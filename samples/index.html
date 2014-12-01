@@ -11,16 +11,13 @@
 </body>
 </html>
 <script type="text/javascript">
-    var util = ax5.util;
-    var object = ax5.util.object;
-    var array = ax5.util.array;
+    var ax = ax5.util;
 
     var myObject = {a:1, b:2};
-    myObject = array.clear( myObject );
-    console.log( myObject );
+    console.log( ax.first( myObject ) );
 
     var myArray = [0,1,2,3,4];
-    myArray = array.clear( myArray );
+    //myArray = ax.clear( myArray );
     console.log( myArray );
 
 /*

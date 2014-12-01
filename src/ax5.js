@@ -15,86 +15,167 @@ argument
  */
 
 
-(function(root, ax_super) {
-	'use strict';
+// 필수 Ployfill
+(function(){
+	var root = this;
 
-	// Ployfill -- start
-	(function(){
-		// From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
-		if (!Object.keys) {
-			Object.keys = (function() {
-				'use strict';
-				var hasOwnProperty = Object.prototype.hasOwnProperty,
-					hasDontEnumBug = !({ toString: null }).propertyIsEnumerable('toString'),
-					dontEnums = [
-						'toString',
-						'toLocaleString',
-						'valueOf',
-						'hasOwnProperty',
-						'isPrototypeOf',
-						'propertyIsEnumerable',
-						'constructor'
-					],
-					dontEnumsLength = dontEnums.length;
-
-				return function(obj) {
-					if (typeof obj !== 'object' && (typeof obj !== 'function' || obj === null)) {
-						throw new TypeError('Object.keys called on non-object');
-					}
-
-					var result = [], prop, i;
-
-					for (prop in obj) {
-						if (hasOwnProperty.call(obj, prop)) {
-							result.push(prop);
-						}
-					}
-
-					if (hasDontEnumBug) {
-						for (i = 0; i < dontEnumsLength; i++) {
-							if (hasOwnProperty.call(obj, dontEnums[i])) {
-								result.push(dontEnums[i]);
-							}
-						}
-					}
-					return result;
-				};
-			}());
-		}
-
-		// Console-polyfill. MIT license.
-		// https://github.com/paulmillr/console-polyfill
-		// Make it safe to do console.log() always.
-		(function(con) {
+	// From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
+	if (!Object.keys) {
+		Object.keys = (function() {
 			'use strict';
-			var prop, method;
-			var empty = {};
-			var dummy = function() {};
-			var properties = 'memory'.split(',');
-			var methods = ('assert,clear,count,debug,dir,dirxml,error,exception,group,' +
-				'groupCollapsed,groupEnd,info,log,markTimeline,profile,profiles,profileEnd,' +
-				'show,table,time,timeEnd,timeline,timelineEnd,timeStamp,trace,warn').split(',');
-			while (prop = properties.pop()) con[prop] = con[prop] || empty;
-			while (method = methods.pop()) con[method] = con[method] || dummy;
-		})(root.console = root.console || {}); // Using `this` for web workers.
-	})(window);
-	// Polyfill -- end
+			var hasOwnProperty = Object.prototype.hasOwnProperty,
+				hasDontEnumBug = !({ toString: null }).propertyIsEnumerable('toString'),
+				dontEnums = [
+					'toString',
+					'toLocaleString',
+					'valueOf',
+					'hasOwnProperty',
+					'isPrototypeOf',
+					'propertyIsEnumerable',
+					'constructor'
+				],
+				dontEnumsLength = dontEnums.length;
+
+			return function(obj) {
+				if (typeof obj !== 'object' && (typeof obj !== 'function' || obj === null)) {
+					throw new TypeError('Object.keys called on non-object');
+				}
+
+				var result = [], prop, i;
+
+				for (prop in obj) {
+					if (hasOwnProperty.call(obj, prop)) {
+						result.push(prop);
+					}
+				}
+
+				if (hasDontEnumBug) {
+					for (i = 0; i < dontEnumsLength; i++) {
+						if (hasOwnProperty.call(obj, dontEnums[i])) {
+							result.push(dontEnums[i]);
+						}
+					}
+				}
+				return result;
+			};
+		}());
+	}
+
+	// Console-polyfill. MIT license.
+	// https://github.com/paulmillr/console-polyfill
+	// Make it safe to do console.log() always.
+	(function(con) {
+		'use strict';
+		var prop, method;
+		var empty = {};
+		var dummy = function() {};
+		var properties = 'memory'.split(',');
+		var methods = ('assert,clear,count,debug,dir,dirxml,error,exception,group,' +
+			'groupCollapsed,groupEnd,info,log,markTimeline,profile,profiles,profileEnd,' +
+			'show,table,time,timeEnd,timeline,timelineEnd,timeStamp,trace,warn').split(',');
+		while (prop = properties.pop()) con[prop] = con[prop] || empty;
+		while (method = methods.pop()) con[method] = con[method] || dummy;
+	})(root.console = root.console || {}); // Using `this` for web workers.
+}.call(this));
+
+(function() {
+	'use strict';
+	var root = this;
 
 	/** @namespace {Object} ax5 */
-	var ax5 = (function(){
+	var ax5 = {};
+
+	/**
+	 * 상수모음
+	 * @namespace ax5.const
+	 */
+	var CV = ax5.const = {
+/**
+ * event keyCodes
+ * @member {Object} ax5.const.event_keys
+ * @example
+ ```
+ {
+	KEY_BACKSPACE: 8,
+	KEY_TAB: 9,
+	KEY_RETURN: 13, KEY_ESC: 27, KEY_LEFT: 37, KEY_UP: 38, KEY_RIGHT: 39, KEY_DOWN: 40, KEY_DELETE: 46,
+	KEY_HOME: 36, KEY_END: 35, KEY_PAGEUP: 33, KEY_PAGEDOWN: 34, KEY_INSERT: 45, KEY_SPACE: 32
+ }
+ ```
+ */
+		event_keys: {
+			KEY_BACKSPACE: 8,
+			KEY_TAB: 9,
+			KEY_RETURN: 13, KEY_ESC: 27, KEY_LEFT: 37, KEY_UP: 38, KEY_RIGHT: 39, KEY_DOWN: 40, KEY_DELETE: 46,
+			KEY_HOME: 36, KEY_END: 35, KEY_PAGEUP: 33, KEY_PAGEDOWN: 34, KEY_INSERT: 45, KEY_SPACE: 32
+		},
+/**
+ * 사용자 브라우저 식별용 오브젝트
+ * @member {Object} ax5.const.browser
+ * @example
+ ```
+ console.log( ax5.const.browser );
+ //Object {name: "chrome", version: "39.0.2171.71", mobile: false}
+ ```
+ */
+		browser  : (function () {
+			var ua = navigator.userAgent.toLowerCase();
+			var mobile = (ua.search(/mobile/g) != -1);
+			if (ua.search(/iphone/g) != -1) {
+				return { name: "iphone", version: 0, mobile: true }
+			} else if (ua.search(/ipad/g) != -1) {
+				return { name: "ipad", version: 0, mobile: true }
+			} else if (ua.search(/android/g) != -1) {
+				var match = /(android)[ \/]([\w.]+)/.exec(ua) || [];
+				var browserVersion = (match[2] || "0");
+				return { name: "android", version: browserVersion, mobile: mobile }
+			} else {
+				var browserName = "";
+				var match = /(chrome)[ \/]([\w.]+)/.exec(ua) ||
+					/(webkit)[ \/]([\w.]+)/.exec(ua) ||
+					/(opera)(?:.*version|)[ \/]([\w.]+)/.exec(ua) ||
+					/(msie) ([\w.]+)/.exec(ua) ||
+					ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) ||
+					[];
+
+				var browser = (match[1] || "");
+				var browserVersion = (match[2] || "0");
+
+				if (browser == "msie") browser = "ie";
+				return {
+					name: browser,
+					version: browserVersion,
+					mobile: mobile
+				}
+			}
+		})(),
+/**
+ * 브라우저에 따른 마우스 휠 이벤트이름
+ * @member {Object} ax5.const.mousewheelevt
+ */
+		mousewheelevt: ((/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel")
+	};
+
+/**
+ * Refer to this by {@link ax5}.
+ * @namespace ax5.util
+ */
+	ax5.util = (function(){
+		var _toString = Object.prototype.toString;
 /**
  * Object나 Array의 아이템으로 사용자 함수를 호출합니다.
- * @method ax5.each
+ * @method ax5.util.each
  * @param {Object|Array} O
  * @param {Function} _fn
  * @example
 ```js
-axf.each([0,1,2], function(){
+ var axf = ax5.util;
+ axf.each([0,1,2], function(){
 	// with this
-});
-axf.each({a:1, b:2}, function(){
+ });
+ axf.each({a:1, b:2}, function(){
 	// with this
-});
+ });
 ```
  */
 		function each(O, _fn){
@@ -119,15 +200,29 @@ axf.each({a:1, b:2}, function(){
 					}
 				}
 			}
-		};
+			return O;
+		}
+
+		function map(O, _fn){
+
+		}
+		function reduce(){
+
+		}
+		function reduct_right(){
+
+		}
+		function find(){
+
+		}
 /**
  * 에러를 발생시킵니다.
- * @method ax5.error
+ * @method ax5.util.error
  * @param {String} msg
  * @example
-```js
-ax5.error( "에러가 발생되었습니다." );
-```
+ ```js
+ ax5.util.error( "에러가 발생되었습니다." );
+ ```
  */
 		function error( msg ){
 			throw new Error( msg );
@@ -137,40 +232,21 @@ ax5.error( "에러가 발생되었습니다." );
 
 		}
 
-		return {
-			each   : each,
-			error  : error,
-			to_json: to_json
-		}
-	})();
-
-	/**
-	 * Refer to this by {@link ax5}.
-	 * @namespace ax5.util
-	 */
-	var util = {};
-	/**
-	 * 오브젝트 관련 유틸리티
-	 * Refer to this by {@link ax5.util}.
-	 * @namespace ax5.util.object
-	 */
-	util.object = (function(){
-		var _toString = Object.prototype.toString;
 /**
  * 타겟 오브젝트의 키를 대상 오브젝트의 키만큼 확장합니다.
- * @method ax5.util.object.extend
+ * @method ax5.util.extend
  * @param {Object} O - 타겟 오브젝트
  * @param {Object} _O - 대상 오브젝트
  * @param {Boolean} overwrite - 덮어쓰기 여부
  * @returns {Object} extened Object
  * @example
-```js
- var object = ax5.util.object;
+ ```js
+ var axf = ax5.util;
  var obja = {a:1};
- object.extend(obja, {b:2});
- object.extend(obja, {a:2});
- object.extend(obja, {a:2}, true);
-```
+ axf.extend(obja, {b:2});
+ axf.extend(obja, {a:2});
+ axf.extend(obja, {a:2}, true);
+ ```
  */
 		function extend(O, _O, overwrite) {
 			if ( typeof O !== "object" && typeof O !== "function" ) O = {};
@@ -188,31 +264,31 @@ ax5.error( "에러가 발생되었습니다." );
 		}
 /**
  * 타겟 오브젝트를 복제하여 참조를 다르게 합니다.
- * @method ax5.util.object.clone
+ * @method ax5.util.clone
  * @param {Object} O - 타겟 오브젝트
  * @returns {Object} clone Object
  * @example
-```js
- var object = ax5.util.object;
+ ```js
+ var axf = ax5.util;
  var obja = {a:1};
- var objb = object.clone( obja );
+ var objb = axf.clone( obja );
  obja.a = 3; // 원본 오브젝트 수정
  console.log(obja, objb);
  // Object {a: 3} Object {a: 2}
-```
+ ```
  */
 		function clone(O){
 			return extend({}, O);
 		}
 /**
  * 인자의 타입을 반환합니다.
- * @method ax5.util.object.get_type
+ * @method ax5.util.get_type
  * @param {Object|Array|String|Number|Element|Etc} O
  * @returns {String} element|object|array|function|string|number|undefined
  * @example
-```js
+ ```js
 
-```
+ ```
  */
 		function get_type(O){
 			var typeName;
@@ -245,81 +321,81 @@ ax5.error( "에러가 발생되었습니다." );
 			}
 			return typeName;
 		}
-/**
- * 오브젝트가 HTML 엘리먼트여부인지 판단합니다.
- * @method ax5.util.object.is_element
- * @param {Object} O
- * @returns {Boolean}
- */
+		/**
+		 * 오브젝트가 HTML 엘리먼트여부인지 판단합니다.
+		 * @method ax5.util.is_element
+		 * @param {Object} O
+		 * @returns {Boolean}
+		 */
 		function is_element(O) { return !!(O && O.nodeType == 1); }
-/**
- * 오브젝트가 Object인지 판단합니다.
- * @method ax5.util.object.is_object
- * @param {Object} O
- * @returns {Boolean}
- */
+		/**
+		 * 오브젝트가 Object인지 판단합니다.
+		 * @method ax5.util.is_object
+		 * @param {Object} O
+		 * @returns {Boolean}
+		 */
 		function is_object(O) { return _toString.call(O) == "[object Object]"; }
-/**
- * 오브젝트가 Array인지 판단합니다.
- * @method ax5.util.object.is_array
- * @param {Object} O
- * @returns {Boolean}
- */
+		/**
+		 * 오브젝트가 Array인지 판단합니다.
+		 * @method ax5.util.is_array
+		 * @param {Object} O
+		 * @returns {Boolean}
+		 */
 		function is_array(O) { return _toString.call(O) == "[object Array]"; }
-/**
- * 오브젝트가 Function인지 판단합니다.
- * @method ax5.util.object.is_function
- * @param {Object} O
- * @returns {Boolean}
- */
+		/**
+		 * 오브젝트가 Function인지 판단합니다.
+		 * @method ax5.util.is_function
+		 * @param {Object} O
+		 * @returns {Boolean}
+		 */
 		function is_function(O) { return typeof O === "function"; }
-/**
- * 오브젝트가 String인지 판단합니다.
- * @method ax5.util.object.is_string
- * @param {Object} O
- * @returns {Boolean}
- */
+		/**
+		 * 오브젝트가 String인지 판단합니다.
+		 * @method ax5.util.is_string
+		 * @param {Object} O
+		 * @returns {Boolean}
+		 */
 		function is_string(O) { return _toString.call(O) == "[object String]"; }
-/**
- * 오브젝트가 Number인지 판단합니다.
- * @method ax5.util.object.is_number
- * @param {Object} O
- * @returns {Boolean}
- */
+		/**
+		 * 오브젝트가 Number인지 판단합니다.
+		 * @method ax5.util.is_number
+		 * @param {Object} O
+		 * @returns {Boolean}
+		 */
 		function is_number(O) { return _toString.call(O) == "[object Number]"; }
-/**
- * 오브젝트가 undefined인지 판단합니다.
- * @method ax5.util.object.is_undefined
- * @param {Object} O
- * @returns {Boolean}
- */
+		/**
+		 * 오브젝트가 undefined인지 판단합니다.
+		 * @method ax5.util.is_undefined
+		 * @param {Object} O
+		 * @returns {Boolean}
+		 */
 		function is_undefined(O) { return typeof O === "undefined"; }
-/**
- * 오브젝트가 undefined이거나 null이거나 빈값인지 판단합니다.
- * @method ax5.util.object.is_nothing
- * @param {Object} O
- * @returns {Boolean}
- */
+		/**
+		 * 오브젝트가 undefined이거나 null이거나 빈값인지 판단합니다.
+		 * @method ax5.util.is_nothing
+		 * @param {Object} O
+		 * @returns {Boolean}
+		 */
 		function is_nothing(O) { return (typeof O === "undefined" || O === null || O === ""); }
 /**
  * 오브젝트의 첫번째 아이템을 반환합니다.
- * @method ax5.util.object.first
+ * @method ax5.util.first
  * @param {Object|Array} O
  * @returns {Object}
  * @example
  ```js
- ax5.util.object.first({a:1, b:2});
+ ax5.util.first({a:1, b:2});
  // Object {a: 1}
  ```
  */
 		function first(O){
-			if( util.object.is_object(O) ) {
+			if( is_object(O) ) {
 				var keys = Object.keys(O);
 				var item = {}; item[keys[0]] = O[keys[0]];
 				return item;
 			}
 			else
-			if( util.object.is_array(O) ) {
+			if( is_array(O) ) {
 				return O[0];
 			}
 			else
@@ -330,12 +406,12 @@ ax5.error( "에러가 발생되었습니다." );
 		}
 /**
  * 오브젝트의 마지막 아이템을 반환합니다.
- * @method ax5.util.object.last
+ * @method ax5.util.last
  * @param {Object|Array} O
  * @returns {Object}
  * @example
  ```js
- ax5.util.object.last({a:1, b:2});
+ ax5.util.last({a:1, b:2});
  // Object {b: 2}
  ```
  */
@@ -355,143 +431,58 @@ ax5.error( "에러가 발생되었습니다." );
 				return undefined;
 			}
 		}
-/**
- * Object의 아이템을 모두 제거합니다.
- * @method ax5.util.object.clear
- * @param {Object|Array} O
- * @returns {Object|Array}
- * @example
- ```js
- var object = ax5.util.object;
 
- var myObject = {a:1, b:2};
- myObject = object.clear( myObject );
- console.log( myObject );
+		function set_cookie(){
 
- var myArray = [0,1,2,3,4];
- myArray = object.clear( myArray );
- console.log( myArray );
- ```
- */
-		function clear(O){
-			if( util.object.is_array(O) ) {
-				return (O = []);
-			}
-			else
-			if( util.object.is_object(O) ) {
-				return (O = {});
-			}
-			else
-			{
-				console.error("ax5.util.array.clear", "argument type error");
-				return undefined;
-			}
+		}
+		function get_cookie(){
+
+		}
+		function alert(){
+
+		}
+		function confirm(){
+
+		}
+
+		function getUrlInfo() {
+			var url, url_param, param, referUrl, pathName, AXparam, pageProtocol, pageHostName;
+			url_param = window.location.href;
+			param = window.location.search;
+			referUrl = document.referrer;
+			pathName = window.location.pathname;
+			url = url_param.replace(param, '');
+			param = param.replace(/^\?/, '');
+			pageProtocol = window.location.protocol;
+			pageHostName = window.location.hostname;
+			AXparam = url_param.replace(pageProtocol + "//", "");
+			AXparam = (param) ? AXparam.replace(pageHostName + pathName + "?" + param, "") : AXparam.replace(pageHostName + pathName, "");
+			return {
+				url : url,
+				param : param,
+				anchorData : AXparam,
+				urlParam : url_param,
+				referUrl : referUrl,
+				pathName : pathName,
+				protocol : pageProtocol,
+				hostName : pageHostName
+			};
 		}
 
 		return {
+			each   : each,
+			error  : error,
+			to_json: to_json,
 			extend    : extend,
 			clone     : clone,
 			get_type  : get_type,
 			is_element: is_element, is_object: is_object, is_array: is_array, is_function: is_function,
 			is_string : is_string, is_number: is_number, is_undefined: is_undefined, is_nothing: is_nothing,
-			first     : first, last: last, clear: clear
-		};
-	})();
-
-/**
- * Array관련 유틸리티
- * Refer to this by {@link ax5.util}.
- * @namespace ax5.util.array
- */
-	util.array = (function(){
-
-/**
- * 오브젝트의 첫번째 아이템을 반환합니다.
- * @method ax5.util.array.first
- * @param {Array} O
- * @returns {Object}
- * @example
- ```js
- ax5.util.array.first([0,1,2]);
- // 0
- ```
- */
-		function first(O){
-			if( util.object.is_array(O) ) {
-				return O[0];
-			}
-			else
-			{
-				console.error("ax5.util.array.first", "argument type error");
-				return undefined;
-			}
-		}
-/**
- * 오브젝트의 마지막 아이템을 반환합니다.
- * @method ax5.util.array.last
- * @param {Array} O
- * @returns {Object}
- * @example
- ```js
- ax5.util.array.last([0,1,2]);
- // 2
- ```
- */
-		function last(){
-			if( util.object.is_array(O) ) {
-				return O[O.length-1];
-			}
-			else
-			{
-				console.error("ax5.util.array.last", "argument type error");
-				return undefined;
-			}
-		}
-/**
- * Array의 아이템을 모두 제거합니다.
- * @method ax5.util.array.clear
- * @param {Array} O
- * @returns {Array}
- * @example
-```js
- var array = ax5.util.array;
-
- var myArray = [0,1,2,3,4];
- myArray = array.clear( myArray );
- console.log( myArray );
-```
- */
-		function clear(O){
-			if( util.object.is_array(O) ) {
-				return (O = []);
-			}
-			else
-			{
-				console.error("ax5.util.array.clear", "argument type error");
-				return undefined;
-			}
-		}
-		function remove(){
-
-		}
-		function append(){
-
-		}
-		function sort_by(){
-
-		}
-
-		return {
-			first  : first,
-			last   : last,
-			clear  : clear,
-			remove : remove,
-			append : append,
-			sort_by: sort_by
+			first     : first, last: last
 		}
 	})();
 
-	ax5.util = util;
+
 
 	if ( typeof module === "object" && module && typeof module.exports === "object" ){
 		module.exports = ax5; // commonJS
@@ -500,4 +491,4 @@ ax5.error( "에러가 발생되었습니다." );
 		if ( typeof define === "function" && define.amd ) define("_ax5", [], function () { return ax5; }); // requireJS
 	}
 
-})(window);
+}.call(this));
