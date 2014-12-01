@@ -1,0 +1,161 @@
+@import "common.less";
+
+@print:	~"only print";
+
+// normalize
+html, body {
+	margin: 0px;
+	padding: 0px;
+    font: 12px "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
+    background-color: #f4f4f4;
+	line-height: 1.5em;
+}
+ul, ol {
+    margin: 0;
+    padding: 0;
+}
+li {
+    list-style-type: none;
+}
+p{
+	color: #666;
+	line-height: 1.8em;
+}
+#wrap {
+    position: relative;
+}
+
+
+@import "navigation.less";
+@import "main.less";
+@import "footer.less";
+
+
+@media @print {
+	html, body{
+		background: #fff;
+	}
+	.navigation{
+		display: none;
+	}
+	.main {
+		page-break-before: always;
+		background: #fff;
+		padding: 20px 20px;
+		margin-left: 0px;
+		img{width: 100%;}
+
+		article {
+			.prettyprint{
+				padding: 10px;
+				background: #fff;
+				border: 1px solid #ccc;
+				border-radius: 10px;
+				ol{margin: 0px;margin-left:40px;}
+				li{
+					margin: 0px;color: #aaa;
+					background: #fff;
+				}
+			}
+			pre.prettyprint{
+				width: auto;
+				margin: 0px;
+				font-size: 12px;
+				word-break:break-all;
+				li{
+					word-break:break-all;
+					code{
+						span{white-space: pre-wrap;}
+					}
+				}
+			}
+		}
+	}
+
+	/*
+	.index{
+		.navigation{
+			display: block;
+			position: relative;
+			float: none;
+			width: auto;
+			height: auto;
+			overflow: visible;
+			background: #fff;
+			.applicationName{
+				color: #000;
+				a{color: #000;}
+			}
+			.search{display: none;}
+			.list{
+				height: auto;
+				overflow: visible;
+			}
+			li.item {
+				display: block;
+				margin: 8px 0px;
+				padding: 8px 0px;
+				border-top: 1px solid #ccc;
+				border-bottom: 0px none;
+
+				a {
+					font-size: 12px;
+					text-decoration: none;
+					color: #000;
+					&:hover {
+						color: #000;
+					}
+				}
+				.title {
+					cursor: pointer;
+					position: relative;
+
+					a {
+						font-size: 18px;
+						color: #000;
+						&:hover {
+							color: #000;
+						}
+					}
+					display: block;
+					font-size: 0.8em;
+
+					.static {
+						display: block;
+						border-radius: 3px;
+						background-color: @colorSubtitle;
+						color: #000;
+						font-size: 0.7em;
+						line-height: 1.2em;
+						padding: 2px 4px;
+						float: right;
+					}
+				}
+
+				.subtitle {
+					margin-top: 10px;
+					font: bold 1em Helvetica;
+					color: @colorSubtitle;
+					display: block;
+				}
+
+
+				ul {
+					& > li {
+						font-size: 0.9em;
+						padding-left: 20px;
+						margin-top: 2px;
+					}
+				}
+
+				.itemMembers {
+					margin-left:20px;
+					display: block;
+					font-size: 13px;
+				}
+			}
+		}
+	}
+*/
+
+}

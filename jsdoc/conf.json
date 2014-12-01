@@ -1,0 +1,34 @@
+{
+	"tags": {
+		"allowUnknownTags" : true
+	},
+	"plugins": ["plugins/markdown"],
+	"templates": {
+		"cleverLinks": true,
+		"monospaceLinks": true,
+		"default": {
+			"outputSourceFiles" : true
+		},
+		"applicationName": "AX5 API",
+		"git_liblink": "https://github.com/tom-axisj/ax5",
+		"disqus": "",
+		"googleAnalytics": "",
+		"openGraph": {
+			"title": "AX5 JSDOC",
+			"type": "JSDOC API",
+			"image": "http://dev.axisj.com/ui/AXJ.png",
+			"site_name": "풀 스택 오픈소스 자바스크립트 UI 프레임워크 - AXISJ",
+			"url": "http://newdoc.axisj.com"
+		},
+		"meta": {
+			"title": "AX5 API",
+			"description": "자바스크립트 UI Library AX5 JSDOC API서비스 입니다.",
+			"keyword": "AXISJ, JSDOC, API"
+		}
+	},
+	"markdown": {
+		"parser": "gfm",
+		"hardwrap": true,
+		"tags": ["examples"]
+	}
+}

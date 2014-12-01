@@ -1,0 +1,556 @@
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+  font: 12px "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+  background-color: #f4f4f4;
+  line-height: 1.5em;
+}
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style-type: none;
+}
+p {
+  color: #666;
+  line-height: 1.8em;
+}
+#wrap {
+  position: relative;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 4px;
+}
+.navigation {
+  position: fixed;
+  float: left;
+  width: 250px;
+  height: 100%;
+  background-color: #1a1a1a;
+}
+.navigation .applicationName {
+  margin: 0;
+  margin-top: 15px;
+  padding: 10px 15px;
+  font: bold 1.25em Helvetica;
+  color: #ffffff;
+  font-size: 22px;
+  text-decoration: none;
+  text-align: center;
+}
+.navigation .applicationName a {
+  color: #ffffff;
+  text-decoration: none;
+}
+.navigation .applicationName a i.axi {
+  vertical-align: top;
+  padding-top: 1px;
+}
+.navigation .search {
+  padding: 10px 15px;
+}
+.navigation .search input {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px;
+}
+.navigation .list {
+  display: block;
+  padding: 10px 15px 0 15px;
+  position: relative;
+  overflow: auto;
+}
+.navigation li.item {
+  display: block;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #333;
+}
+.navigation li.item a {
+  text-decoration: none;
+  color: #bbb;
+}
+.navigation li.item a:hover {
+  color: #fff;
+}
+.navigation li.item .title {
+  cursor: pointer;
+  position: relative;
+  display: block;
+  font-size: 0.8em;
+}
+.navigation li.item .title a {
+  font-size: 13px;
+  color: #e1e1e1;
+}
+.navigation li.item .title a:hover {
+  color: #fff;
+}
+.navigation li.item .title .static {
+  display: block;
+  border-radius: 3px;
+  background-color: #f06433;
+  color: #000;
+  font-size: 0.7em;
+  line-height: 1.2em;
+  padding: 2px 4px;
+  float: right;
+}
+.navigation li.item .subtitle {
+  margin-top: 10px;
+  font: bold 1em Helvetica;
+  color: #f06433;
+  display: block;
+}
+.navigation li.item ul > li {
+  font-size: 0.9em;
+  padding-left: 8px;
+  margin-top: 2px;
+}
+.navigation li.item .itemMembers {
+  display: none;
+  font-size: 13px;
+}
+.main {
+  padding: 20px 20px;
+  margin-left: 250px;
+}
+.main .page-title {
+  display: none;
+}
+.main h1 {
+  font-weight: bold;
+  font-size: 1.6em;
+  margin: 0;
+}
+.main h2 {
+  position: relative;
+  font-size: 2em;
+  font-weight: normal;
+  padding: 0px 0px 0.6em 0px;
+  margin: 0.5em 0px 1em 0px;
+}
+.main h3 {
+  font-weight: bold;
+  font-size: 12px;
+  margin: 5px 0;
+}
+.main h4 {
+  font-weight: bold;
+  font-size: 1em;
+}
+.main h5 {
+  font-weight: bold;
+  font-size: 12px;
+  margin: 5px;
+  color: #888;
+}
+.main dd {
+  font-size: 12px;
+}
+.main h4.name span.type-signature {
+  display: inline-block;
+  border-radius: 3px;
+  background-color: gray;
+  color: #fff;
+  font-size: 0.7em;
+  padding: 2px 4px;
+}
+.main h4.name span.type-signature a {
+  color: #ffffff;
+}
+.main h4.name span.type {
+  margin-left: 5px;
+}
+.main h4.name span.glyphicon {
+  display: inline-block;
+  vertical-align: middle;
+  color: #e1e1e1;
+  margin-left: 7px;
+}
+.main h4.name span.returnType {
+  margin-left: 3px;
+  background-color: transparent!important;
+  color: #6fafe0!important;
+}
+.main h4.name span.returnType a {
+  color: #6fafe0!important;
+}
+.main span.static {
+  display: inline-block;
+  border-radius: 3px;
+  background-color: #f06433 !important;
+  color: #fff;
+  font-size: 0.7em;
+  padding: 2px 4px;
+  margin-right: 8px;
+}
+.main span.number {
+  background-color: gray!important;
+}
+.main span.string {
+  background-color: gray!important;
+}
+.main span.object {
+  background-color: #2a6496 !important;
+}
+.main span.array {
+  background-color: #2a6496 !important;
+}
+.main span.boolean {
+  background-color: #ee7d7d !important;
+}
+.main .subsection-title {
+  font-size: 18px;
+  margin-top: 30px;
+  color: #f06433;
+}
+.main .description {
+  margin-top: 10px;
+  font-size: 13px;
+}
+.main .description p {
+  font-size: 13px;
+}
+.main .tag-source {
+  font-size: 12px;
+}
+.main dt.tag-source {
+  margin-top: 5px;
+}
+.main dt.tag-todo {
+  font-size: 10px;
+  display: inline-block;
+  background-color: #2a6496;
+  color: #fff;
+  padding: 2px 4px;
+  border-radius: 5px;
+}
+.main .type-signature {
+  font-size: 12px;
+}
+.main .tag-deprecated {
+  display: inline-block;
+  font-size: 10px;
+}
+.main .important {
+  background-color: #ee7d7d;
+  color: #fff;
+  padding: 2px 4px;
+  border-radius: 5px;
+}
+.main .nameContainer {
+  position: relative;
+  margin-top: 20px;
+  padding-top: 5px;
+  border-top: 1px dashed #ccc;
+}
+.main .nameContainer .inherited {
+  display: inline-block;
+  border-radius: 3px;
+  background-color: #888!important;
+  font-size: 0.7em;
+  padding: 2px 4px;
+  margin-right: 5px;
+}
+.main .nameContainer .inherited a {
+  color: #fff;
+}
+.main .nameContainer .tag-source {
+  position: absolute;
+  top: 17px;
+  right: 0;
+  font-size: 10px;
+}
+.main .nameContainer .tag-source i.axi {
+  font-size: 13px;
+}
+.main .nameContainer .tag-source a {
+  color: gray;
+}
+.main .nameContainer.inherited {
+  color: gray;
+}
+.main .nameContainer h4 {
+  font-size: 15px;
+  margin: 0px;
+  padding: 15px 0px;
+  margin-right: 150px;
+  line-height: 1.3;
+}
+.main .nameContainer h4 .signature {
+  font-size: 13px;
+  font-weight: normal;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+.main pre {
+  font-size: 11px;
+}
+.main table.params {
+  margin-bottom: 15px;
+  border-collapse: collapse;
+}
+.main table.params th {
+  padding: 2px 5px;
+  text-align: left;
+  border-left: 1px solid #d6d6d6;
+}
+.main table.params td {
+  vertical-align: top;
+  padding: 2px 5px;
+  padding-right: 10px;
+  border-left: 1px solid #d6d6d6;
+}
+.main table.params .name {
+  min-width: 100px;
+}
+.main table.params .type {
+  min-width: 100px;
+  color: #6fafe0;
+  font-size: 11px;
+}
+.main table.params .type a {
+  color: #6fafe0;
+}
+.main table.params .attributes {
+  min-width: 80px;
+  color: #aaa;
+  font-size: 11px;
+}
+.main table.params .description {
+  font-size: 12px;
+}
+.main table.params .description p {
+  margin: 0;
+}
+.main table.params .optional {
+  float: left;
+  border-radius: 3px;
+  background-color: #ddd!important;
+  font-size: 0.7em;
+  padding: 2px 4px;
+  margin-right: 5px;
+  color: gray;
+}
+.main .readme p {
+  margin-top: 15px;
+  line-height: 1.5;
+  font-size: 13px;
+}
+.main .readme h1 {
+  font-size: 1.7em;
+}
+.main .readme h2 {
+  font-size: 1.5em;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e1e1e1;
+}
+.main .readme li {
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+.main article ol,
+.main article ul {
+  margin-left: 25px;
+}
+.main article ol > li {
+  list-style-type: decimal;
+  margin-bottom: 5px;
+}
+.main article ul > li {
+  margin-bottom: 5px;
+  list-style-type: disc;
+}
+.main article ul > li a {
+  color: #6fafe0;
+}
+.main article dd {
+  margin: 0px;
+}
+.main article blockquote {
+  margin: 0px;
+  padding: 0 15px;
+  border-left: 4px solid #ddd;
+  font-style: italic;
+}
+.main article blockquote p {
+  color: #aaa;
+}
+.main article .prettyprint {
+  padding: 10px;
+  background: #414141;
+}
+.main article .prettyprint ol {
+  margin: 0px;
+  margin-left: 40px;
+}
+.main article .prettyprint li {
+  margin: 0px;
+  color: #aaa;
+  background: #393939;
+}
+.main article pre.prettyprint {
+  width: auto;
+  margin: 0px;
+  font-size: 12px;
+  word-break: break-all;
+}
+.main article pre.prettyprint li {
+  word-break: break-all;
+}
+.main article pre.prettyprint li code span {
+  white-space: pre-wrap;
+}
+footer {
+  margin: 15px 0;
+  padding-top: 15px;
+  border-top: 1px solid #e1e1e1;
+  font-family: "freight-text-pro", Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 0.8em;
+  color: gray;
+}
+@media only print {
+  html,
+  body {
+    background: #fff;
+  }
+  .navigation {
+    display: none;
+  }
+  .main {
+    page-break-before: always;
+    background: #fff;
+    padding: 20px 20px;
+    margin-left: 0px;
+  }
+  .main img {
+    width: 100%;
+  }
+  .main article .prettyprint {
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+  .main article .prettyprint ol {
+    margin: 0px;
+    margin-left: 40px;
+  }
+  .main article .prettyprint li {
+    margin: 0px;
+    color: #aaa;
+    background: #fff;
+  }
+  .main article pre.prettyprint {
+    width: auto;
+    margin: 0px;
+    font-size: 12px;
+    word-break: break-all;
+  }
+  .main article pre.prettyprint li {
+    word-break: break-all;
+  }
+  .main article pre.prettyprint li code span {
+    white-space: pre-wrap;
+  }
+  /*
+	.index{
+		.navigation{
+			display: block;
+			position: relative;
+			float: none;
+			width: auto;
+			height: auto;
+			overflow: visible;
+			background: #fff;
+			.applicationName{
+				color: #000;
+				a{color: #000;}
+			}
+			.search{display: none;}
+			.list{
+				height: auto;
+				overflow: visible;
+			}
+			li.item {
+				display: block;
+				margin: 8px 0px;
+				padding: 8px 0px;
+				border-top: 1px solid #ccc;
+				border-bottom: 0px none;
+
+				a {
+					font-size: 12px;
+					text-decoration: none;
+					color: #000;
+					&:hover {
+						color: #000;
+					}
+				}
+				.title {
+					cursor: pointer;
+					position: relative;
+
+					a {
+						font-size: 18px;
+						color: #000;
+						&:hover {
+							color: #000;
+						}
+					}
+					display: block;
+					font-size: 0.8em;
+
+					.static {
+						display: block;
+						border-radius: 3px;
+						background-color: @colorSubtitle;
+						color: #000;
+						font-size: 0.7em;
+						line-height: 1.2em;
+						padding: 2px 4px;
+						float: right;
+					}
+				}
+
+				.subtitle {
+					margin-top: 10px;
+					font: bold 1em Helvetica;
+					color: @colorSubtitle;
+					display: block;
+				}
+
+
+				ul {
+					& > li {
+						font-size: 0.9em;
+						padding-left: 20px;
+						margin-top: 2px;
+					}
+				}
+
+				.itemMembers {
+					margin-left:20px;
+					display: block;
+					font-size: 13px;
+				}
+			}
+		}
+	}
+*/
+}
