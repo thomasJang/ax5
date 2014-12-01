@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="../plugin/require.js"></script>
+</head>
+<body>
+    <ax:tree></ax:tree>
+</body>
+</html>
+<script type="text/javascript">
+    // 이 코드를 RequireJS가 로딩된 뒤 기타 모듈을 로딩하기 전에 둔다.
+
+    require.config({
+        baseUrl: "../", // 모듈을 로딩할 기본 패스를 지정한다.
+        waitSeconds: 15 // 모듈의 로딩 시간을 지정한다. 이 시간을 초과하면 Timeout Error 가 throw 된다
+    });
+
+    require([ "plugin/jquery-1.10.2", "src/ax5" ], function () {
+
+        console.log( ax5 );
+        console.log( ax5.util.array.first([99,88,77]) );
+
+    }, function (err) {
+        // ERROR handling
+    });
+</script>

@@ -1,0 +1,91 @@
+{
+	ax5: {
+		util: {
+			to_json  : {},
+			each     : {},
+			setCookie: {},
+			getCookie: {},
+			alert    : {},
+			confirm  : {},
+			browser  : {},
+			eventKeys: {},
+
+			array : {
+				first : {},
+				last  : {},
+				clear : {},
+				remove: {},
+				append: {},
+				sortBy: {}
+			},
+			object: {
+				extend      : {},
+				clone       : {},
+				get_type    : {},
+				is_element  : {},
+				is_object   : {},
+				is_array    : {},
+				is_function : {},
+				is_string   : {},
+				is_number   : {},
+				is_undefined: {},
+				is_nothing  : {},
+				first       : {},
+				last        : {}
+			},
+			date  : {
+				add         : {},
+				diff        : {},
+				print       : {},
+				setDate     : {},
+				length_month: {}
+			},
+			string: {
+				left        : {},
+				right       : {},
+				enc         : {},
+				dec         : {},
+				object_query: {},
+				object_json : {}
+			},
+			number: {
+				round: {},
+				money: {},
+				div  : {},
+				byte : {}
+			},
+			html  : {
+				form    : {},
+				getParam: {},
+				setParam: {}
+			},
+			xhr   : {
+				config: {},
+				call  : {}
+			}
+		},
+		dom : {
+			on          : {},
+			css         : {},
+			clientHeight: {},
+			clientWidth : {},
+			scrollHeight: {},
+			scrollWidth : {}
+		},
+		ui  : {
+			grid    : {},
+			context : {},
+			modal   : {},
+			menu    : {},
+			panel   : {},
+			tab     : {},
+			scroll  : {},
+			editor  : {},
+			upload  : {},
+			input   : {},
+			select  : {},
+			textarea: {},
+			button  : {}
+		}
+	}
+}

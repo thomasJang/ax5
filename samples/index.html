@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="../src/ax5.js"></script>
+    <!--script type="text/javascript" src="../src/ax5_logger.js"></script-->
+</head>
+<body>
+    <ax:tree></ax:tree>
+</body>
+</html>
+<script type="text/javascript">
+    var util = ax5.util;
+    var object = ax5.util.object;
+    var array = ax5.util.array;
+
+    var myObject = {a:1, b:2};
+    myObject = array.clear( myObject );
+    console.log( myObject );
+
+    var myArray = [0,1,2,3,4];
+    myArray = array.clear( myArray );
+    console.log( myArray );
+
+/*
+    window.myClass = new ax5_logger();
+    var myStr = myClass.setName("동근").getName();
+    console.log(myStr);
+    console.log( ax5.util.left( myStr, 3) );
+*/
+</script>
