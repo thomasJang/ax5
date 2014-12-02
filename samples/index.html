@@ -13,12 +13,16 @@
 <script type="text/javascript">
     var ax = ax5.util;
 
-    var myObject = {a:1, b:2};
-    console.log( ax.first( myObject ) );
+    var myObject = {a:1, b:"2", c:{axj:"what", arrs:[0,2,"3"]},
+        fn: function(abcdd){
+            return abcdd;
+        }
+    };
+    console.log( ax.to_json(myObject) );
 
     var myArray = [0,1,2,3,4];
     //myArray = ax.clear( myArray );
-    console.log( myArray );
+    console.log( ax.to_json(myArray) );
 
 /*
     window.myClass = new ax5_logger();

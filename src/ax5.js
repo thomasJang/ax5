@@ -14,9 +14,9 @@ argument
  - msg : 메세지
  */
 
-
 // 필수 Ployfill
 (function(){
+
 	var root = this;
 
 	// From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
@@ -61,8 +61,66 @@ argument
 		}());
 	}
 
-	// Console-polyfill. MIT license.
-	// https://github.com/paulmillr/console-polyfill
+	// Production steps of ECMA-262, Edition 5, 15.4.4.18
+	// Reference: http://es5.github.io/#x15.4.4.18
+	if (!Array.prototype.forEach) {
+
+		Array.prototype.forEach = function(callback, thisArg) {
+
+			var T, k;
+
+			if (this == null) {
+				throw new TypeError(' this is null or not defined');
+			}
+
+			// 1. Let O be the result of calling ToObject passing the |this| value as the argument.
+			var O = Object(this);
+
+			// 2. Let lenValue be the result of calling the Get internal method of O with the argument "length".
+			// 3. Let len be ToUint32(lenValue).
+			var len = O.length >>> 0;
+
+			// 4. If IsCallable(callback) is false, throw a TypeError exception.
+			// See: http://es5.github.com/#x9.11
+			if (typeof callback !== "function") {
+				throw new TypeError(callback + ' is not a function');
+			}
+
+			// 5. If thisArg was supplied, let T be thisArg; else let T be undefined.
+			if (arguments.length > 1) {
+				T = thisArg;
+			}
+
+			// 6. Let k be 0
+			k = 0;
+
+			// 7. Repeat, while k < len
+			while (k < len) {
+
+				var kValue;
+
+				// a. Let Pk be ToString(k).
+				//   This is implicit for LHS operands of the in operator
+				// b. Let kPresent be the result of calling the HasProperty internal method of O with argument Pk.
+				//   This step can be combined with c
+				// c. If kPresent is true, then
+				if (k in O) {
+
+					// i. Let kValue be the result of calling the Get internal method of O with argument Pk.
+					kValue = O[k];
+
+					// ii. Call the Call internal method of callback with T as the this value and
+					// argument list containing kValue, k, and O.
+					callback.call(T, kValue, k, O);
+				}
+				// d. Increase k by 1.
+				k++;
+			}
+			// 8. return undefined
+		};
+	}
+
+	// Console-polyfill. MIT license. https://github.com/paulmillr/console-polyfill
 	// Make it safe to do console.log() always.
 	(function(con) {
 		'use strict';
@@ -76,10 +134,13 @@ argument
 		while (prop = properties.pop()) con[prop] = con[prop] || empty;
 		while (method = methods.pop()) con[method] = con[method] || dummy;
 	})(root.console = root.console || {}); // Using `this` for web workers.
+
 }.call(this));
 
 (function() {
 	'use strict';
+
+	// root of function
 	var root = this;
 
 	/** @namespace {Object} ax5 */
@@ -203,13 +264,14 @@ argument
 			return O;
 		}
 
+		// In addition to using the http://underscorejs.org : map, reduce, reduce_right, find
 		function map(O, _fn){
 
 		}
 		function reduce(){
 
 		}
-		function reduct_right(){
+		function reduce_right(){
 
 		}
 		function find(){
@@ -227,9 +289,59 @@ argument
 		function error( msg ){
 			throw new Error( msg );
 		}
-
-		function to_json(){
-
+/**
+ * Object를 JSONString 으로 반환합니다.
+ * @method ax5.util.to_json
+ * @param {Object|Array} O
+ * @returns {String} JSON
+ * @example
+```js
+ var ax = ax5.util;
+ var myObject = {a:1, b:"2", c:{axj:"what", arrs:[0,2,"3"]},
+        fn: function(abcdd){
+            return abcdd;
+        }
+    };
+ console.log( ax.to_json(myObject) );
+```
+ */
+		function to_json(O){
+			var json_string = "";
+			if(ax5.util.is_array(O)){
+				O.forEach(function(item, index){
+					if(index == 0) json_string += "[";
+					else json_string += ",";
+					json_string += to_json(item);
+				});
+				json_string += "]";
+			}
+			else
+			if(ax5.util.is_object(O)){
+				json_string += "{";
+				var json_object_body = [];
+				each(O, function(key, value) {
+					json_object_body.push( '"' + key + '": ' + to_json(value) );
+				});
+				json_string += json_object_body.join(", ");
+				json_string += "}";
+			}
+			else
+			if(ax5.util.is_string(O)){
+				json_string = '"' + O + '"';
+			}
+			else
+			if(ax5.util.is_number(O)){
+				json_string = O;
+			}
+			else
+			if(ax5.util.is_undefined(O)){
+				json_string = "undefined";
+			}
+			else
+			if(ax5.util.is_function(O)){
+				json_string = '"{Function}"';
+			}
+			return json_string;
 		}
 
 /**
@@ -441,11 +553,8 @@ argument
 		function alert(){
 
 		}
-		function confirm(){
 
-		}
-
-		function getUrlInfo() {
+		function url_info() {
 			var url, url_param, param, referUrl, pathName, AXparam, pageProtocol, pageHostName;
 			url_param = window.location.href;
 			param = window.location.search;
@@ -470,19 +579,41 @@ argument
 		}
 
 		return {
-			each   : each,
-			error  : error,
-			to_json: to_json,
-			extend    : extend,
-			clone     : clone,
-			get_type  : get_type,
-			is_element: is_element, is_object: is_object, is_array: is_array, is_function: is_function,
-			is_string : is_string, is_number: is_number, is_undefined: is_undefined, is_nothing: is_nothing,
-			first     : first, last: last
+			each        : each,
+			map         : map,
+			reduce      : reduce,
+			reduce_right: reduce_right,
+			find        : find,
+			error       : error,
+			to_json     : to_json,
+			extend      : extend,
+			clone       : clone,
+			get_type    : get_type,
+			is_element  : is_element,
+			is_object   : is_object,
+			is_array    : is_array,
+			is_function : is_function,
+			is_string   : is_string,
+			is_number   : is_number,
+			is_undefined: is_undefined,
+			is_nothing  : is_nothing,
+			first       : first,
+			last        : last,
+			set_cookie  : set_cookie,
+			get_cookie  : get_cookie,
+			url_info    : url_info
 		}
 	})();
 
-
+/**
+ * Refer to this by {@link ax5}.
+ * @namespace ax5.dom
+ */
+	ax5.dom = (function(){
+		return function(select){
+			console.log(select);
+		}
+	})();
 
 	if ( typeof module === "object" && module && typeof module.exports === "object" ){
 		module.exports = ax5; // commonJS
