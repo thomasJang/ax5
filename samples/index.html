@@ -5,9 +5,17 @@
     <title></title>
     <script type="text/javascript" src="../src/ax5.js"></script>
     <!--script type="text/javascript" src="../src/ax5_logger.js"></script-->
+
+    <style type="text/css">
+        ax-tree{
+            font-size: 200px;
+        }
+    </style>
+
 </head>
 <body>
-    <ax:tree></ax:tree>
+    <ax-tree data-ax-some="abcd">AX5</ax-tree>
+    <div data-ax-grid="1233"></div>
 </body>
 </html>
 <script type="text/javascript">
@@ -23,6 +31,11 @@
     var myArray = [0,1,2,3,4];
     //myArray = ax.clear( myArray );
     console.log( ax.to_json(myArray) );
+
+    console.log( document.querySelector("[data-ax-grid]") );
+    console.log( document.querySelectorAll('[data-ax-grid="1233"]')[0] );
+    console.log( document.querySelectorAll('[data-ax-grid="1233"]') );
+    console.log( document.querySelector('ax-tree').nodeName );
 
 /*
     window.myClass = new ax5_logger();
