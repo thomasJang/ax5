@@ -530,13 +530,13 @@ argument
  ```
  */
 		function last(O){
-			if( util.object.is_object(O) ) {
+			if( is_object(O) ) {
 				var keys = Object.keys(O);
 				var item = {}; item[keys[keys.length-1]] = O[keys[keys.length-1]];
 				return item;
 			}
 			else
-			if( util.object.is_array(O) ) {
+			if( is_array(O) ) {
 				return O[O.length-1];
 			}
 			else

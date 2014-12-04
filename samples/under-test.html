@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="../src/ax5.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+var globals = {};
+
+    function makeBindFun(resolver){
+        return function(k, v){
+            globals[k] = resolver(globals[k] || [], v);
+            return globals;
+        }
+    }
+    var stackBinder = makeBindFun(function(stack, v){
+        stack.push(v);
+        return stack;
+    });
+    var stackUnBinder = makeBindFun(function(stack){
+        stack.pop();
+        return stack;
+    });
+    var dynamicLookup = function(k){
+        return ax5.util.last( globals[k] || [] );
+    };
+
+    stackBinder("a", 1);
+    stackBinder("a", 2);
+    stackBinder("a", 3);
+    stackBinder("b", 1);
+    dynamicLookup("a");
+
+
+</script>
