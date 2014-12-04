@@ -546,14 +546,64 @@ argument
 			}
 		}
 
-		function set_cookie(){
-
+/**
+ * 쿠키를 설정합니다.
+ * @method ax5.util.set_cookie
+ * @param {String} cname - 쿠키이름
+ * @param {String} cvalue - 쿠키값
+ * @param {Number} [exdays] - 쿠키 유지일수
+ * @example
+```js
+ ax5.util.set_cookie("jslib", "AX5");
+ ax5.util.set_cookie("jslib", "AX5", 3);
+```
+ */
+		function set_cookie(cname, cvalue, exdays){
+			document.cookie = cname + "=" + escape(cvalue) + "; path=/;" + (function(){
+				if(typeof exdays != "undefined"){
+					var d = new Date();
+					d.setTime(d.getTime() + (exdays*24*60*60*1000));
+					return "expires=" + d.toUTCString();
+				}else{
+					return "";
+				}
+			})();
 		}
-		function get_cookie(){
-
+/**
+ * 쿠키를 가져옵니다.
+ * @method ax5.util.get_cookie
+ * @param {String} cname
+ * @returns {String} cookie value
+ * @example
+```js
+ ax5.util.get_cookie("jslib");
+```
+ */
+		function get_cookie(cname){
+			var name = cname + "=";
+			var ca = document.cookie.split(';');
+			for(var i=0; i<ca.length; i++) {
+				var c = ca[i];
+				while (c.charAt(0)==' ') c = c.substring(1);
+				if (c.indexOf(name) != -1) return unescape(c.substring(name.length, c.length));
+			}
+			return "";
 		}
-		function alert(){
 
+/**
+ * jsonString 으로 alert 합니다.
+ * @method ax5.util.alert
+ * @param {Object|Array|String|Number} O
+ * @returns {Object|Array|String|Number} O
+ * @example
+```js
+ ax5.util.alert({a:1,b:2});
+ ax5.util.alert("정말?");
+```
+ */
+		function alert(O){
+			window.alert( to_json(O) );
+			return O;
 		}
 
 		function url_info() {
@@ -603,6 +653,7 @@ argument
 			last        : last,
 			set_cookie  : set_cookie,
 			get_cookie  : get_cookie,
+			alert       : alert, 
 			url_info    : url_info
 		}
 	})();

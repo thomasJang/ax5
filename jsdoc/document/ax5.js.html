@@ -146,6 +146,8 @@
             
             <span class="subtitle">Methods</span>
             
+                <li data-name="ax5.util.alert"><a href="ax5.util.html#alert">alert</a></li>
+            
                 <li data-name="ax5.util.clone"><a href="ax5.util.html#clone">clone</a></li>
             
                 <li data-name="ax5.util.each"><a href="ax5.util.html#each">each</a></li>
@@ -155,6 +157,8 @@
                 <li data-name="ax5.util.extend"><a href="ax5.util.html#extend">extend</a></li>
             
                 <li data-name="ax5.util.first"><a href="ax5.util.html#first">first</a></li>
+            
+                <li data-name="ax5.util.get_cookie"><a href="ax5.util.html#get_cookie">get_cookie</a></li>
             
                 <li data-name="ax5.util.get_type"><a href="ax5.util.html#get_type">get_type</a></li>
             
@@ -175,6 +179,8 @@
                 <li data-name="ax5.util.is_undefined"><a href="ax5.util.html#is_undefined">is_undefined</a></li>
             
                 <li data-name="ax5.util.last"><a href="ax5.util.html#last">last</a></li>
+            
+                <li data-name="ax5.util.set_cookie"><a href="ax5.util.html#set_cookie">set_cookie</a></li>
             
                 <li data-name="ax5.util.to_json"><a href="ax5.util.html#to_json">to_json</a></li>
             
@@ -257,62 +263,63 @@ argument
 		}());
 	}
 
-	// Production steps of ECMA-262, Edition 5, 15.4.4.18
-	// Reference: http://es5.github.io/#x15.4.4.18
+	// ES5 15.4.4.18 Array.prototype.forEach ( callbackfn [ , thisArg ] )
+	// From https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/forEach
 	if (!Array.prototype.forEach) {
+		Array.prototype.forEach = function (fun /*, thisp */) {
+			if (this === void 0 || this === null) { throw TypeError(); }
 
-		Array.prototype.forEach = function(callback, thisArg) {
+			var t = Object(this);
+			var len = t.length >>> 0;
+			if (typeof fun !== "function") { throw TypeError(); }
 
-			var T, k;
-
-			if (this == null) {
-				throw new TypeError(' this is null or not defined');
-			}
-
-			// 1. Let O be the result of calling ToObject passing the |this| value as the argument.
-			var O = Object(this);
-
-			// 2. Let lenValue be the result of calling the Get internal method of O with the argument "length".
-			// 3. Let len be ToUint32(lenValue).
-			var len = O.length >>> 0;
-
-			// 4. If IsCallable(callback) is false, throw a TypeError exception.
-			// See: http://es5.github.com/#x9.11
-			if (typeof callback !== "function") {
-				throw new TypeError(callback + ' is not a function');
-			}
-
-			// 5. If thisArg was supplied, let T be thisArg; else let T be undefined.
-			if (arguments.length > 1) {
-				T = thisArg;
-			}
-
-			// 6. Let k be 0
-			k = 0;
-
-			// 7. Repeat, while k &lt; len
-			while (k &lt; len) {
-
-				var kValue;
-
-				// a. Let Pk be ToString(k).
-				//   This is implicit for LHS operands of the in operator
-				// b. Let kPresent be the result of calling the HasProperty internal method of O with argument Pk.
-				//   This step can be combined with c
-				// c. If kPresent is true, then
-				if (k in O) {
-
-					// i. Let kValue be the result of calling the Get internal method of O with argument Pk.
-					kValue = O[k];
-
-					// ii. Call the Call internal method of callback with T as the this value and
-					// argument list containing kValue, k, and O.
-					callback.call(T, kValue, k, O);
+			var thisp = arguments[1], i;
+			for (i = 0; i &lt; len; i++) {
+				if (i in t) {
+					fun.call(thisp, t[i], i, t);
 				}
-				// d. Increase k by 1.
-				k++;
 			}
-			// 8. return undefined
+		};
+	}
+
+	// Document.querySelectorAll method
+	// http://ajaxian.com/archives/creating-a-queryselector-for-ie-that-runs-at-native-speed
+	// Needed for: IE7-
+	if (!document.querySelectorAll) {
+		document.querySelectorAll = function(selectors) {
+			var style = document.createElement('style'), elements = [], element;
+			document.documentElement.firstChild.appendChild(style);
+			document._qsa = [];
+
+			style.styleSheet.cssText = selectors + '{x-qsa:expression(document._qsa && document._qsa.push(this))}';
+			window.scrollBy(0, 0);
+			style.parentNode.removeChild(style);
+
+			while (document._qsa.length) {
+				element = document._qsa.shift();
+				element.style.removeAttribute('x-qsa');
+				elements.push(element);
+			}
+			document._qsa = null;
+			return elements;
+		};
+	}
+
+	// Document.querySelector method
+	// Needed for: IE7-
+	if (!document.querySelector) {
+		document.querySelector = function(selectors) {
+			var elements = document.querySelectorAll(selectors);
+			return (elements.length) ? elements[0] : null;
+		};
+	}
+
+	// Document.getElementsByClassName method
+	// Needed for: IE8-
+	if (!document.getElementsByClassName) {
+		document.getElementsByClassName = function(classNames) {
+			classNames = String(classNames).replace(/^|\s+/g, '.');
+			return document.querySelectorAll(classNames);
 		};
 	}
 
@@ -461,6 +468,7 @@ argument
 		}
 
 		// In addition to using the http://underscorejs.org : map, reduce, reduce_right, find
+		// todo : map, reduce 등등 구현
 		function map(O, _fn){
 
 		}
@@ -724,13 +732,13 @@ argument
  ```
  */
 		function last(O){
-			if( util.object.is_object(O) ) {
+			if( is_object(O) ) {
 				var keys = Object.keys(O);
 				var item = {}; item[keys[keys.length-1]] = O[keys[keys.length-1]];
 				return item;
 			}
 			else
-			if( util.object.is_array(O) ) {
+			if( is_array(O) ) {
 				return O[O.length-1];
 			}
 			else
@@ -740,14 +748,64 @@ argument
 			}
 		}
 
-		function set_cookie(){
-
+/**
+ * 쿠키를 설정합니다.
+ * @method ax5.util.set_cookie
+ * @param {String} cname - 쿠키이름
+ * @param {String} cvalue - 쿠키값
+ * @param {Number} [exdays] - 쿠키 유지일수
+ * @example
+```js
+ ax5.util.set_cookie("jslib", "AX5");
+ ax5.util.set_cookie("jslib", "AX5", 3);
+```
+ */
+		function set_cookie(cname, cvalue, exdays){
+			document.cookie = cname + "=" + escape(cvalue) + "; path=/;" + (function(){
+				if(typeof exdays != "undefined"){
+					var d = new Date();
+					d.setTime(d.getTime() + (exdays*24*60*60*1000));
+					return "expires=" + d.toUTCString();
+				}else{
+					return "";
+				}
+			})();
 		}
-		function get_cookie(){
-
+/**
+ * 쿠키를 가져옵니다.
+ * @method ax5.util.get_cookie
+ * @param {String} cname
+ * @returns {String} cookie value
+ * @example
+```js
+ ax5.util.get_cookie("jslib");
+```
+ */
+		function get_cookie(cname){
+			var name = cname + "=";
+			var ca = document.cookie.split(';');
+			for(var i=0; i&lt;ca.length; i++) {
+				var c = ca[i];
+				while (c.charAt(0)==' ') c = c.substring(1);
+				if (c.indexOf(name) != -1) return unescape(c.substring(name.length, c.length));
+			}
+			return "";
 		}
-		function alert(){
 
+/**
+ * jsonString 으로 alert 합니다.
+ * @method ax5.util.alert
+ * @param {Object|Array|String|Number} O
+ * @returns {Object|Array|String|Number} O
+ * @example
+```js
+ ax5.util.alert({a:1,b:2});
+ ax5.util.alert("정말?");
+```
+ */
+		function alert(O){
+			window.alert( to_json(O) );
+			return O;
 		}
 
 		function url_info() {
@@ -797,6 +855,7 @@ argument
 			last        : last,
 			set_cookie  : set_cookie,
 			get_cookie  : get_cookie,
+			alert       : alert, 
 			url_info    : url_info
 		}
 	})();
@@ -805,6 +864,7 @@ argument
  * Refer to this by {@link ax5}.
  * @namespace ax5.dom
  */
+	// todo : querySelectAll 을 활용한 dom 구현
 	ax5.dom = (function(){
 		return function(select){
 			console.log(select);
@@ -830,7 +890,7 @@ argument
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Wed Dec 03 2014 01:24:43 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Thu Dec 04 2014 23:51:06 GMT+0900 (KST)
         </footer>
     </div>
 </div>
