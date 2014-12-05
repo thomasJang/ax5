@@ -15,27 +15,23 @@
 </head>
 <body>
     <ax-tree data-ax-some="abcd">AX5</ax-tree>
-    <div data-ax-grid="1233"></div>
+    <div data-ax-grid="0">1</div>
+    <div data-ax-grid="1">2</div>
 </body>
 </html>
 <script type="text/javascript">
     var ax = ax5.util, result;
 
-    var myObject = {a:1, b:"2", c:{axj:"what", arrs:[0,2,"3"]},
-        fn: function(abcdd){
-            return abcdd;
-        }
-    };
-    console.log( ax.to_json(myObject) );
+    //console.log( ax.get_elements("[data-ax-grid]") );
 
-    var myArray = [0,1,2,3,4];
-    //myArray = ax.clear( myArray );
-    console.log( ax.to_json(myArray) );
+    console.log( ax5.dom("[data-ax-grid]").css() );
 
-    console.log( document.querySelector("[data-ax-grid]") );
-    console.log( document.querySelectorAll('[data-ax-grid="1233"]')[0] );
-    console.log( document.querySelectorAll('[data-ax-grid="1233"]') );
-    console.log( document.querySelector('ax-tree').nodeName );
+    /*
+
+    //console.log( document.querySelector("[data-ax-grid]") );
+    //console.log( document.querySelectorAll('[data-ax-grid]')[ );
+    //console.log( document.querySelectorAll('[data-ax-grid="1233"]').length );
+    //console.log( document.querySelector('ax-tree').length );
     console.log( ax5.util.to_json( ax5.util.url_util() ) );
 
     var _arr = ax5.util.map( myArray,  function(index, I){
@@ -73,10 +69,5 @@
         return this.pickup;
     });
     console.log( ax.to_json(result) );
-/*
-    window.myClass = new ax5_logger();
-    var myStr = myClass.setName("동근").getName();
-    console.log(myStr);
-    console.log( ax5.util.left( myStr, 3) );
-*/
+    */
 </script>

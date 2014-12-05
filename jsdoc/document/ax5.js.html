@@ -79,22 +79,14 @@
             </ul>
         </li>
     
-        <li class="item" data-name="ax5.const">
+        <li class="item" data-name="ax5.dom">
             <span class="title">
-                <a href="ax5.const.html">ax5.const</a>
+                <a href="ax5.dom.html">ax5.dom</a>
                 
                 <span class="static">static</span>
                 
             </span>
             <ul class="members itemMembers">
-            
-            <span class="subtitle">Members</span>
-            
-                <li data-name="ax5.const.browser"><a href="ax5.const.html#browser">browser</a></li>
-            
-                <li data-name="ax5.const.event_keys"><a href="ax5.const.html#event_keys">event_keys</a></li>
-            
-                <li data-name="ax5.const.mousewheelevt"><a href="ax5.const.html#mousewheelevt">mousewheelevt</a></li>
             
             </ul>
             <ul class="typedefs itemMembers">
@@ -108,14 +100,22 @@
             </ul>
         </li>
     
-        <li class="item" data-name="ax5.dom">
+        <li class="item" data-name="ax5.info">
             <span class="title">
-                <a href="ax5.dom.html">ax5.dom</a>
+                <a href="ax5.info.html">ax5.info</a>
                 
                 <span class="static">static</span>
                 
             </span>
             <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="ax5.info.browser"><a href="ax5.info.html#browser">browser</a></li>
+            
+                <li data-name="ax5.info.event_keys"><a href="ax5.info.html#event_keys">event_keys</a></li>
+            
+                <li data-name="ax5.info.mousewheelevt"><a href="ax5.info.html#mousewheelevt">mousewheelevt</a></li>
             
             </ul>
             <ul class="typedefs itemMembers">
@@ -362,12 +362,13 @@ argument
 
 	/**
 	 * 상수모음
-	 * @namespace ax5.const
+	 * @namespace ax5.info
 	 */
-	var CV = ax5.const = {
+	ax5.info = {
+		version: "0.0.1",
 /**
  * event keyCodes
- * @member {Object} ax5.const.event_keys
+ * @member {Object} ax5.info.event_keys
  * @example
  ```
  {
@@ -386,10 +387,10 @@ argument
 		},
 /**
  * 사용자 브라우저 식별용 오브젝트
- * @member {Object} ax5.const.browser
+ * @member {Object} ax5.info.browser
  * @example
  ```
- console.log( ax5.const.browser );
+ console.log( ax5.info.browser );
  //Object {name: "chrome", version: "39.0.2171.71", mobile: false}
  ```
  */
@@ -426,7 +427,7 @@ argument
 		})(),
 /**
  * 브라우저에 따른 마우스 휠 이벤트이름
- * @member {Object} ax5.const.mousewheelevt
+ * @member {Object} ax5.info.mousewheelevt
  */
 		mousewheelevt: ((/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel")
 	};
@@ -435,7 +436,7 @@ argument
  * Refer to this by {@link ax5}.
  * @namespace ax5.util
  */
-	ax5.util = (function(){
+	ax5['util'] = (function(){
 		var _toString = Object.prototype.toString;
 /**
  * Object나 Array의 아이템으로 사용자 함수를 호출합니다.
@@ -473,7 +474,6 @@ argument
 			}
 			return O;
 		}
-
 		// In addition to using the http://underscorejs.org : map, reduce, reduce_right, find
 		// todo : map, reduce 등등 구현
 /**
@@ -529,7 +529,6 @@ argument
 			}
 			return results;
 		}
-
 /**
  * 배열의 왼쪽에서 오른쪽으로 연산을 진행하는데 수행한 결과가 왼쪽 값으로 반영되어 최종 왼쪽 값을 반환합니다.
  * @method ax5.util.reduce
@@ -708,7 +707,6 @@ argument
 			}
 			return json_string;
 		}
-
 /**
  * 타겟 오브젝트의 키를 대상 오브젝트의 키만큼 확장합니다.
  * @method ax5.util.extend
@@ -798,61 +796,61 @@ argument
 			}
 			return typeName;
 		}
-		/**
-		 * 오브젝트가 HTML 엘리먼트여부인지 판단합니다.
-		 * @method ax5.util.is_element
-		 * @param {Object} O
-		 * @returns {Boolean}
-		 */
+/**
+ * 오브젝트가 HTML 엘리먼트여부인지 판단합니다.
+ * @method ax5.util.is_element
+ * @param {Object} O
+ * @returns {Boolean}
+ */
 		function is_element(O) { return !!(O && O.nodeType == 1); }
-		/**
-		 * 오브젝트가 Object인지 판단합니다.
-		 * @method ax5.util.is_object
-		 * @param {Object} O
-		 * @returns {Boolean}
-		 */
+/**
+ * 오브젝트가 Object인지 판단합니다.
+ * @method ax5.util.is_object
+ * @param {Object} O
+ * @returns {Boolean}
+ */
 		function is_object(O) { return _toString.call(O) == "[object Object]"; }
-		/**
-		 * 오브젝트가 Array인지 판단합니다.
-		 * @method ax5.util.is_array
-		 * @param {Object} O
-		 * @returns {Boolean}
-		 */
+/**
+ * 오브젝트가 Array인지 판단합니다.
+ * @method ax5.util.is_array
+ * @param {Object} O
+ * @returns {Boolean}
+ */
 		function is_array(O) { return _toString.call(O) == "[object Array]"; }
-		/**
-		 * 오브젝트가 Function인지 판단합니다.
-		 * @method ax5.util.is_function
-		 * @param {Object} O
-		 * @returns {Boolean}
-		 */
+/**
+ * 오브젝트가 Function인지 판단합니다.
+ * @method ax5.util.is_function
+ * @param {Object} O
+ * @returns {Boolean}
+ */
 		function is_function(O) { return typeof O === "function"; }
-		/**
-		 * 오브젝트가 String인지 판단합니다.
-		 * @method ax5.util.is_string
-		 * @param {Object} O
-		 * @returns {Boolean}
-		 */
+/**
+ * 오브젝트가 String인지 판단합니다.
+ * @method ax5.util.is_string
+ * @param {Object} O
+ * @returns {Boolean}
+ */
 		function is_string(O) { return _toString.call(O) == "[object String]"; }
-		/**
-		 * 오브젝트가 Number인지 판단합니다.
-		 * @method ax5.util.is_number
-		 * @param {Object} O
-		 * @returns {Boolean}
-		 */
+/**
+ * 오브젝트가 Number인지 판단합니다.
+ * @method ax5.util.is_number
+ * @param {Object} O
+ * @returns {Boolean}
+ */
 		function is_number(O) { return _toString.call(O) == "[object Number]"; }
-		/**
-		 * 오브젝트가 undefined인지 판단합니다.
-		 * @method ax5.util.is_undefined
-		 * @param {Object} O
-		 * @returns {Boolean}
-		 */
+/**
+ * 오브젝트가 undefined인지 판단합니다.
+ * @method ax5.util.is_undefined
+ * @param {Object} O
+ * @returns {Boolean}
+ */
 		function is_undefined(O) { return typeof O === "undefined"; }
-		/**
-		 * 오브젝트가 undefined이거나 null이거나 빈값인지 판단합니다.
-		 * @method ax5.util.is_nothing
-		 * @param {Object} O
-		 * @returns {Boolean}
-		 */
+/**
+ * 오브젝트가 undefined이거나 null이거나 빈값인지 판단합니다.
+ * @method ax5.util.is_nothing
+ * @param {Object} O
+ * @returns {Boolean}
+ */
 		function is_nothing(O) { return (typeof O === "undefined" || O === null || O === ""); }
 /**
  * 오브젝트의 첫번째 아이템을 반환합니다.
@@ -908,7 +906,6 @@ argument
 				return undefined;
 			}
 		}
-
 /**
  * 쿠키를 설정합니다.
  * @method ax5.util.set_cookie
@@ -952,7 +949,6 @@ argument
 			}
 			return "";
 		}
-
 /**
  * jsonString 으로 alert 합니다.
  * @method ax5.util.alert
@@ -968,7 +964,6 @@ argument
 			window.alert( to_json(O) );
 			return O;
 		}
-
 /**
  * 현재 페이지의 Url 정보를 리턴합니다.
  * @method ax5.util.url_util
@@ -1007,6 +1002,16 @@ argument
 			return url;
 		}
 
+		function get_elements(query, parent_element){
+			if(typeof parent_element === "undefined") parent_element = document;
+			var elements = parent_element.querySelectorAll(query), return_elements = [];
+			//console.info( elements );
+			var i = 0, length = elements.length;
+			for(;i&lt;length;){
+				return_elements.push( elements[i++] );
+			}
+			return return_elements;
+		}
 		return {
 			each        : each,
 			map         : map,
@@ -1031,20 +1036,42 @@ argument
 			set_cookie  : set_cookie,
 			get_cookie  : get_cookie,
 			alert       : alert,
-			url_util    : url_util
+			url_util    : url_util,
+			get_elements: get_elements
 		}
 	})();
 
-/**
- * Refer to this by {@link ax5}.
- * @namespace ax5.dom
- */
+	/**
+	 * Refer to this by {@link ax5}.
+	 * @namespace ax5.dom
+	 */
 	// todo : querySelectAll 을 활용한 dom 구현
-	ax5.dom = (function(){
-		return function(select){
-			console.log(select);
-		}
-	})();
+	ax5.dom = function(query){
+		var axdom = (function(){
+			var util = ax5.util;
+			function ax(query){
+				this.version = ax5.info.version;
+				this.dom = ax5.util.get_elements(query);
+			}
+			// css bind
+			ax.prototype.css = function(O){
+				util.each(this.dom, function(){
+					this.style.backgroundColor = "#000";
+				});
+				return this;
+			};
+			// event bind
+
+			// animate
+
+			// class 관련
+
+			// attr 관련
+
+			return ax;
+		})();
+		return new axdom(query);
+	};
 
 	if ( typeof module === "object" && module && typeof module.exports === "object" ){
 		module.exports = ax5; // commonJS
@@ -1053,8 +1080,7 @@ argument
 		if ( typeof define === "function" && define.amd ) define("_ax5", [], function () { return ax5; }); // requireJS
 	}
 
-}.call(this));
-</code></pre>
+}.call(this));</code></pre>
         </article>
     </section>
 
@@ -1065,7 +1091,7 @@ argument
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Fri Dec 05 2014 17:48:33 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sat Dec 06 2014 01:12:00 GMT+0900 (KST)
         </footer>
     </div>
 </div>
