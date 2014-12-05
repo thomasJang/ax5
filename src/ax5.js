@@ -14,7 +14,7 @@ argument
  - msg : 메세지
  */
 
-// 필수 Ployfill
+// 필수 Ployfill 확장 구문
 (function(){
 
 	var root = this;
@@ -138,6 +138,7 @@ argument
 
 }.call(this));
 
+// ax5 선언
 (function() {
 	'use strict';
 
@@ -241,25 +242,21 @@ argument
 ```
  */
 		function each(O, _fn){
-			if(O){
-				var name, i = 0, length = O.length,
-					isObj = length === undefined || typeof O === "function";
-				if ( isObj ) {
-					for ( name in O ) {
-						if( typeof O[ name ] != "undefined" ) {
-							if (_fn.call(O[ name ], name, O[ name ]) === false) {
-								break;
-							}
-						}
-					}
-				} else {
-					for ( ; i < length; ) {
-						if( typeof O[ i ] != "undefined" ) {
-							if (_fn.call(O[ i ], i, O[ i++ ]) === false) {
-								break;
-							}
-						}
-					}
+			if (O == null || typeof O === "undeinfed"){
+				console.error("argument error : ax5.util.each");
+				return O;
+			}
+			var key, i = 0, length = O.length,
+				isObj = length === undefined || typeof O === "function";
+			if(isObj){
+				for(key in O){
+					if(typeof O[key] != "undefined")
+					if(_fn.call(O[key], key, O[key]) === false) break;
+				}
+			}else{
+				for( ; i < length; ){
+					if( typeof O[ i ] != "undefined" )
+					if (_fn.call(O[ i ], i, O[ i++ ]) === false) break;
 				}
 			}
 			return O;
@@ -267,17 +264,171 @@ argument
 
 		// In addition to using the http://underscorejs.org : map, reduce, reduce_right, find
 		// todo : map, reduce 등등 구현
+/**
+ * 원본 아이템들을 이용하여 사용자 함수의 리턴값으로 이루어진 새로운 배열을 만듭니다.
+ * @method ax5.util.map
+ * @param {Object|Array} O
+ * @param {Function} _fn
+ * @returns {Array}
+ * @example
+```js
+ var myArray = [0,1,2,3,4];
+ var myObject = {a:1, b:"2", c:{axj:"what", arrs:[0,2,"3"]},
+    fn: function(abcdd){
+        return abcdd;
+    }
+ };
+
+ var _arr = ax5.util.map( myArray,  function(index, I){
+    return index+1;
+ });
+ console.log(_arr);
+ // [1, 2, 3, 4, 5]
+
+ var _arr = ax5.util.map( myObject,  function(k, v){
+    return v * 2;
+ });
+ console.log(_arr);
+ // [2, 4, NaN, NaN]
+```
+ */
 		function map(O, _fn){
-
+			if (O == null || typeof O === "undeinfed"){
+				console.error("argument error : ax5.util.map");
+				return [];
+			}
+			var key, i = 0, length = O.length, isObj = length === undefined || typeof O === "function", results = [], fn_result;
+			if (isObj){
+				for (key in O) {
+					if(typeof O[key] != "undefined"){
+						fn_result = undefined;
+						if ( (fn_result = _fn.call(O[key], key, O[key])) === false ) break;
+						else results.push( fn_result );
+					}
+				}
+			} else {
+				for ( ; i < length; ) {
+					if(typeof O[i] != "undefined") {
+						fn_result = undefined;
+						if ( (fn_result = _fn.call(O[ i ], i, O[ i++ ])) === false ) break;
+						else results.push( fn_result );
+					}
+				}
+			}
+			return results;
 		}
-		function reduce(){
 
+/**
+ * 배열의 왼쪽에서 오른쪽으로 연산을 진행하는데 수행한 결과가 왼쪽 값으로 반영되어 최종 왼쪽 값을 반환합니다.
+ * @method ax5.util.reduce
+ * @param {Array} O
+ * @param {Function} _fn
+ * @returns {Alltypes}
+ * @example
+```js
+ var aarray = [5,4,3,2,1];
+ result = ax5.util.reduce( aarray, function(p, n){
+       return p * n;
+    });
+ console.log(result, aarray);
+ // 120 [5, 4, 3, 2, 1]
+```
+ */
+		function reduce(O, _fn){
+			if (O == null || typeof O === "undeinfed"){
+				console.error("argument error : ax5.util.map - use Array");
+				return [];
+			}
+			if (!is_array(O)){
+				console.error("argument error : ax5.util.map - use Array");
+				return []
+			}
+			var i = 0, length = O.length, token_item = O[i];
+			for ( ; i < length-1; ) {
+				if(typeof O[i] != "undefined") {
+					if ( ( token_item = _fn.call(root, token_item, O[ ++i ]) ) === false ) break;
+				}
+			}
+			return token_item;
 		}
-		function reduce_right(){
-
+/**
+ * 배열의 오른쪽에서 왼쪽으로 연산을 진행하는데 수행한 결과가 오른쪽 값으로 반영되어 최종 오른쪽 값을 반환합니다.
+ * @method ax5.util.reduce_right
+ * @param {Array} O
+ * @param {Function} _fn
+ * @returns {Alltypes}
+ * @example
+ ```js
+ var aarray = [5,4,3,2,1];
+ result = ax5.util.reduce_right( aarray, function(p, n){
+    console.log( n );
+    return p * n;
+ });
+ console.log(result, aarray);
+ 120 [5, 4, 3, 2, 1]
+ ```
+ */
+		function reduce_right(O, _fn){
+			if (O == null || typeof O === "undeinfed"){
+				console.error("argument error : ax5.util.map - use Array");
+				return [];
+			}
+			if (!is_array(O)){
+				console.error("argument error : ax5.util.map - use Array");
+				return []
+			}
+			var i = O.length-1, token_item = O[i];
+			for ( ; i > 0; ) {
+				if(typeof O[i] != "undefined") {
+					if ( ( token_item = _fn.call(root, token_item, O[ --i ]) ) === false ) break;
+				}
+			}
+			return token_item;
 		}
-		function find(){
+/**
+ * 배열또는 오브젝트의 각 아이템을 인자로 하는 사용자 함수의 결과가 참인 아이템들의 배열을 반환합니다.
+ * @method ax5.util.filter
+ * @param {Object|Array} O
+ * @param {Function} _fn
+ * @returns {Array}
+ * @example
+```js
+ var aarray = [5,4,3,2,1];
+ result = ax5.util.filter( aarray, function(){
+        return this % 2;
+ });
+ console.log(result);
+ // [5, 3, 1]
 
+ var filObject = {a:1, s:"string", oa:{pickup:true, name:"AXISJ"}, os:{pickup:true, name:"AX5"}};
+ result = ax5.util.filter( filObject, function(){
+	return this.pickup;
+ });
+ console.log( ax.to_json(result) );
+ // [{"pickup": , "name": "AXISJ"}, {"pickup": , "name": "AX5"}]
+```
+ */
+		function filter(O, _fn){
+			if (O == null || typeof O === "undeinfed"){
+				console.error("argument error : ax5.util.map");
+				return [];
+			}
+			var key, i = 0, length = O.length, isObj = length === undefined || typeof O === "function", results = [], fn_result;
+			if (isObj){
+				for (key in O) {
+					if(typeof O[key] != "undefined"){
+						if( fn_result = _fn.call(O[key], key, O[key]) ) results.push( O[key] );
+					}
+				}
+			} else {
+				for ( ; i < length; ) {
+					if(typeof O[i] != "undefined") {
+						if ( fn_result = _fn.call(O[ i ], i, O[ i ]) ) results.push( O[ i ] );
+						i++;
+					}
+				}
+			}
+			return results;
 		}
 /**
  * 에러를 발생시킵니다.
@@ -606,28 +757,42 @@ argument
 			return O;
 		}
 
-		function url_info() {
-			var url, url_param, param, referUrl, pathName, AXparam, pageProtocol, pageHostName;
-			url_param = window.location.href;
-			param = window.location.search;
-			referUrl = document.referrer;
-			pathName = window.location.pathname;
-			url = url_param.replace(param, '');
-			param = param.replace(/^\?/, '');
-			pageProtocol = window.location.protocol;
-			pageHostName = window.location.hostname;
-			AXparam = url_param.replace(pageProtocol + "//", "");
-			AXparam = (param) ? AXparam.replace(pageHostName + pathName + "?" + param, "") : AXparam.replace(pageHostName + pathName, "");
-			return {
-				url : url,
-				param : param,
-				anchorData : AXparam,
-				urlParam : url_param,
-				referUrl : referUrl,
-				pathName : pathName,
-				protocol : pageProtocol,
-				hostName : pageHostName
-			};
+/**
+ * 현재 페이지의 Url 정보를 리턴합니다.
+ * @method ax5.util.url_util
+ * @returns {Object}
+ * @example
+```js
+
+ console.log( ax5.util.to_json( ax5.util.url_util() ) );
+ {
+    "href": "http://ax5:2018/samples/index.html?a=1&b=1#abc",
+    "param": "a=1&b=1",
+    "referrer": "",
+    "pathname": "/samples/index.html",
+    "hostname": "ax5",
+    "port": "2018",
+    "url": "http://ax5:2018/samples/index.html",
+    "hashdata": "abc"
+ }
+```
+ */
+		function url_util() {
+			var url = {
+				href: window.location.href,
+				param: window.location.search,
+				referrer: document.referrer,
+				pathname: window.location.pathname,
+				hostname: window.location.hostname,
+				port: window.location.port
+			}, urls = url.href.split(/[\?#]/);
+			url.param = url.param.replace("?", "");
+			url.url = urls[0];
+			if(url.href.search("#") > -1){
+				url.hashdata = last(urls);
+			}
+			urls = null;
+			return url;
 		}
 
 		return {
@@ -635,7 +800,7 @@ argument
 			map         : map,
 			reduce      : reduce,
 			reduce_right: reduce_right,
-			find        : find,
+			filter      : filter,
 			error       : error,
 			to_json     : to_json,
 			extend      : extend,
@@ -653,8 +818,8 @@ argument
 			last        : last,
 			set_cookie  : set_cookie,
 			get_cookie  : get_cookie,
-			alert       : alert, 
-			url_info    : url_info
+			alert       : alert,
+			url_util    : url_util
 		}
 	})();
 

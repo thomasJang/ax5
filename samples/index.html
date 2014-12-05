@@ -19,7 +19,7 @@
 </body>
 </html>
 <script type="text/javascript">
-    var ax = ax5.util;
+    var ax = ax5.util, result;
 
     var myObject = {a:1, b:"2", c:{axj:"what", arrs:[0,2,"3"]},
         fn: function(abcdd){
@@ -36,7 +36,43 @@
     console.log( document.querySelectorAll('[data-ax-grid="1233"]')[0] );
     console.log( document.querySelectorAll('[data-ax-grid="1233"]') );
     console.log( document.querySelector('ax-tree').nodeName );
+    console.log( ax5.util.to_json( ax5.util.url_util() ) );
 
+    var _arr = ax5.util.map( myArray,  function(index, I){
+        return index+1;
+    });
+    console.log(_arr);
+
+    var _arr = ax5.util.map( myObject,  function(k, v){
+        return v * 2;
+    });
+    console.log(_arr);
+
+    console.info("--");
+
+    var aarray = [5,4,3,2,1];
+    result = ax5.util.reduce( aarray, function(p, n){
+        console.log( n );
+        return p * n;
+    });
+    console.log(result, aarray);
+
+    result = ax5.util.reduce_right( aarray, function(p, n){
+        console.log( n );
+        return p * n;
+    });
+    console.log(result, aarray);
+
+    result = ax5.util.filter( aarray, function(){
+        return this % 2;
+    });
+    console.log(result);
+
+    var filObject = {a:1, s:"string", oa:{pickup:true, name:"AXISJ"}, os:{pickup:true, name:"AX5"}}
+    result = ax5.util.filter( filObject, function(){
+        return this.pickup;
+    });
+    console.log( ax.to_json(result) );
 /*
     window.myClass = new ax5_logger();
     var myStr = myClass.setName("동근").getName();
