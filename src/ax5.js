@@ -835,26 +835,37 @@ argument
 	 */
 	// todo : querySelectAll 을 활용한 dom 구현
 	ax5.dom = function(query){
+
+		function setCSS( options ){
+			for(var di=0;di<this.dom.length;di++) {
+				for ( name in options ) {
+					this.dom[di].style[name] = options[name];
+				}
+			}
+			return this;
+		}
+
 		var axdom = (function(){
 			var util = ax5.util;
 			function ax(query){
 				this.version = ax5.info.version;
 				this.dom = ax5.util.get_elements(query);
+				this.x = function(command, O){
+					// css bind
+					if(command == "css"){
+						setCSS.call(this, O);
+					}
+					// event bind
+
+					// animate
+
+					// class 관련
+
+					// attr 관련
+
+					return this;
+				};
 			}
-			// css bind
-			ax.prototype.css = function(O){
-				util.each(this.dom, function(){
-					this.style.backgroundColor = "#000";
-				});
-				return this;
-			};
-			// event bind
-
-			// animate
-
-			// class 관련
-
-			// attr 관련
 
 			return ax;
 		})();
