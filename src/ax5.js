@@ -297,8 +297,8 @@ argument
 				console.error("argument error : ax5.util.map");
 				return [];
 			}
-			var key, i = 0, length = O.length, isObj = length === undefined || typeof O === "function", results = [], fn_result;
-			if (isObj){
+			var key, i = 0, length = O.length, results = [], fn_result;
+			if (is_object(O)){
 				for (key in O) {
 					if(typeof O[key] != "undefined"){
 						fn_result = undefined;
@@ -316,6 +316,50 @@ argument
 				}
 			}
 			return results;
+		}
+/**
+ * 원본 아이템들을 이용하여 사용자 함수의 리턴값이 참인 아이템의 위치를 반환합니다.
+ * @method ax5.util.search
+ * @param {Object|Array} O
+ * @param {Function} _fn
+ * @returns {Number|String}
+ * @example
+ ```js
+ var myArray = [0,1,2,3,4,5,6];
+ var myObject = {a:"123","b":"123",c:123};
+
+ ax.search(myArray,  function(){
+    return this > 3;
+ });
+ // 4
+ ax.search(myObject,  function(k, v){
+    return v === 123;
+ });
+ // "c"
+ ```
+ */
+		function search(O, _fn){
+			if (O == null || typeof O === "undeinfed"){
+				console.error("argument error : ax5.util.find");
+				return -1;
+			}
+			var key, i = 0, length = O.length;
+			if (is_object(O)){
+				for (key in O) {
+					if(typeof O[key] != "undefined" && _fn.call(O[key], key, O[key])){
+						return key;
+						break;
+					}
+				}
+			} else {
+				for ( ; i < length; ) {
+					if(typeof O[i] != "undefined" && _fn.call(O[ i ], i, O[ i++ ])) {
+						return i-1;
+						break;
+					}
+				}
+			}
+			return -1;
 		}
 /**
  * 배열의 왼쪽에서 오른쪽으로 연산을 진행하는데 수행한 결과가 왼쪽 값으로 반영되어 최종 왼쪽 값을 반환합니다.
@@ -806,6 +850,7 @@ argument
 		return {
 			each           : each,
 			map            : map,
+			search         : search,
 			reduce         : reduce,
 			reduce_right   : reduce_right,
 			filter         : filter,
@@ -853,7 +898,7 @@ argument
 				this.dom = util.get_elements(query);
 
 /**
- * query selected elements에 css 값을 적용또는 반환합니다.
+ * elements에 css 값을 적용또는 반환합니다.
  * @method ax5.dom.css
  * @param {Object|Array|String} O
  * @returns {ax5.dom|String|Object}
@@ -889,9 +934,48 @@ argument
 					}
 					return this;
 				};
+/**
+ * elements에 className 를 추가, 제거, 확인, 토글합니다.
+ * @method ax5.dom.class
+ * @param {String} [command=has] - add,remove,toggle,has
+ * @param {String|Array} O - 클래스명
+ * @returns {ax5.dom|String} return - ax5.dom 또는 클래스이름
+ * @example
+```js
 
-				this.class = function(O){
+```
+ */
+				this.class = function(command, O){
+					// add, remove, toggle
+					if(command === "add") {
 
+						//if(){
+						for (var k in O) {
+							this.dom[di].style[k] = O[k];
+						}
+						//}
+					}
+					else
+					if(command === "remove") {
+
+					}
+					else
+					if(command === "toggle") {
+
+					}
+					else
+					{ // has
+						if(typeof O === "undefined") O = command;
+						var classNames = this.dom[0]["className"].split(/ /g);
+						if (util.is_string(O)) { // hasClass
+							// get Class Name
+							return (util.search(classNames, function () { return this === O }) > -1);
+						}
+						else if (util.is_array(O)) { // hasClass array
+
+						}
+					}
+					return this;
 				};
 				this.on = function(){
 

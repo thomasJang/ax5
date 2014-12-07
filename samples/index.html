@@ -24,9 +24,20 @@
 
     //console.log( ax.get_elements("[data-ax-grid]") );
 
+    var myArray = [0,1,2,3,4,5,6];
+    var myObject = {a:"123","b":"123",c:123};
+
     ax5.dom("[data-ax-grid]").css({"color":"#ff3300", border:"1px solid #000"});
     console.log( ax5.dom("[data-ax-grid]").css("color") );
     console.log( ax5.dom("[data-ax-grid]").css(["border","color"]) );
+
+    console.info(
+        ax5.dom("[data-ax-grid='0']").class("K"),
+        ax5.dom("[data-ax-grid='0']").class("has","A")
+    );
+
+
+
 
 
 

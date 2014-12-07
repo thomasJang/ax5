@@ -100,6 +100,8 @@
             
             <span class="subtitle">Methods</span>
             
+                <li data-name="ax5.dom.class"><a href="ax5.dom.html#class">class</a></li>
+            
                 <li data-name="ax5.dom.css"><a href="ax5.dom.html#css">css</a></li>
             
             </ul>
@@ -195,6 +197,8 @@
                 <li data-name="ax5.util.reduce"><a href="ax5.util.html#reduce">reduce</a></li>
             
                 <li data-name="ax5.util.reduce_right"><a href="ax5.util.html#reduce_right">reduce_right</a></li>
+            
+                <li data-name="ax5.util.search"><a href="ax5.util.html#search">search</a></li>
             
                 <li data-name="ax5.util.set_cookie"><a href="ax5.util.html#set_cookie">set_cookie</a></li>
             
@@ -334,17 +338,17 @@
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="css">
+        <h4 class="name" id="class">
             
-            <span class="type-signature static">static</span>ax5.dom.css<span class="signature">(O)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom.html">ax5.dom</a>|String|Object}</span>
+            <span class="type-signature static">static</span>ax5.dom.class<span class="signature">(<span class="optional">command</span>, O)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom.html">ax5.dom</a>|String}</span>
         </h4>
     
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5ax5.js#L855" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5ax5.js#L937" target="_blank">
             ax5.js,
-            line 855</a>
+            line 937</a>
         </div>
         
     </div>
@@ -355,7 +359,194 @@
     
     
     <div class="description">
-        <p>query selected elements에 css 값을 적용또는 반환합니다.</p>
+        <p>elements에 className 를 추가, 제거, 확인, 토글합니다.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>command</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                    has
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>add,remove,toggle,has</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>O</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+|
+
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                <p>클래스명</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+<h5>Returns:</h5>
+- ax5.dom 또는 클래스이름
+<br />
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint linenums"><code class="lang-js">
+</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="css">
+            
+            <span class="type-signature static">static</span>ax5.dom.css<span class="signature">(O)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom.html">ax5.dom</a>|String|Object}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <i class="axi axi-github"></i>
+            <a href="https://github.com/tom-axisj/ax5ax5.js#L900" target="_blank">
+            ax5.js,
+            line 900</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>elements에 css 값을 적용또는 반환합니다.</p>
     </div>
     
 
@@ -489,7 +680,7 @@
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sun Dec 07 2014 22:45:19 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Mon Dec 08 2014 00:45:50 GMT+0900 (KST)
         </footer>
     </div>
 </div>
