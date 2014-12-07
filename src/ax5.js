@@ -836,14 +836,6 @@ argument
 	// todo : querySelectAll 을 활용한 dom 구현
 	ax5.dom = function(query){
 
-		function setCSS( options ){
-			for(var di=0;di<this.dom.length;di++) {
-				for ( name in options ) {
-					this.dom[di].style[name] = options[name];
-				}
-			}
-			return this;
-		}
 
 		var axdom = (function(){
 			var util = ax5.util;
@@ -851,11 +843,20 @@ argument
 				this.version = ax5.info.version;
 				this.dom = ax5.util.get_elements(query);
 				this.x = function(command, O){
-					// css bind
+					// css
 					if(command == "css"){
-						setCSS.call(this, O);
+						for(var di=0;di<this.dom.length;di++) {
+							if( ax5.util.is_string( options ) ){
+								return this.dom[di].style[options];
+							}else {
+								for (name in options) {
+									this.dom[di].style[name] = options[name];
+								}
+							}
+						}
+						return this;
 					}
-					// event bind
+					// event
 
 					// animate
 

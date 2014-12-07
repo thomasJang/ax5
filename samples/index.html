@@ -24,7 +24,8 @@
 
     //console.log( ax.get_elements("[data-ax-grid]") );
 
-    ax5.dom("[data-ax-grid]").x("css", {color:"#ff3300"}).x("addclass", "addedClass");
+    ax5.dom("[data-ax-grid]").x("css", {"color":"#ff3300"}).x("css", {border:"1px solid #000"});
+    console.log( ax5.dom("[data-ax-grid]").x("css", "border") );
 
 
     /*
