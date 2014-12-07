@@ -15,7 +15,7 @@
 </head>
 <body>
     <ax-tree data-ax-some="abcd">AX5</ax-tree>
-    <div data-ax-grid="0">1</div>
+    <div data-ax-grid="0" class="A B C">1</div>
     <div data-ax-grid="1">2</div>
 </body>
 </html>
@@ -24,8 +24,11 @@
 
     //console.log( ax.get_elements("[data-ax-grid]") );
 
-    ax5.dom("[data-ax-grid]").x("css", {"color":"#ff3300"}).x("css", {border:"1px solid #000"});
-    console.log( ax5.dom("[data-ax-grid]").x("css", "border") );
+    ax5.dom("[data-ax-grid]").css({"color":"#ff3300", border:"1px solid #000"});
+    console.log( ax5.dom("[data-ax-grid]").css("color") );
+    console.log( ax5.dom("[data-ax-grid]").css(["border","color"]) );
+
+
 
 
     /*

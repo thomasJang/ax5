@@ -146,13 +146,13 @@ argument
 	var root = this;
 
 	/** @namespace {Object} ax5 */
-	var ax5 = {};
+	var ax5 = {}, info, util, dom;
 
 	/**
 	 * 상수모음
 	 * @namespace ax5.info
 	 */
-	ax5.info = {
+	ax5.info = info = {
 		version: "0.0.1",
 /**
  * event keyCodes
@@ -224,7 +224,7 @@ argument
  * Refer to this by {@link ax5}.
  * @namespace ax5.util
  */
-	ax5['util'] = (function(){
+	ax5['util'] = util = (function(){
 		var _toString = Object.prototype.toString;
 /**
  * Object나 Array의 아이템으로 사용자 함수를 호출합니다.
@@ -800,32 +800,36 @@ argument
 			}
 			return return_elements;
 		}
+		function create_elements(){
+
+		}
 		return {
-			each        : each,
-			map         : map,
-			reduce      : reduce,
-			reduce_right: reduce_right,
-			filter      : filter,
-			error       : error,
-			to_json     : to_json,
-			extend      : extend,
-			clone       : clone,
-			get_type    : get_type,
-			is_element  : is_element,
-			is_object   : is_object,
-			is_array    : is_array,
-			is_function : is_function,
-			is_string   : is_string,
-			is_number   : is_number,
-			is_undefined: is_undefined,
-			is_nothing  : is_nothing,
-			first       : first,
-			last        : last,
-			set_cookie  : set_cookie,
-			get_cookie  : get_cookie,
-			alert       : alert,
-			url_util    : url_util,
-			get_elements: get_elements
+			each           : each,
+			map            : map,
+			reduce         : reduce,
+			reduce_right   : reduce_right,
+			filter         : filter,
+			error          : error,
+			to_json        : to_json,
+			extend         : extend,
+			clone          : clone,
+			get_type       : get_type,
+			is_element     : is_element,
+			is_object      : is_object,
+			is_array       : is_array,
+			is_function    : is_function,
+			is_string      : is_string,
+			is_number      : is_number,
+			is_undefined   : is_undefined,
+			is_nothing     : is_nothing,
+			first          : first,
+			last           : last,
+			set_cookie     : set_cookie,
+			get_cookie     : get_cookie,
+			alert          : alert,
+			url_util       : url_util,
+			get_elements   : get_elements,
+			create_elements: create_elements
 		}
 	})();
 
@@ -835,39 +839,67 @@ argument
 	 */
 	// todo : querySelectAll 을 활용한 dom 구현
 	ax5.dom = function(query){
-
-
 		var axdom = (function(){
-			var util = ax5.util;
 			function ax(query){
-				this.version = ax5.info.version;
-				this.dom = ax5.util.get_elements(query);
-				this.x = function(command, O){
-					// css
-					if(command == "css"){
+/**
+ * version of ax5
+ * @member {String} version
+ */
+				this.version = info.version;
+/**
+ * query selected elements
+ * @member {Array} ax5.dom.dom
+ */
+				this.dom = util.get_elements(query);
+
+/**
+ * query selected elements에 css 값을 적용또는 반환합니다.
+ * @method ax5.dom.css
+ * @param {Object|Array|String} O
+ * @returns {ax5.dom|String|Object}
+ * @example
+```js
+ ax5.dom("[data-ax-grid]").css({"color":"#ff3300", border:"1px solid #000"});
+ console.log( ax5.dom("[data-ax-grid]").css("color") );
+ // rgb(255, 51, 0)
+ console.log( ax5.dom("[data-ax-grid]").css(["border","color"]) );
+ // {border: "1px solid rgb(0, 0, 0)", color: "rgb(255, 51, 0)"}
+```
+ */
+				// todo : css value 사용자 함수로 설정하기
+				this.css = function(O){
+					if( util.is_string( O ) ) {
+						return this.dom[0].style[O];
+					}
+					else
+					if( util.is_array( O ) ) {
+						var css = {};
+						for(var i=0;i<O.length;i++){
+							css[O[i]] = this.dom[0].style[O[i]];
+						}
+						return css;
+					}
+					else
+					{
 						for(var di=0;di<this.dom.length;di++) {
-							if( ax5.util.is_string( options ) ){
-								return this.dom[di].style[options];
-							}else {
-								for (name in options) {
-									this.dom[di].style[name] = options[name];
-								}
+							for (var k in O) {
+								this.dom[di].style[k] = O[k];
 							}
 						}
-						return this;
 					}
-					// event
-
-					// animate
-
-					// class 관련
-
-					// attr 관련
-
 					return this;
 				};
-			}
 
+				this.class = function(O){
+
+				};
+				this.on = function(){
+
+				};
+				this.attr = function(){
+
+				};
+			}
 			return ax;
 		})();
 		return new axdom(query);
