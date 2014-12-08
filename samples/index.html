@@ -17,6 +17,7 @@
     <ax-tree data-ax-some="abcd">AX5</ax-tree>
     <div data-ax-grid="0" class="A B C">1</div>
     <div data-ax-grid="1">2</div>
+    <div id="data-ax-grid">3</div>
 </body>
 </html>
 <script type="text/javascript">
@@ -32,9 +33,13 @@
     console.log( ax5.dom("[data-ax-grid]").css(["border","color"]) );
 
     console.info(
+        ax5.dom("[data-ax-grid-]").length,
+        ax5.dom("[data-ax-grid-]").dom.length,
         ax5.dom("[data-ax-grid='0']").class("K"),
         ax5.dom("[data-ax-grid='0']").class("has","A")
     );
+
+    ax5.dom("#data-ax-grid").css({"color":"#ff3300", border:"1px solid #000"});
 
 
 

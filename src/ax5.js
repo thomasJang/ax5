@@ -835,12 +835,15 @@ argument
 		}
 
 		function get_elements(query, parent_element){
-			if(typeof parent_element === "undefined") parent_element = document;
-			var elements = parent_element.querySelectorAll(query), return_elements = [];
-			//console.info( elements );
-			var i = 0, length = elements.length;
-			for(;i<length;){
-				return_elements.push( elements[i++] );
+			var elements, return_elements = [];
+			if(query.substr(0,1) === "#") {
+				return_elements.push( document.getElementById(query.substr(1)) );
+			}else{
+				if(typeof parent_element === "undefined") parent_element = document;
+				elements = parent_element.querySelectorAll(query);
+				for(var i=0;i<elements.length;i++){
+					return_elements.push( elements[i] );
+				}
 			}
 			return return_elements;
 		}
@@ -896,6 +899,7 @@ argument
  * @member {Array} ax5.dom.dom
  */
 				this.dom = util.get_elements(query);
+				this.length = this.dom.length;
 
 /**
  * elements에 css 값을 적용또는 반환합니다.
