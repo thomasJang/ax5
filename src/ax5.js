@@ -1127,8 +1127,56 @@ argument
 
 				};
 				// todo : setAttributeNS, setAttribute 차이 찾아보기
-				this.attr = function(){
+/**
+ * element의 attribute를 추가 삭제 가져오기 합니다.
+ * @method ax5.dom.attr
+ * @param {String|Object} [command=get] - 명령어
+ * @param {Object|String} O - json타입또는 문자열
+ * @returns {ax5.dom|String}
+ * @example
+```js
+ ax5.dom("[data-ax-grid=A]").attr("add", {"data-ax-spt":"ABCD"});
+ ax5.dom("[data-ax-grid=A]").attr({"data-ax-spt":"9999", "data-next":"next"});
 
+ console.log( ax5.dom("[data-ax-grid=A]").attr("data-ax-spt") );
+ console.log( ax5.dom("[data-ax-grid=A]").attr("data-next") );
+
+ ax5.dom("[data-ax-grid=A]").attr("remove", "data-next");
+ ax5.dom("[data-ax-grid=A]").attr("remove", "data-next2");
+```
+ */
+				this.attr = function(command, O){
+					if( command === "add" || (typeof O === "undefined" && util.is_object(command)) ){
+						if(typeof O === "undefined") O = command;
+						for(var di=0;di<this.dom.length;di++) {
+							for (var k in O) {
+								this.dom[di].setAttribute(k, O[k]);
+							}
+						}
+					}
+					else
+					if( command === "get" || command === "read" || (typeof O === "undefined" && util.is_string(command)) ){
+						if(typeof O === "undefined") O = command;
+						if(!util.is_string(O)) return this;
+
+						return this.dom[0].getAttribute(O);
+					}
+					else
+					if( command === "remove" ){
+						if(util.is_string(O)) {
+							for (var di = 0; di < this.dom.length; di++) {
+								this.dom[di].removeAttribute(O);
+							}
+						}else{
+							for (var di = 0; di < this.dom.length; di++) {
+								var _this = this;
+								util.each(O,  function(){
+									_this.dom[di].removeAttribute(this);
+								});
+							}
+						}
+					}
+					return this;
 				};
 			}
 			return ax;

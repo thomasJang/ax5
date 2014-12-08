@@ -34,7 +34,7 @@
 
     //console.log( ax.get_elements("[data-ax-grid]") );
 
-    alert( ax5.dom("input[type=text]").dom[0].value );
+    //alert( ax5.dom("input[type=text]").dom[0].value );
 
     var myArray = [0,1,2,3,4,5,6];
     var myObject = {a:"123","b":"123",c:123};
@@ -60,11 +60,18 @@
     );
 
     ax5.dom("[data-ax-grid=A]").class("add", "adclass").class("remove", "adclass").class("remove", "A");
+    ax5.dom("[data-ax-grid=A]").attr("add", {"data-ax-spt":"ABCD"});
+    ax5.dom("[data-ax-grid=A]").attr({"data-ax-spt":"9999", "data-next":"next"});
 
+    console.log( ax5.dom("[data-ax-grid=A]").attr("data-ax-spt") );
+    console.log( ax5.dom("[data-ax-grid=A]").attr("data-next") );
+
+    ax5.dom("[data-ax-grid=A]").attr("remove", "data-next");
+    ax5.dom("[data-ax-grid=A]").attr("remove", "data-next2");
 
     ax5.info.base_url = "../src/";
     ax.require(["ax5_class_sample.js"], function(){
-       console.log("load ok");
+       //console.log("load ok");
     });
 
     /*
