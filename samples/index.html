@@ -18,17 +18,23 @@
 </head>
 <body>
     <ax-tree data-ax-some="abcd">AX5</ax-tree>
-    <div data-ax-grid="0" class="A B C">1</div>
-    <div data-ax-grid="1">2</div>
+    <input type="text" value="abcd" />
+    <div data-ax-grid="A" class="A B C">1</div>
+    <div data-ax-grid="B">2</div>
+    <div data-ax-grid="9B">99</div>
     <div id="data-ax-grid">3</div>
 
-    <button onclick='ax5.dom("[data-ax-grid=\"0\"]").class("toggle", "red");'>toggle Class</button>
+    <button onclick='ax5.dom("[data-ax-grid=A]").class("toggle", "red");'>toggle Class</button>
+    <button onclick='ax5.dom("[data-ax-grid=\"9B\"]").class("toggle", "red");'>toggle Class</button>
 </body>
 </html>
 <script type="text/javascript">
+
     var ax = ax5.util, result;
 
     //console.log( ax.get_elements("[data-ax-grid]") );
+
+    alert( ax5.dom("input[type=text]").dom[0].value );
 
     var myArray = [0,1,2,3,4,5,6];
     var myObject = {a:"123","b":"123",c:123};
@@ -46,15 +52,20 @@
 
 
 
-    console.info(".class ");
+    console.info(".class ===");
 
     console.log(
-        ax5.dom("[data-ax-grid='0']").class("K"),
-        ax5.dom("[data-ax-grid='0']").class("has","A")
+        ax5.dom("[data-ax-grid=A]").class("A"),
+        ax5.dom("[data-ax-grid='A']").class("has","A")
     );
 
-    ax5.dom("[data-ax-grid='0']").class("add", "adclass").class("remove", "adclass").class("remove", "A");
+    ax5.dom("[data-ax-grid=A]").class("add", "adclass").class("remove", "adclass").class("remove", "A");
 
+
+    ax5.info.base_url = "../src/";
+    ax.require(["ax5_class_sample.js"], function(){
+       console.log("load ok");
+    });
 
     /*
 

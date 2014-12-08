@@ -164,6 +164,7 @@ argument
 	 */
 	ax5.info = info = {
 		version: "0.0.1",
+		base_url: "",
 /**
  * event keyCodes
  * @member {Object} ax5.info.event_keys
@@ -843,7 +844,18 @@ argument
 			urls = null;
 			return url;
 		}
-
+/**
+ * CSS Selector를 이용하여 HTML Elements를 찾습니다.
+ * @method ax5.util.get_elements
+ * @param {String} query - CSS Selector
+ * @param {Element} [parent_element=document]
+ * @returns {Array} elements
+ * @example
+```js
+ ax5.util.get_elements("#element01");
+ ax5.util.get_elements("input[type='text']");
+```
+ */
 		function get_elements(query, parent_element){
 			var elements, return_elements = [];
 			if(query.substr(0,1) === "#") {
@@ -860,8 +872,6 @@ argument
 		function create_elements(){
 
 		}
-
-		// todo : ax5.util.require 테스트
 /**
  * ax5 require
  * @method ax5.util.require
@@ -870,7 +880,10 @@ argument
  * @param {Function} [errorBack] - 로드 실패시 호출함수
  * @example
 ```js
-
+ ax5.info.base_url = "../src/";
+ ax.require(["ax5_class_sample.js"], function(){
+	alert("ok");
+ });
 ```
  */
 		function require(mods, callBack, errorBack){
@@ -879,7 +892,6 @@ argument
 			var onloadTimer, onerrorTimer;
 			var onload = function(){
 				if(loadCount == 0 && loadErrors.length == 0){
-					A.onready();
 					if(callBack) callBack({});
 				}
 			};
@@ -901,14 +913,14 @@ argument
 				if(type == ".js") {
 					plugin = document.createElement("script");
 					plugin.type = "text/javascript";
-					plugin.src = src;
+					plugin.src = info.base_url + src;
 				}
 				else
 				if(type == ".css") {
 					plugin = document.createElement("link");
 					plugin.rel = "stylesheet";
 					plugin.type = "text/css";
-					plugin.href = src;
+					plugin.href = info.base_url + src;
 				}
 				var plugin_onload = function(){
 					loadCount--;
@@ -990,7 +1002,7 @@ argument
 			url_util       : url_util,
 			get_elements   : get_elements,
 			create_elements: create_elements,
-			require: require
+			require        : require
 		}
 	})();
 
@@ -1031,7 +1043,6 @@ argument
  // {border: "1px solid rgb(0, 0, 0)", color: "rgb(255, 51, 0)"}
 ```
  */
-				// todo : css value 사용자 함수로 설정하기
 				this.css = function(O){
 					if( util.is_string( O ) ) {
 						return this.dom[0].style[O];
@@ -1058,11 +1069,18 @@ argument
  * elements에 className 를 추가, 제거, 확인, 토글합니다.
  * @method ax5.dom.class
  * @param {String} [command=has] - add,remove,toggle,has
- * @param {String|Array} O - 클래스명
+ * @param {String} O - 클래스명
  * @returns {ax5.dom|String} return - ax5.dom 또는 클래스이름
  * @example
 ```js
+ console.log(
+	 ax5.dom("[data-ax-grid=A]").class("A"),
+	 ax5.dom("[data-ax-grid='A']").class("has","A")
+ );
+ ax5.dom("[data-ax-grid=A]").class("add", "adclass").class("remove", "adclass").class("remove", "A");
 
+ ax5.dom("[data-ax-grid=A]").class("toggle", "red");
+ ax5.dom("[data-ax-grid=\"9B\"]").class("toggle", "red");
 ```
  */
 				this.class = function(command, O){
@@ -1098,16 +1116,17 @@ argument
 						if (util.is_string(O)) { // hasClass
 							// get Class Name
 							return (util.search(classNames, function () { return this === O }) > -1);
-						}
-						else if (util.is_array(O)) { // hasClass array
-
+						}else{
+							console.error("")
 						}
 					}
 					return this;
 				};
+
 				this.on = function(){
 
 				};
+				// todo : setAttributeNS, setAttribute 차이 찾아보기
 				this.attr = function(){
 
 				};
