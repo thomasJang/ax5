@@ -10,6 +10,9 @@
         ax-tree{
             font-size: 200px;
         }
+        .red{
+            background: #ff3300;
+        }
     </style>
 
 </head>
@@ -18,6 +21,8 @@
     <div data-ax-grid="0" class="A B C">1</div>
     <div data-ax-grid="1">2</div>
     <div id="data-ax-grid">3</div>
+
+    <button onclick='ax5.dom("[data-ax-grid=\"0\"]").class("toggle", "red");'>toggle Class</button>
 </body>
 </html>
 <script type="text/javascript">
@@ -34,17 +39,21 @@
 
     console.info(
         ax5.dom("[data-ax-grid-]").length,
-        ax5.dom("[data-ax-grid-]").dom.length,
-        ax5.dom("[data-ax-grid='0']").class("K"),
-        ax5.dom("[data-ax-grid='0']").class("has","A")
+        ax5.dom("[data-ax-grid-]").dom.length
     );
 
     ax5.dom("#data-ax-grid").css({"color":"#ff3300", border:"1px solid #000"});
 
 
 
+    console.info(".class ");
 
+    console.log(
+        ax5.dom("[data-ax-grid='0']").class("K"),
+        ax5.dom("[data-ax-grid='0']").class("has","A")
+    );
 
+    ax5.dom("[data-ax-grid='0']").class("add", "adclass").class("remove", "adclass").class("remove", "A");
 
 
     /*

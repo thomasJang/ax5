@@ -121,6 +121,16 @@ argument
 		};
 	}
 
+	if (!String.prototype.trim) {
+		(function() {
+			// Make sure we trim BOM and NBSP
+			var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+			String.prototype.trim = function() {
+				return this.replace(rtrim, '');
+			};
+		})();
+	}
+
 	// Console-polyfill. MIT license. https://github.com/paulmillr/console-polyfill
 	// Make it safe to do console.log() always.
 	(function(con) {
@@ -146,7 +156,7 @@ argument
 	var root = this;
 
 	/** @namespace {Object} ax5 */
-	var ax5 = {}, info, util, dom;
+	var ax5 = {}, info, util, dom, xhr, ui;
 
 	/**
 	 * 상수모음
@@ -850,6 +860,108 @@ argument
 		function create_elements(){
 
 		}
+
+		// todo : ax5.util.require 테스트
+/**
+ * ax5 require
+ * @method ax5.util.require
+ * @param {Array} mods - load modules
+ * @param {Function} callBack - 로드 성공시 호출함수
+ * @param {Function} [errorBack] - 로드 실패시 호출함수
+ * @example
+```js
+
+```
+ */
+		function require(mods, callBack, errorBack){
+			var loadCount = mods.length, loadErrors = [];
+			var head = document.head || document.getElementsByTagName("head")[0];
+			var onloadTimer, onerrorTimer;
+			var onload = function(){
+				if(loadCount == 0 && loadErrors.length == 0){
+					A.onready();
+					if(callBack) callBack({});
+				}
+			};
+			var onerror = function(){
+				if(loadCount == 0 && loadErrors.length > 0){
+					if(errorBack) errorBack({
+						type:"loadFail",
+						list:loadErrors
+					});
+				}
+			};
+
+			// 로드해야 할 모듈들을 document.head에 삽입하고 로드가 성공여부를 리턴합니다.
+			for(var i=0;i<mods.length;i++){
+				var src = mods[i], type = src.substr(src.lastIndexOf("."));
+				if(type.substr(0,1) != ".") type = ".js";
+
+				var plugin;
+				if(type == ".js") {
+					plugin = document.createElement("script");
+					plugin.type = "text/javascript";
+					plugin.src = src;
+				}
+				else
+				if(type == ".css") {
+					plugin = document.createElement("link");
+					plugin.rel = "stylesheet";
+					plugin.type = "text/css";
+					plugin.href = src;
+				}
+				var plugin_onload = function(){
+					loadCount--;
+					if(onloadTimer) clearTimeout(onloadTimer);
+					onloadTimer = setTimeout(onload, 1);
+				};
+
+				var plugin_onerror = function(event){
+					loadCount--;
+					loadErrors.push({
+						type: (event.target.nodeName == "script") ? "js" : "css",
+						src : (event.target.href || event.target.src)
+					});
+					if(onerrorTimer) clearTimeout(onerrorTimer);
+					onerrorTimer = setTimeout(onerror, 1);
+				};
+
+				if (plugin.attachEvent &&
+					//Check if node.attachEvent is artificially added by custom script or
+					//natively supported by browser
+					//read https://github.com/jrburke/requirejs/issues/187
+					//if we can NOT find [native code] then it must NOT natively supported.
+					//in IE8, node.attachEvent does not have toString()
+					//Note the test for "[native code" with no closing brace, see:
+					//https://github.com/jrburke/requirejs/issues/273
+					!(plugin.attachEvent.toString && plugin.attachEvent.toString().indexOf('[native code') < 0)) {
+					//Probably IE. IE (at least 6-8) do not fire
+					//script onload right after executing the script, so
+					//we cannot tie the anonymous define call to a name.
+					//However, IE reports the script as being in 'interactive'
+					//readyState at the time of the define call.
+					//useInteractive = true;
+
+					plugin.attachEvent('onreadystatechange', plugin_onload);
+					//It would be great to add an error handler here to catch
+					//404s in IE9+. However, onreadystatechange will fire before
+					//the error handler, so that does not help. If addEventListener
+					//is used, then IE will fire error before load, but we cannot
+					//use that pathway given the connect.microsoft.com issue
+					//mentioned above about not doing the 'script execute,
+					//then fire the script load event listener before execute
+					//next script' that other browsers do.
+					//Best hope: IE10 fixes the issues,
+					//and then destroys all installs of IE 6-9.
+					//node.attachEvent('onerror', context.onScriptError);
+				} else {
+					plugin.addEventListener('load', plugin_onload, false);
+					plugin.addEventListener('error', plugin_onerror, false);
+				}
+				head.appendChild(plugin);
+			}
+		}
+
 		return {
 			each           : each,
 			map            : map,
@@ -877,7 +989,8 @@ argument
 			alert          : alert,
 			url_util       : url_util,
 			get_elements   : get_elements,
-			create_elements: create_elements
+			create_elements: create_elements,
+			require: require
 		}
 	})();
 
@@ -953,27 +1066,35 @@ argument
 ```
  */
 				this.class = function(command, O){
+					var classNames;
 					// add, remove, toggle
-					if(command === "add") {
-
-						//if(){
-						for (var k in O) {
-							this.dom[di].style[k] = O[k];
+					if(command === "add" || command === "remove" || command === "toggle") {
+						for(var di=0;di<this.dom.length;di++) {
+							classNames = this.dom[di]["className"].split(/ /g);
+							if(command === "add"){
+								if(util.search(classNames, function(){
+									return O.trim() == this;
+								}) == -1) {
+									classNames.push(O.trim());
+								}
+							}else if(command === "remove"){
+								classNames = util.filter(classNames, function(){
+									return O.trim() != this;
+								});
+							}else if(command === "toggle"){
+								var class_count = classNames.length;
+								classNames = util.filter(classNames, function(){
+									return O.trim() != this;
+								});
+								if(class_count === classNames.length) classNames.push(O.trim());
+							}
+							this.dom[di]["className"] = classNames.join(" ");
 						}
-						//}
-					}
-					else
-					if(command === "remove") {
-
-					}
-					else
-					if(command === "toggle") {
-
 					}
 					else
 					{ // has
 						if(typeof O === "undefined") O = command;
-						var classNames = this.dom[0]["className"].split(/ /g);
+						classNames = this.dom[0]["className"].split(/ /g);
 						if (util.is_string(O)) { // hasClass
 							// get Class Name
 							return (util.search(classNames, function () { return this === O }) > -1);
@@ -995,6 +1116,10 @@ argument
 		})();
 		return new axdom(query);
 	};
+
+	ax5.xhr = xhr = (function(){
+
+	})();
 
 	if ( typeof module === "object" && module && typeof module.exports === "object" ){
 		module.exports = ax5; // commonJS

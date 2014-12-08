@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title></title>
     <script type="text/javascript" src="../plugin/require.js"></script>
+    <script type="text/javascript" src="../src/ax5.js"></script>
 </head>
 <body>
     <ax:tree></ax:tree>
@@ -17,12 +18,14 @@
         waitSeconds: 15 // 모듈의 로딩 시간을 지정한다. 이 시간을 초과하면 Timeout Error 가 throw 된다
     });
 
-    require([ "plugin/jquery-1.10.2", "src/ax5" ], function () {
+    //require([ "src/ax5" ], function () {
+        require([ "plugin/jquery-1.10.2", "src/ax5_class_sample" ], function () {
+            var myax = new ax5_class_sample();
+            console.log(myax.setName("AX5").getName());
+            console.log(myax.setAge(20).getAge());
 
-        console.log( ax5 );
-        console.log( ax5.util.first([99,88,77]) );
-
-    }, function (err) {
-        // ERROR handling
-    });
+        }, function (err) {
+            // ERROR handling
+        });
+    //});
 </script>
