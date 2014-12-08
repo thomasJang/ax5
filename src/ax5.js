@@ -899,8 +899,11 @@ argument
  * @member {Array} ax5.dom.dom
  */
 				this.dom = util.get_elements(query);
+/**
+ * query selected elements length
+ * @member {Number} ax5.dom.length
+ */
 				this.length = this.dom.length;
-
 /**
  * elements에 css 값을 적용또는 반환합니다.
  * @method ax5.dom.css
