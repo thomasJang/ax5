@@ -131,6 +131,29 @@ argument
 		})();
 	}
 
+	if (!window.JSON) {
+		window.JSON = {
+			parse: function (sJSON) { return eval("(" + sJSON + ")"); },
+			stringify: function (vContent) {
+				if (vContent instanceof Object) {
+					var sOutput = "";
+					if (vContent.constructor === Array) {
+						for (var nId = 0; nId < vContent.length; sOutput += this.stringify(vContent[nId]) + ",", nId++);
+						return "[" + sOutput.substr(0, sOutput.length - 1) + "]";
+					}
+					if (vContent.toString !== Object.prototype.toString) {
+						return "\"" + vContent.toString().replace(/"/g, "\\$&") + "\"";
+					}
+					for (var sProp in vContent) {
+						sOutput += "\"" + sProp.replace(/"/g, "\\$&") + "\":" + this.stringify(vContent[sProp]) + ",";
+					}
+					return "{" + sOutput.substr(0, sOutput.length - 1) + "}";
+				}
+				return typeof vContent === "string" ? "\"" + vContent.replace(/"/g, "\\$&") + "\"" : String(vContent);
+			}
+		};
+	}
+
 	// Console-polyfill. MIT license. https://github.com/paulmillr/console-polyfill
 	// Make it safe to do console.log() always.
 	(function(con) {
@@ -156,7 +179,9 @@ argument
 	var root = this;
 
 	/** @namespace {Object} ax5 */
-	var ax5 = {}, info, util, dom, xhr, ui;
+	var ax5 = {}, info, U, dom, xhr, ui;
+	ax5.guid = 1;
+	ax5.get_guid = function(){return ax5.guid++;};
 
 	/**
 	 * 상수모음
@@ -235,7 +260,8 @@ argument
  * Refer to this by {@link ax5}.
  * @namespace ax5.util
  */
-	ax5['util'] = util = (function(){
+	ax5['util'] = U = (function(){
+
 		var _toString = Object.prototype.toString;
 /**
  * Object나 Array의 아이템으로 사용자 함수를 호출합니다.
@@ -973,6 +999,54 @@ argument
 				head.appendChild(plugin);
 			}
 		}
+/**
+ * 문자열의 특정 문자열까지 잘라주거나 원하는 포지션까지 잘라줍니다.
+ * @method ax5.util.left
+ * @param {String} str - 문자열
+ * @param {String|Number} pos - 찾을 문자열 또는 포지션
+ * @returns {String}
+ * @example
+```js
+ ax5.util.left("abcd.efd", 3);
+ // abc
+ ax5.util.left("abcd.efd", ".");
+ // abcd
+```
+ */
+		function left(str, pos){
+			if(typeof str === "undefined" || typeof pos === "undefined") return "";
+			if(is_string(pos)){
+				return (str.indexOf(pos) > -1) ? str.substr(0, str.indexOf(pos)) : str ;
+			}else if(is_number(pos)){
+				return str.substr(0, pos);
+			}else{
+				return "";
+			}
+		}
+/**
+ * 문자열의 특정 문자열까지 잘라주거나 원하는 포지션까지 잘라줍니다.
+ * @method ax5.util.right
+ * @param {String} str - 문자열
+ * @param {String|Number} pos - 찾을 문자열 또는 포지션
+ * @returns {String}
+ * @example
+ ```js
+ ax5.util.right("abcd.efd", 3);
+ // efd
+ ax5.util.right("abcd.efd", ".");
+ // efd
+ ```
+ */
+		function right(str, pos){
+			if(typeof str === "undefined" || typeof pos === "undefined") return "";
+			if(is_string(pos)){
+				return (str.indexOf(pos) > -1) ? str.substr(str.indexOf(pos)+1) : str ;
+			}else if(is_number(pos)){
+				return str.substr(str.length-pos);
+			}else{
+				return "";
+			}
+		}
 
 		return {
 			each           : each,
@@ -1002,7 +1076,9 @@ argument
 			url_util       : url_util,
 			get_elements   : get_elements,
 			create_elements: create_elements,
-			require        : require
+			require        : require,
+			left           : left,
+			right          : right
 		}
 	})();
 
@@ -1012,6 +1088,28 @@ argument
 	 */
 	// todo : querySelectAll 을 활용한 dom 구현
 	ax5.dom = function(query){
+
+		function eventBind(elem, type, eventHandle){
+			type = U.left(type, ".");
+			if ( elem.addEventListener ) {
+				elem.addEventListener( type, eventHandle, false );
+			} else if ( elem.attachEvent ) {
+				elem.attachEvent( "on" + type, eventHandle );
+			}
+		}
+		function eventUnBind(elem, type, eventHandle){
+			type = U.left(type, ".");
+			if ( elem.removeEventListener ) {
+				if(eventHandle) elem.removeEventListener( type, eventHandle );
+				else{
+					elem.removeEventListener( type );
+				}
+			} else if ( elem.detachEvent ) {
+				if(eventHandle) elem.detachEvent( "on" + type, eventHandle );
+				else elem.detachEvent( "on" + type );
+			}
+		}
+
 		var axdom = (function(){
 			function ax(query){
 /**
@@ -1023,7 +1121,7 @@ argument
  * query selected elements
  * @member {Array} ax5.dom.dom
  */
-				this.dom = util.get_elements(query);
+				this.dom = U.get_elements(query);
 /**
  * query selected elements length
  * @member {Number} ax5.dom.length
@@ -1044,11 +1142,11 @@ argument
 ```
  */
 				this.css = function(O){
-					if( util.is_string( O ) ) {
+					if( U.is_string( O ) ) {
 						return this.dom[0].style[O];
 					}
 					else
-					if( util.is_array( O ) ) {
+					if( U.is_array( O ) ) {
 						var css = {};
 						for(var i=0;i<O.length;i++){
 							css[O[i]] = this.dom[0].style[O[i]];
@@ -1067,41 +1165,41 @@ argument
 				};
 /**
  * elements에 className 를 추가, 제거, 확인, 토글합니다.
- * @method ax5.dom.class
+ * @method ax5.dom.clazz
  * @param {String} [command=has] - add,remove,toggle,has
  * @param {String} O - 클래스명
  * @returns {ax5.dom|String} return - ax5.dom 또는 클래스이름
  * @example
 ```js
  console.log(
-	 ax5.dom("[data-ax-grid=A]").class("A"),
-	 ax5.dom("[data-ax-grid='A']").class("has","A")
+	 ax5.dom("[data-ax-grid=A]").clazz("A"),
+	 ax5.dom("[data-ax-grid='A']").clazz("has","A")
  );
- ax5.dom("[data-ax-grid=A]").class("add", "adclass").class("remove", "adclass").class("remove", "A");
+ ax5.dom("[data-ax-grid=A]").clazz("add", "adclass").class("remove", "adclass").class("remove", "A");
 
- ax5.dom("[data-ax-grid=A]").class("toggle", "red");
- ax5.dom("[data-ax-grid=\"9B\"]").class("toggle", "red");
+ ax5.dom("[data-ax-grid=A]").clazz("toggle", "red");
+ ax5.dom("[data-ax-grid=\"9B\"]").clazz("toggle", "red");
 ```
  */
-				this.class = function(command, O){
+				this.clazz = function(command, O){
 					var classNames;
 					// add, remove, toggle
 					if(command === "add" || command === "remove" || command === "toggle") {
 						for(var di=0;di<this.dom.length;di++) {
 							classNames = this.dom[di]["className"].split(/ /g);
 							if(command === "add"){
-								if(util.search(classNames, function(){
+								if(U.search(classNames, function(){
 									return O.trim() == this;
 								}) == -1) {
 									classNames.push(O.trim());
 								}
 							}else if(command === "remove"){
-								classNames = util.filter(classNames, function(){
+								classNames = U.filter(classNames, function(){
 									return O.trim() != this;
 								});
 							}else if(command === "toggle"){
 								var class_count = classNames.length;
-								classNames = util.filter(classNames, function(){
+								classNames = U.filter(classNames, function(){
 									return O.trim() != this;
 								});
 								if(class_count === classNames.length) classNames.push(O.trim());
@@ -1113,18 +1211,89 @@ argument
 					{ // has
 						if(typeof O === "undefined") O = command;
 						classNames = this.dom[0]["className"].split(/ /g);
-						if (util.is_string(O)) { // hasClass
+						if (U.is_string(O)) { // hasClass
 							// get Class Name
-							return (util.search(classNames, function () { return this === O }) > -1);
+							return (U.search(classNames, function () { return this === O }) > -1);
 						}else{
 							console.error("")
 						}
 					}
 					return this;
 				};
+/**
+ * elements에 이벤트를 바인드 합니다.
+ * @method ax5.dom.on
+ * @param {String} type - 이벤트 타입
+ * @param {Function} _fn - 이벤트 콜백함수
+ * @returns {ax5.dom}
+ * @example
+```js
+ var mydom = axd("[data-event-test=text-box]"),
+	 remove_dom = axd("[data-event-test=remove]");
 
-				this.on = function(){
+	 mydom.on("click", window.fna);
+	 mydom.on("click", window.fnb);
+	 mydom.on("click", window.fnc);
 
+ remove_dom.on("click", function(){
+    mydom.off("click", window.fna);
+    remove_dom.off("click");
+    alert("이벤트 제거");
+ });
+
+ // 핸들방식
+ axd("[data-event-test=text-box]").on("click.fna", window.fna);
+ axd("[data-event-test=text-box]").on("click.fnb", window.fnb);
+ axd("[data-event-test=text-box]").on("click.fnc", window.fnc);
+```
+ */
+				// todo: event type 모두 체크
+				this.on = function(type, _fn) {
+					for(var di=0;di<this.dom.length;di++) {
+						// event handle 관리
+						var bind_fn, dom = this.dom[di];
+						if(!dom.evt_handle) dom.evt_handle = {};
+						if(typeof dom.evt_handle[type] === "undefined"){
+							bind_fn = dom.evt_handle[type] = _fn;
+						}else{
+							if(U.is_array( dom.evt_handle[type] )){
+								dom.evt_handle[type].push(_fn);
+								bind_fn = dom.evt_handle[type][dom.evt_handle[type].length-1];
+							}else{
+								dom.evt_handle[type] = [dom.evt_handle[type]];
+								dom.evt_handle[type].push(_fn);
+								bind_fn = dom.evt_handle[type][dom.evt_handle[type].length-1];
+							}
+						}
+						eventBind(dom, type, bind_fn);
+					}
+					return this;
+				};
+/**
+ * elements에 이벤트를 언바인드 합니다.
+ * @method ax5.dom.off
+ * @param {String} type - 이벤트 타입
+ * @param {Function} [_fn] - 이벤트 콜백함수
+ * @returns {ax5.dom}
+ * @example
+ ```js
+ axd("[data-event-test=text-box]").off("click");
+ axd("[data-event-test=text-box]").off("click.fnb").off("click.fnc");
+ ```
+ */
+				// todo : 이벤트 제거시 .하위 까지 제거해주기
+				this.off = function(type, _fn) {
+					for(var di=0;di<this.dom.length;di++) {
+						var dom = this.dom[di];
+						if (U.is_array(dom.evt_handle[type])) {
+							for (var i = 0; i < dom.evt_handle[type].length; i++) {
+								if(dom.evt_handle[type][i] == _fn || typeof _fn === "undefined") eventUnBind(dom, type, dom.evt_handle[type][i]);
+							}
+						} else {
+							if(dom.evt_handle[type] == _fn || typeof _fn === "undefined") eventUnBind(dom, type, dom.evt_handle[type]);
+						}
+					}
+					return this;
 				};
 				// todo : setAttributeNS, setAttribute 차이 찾아보기
 /**
@@ -1135,18 +1304,18 @@ argument
  * @returns {ax5.dom|String}
  * @example
 ```js
- ax5.dom("[data-ax-grid=A]").attr("add", {"data-ax-spt":"ABCD"});
- ax5.dom("[data-ax-grid=A]").attr({"data-ax-spt":"9999", "data-next":"next"});
+ ax5.dom("[data-ax-grid=A]").attr("set", {"data-ax-spt":"ABCD"}); // set attribute
+ ax5.dom("[data-ax-grid=A]").attr({"data-ax-spt":"9999", "data-next":"next"}); // set attribute
 
- console.log( ax5.dom("[data-ax-grid=A]").attr("data-ax-spt") );
- console.log( ax5.dom("[data-ax-grid=A]").attr("data-next") );
+ console.log( ax5.dom("[data-ax-grid=A]").attr("data-ax-spt") ); // get or read
+ console.log( ax5.dom("[data-ax-grid=A]").attr("get", "data-next") ); // get or read
 
  ax5.dom("[data-ax-grid=A]").attr("remove", "data-next");
  ax5.dom("[data-ax-grid=A]").attr("remove", "data-next2");
 ```
  */
 				this.attr = function(command, O){
-					if( command === "add" || (typeof O === "undefined" && util.is_object(command)) ){
+					if( command === "set" || (typeof O === "undefined" && U.is_object(command)) ){
 						if(typeof O === "undefined") O = command;
 						for(var di=0;di<this.dom.length;di++) {
 							for (var k in O) {
@@ -1155,22 +1324,21 @@ argument
 						}
 					}
 					else
-					if( command === "get" || command === "read" || (typeof O === "undefined" && util.is_string(command)) ){
+					if( command === "get" || command === "read" || (typeof O === "undefined" && U.is_string(command)) ){
 						if(typeof O === "undefined") O = command;
-						if(!util.is_string(O)) return this;
-
+						if(!U.is_string(O)) return this;
 						return this.dom[0].getAttribute(O);
 					}
 					else
 					if( command === "remove" ){
-						if(util.is_string(O)) {
+						if(U.is_string(O)) {
 							for (var di = 0; di < this.dom.length; di++) {
 								this.dom[di].removeAttribute(O);
 							}
 						}else{
 							for (var di = 0; di < this.dom.length; di++) {
 								var _this = this;
-								util.each(O,  function(){
+								U.each(O,  function(){
 									_this.dom[di].removeAttribute(this);
 								});
 							}

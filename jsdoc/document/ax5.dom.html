@@ -104,9 +104,13 @@
             
                 <li data-name="ax5.dom.attr"><a href="ax5.dom.html#attr">attr</a></li>
             
-                <li data-name="ax5.dom.class"><a href="ax5.dom.html#class">class</a></li>
+                <li data-name="ax5.dom.clazz"><a href="ax5.dom.html#clazz">clazz</a></li>
             
                 <li data-name="ax5.dom.css"><a href="ax5.dom.html#css">css</a></li>
+            
+                <li data-name="ax5.dom.off"><a href="ax5.dom.html#off">off</a></li>
+            
+                <li data-name="ax5.dom.on"><a href="ax5.dom.html#on">on</a></li>
             
             </ul>
             <ul class="events itemMembers">
@@ -198,6 +202,8 @@
             
                 <li data-name="ax5.util.last"><a href="ax5.util.html#last">last</a></li>
             
+                <li data-name="ax5.util.left"><a href="ax5.util.html#left">left</a></li>
+            
                 <li data-name="ax5.util.map"><a href="ax5.util.html#map">map</a></li>
             
                 <li data-name="ax5.util.reduce"><a href="ax5.util.html#reduce">reduce</a></li>
@@ -205,6 +211,8 @@
                 <li data-name="ax5.util.reduce_right"><a href="ax5.util.html#reduce_right">reduce_right</a></li>
             
                 <li data-name="ax5.util.require"><a href="ax5.util.html#require">require</a></li>
+            
+                <li data-name="ax5.util.right"><a href="ax5.util.html#right">right</a></li>
             
                 <li data-name="ax5.util.search"><a href="ax5.util.html#search">search</a></li>
             
@@ -399,9 +407,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5ax5.js#L1130" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5ax5.js#L1299" target="_blank">
             ax5.js,
-            line 1130</a>
+            line 1299</a>
         </div>
         
     </div>
@@ -566,11 +574,11 @@
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-js"> ax5.dom(&quot;[data-ax-grid=A]&quot;).attr(&quot;add&quot;, {&quot;data-ax-spt&quot;:&quot;ABCD&quot;});
- ax5.dom(&quot;[data-ax-grid=A]&quot;).attr({&quot;data-ax-spt&quot;:&quot;9999&quot;, &quot;data-next&quot;:&quot;next&quot;});
+    <pre class="prettyprint linenums"><code class="lang-js"> ax5.dom(&quot;[data-ax-grid=A]&quot;).attr(&quot;set&quot;, {&quot;data-ax-spt&quot;:&quot;ABCD&quot;}); // set attribute
+ ax5.dom(&quot;[data-ax-grid=A]&quot;).attr({&quot;data-ax-spt&quot;:&quot;9999&quot;, &quot;data-next&quot;:&quot;next&quot;}); // set attribute
 
- console.log( ax5.dom(&quot;[data-ax-grid=A]&quot;).attr(&quot;data-ax-spt&quot;) );
- console.log( ax5.dom(&quot;[data-ax-grid=A]&quot;).attr(&quot;data-next&quot;) );
+ console.log( ax5.dom(&quot;[data-ax-grid=A]&quot;).attr(&quot;data-ax-spt&quot;) ); // get or read
+ console.log( ax5.dom(&quot;[data-ax-grid=A]&quot;).attr(&quot;get&quot;, &quot;data-next&quot;) ); // get or read
 
  ax5.dom(&quot;[data-ax-grid=A]&quot;).attr(&quot;remove&quot;, &quot;data-next&quot;);
  ax5.dom(&quot;[data-ax-grid=A]&quot;).attr(&quot;remove&quot;, &quot;data-next2&quot;);</code></pre>
@@ -583,17 +591,17 @@
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="class">
+        <h4 class="name" id="clazz">
             
-            <span class="type-signature static">static</span>ax5.dom.class<span class="signature">(<span class="optional">command</span>, O)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom.html">ax5.dom</a>|String}</span>
+            <span class="type-signature static">static</span>ax5.dom.clazz<span class="signature">(<span class="optional">command</span>, O)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom.html">ax5.dom</a>|String}</span>
         </h4>
     
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5ax5.js#L1068" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5ax5.js#L1166" target="_blank">
             ax5.js,
-            line 1068</a>
+            line 1166</a>
         </div>
         
     </div>
@@ -757,13 +765,13 @@
 
     
     <pre class="prettyprint linenums"><code class="lang-js"> console.log(
-     ax5.dom(&quot;[data-ax-grid=A]&quot;).class(&quot;A&quot;),
-     ax5.dom(&quot;[data-ax-grid='A']&quot;).class(&quot;has&quot;,&quot;A&quot;)
+     ax5.dom(&quot;[data-ax-grid=A]&quot;).clazz(&quot;A&quot;),
+     ax5.dom(&quot;[data-ax-grid='A']&quot;).clazz(&quot;has&quot;,&quot;A&quot;)
  );
- ax5.dom(&quot;[data-ax-grid=A]&quot;).class(&quot;add&quot;, &quot;adclass&quot;).class(&quot;remove&quot;, &quot;adclass&quot;).class(&quot;remove&quot;, &quot;A&quot;);
+ ax5.dom(&quot;[data-ax-grid=A]&quot;).clazz(&quot;add&quot;, &quot;adclass&quot;).class(&quot;remove&quot;, &quot;adclass&quot;).class(&quot;remove&quot;, &quot;A&quot;);
 
- ax5.dom(&quot;[data-ax-grid=A]&quot;).class(&quot;toggle&quot;, &quot;red&quot;);
- ax5.dom(&quot;[data-ax-grid=\&quot;9B\&quot;]&quot;).class(&quot;toggle&quot;, &quot;red&quot;);</code></pre>
+ ax5.dom(&quot;[data-ax-grid=A]&quot;).clazz(&quot;toggle&quot;, &quot;red&quot;);
+ ax5.dom(&quot;[data-ax-grid=\&quot;9B\&quot;]&quot;).clazz(&quot;toggle&quot;, &quot;red&quot;);</code></pre>
     
 
     
@@ -781,9 +789,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5ax5.js#L1032" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5ax5.js#L1130" target="_blank">
             ax5.js,
-            line 1032</a>
+            line 1130</a>
         </div>
         
     </div>
@@ -911,6 +919,345 @@
     
 </dd>
 
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="off">
+            
+            <span class="type-signature static">static</span>ax5.dom.off<span class="signature">(type, <span class="optional">_fn</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom.html">ax5.dom</a>}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <i class="axi axi-github"></i>
+            <a href="https://github.com/tom-axisj/ax5ax5.js#L1272" target="_blank">
+            ax5.js,
+            line 1272</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>elements에 이벤트를 언바인드 합니다.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                <p>이벤트 타입</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>_fn</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>이벤트 콜백함수</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint linenums"><code class="lang-js"> axd(&quot;[data-event-test=text-box]&quot;).off(&quot;click&quot;);
+ axd(&quot;[data-event-test=text-box]&quot;).off(&quot;click.fnb&quot;).off(&quot;click.fnc&quot;);</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="on">
+            
+            <span class="type-signature static">static</span>ax5.dom.on<span class="signature">(type, _fn)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom.html">ax5.dom</a>}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <i class="axi axi-github"></i>
+            <a href="https://github.com/tom-axisj/ax5ax5.js#L1223" target="_blank">
+            ax5.js,
+            line 1223</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>elements에 이벤트를 바인드 합니다.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>이벤트 타입</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>_fn</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>이벤트 콜백함수</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint linenums"><code class="lang-js"> var mydom = axd(&quot;[data-event-test=text-box]&quot;),
+     remove_dom = axd(&quot;[data-event-test=remove]&quot;);
+
+     mydom.on(&quot;click&quot;, window.fna);
+     mydom.on(&quot;click&quot;, window.fnb);
+     mydom.on(&quot;click&quot;, window.fnc);
+
+ remove_dom.on(&quot;click&quot;, function(){
+    mydom.off(&quot;click&quot;, window.fna);
+    remove_dom.off(&quot;click&quot;);
+    alert(&quot;이벤트 제거&quot;);
+ });
+
+ // 핸들방식
+ axd(&quot;[data-event-test=text-box]&quot;).on(&quot;click.fna&quot;, window.fna);
+ axd(&quot;[data-event-test=text-box]&quot;).on(&quot;click.fnb&quot;, window.fnb);
+ axd(&quot;[data-event-test=text-box]&quot;).on(&quot;click.fnc&quot;, window.fnc);</code></pre>
+    
+
+    
+</dd>
+
         </dl>
     
     
@@ -928,7 +1275,7 @@
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Tue Dec 09 2014 01:09:58 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Wed Dec 10 2014 01:24:36 GMT+0900 (KST)
         </footer>
     </div>
 </div>

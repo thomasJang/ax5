@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title></title>
     <script type="text/javascript" src="../src/ax5.js"></script>
-    <!--script type="text/javascript" src="../src/ax5_logger.js"></script-->
 
     <style type="text/css">
         ax-tree{
@@ -13,109 +12,60 @@
         .red{
             background: #ff3300;
         }
+        #text-box{
+            border: 2px solid;
+            width: 100px; height: 100px;
+            display: inline-block;
+        }
+        #img-box{
+            border: 2px solid;
+            width: 100px; height: 100px;
+            display: inline-block;
+        }
+        .new-class{
+            background: #eee;
+        }
     </style>
 
 </head>
 <body>
-    <ax-tree data-ax-some="abcd">AX5</ax-tree>
-    <input type="text" value="abcd" />
-    <div data-ax-grid="A" class="A B C">1</div>
-    <div data-ax-grid="B">2</div>
-    <div data-ax-grid="9B">99</div>
-    <div id="data-ax-grid">3</div>
-
-    <button onclick='ax5.dom("[data-ax-grid=A]").class("toggle", "red");'>toggle Class</button>
-    <button onclick='ax5.dom("[data-ax-grid=\"9B\"]").class("toggle", "red");'>toggle Class</button>
+    <div id="text-box"></div>
+    <div id="img-box"></div>
+    <div></div>
+    <button data-event-test="text-box">Event Test(text)</button>
+    <button data-event-test="remove">Event remove</button>
 </body>
 </html>
 <script type="text/javascript">
-
-    var ax = ax5.util, result;
-
-    //console.log( ax.get_elements("[data-ax-grid]") );
-
-    //alert( ax5.dom("input[type=text]").dom[0].value );
-
-    var myArray = [0,1,2,3,4,5,6];
-    var myObject = {a:"123","b":"123",c:123};
-
-    ax5.dom("[data-ax-grid]").css({"color":"#ff3300", border:"1px solid #000"});
-    console.log( ax5.dom("[data-ax-grid]").css("color") );
-    console.log( ax5.dom("[data-ax-grid]").css(["border","color"]) );
-
-    console.info(
-        ax5.dom("[data-ax-grid-]").length,
-        ax5.dom("[data-ax-grid-]").dom.length
-    );
-
-    ax5.dom("#data-ax-grid").css({"color":"#ff3300", border:"1px solid #000"});
-
-
-
-    console.info(".class ===");
-
-    console.log(
-        ax5.dom("[data-ax-grid=A]").class("A"),
-        ax5.dom("[data-ax-grid='A']").class("has","A")
-    );
-
-    ax5.dom("[data-ax-grid=A]").class("add", "adclass").class("remove", "adclass").class("remove", "A");
-    ax5.dom("[data-ax-grid=A]").attr("add", {"data-ax-spt":"ABCD"});
-    ax5.dom("[data-ax-grid=A]").attr({"data-ax-spt":"9999", "data-next":"next"});
-
-    console.log( ax5.dom("[data-ax-grid=A]").attr("data-ax-spt") );
-    console.log( ax5.dom("[data-ax-grid=A]").attr("data-next") );
-
-    ax5.dom("[data-ax-grid=A]").attr("remove", "data-next");
-    ax5.dom("[data-ax-grid=A]").attr("remove", "data-next2");
-
-    ax5.info.base_url = "../src/";
-    ax.require(["ax5_class_sample.js"], function(){
-       //console.log("load ok");
-    });
-
+    var axd = ax5.dom;
     /*
-
-    //console.log( document.querySelector("[data-ax-grid]") );
-    //console.log( document.querySelectorAll('[data-ax-grid]')[ );
-    //console.log( document.querySelectorAll('[data-ax-grid="1233"]').length );
-    //console.log( document.querySelector('ax-tree').length );
-    console.log( ax5.util.to_json( ax5.util.url_util() ) );
-
-    var _arr = ax5.util.map( myArray,  function(index, I){
-        return index+1;
-    });
-    console.log(_arr);
-
-    var _arr = ax5.util.map( myObject,  function(k, v){
-        return v * 2;
-    });
-    console.log(_arr);
-
-    console.info("--");
-
-    var aarray = [5,4,3,2,1];
-    result = ax5.util.reduce( aarray, function(p, n){
-        console.log( n );
-        return p * n;
-    });
-    console.log(result, aarray);
-
-    result = ax5.util.reduce_right( aarray, function(p, n){
-        console.log( n );
-        return p * n;
-    });
-    console.log(result, aarray);
-
-    result = ax5.util.filter( aarray, function(){
-        return this % 2;
-    });
-    console.log(result);
-
-    var filObject = {a:1, s:"string", oa:{pickup:true, name:"AXISJ"}, os:{pickup:true, name:"AX5"}}
-    result = ax5.util.filter( filObject, function(){
-        return this.pickup;
-    });
-    console.log( ax.to_json(result) );
+    document.getElementById("text-box").eventHanles = {"A":function(){return "A";}, "B":function(){return "B";}};
+    console.log( document.getElementById("text-box").eventHanles.A );
     */
+    axd("#text-box").clazz("add", "new-class");
+
+    window.fna = function(){console.log("fna")};
+    window.fnb = function(){console.log("fnb")};
+    window.fnc = function(){console.log("fnc")};
+
+var mydom = axd("[data-event-test=text-box]"),
+    remove_dom = axd("[data-event-test=remove]");
+    mydom.on("click", window.fna);
+    mydom.on("click", window.fnb);
+    mydom.on("click", window.fnc);
+
+    remove_dom.on("click", function(){
+        mydom.off("click", window.fna);
+        remove_dom.off("click");
+        alert("이벤트 제거");
+    });
+
+
+/*
+    axd("[data-event-test=text-box]").on("click.fna", window.fna);
+    axd("[data-event-test=text-box]").on("click.fnb", window.fnb);
+    axd("[data-event-test=text-box]").on("click.fnc", window.fnc);
+    axd("[data-event-test=text-box]").off("click.fnb").off("click.fnc");
+*/
+
 </script>

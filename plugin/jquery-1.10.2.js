@@ -4730,8 +4730,11 @@ function safeActiveElement() {
 jQuery.event = {
 
 	global: {},
-
+// todo : jQuery event add
 	add: function( elem, types, handler, data, selector ) {
+		// 1
+		console.log(elem, types, handler, data, selector);
+
 		var tmp, events, t, handleObjIn,
 			special, eventHandle, handleObj,
 			handlers, type, namespaces, origType,
