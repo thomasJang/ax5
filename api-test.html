@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="pub/ax5.min.js"></script>
+    <title>ax5 - API TESTER</title>
+    <style>
+        h3{margin: 5px;}
+        .blue{color: #6fafe0;}
+        .red{color: #f06433;}
+        h3 u{color: #000;}
+    </style>
+
+</head>
+<body>
+    <h1>AX5 API Check</h1>
+    <div id="test-result"></div>
+    <script type="text/javascript">
+        var check_list = [
+            {
+                label:"ax5.util.clone",
+                fn: function(){
+                    var obja = {a:1};
+                    var objb = ax5.util.clone( obja );
+                    obja.a = 3; // 원본 오브젝트 수정
+                    return objb.a;
+                },
+                r: 1
+            },
+            {
+                label:"ax5.util.each",
+                fn: function(){
+                    var result = "";
+                    ax5.util.each([0,1,2], function(){
+                        // with this
+                        result+= this;
+                    });
+                    ax5.util.each({a:1,b:"2",c:function(){}}, function(k, v){
+                        // with this
+                        result+= k;
+                    });
+                    return result;
+                },
+                r: "012abc"
+            },
+            {
+                label:"console.log",
+                fn: function(){
+                    return (function A(){ return typeof console.log; })();
+                }
+            },
+            {
+                label:"ax5.util.extend",
+                fn: function(){
+                    var obja = {a:1};
+                    ax5.util.extend(obja, {b:2});
+                    return obja.b;
+                },
+                r: 2
+            },
+            {
+                label:"ax5.util.filter",
+                fn: function(){
+                    var aarray = [5,4,3,2,1];
+                    result = ax5.util.filter( aarray, function(){
+                        return this % 2;
+                    });
+                    return result.join('');
+                },
+                r: "531"
+            },
+            {
+                label:"ax5.util.first",
+                fn: function(){
+                    var aarray = [5,4,3,2,1];
+                    return ax5.util.first(aarray);
+                },
+                r: 5
+            },
+            {
+                label:"ax5.util.last",
+                fn: function(){
+                    var aarray = [5,4,3,2,1];
+                    return ax5.util.last(aarray);
+                },
+                r: 1
+            },
+            {
+                label:"ax5.util.set_cookie, ax5.util.get_cookie",
+                fn: function(){
+                    ax5.util.set_cookie("jslib", "AX5");
+                    return ax5.util.get_cookie("jslib");
+                },
+                r: "AX5"
+            },
+            {
+                label:"ax5.util.get_elements",
+                fn: function(){
+                    return ax5.util.get_elements("#test-result");
+                }
+            },
+            {
+                label:"ax5.util.get_type",
+                fn: function(){
+                    return ax5.util.get_type({a:1})+"/"+
+                    ax5.util.get_type([])+"/"+
+                    ax5.util.get_type(function(){})+"/"+
+                    ax5.util.get_type("1")+"/"+
+                    ax5.util.get_type(1)+"/"+
+                    ax5.util.get_type(document.getElementById("test-result"))+"/"+
+                    ax5.util.get_type(undefined);
+                },
+                r: "object/array/function/string/number/element/undefined"
+            },
+            {
+                label:"ax5.util.is_array",
+                fn: function(){
+                    return ax5.util.is_array([]);
+                }
+            },
+            {
+                label:"ax5.util.is_element",
+                fn: function(){
+                    return ax5.util.is_element(document.getElementById("test-result"));
+                }
+            },
+            {
+                label:"ax5.util.is_function",
+                fn: function(){
+                    var a = function(){};
+                    return ax5.util.is_function(a);
+                }
+            },
+            {
+                label:"ax5.util.is_nothing",
+                fn: function(){
+                    return ax5.util.is_nothing(null);
+                }
+            },
+            {
+                label:"ax5.util.is_number",
+                fn: function(){
+                    return ax5.util.is_number(99e10);
+                }
+            },
+            {
+                label:"ax5.util.is_object",
+                fn: function(){
+                    return ax5.util.is_object({a:1,b:2});
+                }
+            },
+            {
+                label:"ax5.util.is_string",
+                fn: function(){
+                    return ax5.util.is_string("장기영");
+                }
+            },
+            {
+                label:"ax5.util.is_undefined",
+                fn: function(){
+                    var a;
+                    return ax5.util.is_undefined(a);
+                }
+            },
+            {
+                label:"ax5.util.left",
+                fn: function(){
+                    return ax5.util.left("ab장.123", ".") + ax5.util.left("ax5-axisj", 3);
+                },
+                r: "ab장ax5"
+            },
+            {
+                label:"ax5.util.right",
+                fn: function(){
+                    return ax5.util.right("ab장.123", ".") + ax5.util.right("ax5-axisj", 3);
+                },
+                r: "123isj"
+            }
+        ];
+
+        if("체크 실행") {
+            var target = document.getElementById("test-result");
+            var newDiv = document.createElement("div");
+            newDiv.innerHTML = "<h2>" + navigator.userAgent.toLowerCase() + "</h2>";
+            target.appendChild(newDiv);
+            function checker(O) {
+                if (!O) return;
+                var newDiv = document.createElement("div");
+                if (typeof O.r != "undefined" && (O.fn() == O.r)) {
+                    newDiv.innerHTML = "<h3 class='blue'>" + O.label + " : <u>OK</u></h3>";
+                } else if (typeof O.r == "undefined" && O.fn()) {
+                    newDiv.innerHTML = "<h3 class='blue'>" + O.label + " : <u>OK : "+ O.fn() +"</u></h3>";
+                } else {
+                    newDiv.innerHTML = "<h3 class='red'>" + O.label + " : <u>?? " + O.fn() + "</u></h3>";
+                }
+
+                target.appendChild(newDiv);
+
+                setTimeout(function () {
+                    checker(check_list.shift());
+                }, 100);
+            }
+            checker(check_list.shift());
+        }
+    </script>
+</body>
+</html>

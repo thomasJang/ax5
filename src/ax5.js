@@ -620,7 +620,7 @@ argument
  var objb = axf.clone( obja );
  obja.a = 3; // 원본 오브젝트 수정
  console.log(obja, objb);
- // Object {a: 3} Object {a: 2}
+ // Object {a: 3} Object {a: 1}
  ```
  */
 		function clone(O){
