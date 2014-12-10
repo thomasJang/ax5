@@ -5,14 +5,28 @@
     <script type="text/javascript" src="pub/ax5.min.js"></script>
     <title>ax5 - API TESTER</title>
     <style>
-        h3{margin: 5px;}
+        h1{}
+        h2{color: #9b9b9b;}
+        h3{margin: 5px;font-size: 15px;}
         .blue{color: #6fafe0;}
         .red{color: #f06433;}
         h3 u{color: #000;}
+
+        #progress{
+            border: 1px solid #888;
+            border-radius: 5px;
+            height: 6px;
+        }
+        #progress-bar{
+            height: 6px;width: 0%;
+            border-radius: 4px;
+            background: #f06433;
+        }
     </style>
 
 </head>
 <body>
+    <div id="progress"><div id="progress-bar"></div></div>
     <h1>AX5 API Check</h1>
     <div id="test-result"></div>
     <script type="text/javascript">
@@ -179,11 +193,14 @@
         ];
 
         if("체크 실행") {
+            var test_t_count = check_list.length;
             var target = document.getElementById("test-result");
+            var p_bar = document.getElementById("progress-bar");
             var newDiv = document.createElement("div");
             newDiv.innerHTML = "<h2>" + navigator.userAgent.toLowerCase() + "</h2>";
             target.appendChild(newDiv);
             function checker(O) {
+                p_bar.style.width = 100-(check_list.length / test_t_count * 100)+"%";
                 if (!O) return;
                 var newDiv = document.createElement("div");
                 if (typeof O.r != "undefined" && (O.fn() == O.r)) {
