@@ -1121,14 +1121,14 @@ argument
 				this.version = info.version;
 /**
  * query selected elements
- * @member {Array} ax5.dom.dom
+ * @member {Array} ax5.dom.elements
  */
-				this.dom = U.get_elements(query);
+				this.elements = U.get_elements(query);
 /**
  * query selected elements length
  * @member {Number} ax5.dom.length
  */
-				this.length = this.dom.length;
+				this.length = this.elements.length;
 /**
  * elements에 css 값을 적용또는 반환합니다.
  * @method ax5.dom.css
@@ -1145,21 +1145,21 @@ argument
  */
 				this.css = function(O){
 					if( U.is_string( O ) ) {
-						return this.dom[0].style[O];
+						return this.elements[0].style[O];
 					}
 					else
 					if( U.is_array( O ) ) {
 						var css = {};
 						for(var i=0;i<O.length;i++){
-							css[O[i]] = this.dom[0].style[O[i]];
+							css[O[i]] = this.elements[0].style[O[i]];
 						}
 						return css;
 					}
 					else
 					{
-						for(var di=0;di<this.dom.length;di++) {
+						for(var di=0;di<this.elements.length;di++) {
 							for (var k in O) {
-								this.dom[di].style[k] = O[k];
+								this.elements[di].style[k] = O[k];
 							}
 						}
 					}
@@ -1185,10 +1185,9 @@ argument
  */
 				this.clazz = function(command, O){
 					var classNames;
-					// add, remove, toggle
 					if(command === "add" || command === "remove" || command === "toggle") {
-						for(var di=0;di<this.dom.length;di++) {
-							classNames = this.dom[di]["className"].split(/ /g);
+						for(var di=0;di<this.elements.length;di++) {
+							classNames = this.elements[di]["className"].split(/ /g);
 							if(command === "add"){
 								if(U.search(classNames, function(){
 									return O.trim() == this;
@@ -1206,13 +1205,13 @@ argument
 								});
 								if(class_count === classNames.length) classNames.push(O.trim());
 							}
-							this.dom[di]["className"] = classNames.join(" ");
+							this.elements[di]["className"] = classNames.join(" ");
 						}
 					}
 					else
 					{ // has
 						if(typeof O === "undefined") O = command;
-						classNames = this.dom[0]["className"].split(/ /g);
+						classNames = this.elements[0]["className"].split(/ /g);
 						if (U.is_string(O)) { // hasClass
 							// get Class Name
 							return (U.search(classNames, function () { return this === O }) > -1);
@@ -1251,8 +1250,8 @@ argument
  */
 				// todo: event type 모두 체크
 				this.on = function(typ, _fn) {
-					for(var i=0;i<this.dom.length;i++) {
-						var __fn, _d = this.dom[i];
+					for(var i=0;i<this.elements.length;i++) {
+						var __fn, _d = this.elements[i];
 						if(!_d.e_hd) _d.e_hd = {};
 						if(typeof _d.e_hd[typ] === "undefined"){
 							__fn = _d.e_hd[typ] = _fn;
@@ -1279,8 +1278,8 @@ argument
  */
 				// todo : 이벤트 제거시 .하위 까지 제거해주기
 				this.off = function(typ, _fn) {
-					for(var i=0;i<this.dom.length;i++) {
-						var _d = this.dom[i];
+					for(var i=0;i<this.elements.length;i++) {
+						var _d = this.elements[i];
 						if (U.is_array(_d.e_hd[typ])) {
 							var _na = [];
 							for (var i = 0; i < _d.e_hd[typ].length; i++) {
@@ -1319,9 +1318,9 @@ argument
 				this.attr = function(command, O){
 					if( command === "set" || (typeof O === "undefined" && U.is_object(command)) ){
 						if(typeof O === "undefined") O = command;
-						for(var di=0;di<this.dom.length;di++) {
+						for(var di=0;di<this.elements.length;di++) {
 							for (var k in O) {
-								this.dom[di].setAttribute(k, O[k]);
+								this.elements[di].setAttribute(k, O[k]);
 							}
 						}
 					}
@@ -1329,19 +1328,19 @@ argument
 					if( command === "get" || command === "read" || (typeof O === "undefined" && U.is_string(command)) ){
 						if(typeof O === "undefined") O = command;
 						if(!U.is_string(O)) return this;
-						return this.dom[0].getAttribute(O);
+						return this.elements[0].getAttribute(O);
 					}
 					else
 					if( command === "remove" ){
 						if(U.is_string(O)) {
-							for (var di = 0; di < this.dom.length; di++) {
-								this.dom[di].removeAttribute(O);
+							for (var di = 0; di < this.elements.length; di++) {
+								this.elements[di].removeAttribute(O);
 							}
 						}else{
-							for (var di = 0; di < this.dom.length; di++) {
+							for (var di = 0; di < this.elements.length; di++) {
 								var _this = this;
 								U.each(O,  function(){
-									_this.dom[di].removeAttribute(this);
+									_this.elements[di].removeAttribute(this);
 								});
 							}
 						}

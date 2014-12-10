@@ -43,7 +43,7 @@
     document.getElementById("text-box").eventHanles = {"A":function(){return "A";}, "B":function(){return "B";}};
     console.log( document.getElementById("text-box").eventHanles.A );
     */
-    axd("#text-box").clazz("add", "new-class");
+    ax5.dom("#text-box").clazz("add", "new-class");
 
     window.fna = function(){
         console.log("fna");
@@ -58,15 +58,13 @@ var mydom = axd("[data-event-test=text-box]"),
     mydom.on("click", window.fnc);
 
     remove_dom.on("click", function(){
-        console.log(mydom.dom[0].e_hd);
         mydom.off("click", window.fna);
-        console.log(mydom.dom[0].e_hd);
         remove_dom.off("click");
         alert("이벤트 제거");
     });
 
     axd("[data-event-test=removeb]").on("click", function() {
-        mydom.off("click", window.fnb);
+        mydom.off("click");
     });
 
 /*
