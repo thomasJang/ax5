@@ -82,46 +82,47 @@ argument
 		};
 	}
 
-	// Document.querySelectorAll method
-	// http://ajaxian.com/archives/creating-a-queryselector-for-ie-that-runs-at-native-speed
-	// Needed for: IE7-
-	if (!document.querySelectorAll) {
-		document.querySelectorAll = function(selectors) {
-			var style = document.createElement('style'), elements = [], element;
-			document.documentElement.firstChild.appendChild(style);
-			document._qsa = [];
+	/*global document */
+	/**
+	 * define document.querySelector & document.querySelectorAll for IE7
+	 *
+	 * A not very fast but small hack. The approach is taken from
+	 * http://weblogs.asp.net/bleroy/archive/2009/08/31/queryselectorall-on-old-ie-versions-something-that-doesn-t-work.aspx
+	 *
+	 */
+	(function () {
+		if (document.querySelectorAll || document.querySelector) {
+			return;
+		}
+		if(!document.createStyleSheet) return;
+		var style = document.createStyleSheet(),
+			select = function (selector, maxCount) {
+				var
+					all = document.all,
+					l = all.length,
+					i,
+					resultSet = [];
 
-			style.styleSheet.cssText = selectors + '{x-qsa:expression(document._qsa && document._qsa.push(this))}';
-			window.scrollBy(0, 0);
-			style.parentNode.removeChild(style);
+				style.addRule(selector, "foo:bar");
+				for (i = 0; i < l; i += 1) {
+					if (all[i].currentStyle.foo === "bar") {
+						resultSet.push(all[i]);
+						if (resultSet.length > maxCount) {
+							break;
+						}
+					}
+				}
+				style.removeRule(0);
+				return resultSet;
+			};
 
-			while (document._qsa.length) {
-				element = document._qsa.shift();
-				element.style.removeAttribute('x-qsa');
-				elements.push(element);
-			}
-			document._qsa = null;
-			return elements;
+		document.querySelectorAll = function (selector) {
+			return select(selector, Infinity);
 		};
-	}
-
-	// Document.querySelector method
-	// Needed for: IE7-
-	if (!document.querySelector) {
-		document.querySelector = function(selectors) {
-			var elements = document.querySelectorAll(selectors);
-			return (elements.length) ? elements[0] : null;
+		document.querySelector = function (selector) {
+			return select(selector, 1)[0] || null;
 		};
-	}
-
-	// Document.getElementsByClassName method
-	// Needed for: IE8-
-	if (!document.getElementsByClassName) {
-		document.getElementsByClassName = function(classNames) {
-			classNames = String(classNames).replace(/^|\s+/g, '.');
-			return document.querySelectorAll(classNames);
-		};
-	}
+	}());
 
 	if (!String.prototype.trim) {
 		(function() {
@@ -367,11 +368,11 @@ argument
  var myArray = [0,1,2,3,4,5,6];
  var myObject = {a:"123","b":"123",c:123};
 
- ax.search(myArray,  function(){
+ ax5.util.search(myArray,  function(){
     return this > 3;
  });
  // 4
- ax.search(myObject,  function(k, v){
+ ax5.util.search(myObject,  function(k, v){
     return v === 123;
  });
  // "c"
@@ -486,7 +487,7 @@ argument
  result = ax5.util.filter( filObject, function(){
 	return this.pickup;
  });
- console.log( ax.to_json(result) );
+ console.log( ax5.util.to_json(result) );
  // [{"pickup": , "name": "AXISJ"}, {"pickup": , "name": "AX5"}]
 ```
  */
@@ -642,6 +643,10 @@ argument
 				typeName = "element";
 			}
 			else
+			if(typeof O === "undefined") {
+				typeName = "undefined";
+			}
+			else
 			if(_toString.call(O) == "[object Object]") {
 				typeName = "object";
 			}
@@ -660,10 +665,6 @@ argument
 			else
 			if(typeof O === "function") {
 				typeName = "function";
-			}
-			else
-			if(typeof O === "undefined") {
-				typeName = "undefined";
 			}
 			return typeName;
 		}
@@ -909,26 +910,29 @@ argument
  * @example
 ```js
  ax5.info.base_url = "../src/";
- ax.require(["ax5_class_sample.js"], function(){
+ ax5.util.require(["ax5_class_sample.js"], function(){
 	alert("ok");
  });
 ```
  */
+		// todo : ie 에서 onload 이중 발생.
 		function require(mods, callBack, errorBack){
 			var loadCount = mods.length, loadErrors = [];
 			var head = document.head || document.getElementsByTagName("head")[0];
-			var onloadTimer, onerrorTimer;
+			var onloadTimer, onerrorTimer, returned = false;
 			var onload = function(){
-				if(loadCount == 0 && loadErrors.length == 0){
+				if(loadCount < 1 && loadErrors.length == 0 && !returned){
 					if(callBack) callBack({});
+					returned = true;
 				}
 			};
 			var onerror = function(){
-				if(loadCount == 0 && loadErrors.length > 0){
+				if(loadCount < 1 && loadErrors.length > 0 && !returned){
 					if(errorBack) errorBack({
 						type:"loadFail",
 						list:loadErrors
 					});
+					returned = true;
 				}
 			};
 
@@ -974,7 +978,8 @@ argument
 					//in IE8, node.attachEvent does not have toString()
 					//Note the test for "[native code" with no closing brace, see:
 					//https://github.com/jrburke/requirejs/issues/273
-					!(plugin.attachEvent.toString && plugin.attachEvent.toString().indexOf('[native code') < 0)) {
+					!(plugin.attachEvent.toString && plugin.attachEvent.toString().indexOf('[native code') < 0))
+				{
 					//Probably IE. IE (at least 6-8) do not fire
 					//script onload right after executing the script, so
 					//we cannot tie the anonymous define call to a name.
@@ -998,6 +1003,8 @@ argument
 					plugin.addEventListener('load', plugin_onload, false);
 					plugin.addEventListener('error', plugin_onerror, false);
 				}
+
+
 				head.appendChild(plugin);
 			}
 		}
@@ -1211,10 +1218,11 @@ argument
 					else
 					{ // has
 						if(typeof O === "undefined") O = command;
-						classNames = this.elements[0]["className"].split(/ /g);
+						classNames = this.elements[0]["className"].trim().split(/ /g);
+						//if(U.is_string(classNames)) classNames = [classNames];
 						if (U.is_string(O)) { // hasClass
 							// get Class Name
-							return (U.search(classNames, function () { return this === O }) > -1);
+							return (U.search(classNames, function () { return this.trim() === O }) > -1);
 						}else{
 							console.error("")
 						}

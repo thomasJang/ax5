@@ -9,20 +9,20 @@
 		"default": {
 			"outputSourceFiles" : true
 		},
-		"applicationName": "AX5 API",
+		"applicationName": "ax5.io",
 		"git_liblink": "https://github.com/tom-axisj/ax5",
 		"disqus": "",
 		"googleAnalytics": "",
 		"openGraph": {
-			"title": "AX5 JSDOC",
+			"title": "ax5.io",
 			"type": "JSDOC API",
 			"image": "http://dev.axisj.com/ui/AXJ.png",
-			"site_name": "풀 스택 오픈소스 자바스크립트 UI 프레임워크 - AXISJ",
+			"site_name": "new html5 javascript framework",
 			"url": "http://newdoc.axisj.com"
 		},
 		"meta": {
-			"title": "AX5 API",
-			"description": "자바스크립트 UI Library AX5 JSDOC API서비스 입니다.",
+			"title": "ax5 API",
+			"description": "자바스크립트 UI Library ax5 JSDOC API서비스 입니다.",
 			"keyword": "AXISJ, JSDOC, API"
 		}
 	},

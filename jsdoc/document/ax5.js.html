@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>AX5 API</title>
+    <title>ax5 API</title>
 
     <link rel="shortcut icon" href="https://www.axisj.com/sys-datas/plugins/axisj/ui/axisj.ico" type="image/x-icon" />
     <link rel="icon" href="https://www.axisj.com/sys-datas/plugins/axisj/ui/axisj.ico" type="image/x-icon" />
@@ -10,17 +10,17 @@
     <link rel="apple-touch-icon-precomposed" href="https://www.axisj.com/sys-datas/layouts/axisj/images/ax-symbol.png" />
 
     
-    <meta name="description" content="자바스크립트 UI Library AX5 JSDOC API서비스 입니다." />
+    <meta name="description" content="자바스크립트 UI Library ax5 JSDOC API서비스 입니다." />
     
         <meta name="keywords" content="AXISJ, JSDOC, API" />
         <meta name="keyword" content="AXISJ, JSDOC, API" />
     
     
     
-    <meta property="og:title" content="AX5 JSDOC"/>
+    <meta property="og:title" content="ax5.io"/>
     <meta property="og:type" content="JSDOC API"/>
     <meta property="og:image" content="http://dev.axisj.com/ui/AXJ.png"/>
-    <meta property="og:site_name" content="풀 스택 오픈소스 자바스크립트 UI 프레임워크 - AXISJ"/>
+    <meta property="og:site_name" content="new html5 javascript framework"/>
     <meta property="og:url" content="http://newdoc.axisj.com"/>
     
 
@@ -41,7 +41,7 @@
 
     
     <script>
-    var config = {"monospaceLinks":true,"cleverLinks":true,"default":{"outputSourceFiles":true},"applicationName":"AX5 API","git_liblink":"https://github.com/tom-axisj/ax5","disqus":"","googleAnalytics":"","openGraph":{"title":"AX5 JSDOC","type":"JSDOC API","image":"http://dev.axisj.com/ui/AXJ.png","site_name":"풀 스택 오픈소스 자바스크립트 UI 프레임워크 - AXISJ","url":"http://newdoc.axisj.com"},"meta":{"title":"AX5 API","description":"자바스크립트 UI Library AX5 JSDOC API서비스 입니다.","keyword":"AXISJ, JSDOC, API"}};
+    var config = {"monospaceLinks":true,"cleverLinks":true,"default":{"outputSourceFiles":true},"applicationName":"ax5.io","git_liblink":"https://github.com/tom-axisj/ax5","disqus":"","googleAnalytics":"","openGraph":{"title":"ax5.io","type":"JSDOC API","image":"http://dev.axisj.com/ui/AXJ.png","site_name":"new html5 javascript framework","url":"http://newdoc.axisj.com"},"meta":{"title":"ax5 API","description":"자바스크립트 UI Library ax5 JSDOC API서비스 입니다.","keyword":"AXISJ, JSDOC, API"}};
     </script>
     
 
@@ -51,7 +51,7 @@
 <div id="wrap" class="clearfix ax5.js">
     
 <div class="navigation">
-    <h3 class="applicationName"><a href="index.html"><i class="axi axi-axisj"></i> AX5 API</a></h3>
+    <h3 class="applicationName"><a href="index.html"><i class="axi axi-axisj"></i> ax5.io</a></h3>
 
     <div class="search">
         <input id="search" type="text" class="form-control input-sm" placeholder="Search Documentations">
@@ -322,46 +322,47 @@ argument
 		};
 	}
 
-	// Document.querySelectorAll method
-	// http://ajaxian.com/archives/creating-a-queryselector-for-ie-that-runs-at-native-speed
-	// Needed for: IE7-
-	if (!document.querySelectorAll) {
-		document.querySelectorAll = function(selectors) {
-			var style = document.createElement('style'), elements = [], element;
-			document.documentElement.firstChild.appendChild(style);
-			document._qsa = [];
+	/*global document */
+	/**
+	 * define document.querySelector & document.querySelectorAll for IE7
+	 *
+	 * A not very fast but small hack. The approach is taken from
+	 * http://weblogs.asp.net/bleroy/archive/2009/08/31/queryselectorall-on-old-ie-versions-something-that-doesn-t-work.aspx
+	 *
+	 */
+	(function () {
+		if (document.querySelectorAll || document.querySelector) {
+			return;
+		}
+		if(!document.createStyleSheet) return;
+		var style = document.createStyleSheet(),
+			select = function (selector, maxCount) {
+				var
+					all = document.all,
+					l = all.length,
+					i,
+					resultSet = [];
 
-			style.styleSheet.cssText = selectors + '{x-qsa:expression(document._qsa && document._qsa.push(this))}';
-			window.scrollBy(0, 0);
-			style.parentNode.removeChild(style);
+				style.addRule(selector, "foo:bar");
+				for (i = 0; i &lt; l; i += 1) {
+					if (all[i].currentStyle.foo === "bar") {
+						resultSet.push(all[i]);
+						if (resultSet.length > maxCount) {
+							break;
+						}
+					}
+				}
+				style.removeRule(0);
+				return resultSet;
+			};
 
-			while (document._qsa.length) {
-				element = document._qsa.shift();
-				element.style.removeAttribute('x-qsa');
-				elements.push(element);
-			}
-			document._qsa = null;
-			return elements;
+		document.querySelectorAll = function (selector) {
+			return select(selector, Infinity);
 		};
-	}
-
-	// Document.querySelector method
-	// Needed for: IE7-
-	if (!document.querySelector) {
-		document.querySelector = function(selectors) {
-			var elements = document.querySelectorAll(selectors);
-			return (elements.length) ? elements[0] : null;
+		document.querySelector = function (selector) {
+			return select(selector, 1)[0] || null;
 		};
-	}
-
-	// Document.getElementsByClassName method
-	// Needed for: IE8-
-	if (!document.getElementsByClassName) {
-		document.getElementsByClassName = function(classNames) {
-			classNames = String(classNames).replace(/^|\s+/g, '.');
-			return document.querySelectorAll(classNames);
-		};
-	}
+	}());
 
 	if (!String.prototype.trim) {
 		(function() {
@@ -607,11 +608,11 @@ argument
  var myArray = [0,1,2,3,4,5,6];
  var myObject = {a:"123","b":"123",c:123};
 
- ax.search(myArray,  function(){
+ ax5.util.search(myArray,  function(){
     return this > 3;
  });
  // 4
- ax.search(myObject,  function(k, v){
+ ax5.util.search(myObject,  function(k, v){
     return v === 123;
  });
  // "c"
@@ -726,7 +727,7 @@ argument
  result = ax5.util.filter( filObject, function(){
 	return this.pickup;
  });
- console.log( ax.to_json(result) );
+ console.log( ax5.util.to_json(result) );
  // [{"pickup": , "name": "AXISJ"}, {"pickup": , "name": "AX5"}]
 ```
  */
@@ -860,7 +861,7 @@ argument
  var objb = axf.clone( obja );
  obja.a = 3; // 원본 오브젝트 수정
  console.log(obja, objb);
- // Object {a: 3} Object {a: 2}
+ // Object {a: 3} Object {a: 1}
  ```
  */
 		function clone(O){
@@ -882,6 +883,10 @@ argument
 				typeName = "element";
 			}
 			else
+			if(typeof O === "undefined") {
+				typeName = "undefined";
+			}
+			else
 			if(_toString.call(O) == "[object Object]") {
 				typeName = "object";
 			}
@@ -900,10 +905,6 @@ argument
 			else
 			if(typeof O === "function") {
 				typeName = "function";
-			}
-			else
-			if(typeof O === "undefined") {
-				typeName = "undefined";
 			}
 			return typeName;
 		}
@@ -1149,26 +1150,29 @@ argument
  * @example
 ```js
  ax5.info.base_url = "../src/";
- ax.require(["ax5_class_sample.js"], function(){
+ ax5.util.require(["ax5_class_sample.js"], function(){
 	alert("ok");
  });
 ```
  */
+		// todo : ie 에서 onload 이중 발생.
 		function require(mods, callBack, errorBack){
 			var loadCount = mods.length, loadErrors = [];
 			var head = document.head || document.getElementsByTagName("head")[0];
-			var onloadTimer, onerrorTimer;
+			var onloadTimer, onerrorTimer, returned = false;
 			var onload = function(){
-				if(loadCount == 0 && loadErrors.length == 0){
+				if(loadCount &lt; 1 && loadErrors.length == 0 && !returned){
 					if(callBack) callBack({});
+					returned = true;
 				}
 			};
 			var onerror = function(){
-				if(loadCount == 0 && loadErrors.length > 0){
+				if(loadCount &lt; 1 && loadErrors.length > 0 && !returned){
 					if(errorBack) errorBack({
 						type:"loadFail",
 						list:loadErrors
 					});
+					returned = true;
 				}
 			};
 
@@ -1214,7 +1218,8 @@ argument
 					//in IE8, node.attachEvent does not have toString()
 					//Note the test for "[native code" with no closing brace, see:
 					//https://github.com/jrburke/requirejs/issues/273
-					!(plugin.attachEvent.toString && plugin.attachEvent.toString().indexOf('[native code') &lt; 0)) {
+					!(plugin.attachEvent.toString && plugin.attachEvent.toString().indexOf('[native code') &lt; 0))
+				{
 					//Probably IE. IE (at least 6-8) do not fire
 					//script onload right after executing the script, so
 					//we cannot tie the anonymous define call to a name.
@@ -1238,6 +1243,8 @@ argument
 					plugin.addEventListener('load', plugin_onload, false);
 					plugin.addEventListener('error', plugin_onerror, false);
 				}
+
+
 				head.appendChild(plugin);
 			}
 		}
@@ -1451,10 +1458,11 @@ argument
 					else
 					{ // has
 						if(typeof O === "undefined") O = command;
-						classNames = this.elements[0]["className"].split(/ /g);
+						classNames = this.elements[0]["className"].trim().split(/ /g);
+						//if(U.is_string(classNames)) classNames = [classNames];
 						if (U.is_string(O)) { // hasClass
 							// get Class Name
-							return (U.search(classNames, function () { return this === O }) > -1);
+							return (U.search(classNames, function () { return this.trim() === O }) > -1);
 						}else{
 							console.error("")
 						}
@@ -1615,7 +1623,7 @@ argument
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Wed Dec 10 2014 22:47:49 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Thu Dec 11 2014 14:28:32 GMT+0900 (KST)
         </footer>
     </div>
 </div>

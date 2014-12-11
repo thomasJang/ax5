@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <script type="text/javascript" src="pub/ax5.min.js"></script>
+    <script type="text/javascript" src="src/ax5.js"></script>
     <title>ax5 - API TESTER</title>
     <style>
         h1{}
@@ -29,6 +29,13 @@
     <div id="progress"><div id="progress-bar"></div></div>
     <h1>AX5 API Check</h1>
     <div id="test-result"></div>
+    <p>tom@axisj.com - 2014-12-11</p>
+
+    <div id="id-test"></div>
+    <a class="class-text"></a>
+    <span data-attr="A"></span>
+    <div data-attr="B"></div>
+
     <script type="text/javascript">
         var check_list = [
             {
@@ -116,13 +123,14 @@
             {
                 label:"ax5.util.get_type",
                 fn: function(){
+                    var a;
                     return ax5.util.get_type({a:1})+"/"+
                     ax5.util.get_type([])+"/"+
                     ax5.util.get_type(function(){})+"/"+
                     ax5.util.get_type("1")+"/"+
                     ax5.util.get_type(1)+"/"+
                     ax5.util.get_type(document.getElementById("test-result"))+"/"+
-                    ax5.util.get_type(undefined);
+                    ax5.util.get_type(a);
                 },
                 r: "object/array/function/string/number/element/undefined"
             },
@@ -189,6 +197,163 @@
                     return ax5.util.right("ab장.123", ".") + ax5.util.right("ax5-axisj", 3);
                 },
                 r: "123isj"
+            },
+            {
+                label: "ax5.util.map",
+                fn   : function () {
+                    var ra = ax5.util.map(["a", "b", "c"], function () {
+                        return this + "1";
+                    });
+                    return ra.join('');
+                },
+                r    : "a1b1c1"
+            },
+            {
+                label: "ax5.util.reduce",
+                fn   : function () {
+                    var aarray = [5, 4, 3, 2, 1];
+                    return ax5.util.reduce(aarray, function (p, n) {
+                        return p - n;
+                    });
+                },
+                r    : -5
+            },
+            {
+                label: "ax5.util.reduce_right",
+                fn   : function () {
+                    var aarray = [5, 4, 3, 2, 1];
+                    return ax5.util.reduce_right(aarray, function (p, n) {
+                        return p - n;
+                    });
+                },
+                r    : -13
+            },
+            {
+                label: "ax5.util.search",
+                fn   : function () {
+                    var myArray = [0,1,2,3,4,5,6];
+                    var myObject = {a:"123","b":"123",c:123};
+                    var result = "";
+                    result = ax5.util.search(myArray,  function(){
+                        return this > 3;
+                    });
+                    // 4
+                    result += ax5.util.search(myObject,  function(k, v){
+                        return v === 123;
+                    });
+                    // "c"
+                    return result;
+                },
+                r    : "4c"
+            },
+            {
+                label: "ax5.util.to_json",
+                fn   : function () {
+                    var o = {
+                        a: 1, b: "1", c: {
+                            ca: 1, cb: function () {
+                            }
+                        }, d:["ab","ac", 1, {name:"12",key:"11"}]
+                    };
+                    return ax5.util.to_json(o);
+                },
+                r    : "{\"a\": 1, \"b\": \"1\", \"c\": {\"ca\": 1, \"cb\": \"{Function}\"}, \"d\": [\"ab\",\"ac\",1,{\"name\": \"12\", \"key\": \"11\"}]}"
+            },
+            {
+                label: "ax5.util.require",
+                fn   : function (callBack) {
+                    ax5.util.require(["src/ax5_class_sample.js"], function(){
+                        callBack(true);
+                    });
+                },
+                r    : "ready-response"
+            },
+            {
+                label: "ax5.util.url_util",
+                fn   : function () {
+                    return ax5.util.url_util().pathname;
+                },
+                r    : "/api-test.html"
+            },
+            {
+                label: "ax5.dom('#id')",
+                fn   : function () {
+                    return ax5.util.is_element(ax5.dom("#id-test").elements[0])
+                }
+            },
+            {
+                label: "ax5.dom('.class')",
+                fn   : function () {
+                    return ax5.util.is_element(ax5.dom(".class-text").elements[0])
+                }
+            },
+            {
+                label: "ax5.dom('[attr]')",
+                fn   : function () {
+                    return ax5.dom("[data-attr]").elements.length == 2;
+                }
+            },
+            {
+                label: "ax5.dom('[attr=value]')",
+                fn   : function () {
+                    return ax5.util.is_element(ax5.dom("[data-attr=A]").elements[0])
+                }
+            },
+            {
+                label: "ax5.dom.attr",
+                fn   : function () {
+                    ax5.dom("#id-test").attr("set", {"data-ax-spt":"ABCDE"}); // set attribute
+                    ax5.dom("#id-test").attr({"data-ax-0":"A", "data-ax-1":"B"}); // set attribute
+
+                    var result = ax5.dom("#id-test").attr("data-ax-spt") +
+                    ax5.dom("#id-test").attr("get", "data-ax-0");
+                    ax5.dom("#id-test").attr("remove", "data-ax-1");
+                    result += ax5.dom("#id-test").attr("data-ax-1");
+
+                    return result;
+                },
+                r    : "ABCDEAnull"
+            },
+            {
+                label: "ax5.dom.clazz",
+                fn   : function () {
+
+                    var result = "";
+                    result += ax5.dom(".class-text").clazz("class-text");
+                    ax5.dom(".class-text").clazz("add", "newclass-0");
+                    result += ax5.dom(".class-text").clazz("has", "newclass-0");
+                    ax5.dom(".class-text").clazz("remove", "newclass-0");
+                    result += ax5.dom(".class-text").clazz("has", "newclass-0");
+                    ax5.dom(".class-text").clazz("toggle", "newclass-1");
+                    result += ax5.dom(".class-text").clazz("has", "newclass-1");
+                    ax5.dom(".class-text").clazz("toggle", "newclass-1");
+                    result += ax5.dom(".class-text").clazz("has", "newclass-1");
+
+                    return result;
+
+                },
+                r    : "truetruefalsetruefalse"
+            },
+            {
+                label: "ax5.dom.css",
+                fn   : function () {
+                    var result = "";
+                    ax5.dom("#id-test").css({fontFamily:"Gulim"});
+                    result = ax5.dom("#id-test").css("font-family");
+                    return result;
+                },
+                r    : "Gulim"
+            },
+            {
+                label: "ax5.dom.on",
+                fn   : function (callBack) {
+                    var result = "";
+                    ax5.dom("#id-test").on("click", function(){
+                        callBack(true);
+                    });
+                    ax5.dom("#id-test").elements[0].click();
+                },
+                r    : "ready-response"
             }
         ];
 
@@ -199,23 +364,44 @@
             var newDiv = document.createElement("div");
             newDiv.innerHTML = "<h2>" + navigator.userAgent.toLowerCase() + "</h2>";
             target.appendChild(newDiv);
+
             function checker(O) {
                 p_bar.style.width = 100-(check_list.length / test_t_count * 100)+"%";
                 if (!O) return;
                 var newDiv = document.createElement("div");
-                if (typeof O.r != "undefined" && (O.fn() == O.r)) {
-                    newDiv.innerHTML = "<h3 class='blue'>" + O.label + " : <u>OK</u></h3>";
-                } else if (typeof O.r == "undefined" && O.fn()) {
-                    newDiv.innerHTML = "<h3 class='blue'>" + O.label + " : <u>OK : "+ O.fn() +"</u></h3>";
-                } else {
-                    newDiv.innerHTML = "<h3 class='red'>" + O.label + " : <u>?? " + O.fn() + "</u></h3>";
+                var result, err_string;
+
+                if(O.r === "ready-response"){
+                    O.fn(function(res){
+                        if(res){
+                            newDiv.innerHTML = "<h3 class='blue'>" + O.label + " : <u>OK</u></h3>";
+                            target.appendChild(newDiv);
+                            setTimeout(function () {
+                                checker(check_list.shift());
+                            }, 100);
+                        }
+                    });
+                }else{
+                    try{
+                        result = O.fn();
+                    }catch(e){
+                        err_string = e.toString();
+                        console.error(e);
+                    }
+
+                    if (typeof O.r != "undefined" && (result == O.r)) {
+                        newDiv.innerHTML = "<h3 class='blue'>" + O.label + " : <u>OK</u></h3>";
+                    } else if (typeof O.r == "undefined" && result) {
+                        newDiv.innerHTML = "<h3 class='blue'>" + O.label + " : <u>OK : "+ result +"</u></h3>";
+                    } else {
+                        newDiv.innerHTML = "<h3 class='red'>" + O.label + " : <u>?? " + result + "["+ err_string +"]" + "</u></h3>";
+                    }
+
+                    target.appendChild(newDiv);
+                    setTimeout(function () {
+                        checker(check_list.shift());
+                    }, 10);
                 }
-
-                target.appendChild(newDiv);
-
-                setTimeout(function () {
-                    checker(check_list.shift());
-                }, 100);
             }
             checker(check_list.shift());
         }
