@@ -4,74 +4,14 @@
     <meta charset="UTF-8">
     <title></title>
     <script type="text/javascript" src="../src/ax5.js"></script>
-
     <style type="text/css">
-        ax-tree{
-            font-size: 200px;
-        }
-        .red{
-            background: #ff3300;
-        }
-        #text-box{
-            border: 2px solid;
-            width: 100px; height: 100px;
-            display: inline-block;
-        }
-        #img-box{
-            border: 2px solid;
-            width: 100px; height: 100px;
-            display: inline-block;
-        }
-        .new-class{
-            background: #eee;
-        }
-    </style>
 
+    </style>
 </head>
 <body>
-    <div id="text-box"></div>
-    <div id="img-box"></div>
-    <div></div>
-    <button data-event-test="text-box">Event Test(text)</button>
-    <button data-event-test="remove">Event remove a</button>
-    <button data-event-test="removeb">Event remove b</button>
+
 </body>
 </html>
 <script type="text/javascript">
-    var axd = ax5.dom;
-    /*
-    document.getElementById("text-box").eventHanles = {"A":function(){return "A";}, "B":function(){return "B";}};
-    console.log( document.getElementById("text-box").eventHanles.A );
-    */
-    ax5.dom("#text-box").clazz("add", "new-class");
-
-    window.fna = function(){
-        console.log("fna");
-    };
-    window.fnb = function(){console.log("fnb")};
-    window.fnc = function(){console.log("fnc")};
-
-var mydom = axd("[data-event-test=text-box]"),
-    remove_dom = axd("[data-event-test=remove]");
-    mydom.on("click", window.fna);
-    mydom.on("click", window.fnb);
-    mydom.on("click", window.fnc);
-
-    remove_dom.on("click", function(){
-        mydom.off("click", window.fna);
-        remove_dom.off("click");
-        alert("이벤트 제거");
-    });
-
-    axd("[data-event-test=removeb]").on("click", function() {
-        mydom.off("click");
-    });
-
-/*
-    axd("[data-event-test=text-box]").on("click.fna", window.fna);
-    axd("[data-event-test=text-box]").on("click.fnb", window.fnb);
-    axd("[data-event-test=text-box]").on("click.fnc", window.fnc);
-    axd("[data-event-test=text-box]").off("click.fnb").off("click.fnc");
-*/
 
 </script>

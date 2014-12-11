@@ -2,7 +2,7 @@ html,
 body {
   margin: 0px;
   padding: 0px;
-  font: 12px "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+  font: 13px "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
   background-color: #f4f4f4;
   line-height: 1.5em;
 }
@@ -131,6 +131,9 @@ p {
 .main .page-title {
   display: none;
 }
+.main a {
+  color: #6fafe0;
+}
 .main h1 {
   font-weight: bold;
   font-size: 1.6em;
@@ -142,6 +145,9 @@ p {
   font-weight: normal;
   padding: 0px 0px 0.6em 0px;
   margin: 0.5em 0px 1em 0px;
+}
+.main h2 a {
+  color: #000;
 }
 .main h3 {
   font-weight: bold;
@@ -307,12 +313,19 @@ p {
   padding: 2px 5px;
   text-align: left;
   border-left: 1px solid #d6d6d6;
+  background: #eee;
+}
+.main table.params th.last {
+  padding-right: 50px;
 }
 .main table.params td {
   vertical-align: top;
   padding: 2px 5px;
   padding-right: 10px;
   border-left: 1px solid #d6d6d6;
+}
+.main table.params tr:nth-child(even) td {
+  background: #eee;
 }
 .main table.params .name {
   min-width: 100px;
@@ -332,16 +345,18 @@ p {
 }
 .main table.params .description {
   font-size: 12px;
+  white-space: nowrap;
 }
 .main table.params .description p {
   margin: 0;
+  display: inline;
 }
 .main table.params .optional {
-  float: left;
+  display: inline-block;
   border-radius: 3px;
   background-color: #ddd!important;
   font-size: 0.7em;
-  padding: 2px 4px;
+  padding: 0px 4px;
   margin-right: 5px;
   color: gray;
 }

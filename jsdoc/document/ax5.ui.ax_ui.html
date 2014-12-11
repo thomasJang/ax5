@@ -48,7 +48,7 @@
     
 </head>
 <body>
-<div id="wrap" class="clearfix ax5">
+<div id="wrap" class="clearfix ax5.ui.ax_ui">
     
 <div class="navigation">
     <h3 class="applicationName"><a href="index.html"><i class="axi axi-axisj"></i> ax5.io</a></h3>
@@ -296,7 +296,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="ax5.html">Namespace: ax5</h1>
+        <h1 class="page-title" data-filename="ax5.ui.ax_ui.html">Class: ax_ui</h1>
         
 
 
@@ -305,8 +305,12 @@
     
 <header>
     <h2>
-    ax5
+        <span class="ancestors"><a href="ax5.html">ax5</a><a href="ax5.ui.html">.ui</a>.</span>
+    
+    ax_ui
     </h2>
+    
+        <div class="class-description"><p>ax5 ui class 코어 클래스 모든 클래스의 공통 함수를 가지고 있습니다.</p></div>
     
 </header>  
 
@@ -316,8 +320,238 @@
     
     
         
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="ax_ui">
+            
+            new ax5.ui.ax_ui<span class="signature">()</span>
+        </h4>
+    
         
+        <div class="tag-source">
+            <i class="axi axi-github"></i>
+            <a href="https://github.com/tom-axisj/ax5ax5.js#L1379" target="_blank">
+            ax5.js,
+            line 1379</a>
+        </div>
         
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    <dt class="tag-version">Version:</dt>
+    <dd class="tag-version"><ul class="dummy"><li>v0.0.1</li></ul></dd>
+    
+    
+    
+
+    
+    
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>tom@axisj.com</li>
+        </ul>
+    </dd>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint linenums"><code> var myui = new ax5.ui.ax_ui();</code></pre>
+    
+
+    
+</dd>
+
+    
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="set_config">
+            
+            <span class="type-signature static">static</span>ax5.ui.ax_ui.set_config<span class="signature">(config, <span class="optional">call_init</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.ui.ax_ui.html">ax5.ui.ax_ui</a>}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <i class="axi axi-github"></i>
+            <a href="https://github.com/tom-axisj/ax5ax5.js#L1394" target="_blank">
+            ax5.js,
+            line 1394</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>클래스의 속성 정의 메소드 속성 확장후에 내부에 init 함수를 호출합니다.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                <p>클래스 속성값</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>call_init</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                    true
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>init 함수 호출 여부</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
 <dl class="details">
     
         
@@ -342,42 +576,37 @@
     
 </dl>
 
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+        <h5>Example</h5>
         
-        
+
     
-    </div>
+    <pre class="prettyprint linenums"><code class="lang-js"> var myui = new ax5.ui.ax_ui();
+ myui.set_config({
+    id:&quot;abcd&quot;
+ });</code></pre>
     
+
     
-    
-    
-    
-    
-    
-    
-    
-    
-        <h3 class="subsection-title">Namespaces</h3>
-        
-        <dl>
-            <dt><a href="namespaces.html#ax5.dom"><a href="ax5.dom.html">dom</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#ax5.info"><a href="ax5.info.html">info</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#ax5.ui"><a href="ax5.ui.html">ui</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#ax5.util"><a href="ax5.util.html">util</a></a></dt>
-            <dd></dd>
-        
-            <dt><a href="namespaces.html#ax5.xhr"><a href="ax5.xhr.html">xhr</a></a></dt>
-            <dd></dd>
+</dd>
+
         </dl>
-    
-    
-    
-    
     
     
     
