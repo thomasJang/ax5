@@ -33,10 +33,14 @@
 
     <div id="id-test"></div>
     <a class="class-text"></a>
+
     <span data-attr="A"></span>
     <div data-attr="B"></div>
 
     <script type="text/javascript">
+        /*
+         http://ax5.io/jsdoc/document/index.html 에 좌측메뉴 순서대로 테스트 코드를 작성합니다.
+         */
         var check_list = [
             {
                 label:"ax5.util.clone",
@@ -357,7 +361,7 @@
             }
         ];
 
-        if("체크 실행") {
+        if("API check 시작") {
             var test_t_count = check_list.length;
             var target = document.getElementById("test-result");
             var p_bar = document.getElementById("progress-bar");
