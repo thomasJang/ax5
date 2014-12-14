@@ -191,6 +191,10 @@ argument
 	 * @namespace ax5.info
 	 */
 	ax5.info = info = {
+/**
+ * ax5 version
+ * @member {String} ax5.info.version
+ */
 		version: "0.0.1",
 		base_url: "",
 /**
@@ -915,7 +919,7 @@ argument
  });
 ```
  */
-		// todo : ie 에서 onload 이중 발생.
+		// todo : 이미 로드된 모듈인지 판단하는 구문 추
 		function require(mods, callBack, errorBack){
 			var loadCount = mods.length, loadErrors = [];
 			var head = document.head || document.getElementsByTagName("head")[0];
@@ -1097,7 +1101,6 @@ argument
 	 */
 	// todo : querySelectAll 을 활용한 dom 구현
 	ax5.dom = function(query){
-
 		function eventBind(elem, type, eventHandle){
 			type = U.left(type, ".");
 			if ( elem.addEventListener ) {
@@ -1121,11 +1124,6 @@ argument
 
 		var axdom = (function(){
 			function ax(query){
-/**
- * version of ax5
- * @member {String} version
- */
-				this.version = info.version;
 /**
  * query selected elements
  * @member {Array} ax5.dom.elements
@@ -1362,6 +1360,72 @@ argument
 		})();
 		return new axdom(query);
 	};
+
+	(function(){
+		// jQuery.ready.promise jquery 1.10.2
+/**
+ * document 로드 완료를 체크 합니다.
+ * @method ax5.dom.ready
+ * @param {Function} _fn - 로드완료시 호출함수
+ * @example
+```js
+ var a = 1;
+ setTimeout(function(){
+    ax5.dom.ready(function(){
+        console.log("test" + a);
+        console.log(ax5.util.left("axisj-ax5", "-"));
+    });
+ }, 1000);
+```
+ */
+		function ready( _fn ){
+			if(ax5.dom.is_ready || ax5.dom.is_reading) return;
+			ax5.dom.is_reading = true;
+			promise(function(){
+				if(ax5.dom.is_ready) return;
+				ax5.dom.is_ready = true;
+				_fn();
+			});
+		}
+		function promise(_fn){
+			if ( document.readyState === "complete" ) {
+				setTimeout( _fn );
+			} else if ( document.addEventListener ) {
+				document.addEventListener( "DOMContentLoaded", _fn, false );
+				window.addEventListener( "load", _fn, false );
+			} else {
+				document.attachEvent( "onreadystatechange", _fn );
+				window.attachEvent( "onload", _fn );
+
+				// If IE and not a frame
+				var top = false;
+				try {
+					top = window.frameElement == null && document.documentElement;
+				} catch(e) {}
+
+				if ( top && top.doScroll ) {
+					(function doScrollCheck() {
+						if ( !jQuery.isReady ) {
+							try {
+								// Use the trick by Diego Perini
+								// http://javascript.nwbox.com/IEContentLoaded/
+								top.doScroll("left");
+							} catch(e) {
+								return setTimeout( doScrollCheck, 50 );
+							}
+							// and execute any waiting functions
+							_fn();
+						}
+					})();
+				}
+			}
+		}
+
+		U.extend(ax5.dom, {
+			ready: ready
+		});
+	})();
+
 
 /**
  * Refer to this by {@link ax5}.

@@ -1,17 +1,29 @@
 <!DOCTYPE html>
-<html>
-<head lang="en">
+<html lang="ko">
+<head>
     <meta charset="UTF-8">
     <title></title>
     <script type="text/javascript" src="../src/ax5.js"></script>
-    <style type="text/css">
-
-    </style>
+    <script type="text/javascript" src="ax5-sample.js"></script>
 </head>
 <body>
+    <div class="ax5-sample-view">
+        <h1 class="ax5-h1">ax5</h1>
+        <h5 class="ax5-h5">This is ax5 sample source</h5>
+        <div class="ax5-section">
 
+        </div>
+    </div>
 </body>
 </html>
 <script type="text/javascript">
+var a = 1;
+setTimeout(function(){
+    ax5.dom.ready(function(){
+        console.log("test" + a);
+        console.log(ax5.util.left("axisj-ax5", "-"));
+    });
+}, 1000);
+
 
 </script>

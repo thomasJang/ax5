@@ -10,7 +10,7 @@
 			"outputSourceFiles" : true
 		},
 		"applicationName": "ax5.io",
-		"git_liblink": "https://github.com/tom-axisj/ax5",
+		"git_liblink": "https://github.com/tom-axisj/ax5/tree/master/src/",
 		"disqus": "",
 		"googleAnalytics": "",
 		"openGraph": {
