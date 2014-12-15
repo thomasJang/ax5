@@ -17,6 +17,13 @@
 </body>
 </html>
 <script type="text/javascript">
+
+ax5.util.require(["../src/ax5.js"], function(){
+   alert("ok");
+}, function(){
+    alert("error");
+});
+
 var a = 1;
 setTimeout(function(){
     ax5.dom.ready(function(){

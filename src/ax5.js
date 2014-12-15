@@ -849,6 +849,7 @@ argument
 
  console.log( ax5.util.to_json( ax5.util.url_util() ) );
  {
+    "base_url": "http://ax5:2018",
     "href": "http://ax5:2018/samples/index.html?a=1&b=1#abc",
     "param": "a=1&b=1",
     "referrer": "",
@@ -875,6 +876,7 @@ argument
 				url.hashdata = last(urls);
 			}
 			urls = null;
+			url.base_url = left(url.href, "?").replace(url.pathname, "");
 			return url;
 		}
 /**
@@ -919,11 +921,13 @@ argument
  });
 ```
  */
-		// todo : 이미 로드된 모듈인지 판단하는 구문 추
 		function require(mods, callBack, errorBack){
-			var loadCount = mods.length, loadErrors = [];
-			var head = document.head || document.getElementsByTagName("head")[0];
-			var onloadTimer, onerrorTimer, returned = false;
+			var head = document.head || document.getElementsByTagName("head")[0],
+				isBrowser = !!(typeof window !== 'undefined' && typeof navigator !== 'undefined' && window.document),
+				readyRegExp = isBrowser && navigator.platform === 'PLAYSTATION 3' ? /^complete$/ : /^(complete|loaded)$/;
+			var loadCount = mods.length, loadErrors = [], onloadTimer, onerrorTimer, returned = false;
+			var scripts = ax5.dom("script[src]").elements, styles = ax5.dom("style[href]").elements;
+
 			var onload = function(){
 				if(loadCount < 1 && loadErrors.length == 0 && !returned){
 					if(callBack) callBack({});
@@ -932,6 +936,7 @@ argument
 			};
 			var onerror = function(){
 				if(loadCount < 1 && loadErrors.length > 0 && !returned){
+					console.error(loadErrors);
 					if(errorBack) errorBack({
 						type:"loadFail",
 						list:loadErrors
@@ -942,74 +947,106 @@ argument
 
 			// 로드해야 할 모듈들을 document.head에 삽입하고 로드가 성공여부를 리턴합니다.
 			for(var i=0;i<mods.length;i++){
-				var src = mods[i], type = src.substr(src.lastIndexOf("."));
+				var src = mods[i], type = src.substr(src.lastIndexOf(".")), hasPlugin = false;
 				if(type.substr(0,1) != ".") type = ".js";
 
-				var plugin;
-				if(type == ".js") {
-					plugin = document.createElement("script");
-					plugin.type = "text/javascript";
-					plugin.src = info.base_url + src;
+				if(type === ".js") {
+					for (var s = 0; s < scripts.length; s++) {
+						if (scripts[s].getAttribute("src") === (info.base_url + src)) {
+							hasPlugin = true;
+							break;
+						}
+					}
+				}else if(type === ".css"){
+					for (var s = 0; s < styles.length; s++) {
+						if (styles[s].getAttribute("href") === (info.base_url + src)) {
+							hasPlugin = true;
+							break;
+						}
+					}
 				}
-				else
-				if(type == ".css") {
-					plugin = document.createElement("link");
-					plugin.rel = "stylesheet";
-					plugin.type = "text/css";
-					plugin.href = info.base_url + src;
-				}
-				var plugin_onload = function(){
+
+				//info.base_url + src
+				if(hasPlugin) {
 					loadCount--;
-					if(onloadTimer) clearTimeout(onloadTimer);
-					onloadTimer = setTimeout(onload, 1);
-				};
-
-				var plugin_onerror = function(event){
-					loadCount--;
-					loadErrors.push({
-						type: (event.target.nodeName == "script") ? "js" : "css",
-						src : (event.target.href || event.target.src)
-					});
-					if(onerrorTimer) clearTimeout(onerrorTimer);
-					onerrorTimer = setTimeout(onerror, 1);
-				};
-
-				if (plugin.attachEvent &&
-					//Check if node.attachEvent is artificially added by custom script or
-					//natively supported by browser
-					//read https://github.com/jrburke/requirejs/issues/187
-					//if we can NOT find [native code] then it must NOT natively supported.
-					//in IE8, node.attachEvent does not have toString()
-					//Note the test for "[native code" with no closing brace, see:
-					//https://github.com/jrburke/requirejs/issues/273
-					!(plugin.attachEvent.toString && plugin.attachEvent.toString().indexOf('[native code') < 0))
-				{
-					//Probably IE. IE (at least 6-8) do not fire
-					//script onload right after executing the script, so
-					//we cannot tie the anonymous define call to a name.
-					//However, IE reports the script as being in 'interactive'
-					//readyState at the time of the define call.
-					//useInteractive = true;
-
-					plugin.attachEvent('onreadystatechange', plugin_onload);
-					//It would be great to add an error handler here to catch
-					//404s in IE9+. However, onreadystatechange will fire before
-					//the error handler, so that does not help. If addEventListener
-					//is used, then IE will fire error before load, but we cannot
-					//use that pathway given the connect.microsoft.com issue
-					//mentioned above about not doing the 'script execute,
-					//then fire the script load event listener before execute
-					//next script' that other browsers do.
-					//Best hope: IE10 fixes the issues,
-					//and then destroys all installs of IE 6-9.
-					//node.attachEvent('onerror', context.onScriptError);
+					onload();
 				} else {
-					plugin.addEventListener('load', plugin_onload, false);
-					plugin.addEventListener('error', plugin_onerror, false);
+					var plugin;
+					if(type == ".js") {
+						plugin = document.createElement("script");
+						plugin.type = "text/javascript";
+					}
+					else
+					if(type == ".css") {
+						plugin = document.createElement("link");
+						plugin.rel = "stylesheet";
+						plugin.type = "text/css";
+					}
+
+					var plugin_onload = function(e){
+						if (e.type === 'load' || (readyRegExp.test((e.currentTarget || e.srcElement).readyState))) {
+							loadCount--;
+							if(onloadTimer) clearTimeout(onloadTimer);
+							onloadTimer = setTimeout(onload, 1);
+						}else{
+							loadCount--;
+							loadErrors.push({
+								src : info.base_url + src
+							});
+							if(onerrorTimer) clearTimeout(onerrorTimer);
+							onerrorTimer = setTimeout(onerror, 1);
+						}
+					};
+
+					var plugin_onerror = function(event){
+						loadCount--;
+						loadErrors.push({
+							src : info.base_url + src
+						});
+						if(onerrorTimer) clearTimeout(onerrorTimer);
+						onerrorTimer = setTimeout(onerror, 1);
+					};
+
+					if (plugin.attachEvent &&
+							//Check if node.attachEvent is artificially added by custom script or
+							//natively supported by browser
+							//read https://github.com/jrburke/requirejs/issues/187
+							//if we can NOT find [native code] then it must NOT natively supported.
+							//in IE8, node.attachEvent does not have toString()
+							//Note the test for "[native code" with no closing brace, see:
+							//https://github.com/jrburke/requirejs/issues/273
+						!(plugin.attachEvent.toString && plugin.attachEvent.toString().indexOf('[native code') < 0))
+					{
+						//Probably IE. IE (at least 6-8) do not fire
+						//script onload right after executing the script, so
+						//we cannot tie the anonymous define call to a name.
+						//However, IE reports the script as being in 'interactive'
+						//readyState at the time of the define call.
+						//useInteractive = true;
+
+						plugin.attachEvent('onreadystatechange', plugin_onload);
+						//It would be great to add an error handler here to catch
+						//404s in IE9+. However, onreadystatechange will fire before
+						//the error handler, so that does not help. If addEventListener
+						//is used, then IE will fire error before load, but we cannot
+						//use that pathway given the connect.microsoft.com issue
+						//mentioned above about not doing the 'script execute,
+						//then fire the script load event listener before execute
+						//next script' that other browsers do.
+						//Best hope: IE10 fixes the issues,
+						//and then destroys all installs of IE 6-9.
+						//node.attachEvent('onerror', context.onScriptError);
+					} else {
+						plugin.addEventListener('load', plugin_onload, false);
+						plugin.addEventListener('error', plugin_onerror, false);
+					}
+					if(type == ".js") {
+						plugin.src = info.base_url + src;
+					}else {
+						plugin.href = info.base_url + src;
+					}
+					head.appendChild(plugin);
 				}
-
-
-				head.appendChild(plugin);
 			}
 		}
 /**
