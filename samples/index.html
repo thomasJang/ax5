@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title></title>
     <script type="text/javascript" src="../src/ax5.js"></script>
-    <script type="text/javascript" src="ax5-sample.js"></script>
 </head>
 <body>
     <div class="ax5-sample-view">
@@ -17,7 +16,15 @@
 </body>
 </html>
 <script type="text/javascript">
-var _, $;
+
+    ax5.util.require(["../src/ax5_class_sample.js"], function(){
+       alert("ok");
+    }, function(){
+        alert("err");
+    });
+
+/*
+
 var fnObj = {
     pageStart: function(){
         this.item.init();
@@ -28,8 +35,8 @@ var fnObj = {
         }
     }
 };
-
 ax5.dom.ready(function(){
     fnObj.pageStart();
 });
+*/
 </script>

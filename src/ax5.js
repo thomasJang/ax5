@@ -957,11 +957,12 @@ argument
 			loadCount = mods.length, loadErrors = [], onloadTimer, onerrorTimer, returned = false,
 			scripts = get_elements("script[src]"), styles = get_elements("style[href]"),
 			onload = function(){
-			if(loadCount < 1 && loadErrors.length == 0 && !returned){
-				if(callBack) callBack({});
-				returned = true;
-			}
-			},  onerror = function(){
+				if(loadCount < 1 && loadErrors.length == 0 && !returned){
+					if(callBack) callBack({});
+					returned = true;
+				}
+			},
+			onerror = function(){
 				if(loadCount < 1 && loadErrors.length > 0 && !returned){
 					console.error(loadErrors);
 					if(errorBack) errorBack({
@@ -1002,12 +1003,14 @@ argument
 					if(type == ".js") {
 						plugin = document.createElement("script");
 						plugin.type = "text/javascript";
+						plugin.src = info.base_url + src;
 					}
 					else
 					if(type == ".css") {
 						plugin = document.createElement("link");
 						plugin.rel = "stylesheet";
 						plugin.type = "text/css";
+						plugin.href = info.base_url + src;
 					}
 
 					var plugin_onload = function(e){
@@ -1025,7 +1028,7 @@ argument
 						}
 					};
 
-					var plugin_onerror = function(event){
+					var plugin_onerror = function(e){
 						loadCount--;
 						loadErrors.push({
 							src : info.base_url + src
@@ -1034,45 +1037,29 @@ argument
 						onerrorTimer = setTimeout(onerror, 1);
 					};
 
-					if (plugin.attachEvent &&
-							//Check if node.attachEvent is artificially added by custom script or
-							//natively supported by browser
-							//read https://github.com/jrburke/requirejs/issues/187
-							//if we can NOT find [native code] then it must NOT natively supported.
-							//in IE8, node.attachEvent does not have toString()
-							//Note the test for "[native code" with no closing brace, see:
-							//https://github.com/jrburke/requirejs/issues/273
-						!(plugin.attachEvent.toString && plugin.attachEvent.toString().indexOf('[native code') < 0))
+					if (plugin.attachEvent && !(plugin.attachEvent.toString && plugin.attachEvent.toString().indexOf('[native code') < 0))
 					{
-						//Probably IE. IE (at least 6-8) do not fire
-						//script onload right after executing the script, so
-						//we cannot tie the anonymous define call to a name.
-						//However, IE reports the script as being in 'interactive'
-						//readyState at the time of the define call.
-						//useInteractive = true;
-
-						plugin.attachEvent('onreadystatechange', plugin_onload);
-						//It would be great to add an error handler here to catch
-						//404s in IE9+. However, onreadystatechange will fire before
-						//the error handler, so that does not help. If addEventListener
-						//is used, then IE will fire error before load, but we cannot
-						//use that pathway given the connect.microsoft.com issue
-						//mentioned above about not doing the 'script execute,
-						//then fire the script load event listener before execute
-						//next script' that other browsers do.
-						//Best hope: IE10 fixes the issues,
-						//and then destroys all installs of IE 6-9.
-						//node.attachEvent('onerror', context.onScriptError);
+						var oReq = new XMLHttpRequest();
+						oReq.open("GET", info.base_url + src, false);
+						oReq.onreadystatechange = function(){
+							if (oReq.readyState == 4 /* complete */) {
+								if (oReq.status == 200 || oReq.status == 304) {
+									head.appendChild(plugin);
+									plugin_onload({type:"load"});
+								}
+								else {
+									// error occurred
+									plugin_onerror();
+								}
+							}
+						};
+						oReq.send();
 					} else {
 						plugin.addEventListener('load', plugin_onload, false);
 						plugin.addEventListener('error', plugin_onerror, false);
+						head.appendChild(plugin);
 					}
-					if(type == ".js") {
-						plugin.src = info.base_url + src;
-					}else {
-						plugin.href = info.base_url + src;
-					}
-					head.appendChild(plugin);
+
 				}
 			}
 		}
@@ -1469,7 +1456,7 @@ argument
 
 				if ( top && top.doScroll ) {
 					(function doScrollCheck() {
-						if ( !jQuery.isReady ) {
+						if ( !ax5.dom.is_ready  ) {
 							try {
 								// Use the trick by Diego Perini
 								// http://javascript.nwbox.com/IEContentLoaded/
