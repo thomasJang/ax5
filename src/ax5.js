@@ -257,6 +257,11 @@ argument
 			}
 		})(),
 /**
+ * 브라우저 여부
+ * @member {Boolean} ax5.info.is_browser
+ */
+		is_browser : !!(typeof window !== 'undefined' && typeof navigator !== 'undefined' && window.document),
+/**
  * 브라우저에 따른 마우스 휠 이벤트이름
  * @member {Object} ax5.info.mousewheelevt
  */
@@ -268,7 +273,6 @@ argument
  * @namespace ax5.util
  */
 	ax5['util'] = U = (function(){
-
 		var _toString = Object.prototype.toString;
 /**
  * Object나 Array의 아이템으로 사용자 함수를 호출합니다.
@@ -307,7 +311,6 @@ argument
 			return O;
 		}
 		// In addition to using the http://underscorejs.org : map, reduce, reduce_right, find
-		// todo : map, reduce 등등 구현
 /**
  * 원본 아이템들을 이용하여 사용자 함수의 리턴값으로 이루어진 새로운 배열을 만듭니다.
  * @method ax5.util.map
@@ -882,7 +885,7 @@ argument
 /**
  * CSS Selector를 이용하여 HTML Elements를 찾습니다.
  * @method ax5.util.get_elements
- * @param {String} query - CSS Selector
+ * @param {String|Element} query - CSS Selector
  * @param {Element} [parent_element=document]
  * @returns {Array} elements
  * @example
@@ -893,9 +896,17 @@ argument
  */
 		function get_elements(query, parent_element){
 			var elements, return_elements = [];
-			if(query.substr(0,1) === "#") {
+			if(is_element(query))
+			{
+				return_elements.push( query );
+			}
+			else
+			if(query.substr(0,1) === "#")
+			{
 				return_elements.push( document.getElementById(query.substr(1)) );
-			}else{
+			}
+			else
+			{
 				if(typeof parent_element === "undefined") parent_element = document;
 				elements = parent_element.querySelectorAll(query);
 				for(var i=0;i<elements.length;i++){
@@ -904,7 +915,10 @@ argument
 			}
 			return return_elements;
 		}
-		function create_elements(){
+
+		// todo : create_elements
+		function create_elements(node_nm){
+// div, svg, input
 
 		}
 /**
@@ -921,20 +935,19 @@ argument
  });
 ```
  */
+		// RequireJS 2.1.15 소스코드 참고
 		function require(mods, callBack, errorBack){
-			var head = document.head || document.getElementsByTagName("head")[0],
-				isBrowser = !!(typeof window !== 'undefined' && typeof navigator !== 'undefined' && window.document),
-				readyRegExp = isBrowser && navigator.platform === 'PLAYSTATION 3' ? /^complete$/ : /^(complete|loaded)$/;
-			var loadCount = mods.length, loadErrors = [], onloadTimer, onerrorTimer, returned = false;
-			var scripts = ax5.dom("script[src]").elements, styles = ax5.dom("style[href]").elements;
-
-			var onload = function(){
-				if(loadCount < 1 && loadErrors.length == 0 && !returned){
-					if(callBack) callBack({});
-					returned = true;
-				}
-			};
-			var onerror = function(){
+			var
+			head = document.head || document.getElementsByTagName("head")[0],
+			readyRegExp = info.is_browser && navigator.platform === 'PLAYSTATION 3' ? /^complete$/ : /^(complete|loaded)$/,
+			loadCount = mods.length, loadErrors = [], onloadTimer, onerrorTimer, returned = false,
+			scripts = get_elements("script[src]"), styles = get_elements("style[href]"),
+			onload = function(){
+			if(loadCount < 1 && loadErrors.length == 0 && !returned){
+				if(callBack) callBack({});
+				returned = true;
+			}
+			},  onerror = function(){
 				if(loadCount < 1 && loadErrors.length > 0 && !returned){
 					console.error(loadErrors);
 					if(errorBack) errorBack({
