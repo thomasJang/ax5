@@ -921,8 +921,18 @@ argument
 		}
 
 		// todo : create_elements
-		function create_elements(node_nm){
-// div, svg, input
+		function create_elements(node_nm, attr, val){
+			/*
+			HTML - Use http://www.w3.org/1999/xhtml
+			SVG - Use http://www.w3.org/2000/svg
+			XBL - Use http://www.mozilla.org/xbl
+			XUL - Use http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul
+			document.createElementNS("http://www.w3.org/1999/xhtml","div");
+			document.createElement("div")
+			document.createTextNode(text)
+			*/
+
+
 
 		}
 /**

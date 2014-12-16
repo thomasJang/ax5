@@ -17,20 +17,19 @@
 </body>
 </html>
 <script type="text/javascript">
+var _, $;
+var fnObj = {
+    pageStart: function(){
+        this.item.init();
+    },
+    item: {
+        init: function(){
+            console.log("success");
+        }
+    }
+};
 
-ax5.util.require(["../src/ax5.js"], function(){
-   alert("ok");
-}, function(){
-    alert("error");
+ax5.dom.ready(function(){
+    fnObj.pageStart();
 });
-
-var a = 1;
-setTimeout(function(){
-    ax5.dom.ready(function(){
-        console.log("test" + a);
-        console.log(ax5.util.left("axisj-ax5", "-"));
-    });
-}, 1000);
-
-
 </script>
