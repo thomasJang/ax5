@@ -179,7 +179,7 @@ argument
 	'use strict';
 
 	// root of function
-	var root = this;
+	var root = this, doc = document, win = window;
 
 	/** @namespace {Object} ax5 */
 	var ax5 = {}, info, U, dom, xhr, ui;
@@ -203,18 +203,16 @@ argument
  * @example
  ```
  {
-	KEY_BACKSPACE: 8,
-	KEY_TAB: 9,
-	KEY_RETURN: 13, KEY_ESC: 27, KEY_LEFT: 37, KEY_UP: 38, KEY_RIGHT: 39, KEY_DOWN: 40, KEY_DELETE: 46,
-	KEY_HOME: 36, KEY_END: 35, KEY_PAGEUP: 33, KEY_PAGEDOWN: 34, KEY_INSERT: 45, KEY_SPACE: 32
+	BACKSPACE: 8, TAB: 9,
+	RETURN: 13, ESC: 27, LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40, DELETE: 46,
+	HOME: 36, END: 35, PAGEUP: 33, PAGEDOWN: 34, INSERT: 45, SPACE: 32
  }
  ```
  */
 		event_keys: {
-			KEY_BACKSPACE: 8,
-			KEY_TAB: 9,
-			KEY_RETURN: 13, KEY_ESC: 27, KEY_LEFT: 37, KEY_UP: 38, KEY_RIGHT: 39, KEY_DOWN: 40, KEY_DELETE: 46,
-			KEY_HOME: 36, KEY_END: 35, KEY_PAGEUP: 33, KEY_PAGEDOWN: 34, KEY_INSERT: 45, KEY_SPACE: 32
+			BACKSPACE: 8, TAB: 9,
+			RETURN: 13, ESC: 27, LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40, DELETE: 46,
+			HOME: 36, END: 35, PAGEUP: 33, PAGEDOWN: 34, INSERT: 45, SPACE: 32
 		},
 /**
  * 사용자 브라우저 식별용 오브젝트
@@ -260,7 +258,7 @@ argument
  * 브라우저 여부
  * @member {Boolean} ax5.info.is_browser
  */
-		is_browser : !!(typeof window !== 'undefined' && typeof navigator !== 'undefined' && window.document),
+		is_browser : !!(typeof window !== 'undefined' && typeof navigator !== 'undefined' && win.document),
 /**
  * 브라우저에 따른 마우스 휠 이벤트이름
  * @member {Object} ax5.info.mousewheelevt
@@ -802,7 +800,7 @@ argument
 ```
  */
 		function set_cookie(cname, cvalue, exdays){
-			document.cookie = cname + "=" + escape(cvalue) + "; path=/;" + (function(){
+			doc.cookie = cname + "=" + escape(cvalue) + "; path=/;" + (function(){
 				if(typeof exdays != "undefined"){
 					var d = new Date();
 					d.setTime(d.getTime() + (exdays*24*60*60*1000));
@@ -824,7 +822,7 @@ argument
  */
 		function get_cookie(cname){
 			var name = cname + "=";
-			var ca = document.cookie.split(';');
+			var ca = doc.cookie.split(';');
 			for(var i=0; i<ca.length; i++) {
 				var c = ca[i];
 				while (c.charAt(0)==' ') c = c.substring(1);
@@ -844,7 +842,7 @@ argument
 ```
  */
 		function alert(O){
-			window.alert( to_json(O) );
+			win.alert( to_json(O) );
 			return O;
 		}
 /**
@@ -870,12 +868,12 @@ argument
  */
 		function url_util() {
 			var url = {
-				href: window.location.href,
-				param: window.location.search,
-				referrer: document.referrer,
-				pathname: window.location.pathname,
-				hostname: window.location.hostname,
-				port: window.location.port
+				href: win.location.href,
+				param: win.location.search,
+				referrer: doc.referrer,
+				pathname: win.location.pathname,
+				hostname: win.location.hostname,
+				port: win.location.port
 			}, urls = url.href.split(/[\?#]/);
 			url.param = url.param.replace("?", "");
 			url.url = urls[0];
@@ -907,11 +905,11 @@ argument
 			else
 			if(query.substr(0,1) === "#")
 			{
-				return_elements.push( document.getElementById(query.substr(1)) );
+				return_elements.push( doc.getElementById(query.substr(1)) );
 			}
 			else
 			{
-				if(typeof parent_element === "undefined") parent_element = document;
+				if(typeof parent_element === "undefined" || (info.browser.name == "ie" && info.browser.version < 8)) parent_element = doc;
 				elements = parent_element.querySelectorAll(query);
 				for(var i=0;i<elements.length;i++){
 					return_elements.push( elements[i] );
@@ -941,7 +939,7 @@ argument
 			document.createTextNode(text)
 			*/
 
-			var element = document.createElement(node_nm);
+			var element = doc.createElement(node_nm);
 			each(attr, function(k, v){
 				element[k] = v;
 			});
@@ -965,7 +963,7 @@ argument
 		// RequireJS 2.1.15 소스코드 참고
 		function require(mods, callBack, errorBack){
 			var
-			head = document.head || document.getElementsByTagName("head")[0],
+			head = doc.head || doc.getElementsByTagName("head")[0],
 			readyRegExp = info.is_browser && navigator.platform === 'PLAYSTATION 3' ? /^complete$/ : /^(complete|loaded)$/,
 			loadCount = mods.length, loadErrors = [], onloadTimer, onerrorTimer, returned = false,
 			scripts = get_elements("script[src]"), styles = get_elements("style[href]"),
@@ -986,26 +984,16 @@ argument
 				}
 			};
 
-			// 로드해야 할 모듈들을 document.head에 삽입하고 로드가 성공여부를 리턴합니다.
+			// 로드해야 할 모듈들을 doc.head에 삽입하고 로드가 성공여부를 리턴합니다.
 			for(var i=0;i<mods.length;i++){
 				var src = mods[i], type = right(src, "."), hasPlugin = false,
-					plugin, plugin_src = info.base_url + src;
-
-				if(type === "js") {
+					plugin, plugin_src = info.base_url + src, attr_nm = (type === "js") ? "src" : "href";
 					for (var s = 0; s < scripts.length; s++) {
-						if (scripts[s].getAttribute("src") === plugin_src) {
+						if (scripts[s].getAttribute(attr_nm) === plugin_src) {
 							hasPlugin = true;
 							break;
 						}
 					}
-				}else if(type === "css"){
-					for (var s = 0; s < styles.length; s++) {
-						if (styles[s].getAttribute("href") === plugin_src) {
-							hasPlugin = true;
-							break;
-						}
-					}
-				}
 
 				//info.base_url + src
 				if(hasPlugin) {
@@ -1034,8 +1022,11 @@ argument
 							onerrorTimer = setTimeout(onerror, 1);
 						};
 
-					if (plugin.attachEvent && !(plugin.attachEvent.toString && plugin.attachEvent.toString().indexOf('[native code') < 0))
-					{
+					if (plugin.addEventListener){
+						plugin.addEventListener('load', plugin_onload, false);
+						plugin.addEventListener('error', plugin_onerror, false);
+						head.appendChild(plugin);
+					}else{
 						var oReq = new XMLHttpRequest();
 						oReq.open("GET", plugin_src, false);
 						oReq.onreadystatechange = function(){
@@ -1051,12 +1042,16 @@ argument
 							}
 						};
 						oReq.send();
-					} else {
-						plugin.addEventListener('load', plugin_onload, false);
-						plugin.addEventListener('error', plugin_onerror, false);
-						head.appendChild(plugin);
 					}
 
+					/*
+					if (plugin.attachEvent && !(plugin.attachEvent.toString && plugin.attachEvent.toString().indexOf('[native code') < 0))
+					{
+
+					} else {
+
+					}
+*/
 				}
 			}
 		}
@@ -1436,19 +1431,19 @@ argument
 			});
 		}
 		function promise(_fn){
-			if ( document.readyState === "complete" ) {
+			if ( doc.readyState === "complete" ) {
 				setTimeout( _fn );
-			} else if ( document.addEventListener ) {
-				document.addEventListener( "DOMContentLoaded", _fn, false );
-				window.addEventListener( "load", _fn, false );
+			} else if ( doc.addEventListener ) {
+				doc.addEventListener( "DOMContentLoaded", _fn, false );
+				win.addEventListener( "load", _fn, false );
 			} else {
-				document.attachEvent( "onreadystatechange", _fn );
-				window.attachEvent( "onload", _fn );
+				doc.attachEvent( "onreadystatechange", _fn );
+				win.attachEvent( "onload", _fn );
 
 				// If IE and not a frame
 				var top = false;
 				try {
-					top = window.frameElement == null && document.documentElement;
+					top = win.frameElement == null && doc.documentElement;
 				} catch(e) {}
 
 				if ( top && top.doScroll ) {
