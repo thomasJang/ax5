@@ -26,9 +26,9 @@
 
 </head>
 <body>
-    <div id="progress"><div id="progress-bar"></div></div>
+    <div id="progress" class="progress"><div id="progress-bar" class="progress-bar"></div></div>
     <h1>AX5 API Check</h1>
-    <div id="test-result"></div>
+    <div id="test-result" class="test-result"></div>
     <p>tom@axisj.com - 2014-12-11</p>
 
     <div id="id-test"></div>
@@ -39,11 +39,17 @@
 
     <script type="text/javascript">
         /*
-         http://ax5.io/jsdoc/document/index.html 에 좌측메뉴 순서대로 테스트 코드를 작성합니다.
+         http://ax5.io/jsdoc/document/index.html 에 좌측메뉴 순서대로 테스트 코드를 작성을 기준으로 하지만 짝이 있는 함수일 경우 같이 작성 합니다.
          */
         var check_list = [
             {
-                label:"ax5.util.clone",
+                label:"ax5.util.alert",
+                fn: function(){
+                    return (function A(){ return typeof ax5.util.alert; })();
+                }
+            },
+            {
+                label:"ax5.util.clone(object)",
                 fn: function(){
                     var obja = {a:1};
                     var objb = ax5.util.clone( obja );
@@ -53,14 +59,24 @@
                 r: 1
             },
             {
+                label:"ax5.util.clone(string)",
+                fn: function(){
+                    var str_a = "string A";
+                    var str_b = ax5.util.clone( str_a );
+                    str_a = "string AA";
+                    return str_b;
+                },
+                r: "string A"
+            },
+            {
                 label:"ax5.util.each",
                 fn: function(){
                     var result = "";
-                    ax5.util.each([0,1,2], function(){
+                    ax5.util.each([0, 1, 2], function(){
                         // with this
                         result+= this;
                     });
-                    ax5.util.each({a:1,b:"2",c:function(){}}, function(k, v){
+                    ax5.util.each({a:1, b:"2", c:function(){}}, function(k, v){
                         // with this
                         result+= k;
                     });
@@ -75,16 +91,59 @@
                 }
             },
             {
-                label:"ax5.util.extend",
+                label:"ax5.util.error(msg)",
                 fn: function(){
-                    var obja = {a:1};
-                    ax5.util.extend(obja, {b:2});
-                    return obja.b;
+                    return (function A(){ return typeof ax5.util.error; })();
+                }
+            },
+
+            {
+                label:"ax5.util.extend : add key",
+                fn: function(){
+                    var origin_obj = {a:1};
+                    ax5.util.extend(origin_obj, {b:2});
+                    return origin_obj.b;
                 },
                 r: 2
             },
             {
-                label:"ax5.util.filter",
+                label:"ax5.util.extend : overwrite_true",
+                fn: function(){
+                    var origin_obj = {a:1};
+                    ax5.util.extend(origin_obj, {a:"overwrite value"}, true);
+                    return origin_obj.a;
+                },
+                r: "overwrite value"
+            },
+            {
+                label:"ax5.util.extend : overwrite_false",
+                fn: function(){
+                    var origin_obj = {a:1};
+                    ax5.util.extend(origin_obj, {a:"overwrite value"});
+                    return origin_obj.a;
+                },
+                r: 1
+            },
+            {
+                label:"ax5.util.extend : add keys, overwrite_false",
+                fn: function(){
+                    var origin_obj = {a:1};
+                    ax5.util.extend(origin_obj, {a:"key1value", b:"key2value" });
+                    return origin_obj.a +"_"+ origin_obj.b;
+                },
+                r: "1_key2value"
+            },
+            {
+                label:"ax5.util.extend : add keys, overwrite_true",
+                fn: function(){
+                    var origin_obj = {a:1};
+                    ax5.util.extend(origin_obj, {a:"key1value", b:"key2value" }, true);
+                    return origin_obj.a +"_"+ origin_obj.b;
+                },
+                r: "key1value_key2value"
+            },
+            {
+                label:"ax5.util.filter : array",
                 fn: function(){
                     var aarray = [5,4,3,2,1];
                     result = ax5.util.filter( aarray, function(){
@@ -95,7 +154,19 @@
                 r: "531"
             },
             {
-                label:"ax5.util.first",
+                label:"ax5.util.filter : object",
+                fn: function(){
+                    var filObject = {a:1, s:"string", oa:{pickup:true, name:"AXISJ"}, os:{pickup:true, name:"AX5"}};
+                    result = ax5.util.filter( filObject, function(){
+                        return this.pickup;
+                    });
+
+                    return result[1].name;
+                },
+                r: "AX5"
+            },
+            {
+                label:"ax5.util.first(array)",
                 fn: function(){
                     var aarray = [5,4,3,2,1];
                     return ax5.util.first(aarray);
@@ -103,12 +174,32 @@
                 r: 5
             },
             {
-                label:"ax5.util.last",
+                label:"ax5.util.first(object)",
+                fn: function(){
+                    var aarray = {a:11, b:22, c:33, d:44};
+                    var result = ax5.util.first(aarray);
+
+                    return result[Object.keys(result)[0]];
+                },
+                r: 11
+            },
+            {
+                label:"ax5.util.last(array)",
                 fn: function(){
                     var aarray = [5,4,3,2,1];
                     return ax5.util.last(aarray);
                 },
                 r: 1
+            },
+            {
+                label:"ax5.util.last(object)",
+                fn: function(){
+                    var aarray = {a:11, b:22, c:33, d:44}
+                    var result = ax5.util.last(aarray);
+
+                    return result[Object.keys(result)[0]];
+                },
+                r: 44
             },
             {
                 label:"ax5.util.set_cookie, ax5.util.get_cookie",
@@ -119,11 +210,61 @@
                 r: "AX5"
             },
             {
-                label:"ax5.util.get_elements",
+                label:"ax5.util.get_elements : id",
                 fn: function(){
                     return ax5.util.get_elements("#test-result");
                 }
             },
+            {
+                label:"ax5.util.get_elements : class",
+                fn: function(){
+                    return ax5.util.get_elements(".test-result");
+                }
+            },
+            {
+                label:"ax5.util.get_elements : tagName#id",
+                fn: function(){
+                    return ax5.util.get_elements("div#test-result");
+                }
+            },
+            {
+                label:"ax5.util.get_elements : tagName.class",
+                fn: function(){
+                    return ax5.util.get_elements("div.test-result");
+                }
+            },
+            {
+                label:"ax5.util.get_elements : tagName#id #id ",
+                fn: function(){
+                    return ax5.util.get_elements("div#progress #progress-bar");
+                }
+            },
+            {
+                label:"ax5.util.get_elements : tagName.class .class ",
+                fn: function(){
+                    return ax5.util.get_elements("div.progress .progress-bar");
+                }
+            },
+            {
+                label:"ax5.util.get_elements : tagName#id .class ",
+                fn: function(){
+                    return ax5.util.get_elements("div#progress .progress-bar");
+                }
+            },
+            {
+                label:"ax5.util.get_elements : tagName.class #id",
+                fn: function(){
+                    return ax5.util.get_elements("div.progress #progress-bar");
+                }
+            },
+
+            {
+                label:"ax5.util.get_elements(selecter, parent_element)",
+                fn: function(){
+                    return ax5.util.get_elements("div:first-child", document.querySelector('#test-result') );
+                }
+            },
+
             {
                 label:"ax5.util.get_type",
                 fn: function(){
@@ -203,7 +344,7 @@
                 r: "123isj"
             },
             {
-                label: "ax5.util.map",
+                label: "ax5.util.map(array)",
                 fn   : function () {
                     var ra = ax5.util.map(["a", "b", "c"], function () {
                         return this + "1";
@@ -211,6 +352,22 @@
                     return ra.join('');
                 },
                 r    : "a1b1c1"
+            },
+            {
+                label: "ax5.util.map(object)",
+                fn   : function () {
+                        var myObj = {a: 1, b: "2", c: {axj: "what", arrs: [0,2,"3"]},
+                            fn: function(abcdd){
+                                return abcdd;
+                            }
+                        };
+
+                        var ra = ax5.util.map(myObj, function (k, v) {
+                            return v * 2;
+                        });
+                    return ra.join('');
+                },
+                r    : "24NaNNaN"
             },
             {
                 label: "ax5.util.reduce",
@@ -233,6 +390,15 @@
                 r    : -13
             },
             {
+                label: "ax5.util.require",
+                fn   : function (callBack) {
+                    ax5.util.require(["src/ax5_class_sample.js"], function(){
+                        callBack(true);
+                    });
+                },
+                r    : "ready-response"
+            },
+            {
                 label: "ax5.util.search",
                 fn   : function () {
                     var myArray = [0,1,2,3,4,5,6];
@@ -251,7 +417,7 @@
                 r    : "4c"
             },
             {
-                label: "ax5.util.to_json",
+                label: "ax5.util.to_json(object)",
                 fn   : function () {
                     var o = {
                         a: 1, b: "1", c: {
@@ -264,14 +430,22 @@
                 r    : "{\"a\": 1, \"b\": \"1\", \"c\": {\"ca\": 1, \"cb\": \"{Function}\"}, \"d\": [\"ab\",\"ac\",1,{\"name\": \"12\", \"key\": \"11\"}]}"
             },
             {
-                label: "ax5.util.require",
-                fn   : function (callBack) {
-                    ax5.util.require(["src/ax5_class_sample.js"], function(){
-                        callBack(true);
-                    });
+                label: "ax5.util.to_json(array)",
+                fn   : function () {
+                    var a = ["aa", 2, "ccc", 4];
+                    return ax5.util.to_json(a);
                 },
-                r    : "ready-response"
+                r    : "[\"aa\",2,\"ccc\",4]"
             },
+            {
+                label: "ax5.util.to_json(object array)",
+                fn   : function () {
+                    var a = [ {name: "groovedk", status: "hungry"},{name: "root", status: "starving"}, "something" ];
+                    return ax5.util.to_json(a);
+                },
+                r    : "[{\"name\": \"groovedk\", \"status\": \"hungry\"},{\"name\": \"root\", \"status\": \"starving\"},\"something\"]"
+            },
+
             {
                 label: "ax5.util.url_util",
                 fn   : function () {

@@ -638,7 +638,11 @@ argument
  * @returns {String} element|object|array|function|string|number|undefined
  * @example
  ```js
-
+ var axf = ax5.util;
+ var a = 11;
+ var b = "11";
+ console.log( axf.get_type(a) );
+ console.log( axf.get_type(b) );
  ```
  */
 		function get_type(O){
