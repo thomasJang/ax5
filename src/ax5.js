@@ -636,7 +636,7 @@ argument
  * 인자의 타입을 반환합니다.
  * @method ax5.util.get_type
  * @param {Object|Array|String|Number|Element|Etc} O
- * @returns {String} element|object|array|function|string|number|undefined
+ * @returns {String} element|object|array|function|string|number|undefined|nodelist
  * @example
  ```js
  var axf = ax5.util;
@@ -670,6 +670,10 @@ argument
 			else
 			if(_toString.call(O) == "[object Number]") {
 				typeName = "number";
+			}
+			else
+			if(_toString.call(O) == "[object NodeList]") {
+				typeName = "nodelist";
 			}
 			else
 			if(typeof O === "function") {
@@ -720,6 +724,13 @@ argument
  */
 		function is_number(O) { return _toString.call(O) == "[object Number]"; }
 /**
+ * 오브젝트가 NodeList인지 판단합니다.
+ * @method ax5.util.is_nodelist
+ * @param {Object} O
+ * @returns {Boolean}
+ */
+		function is_nodelist(O) { return _toString.call(O) == "[object NodeList]"; }
+/**
  * 오브젝트가 undefined인지 판단합니다.
  * @method ax5.util.is_undefined
  * @param {Object} O
@@ -733,6 +744,10 @@ argument
  * @returns {Boolean}
  */
 		function is_nothing(O) { return (typeof O === "undefined" || O === null || O === ""); }
+
+
+
+
 /**
  * 오브젝트의 첫번째 아이템을 반환합니다.
  * @method ax5.util.first
@@ -887,8 +902,8 @@ argument
 /**
  * CSS Selector를 이용하여 HTML Elements를 찾습니다.
  * @method ax5.util.get_elements
- * @param {String|Element} query - CSS Selector
- * @param {Element} [parent_element=document]
+ * @param {String|Element} query - CSS Selector | Element
+ * @param {String} sub_query - CSS Selector
  * @returns {Array} elements
  * @example
 ```js
@@ -896,26 +911,59 @@ argument
  ax5.util.get_elements("input[type='text']");
 ```
  */
-		function get_elements(query, parent_element){
-			var elements, return_elements = [];
+		function get_elements(query, sub_query){
+			var elements, return_elements = [], parent_element;
+
+			//console.log(query.toString());
+
 			if(is_element(query))
 			{
 				return_elements.push( query );
 			}
 			else
-			if(query.substr(0,1) === "#")
+			if(is_array(query) || is_nodelist(query)){
+				for(var i=0;i<query.length;i++) {
+					if(is_element(query[i])) return_elements.push( query[i] );
+				}
+			}
+			else
+			if(is_string(query) && query.substr(0,1) === "#")
 			{
 				return_elements.push( doc.getElementById(query.substr(1)) );
 			}
 			else
 			{
-				if(typeof parent_element === "undefined" || (info.browser.name == "ie" && info.browser.version < 8)) parent_element = doc;
-				elements = parent_element.querySelectorAll(query);
+				elements = doc.querySelectorAll(query);
 				for(var i=0;i<elements.length;i++){
 					return_elements.push( elements[i] );
 				}
 			}
+
+			if(typeof sub_query != "undefined") {
+				parent_element = (info.browser.name == "ie" && info.browser.version < 8) ? doc : return_elements[0];
+				return_elements = [];
+				elements = parent_element.querySelectorAll(sub_query);
+				for(var i=0;i<elements.length;i++){
+					return_elements.push( elements[i] );
+				}
+			}
+
 			return return_elements;
+		}
+/**
+ * CSS Selector를 이용하여 HTML Element를 찾습니다.
+ * @method ax5.util.get_element
+ * @param {String|Element} query - CSS Selector | Element
+ * @param {String} sub_query - CSS Selector
+ * @returns {Element} element
+ * @example
+ ```js
+ ax5.util.get_element("#element01");
+ ax5.util.get_element("input[type='text']");
+```
+ */
+		function get_element(query, sub_query){
+			return get_elements(query, sub_query)[0];
 		}
 /**
  * createElement 구문을 효과적으로 수행합니다.
@@ -1104,7 +1152,7 @@ argument
 			}
 		}
 /**
- * 타겟엘리먼트의 부모 엘리멘트에서 원하는 조건의 엘리먼트를 얻습니다.
+ * 타겟엘리먼트의 부모 엘리멘트 트리에서 원하는 조건의 엘리먼트를 얻습니다.
  * @method ax5.util.get_event_target
  * @param {Element} target - target element
  * @param {Object} cond - 원하는 element를 찾을 조건
@@ -1165,6 +1213,40 @@ argument
 			}
 			return _target;
 		}
+/**
+ * Elements에 CSS속성을 읽고 씁니다.
+ * @method 
+ * @param {Array} elements - 대상의 엘리먼트 리스트 혹은 엘리먼트
+ * @param {Object|Array|String} CSS
+ * @returns {String|Object|true}
+ * @example
+```js
+ ax5.util.set_css(ax5.util.get_elements("#abcd"), {"color":"#ff3300"});
+```
+ */
+		function set_css(elements, O){
+			if(!is_array(elements) || !is_nodelist(elements)) elements = [elements];
+			if( is_string(O) ) {
+				return elements[0].style[O];
+			}
+			else
+			if( is_array(O)  ) {
+				var css = {};
+				for(var i=0;i<O.length;i++){
+					css[O[i]] = elements[0].style[O[i]];
+				}
+				return css;
+			}
+			else
+			{
+				for(var di=0;di<elements.length;di++) {
+					for (var k in O) {
+						elements[di].style[k] = O[k];
+					}
+				}
+			}
+			return true;
+		}
 
 		return {
 			each            : each,
@@ -1184,6 +1266,7 @@ argument
 			is_function     : is_function,
 			is_string       : is_string,
 			is_number       : is_number,
+			is_nodelist     : is_nodelist,
 			is_undefined    : is_undefined,
 			is_nothing      : is_nothing,
 			first           : first,
@@ -1193,11 +1276,13 @@ argument
 			alert           : alert,
 			url_util        : url_util,
 			get_elements    : get_elements,
+			get_element     : get_element,
 			create_elements : create_elements,
 			require         : require,
 			left            : left,
 			right           : right,
-			get_event_target: get_event_target
+			get_event_target: get_event_target,
+			set_css         : set_css
 		}
 	})();
 
@@ -1255,27 +1340,10 @@ argument
 ```
  */
 				this.css = function(O){
-					if( U.is_string( O ) ) {
-						return this.elements[0].style[O];
-					}
-					else
-					if( U.is_array( O ) ) {
-						var css = {};
-						for(var i=0;i<O.length;i++){
-							css[O[i]] = this.elements[0].style[O[i]];
-						}
-						return css;
-					}
-					else
-					{
-						for(var di=0;di<this.elements.length;di++) {
-							for (var k in O) {
-								this.elements[di].style[k] = O[k];
-							}
-						}
-					}
-					return this;
+					var rs = U.set_css(this.elements, O);
+					return (rs === true) ? this : rs;
 				};
+				// todo : clazz, on, off, attr > util로 이전
 /**
  * elements에 className 를 추가, 제거, 확인, 토글합니다.
  * @method ax5.dom.clazz
@@ -1461,6 +1529,20 @@ argument
 					}
 					return this;
 				};
+/**
+ * element의 attribute를 추가 삭제 가져오기 합니다.
+ * @method ax5.dom.find
+ * @param {String} query - selector query
+ * @returns {ax5.dom}
+ * @example
+ ```js
+
+ ```
+ */
+				this.find = function(query){
+					this.elements = U.get_elements(this.elements[0], query);
+					return this;
+				}
 			}
 			return ax;
 		})();

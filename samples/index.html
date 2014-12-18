@@ -12,16 +12,27 @@
         <div class="ax5-section">
 
         </div>
+
+        <div id="test-result">
+            <div></div>
+        </div>
     </div>
 </body>
 </html>
 <script type="text/javascript">
 
+    //ax5.dom(".ax5-h5").css({color:"#ff3300"});
+
+    //ax5.util.set_css( ax5.util.get_elements(".ax5-h5"), {color:"#ff3300"} );
+
+    ax5.util.get_elements(document.querySelectorAll('#test-result'), "div:first-child");
+    /*
     ax5.util.require(["../src/ax5_class_sample.js"], function(){
        alert("ok");
     }, function(){
         alert("err");
     });
+    */
 
 /*
 

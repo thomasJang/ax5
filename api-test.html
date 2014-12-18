@@ -260,9 +260,10 @@
             },
 
             {
-                label:"ax5.util.get_elements(selecter, parent_element)",
+                label:"ax5.util.get_elements(parent_element, selector)",
                 fn: function(){
-                    return ax5.util.get_elements("div:first-child", document.querySelector('#test-result') );
+                    //return ax5.util.get_elements(ax5.util.get_element('#test-result'), "div:first-child");
+                    return ax5.util.get_elements(document.querySelectorAll('#test-result'), "div:first-child");
                 }
             },
 
