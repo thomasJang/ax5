@@ -1103,38 +1103,93 @@ argument
 				return "";
 			}
 		}
+/**
+ * 타겟엘리먼트의 부모 엘리멘트에서 원하는 조건의 엘리먼트를 얻습니다.
+ * @method ax5.util.get_event_target
+ * @param {Element} target - target element
+ * @param {Object} cond - 원하는 element를 찾을 조건
+ * @returns {Element}
+ * @example
+ ```js
+ console.log(ax5.util.get_event_target(e.target, {tagname:"a"}));
+ ```
+ */
+		function get_event_target(target, cond){
+			var _target = target;
+			if (_target) {
+				while ((function(){
+					var result = true;
+					for(k in cond){
+						if(k === "tagname"){;
+							if(_target.tagName.lcase() != cond[k]) {
+								result = false;
+								break;
+							}
+						}
+						else
+						if(k === "clazz"){
+							var klasss = _target.className.split(/ /g);
+							var hasClass = false;
+							for(var a=0;a<klasss.length;a++){
+								if(klasss[a] == cond[k]){
+									hasClass = true;
+									break;
+								}
+							}
+							result = hasClass;
+						}
+						else
+						{ // 그외 속성값들.
+							if(_target.getAttribute(k) != cond[k]) {
+								result = false;
+								break;
+							}
+						}
+					}
+					return !result;
+				})()) {
+					if (_target.parentNode) {
+						_target = _target.parentNode;
+					} else {
+						_target = false; break;
+					}
+				}
+			}
+			return _target;
+		}
 
 		return {
-			each           : each,
-			map            : map,
-			search         : search,
-			reduce         : reduce,
-			reduce_right   : reduce_right,
-			filter         : filter,
-			error          : error,
-			to_json        : to_json,
-			extend         : extend,
-			clone          : clone,
-			get_type       : get_type,
-			is_element     : is_element,
-			is_object      : is_object,
-			is_array       : is_array,
-			is_function    : is_function,
-			is_string      : is_string,
-			is_number      : is_number,
-			is_undefined   : is_undefined,
-			is_nothing     : is_nothing,
-			first          : first,
-			last           : last,
-			set_cookie     : set_cookie,
-			get_cookie     : get_cookie,
-			alert          : alert,
-			url_util       : url_util,
-			get_elements   : get_elements,
-			create_elements: create_elements,
-			require        : require,
-			left           : left,
-			right          : right
+			each            : each,
+			map             : map,
+			search          : search,
+			reduce          : reduce,
+			reduce_right    : reduce_right,
+			filter          : filter,
+			error           : error,
+			to_json         : to_json,
+			extend          : extend,
+			clone           : clone,
+			get_type        : get_type,
+			is_element      : is_element,
+			is_object       : is_object,
+			is_array        : is_array,
+			is_function     : is_function,
+			is_string       : is_string,
+			is_number       : is_number,
+			is_undefined    : is_undefined,
+			is_nothing      : is_nothing,
+			first           : first,
+			last            : last,
+			set_cookie      : set_cookie,
+			get_cookie      : get_cookie,
+			alert           : alert,
+			url_util        : url_util,
+			get_elements    : get_elements,
+			create_elements : create_elements,
+			require         : require,
+			left            : left,
+			right           : right,
+			get_event_target: get_event_target
 		}
 	})();
 
