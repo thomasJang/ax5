@@ -1119,8 +1119,8 @@ argument
 			if (_target) {
 				while ((function(){
 					var result = true;
-					for(k in cond){
-						if(k === "tagname"){;
+					for(var k in cond){
+						if(k === "tagname"){
 							if(_target.tagName.lcase() != cond[k]) {
 								result = false;
 								break;
