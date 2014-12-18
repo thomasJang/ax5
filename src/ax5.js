@@ -1111,7 +1111,15 @@ argument
  * @returns {Element}
  * @example
  ```js
- console.log(ax5.util.get_event_target(e.target, {tagname:"a"}));
+ // cond 속성정의
+ var cond = {
+    tagname: {String} - 태그명 (ex. a, div, span..),
+    clazz: {String} - 클래스명
+    [, 그 외 찾고 싶은 attribute명들]
+ };
+ console.log(
+    ax5.util.get_event_target(e.target, {tagname:"a", clazz:"ax-menu-handel", "data-custom-attr":"attr_value"})
+ );
  ```
  */
 		function get_event_target(target, cond){
