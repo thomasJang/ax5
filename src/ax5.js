@@ -1225,7 +1225,7 @@ argument
 ```
  */
 		function set_css(elements, O){
-			if(!is_array(elements) || !is_nodelist(elements)) elements = [elements];
+			if(!is_array(elements) && !is_nodelist(elements)) elements = [elements];
 			if( is_string(O) ) {
 				return elements[0].style[O];
 			}
