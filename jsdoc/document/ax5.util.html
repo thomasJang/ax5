@@ -195,6 +195,10 @@
             
                 <li data-name="ax5.util.alert"><a href="ax5.util.html#alert">alert</a></li>
             
+                <li data-name="ax5.util.attr"><a href="ax5.util.html#attr">attr</a></li>
+            
+                <li data-name="ax5.util.clazz"><a href="ax5.util.html#clazz">clazz</a></li>
+            
                 <li data-name="ax5.util.clone"><a href="ax5.util.html#clone">clone</a></li>
             
                 <li data-name="ax5.util.create_elements"><a href="ax5.util.html#create_elements">create_elements</a></li>
@@ -394,9 +398,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L848" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L844" target="_blank">
             ax5.js,
-            line 848</a>
+            line 844</a>
         </div>
         
     </div>
@@ -519,6 +523,448 @@
     
     <pre class="prettyprint linenums"><code class="lang-js"> ax5.util.alert({a:1,b:2});
  ax5.util.alert(&quot;정말?&quot;);</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="attr">
+            
+            <span class="type-signature static">static</span>ax5.util.attr<span class="signature">(elements, <span class="optional">command</span>, O)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{String}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <i class="axi axi-github"></i>
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1302" target="_blank">
+            ax5.js,
+            line 1302</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>elements에 attribute를 추가, 제거, 확인 합니다.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>elements</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                <p>대상의 엘리먼트 리스트 혹은 엘리먼트</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>command</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+|
+
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                    get
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>명령어</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>O</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                <p>json타입또는 문자열</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+<h5>Returns:</h5>
+- &quot;this&quot; 또는 클래스이름
+<br />
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint linenums"><code class="lang-js"> ax5.util.attr(ax5.dom(&quot;[data-ax-grid=A]&quot;), &quot;set&quot;, {&quot;data-ax-spt&quot;:&quot;ABCD&quot;}); // set attribute
+ ax5.util.attr(ax5.dom(&quot;[data-ax-grid=A]&quot;), {&quot;data-ax-spt&quot;:&quot;9999&quot;, &quot;data-next&quot;:&quot;next&quot;}); // set attribute
+ ax5.util.attr(ax5.dom(&quot;[data-ax-grid=A]&quot;), &quot;remove&quot;, &quot;data-next&quot;);</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="clazz">
+            
+            <span class="type-signature static">static</span>ax5.util.clazz<span class="signature">(elements, <span class="optional">command</span>, O)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{String}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <i class="axi axi-github"></i>
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1245" target="_blank">
+            ax5.js,
+            line 1245</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>elements에 className 를 추가, 제거, 확인, 토글합니다.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>elements</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                <p>대상의 엘리먼트 리스트 혹은 엘리먼트</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>command</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                    has
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>add,remove,toggle,has</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>O</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                <p>클래스명</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+<h5>Returns:</h5>
+- &quot;this&quot; 또는 클래스이름
+<br />
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint linenums"><code class="lang-js"> ax5.util.set_class(ax5.util.get_elements(&quot;#abcd&quot;), &quot;class-text&quot;); // has 와 동일
+ ax5.util.set_class(ax5.util.get_elements(&quot;#abcd&quot;), &quot;add&quot;, &quot;class-text&quot;);
+ ax5.util.set_class(ax5.util.get_elements(&quot;#abcd&quot;), &quot;remove&quot;, &quot;class-text&quot;);
+ ax5.util.set_class(ax5.util.get_elements(&quot;#abcd&quot;), &quot;has&quot;, &quot;class-text&quot;);
+ ax5.util.set_class(ax5.util.get_elements(&quot;#abcd&quot;), &quot;toggle&quot;, &quot;class-text&quot;);</code></pre>
     
 
     
@@ -677,9 +1123,9 @@ Object
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L968" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L964" target="_blank">
             ax5.js,
-            line 968</a>
+            line 964</a>
         </div>
         
     </div>
@@ -1474,9 +1920,9 @@ Object
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L751" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L747" target="_blank">
             ax5.js,
-            line 751</a>
+            line 747</a>
         </div>
         
     </div>
@@ -1610,9 +2056,9 @@ Object
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L828" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L824" target="_blank">
             ax5.js,
-            line 828</a>
+            line 824</a>
         </div>
         
     </div>
@@ -1746,9 +2192,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L953" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L949" target="_blank">
             ax5.js,
-            line 953</a>
+            line 949</a>
         </div>
         
     </div>
@@ -1905,9 +2351,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L902" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L898" target="_blank">
             ax5.js,
-            line 902</a>
+            line 898</a>
         </div>
         
     </div>
@@ -2064,9 +2510,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1154" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1149" target="_blank">
             ax5.js,
-            line 1154</a>
+            line 1149</a>
         </div>
         
     </div>
@@ -3494,9 +3940,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L778" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L774" target="_blank">
             ax5.js,
-            line 778</a>
+            line 774</a>
         </div>
         
     </div>
@@ -3630,9 +4076,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1106" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1101" target="_blank">
             ax5.js,
-            line 1106</a>
+            line 1101</a>
         </div>
         
     </div>
@@ -4287,9 +4733,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L997" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L992" target="_blank">
             ax5.js,
-            line 997</a>
+            line 992</a>
         </div>
         
     </div>
@@ -4480,9 +4926,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1130" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1125" target="_blank">
             ax5.js,
-            line 1130</a>
+            line 1125</a>
         </div>
         
     </div>
@@ -4809,9 +5255,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L805" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L801" target="_blank">
             ax5.js,
-            line 805</a>
+            line 801</a>
         </div>
         
     </div>
@@ -5141,9 +5587,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L863" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L859" target="_blank">
             ax5.js,
-            line 863</a>
+            line 859</a>
         </div>
         
     </div>
@@ -5245,7 +5691,7 @@ value
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Fri Dec 19 2014 01:46:41 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sun Dec 21 2014 01:48:20 GMT+0900 (KST)
         </footer>
     </div>
 </div>

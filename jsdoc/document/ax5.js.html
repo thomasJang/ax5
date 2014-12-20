@@ -195,6 +195,10 @@
             
                 <li data-name="ax5.util.alert"><a href="ax5.util.html#alert">alert</a></li>
             
+                <li data-name="ax5.util.attr"><a href="ax5.util.html#attr">attr</a></li>
+            
+                <li data-name="ax5.util.clazz"><a href="ax5.util.html#clazz">clazz</a></li>
+            
                 <li data-name="ax5.util.clone"><a href="ax5.util.html#clone">clone</a></li>
             
                 <li data-name="ax5.util.create_elements"><a href="ax5.util.html#create_elements">create_elements</a></li>
@@ -1065,10 +1069,6 @@ argument
  * @returns {Boolean}
  */
 		function is_nothing(O) { return (typeof O === "undefined" || O === null || O === ""); }
-
-
-
-
 /**
  * 오브젝트의 첫번째 아이템을 반환합니다.
  * @method ax5.util.first
@@ -1314,7 +1314,6 @@ argument
 			});
 			return element;
 		}
-
 /**
  * ax5 require
  * @method ax5.util.require
@@ -1546,7 +1545,7 @@ argument
 ```
  */
 		function set_css(elements, O){
-			if(!is_array(elements) || !is_nodelist(elements)) elements = [elements];
+			if(!is_array(elements) && !is_nodelist(elements)) elements = [elements];
 			if( is_string(O) ) {
 				return elements[0].style[O];
 			}
@@ -1566,7 +1565,109 @@ argument
 					}
 				}
 			}
-			return true;
+			return "this";
+		}
+/**
+ * elements에 className 를 추가, 제거, 확인, 토글합니다.
+ * @method ax5.util.clazz
+ * @param {Array} elements - 대상의 엘리먼트 리스트 혹은 엘리먼트
+ * @param {String} [command=has] - add,remove,toggle,has
+ * @param {String} O - 클래스명
+ * @returns {String} return - "this" 또는 클래스이름
+ * @example
+ ```js
+ ax5.util.set_class(ax5.util.get_elements("#abcd"), "class-text"); // has 와 동일
+ ax5.util.set_class(ax5.util.get_elements("#abcd"), "add", "class-text");
+ ax5.util.set_class(ax5.util.get_elements("#abcd"), "remove", "class-text");
+ ax5.util.set_class(ax5.util.get_elements("#abcd"), "has", "class-text");
+ ax5.util.set_class(ax5.util.get_elements("#abcd"), "toggle", "class-text");
+ ```
+ */
+		function clazz(elements, command, O){
+			var classNames;
+			if(command === "add" || command === "remove" || command === "toggle") {
+				for(var di=0;di&lt;elements.length;di++) {
+					classNames = elements[di]["className"].split(/ /g);
+					if(command === "add"){
+						if(search(classNames, function(){
+								return O.trim() == this;
+							}) == -1) {
+							classNames.push(O.trim());
+						}
+					}else if(command === "remove"){
+						classNames = filter(classNames, function(){
+							return O.trim() != this;
+						});
+					}else if(command === "toggle"){
+						var class_count = classNames.length;
+						classNames = filter(classNames, function(){
+							return O.trim() != this;
+						});
+						if(class_count === classNames.length) classNames.push(O.trim());
+					}
+					elements[di]["className"] = classNames.join(" ");
+				}
+				return "this";
+			}
+			else
+			{ // has
+				if(typeof O === "undefined") O = command;
+				classNames = elements[0]["className"].trim().split(/ /g);
+				//if(U.is_string(classNames)) classNames = [classNames];
+				if (is_string(O)) { // hasClass
+					// get Class Name
+					return (search(classNames, function () { return this.trim() === O }) > -1);
+				}else{
+					console.error("set_class argument error");
+				}
+				return "this";
+			}
+		}
+
+/**
+ * elements에 attribute를 추가, 제거, 확인 합니다.
+ * @method ax5.util.attr
+ * @param {Array} elements - 대상의 엘리먼트 리스트 혹은 엘리먼트
+ * @param {String|Object} [command=get] - 명령어
+ * @param {Object|String} O - json타입또는 문자열
+ * @returns {String} return - "this" 또는 클래스이름
+ * @example
+```js
+ ax5.util.attr(ax5.dom("[data-ax-grid=A]"), "set", {"data-ax-spt":"ABCD"}); // set attribute
+ ax5.util.attr(ax5.dom("[data-ax-grid=A]"), {"data-ax-spt":"9999", "data-next":"next"}); // set attribute
+ ax5.util.attr(ax5.dom("[data-ax-grid=A]"), "remove", "data-next");
+```
+ */
+		function attr(elements, command, O){
+			if( command === "set" || (typeof O === "undefined" && is_object(command)) ){
+				if(typeof O === "undefined") O = command;
+				for(var di=0;di&lt;elements.length;di++) {
+					for (var k in O) {
+						elements[di].setAttribute(k, O[k]);
+					}
+				}
+			}
+			else
+			if( command === "get" || command === "read" || (typeof O === "undefined" && is_string(command)) ){
+				if(typeof O === "undefined") O = command;
+				if(!is_string(O)) return this;
+				return elements[0].getAttribute(O);
+			}
+			else
+			if( command === "remove" ){
+				if(U.is_string(O)) {
+					for (var di = 0; di &lt; elements.length; di++) {
+						elements[di].removeAttribute(O);
+					}
+				}else{
+					for (var di = 0; di &lt; elements.length; di++) {
+						each(O, function(){
+							elements[di].removeAttribute(this);
+						});
+					}
+				}
+			}
+			return "this";
 		}
 
 		return {
@@ -1603,7 +1704,9 @@ argument
 			left            : left,
 			right           : right,
 			get_event_target: get_event_target,
-			set_css         : set_css
+			set_css         : set_css,
+			clazz           : clazz,
+			attr            : attr
 		}
 	})();
 
@@ -1662,7 +1765,7 @@ argument
  */
 				this.css = function(O){
 					var rs = U.set_css(this.elements, O);
-					return (rs === true) ? this : rs;
+					return (rs === "this") ? this : rs;
 				};
 				// todo : clazz, on, off, attr > util로 이전
 /**
@@ -1684,43 +1787,8 @@ argument
 ```
  */
 				this.clazz = function(command, O){
-					var classNames;
-					if(command === "add" || command === "remove" || command === "toggle") {
-						for(var di=0;di&lt;this.elements.length;di++) {
-							classNames = this.elements[di]["className"].split(/ /g);
-							if(command === "add"){
-								if(U.search(classNames, function(){
-									return O.trim() == this;
-								}) == -1) {
-									classNames.push(O.trim());
-								}
-							}else if(command === "remove"){
-								classNames = U.filter(classNames, function(){
-									return O.trim() != this;
-								});
-							}else if(command === "toggle"){
-								var class_count = classNames.length;
-								classNames = U.filter(classNames, function(){
-									return O.trim() != this;
-								});
-								if(class_count === classNames.length) classNames.push(O.trim());
-							}
-							this.elements[di]["className"] = classNames.join(" ");
-						}
-					}
-					else
-					{ // has
-						if(typeof O === "undefined") O = command;
-						classNames = this.elements[0]["className"].trim().split(/ /g);
-						//if(U.is_string(classNames)) classNames = [classNames];
-						if (U.is_string(O)) { // hasClass
-							// get Class Name
-							return (U.search(classNames, function () { return this.trim() === O }) > -1);
-						}else{
-							console.error("")
-						}
-					}
-					return this;
+					var rs = U.clazz(this.elements, command, O);
+					return (rs === "this") ? this : rs;
 				};
 /**
  * elements에 이벤트를 바인드 합니다.
@@ -1819,36 +1887,8 @@ argument
 ```
  */
 				this.attr = function(command, O){
-					if( command === "set" || (typeof O === "undefined" && U.is_object(command)) ){
-						if(typeof O === "undefined") O = command;
-						for(var di=0;di&lt;this.elements.length;di++) {
-							for (var k in O) {
-								this.elements[di].setAttribute(k, O[k]);
-							}
-						}
-					}
-					else
-					if( command === "get" || command === "read" || (typeof O === "undefined" && U.is_string(command)) ){
-						if(typeof O === "undefined") O = command;
-						if(!U.is_string(O)) return this;
-						return this.elements[0].getAttribute(O);
-					}
-					else
-					if( command === "remove" ){
-						if(U.is_string(O)) {
-							for (var di = 0; di &lt; this.elements.length; di++) {
-								this.elements[di].removeAttribute(O);
-							}
-						}else{
-							for (var di = 0; di &lt; this.elements.length; di++) {
-								var _this = this;
-								U.each(O,  function(){
-									_this.elements[di].removeAttribute(this);
-								});
-							}
-						}
-					}
-					return this;
+					var rs = U.attr(this.elements, command, O);
+					return (rs === "this") ? this : rs;
 				};
 /**
  * element의 attribute를 추가 삭제 가져오기 합니다.
@@ -2012,7 +2052,7 @@ argument
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Fri Dec 19 2014 01:46:41 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sun Dec 21 2014 01:48:20 GMT+0900 (KST)
         </footer>
     </div>
 </div>
