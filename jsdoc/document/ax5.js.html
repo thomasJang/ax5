@@ -207,6 +207,10 @@
             
                 <li data-name="ax5.util.error"><a href="ax5.util.html#error">error</a></li>
             
+                <li data-name="ax5.util.event_off"><a href="ax5.util.html#event_off">event_off</a></li>
+            
+                <li data-name="ax5.util.event_on"><a href="ax5.util.html#event_on">event_on</a></li>
+            
                 <li data-name="ax5.util.extend"><a href="ax5.util.html#extend">extend</a></li>
             
                 <li data-name="ax5.util.filter"><a href="ax5.util.html#filter">filter</a></li>
@@ -217,9 +221,9 @@
             
                 <li data-name="ax5.util.get_element"><a href="ax5.util.html#get_element">get_element</a></li>
             
-                <li data-name="ax5.util.get_elements"><a href="ax5.util.html#get_elements">get_elements</a></li>
+                <li data-name="ax5.util.get_element_right"><a href="ax5.util.html#get_element_right">get_element_right</a></li>
             
-                <li data-name="ax5.util.get_event_target"><a href="ax5.util.html#get_event_target">get_event_target</a></li>
+                <li data-name="ax5.util.get_elements"><a href="ax5.util.html#get_elements">get_elements</a></li>
             
                 <li data-name="ax5.util.get_type"><a href="ax5.util.html#get_type">get_type</a></li>
             
@@ -1411,15 +1415,6 @@ argument
 						};
 						oReq.send();
 					}
-
-					/*
-					if (plugin.attachEvent && !(plugin.attachEvent.toString && plugin.attachEvent.toString().indexOf('[native code') &lt; 0))
-					{
-
-					} else {
-
-					}
-*/
 				}
 			}
 		}
@@ -1473,7 +1468,7 @@ argument
 		}
 /**
  * 타겟엘리먼트의 부모 엘리멘트 트리에서 원하는 조건의 엘리먼트를 얻습니다.
- * @method ax5.util.get_event_target
+ * @method ax5.util.get_element_right
  * @param {Element} target - target element
  * @param {Object} cond - 원하는 element를 찾을 조건
  * @returns {Element}
@@ -1486,11 +1481,11 @@ argument
     [, 그 외 찾고 싶은 attribute명들]
  };
  console.log(
-    ax5.util.get_event_target(e.target, {tagname:"a", clazz:"ax-menu-handel", "data-custom-attr":"attr_value"})
+    ax5.util.get_elements_right(e.target, {tagname:"a", clazz:"ax-menu-handel", "data-custom-attr":"attr_value"})
  );
  ```
  */
-		function get_event_target(target, cond){
+		function get_element_right(target, cond){
 			var _target = target;
 			if (_target) {
 				while ((function(){
@@ -1670,52 +1665,6 @@ argument
 			return "this";
 		}
 
-		return {
-			each            : each,
-			map             : map,
-			search          : search,
-			reduce          : reduce,
-			reduce_right    : reduce_right,
-			filter          : filter,
-			error           : error,
-			to_json         : to_json,
-			extend          : extend,
-			clone           : clone,
-			get_type        : get_type,
-			is_element      : is_element,
-			is_object       : is_object,
-			is_array        : is_array,
-			is_function     : is_function,
-			is_string       : is_string,
-			is_number       : is_number,
-			is_nodelist     : is_nodelist,
-			is_undefined    : is_undefined,
-			is_nothing      : is_nothing,
-			first           : first,
-			last            : last,
-			set_cookie      : set_cookie,
-			get_cookie      : get_cookie,
-			alert           : alert,
-			url_util        : url_util,
-			get_elements    : get_elements,
-			get_element     : get_element,
-			create_elements : create_elements,
-			require         : require,
-			left            : left,
-			right           : right,
-			get_event_target: get_event_target,
-			set_css         : set_css,
-			clazz           : clazz,
-			attr            : attr
-		}
-	})();
-
-	/**
-	 * Refer to this by {@link ax5}.
-	 * @namespace ax5.dom
-	 */
-	// todo : querySelectAll 을 활용한 dom 구현
-	ax5.dom = function(query){
 		function eventBind(elem, type, eventHandle){
 			type = U.left(type, ".");
 			if ( elem.addEventListener ) {
@@ -1736,6 +1685,127 @@ argument
 				else elem.detachEvent( "on" + type );
 			}
 		}
+
+/**
+ * elements에 이벤트를 바인드 합니다.
+ * @method ax5.util.event_on
+ * @param {Array} elements
+ * @param {String} type - 이벤트 타입
+ * @param {Function} _fn - 이벤트 콜백함수
+ * @example
+ ```js
+ var mydom = ax5.util.get_elements("[data-event-test=text-box]"),
+ remove_dom = ax5.util.get_elements("[data-event-test=remove]");
+
+ ax5.util.event_on(mydom, "click", window.fna);
+ ax5.util.event_on(mydom, "click", window.fnb);
+ ax5.util.event_on(mydom, "click", window.fnc);
+
+ ax5.util.event_on(remove_dom, "click", function(){
+	 ax5.util.event_off(mydom, "click", window.fna);
+	 ax5.util.event_off(remove_dom, "click");
+	 alert("이벤트 제거");
+ });
+
+ // 핸들방식
+ ax5.util.event_on(mydom, "click.fna", window.fna);
+ ax5.util.event_on(mydom, "click.fnb", window.fnb);
+ ax5.util.event_on(mydom, "click.fnc", window.fnc);
+ ```
+ */
+		function event_on(elements, typ, _fn){
+			for(var i=0;i&lt;elements.length;i++) {
+				var __fn, _d = elements[i];
+				if(!_d.e_hd) _d.e_hd = {};
+				if(typeof _d.e_hd[typ] === "undefined"){
+					__fn = _d.e_hd[typ] = _fn;
+				}else{
+					if(!is_array( _d.e_hd[typ])) _d.e_hd[typ] = [_d.e_hd[typ]];
+					_d.e_hd[typ].push(_fn);
+					__fn = _d.e_hd[typ][_d.e_hd[typ].length-1];
+				}
+				eventBind(_d, typ, __fn);
+			}
+		}
+/**
+ * elements에 이벤트를 언바인드 합니다.
+ * @method ax5.util.event_off
+ * @param {Array} elements
+ * @param {String} type - 이벤트 타입
+ * @param {Function} [_fn] - 이벤트 콜백함수
+ * @example
+ ```js
+ var mydom = ax5.util.get_elements("[data-event-test=text-box]")
+ ax5.util.event_off(mydom, "click");
+ ax5.util.event_off(mydom, "click.fnb");
+ ```
+ */
+		function event_off(elements, typ, _fn){
+			for(var i=0;i&lt;elements.length;i++) {
+				var _d = elements[i];
+				if (U.is_array(_d.e_hd[typ])) {
+					var _na = [];
+					for (var i = 0; i &lt; _d.e_hd[typ].length; i++) {
+						if(_d.e_hd[typ][i] == _fn || typeof _fn === "undefined") eventUnBind(_d, typ, _d.e_hd[typ][i]);
+						else _na.push(_d.e_hd[typ][i]);
+					}
+					_d.e_hd[typ] = _na;
+				} else {
+					if(_d.e_hd[typ] == _fn || typeof _fn === "undefined") {
+						eventUnBind(_d, typ, _d.e_hd[typ]);
+						delete _d.e_hd[typ]; // 함수 제거
+					}
+				}
+			}
+		}
+		return {
+			each             : each,
+			map              : map,
+			search           : search,
+			reduce           : reduce,
+			reduce_right     : reduce_right,
+			filter           : filter,
+			error            : error,
+			to_json          : to_json,
+			extend           : extend,
+			clone            : clone,
+			get_type         : get_type,
+			is_element       : is_element,
+			is_object        : is_object,
+			is_array         : is_array,
+			is_function      : is_function,
+			is_string        : is_string,
+			is_number        : is_number,
+			is_nodelist      : is_nodelist,
+			is_undefined     : is_undefined,
+			is_nothing       : is_nothing,
+			first            : first,
+			last             : last,
+			set_cookie       : set_cookie,
+			get_cookie       : get_cookie,
+			alert            : alert,
+			url_util         : url_util,
+			get_elements     : get_elements,
+			get_element      : get_element,
+			create_elements  : create_elements,
+			require          : require,
+			left             : left,
+			right            : right,
+			get_element_right: get_element_right,
+			set_css          : set_css,
+			clazz            : clazz,
+			attr             : attr,
+			event_on         : event_on,
+			event_off        : event_off
+		}
+	})();
+
+	/**
+	 * Refer to this by {@link ax5}.
+	 * @namespace ax5.dom
+	 */
+	// todo : querySelectAll 을 활용한 dom 구현
+	ax5.dom = function(query){
 
 		var axdom = (function(){
 			function ax(query){
@@ -1820,18 +1890,7 @@ argument
  */
 				// todo: event type 모두 체크
 				this.on = function(typ, _fn) {
-					for(var i=0;i&lt;this.elements.length;i++) {
-						var __fn, _d = this.elements[i];
-						if(!_d.e_hd) _d.e_hd = {};
-						if(typeof _d.e_hd[typ] === "undefined"){
-							__fn = _d.e_hd[typ] = _fn;
-						}else{
-							if(!U.is_array( _d.e_hd[typ])) _d.e_hd[typ] = [_d.e_hd[typ]];
-							_d.e_hd[typ].push(_fn);
-							__fn = _d.e_hd[typ][_d.e_hd[typ].length-1];
-						}
-						eventBind(_d, typ, __fn);
-					}
+					U.event_on(this.elements, typ,  _fn);
 					return this;
 				};
 /**
@@ -1849,22 +1908,7 @@ argument
  */
 				// todo : 이벤트 제거시 .하위 까지 제거해주기
 				this.off = function(typ, _fn) {
-					for(var i=0;i&lt;this.elements.length;i++) {
-						var _d = this.elements[i];
-						if (U.is_array(_d.e_hd[typ])) {
-							var _na = [];
-							for (var i = 0; i &lt; _d.e_hd[typ].length; i++) {
-								if(_d.e_hd[typ][i] == _fn || typeof _fn === "undefined") eventUnBind(_d, typ, _d.e_hd[typ][i]);
-								else _na.push(_d.e_hd[typ][i]);
-							}
-							_d.e_hd[typ] = _na;
-						} else {
-							if(_d.e_hd[typ] == _fn || typeof _fn === "undefined") {
-								eventUnBind(_d, typ, _d.e_hd[typ]);
-								delete _d.e_hd[typ]; // 함수 제거
-							}
-						}
-					}
+					U.event_off(this.elements, typ,  _fn);
 					return this;
 				};
 				// todo : setAttributeNS, setAttribute 차이 찾아보기
@@ -1903,7 +1947,19 @@ argument
 				this.find = function(query){
 					this.elements = U.get_elements(this.elements[0], query);
 					return this;
-				}
+				};
+				this.next = function(){
+
+				};
+				this.prev = function(){
+
+				};
+				this.parent = function(){
+
+				};
+				this.child = function(){
+
+				};
 			}
 			return ax;
 		})();
@@ -2052,7 +2108,7 @@ argument
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sun Dec 21 2014 01:48:20 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sun Dec 21 2014 23:25:52 GMT+0900 (KST)
         </footer>
     </div>
 </div>
