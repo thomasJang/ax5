@@ -236,9 +236,9 @@ argument
 				return { name: "android", version: browserVersion, mobile: mobile }
 			} else {
 				var browserName = "";
-				var match = /(chrome)[ \/]([\w.]+)/.exec(ua) ||
+				var match = /(opr)[ \/]([\w.]+)/.exec(ua) ||
+					/(chrome)[ \/]([\w.]+)/.exec(ua) ||
 					/(webkit)[ \/]([\w.]+)/.exec(ua) ||
-					/(opera)(?:.*version|)[ \/]([\w.]+)/.exec(ua) ||
 					/(msie) ([\w.]+)/.exec(ua) ||
 					ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) ||
 					[];
