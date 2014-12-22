@@ -1299,9 +1299,9 @@ argument
  * @returns {String} return - "this" 또는 클래스이름
  * @example
 ```js
- ax5.util.attr(ax5.dom("[data-ax-grid=A]"), "set", {"data-ax-spt":"ABCD"}); // set attribute
- ax5.util.attr(ax5.dom("[data-ax-grid=A]"), {"data-ax-spt":"9999", "data-next":"next"}); // set attribute
- ax5.util.attr(ax5.dom("[data-ax-grid=A]"), "remove", "data-next");
+ ax5.util.attr(ax5.util.get_elements("[data-ax-grid=A]"), "set", {"data-ax-spt":"ABCD"}); // set attribute
+ ax5.util.attr(ax5.util.get_elements("[data-ax-grid=A]"), {"data-ax-spt":"9999", "data-next":"next"}); // set attribute
+ ax5.util.attr(ax5.util.get_elements("[data-ax-grid=A]"), "remove", "data-next");
 ```
  */
 		function attr(elements, command, O){
