@@ -1163,7 +1163,7 @@ argument
 					var result = true;
 					for(var k in cond){
 						if(k === "tagname"){
-							if(_target.tagName.lcase() != cond[k]) {
+							if(_target.tagName.toLocaleLowerCase() != cond[k]) {
 								result = false;
 								break;
 							}
@@ -1201,7 +1201,7 @@ argument
 		}
 /**
  * Elements에 CSS속성을 읽고 씁니다.
- * @method 
+ * @method ax5.util.set_css
  * @param {Array} elements - 대상의 엘리먼트 리스트 혹은 엘리먼트
  * @param {Object|Array|String} CSS
  * @returns {String|Object|true}
