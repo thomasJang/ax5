@@ -1282,6 +1282,35 @@ ax("#elementid");
 
 	// dom functions
 	(function(){
+
+		function eventBind(elem, type, eventHandle){
+			type = U.left(type, ".");
+			if ( elem.addEventListener ) {
+				elem.addEventListener( type, eventHandle, false );
+			} else if ( elem.attachEvent ) {
+				elem.attachEvent( "on" + type, eventHandle );
+			}
+		}
+		function eventUnBind(elem, type, eventHandle){
+			type = U.left(type, ".");
+			if ( elem.removeEventListener ) {
+				if(eventHandle) elem.removeEventListener( type, eventHandle );
+				else{
+					elem.removeEventListener( type );
+				}
+			} else if ( elem.detachEvent ) {
+				if(eventHandle) elem.detachEvent( "on" + type, eventHandle );
+				else elem.detachEvent( "on" + type );
+			}
+		}
+		function get_elements(elem, fn_name){
+			if(U.is_element(elem)) elem = [elem];
+			if(!U.is_array(elem) && !U.is_nodelist(elem)) {
+				elem = [];
+				console.error("ax5.dom."+fn_name+" : elements parameter incorrect");
+			}
+			return elem;
+		}
 		// jQuery.ready.promise jquery 1.10.2
 		/**
 		 * document 로드 완료를 체크 합니다.
@@ -1515,7 +1544,7 @@ ax("#elementid");
  ```
 		 */
 		function css(elements, O){
-			if(!U.is_array(elements) && !U.is_nodelist(elements)) elements = [elements];
+			elements = get_elements(elements, "css");
 			if(U.is_string(O)) {
 				return elements[0].style[O];
 			}
@@ -1556,6 +1585,7 @@ ax("#elementid");
 		 */
 		function clazz(elements, command, O){
 			var classNames;
+			elements = get_elements(elements, "clazz");
 			if(command === "add" || command === "remove" || command === "toggle") {
 				for(var di=0;di<elements.length;di++) {
 					classNames = elements[di]["className"].split(/ /g);
@@ -1609,6 +1639,7 @@ ax("#elementid");
  ```
 		 */
 		function attr(elements, command, O){
+			elements = get_elements(elements, "attr");
 			if( command === "set" || (typeof O === "undefined" && U.is_object(command)) ){
 				if(typeof O === "undefined") O = command;
 				for(var di=0;di<elements.length;di++) {
@@ -1640,27 +1671,6 @@ ax("#elementid");
 			return "this";
 		}
 
-		function eventBind(elem, type, eventHandle){
-			type = U.left(type, ".");
-			if ( dom.addEventListener ) {
-				dom.addEventListener( type, eventHandle, false );
-			} else if ( dom.attachEvent ) {
-				dom.attachEvent( "on" + type, eventHandle );
-			}
-		}
-		function eventUnBind(elem, type, eventHandle){
-			type = U.left(type, ".");
-			if ( dom.removeEventListener ) {
-				if(eventHandle) dom.removeEventListener( type, eventHandle );
-				else{
-					dom.removeEventListener( type );
-				}
-			} else if ( dom.detachEvent ) {
-				if(eventHandle) dom.detachEvent( "on" + type, eventHandle );
-				else dom.detachEvent( "on" + type );
-			}
-		}
-
 		/**
 		 * elements에 이벤트를 바인드 합니다.
 		 * @method ax5.dom.on
@@ -1669,17 +1679,20 @@ ax("#elementid");
 		 * @param {Function} _fn - 이벤트 콜백함수
 		 * @example
  ```js
- var mydom = ax5.dom.get("[data-event-test=text-box]"),
- remove_dom = ax5.dom.get("[data-event-test=remove]");
+ var fna = function(){console.log("fna")};
+ var fnb = function(){console.log("fnb")};
+ var fnc = function(){console.log("fnc")};
+
+ var mydom = ax5.dom.get("[data-event-test=text-box]"), remove_dom = ax5.dom.get("[data-event-test=remove]");
 
  ax5.dom.on(mydom, "click", window.fna);
  ax5.dom.on(mydom, "click", window.fnb);
  ax5.dom.on(mydom, "click", window.fnc);
 
  ax5.dom.on(remove_dom, "click", function(){
-	 ax5.dom.off(mydom, "click", window.fna);
-	 ax5.dom.off(remove_dom, "click");
-	 alert("이벤트 제거");
+    ax5.dom.off(mydom, "click", window.fna);
+    ax5.dom.off(remove_dom, "click");
+    alert("이벤트 제거");
  });
 
  // 핸들방식
@@ -1689,13 +1702,14 @@ ax("#elementid");
  ```
 		 */
 		function on(elements, typ, _fn){
+			elements = get_elements(elements, "on");
 			for(var i=0;i<elements.length;i++) {
 				var __fn, _d = elements[i];
 				if(!_d.e_hd) _d.e_hd = {};
 				if(typeof _d.e_hd[typ] === "undefined"){
 					__fn = _d.e_hd[typ] = _fn;
 				}else{
-					if(!is_array( _d.e_hd[typ])) _d.e_hd[typ] = [_d.e_hd[typ]];
+					if(!U.is_array( _d.e_hd[typ])) _d.e_hd[typ] = [_d.e_hd[typ]];
 					_d.e_hd[typ].push(_fn);
 					__fn = _d.e_hd[typ][_d.e_hd[typ].length-1];
 				}
@@ -1716,6 +1730,7 @@ ax("#elementid");
  ```
 		 */
 		function off(elements, typ, _fn){
+			elements = get_elements(elements, "off");
 			for(var i=0;i<elements.length;i++) {
 				var _d = elements[i];
 				if (U.is_array(_d.e_hd[typ])) {
@@ -1733,9 +1748,44 @@ ax("#elementid");
 				}
 			}
 		}
-
+		/**
+		 * 타겟 엘리먼트의 자식을 반환합니다.
+		 * @method ax5.dom.child
+		 * @param {Element|Elements} elements
+		 * @returns {Elements} elements
+		 * @example
+```
+ <ul id="list-container">
+	 <li data-list-item="0">
+	    <div>child>child</div>
+	 </li>
+	 <li data-list-item="1"></li>
+	 <li data-list-item="2"></li>
+	 <li data-list-item="3"></li>
+	 <li data-list-item="4"></li>
+	 <li data-list-item="5"></li>
+ </ul>
+ <script>
+ var el = ax5.dom.get("#list-container");
+ console.log(
+	 ax5.dom.child(el)[1].tagName,
+	 ax5.dom.attr(ax5.dom.child(el)[1], "data-list-item")
+ );
+ // LI 1
+ </script>
+```
+		 */
+		// todo : child depth 파라미터 개발
 		function child(elements, depth){
-
+			elements = get_elements(elements, "child");
+			var return_elems = [], len;
+			if(elements[0]) {
+				len = elements[0].children.length;
+				for (var i = 0; i < len; i++) {
+					return_elems.push(elements[0].children[i]);
+				}
+			}
+			return return_elems;
 		}
 		function parent(elements, depth){
 
@@ -1744,6 +1794,24 @@ ax("#elementid");
 
 		}
 		function next(elements){
+
+		}
+		function html(){
+
+		}
+		function text(){
+
+		}
+		function append(){
+
+		}
+		function prepend(){
+
+		}
+		function before(){
+
+		}
+		function after(){
 
 		}
 
@@ -1763,7 +1831,13 @@ ax("#elementid");
 			parent    : parent,
 			child     : child,
 			prev      : prev,
-			next      : next
+			next      : next,
+			html      : html,
+			text      : text,
+			append    : append,
+			prepend   : prepend,
+			before    : before,
+			after     : after
 		});
 	})();
 

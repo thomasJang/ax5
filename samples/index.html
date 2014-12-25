@@ -9,7 +9,9 @@
     <div class="ax5-sample-view">
         <div>
             <ul id="list-container">
-                <li data-list-item="0"></li>
+                <li data-list-item="0">
+                    <div>child>child</div>
+                </li>
                 <li data-list-item="1"></li>
                 <li data-list-item="2"></li>
                 <li data-list-item="3"></li>
@@ -17,11 +19,30 @@
                 <li data-list-item="5"></li>
             </ul>
         </div>
+
+        <button data-event-test="text-box">버튼</button>
+        <button data-event-test="remove">버튼</button>
+
     </div>
 </body>
 </html>
 <script type="text/javascript">
+
+
+
+    /*
     var myli = ax5.dom.get("[data-list-item='0']");
     console.log(myli);
-    var myli = ax5.dom.get("[data-list-item='0']");
+    var mydom = ax5.dom("[data-list-item='0']");
+    mydom.css({"border":"1px solid #000"});
+    */
+
+    var el = ax5.dom.get("#list-container");
+    console.log(
+        ax5.dom.child(el)[1].tagName,
+        ax5.dom.attr(ax5.dom.child(el)[1], "data-list-item")
+    );
+
+    //ax5.dom.child("123");
+
 </script>
