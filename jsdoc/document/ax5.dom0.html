@@ -48,7 +48,7 @@
     
 </head>
 <body>
-<div id="wrap" class="clearfix ax5.dom">
+<div id="wrap" class="clearfix ax5.dom0">
     
 <div class="navigation">
     <h3 class="applicationName"><a href="index.html"><i class="axi axi-axisj"></i> ax5.io</a></h3>
@@ -345,7 +345,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="ax5.dom.html">Namespace: dom</h1>
+        <h1 class="page-title" data-filename="ax5.dom0.html">Namespace: dom0</h1>
         
 
 
@@ -356,7 +356,7 @@
     <h2>
         <span class="ancestors"><a href="ax5.html">ax5</a>.</span>
     
-    dom
+    dom0
     </h2>
     
 </header>  
@@ -367,7 +367,8 @@
     
     
         
-            <div class="description"><p>Refer to this by <a href="ax5.html"><code>ax5</code></a>.</p></div>
+            <div class="description"><p>Refer to this by <a href="ax5.html"><code>ax5</code></a>. <br/>
+dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함수들과는 다른 개념입니다. ax5.dom0는 query에 의해 만들어진 인스턴스 입니다.</p></div>
         
         
         
@@ -397,6 +398,17 @@
 
         
         
+            <h3>Example</h3>
+            
+
+    
+    <pre class="prettyprint linenums"><code>ax5.dom(&quot;#elementid&quot;);
+var ax = ax5.dom;
+ax(&quot;#elementid&quot;);
+// 처러 사용할 수 있습니다.</code></pre>
+    
+
+        
     
     </div>
     
@@ -410,6 +422,100 @@
     
     
     
+    
+        <h3 class="subsection-title">Members</h3>
+        
+        <dl>
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="elements"><span class="type-signature static">static</span>ax5.dom0.elements<span class="type-signature type array">Array</span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>query selected elements</p>
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="length"><span class="type-signature static">static</span>ax5.dom0.length<span class="type-signature type number">Number</span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>query selected elements length</p>
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        </dl>
     
     
     
@@ -421,15 +527,15 @@
     <div class="nameContainer">
         <h4 class="name" id="attr">
             
-            <span class="type-signature static">static</span>ax5.dom.attr<span class="signature">(elements, <span class="optional">command</span>, O)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{String}</span>
+            <span class="type-signature static">static</span>ax5.dom0.attr<span class="signature">(<span class="optional">command</span>, O)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom.html">ax5.dom</a>|String}</span>
         </h4>
     
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1597" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1229" target="_blank">
             ax5.js,
-            line 1597</a>
+            line 1229</a>
         </div>
         
     </div>
@@ -440,7 +546,7 @@
     
     
     <div class="description">
-        <p>elements에 attribute를 추가, 제거, 확인 합니다.</p>
+        <p>element의 attribute를 추가 삭제 가져오기 합니다.</p>
     </div>
     
 
@@ -469,38 +575,6 @@
 	</thead>
 	
 	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>elements</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Array</span>
-
-
-            
-            </td>
-            
-            
-                <td class="default">
-                
-                </td>
-            
-            
-            <td class="description last">
-                
-                    
-                    
-                        
-                    
-                
-                <p>대상의 엘리먼트 리스트 혹은 엘리먼트</p></td>
-        </tr>
-	
 	
 	
         <tr>
@@ -619,10 +693,6 @@
     
 
 
-<h5>Returns:</h5>
-- &quot;this&quot; 또는 클래스이름
-<br />
-
     
     
     
@@ -630,9 +700,14 @@
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-js"> ax5.dom.attr(ax5.dom.get(&quot;[data-ax-grid=A]&quot;), &quot;set&quot;, {&quot;data-ax-spt&quot;:&quot;ABCD&quot;}); // set attribute
- ax5.dom.attr(ax5.dom.get(&quot;[data-ax-grid=A]&quot;), {&quot;data-ax-spt&quot;:&quot;9999&quot;, &quot;data-next&quot;:&quot;next&quot;}); // set attribute
- ax5.dom.attr(ax5.dom.get(&quot;[data-ax-grid=A]&quot;), &quot;remove&quot;, &quot;data-next&quot;);</code></pre>
+    <pre class="prettyprint linenums"><code class="lang-js"> ax5.dom(&quot;[data-ax-grid=A]&quot;).attr(&quot;set&quot;, {&quot;data-ax-spt&quot;:&quot;ABCD&quot;}); // set attribute
+ ax5.dom(&quot;[data-ax-grid=A]&quot;).attr({&quot;data-ax-spt&quot;:&quot;9999&quot;, &quot;data-next&quot;:&quot;next&quot;}); // set attribute
+
+ console.log( ax5.dom(&quot;[data-ax-grid=A]&quot;).attr(&quot;data-ax-spt&quot;) ); // get or read
+ console.log( ax5.dom(&quot;[data-ax-grid=A]&quot;).attr(&quot;get&quot;, &quot;data-next&quot;) ); // get or read
+
+ ax5.dom(&quot;[data-ax-grid=A]&quot;).attr(&quot;remove&quot;, &quot;data-next&quot;);
+ ax5.dom(&quot;[data-ax-grid=A]&quot;).attr(&quot;remove&quot;, &quot;data-next2&quot;);</code></pre>
     
 
     
@@ -644,15 +719,15 @@
     <div class="nameContainer">
         <h4 class="name" id="clazz">
             
-            <span class="type-signature static">static</span>ax5.dom.clazz<span class="signature">(elements, <span class="optional">command</span>, O)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{String}</span>
+            <span class="type-signature static">static</span>ax5.dom0.clazz<span class="signature">(<span class="optional">command</span>, O)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom.html">ax5.dom</a>|String}</span>
         </h4>
     
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1541" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1155" target="_blank">
             ax5.js,
-            line 1541</a>
+            line 1155</a>
         </div>
         
     </div>
@@ -692,38 +767,6 @@
 	</thead>
 	
 	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>elements</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Array</span>
-
-
-            
-            </td>
-            
-            
-                <td class="default">
-                
-                </td>
-            
-            
-            <td class="description last">
-                
-                    
-                    
-                        
-                    
-                
-                <p>대상의 엘리먼트 리스트 혹은 엘리먼트</p></td>
-        </tr>
-	
 	
 	
         <tr>
@@ -837,7 +880,7 @@
 
 
 <h5>Returns:</h5>
-- &quot;this&quot; 또는 클래스이름
+- ax5.dom 또는 클래스이름
 <br />
 
     
@@ -847,168 +890,14 @@
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-js"> ax5.dom.clazz(ax5.dom.get(&quot;#abcd&quot;), &quot;class-text&quot;); // has 와 동일
- ax5.dom.clazz(ax5.dom.get(&quot;#abcd&quot;), &quot;add&quot;, &quot;class-text&quot;);
- ax5.dom.clazz(ax5.dom.get(&quot;#abcd&quot;), &quot;remove&quot;, &quot;class-text&quot;);
- ax5.dom.clazz(ax5.dom.get(&quot;#abcd&quot;), &quot;has&quot;, &quot;class-text&quot;);
- ax5.dom.clazz(ax5.dom.get(&quot;#abcd&quot;), &quot;toggle&quot;, &quot;class-text&quot;);</code></pre>
-    
+    <pre class="prettyprint linenums"><code class="lang-js"> console.log(
+     ax5.dom(&quot;[data-ax-grid=A]&quot;).clazz(&quot;A&quot;),
+     ax5.dom(&quot;[data-ax-grid='A']&quot;).clazz(&quot;has&quot;,&quot;A&quot;)
+ );
+ ax5.dom(&quot;[data-ax-grid=A]&quot;).clazz(&quot;add&quot;, &quot;adclass&quot;).class(&quot;remove&quot;, &quot;adclass&quot;).class(&quot;remove&quot;, &quot;A&quot;);
 
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="create">
-            
-            <span class="type-signature static">static</span>ax5.dom.create<span class="signature">(node_nm, attr)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Element}</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1416" target="_blank">
-            ax5.js,
-            line 1416</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>createElement 구문을 효과적으로 수행합니다.</p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>node_nm</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                <p>엘리먼트 이름</p></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>attr</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                <p>엘리먼트 속성정보</p></td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-
-
-    
-    
-    
-        <h5>Example</h5>
-        
-
-    
-    <pre class="prettyprint linenums"><code>     ```js</code></pre>
-<p> ax5.dom.create(&quot;script&quot;, {type:&quot;text/javascript&quot;, src:&quot;../ax5.js&quot;});
-         ```</p>
+ ax5.dom(&quot;[data-ax-grid=A]&quot;).clazz(&quot;toggle&quot;, &quot;red&quot;);
+ ax5.dom(&quot;[data-ax-grid=\&quot;9B\&quot;]&quot;).clazz(&quot;toggle&quot;, &quot;red&quot;);</code></pre>
     
 
     
@@ -1020,15 +909,15 @@
     <div class="nameContainer">
         <h4 class="name" id="css">
             
-            <span class="type-signature static">static</span>ax5.dom.css<span class="signature">(elements, CSS)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{String|Object|true}</span>
+            <span class="type-signature static">static</span>ax5.dom0.css<span class="signature">(O)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom.html">ax5.dom</a>|String|Object}</span>
         </h4>
     
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1506" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1136" target="_blank">
             ax5.js,
-            line 1506</a>
+            line 1136</a>
         </div>
         
     </div>
@@ -1039,7 +928,7 @@
     
     
     <div class="description">
-        <p>Elements에 CSS속성을 읽고 씁니다.</p>
+        <p>elements에 css 값을 적용또는 반환합니다.</p>
     </div>
     
 
@@ -1070,30 +959,7 @@
 	
         <tr>
             
-                <td class="name"><code>elements</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Array</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                <p>대상의 엘리먼트 리스트 혹은 엘리먼트</p></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>CSS</code></td>
+                <td class="name"><code>O</code></td>
             
             
             <td class="type">
@@ -1169,7 +1035,11 @@
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-js"> ax5.dom.css(ax5.dom.get(&quot;#abcd&quot;), {&quot;color&quot;:&quot;#ff3300&quot;});</code></pre>
+    <pre class="prettyprint linenums"><code class="lang-js"> ax5.dom(&quot;[data-ax-grid]&quot;).css({&quot;color&quot;:&quot;#ff3300&quot;, border:&quot;1px solid #000&quot;});
+ console.log( ax5.dom(&quot;[data-ax-grid]&quot;).css(&quot;color&quot;) );
+ // rgb(255, 51, 0)
+ console.log( ax5.dom(&quot;[data-ax-grid]&quot;).css([&quot;border&quot;,&quot;color&quot;]) );
+ // {border: &quot;1px solid rgb(0, 0, 0)&quot;, color: &quot;rgb(255, 51, 0)&quot;}</code></pre>
     
 
     
@@ -1179,17 +1049,17 @@
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="get">
+        <h4 class="name" id="find">
             
-            <span class="type-signature static">static</span>ax5.dom.get<span class="signature">(query, sub_query)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Array}</span>
+            <span class="type-signature static">static</span>ax5.dom0.find<span class="signature">(query)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom.html">ax5.dom</a>}</span>
         </h4>
     
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1350" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1251" target="_blank">
             ax5.js,
-            line 1350</a>
+            line 1251</a>
         </div>
         
     </div>
@@ -1200,7 +1070,7 @@
     
     
     <div class="description">
-        <p>CSS Selector를 이용하여 HTML Elements를 찾습니다.</p>
+        <p>element의 attribute를 추가 삭제 가져오기 합니다.</p>
     </div>
     
 
@@ -1238,9 +1108,6 @@
             
                 
 <span class="param-type">String</span>
-|
-
-<span class="param-type">Element</span>
 
 
             
@@ -1250,30 +1117,7 @@
             
             <td class="description last">
                 
-                <p>CSS Selector | Element</p></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>sub_query</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                <p>CSS Selector</p></td>
+                <p>selector query</p></td>
         </tr>
 	
 	
@@ -1327,330 +1171,8 @@
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-js"> ax5.dom.get(&quot;#element01&quot;);
- ax5.dom.get(&quot;input[type='text']&quot;);</code></pre>
-    
-
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="get_one">
-            
-            <span class="type-signature static">static</span>ax5.dom.get_one<span class="signature">(query, sub_query)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Element}</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1401" target="_blank">
-            ax5.js,
-            line 1401</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>CSS Selector를 이용하여 HTML Element를 찾습니다.</p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>query</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-|
-
-<span class="param-type">Element</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                <p>CSS Selector | Element</p></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>sub_query</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                <p>CSS Selector</p></td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-
-
-    
-    
-    
-        <h5>Example</h5>
-        
-
-    
-    <pre class="prettyprint linenums"><code class="lang-js"> ax5.dom.get_one(&quot;#element01&quot;);
- ax5.dom.get_one(&quot;input[type='text']&quot;);</code></pre>
-    
-
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="get_parent">
-            
-            <span class="type-signature static">static</span>ax5.dom.get_parent<span class="signature">(target, cond)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Element}</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1444" target="_blank">
-            ax5.js,
-            line 1444</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>타겟엘리먼트의 부모 엘리멘트 트리에서 원하는 조건의 엘리먼트를 얻습니다.</p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>target</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Element</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                <p>target element</p></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>cond</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                <p>원하는 element를 찾을 조건</p></td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-
-
-    
-    
-    
-        <h5>Example</h5>
-        
-
-    
-    <pre class="prettyprint linenums"><code class="lang-js"> // cond 속성정의
- var cond = {
-    tagname: {String} - 태그명 (ex. a, div, span..),
-    clazz: {String} - 클래스명
-    [, 그 외 찾고 싶은 attribute명들]
- };
- console.log(
-    ax5.dom.get_parent(e.target, {tagname:&quot;a&quot;, clazz:&quot;ax-menu-handel&quot;, &quot;data-custom-attr&quot;:&quot;attr_value&quot;})
- );</code></pre>
+    <pre class="prettyprint linenums"><code class="lang-js">
+</code></pre>
     
 
     
@@ -1662,15 +1184,15 @@
     <div class="nameContainer">
         <h4 class="name" id="off">
             
-            <span class="type-signature static">static</span>ax5.dom.off<span class="signature">(elements, type, <span class="optional">_fn</span>)</span>
+            <span class="type-signature static">static</span>ax5.dom0.off<span class="signature">(type, <span class="optional">_fn</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom.html">ax5.dom</a>}</span>
         </h4>
     
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1705" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1210" target="_blank">
             ax5.js,
-            line 1705</a>
+            line 1210</a>
         </div>
         
     </div>
@@ -1708,34 +1230,6 @@
 	</thead>
 	
 	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>elements</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Array</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                    
-                    
-                        
-                    
-                
-                </td>
-        </tr>
-	
 	
 	
         <tr>
@@ -1836,13 +1330,18 @@
     
     
     
+
+
+    
+    
+    
         <h5>Example</h5>
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-js"> var mydom = ax5.dom.get(&quot;[data-event-test=text-box]&quot;)
- ax5.dom.off(mydom, &quot;click&quot;);
- ax5.dom.off(mydom, &quot;click.fnb&quot;);</code></pre>
+    <pre class="prettyprint linenums"><code class="lang-js"> var axd = ax5.dom;
+ axd(&quot;[data-event-test=text-box]&quot;).off(&quot;click&quot;);
+ axd(&quot;[data-event-test=text-box]&quot;).off(&quot;click.fnb&quot;).off(&quot;click.fnc&quot;);</code></pre>
     
 
     
@@ -1854,15 +1353,15 @@
     <div class="nameContainer">
         <h4 class="name" id="on">
             
-            <span class="type-signature static">static</span>ax5.dom.on<span class="signature">(elements, type, _fn)</span>
+            <span class="type-signature static">static</span>ax5.dom0.on<span class="signature">(type, _fn)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom.html">ax5.dom</a>}</span>
         </h4>
     
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1664" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1177" target="_blank">
             ax5.js,
-            line 1664</a>
+            line 1177</a>
         </div>
         
     </div>
@@ -1900,29 +1399,6 @@
 	</thead>
 	
 	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>elements</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Array</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                </td>
-        </tr>
-	
 	
 	
         <tr>
@@ -2011,160 +1487,33 @@
     
     
     
+
+
+    
+    
+    
         <h5>Example</h5>
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-js"> var mydom = ax5.dom.get(&quot;[data-event-test=text-box]&quot;),
- remove_dom = ax5.dom.get(&quot;[data-event-test=remove]&quot;);
+    <pre class="prettyprint linenums"><code class="lang-js"> var axd = ax5.dom;
+ var mydom = axd(&quot;[data-event-test=text-box]&quot;),
+     remove_dom = axd(&quot;[data-event-test=remove]&quot;);
 
- ax5.dom.on(mydom, &quot;click&quot;, window.fna);
- ax5.dom.on(mydom, &quot;click&quot;, window.fnb);
- ax5.dom.on(mydom, &quot;click&quot;, window.fnc);
+     mydom.on(&quot;click&quot;, window.fna);
+     mydom.on(&quot;click&quot;, window.fnb);
+     mydom.on(&quot;click&quot;, window.fnc);
 
- ax5.dom.on(remove_dom, &quot;click&quot;, function(){
-     ax5.dom.off(mydom, &quot;click&quot;, window.fna);
-     ax5.dom.off(remove_dom, &quot;click&quot;);
-     alert(&quot;이벤트 제거&quot;);
+ remove_dom.on(&quot;click&quot;, function(){
+    mydom.off(&quot;click&quot;, window.fna);
+    remove_dom.off(&quot;click&quot;);
+    alert(&quot;이벤트 제거&quot;);
  });
 
  // 핸들방식
- ax5.dom.on(mydom, &quot;click.fna&quot;, window.fna);
- ax5.dom.on(mydom, &quot;click.fnb&quot;, window.fnb);
- ax5.dom.on(mydom, &quot;click.fnc&quot;, window.fnc);</code></pre>
-    
-
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="ready">
-            
-            <span class="type-signature static">static</span>ax5.dom.ready<span class="signature">(_fn)</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1286" target="_blank">
-            ax5.js,
-            line 1286</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>document 로드 완료를 체크 합니다.</p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>_fn</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                <p>로드완료시 호출함수</p></td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-        <h5>Example</h5>
-        
-
-    
-    <pre class="prettyprint linenums"><code class="lang-js"> var a = 1;
- setTimeout(function(){
-    ax5.dom.ready(function(){
-        console.log(&quot;test&quot; + a);
-        console.log(ax5.util.left(&quot;axisj-ax5&quot;, &quot;-&quot;));
-    });
- }, 1000);</code></pre>
+ axd(&quot;[data-event-test=text-box]&quot;).on(&quot;click.fna&quot;, window.fna);
+ axd(&quot;[data-event-test=text-box]&quot;).on(&quot;click.fnb&quot;, window.fnb);
+ axd(&quot;[data-event-test=text-box]&quot;).on(&quot;click.fnc&quot;, window.fnc);</code></pre>
     
 
     

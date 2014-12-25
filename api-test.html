@@ -211,59 +211,59 @@
                 r: "AX5"
             },
             {
-                label:"ax5.util.get_elements : id",
+                label:"ax5.dom.get : id",
                 fn: function(){
-                    return ax5.util.get_elements("#test-result");
+                    return ax5.dom.get("#test-result");
                 }
             },
             {
-                label:"ax5.util.get_elements : class",
+                label:"ax5.dom.get : class",
                 fn: function(){
-                    return ax5.util.get_elements(".test-result");
+                    return ax5.dom.get(".test-result");
                 }
             },
             {
-                label:"ax5.util.get_elements : tagName#id",
+                label:"ax5.dom.get : tagName#id",
                 fn: function(){
-                    return ax5.util.get_elements("div#test-result");
+                    return ax5.dom.get("div#test-result");
                 }
             },
             {
-                label:"ax5.util.get_elements : tagName.class",
+                label:"ax5.dom.get : tagName.class",
                 fn: function(){
-                    return ax5.util.get_elements("div.test-result");
+                    return ax5.dom.get("div.test-result");
                 }
             },
             {
-                label:"ax5.util.get_elements : tagName#id #id ",
+                label:"ax5.dom.get : tagName#id #id ",
                 fn: function(){
-                    return ax5.util.get_elements("div#progress #progress-bar");
+                    return ax5.dom.get("div#progress #progress-bar");
                 }
             },
             {
-                label:"ax5.util.get_elements : tagName.class .class ",
+                label:"ax5.dom.get : tagName.class .class ",
                 fn: function(){
-                    return ax5.util.get_elements("div.progress .progress-bar");
+                    return ax5.dom.get("div.progress .progress-bar");
                 }
             },
             {
-                label:"ax5.util.get_elements : tagName#id .class ",
+                label:"ax5.dom.get : tagName#id .class ",
                 fn: function(){
-                    return ax5.util.get_elements("div#progress .progress-bar");
+                    return ax5.dom.get("div#progress .progress-bar");
                 }
             },
             {
-                label:"ax5.util.get_elements : tagName.class #id",
+                label:"ax5.dom.get : tagName.class #id",
                 fn: function(){
-                    return ax5.util.get_elements("div.progress #progress-bar");
+                    return ax5.dom.get("div.progress #progress-bar");
                 }
             },
 
             {
-                label:"ax5.util.get_elements(parent_element, selector)",
+                label:"ax5.dom.get(parent_element, selector)",
                 fn: function(){
-                    //return ax5.util.get_elements(ax5.util.get_element('#test-result'), "div:first-child");
-                    return ax5.util.get_elements(document.querySelectorAll('#test-result'), "div:first-child");
+                    //return ax5.dom.get(ax5.util.get_element('#test-result'), "div:first-child");
+                    return ax5.dom.get(document.querySelectorAll('#test-result'), "div:first-child");
                 }
             },
 

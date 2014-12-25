@@ -7,47 +7,21 @@
 </head>
 <body>
     <div class="ax5-sample-view">
-        <h1 class="ax5-h1">ax5</h1>
-        <h5 class="ax5-h5">This is ax5 sample source</h5>
-        <div class="ax5-section">
-
-        </div>
-
-        <div id="test-result">
-            <div></div>
+        <div>
+            <ul id="list-container">
+                <li data-list-item="0"></li>
+                <li data-list-item="1"></li>
+                <li data-list-item="2"></li>
+                <li data-list-item="3"></li>
+                <li data-list-item="4"></li>
+                <li data-list-item="5"></li>
+            </ul>
         </div>
     </div>
 </body>
 </html>
 <script type="text/javascript">
-
-    //ax5.dom(".ax5-h5").css({color:"#ff3300"});
-
-    //ax5.util.set_css( ax5.util.get_elements(".ax5-h5"), {color:"#ff3300"} );
-
-    ax5.util.get_elements(document.querySelectorAll('#test-result'), "div:first-child");
-    /*
-    ax5.util.require(["../src/ax5_class_sample.js"], function(){
-       alert("ok");
-    }, function(){
-        alert("err");
-    });
-    */
-
-/*
-
-var fnObj = {
-    pageStart: function(){
-        this.item.init();
-    },
-    item: {
-        init: function(){
-            console.log("success");
-        }
-    }
-};
-ax5.dom.ready(function(){
-    fnObj.pageStart();
-});
-*/
+    var myli = ax5.dom.get("[data-list-item='0']");
+    console.log(myli);
+    var myli = ax5.dom.get("[data-list-item='0']");
 </script>
