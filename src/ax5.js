@@ -1420,9 +1420,9 @@ ax("#elementid");
 		 * @param {Object} attr - 엘리먼트 속성정보
 		 * @returns {Element}
 		 * @example
-		 ```js
+ ```js
  ax5.dom.create("script", {type:"text/javascript", src:"../ax5.js"});
-		 ```
+ ```
 		 */
 		function create(node_nm, attr, val){
 			/*
