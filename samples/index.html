@@ -24,25 +24,45 @@
         <button data-event-test="remove">버튼</button>
 
     </div>
+    <script type="text/javascript">
+/*
+        var fna = function(){console.log("fna")};
+        var fnb = function(){console.log("fnb")};
+        var fnc = function(){console.log("fnc")};
+
+        var mydom = ax5.dom.get("[data-event-test=text-box]"), remove_dom = ax5.dom.get("[data-event-test=remove]");
+
+        ax5.dom.on(mydom, "click", window.fna);
+        ax5.dom.on(mydom, "click", window.fnb);
+        ax5.dom.on(mydom, "click", window.fnc);
+
+        ax5.dom.on(remove_dom, "click", function(){
+            ax5.dom.off(mydom, "click", window.fna);
+            ax5.dom.off(remove_dom, "click");
+            alert("이벤트 제거");
+        });
+*/
+
+        /*
+         var myli = ax5.dom.get("[data-list-item='0']");
+         console.log(myli);
+         var mydom = ax5.dom("[data-list-item='0']");
+         mydom.css({"border":"1px solid #000"});
+         */
+
+        var el = ax5.dom.get("#list-container");
+        //console.log(
+//            ax5.dom.parent(ax5.dom.child(el), {tagname:"div", clazz:"ax5-sample-view"})
+  //      );
+
+        var dom_child = ax5.dom("#list-container").child();
+//console.log(dom_child.toString());
+
+        console.log(
+            ax5.dom(dom_child).parent({tagname:"div", clazz:"ax5-sample-view"}),
+            dom_child.parent({tagname:"div", clazz:"ax5-sample-view"})
+        );
+
+    </script>
 </body>
 </html>
-<script type="text/javascript">
-
-
-
-    /*
-    var myli = ax5.dom.get("[data-list-item='0']");
-    console.log(myli);
-    var mydom = ax5.dom("[data-list-item='0']");
-    mydom.css({"border":"1px solid #000"});
-    */
-
-    var el = ax5.dom.get("#list-container");
-    console.log(
-        ax5.dom.child(el)[1].tagName,
-        ax5.dom.attr(ax5.dom.child(el)[1], "data-list-item")
-    );
-
-    //ax5.dom.child("123");
-
-</script>

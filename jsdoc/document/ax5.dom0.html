@@ -110,11 +110,11 @@
             
                 <li data-name="ax5.dom.get_one"><a href="ax5.dom.html#get_one">get_one</a></li>
             
-                <li data-name="ax5.dom.get_parent"><a href="ax5.dom.html#get_parent">get_parent</a></li>
-            
                 <li data-name="ax5.dom.off"><a href="ax5.dom.html#off">off</a></li>
             
                 <li data-name="ax5.dom.on"><a href="ax5.dom.html#on">on</a></li>
+            
+                <li data-name="ax5.dom.parent"><a href="ax5.dom.html#parent">parent</a></li>
             
                 <li data-name="ax5.dom.ready"><a href="ax5.dom.html#ready">ready</a></li>
             
@@ -149,6 +149,8 @@
             
                 <li data-name="ax5.dom0.attr"><a href="ax5.dom0.html#attr">attr</a></li>
             
+                <li data-name="ax5.dom0.child"><a href="ax5.dom0.html#child">child</a></li>
+            
                 <li data-name="ax5.dom0.clazz"><a href="ax5.dom0.html#clazz">clazz</a></li>
             
                 <li data-name="ax5.dom0.css"><a href="ax5.dom0.html#css">css</a></li>
@@ -158,6 +160,8 @@
                 <li data-name="ax5.dom0.off"><a href="ax5.dom0.html#off">off</a></li>
             
                 <li data-name="ax5.dom0.on"><a href="ax5.dom0.html#on">on</a></li>
+            
+                <li data-name="ax5.dom0.parent"><a href="ax5.dom0.html#parent">parent</a></li>
             
             </ul>
             <ul class="events itemMembers">
@@ -470,6 +474,14 @@ ax(&quot;#elementid&quot;);
 
     
     
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint linenums"><code> ax5.dom(&quot;[data-ax-grid&quot;).elements</code></pre>
+    
+
+    
 </dd>
 
         
@@ -515,6 +527,14 @@ ax(&quot;#elementid&quot;);
 
     
     
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint linenums"><code> ax5.dom(&quot;[data-ax-grid&quot;).length</code></pre>
+    
+
+    
 </dd>
 
         </dl>
@@ -529,15 +549,15 @@ ax(&quot;#elementid&quot;);
     <div class="nameContainer">
         <h4 class="name" id="attr">
             
-            <span class="type-signature static">static</span>ax5.dom0.attr<span class="signature">(<span class="optional">command</span>, O)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom.html">ax5.dom</a>|String}</span>
+            <span class="type-signature static">static</span>ax5.dom0.attr<span class="signature">(<span class="optional">command</span>, O)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom0.html">ax5.dom0</a>|String}</span>
         </h4>
     
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1229" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1240" target="_blank">
             ax5.js,
-            line 1229</a>
+            line 1240</a>
         </div>
         
     </div>
@@ -719,17 +739,111 @@ ax(&quot;#elementid&quot;);
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="clazz">
+        <h4 class="name" id="child">
             
-            <span class="type-signature static">static</span>ax5.dom0.clazz<span class="signature">(<span class="optional">command</span>, O)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom.html">ax5.dom</a>|String}</span>
+            <span class="type-signature static">static</span>ax5.dom0.child<span class="signature">()</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom0.html">ax5.dom0</a>}</span>
         </h4>
     
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1155" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1301" target="_blank">
             ax5.js,
-            line 1155</a>
+            line 1301</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>타겟 엘리먼트의 자식들을 반환합니다.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+<h5>Returns:</h5>
+- 자식엘리먼트로 만들어진 새로운 ax5.dom0
+<br />
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint linenums"><code> var dom_child = ax5.dom(&quot;#list-container&quot;).child();
+ ax5.dom(dom_child).child();
+ dom_child.child();
+ // 원하는 대로~</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="clazz">
+            
+            <span class="type-signature static">static</span>ax5.dom0.clazz<span class="signature">(<span class="optional">command</span>, O)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom0.html">ax5.dom0</a>|String}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <i class="axi axi-github"></i>
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1166" target="_blank">
+            ax5.js,
+            line 1166</a>
         </div>
         
     </div>
@@ -911,15 +1025,15 @@ ax(&quot;#elementid&quot;);
     <div class="nameContainer">
         <h4 class="name" id="css">
             
-            <span class="type-signature static">static</span>ax5.dom0.css<span class="signature">(O)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom.html">ax5.dom</a>|String|Object}</span>
+            <span class="type-signature static">static</span>ax5.dom0.css<span class="signature">(O)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom0.html">ax5.dom0</a>|String|Object}</span>
         </h4>
     
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1136" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1147" target="_blank">
             ax5.js,
-            line 1136</a>
+            line 1147</a>
         </div>
         
     </div>
@@ -1053,15 +1167,15 @@ ax(&quot;#elementid&quot;);
     <div class="nameContainer">
         <h4 class="name" id="find">
             
-            <span class="type-signature static">static</span>ax5.dom0.find<span class="signature">(query)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom.html">ax5.dom</a>}</span>
+            <span class="type-signature static">static</span>ax5.dom0.find<span class="signature">(query)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom0.html">ax5.dom0</a>}</span>
         </h4>
     
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1251" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1262" target="_blank">
             ax5.js,
-            line 1251</a>
+            line 1262</a>
         </div>
         
     </div>
@@ -1173,7 +1287,7 @@ ax(&quot;#elementid&quot;);
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-js">
+    <pre class="prettyprint linenums"><code>
 </code></pre>
     
 
@@ -1186,15 +1300,15 @@ ax(&quot;#elementid&quot;);
     <div class="nameContainer">
         <h4 class="name" id="off">
             
-            <span class="type-signature static">static</span>ax5.dom0.off<span class="signature">(type, <span class="optional">_fn</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom.html">ax5.dom</a>}</span>
+            <span class="type-signature static">static</span>ax5.dom0.off<span class="signature">(type, <span class="optional">_fn</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom0.html">ax5.dom0</a>}</span>
         </h4>
     
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1210" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1221" target="_blank">
             ax5.js,
-            line 1210</a>
+            line 1221</a>
         </div>
         
     </div>
@@ -1355,15 +1469,15 @@ ax(&quot;#elementid&quot;);
     <div class="nameContainer">
         <h4 class="name" id="on">
             
-            <span class="type-signature static">static</span>ax5.dom0.on<span class="signature">(type, _fn)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom.html">ax5.dom</a>}</span>
+            <span class="type-signature static">static</span>ax5.dom0.on<span class="signature">(type, _fn)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom0.html">ax5.dom0</a>}</span>
         </h4>
     
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1177" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1188" target="_blank">
             ax5.js,
-            line 1177</a>
+            line 1188</a>
         </div>
         
     </div>
@@ -1521,6 +1635,149 @@ ax(&quot;#elementid&quot;);
     
 </dd>
 
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="parent">
+            
+            <span class="type-signature static">static</span>ax5.dom0.parent<span class="signature">(cond)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.dom0.html">ax5.dom0</a>}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <i class="axi axi-github"></i>
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1281" target="_blank">
+            ax5.js,
+            line 1281</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>타겟엘리먼트의 부모 엘리멘트 트리에서 원하는 조건의 엘리먼트를 얻습니다.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>cond</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>원하는 element를 찾을 조건</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+<h5>Returns:</h5>
+- 부모엘리먼트로 만들어진 새로운 ax5.dom0
+<br />
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint linenums"><code> var dom_child = ax5.dom(&quot;#list-container&quot;).child();
+ console.log(
+ dom_child.parent({tagname:&quot;div&quot;, clazz:&quot;ax5-sample-view&quot;}).elements[0]
+ );
+ console.log(
+ ax5.dom(dom_child).parent({tagname:&quot;div&quot;, clazz:&quot;ax5-sample-view&quot;}).elements[0]
+ );
+ // 같은 결과</code></pre>
+    
+
+    
+</dd>
+
         </dl>
     
     
@@ -1538,7 +1795,7 @@ ax(&quot;#elementid&quot;);
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Thu Dec 25 2014 23:44:22 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Fri Dec 26 2014 14:57:53 GMT+0900 (KST)
         </footer>
     </div>
 </div>

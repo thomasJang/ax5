@@ -110,11 +110,11 @@
             
                 <li data-name="ax5.dom.get_one"><a href="ax5.dom.html#get_one">get_one</a></li>
             
-                <li data-name="ax5.dom.get_parent"><a href="ax5.dom.html#get_parent">get_parent</a></li>
-            
                 <li data-name="ax5.dom.off"><a href="ax5.dom.html#off">off</a></li>
             
                 <li data-name="ax5.dom.on"><a href="ax5.dom.html#on">on</a></li>
+            
+                <li data-name="ax5.dom.parent"><a href="ax5.dom.html#parent">parent</a></li>
             
                 <li data-name="ax5.dom.ready"><a href="ax5.dom.html#ready">ready</a></li>
             
@@ -149,6 +149,8 @@
             
                 <li data-name="ax5.dom0.attr"><a href="ax5.dom0.html#attr">attr</a></li>
             
+                <li data-name="ax5.dom0.child"><a href="ax5.dom0.html#child">child</a></li>
+            
                 <li data-name="ax5.dom0.clazz"><a href="ax5.dom0.html#clazz">clazz</a></li>
             
                 <li data-name="ax5.dom0.css"><a href="ax5.dom0.html#css">css</a></li>
@@ -158,6 +160,8 @@
                 <li data-name="ax5.dom0.off"><a href="ax5.dom0.html#off">off</a></li>
             
                 <li data-name="ax5.dom0.on"><a href="ax5.dom0.html#on">on</a></li>
+            
+                <li data-name="ax5.dom0.parent"><a href="ax5.dom0.html#parent">parent</a></li>
             
             </ul>
             <ul class="events itemMembers">
@@ -558,7 +562,7 @@ argument
 	var root = this, doc = document, win = window;
 
 	/** @namespace {Object} ax5 */
-	var ax5 = {}, info, U, dom, xhr, ui;
+	var ax5 = {}, info, U, dom, xhr, ui, ax5dom;
 	ax5.guid = 1;
 	ax5.get_guid = function(){return ax5.guid++;};
 
@@ -1479,21 +1483,32 @@ ax("#elementid");
 	ax5.dom = dom = function(query){
 		var axdom = (function(){
 			function ax(query){
+				this.toString = function(){
+					return "ax5dom";
+				};
 /**
  * query selected elements
  * @member {Array} ax5.dom0.elements
+ * @example
+ ```
+ ax5.dom("[data-ax-grid").elements
+ ```
  */
 				this.elements = dom.get(query);
 /**
  * query selected elements length
  * @member {Number} ax5.dom0.length
+ * @example
+ ```
+ ax5.dom("[data-ax-grid").length
+ ```
  */
 				this.length = this.elements.length;
 /**
  * elements에 css 값을 적용또는 반환합니다.
  * @method ax5.dom0.css
  * @param {Object|Array|String} O
- * @returns {ax5.dom|String|Object}
+ * @returns {ax5.dom0|String|Object}
  * @example
 ```js
  ax5.dom("[data-ax-grid]").css({"color":"#ff3300", border:"1px solid #000"});
@@ -1513,7 +1528,7 @@ ax("#elementid");
  * @method ax5.dom0.clazz
  * @param {String} [command=has] - add,remove,toggle,has
  * @param {String} O - 클래스명
- * @returns {ax5.dom|String} return - ax5.dom 또는 클래스이름
+ * @returns {ax5.dom0|String} return - ax5.dom 또는 클래스이름
  * @example
 ```js
  console.log(
@@ -1535,7 +1550,7 @@ ax("#elementid");
  * @method ax5.dom0.on
  * @param {String} type - 이벤트 타입
  * @param {Function} _fn - 이벤트 콜백함수
- * @returns {ax5.dom}
+ * @returns {ax5.dom0}
  * @example
 ```js
  var axd = ax5.dom;
@@ -1568,7 +1583,7 @@ ax("#elementid");
  * @method ax5.dom0.off
  * @param {String} type - 이벤트 타입
  * @param {Function} [_fn] - 이벤트 콜백함수
- * @returns {ax5.dom}
+ * @returns {ax5.dom0}
  * @example
  ```js
  var axd = ax5.dom;
@@ -1587,7 +1602,7 @@ ax("#elementid");
  * @method ax5.dom0.attr
  * @param {String|Object} [command=get] - 명령어
  * @param {Object|String} O - json타입또는 문자열
- * @returns {ax5.dom|String}
+ * @returns {ax5.dom0|String}
  * @example
 ```js
  ax5.dom("[data-ax-grid=A]").attr("set", {"data-ax-spt":"ABCD"}); // set attribute
@@ -1604,19 +1619,18 @@ ax("#elementid");
 					var rs = dom.attr(this.elements, command, O);
 					return (rs === "this") ? this : rs;
 				};
-/**
- * element의 attribute를 추가 삭제 가져오기 합니다.
- * @method ax5.dom0.find
- * @param {String} query - selector query
- * @returns {ax5.dom}
- * @example
- ```js
+				/**
+				 * element의 attribute를 추가 삭제 가져오기 합니다.
+				 * @method ax5.dom0.find
+				 * @param {String} query - selector query
+				 * @returns {ax5.dom0} ax5.dom0
+				 * @example
+ ```
 
  ```
- */
+				 */
 				this.find = function(query){
-					this.elements = dom.get(this.elements[0], query);
-					return this;
+					return new axdom( dom.get(this.elements[0], query) );
 				};
 				this.next = function(){
 
@@ -1624,11 +1638,40 @@ ax("#elementid");
 				this.prev = function(){
 
 				};
-				this.parent = function(){
-
+/**
+ * 타겟엘리먼트의 부모 엘리멘트 트리에서 원하는 조건의 엘리먼트를 얻습니다.
+ * @method ax5.dom0.parent
+ * @param {Object} cond - 원하는 element를 찾을 조건
+ * @returns {ax5.dom0} ax5.dom0 - 부모엘리먼트로 만들어진 새로운 ax5.dom0
+ * @example
+ ```
+ var dom_child = ax5.dom("#list-container").child();
+ console.log(
+ dom_child.parent({tagname:"div", clazz:"ax5-sample-view"}).elements[0]
+ );
+ console.log(
+ ax5.dom(dom_child).parent({tagname:"div", clazz:"ax5-sample-view"}).elements[0]
+ );
+ // 같은 결과
+ ```
+ */
+				this.parent = function(cond){
+					return new axdom( dom.parent(this.elements, cond) );
 				};
+/**
+ * 타겟 엘리먼트의 자식들을 반환합니다.
+ * @method ax5.dom0.child
+ * @returns {ax5.dom0} ax5.dom0 - 자식엘리먼트로 만들어진 새로운 ax5.dom0
+ * @example
+```
+ var dom_child = ax5.dom("#list-container").child();
+ ax5.dom(dom_child).child();
+ dom_child.child();
+ // 원하는 대로~
+```
+ */
 				this.child = function(){
-
+					return new axdom( dom.child(this.elements) );
 				};
 			}
 			return ax;
@@ -1659,7 +1702,7 @@ ax("#elementid");
 				else elem.detachEvent( "on" + type );
 			}
 		}
-		function get_elements(elem, fn_name){
+		function validate_elements(elem, fn_name){
 			if(U.is_element(elem)) elem = [elem];
 			if(!U.is_array(elem) && !U.is_nodelist(elem)) {
 				elem = [];
@@ -1667,6 +1710,7 @@ ax("#elementid");
 			}
 			return elem;
 		}
+
 		// jQuery.ready.promise jquery 1.10.2
 		/**
 		 * document 로드 완료를 체크 합니다.
@@ -1735,20 +1779,23 @@ ax("#elementid");
 		/**
 		 * CSS Selector를 이용하여 HTML Elements를 찾습니다.
 		 * @method ax5.dom.get
-		 * @param {String|Element} query - CSS Selector | Element
+		 * @param {String|Element|ax5.dom0} query - CSS Selector | Element
 		 * @param {String} sub_query - CSS Selector
 		 * @returns {Array} elements
 		 * @example
  ```js
  ax5.dom.get("#element01");
  ax5.dom.get("input[type='text']");
+ ax5.dom.get( ax5.dom.get("input[type='text']") );
  ```
 		 */
 		function get(query, sub_query){
 			var elements, return_elements = [], parent_element;
 
-			//console.log(query.toString());
-
+			if(query.toString() == "ax5dom"){
+				return_elements = query.elements;
+			}
+			else
 			if(U.is_element(query))
 			{
 				return_elements.push( query );
@@ -1826,68 +1873,7 @@ ax("#elementid");
 			}
 			return element;
 		}
-		/**
-		 * 타겟엘리먼트의 부모 엘리멘트 트리에서 원하는 조건의 엘리먼트를 얻습니다.
-		 * @method ax5.dom.get_parent
-		 * @param {Element} target - target element
-		 * @param {Object} cond - 원하는 element를 찾을 조건
-		 * @returns {Element}
-		 * @example
- ```js
- // cond 속성정의
- var cond = {
-    tagname: {String} - 태그명 (ex. a, div, span..),
-    clazz: {String} - 클래스명
-    [, 그 외 찾고 싶은 attribute명들]
- };
- console.log(
-    ax5.dom.get_parent(e.target, {tagname:"a", clazz:"ax-menu-handel", "data-custom-attr":"attr_value"})
- );
- ```
-		 */
-		function get_parent(target, cond){
-			var _target = target;
-			if (_target) {
-				while ((function(){
-					var result = true;
-					for(var k in cond){
-						if(k === "tagname"){
-							if(_target.tagName.toLocaleLowerCase() != cond[k]) {
-								result = false;
-								break;
-							}
-						}
-						else
-						if(k === "clazz"){
-							var klasss = _target.className.split(/ /g);
-							var hasClass = false;
-							for(var a=0;a&lt;klasss.length;a++){
-								if(klasss[a] == cond[k]){
-									hasClass = true;
-									break;
-								}
-							}
-							result = hasClass;
-						}
-						else
-						{ // 그외 속성값들.
-							if(_target.getAttribute(k) != cond[k]) {
-								result = false;
-								break;
-							}
-						}
-					}
-					return !result;
-				})()) {
-					if (_target.parentNode) {
-						_target = _target.parentNode;
-					} else {
-						_target = false; break;
-					}
-				}
-			}
-			return _target;
-		}
+
 		/**
 		 * Elements에 CSS속성을 읽고 씁니다.
 		 * @method ax5.dom.css
@@ -1900,7 +1886,7 @@ ax("#elementid");
  ```
 		 */
 		function css(elements, O){
-			elements = get_elements(elements, "css");
+			elements = validate_elements(elements, "css");
 			if(U.is_string(O)) {
 				return elements[0].style[O];
 			}
@@ -1941,7 +1927,7 @@ ax("#elementid");
 		 */
 		function clazz(elements, command, O){
 			var classNames;
-			elements = get_elements(elements, "clazz");
+			elements = validate_elements(elements, "clazz");
 			if(command === "add" || command === "remove" || command === "toggle") {
 				for(var di=0;di&lt;elements.length;di++) {
 					classNames = elements[di]["className"].split(/ /g);
@@ -1995,7 +1981,7 @@ ax("#elementid");
  ```
 		 */
 		function attr(elements, command, O){
-			elements = get_elements(elements, "attr");
+			elements = validate_elements(elements, "attr");
 			if( command === "set" || (typeof O === "undefined" && U.is_object(command)) ){
 				if(typeof O === "undefined") O = command;
 				for(var di=0;di&lt;elements.length;di++) {
@@ -2058,7 +2044,7 @@ ax("#elementid");
  ```
 		 */
 		function on(elements, typ, _fn){
-			elements = get_elements(elements, "on");
+			elements = validate_elements(elements, "on");
 			for(var i=0;i&lt;elements.length;i++) {
 				var __fn, _d = elements[i];
 				if(!_d.e_hd) _d.e_hd = {};
@@ -2086,7 +2072,7 @@ ax("#elementid");
  ```
 		 */
 		function off(elements, typ, _fn){
-			elements = get_elements(elements, "off");
+			elements = validate_elements(elements, "off");
 			for(var i=0;i&lt;elements.length;i++) {
 				var _d = elements[i];
 				if (U.is_array(_d.e_hd[typ])) {
@@ -2132,8 +2118,8 @@ ax("#elementid");
 ```
 		 */
 		// todo : child depth 파라미터 개발
-		function child(elements, depth){
-			elements = get_elements(elements, "child");
+		function child(elements){
+			elements = validate_elements(elements, "child");
 			var return_elems = [], len;
 			if(elements[0]) {
 				len = elements[0].children.length;
@@ -2143,8 +2129,68 @@ ax("#elementid");
 			}
 			return return_elems;
 		}
-		function parent(elements, depth){
-
+		/**
+		 * 타겟엘리먼트의 부모 엘리멘트 트리에서 원하는 조건의 엘리먼트를 얻습니다.
+		 * @method ax5.dom.parent
+		 * @param {Element} elements - target element
+		 * @param {Object} cond - 원하는 element를 찾을 조건
+		 * @returns {Element}
+		 * @example
+ ```
+ // cond 속성정의
+ var cond = {
+    tagname: {String} - 태그명 (ex. a, div, span..),
+    clazz: {String} - 클래스명
+    [, 그 외 찾고 싶은 attribute명들]
+ };
+ console.log(
+ ax5.dom.parent(e.target, {tagname:"a", clazz:"ax-menu-handel", "data-custom-attr":"attr_value"})
+ );
+ ```
+		 */
+		function parent(elements, cond){
+			elements = validate_elements(elements, "child");
+			var _target = elements[0];
+			if (_target) {
+				while ((function(){
+					var result = true;
+					for(var k in cond){
+						if(k === "tagname"){
+							if(_target.tagName.toLocaleLowerCase() != cond[k]) {
+								result = false;
+								break;
+							}
+						}
+						else
+						if(k === "clazz"){
+							var klasss = _target.className.split(/ /g);
+							var hasClass = false;
+							for(var a=0;a&lt;klasss.length;a++){
+								if(klasss[a] == cond[k]){
+									hasClass = true;
+									break;
+								}
+							}
+							result = hasClass;
+						}
+						else
+						{ // 그외 속성값들.
+							if(_target.getAttribute(k) != cond[k]) {
+								result = false;
+								break;
+							}
+						}
+					}
+					return !result;
+				})()) {
+					if (_target.parentNode) {
+						_target = _target.parentNode;
+					} else {
+						_target = false; break;
+					}
+				}
+			}
+			return _target;
 		}
 		function prev(elements){
 
@@ -2177,15 +2223,14 @@ ax("#elementid");
 			unload    : unload,
 			get       : get,
 			get_one   : get_one,
-			get_parent: get_parent,
 			create    : create,
 			css       : css,
 			clazz     : clazz,
 			attr      : attr,
 			on        : on,
 			off       : off,
-			parent    : parent,
 			child     : child,
+			parent    : parent,
 			prev      : prev,
 			next      : next,
 			html      : html,
@@ -2274,7 +2319,7 @@ ax("#elementid");
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Thu Dec 25 2014 23:44:22 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Fri Dec 26 2014 14:57:53 GMT+0900 (KST)
         </footer>
     </div>
 </div>

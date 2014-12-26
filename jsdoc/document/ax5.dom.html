@@ -110,11 +110,11 @@
             
                 <li data-name="ax5.dom.get_one"><a href="ax5.dom.html#get_one">get_one</a></li>
             
-                <li data-name="ax5.dom.get_parent"><a href="ax5.dom.html#get_parent">get_parent</a></li>
-            
                 <li data-name="ax5.dom.off"><a href="ax5.dom.html#off">off</a></li>
             
                 <li data-name="ax5.dom.on"><a href="ax5.dom.html#on">on</a></li>
+            
+                <li data-name="ax5.dom.parent"><a href="ax5.dom.html#parent">parent</a></li>
             
                 <li data-name="ax5.dom.ready"><a href="ax5.dom.html#ready">ready</a></li>
             
@@ -149,6 +149,8 @@
             
                 <li data-name="ax5.dom0.attr"><a href="ax5.dom0.html#attr">attr</a></li>
             
+                <li data-name="ax5.dom0.child"><a href="ax5.dom0.html#child">child</a></li>
+            
                 <li data-name="ax5.dom0.clazz"><a href="ax5.dom0.html#clazz">clazz</a></li>
             
                 <li data-name="ax5.dom0.css"><a href="ax5.dom0.html#css">css</a></li>
@@ -158,6 +160,8 @@
                 <li data-name="ax5.dom0.off"><a href="ax5.dom0.html#off">off</a></li>
             
                 <li data-name="ax5.dom0.on"><a href="ax5.dom0.html#on">on</a></li>
+            
+                <li data-name="ax5.dom0.parent"><a href="ax5.dom0.html#parent">parent</a></li>
             
             </ul>
             <ul class="events itemMembers">
@@ -429,9 +433,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1627" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1609" target="_blank">
             ax5.js,
-            line 1627</a>
+            line 1609</a>
         </div>
         
     </div>
@@ -652,9 +656,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1751" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1733" target="_blank">
             ax5.js,
-            line 1751</a>
+            line 1733</a>
         </div>
         
     </div>
@@ -804,9 +808,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1570" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1552" target="_blank">
             ax5.js,
-            line 1570</a>
+            line 1552</a>
         </div>
         
     </div>
@@ -1023,9 +1027,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1445" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1488" target="_blank">
             ax5.js,
-            line 1445</a>
+            line 1488</a>
         </div>
         
     </div>
@@ -1178,9 +1182,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1535" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1517" target="_blank">
             ax5.js,
-            line 1535</a>
+            line 1517</a>
         </div>
         
     </div>
@@ -1339,9 +1343,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1379" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1419" target="_blank">
             ax5.js,
-            line 1379</a>
+            line 1419</a>
         </div>
         
     </div>
@@ -1393,6 +1397,9 @@
 |
 
 <span class="param-type">Element</span>
+|
+
+<span class="param-type"><a href="ax5.dom0.html">ax5.dom0</a></span>
 
 
             
@@ -1480,7 +1487,8 @@
 
     
     <pre class="prettyprint linenums"><code class="lang-js"> ax5.dom.get(&quot;#element01&quot;);
- ax5.dom.get(&quot;input[type='text']&quot;);</code></pre>
+ ax5.dom.get(&quot;input[type='text']&quot;);
+ ax5.dom.get( ax5.dom.get(&quot;input[type='text']&quot;) );</code></pre>
     
 
     
@@ -1498,9 +1506,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1430" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1473" target="_blank">
             ax5.js,
-            line 1430</a>
+            line 1473</a>
         </div>
         
     </div>
@@ -1649,169 +1657,6 @@
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="get_parent">
-            
-            <span class="type-signature static">static</span>ax5.dom.get_parent<span class="signature">(target, cond)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Element}</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1473" target="_blank">
-            ax5.js,
-            line 1473</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>타겟엘리먼트의 부모 엘리멘트 트리에서 원하는 조건의 엘리먼트를 얻습니다.</p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>target</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Element</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                <p>target element</p></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>cond</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                <p>원하는 element를 찾을 조건</p></td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-
-
-    
-    
-    
-        <h5>Example</h5>
-        
-
-    
-    <pre class="prettyprint linenums"><code class="lang-js"> // cond 속성정의
- var cond = {
-    tagname: {String} - 태그명 (ex. a, div, span..),
-    clazz: {String} - 클래스명
-    [, 그 외 찾고 싶은 attribute명들]
- };
- console.log(
-    ax5.dom.get_parent(e.target, {tagname:&quot;a&quot;, clazz:&quot;ax-menu-handel&quot;, &quot;data-custom-attr&quot;:&quot;attr_value&quot;})
- );</code></pre>
-    
-
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
         <h4 class="name" id="off">
             
             <span class="type-signature static">static</span>ax5.dom.off<span class="signature">(elements, type, <span class="optional">_fn</span>)</span>
@@ -1820,9 +1665,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1719" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1701" target="_blank">
             ax5.js,
-            line 1719</a>
+            line 1701</a>
         </div>
         
     </div>
@@ -2012,9 +1857,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1674" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1656" target="_blank">
             ax5.js,
-            line 1674</a>
+            line 1656</a>
         </div>
         
     </div>
@@ -2196,6 +2041,169 @@
             
 <dt>
     <div class="nameContainer">
+        <h4 class="name" id="parent">
+            
+            <span class="type-signature static">static</span>ax5.dom.parent<span class="signature">(elements, cond)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Element}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <i class="axi axi-github"></i>
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1772" target="_blank">
+            ax5.js,
+            line 1772</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>타겟엘리먼트의 부모 엘리멘트 트리에서 원하는 조건의 엘리먼트를 얻습니다.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>elements</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Element</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>target element</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>cond</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>원하는 element를 찾을 조건</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint linenums"><code> // cond 속성정의
+ var cond = {
+    tagname: {String} - 태그명 (ex. a, div, span..),
+    clazz: {String} - 클래스명
+    [, 그 외 찾고 싶은 attribute명들]
+ };
+ console.log(
+ ax5.dom.parent(e.target, {tagname:&quot;a&quot;, clazz:&quot;ax-menu-handel&quot;, &quot;data-custom-attr&quot;:&quot;attr_value&quot;})
+ );</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
         <h4 class="name" id="ready">
             
             <span class="type-signature static">static</span>ax5.dom.ready<span class="signature">(_fn)</span>
@@ -2204,9 +2212,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1315" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1355" target="_blank">
             ax5.js,
-            line 1315</a>
+            line 1355</a>
         </div>
         
     </div>
@@ -2342,7 +2350,7 @@
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Thu Dec 25 2014 23:44:22 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Fri Dec 26 2014 14:57:53 GMT+0900 (KST)
         </footer>
     </div>
 </div>
