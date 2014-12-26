@@ -22,27 +22,37 @@
             border-radius: 4px;
             background: #f06433;
         }
+        hr.split{
+            border-style: dashed;
+            border-width: 1px;
+        }
+
     </style>
 
 </head>
-<body>
-    <div id="progress" class="progress"><div id="progress-bar" class="progress-bar"></div></div>
+<body custom-attr="ca">
+    <div id="progress" class="progress"><div id="progress-bar" class="progress-bar" ondblclick="alert('dbClick')" custom-attr="ca"></div></div>
     <h1>AX5 API Check</h1>
     <div id="test-result" class="test-result"></div>
-    <div style="clear: both;"></div>
-    <p>tom@axisj.com - 2014-12-25</p>
+    <p id="author"  ondblclick="alert('author_dbClick')">tom@axisj.com - 2014-12-11</p>
 
     <div id="id-test"></div>
     <a class="class-text"></a>
 
-    <span data-attr="A"></span>
+    <span data-attr="A" id="test"></span>
     <div data-attr="B"></div>
 
     <script type="text/javascript">
         /*
          http://ax5.io/jsdoc/document/index.html 에 좌측메뉴 순서대로 테스트 코드를 작성을 기준으로 하지만 짝이 있는 함수일 경우 같이 작성 합니다.
          */
+        var eventChecker = '';
+        var eventCheckerFn = function(){
+            eventChecker = "click_event_on";
+        };
+
         var check_list = [
+            //ax5.util----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             {
                 label:"ax5.util.alert",
                 fn: function(){
@@ -69,6 +79,7 @@
                 },
                 r: "string A"
             },
+
             {
                 label:"ax5.util.each",
                 fn: function(){
@@ -97,7 +108,6 @@
                     return (function A(){ return typeof ax5.util.error; })();
                 }
             },
-
             {
                 label:"ax5.util.extend : add key",
                 fn: function(){
@@ -177,8 +187,8 @@
             {
                 label:"ax5.util.first(object)",
                 fn: function(){
-                    var aarray = {a:11, b:22, c:33, d:44};
-                    var result = ax5.util.first(aarray);
+                    var obj = {a:11, b:22, c:33, d:44};
+                    var result = ax5.util.first(obj);
 
                     return result[Object.keys(result)[0]];
                 },
@@ -195,8 +205,8 @@
             {
                 label:"ax5.util.last(object)",
                 fn: function(){
-                    var aarray = {a:11, b:22, c:33, d:44}
-                    var result = ax5.util.last(aarray);
+                    var obj = {a:11, b:22, c:33, d:44}
+                    var result = ax5.util.last(obj);
 
                     return result[Object.keys(result)[0]];
                 },
@@ -209,62 +219,6 @@
                     return ax5.util.get_cookie("jslib");
                 },
                 r: "AX5"
-            },
-            {
-                label:"ax5.dom.get : id",
-                fn: function(){
-                    return ax5.dom.get("#test-result");
-                }
-            },
-            {
-                label:"ax5.dom.get : class",
-                fn: function(){
-                    return ax5.dom.get(".test-result");
-                }
-            },
-            {
-                label:"ax5.dom.get : tagName#id",
-                fn: function(){
-                    return ax5.dom.get("div#test-result");
-                }
-            },
-            {
-                label:"ax5.dom.get : tagName.class",
-                fn: function(){
-                    return ax5.dom.get("div.test-result");
-                }
-            },
-            {
-                label:"ax5.dom.get : tagName#id #id ",
-                fn: function(){
-                    return ax5.dom.get("div#progress #progress-bar");
-                }
-            },
-            {
-                label:"ax5.dom.get : tagName.class .class ",
-                fn: function(){
-                    return ax5.dom.get("div.progress .progress-bar");
-                }
-            },
-            {
-                label:"ax5.dom.get : tagName#id .class ",
-                fn: function(){
-                    return ax5.dom.get("div#progress .progress-bar");
-                }
-            },
-            {
-                label:"ax5.dom.get : tagName.class #id",
-                fn: function(){
-                    return ax5.dom.get("div.progress #progress-bar");
-                }
-            },
-
-            {
-                label:"ax5.dom.get(parent_element, selector)",
-                fn: function(){
-                    //return ax5.dom.get(ax5.util.get_element('#test-result'), "div:first-child");
-                    return ax5.dom.get(document.querySelectorAll('#test-result'), "div:first-child");
-                }
             },
 
             {
@@ -298,6 +252,12 @@
                 fn: function(){
                     var a = function(){};
                     return ax5.util.is_function(a);
+                }
+            },
+            {
+                label:"ax5.util.is_nodelist",
+                fn: function(){
+                    return ax5.util.is_nodelist(document.querySelectorAll('div'));
                 }
             },
             {
@@ -401,6 +361,28 @@
                 r    : "ready-response"
             },
             {
+                label: "ax5.util.require(not found), fail is OK",
+                fn   : function (callBack) {
+                    ax5.util.require(["src/ax5_class_sample_not_found.js"], function(){
+                        callBack(true);
+                    }, function(){
+                        callBack(false);
+                    });
+                },
+                r    : "ready-response"
+            },
+            {
+                label: "ax5.util.require(large file)",
+                fn   : function (callBack) {
+                    ax5.util.require(["src/ax5_large_class_sample.js?v="+parseInt(Math.random()*100) ], function(){
+                        callBack(true);
+                    }, function(){
+                        callBack(false);
+                    });
+                },
+                r    : "ready-response"
+            },
+            {
                 label: "ax5.util.search",
                 fn   : function () {
                     var myArray = [0,1,2,3,4,5,6];
@@ -455,16 +437,210 @@
                 },
                 r    : "/api-test.html"
             },
+            //ax5.dom----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            {
+                label: "split"
+            },
+            {
+                label: "ax5.dom.attr",
+                fn   : function () {
+                    ax5.dom.attr(ax5.dom.get("#id-test"), "set", {"data-ax-spt":"ABCD"}); // set attribute
+                    ax5.dom.attr(ax5.dom.get("#id-test"), {"data-ax-spt":"9999", "data-next":"next"}); // set attribute
+                    ax5.dom.attr(ax5.dom.get("#id-test"), "remove", "data-next");
+
+                    var result1 = ax5.dom.attr(ax5.dom.get("#id-test"), "data-ax-spt");
+                    var result2 = ax5.dom.attr(ax5.dom.get("#id-test"), "data-next");
+
+                    return result1 + " " + result2;
+                },
+                r   : "9999 null"
+            },
+            {
+                label: "ax5.dom.child",
+                fn   : function () {
+                    var el = ax5.dom.get("#progress");
+
+                    var tn = ax5.dom.child(el)[0].tagName;
+                    var att = ax5.dom.attr(ax5.dom.child(el)[0], "custom-attr");
+
+                    return tn + " " + att;
+                },
+                r   : "DIV ca"
+            },
+
+            {
+                label:"ax5.dom.clazz",
+                fn: function(){
+                    var hasResult1      = ax5.dom.clazz(ax5.dom.get("#progress"), "test-result");
+                    var hasResult_false = ax5.dom.clazz(ax5.dom.get("#progress"), "no-exist");
+                    var addResult       = ax5.dom.clazz(ax5.dom.get("#progress"), "add", "add-class-name");
+                    var hasResult2      = ax5.dom.clazz(ax5.dom.get("#progress"), "add-class-name");
+                    var removeResult    = ax5.dom.clazz(ax5.dom.get("#progress"), "remove", "add-class-name");
+                    var hasResult3      = ax5.dom.clazz(ax5.dom.get("#progress"), "add-class-name");
+                    var toggleResult    = ax5.dom.clazz(ax5.dom.get("#progress"), "toggle", "add-class-name");
+                    var hasResult4      = ax5.dom.clazz(ax5.dom.get("#progress"), "add-class-name");
+                    var toggleResult    = ax5.dom.clazz(ax5.dom.get("#progress"), "toggle", "add-class-name");
+                    var hasResult5      = ax5.dom.clazz(ax5.dom.get("#progress"), "add-class-name");
+
+                    var po = [];
+                    po.push(hasResult1);
+                    po.push(hasResult_false);
+                    po.push(hasResult2);
+                    po.push(hasResult3);
+                    po.push(hasResult4);
+                    po.push(hasResult5);
+
+                    return po.join(' ');
+                },
+                r    : "false false true false true false"
+            },
+
+            {
+                label:"ax5.dom.create",
+                fn: function(){
+                    var ele = ax5.dom.create("div", {id:"createEleId", class:"createEleClass"});
+                    var target = document.getElementById("test-result");
+                    target.appendChild(ele);
+
+                    //return ax5.util.is_element(document.getElementById("test-result"));
+                    return ax5.util.is_element(document.getElementById("createEleId"));
+                },
+                r: true
+            },
+
+            {
+                label:"ax5.dom.css",
+                fn: function(){
+                    ax5.dom.css(ax5.dom.get("#progress"), {"border-color":"#ff3300"});
+                    var result = ax5.dom.css(ax5.dom.get("#progress"), "border-color");
+                    ax5.dom.css(ax5.dom.get("#progress"), {"border-top-style":"dotted", "border-bottom-style":"dashed" });
+                    var result2 = ax5.dom.css(ax5.dom.get("#progress"), "border-bottom-style");
+
+                    return result +" "+ result2 ;
+                },
+                //r   :"#ff3300"
+                r:  "rgb(255, 51, 0) dashed"
+            },
+
+            {
+                label:"ax5.dom.get : id",
+                fn: function(){
+                    return ax5.dom.get("#test-result");
+                }
+            },
+            {
+                label:"ax5.dom.get : class",
+                fn: function(){
+                    return ax5.dom.get(".test-result");
+                }
+            },
+            {
+                label:"ax5.dom.get : tagName#id",
+                fn: function(){
+                    return ax5.dom.get("div#test-result");
+                }
+            },
+            {
+                label:"ax5.dom.get : tagName.class",
+                fn: function(){
+                    return ax5.dom.get("div.test-result");
+                }
+            },
+            {
+                label:"ax5.dom.get : tagName#id #id ",
+                fn: function(){
+                    return ax5.dom.get("div#progress #progress-bar");
+                }
+            },
+            {
+                label:"ax5.dom.get : tagName.class .class ",
+                fn: function(){
+                    return ax5.dom.get("div.progress .progress-bar");
+                }
+            },
+            {
+                label:"ax5.dom.get : tagName#id .class ",
+                fn: function(){
+                    return ax5.dom.get("div#progress .progress-bar");
+                }
+            },
+            {
+                label:"ax5.dom.get : tagName.class #id",
+                fn: function(){
+                    return ax5.dom.get("div.progress #progress-bar");
+                }
+            },
+            {
+                label:"ax5.dom.get(query, subQuery)",
+                fn: function(){
+                    return ax5.dom.get('div#test-result, div' );
+                }
+            },
+
+            {
+                label:"ax5.dom.get_one(query, subQuery)",
+                fn: function(){
+                    return ax5.dom.get_one('div#test-result, div' );
+                }
+            },
+            {
+                label:"ax5.dom.on",
+                fn: function(){
+                    var mydom = ax5.dom.get("#author");
+                    ax5.dom.on(mydom, "click", eventCheckerFn);
+
+                    mydom[0].click();
+                    return eventChecker;
+                },
+                r: "click_event_on"
+            },
+            {
+                label:"ax5.dom.off",
+                fn: function(){
+                    var mydom = ax5.dom.get("#author");
+                    ax5.dom.off(mydom, "click", eventCheckerFn);
+
+                    eventChecker = "off";
+                    mydom[0].click();
+                    return eventChecker;
+                },
+                r: "off"
+            },
+            {
+                label:"ax5.dom.parent",
+                fn: function(){
+                    var tg = ax5.dom.get_one("#progress-bar");
+                    var cond = {
+                        tagname: "div",
+                        clazz: "progress"
+                        //,"custom-attr":"ca"
+                    };
+                    /*
+                     var cond = {
+                     tagname: "body"
+                     //,"custom-attr":"ca"
+                     };
+                     */
+
+                    return ax5.dom.parent(tg, cond);
+                }
+            },
+
+
+            //ax5.domO----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            {
+                label: "split"
+            },
             {
                 label: "ax5.dom('#id')",
                 fn   : function () {
-                    return ax5.util.is_element(ax5.dom("#id-test").elements[0])
+                    return ax5.util.is_element(ax5.dom("#id-test").elements[0]);
                 }
             },
             {
                 label: "ax5.dom('.class')",
                 fn   : function () {
-                    return ax5.util.is_element(ax5.dom(".class-text").elements[0])
+                    return ax5.util.is_element(ax5.dom(".class-text").elements[0]);
                 }
             },
             {
@@ -476,17 +652,18 @@
             {
                 label: "ax5.dom('[attr=value]')",
                 fn   : function () {
-                    return ax5.util.is_element(ax5.dom("[data-attr=A]").elements[0])
+                    return ax5.util.is_element(ax5.dom("[data-attr=A]").elements[0]);
                 }
             },
+
             {
-                label: "ax5.dom.attr",
+                label: "ax5.dom0.attr",
                 fn   : function () {
                     ax5.dom("#id-test").attr("set", {"data-ax-spt":"ABCDE"}); // set attribute
                     ax5.dom("#id-test").attr({"data-ax-0":"A", "data-ax-1":"B"}); // set attribute
 
                     var result = ax5.dom("#id-test").attr("data-ax-spt") +
-                    ax5.dom("#id-test").attr("get", "data-ax-0");
+                            ax5.dom("#id-test").attr("get", "data-ax-0");
                     ax5.dom("#id-test").attr("remove", "data-ax-1");
                     result += ax5.dom("#id-test").attr("data-ax-1");
 
@@ -495,7 +672,21 @@
                 r    : "ABCDEAnull"
             },
             {
-                label: "ax5.dom.clazz",
+                label:"ax5.dom0.attr",
+                fn: function(){
+                    ax5.dom(ax5.dom.get("[data-attr=A]")).attr("set", {"data-ax-spt":"ABCD"});
+                    ax5.dom(ax5.dom.get("[data-attr=A]")).attr("set", {"customn-attr-1":"ca1", "customn-attr-2":"ca2"});
+                    var getAttr = ax5.dom(ax5.dom.get("[data-attr=A]")).attr("data-ax-spt");
+                    var getAttr2 = ax5.dom(ax5.dom.get("[data-attr=A]")).attr("customn-attr-2");
+                    ax5.dom(ax5.dom.get("[data-attr=A]")).attr("remove", "customn-attr-1" );
+                    var getAttr3 = ax5.dom(ax5.dom.get("[data-attr=A]")).attr("customn-attr-1");
+
+                    return ( getAttr + " " + getAttr2  + " " + getAttr3 );
+                },
+                r:"ABCD ca2 null"
+            },
+            {
+                label: "ax5.dom0.clazz",
                 fn   : function () {
 
                     var result = "";
@@ -515,17 +706,44 @@
                 r    : "truetruefalsetruefalse"
             },
             {
-                label: "ax5.dom.css",
+                label:"ax5.dom0.clazz",
+                fn: function(){
+                    var hasResult1      = ax5.dom(ax5.dom.get("#test-result")).clazz("test-result");
+                    var hasResult_false = ax5.dom(ax5.dom.get("#test-result")).clazz("no-exist");
+                    var addResult       = ax5.dom(ax5.dom.get("#test-result")).clazz("add", "add-class-name");
+                    var hasResult2      = ax5.dom(ax5.dom.get("#test-result")).clazz("add-class-name");
+                    var removeResult    = ax5.dom(ax5.dom.get("#test-result")).clazz("remove", "add-class-name");
+                    var hasResult3      = ax5.dom(ax5.dom.get("#test-result")).clazz("add-class-name");
+                    var toggleResult    = ax5.dom(ax5.dom.get("#test-result")).clazz("toggle", "add-class-name");
+                    var hasResult4      = ax5.dom(ax5.dom.get("#test-result")).clazz("add-class-name");
+                    var toggleResult    = ax5.dom(ax5.dom.get("#test-result")).clazz("toggle", "add-class-name");
+                    var hasResult5      = ax5.dom(ax5.dom.get("#test-result")).clazz("add-class-name");
+
+                    var po = [];
+                    po.push(hasResult1);
+                    po.push(hasResult_false);
+                    po.push(hasResult2);
+                    po.push(hasResult3);
+                    po.push(hasResult4);
+                    po.push(hasResult5);
+
+                    return po.join(' ');
+                },
+                r: "true false true false true false"
+            },
+
+            {
+                label: "ax5.dom0.css",
                 fn   : function () {
                     var result = "";
-                    ax5.dom("#id-test").css({"font-family":"Gulim"});
+                    ax5.dom("#id-test").css({fontFamily:"Gulim"});
                     result = ax5.dom("#id-test").css("font-family");
                     return result;
                 },
                 r    : "Gulim"
             },
             {
-                label: "ax5.dom.on",
+                label: "ax5.dom0.on",
                 fn   : function (callBack) {
                     var result = "";
                     ax5.dom("#id-test").on("click", function(){
@@ -534,7 +752,31 @@
                     ax5.dom("#id-test").elements[0].click();
                 },
                 r    : "ready-response"
-            }
+            },
+            {
+                label: "ax5.dom0.off",
+                fn   : function (callBack) {
+                    var result = "";
+                    ax5.dom("#id-test").off("click", function(){
+                        callBack(true);
+                    });
+                    ax5.dom("#id-test").elements[0].click();
+                },
+                r    : "ready-response"
+            },
+
+            {
+                label: "ax5.dom0.css",
+                fn   : function () {
+                    var result = "";
+                    ax5.dom("#id-test").css({fontFamily:"Gulim"});
+                    result = ax5.dom("#id-test").css("font-family");
+                    return result;
+                },
+                r    : "Gulim"
+            },
+
+
         ];
 
         if("API check 시작") {
@@ -552,35 +794,64 @@
                 var result, err_string;
 
                 if(O.r === "ready-response"){
+                    var skipFlag = false;
+
+                    /*
+                    var skipFn = setTimeout(function () {
+                        //var req = new XMLHttpRequest();
+                        //req.abort();
+                        console.log("settimeout");
+                        skipFlag = true;
+
+                        newDiv.innerHTML = "<h3 class='red'>" + O.label + " : <u>skip</u></h3>";
+                        target.appendChild(newDiv);
+                        checker(check_list.shift());
+                    }, 1000);
+                    */
+
                     O.fn(function(res){
-                        if(res){
-                            newDiv.innerHTML = "<h3 class='blue'>" + O.label + " : <u>OK</u></h3>";
-                            target.appendChild(newDiv);
-                            setTimeout(function () {
-                                checker(check_list.shift());
-                            }, 100);
+                        if (!skipFlag) {
+                            //if(skipFn) clearTimeout(skipFn);
+                            if (res) {
+                                newDiv.innerHTML = "<h3 class='blue'>" + O.label + " : <u>OK</u></h3>";
+                                target.appendChild(newDiv);
+                                setTimeout(function () {
+                                    checker(check_list.shift());
+                                }, 100);
+                            } else {
+                                newDiv.innerHTML = "<h3 class='red'>" + O.label + " : <u>fail</u></h3>";
+                                target.appendChild(newDiv);
+                                setTimeout(function () {
+                                    checker(check_list.shift());
+                                }, 100);
+                            }
                         }
                     });
                 }else{
-                    try{
-                        result = O.fn();
-                    }catch(e){
-                        err_string = e.toString();
-                        console.error(e);
-                    }
+                    if(O.label === "split") {
+                        newDiv.innerHTML = "<hr class='split' />";
+                    }else{
+                        try{
+                            result = O.fn();
+                        }catch(e){
+                            err_string = e.toString();
+                            console.error(e);
+                        }
 
-                    if (typeof O.r != "undefined" && (result == O.r)) {
-                        newDiv.innerHTML = "<h3 class='blue'>" + O.label + " : <u>OK</u></h3>";
-                    } else if (typeof O.r == "undefined" && result) {
-                        newDiv.innerHTML = "<h3 class='blue'>" + O.label + " : <u>OK : "+ result +"</u></h3>";
-                    } else {
-                        newDiv.innerHTML = "<h3 class='red'>" + O.label + " : <u>?? " + result + "["+ err_string +"]" + "</u></h3>";
+                        if (typeof O.r != "undefined" && (result == O.r)) {
+                            newDiv.innerHTML = "<h3 class='blue'>" + O.label + " : <u>OK</u></h3>";
+                        } else if (typeof O.r == "undefined" && result) {
+                            newDiv.innerHTML = "<h3 class='blue'>" + O.label + " : <u>OK : "+ result +"</u></h3>";
+                        } else {
+                            newDiv.innerHTML = "<h3 class='red'>" + O.label + " : <u>?? " + result + "["+ err_string +"]" + "</u></h3>";
+                        }
                     }
 
                     target.appendChild(newDiv);
                     setTimeout(function () {
                         checker(check_list.shift());
                     }, 10);
+
                 }
             }
             checker(check_list.shift());
