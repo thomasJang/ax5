@@ -9,14 +9,14 @@
     <div class="ax5-sample-view">
         <div>
             <ul id="list-container">
-                <li data-list-item="0">
+                <li data-list-item="0" id="li0">
                     <div>child>child</div>
                 </li>
-                <li data-list-item="1"></li>
-                <li data-list-item="2"></li>
-                <li data-list-item="3"></li>
-                <li data-list-item="4"></li>
-                <li data-list-item="5"></li>
+                <li data-list-item="1" id="li1"></li>
+                <li data-list-item="2" id="li2"></li>
+                <li data-list-item="3" id="li3"></li>
+                <li data-list-item="4" id="li4"></li>
+                <li data-list-item="5" id="li5"></li>
             </ul>
         </div>
 
@@ -25,45 +25,12 @@
 
     </div>
     <script type="text/javascript">
-/*
-        var fna = function(){console.log("fna")};
-        var fnb = function(){console.log("fnb")};
-        var fnc = function(){console.log("fnc")};
-
-        var mydom = ax5.dom.get("[data-event-test=text-box]"), remove_dom = ax5.dom.get("[data-event-test=remove]");
-
-        ax5.dom.on(mydom, "click", window.fna);
-        ax5.dom.on(mydom, "click", window.fnb);
-        ax5.dom.on(mydom, "click", window.fnc);
-
-        ax5.dom.on(remove_dom, "click", function(){
-            ax5.dom.off(mydom, "click", window.fna);
-            ax5.dom.off(remove_dom, "click");
-            alert("이벤트 제거");
-        });
-*/
-
-        /*
-         var myli = ax5.dom.get("[data-list-item='0']");
-         console.log(myli);
-         var mydom = ax5.dom("[data-list-item='0']");
-         mydom.css({"border":"1px solid #000"});
-         */
-
-        var el = ax5.dom.get("#list-container");
-
-        //console.log(el.toString());
-
-        //console.log(
-//            ax5.dom.parent(ax5.dom.child(el), {tagname:"div", clazz:"ax5-sample-view"})
-  //      );
-
-        var dom_child = ax5.dom("#list-container").child();
-//console.log(dom_child.toString());
+        var el = ax5.dom("#list-container");
+        var li = el.child(el);
 
         console.log(
-            ax5.dom(dom_child).parent({tagname:"div", clazz:"ax5-sample-view"}).elements[0],
-            dom_child.parent({tagname:"div", clazz:"ax5-sample-view"})
+            (c_li = li.next(2)).elements[0].id,
+            (c_li = c_li.prev()).elements[0].id
         );
 
     </script>

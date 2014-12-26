@@ -750,7 +750,7 @@ argument
  * @param {Object} O
  * @returns {Boolean}
  */
-		function is_nodelist(O) { return (_toString.call(O) == "[object NodeList]" || O[0].nodeType == 1); }
+		function is_nodelist(O) { return (_toString.call(O) == "[object NodeList]" || (O && O[0] && O[0].nodeType == 1)); }
 /**
  * 오브젝트가 undefined인지 판단합니다.
  * @method ax5.util.is_undefined
@@ -1259,25 +1259,87 @@ ax("#elementid");
 					var rs = dom.attr(this.elements, command, O);
 					return (rs === "this") ? this : rs;
 				};
-				/**
-				 * element의 attribute를 추가 삭제 가져오기 합니다.
-				 * @method ax5.dom0.find
-				 * @param {String} query - selector query
-				 * @returns {ax5.dom0} ax5.dom0
-				 * @example
- ```
+/**
+ * element의 attribute를 추가 삭제 가져오기 합니다.
+ * @method ax5.dom0.find
+ * @param {String} query - selector query
+ * @returns {ax5.dom0} ax5.dom0
+ * @example
+```
 
- ```
-				 */
+```
+ */
 				this.find = function(query){
 					return new axdom( dom.get(this.elements[0], query) );
 				};
-				this.next = function(){
 
-				};
-				this.prev = function(){
+/**
+ * 형제 엘리먼트중에 다음에 위치한 엘리먼트를 반환합니다.
+ * @method ax5.dom0.next
+ * @param {Number} [times=0] - 횟수
+ * @returns {ax5.dom0} ax5.dom0
+ * @example
+ ```
+ <div>
+	 <ul id="list-container">
+		 <li data-list-item="0" id="li0">
+		    <div>child>child</div>
+		 </li>
+		 <li data-list-item="1" id="li1"></li>
+		 <li data-list-item="2" id="li2"></li>
+		 <li data-list-item="3" id="li3"></li>
+		 <li data-list-item="4" id="li4"></li>
+		 <li data-list-item="5" id="li5"></li>
+	 </ul>
+ </div>
+ <script>
+ var el = ax5.dom("#list-container");
+ var li = el.child(el);
 
+ console.log(
+	 (c_li = li.next(2)).elements[0].id,
+	 (c_li = c_li.prev()).elements[0].id
+ );
+ </script>
+ ```
+ */
+				this.prev = function(times){
+					return new axdom( dom.prev(this.elements, times) );
 				};
+/**
+ * 형제 엘리먼트중에 이전에 위치한 엘리먼트를 반환합니다.
+ * @method ax5.dom0.prev
+ * @param {Number} [times=0] - 횟수
+ * @returns {ax5.dom0} ax5.dom0
+ * @example
+ ```
+ <div>
+	 <ul id="list-container">
+		 <li data-list-item="0" id="li0">
+		    <div>child>child</div>
+		 </li>
+		 <li data-list-item="1" id="li1"></li>
+		 <li data-list-item="2" id="li2"></li>
+		 <li data-list-item="3" id="li3"></li>
+		 <li data-list-item="4" id="li4"></li>
+		 <li data-list-item="5" id="li5"></li>
+	 </ul>
+ </div>
+ <script>
+ var el = ax5.dom("#list-container");
+ var li = el.child(el);
+
+ console.log(
+	 (c_li = li.next(2)).elements[0].id,
+	 (c_li = c_li.prev()).elements[0].id
+ );
+ </script>
+ ```
+ */
+				this.next = function(times){
+					return new axdom( dom.next(this.elements, times) );
+				};
+
 /**
  * 타겟엘리먼트의 부모 엘리멘트 트리에서 원하는 조건의 엘리먼트를 얻습니다.
  * @method ax5.dom0.parent
@@ -1287,10 +1349,10 @@ ax("#elementid");
  ```
  var dom_child = ax5.dom("#list-container").child();
  console.log(
- dom_child.parent({tagname:"div", clazz:"ax5-sample-view"}).elements[0]
+    dom_child.parent({tagname:"div", clazz:"ax5-sample-view"}).elements[0]
  );
  console.log(
- ax5.dom(dom_child).parent({tagname:"div", clazz:"ax5-sample-view"}).elements[0]
+    ax5.dom(dom_child).parent({tagname:"div", clazz:"ax5-sample-view"}).elements[0]
  );
  // 같은 결과
  ```
@@ -1832,11 +1894,91 @@ ax("#elementid");
 			}
 			return _target;
 		}
-		function prev(elements){
 
+		function sibling(elements, forward, times){
+			elements = validate_elements(elements, forward);
+			var prop = (forward == "prev") ? "previousSibling" : "nextSibling", el = elements[0];
+			times = times|0;
+			do{
+				el = el[prop];
+			} while(
+				(function(){
+					if(!el) return false;
+					if(el.nodeType == 1) times--;
+					return (times > -1)
+				})()
+			);
+			return el;
 		}
-		function next(elements){
+/**
+ * 형제 엘리먼트중에 앞서 위치한 엘리먼트를 반환합니다.
+ * @method ax5.dom.prev
+ * @param {Elements|Element} elements
+ * @param {Number} [times=0] - 횟수
+ * @returns {Element|null} element - 원하는 위치에 아이템이 없으면 null 을 반환합니다.
+ * @example
+```
+ <div>
+	 <ul id="list-container">
+		 <li data-list-item="0" id="li0">
+		    <div>child>child</div>
+		 </li>
+		 <li data-list-item="1" id="li1"></li>
+		 <li data-list-item="2" id="li2"></li>
+		 <li data-list-item="3" id="li3"></li>
+		 <li data-list-item="4" id="li4"></li>
+		 <li data-list-item="5" id="li5"></li>
+	 </ul>
+ </div>
+ <script>
+ var el = ax5.dom.get("#list-container");
+ var li = ax5.dom.child(el)[0];
+ var c_li;
 
+ console.log(
+	 (c_li = ax5.dom.next(li, 2)).id,
+	 (c_li = ax5.dom.prev(c_li)).id
+ );
+ </script>
+```
+ */
+		function prev(elements, times){
+			return sibling(elements, "prev", times);
+		}
+/**
+ * 형제 엘리먼트중에 다음에 위치한 엘리먼트를 반환합니다.
+ * @method ax5.dom.next
+ * @param {Elements|Element} elements
+ * @param {Number} [times=0] - 횟수
+ * @returns {Element|null} element - 원하는 위치에 아이템이 없으면 null 을 반환합니다.
+ * @example
+ ```
+ <div>
+	 <ul id="list-container">
+		 <li data-list-item="0" id="li0">
+		 <div>child>child</div>
+		 </li>
+		 <li data-list-item="1" id="li1"></li>
+		 <li data-list-item="2" id="li2"></li>
+		 <li data-list-item="3" id="li3"></li>
+		 <li data-list-item="4" id="li4"></li>
+		 <li data-list-item="5" id="li5"></li>
+	 </ul>
+ </div>
+ <script>
+ var el = ax5.dom.get("#list-container");
+ var li = ax5.dom.child(el)[0];
+ var c_li;
+
+ console.log(
+	 (c_li = ax5.dom.next(li, 2)).id,
+	 (c_li = ax5.dom.prev(c_li)).id
+ );
+ </script>
+ ```
+ */
+		function next(elements, times){
+			return sibling(elements, "next", times);
 		}
 		function html(){
 
