@@ -257,7 +257,7 @@
             {
                 label:"ax5.util.is_nodelist",
                 fn: function(){
-                    return ax5.util.is_nodelist(document.querySelectorAll('div'));
+                    return ax5.util.is_nodelist( document.querySelectorAll('div') );
                 }
             },
             {
@@ -498,7 +498,7 @@
             {
                 label:"ax5.dom.create",
                 fn: function(){
-                    var ele = ax5.dom.create("div", {id:"createEleId", class:"createEleClass"});
+                    var ele = ax5.dom.create("div", {id:"createEleId", "class":"createEleClass"});
                     var target = document.getElementById("test-result");
                     target.appendChild(ele);
 
@@ -774,9 +774,7 @@
                     return result;
                 },
                 r    : "Gulim"
-            },
-
-
+            }
         ];
 
         if("API check 시작") {

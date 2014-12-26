@@ -750,7 +750,7 @@ argument
  * @param {Object} O
  * @returns {Boolean}
  */
-		function is_nodelist(O) { return _toString.call(O) == "[object NodeList]"; }
+		function is_nodelist(O) { return (_toString.call(O) == "[object NodeList]" || O[0].nodeType == 1); }
 /**
  * 오브젝트가 undefined인지 판단합니다.
  * @method ax5.util.is_undefined
@@ -1124,7 +1124,7 @@ ax("#elementid");
 		var axdom = (function(){
 			function ax(query){
 				this.toString = function(){
-					return "ax5dom";
+					return "[object ax5.dom]";
 				};
 /**
  * query selected elements
@@ -1432,7 +1432,7 @@ ax("#elementid");
 		function get(query, sub_query){
 			var elements, return_elements = [], parent_element;
 
-			if(query.toString() == "ax5dom"){
+			if(query.toString() == "[object ax5.dom]"){
 				return_elements = query.elements;
 			}
 			else

@@ -51,6 +51,9 @@
          */
 
         var el = ax5.dom.get("#list-container");
+
+        //console.log(el.toString());
+
         //console.log(
 //            ax5.dom.parent(ax5.dom.child(el), {tagname:"div", clazz:"ax5-sample-view"})
   //      );
@@ -59,7 +62,7 @@
 //console.log(dom_child.toString());
 
         console.log(
-            ax5.dom(dom_child).parent({tagname:"div", clazz:"ax5-sample-view"}),
+            ax5.dom(dom_child).parent({tagname:"div", clazz:"ax5-sample-view"}).elements[0],
             dom_child.parent({tagname:"div", clazz:"ax5-sample-view"})
         );
 
