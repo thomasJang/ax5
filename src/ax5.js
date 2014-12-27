@@ -1471,11 +1471,19 @@ ax("#elementid");
 				}
 			}
 		}
+/**
+ * 브라우저 resize 이벤트를 캐치합니다.
+ * @method ax5.dom.resize
+ * @param {Function} _fn - 캐치후 호출될 함수
+ * @example
+```js
+ ax5.dom.resize(function(){
+    console.log( 1, document.body.clientWidth );
+ });
+```
+ */
 		function resize( _fn ){
-
-		}
-		function unload( _fn ){
-
+			eventBind(window, "resize", _fn);
 		}
 
 		/**
@@ -1980,6 +1988,14 @@ ax("#elementid");
 		function next(elements, times){
 			return sibling(elements, "next", times);
 		}
+
+		function width(elements, opts){
+
+		}
+		function height(elements, opts){
+
+		}
+
 		function html(){
 
 		}
