@@ -2018,7 +2018,6 @@ ax("#elementid");
 		U.extend(ax5.dom, {
 			ready     : ready,
 			resize    : resize,
-			unload    : unload,
 			get       : get,
 			get_one   : get_one,
 			create    : create,
