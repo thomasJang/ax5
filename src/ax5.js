@@ -199,11 +199,21 @@ argument
 	'use strict';
 
 	// root of function
-	var root = this, doc = document, win = window;
+	var root = this, doc = document, win = window,
+		fval = eval,
+		/** @namespace {Object} ax5 */
+		ax5 = {}, info, U, dom, xhr, ui;
 
-	/** @namespace {Object} ax5 */
-	var ax5 = {}, info, U, dom, xhr, ui, ax5dom;
+	/**
+	 * guid
+	 * @member {Number} ax5.guid
+	 */
 	ax5.guid = 1;
+	/**
+	 * ax5.guid를 구하고 증가시킵니다.
+	 * @method ax5.get_guid
+	 * @returns {Number} guid
+	 */
 	ax5.get_guid = function(){return ax5.guid++;};
 
 	/**
@@ -703,6 +713,13 @@ argument
 			return typeName;
 		}
 /**
+ * 오브젝트가 window 인지 판단합니다.
+ * @method ax5.util.is_window
+ * @param {Object} O
+ * @returns {Boolean}
+ */
+		function is_window(O){ return O != null && O == O.window; }
+/**
  * 오브젝트가 HTML 엘리먼트여부인지 판단합니다.
  * @method ax5.util.is_element
  * @param {Object} O
@@ -916,7 +933,6 @@ argument
 			url.base_url = left(url.href, "?").replace(url.pathname, "");
 			return url;
 		}
-
 /**
  * ax5 require
  * @method ax5.util.require
@@ -1065,40 +1081,78 @@ argument
 				return "";
 			}
 		}
-
+/**
+ * css형 문자열이나 특수문자가 포함된 문자열을 카멜케이스로 바꾸어 반환합니다.
+ * @method ax5.util.camel_case
+ * @param {String} str
+ * @returns {String}
+ * @example
+```js
+ ax5.util.camel_case("inner-width");
+ ax5.util.camel_case("inner_width");
+ // innerWidth
+```
+ */
+		function camel_case(str){
+			return str.replace( /^-ms-/, "ms-" ).replace( /[\-_]([\da-z])/gi, function( all, letter ) {
+				return letter.toUpperCase();
+			} );
+		}
+/**
+ * css형 문자열이나 카멜케이스문자열을 스네이크 케이스 문자열로 바꾸어 반환합니다.
+ * @method ax5.util.snake_case
+ * @param {String} str
+ * @returns {String}
+ * @example
+ ```js
+ ax5.util.snake_case("innerWidth");
+ ax5.util.snake_case("inner-Width");
+ ax5.util.snake_case("inner_width");
+ // inner-width
+ ```
+ */
+		function snake_case(str){
+			return camel_case(str).replace( /([A-Z])/g, function( all, letter ) {
+				return "-" + letter.toLowerCase();
+			});
+		}
 		return {
-			alert            : alert,
-			each             : each,
-			map              : map,
-			search           : search,
-			reduce           : reduce,
-			reduce_right     : reduce_right,
-			filter           : filter,
-			error            : error,
-			to_json          : to_json,
-			extend           : extend,
-			clone            : clone,
-			first            : first,
-			last             : last,
-			left             : left,
-			right            : right,
+			alert       : alert,
+			each        : each,
+			map         : map,
+			search      : search,
+			reduce      : reduce,
+			reduce_right: reduce_right,
+			filter      : filter,
+			error       : error,
+			to_json     : to_json,
+			extend      : extend,
+			clone       : clone,
+			first       : first,
+			last        : last,
+			left        : left,
+			right       : right,
 
-			get_type         : get_type,
-			is_element       : is_element,
-			is_object        : is_object,
-			is_array         : is_array,
-			is_function      : is_function,
-			is_string        : is_string,
-			is_number        : is_number,
-			is_nodelist      : is_nodelist,
-			is_undefined     : is_undefined,
-			is_nothing       : is_nothing,
+			get_type    : get_type,
+			is_window   : is_window,
+			is_element  : is_element,
+			is_object   : is_object,
+			is_array    : is_array,
+			is_function : is_function,
+			is_string   : is_string,
+			is_number   : is_number,
+			is_nodelist : is_nodelist,
+			is_undefined: is_undefined,
+			is_nothing  : is_nothing,
 
-			set_cookie       : set_cookie,
-			get_cookie       : get_cookie,
+			set_cookie: set_cookie,
+			get_cookie: get_cookie,
 
-			url_util         : url_util,
-			require          : require
+			url_util: url_util,
+			require : require,
+
+			camel_case: camel_case,
+			snake_case: snake_case
 		}
 	})();
 
@@ -1405,7 +1459,16 @@ ax("#elementid");
 			}
 		}
 		function validate_elements(elem, fn_name){
+			if(elem && elem.nodeType === 9 ) {
+				elem = [elem.documentElement];
+			}
+			else
 			if(U.is_element(elem)) elem = [elem];
+			else
+			if(elem && elem.toString() == "[object ax5.dom]"){
+				elem = elem.elements;
+			}
+			else
 			if(!U.is_array(elem) && !U.is_nodelist(elem)) {
 				elem = [];
 				console.error("ax5.dom."+fn_name+" : elements parameter incorrect");
@@ -1989,15 +2052,56 @@ ax("#elementid");
 			return sibling(elements, "next", times);
 		}
 
-		function width(elements, opts){
 
+		function box_size(elements, name, opts){
+			var d = -1, tag_nm = "";
+			if(U.is_window(elements)){
+				return elements.document.documentElement[ "client" + name ];
+			}
+			else
+			{
+				elements = validate_elements(elements, "width");
+				var el = elements[0];
+				if(el){
+					tag_nm = el.tagName.toLowerCase();
+					if(tag_nm == "html" || tag_nm == "body"){
+						d = Math.max(
+							doc.body[ "scroll" + name ], el[ "scroll" + name ],
+							doc.body[ "offset" + name ], el[ "offset" + name ],
+							el[ "client" + name ]
+						);
+					}
+					else
+					{
+						console.log(
+							el.style
+						)
+						d = el.style[name.toLowerCase()];
+					}
+				}
+			}
+			return d;
+		}
+/**
+ * 엘리먼트의 너비를 반환합니다.
+ * @method ax5.dom.width
+ * @param {Elements|Element} elements
+ * @returns {Number} width
+ * @example
+```js
+
+```
+ */
+		function width(elements, opts){
+			return box_size(elements, "Width", opts);
 		}
 		function height(elements, opts){
-
+			return box_size(elements, "height", opts);
 		}
 
-		function html(){
-
+		function html(elements, val){
+			elements = validate_elements(elements, "html");
+			var el = elements[0];
 		}
 		function text(){
 
@@ -2035,7 +2139,8 @@ ax("#elementid");
 			append    : append,
 			prepend   : prepend,
 			before    : before,
-			after     : after
+			after     : after,
+			width:width,  height:height
 		});
 	})();
 
