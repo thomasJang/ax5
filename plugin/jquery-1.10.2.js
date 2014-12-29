@@ -6902,7 +6902,10 @@ function showHide( elements, show ) {
 
 jQuery.fn.extend({
 	css: function( name, value ) {
+
 		return jQuery.access( this, function( elem, name, value ) {
+			console.log(elem, name, value);
+
 			var len, styles,
 				map = {},
 				i = 0;
@@ -6982,6 +6985,9 @@ jQuery.extend({
 
 	// Get and set the style property on a DOM Node
 	style: function( elem, name, value, extra ) {
+
+		console.log(name, value);
+
 		// Don't set styles on text and comment nodes
 		if ( !elem || elem.nodeType === 3 || elem.nodeType === 8 || !elem.style ) {
 			return;
@@ -7126,7 +7132,9 @@ if ( window.getComputedStyle ) {
 
 		return ret;
 	};
-} else if ( document.documentElement.currentStyle ) {
+}
+else
+if ( document.documentElement.currentStyle ) {
 	getStyles = function( elem ) {
 		return elem.currentStyle;
 	};
@@ -9715,9 +9723,12 @@ function getWindow( elem ) {
 			elem.defaultView || elem.parentWindow :
 			false;
 }
+
+
 // Create innerHeight, innerWidth, height, width, outerHeight and outerWidth methods
 jQuery.each( { Height: "height", Width: "width" }, function( name, type ) {
 	jQuery.each( { padding: "inner" + name, content: type, "": "outer" + name }, function( defaultExtra, funcName ) {
+
 		// margin is only for outerHeight, outerWidth
 		jQuery.fn[ funcName ] = function( margin, value ) {
 			var chainable = arguments.length && ( defaultExtra || typeof margin !== "boolean" ),

@@ -1969,14 +1969,14 @@ ax("#elementid");
 		function sibling(elements, forward, times){
 			elements = validate_elements(elements, forward);
 			var prop = (forward == "prev") ? "previousSibling" : "nextSibling", el = elements[0];
-			times = times|0;
+			times = (typeof times == "undefined" || times < 1) ? 1 : times;
 			do{
 				el = el[prop];
 			} while(
 				(function(){
 					if(!el) return false;
 					if(el.nodeType == 1) times--;
-					return (times > -1)
+					return (times > 0)
 				})()
 			);
 			return el;
@@ -1985,7 +1985,7 @@ ax("#elementid");
  * 형제 엘리먼트중에 앞서 위치한 엘리먼트를 반환합니다.
  * @method ax5.dom.prev
  * @param {Elements|Element} elements
- * @param {Number} [times=0] - 횟수
+ * @param {Number} [times=1] - 횟수
  * @returns {Element|null} element - 원하는 위치에 아이템이 없으면 null 을 반환합니다.
  * @example
 ```
@@ -2020,7 +2020,7 @@ ax("#elementid");
  * 형제 엘리먼트중에 다음에 위치한 엘리먼트를 반환합니다.
  * @method ax5.dom.next
  * @param {Elements|Element} elements
- * @param {Number} [times=0] - 횟수
+ * @param {Number} [times=1] - 횟수
  * @returns {Element|null} element - 원하는 위치에 아이템이 없으면 null 을 반환합니다.
  * @example
  ```
@@ -2052,6 +2052,15 @@ ax("#elementid");
 			return sibling(elements, "next", times);
 		}
 
+		function getStyles(){
+			if (window.getComputedStyle) {
+
+			}
+			else if(document.documentElement.currentStyle){
+
+			}
+		}
+
 
 		function box_size(elements, name, opts){
 			var d = -1, tag_nm = "";
@@ -2074,7 +2083,7 @@ ax("#elementid");
 					else
 					{
 						console.log(
-							el.style
+							el.style.innerWidth()
 						)
 						d = el.style[name.toLowerCase()];
 					}

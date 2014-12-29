@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <script type="text/javascript" src="../plugin/jquery-1.10.2.js"></script>
     <script type="text/javascript" src="../src/ax5.js"></script>
 </head>
 <body>
@@ -25,20 +26,33 @@
 
     </div>
     <script type="text/javascript">
-        var el = ax5.dom("#list-container");
-        var li = el.child(el);
+        var el = ax5.dom.get("#list-container"), styles;
 
-        console.log(
-            (c_li = li.next(2)).elements[0].id,
-            (c_li = c_li.prev()).elements[0].id
-        );
+        console.log(ax5.dom.next( ax5.dom.child(el), 3));
 
-        ax5.dom.resize(function(){
-            console.log( 0, document.body.clientWidth );
-        });
-        ax5.dom.resize(function(){
-            console.log( 1, document.body.clientWidth );
-        });
+        //var li = el.child(el);
+
+
+        var w;
+        if(window.getComputedStyle){
+            styles = window.getComputedStyle( el[0] );
+            w = styles.getPropertyValue( "width" )
+        }else{
+            styles = el[0].currentStyle;
+            w = styles["width"];
+            w = styles.getPropertyValue( "width" )
+            if(w == "auto"){
+                //styles = el[0].runtimeStyle;
+                //console.log(styles.width);
+                w = el[0]["offsetWidth"];
+            }
+        }
+
+        console.log(w);
+
+
+
+
     </script>
 </body>
 </html>
