@@ -2217,6 +2217,7 @@ ax("#elementid");
 
 ```
  */
+// todo : padding, border 반영할 것. box-sizing 에 따라 다르게 처리 해야 하는 듯.
 		function width(elements, opts){
 			return box_size(elements, "width", opts);
 		}
