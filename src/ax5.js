@@ -320,7 +320,6 @@ argument
  */
 		function each(O, _fn){
 			if (O == null || typeof O === "undeinfed"){
-				console.error("argument error : ax5.util.each");
 				return O;
 			}
 			var key, i = 0, length = O.length,
@@ -396,7 +395,7 @@ argument
  * 원본 아이템들을 이용하여 사용자 함수의 리턴값이 참인 아이템의 위치를 반환합니다.
  * @method ax5.util.search
  * @param {Object|Array} O
- * @param {Function} _fn
+ * @param {Function|String|Number} _fn - 함수 또는 값
  * @returns {Number|String}
  * @example
  ```js
@@ -411,6 +410,18 @@ argument
     return v === 123;
  });
  // "c"
+ ax5.util.search([1,2,3,4], 3);
+ // 2
+ ax5.util.search([1,2], 4);
+ // -1
+ ax5.util.search(["name","value"], "value");
+ // 1
+ ax5.util.search(["name","value"], "values");
+ // -1
+ ax5.util.search({k1:"name",k2:"value"}, "value2");
+ // -1
+ ax5.util.search({k1:"name",k2:"value"}, "value");
+ // "k2"
  ```
  */
 		function search(O, _fn){
@@ -421,17 +432,26 @@ argument
 			var key, i = 0, length = O.length;
 			if (is_object(O)){
 				for (key in O) {
-					if(typeof O[key] != "undefined" && _fn.call(O[key], key, O[key])){
+					if(typeof O[key] != "undefined" && is_function(_fn) && _fn.call(O[key], key, O[key])){
+						return key;
+						break;
+					}
+					else if(O[key] == _fn){
 						return key;
 						break;
 					}
 				}
 			} else {
 				for ( ; i < length; ) {
-					if(typeof O[i] != "undefined" && _fn.call(O[ i ], i, O[ i++ ])) {
-						return i-1;
+					if(typeof O[i] != "undefined" && is_function(_fn) && _fn.call(O[ i ], i, O[ i ])) {
+						return i;
 						break;
 					}
+					else if(O[i] == _fn){
+						return i;
+						break;
+					}
+					i++;
 				}
 			}
 			return -1;
@@ -1116,6 +1136,96 @@ argument
 				return "-" + letter.toLowerCase();
 			});
 		}
+/**
+ * 문자열에서 -. 을 제외한 모든 문자열을 제거하고 숫자로 반환합니다. 옵션에 따라 원하는 형식의 숫자로 변환 할 수 도 있습니다.
+ * @method ax5.util.number
+ * @param {String|Number} str
+ * @param {Object} cond - 옵션
+ * @returns {String|Number}
+ * @example
+```js
+var cond = {
+	round: {Number|Boolean} - 반올림할 자릿수,
+	money: {Boolean} - 통화,
+	abs: {Boolean} - 절대값,
+	byte: {Boolean} - 바이트
+}
+
+ console.log(ax5.util.number(123456789.678, {round:1}));
+ console.log(ax5.util.number(123456789.678, {round:1, money:true}));
+ console.log(ax5.util.number(123456789.678, {round:2, byte:true}));
+ console.log(ax5.util.number(-123456789.8888, {abs:true, round:2, money:true}));
+ console.log(ax5.util.number("A-1234~~56789.8~888PX", {abs:true, round:2, money:true}));
+
+ //123456789.7
+ //123,456,789.7
+ //117.7MB
+ //123,456,789.89
+ //123,456,789.89
+```
+ */
+		function number(str, cond){
+			var result, pair = (''+str).split(/\./), isMinus = (parseFloat(pair[0]) < 0 || pair[0] == "-0"), returnValue = 0.0;
+			pair[0] = pair[0].replace(/[-|+]?[\D]/gi, "");
+			if (pair[1]) {
+				pair[1] = pair[1].replace(/\D/gi, "");
+				returnValue = parseFloat(pair[0] + "." + pair[1]) || 0;
+			} else {
+				returnValue = parseFloat(pair[0]) || 0;
+			}
+			result = (isMinus) ? -returnValue : returnValue;
+
+			each(cond, function(k, c){
+				if (k == "round") {
+					result = (is_number(c)) ? +(Math.round(result + "e+" + c) + "e-" + c) : Math.round(result);
+				}
+				else
+				if (k == "money") {
+					result = (function (val) {
+						var txtNumber = '' + val;
+						if (isNaN(txtNumber) || txtNumber == "") {
+							return "";
+						}
+						else {
+							var rxSplit = new RegExp('([0-9])([0-9][0-9][0-9][,.])');
+							var arrNumber = txtNumber.split('.');
+							arrNumber[0] += '.';
+							do {
+								arrNumber[0] = arrNumber[0].replace(rxSplit, '$1,$2');
+							} while (rxSplit.test(arrNumber[0]));
+							if (arrNumber.length > 1) {
+								return arrNumber.join('');
+							} else {
+								return arrNumber[0].split('.')[0];
+							}
+						}
+					})(result);
+				}
+				else
+				if (k == "abs") {
+					result = Math.abs(parseFloat(result));
+				}
+				else
+				if (k == "byte") {
+					result = (function (val) {
+						val = parseFloat(result);
+						var n_unit = "KB";
+						var myByte = val / 1024;
+						if (myByte / 1024 > 1) {
+							n_unit = "MB";
+							myByte = myByte / 1024;
+						}
+						if (myByte / 1024 > 1) {
+							n_unit = "GB";
+							myByte = myByte / 1024;
+						}
+						return number(myByte, {round: 1}) + n_unit;
+					})(result);
+				}
+			});
+
+			return result;
+		}
 		return {
 			alert       : alert,
 			each        : each,
@@ -1152,7 +1262,8 @@ argument
 			require : require,
 
 			camel_case: camel_case,
-			snake_case: snake_case
+			snake_case: snake_case,
+			number: number
 		}
 	})();
 
@@ -1437,7 +1548,8 @@ ax("#elementid");
 
 	// dom functions
 	(function(){
-
+		/* 내장함수 시작 ~~~*/
+		// 이벤트 바인딩
 		function eventBind(elem, type, eventHandle){
 			type = U.left(type, ".");
 			if ( elem.addEventListener ) {
@@ -1446,6 +1558,7 @@ ax("#elementid");
 				elem.attachEvent( "on" + type, eventHandle );
 			}
 		}
+		// 이벤트 언바인딩
 		function eventUnBind(elem, type, eventHandle){
 			type = U.left(type, ".");
 			if ( elem.removeEventListener ) {
@@ -1458,6 +1571,7 @@ ax("#elementid");
 				else elem.detachEvent( "on" + type );
 			}
 		}
+		// 엘리먼트 인자 체크
 		function validate_elements(elem, fn_name){
 			if(elem && elem.nodeType === 9 ) {
 				elem = [elem.documentElement];
@@ -1475,6 +1589,64 @@ ax("#elementid");
 			}
 			return elem;
 		}
+		// 엘리먼트 순서이동
+		function sibling(elements, forward, times){
+			elements = validate_elements(elements, forward);
+			var prop = (forward == "prev") ? "previousSibling" : "nextSibling", el = elements[0];
+			times = (typeof times == "undefined" || times < 1) ? 1 : times;
+			do{
+				el = el[prop];
+			}
+			while(
+				(function(){
+					if(!el) return false;
+					if(el.nodeType == 1) times--;
+					return (times > 0)
+				})()
+				);
+			return el;
+		}
+		// 엘리먼트 스타일 값 가져오기
+		function style(el, key, fn_nm){
+			if(window.getComputedStyle){
+				return window.getComputedStyle(el).getPropertyValue(key);
+			}
+			else
+			if(el.currentStyle){
+				var val = el.currentStyle[key];
+				if(val == "auto"){
+					if(U.search(["width", "height"], key) > -1){
+						//console.log(U.camel_case("offset-" + key));
+						val = el[ U.camel_case("offset-" + key) ];
+					}
+				}
+				return val;
+			}
+			return null;
+		}
+		function box_size(elements, fn_nm, opts){
+			var d = -1, tag_nm = "";
+			if(U.is_window(elements)){
+				return elements.document.documentElement[ U.camel_case("client-" + fn_nm) ];
+			}
+			else
+			{
+				elements = validate_elements(elements, fn_nm);
+				var el = elements[0], _sbs = U.camel_case("scroll-" + fn_nm), _obs = U.camel_case("offset-" + fn_nm), _cbs = U.camel_case("client-" + fn_nm);
+				if(el){
+					tag_nm = el.tagName.toLowerCase();
+					if(tag_nm == "html" || tag_nm == "body"){
+						d = Math.max( doc.body[ _sbs ], el[ _sbs ], doc.body[ _obs ], el[ _obs ], el[ _cbs ] );
+					}
+					else
+					{
+						d = style(el, fn_nm, fn_nm);
+					}
+				}
+			}
+			return U.number(d);
+		}
+		/* 내장함수 끝 ~~~*/
 
 		// jQuery.ready.promise jquery 1.10.2
 		/**
@@ -1965,22 +2137,6 @@ ax("#elementid");
 			}
 			return _target;
 		}
-
-		function sibling(elements, forward, times){
-			elements = validate_elements(elements, forward);
-			var prop = (forward == "prev") ? "previousSibling" : "nextSibling", el = elements[0];
-			times = (typeof times == "undefined" || times < 1) ? 1 : times;
-			do{
-				el = el[prop];
-			} while(
-				(function(){
-					if(!el) return false;
-					if(el.nodeType == 1) times--;
-					return (times > 0)
-				})()
-			);
-			return el;
-		}
 /**
  * 형제 엘리먼트중에 앞서 위치한 엘리먼트를 반환합니다.
  * @method ax5.dom.prev
@@ -2051,46 +2207,6 @@ ax("#elementid");
 		function next(elements, times){
 			return sibling(elements, "next", times);
 		}
-
-		function getStyles(){
-			if (window.getComputedStyle) {
-
-			}
-			else if(document.documentElement.currentStyle){
-
-			}
-		}
-
-
-		function box_size(elements, name, opts){
-			var d = -1, tag_nm = "";
-			if(U.is_window(elements)){
-				return elements.document.documentElement[ "client" + name ];
-			}
-			else
-			{
-				elements = validate_elements(elements, "width");
-				var el = elements[0];
-				if(el){
-					tag_nm = el.tagName.toLowerCase();
-					if(tag_nm == "html" || tag_nm == "body"){
-						d = Math.max(
-							doc.body[ "scroll" + name ], el[ "scroll" + name ],
-							doc.body[ "offset" + name ], el[ "offset" + name ],
-							el[ "client" + name ]
-						);
-					}
-					else
-					{
-						console.log(
-							el.style.innerWidth()
-						)
-						d = el.style[name.toLowerCase()];
-					}
-				}
-			}
-			return d;
-		}
 /**
  * 엘리먼트의 너비를 반환합니다.
  * @method ax5.dom.width
@@ -2102,7 +2218,7 @@ ax("#elementid");
 ```
  */
 		function width(elements, opts){
-			return box_size(elements, "Width", opts);
+			return box_size(elements, "width", opts);
 		}
 		function height(elements, opts){
 			return box_size(elements, "height", opts);
