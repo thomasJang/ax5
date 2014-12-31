@@ -1608,19 +1608,30 @@ ax("#elementid");
 		}
 		// 엘리먼트 스타일 값 가져오기
 		function style(el, key, fn_nm){
-			if(window.getComputedStyle){
-				return window.getComputedStyle(el).getPropertyValue(key);
-			}
-			else
-			if(el.currentStyle){
-				var val = el.currentStyle[key];
-				if(val == "auto"){
-					if(U.search(["width", "height"], key) > -1){
-						//console.log(U.camel_case("offset-" + key));
-						val = el[ U.camel_case("offset-" + key) ];
-					}
+			if(U.is_string(key)) {
+				return get_style(key);
+			}else if(U.is_array(key)){
+				var css = {};
+				for(var i=0;i<key.length;i++){
+					css[key[i]] = get_style(key[i]);
 				}
-				return val;
+				return css;
+			}
+
+			function get_style(k){
+				if(window.getComputedStyle){
+					return window.getComputedStyle(el).getPropertyValue(k);
+				}
+				else
+				if(el.currentStyle){
+					var val = el.currentStyle[k];
+					if(val == "auto"){
+						if(U.search(["width", "height"], k) > -1){
+							val = el[ U.camel_case("offset-" + k) ];
+						}
+					}
+					return val;
+				}
 			}
 			return null;
 		}
@@ -1642,6 +1653,7 @@ ax("#elementid");
 					{
 						d = style(el, fn_nm, fn_nm);
 					}
+					console.log( style(el, ["box-sizing", "padding-left","padding-right", "border-left-width", "border-right-width"], fn_nm) );
 				}
 			}
 			return U.number(d);
