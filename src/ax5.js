@@ -459,7 +459,7 @@ argument
 /**
  * 배열의 왼쪽에서 오른쪽으로 연산을 진행하는데 수행한 결과가 왼쪽 값으로 반영되어 최종 왼쪽 값을 반환합니다.
  * @method ax5.util.reduce
- * @param {Array} O
+ * @param {Array|Object} O
  * @param {Function} _fn
  * @returns {Alltypes}
  * @example
@@ -470,24 +470,42 @@ argument
     });
  console.log(result, aarray);
  // 120 [5, 4, 3, 2, 1]
+
+ ax5.util.reduce({a:1, b:2}, function(p, n){
+    return parseInt(p|0) + parseInt(n);
+ });
+ // 3
 ```
  */
 		function reduce(O, _fn){
 			if (O == null || typeof O === "undeinfed"){
-				console.error("argument error : ax5.util.map - use Array");
+				console.error("argument error : ax5.util.reduce");
 				return [];
 			}
-			if (!is_array(O)){
-				console.error("argument error : ax5.util.map - use Array");
-				return []
-			}
-			var i = 0, length = O.length, token_item = O[i];
-			for ( ; i < length-1; ) {
-				if(typeof O[i] != "undefined") {
-					if ( ( token_item = _fn.call(root, token_item, O[ ++i ]) ) === false ) break;
+			if (is_array(O)){
+				var i = 0, length = O.length, token_item = O[i];
+				for ( ; i < length-1; ) {
+					if(typeof O[i] != "undefined") {
+						if ( ( token_item = _fn.call(root, token_item, O[ ++i ]) ) === false ) break;
+					}
 				}
+				return token_item;
 			}
-			return token_item;
+			else
+			if (is_object(O)){
+				var i = 0, token_item;
+				for(i in O){
+					if(typeof O[i] != "undefined") {
+						if ( ( token_item = _fn.call(root, token_item, O[i]) ) === false ) break;
+					}
+				}
+				return token_item;
+			}
+			else
+			{
+				console.error("argument error : ax5.util.reduce - use Array or Object");
+				return null;
+			}
 		}
 /**
  * 배열의 오른쪽에서 왼쪽으로 연산을 진행하는데 수행한 결과가 오른쪽 값으로 반영되어 최종 오른쪽 값을 반환합니다.
@@ -508,11 +526,11 @@ argument
  */
 		function reduce_right(O, _fn){
 			if (O == null || typeof O === "undeinfed"){
-				console.error("argument error : ax5.util.map - use Array");
+				console.error("argument error : ax5.util.reduce_right - use Array");
 				return [];
 			}
 			if (!is_array(O)){
-				console.error("argument error : ax5.util.map - use Array");
+				console.error("argument error : ax5.util.reduce_right - use Array");
 				return []
 			}
 			var i = O.length-1, token_item = O[i];
@@ -1325,7 +1343,7 @@ ax("#elementid");
  */
 				this.css = function(O){
 					var rs = dom.css(this.elements, O);
-					return (rs === "this") ? this : rs;
+					return (rs === this.elements) ? this : rs;
 				};
 				// todo : clazz, on, off, attr > util로 이전
 /**
@@ -1348,7 +1366,7 @@ ax("#elementid");
  */
 				this.clazz = function(command, O){
 					var rs = dom.clazz(this.elements, command, O);
-					return (rs === "this") ? this : rs;
+					return (rs === this.elements) ? this : rs;
 				};
 /**
  * elements에 이벤트를 바인드 합니다.
@@ -1396,7 +1414,6 @@ ax("#elementid");
  axd("[data-event-test=text-box]").off("click.fnb").off("click.fnc");
  ```
  */
-				// todo : 이벤트 제거시 .하위 까지 제거해주기
 				this.off = function(typ, _fn) {
 					dom.off(this.elements, typ,  _fn);
 					return this;
@@ -1422,7 +1439,7 @@ ax("#elementid");
  */
 				this.attr = function(command, O){
 					var rs = dom.attr(this.elements, command, O);
-					return (rs === "this") ? this : rs;
+					return (rs === this.elements) ? this : rs;
 				};
 /**
  * element의 attribute를 추가 삭제 가져오기 합니다.
@@ -1540,6 +1557,37 @@ ax("#elementid");
 				this.child = function(){
 					return new axdom( dom.child(this.elements) );
 				};
+/**
+ * 타겟 엘리먼트의 너비를 반환합니다.
+ * @method ax5.dom0.width
+ * @returns {Number}
+ * @example
+ ```
+ console.log(
+    ax5.dom("#list-container").css({"width":"400px", "box-sizing":"border-box",
+    "border":"2px solid", "padding":"50px"}).css({"background":"#ccc"}).width()
+ );
+ console.log(
+    ax5.dom("#list-container").css({"width":"400px", "box-sizing":"content-box",
+    "border":"2px solid", "padding":"50px"}).css({"background":"#ccc"}).width()
+ );
+ ```
+ */
+				this.width = function(){
+					return dom.width(this.elements);
+				};
+/**
+ * 타겟 엘리먼트의 높이를 반환합니다.
+ * @method ax5.dom0.height
+ * @returns {Number}
+ * @example
+ ```
+ // width 와 동일
+ ```
+ */
+				this.height = function(){
+					return dom.height(this.elements);
+				}
 			}
 			return ax;
 		})();
@@ -1635,6 +1683,7 @@ ax("#elementid");
 			}
 			return null;
 		}
+		// 박스사이즈 구하기
 		function box_size(elements, fn_nm, opts){
 			var d = -1, tag_nm = "";
 			if(U.is_window(elements)){
@@ -1646,14 +1695,28 @@ ax("#elementid");
 				var el = elements[0], _sbs = U.camel_case("scroll-" + fn_nm), _obs = U.camel_case("offset-" + fn_nm), _cbs = U.camel_case("client-" + fn_nm);
 				if(el){
 					tag_nm = el.tagName.toLowerCase();
-					if(tag_nm == "html" || tag_nm == "body"){
+					if(tag_nm == "html"){
 						d = Math.max( doc.body[ _sbs ], el[ _sbs ], doc.body[ _obs ], el[ _obs ], el[ _cbs ] );
 					}
 					else
 					{
-						d = style(el, fn_nm, fn_nm);
+						if(el.getBoundingClientRect){
+							d = el.getBoundingClientRect()[fn_nm];
+						}
+
+						if(typeof d == "undefined"){
+							d = style(el, fn_nm, fn_nm);
+							var box_cond = (fn_nm == "width") ?
+								style(el, ["box-sizing", "padding-left","padding-right","border-left-width","border-right-width"], fn_nm):
+								style(el, ["box-sizing", "padding-top","padding-bottom","border-top-width","border-bottom-width"], fn_nm);
+
+							if(box_cond["box-sizing"] == "content-box"){
+								d = parseInt(d) + (ax5.util.reduce(box_cond, function(p, n){
+									return U.number(p|0) + U.number(n);
+								}));
+							}
+						}
 					}
-					console.log( style(el, ["box-sizing", "padding-left","padding-right", "border-left-width", "border-right-width"], fn_nm) );
 				}
 			}
 			return U.number(d);
@@ -1732,7 +1795,6 @@ ax("#elementid");
 		function resize( _fn ){
 			eventBind(window, "resize", _fn);
 		}
-
 		/**
 		 * CSS Selector를 이용하여 HTML Elements를 찾습니다.
 		 * @method ax5.dom.get
@@ -1830,30 +1892,22 @@ ax("#elementid");
 			}
 			return element;
 		}
-
 		/**
 		 * Elements에 CSS속성을 읽고 씁니다.
 		 * @method ax5.dom.css
 		 * @param {Array} elements - 대상의 엘리먼트 리스트 혹은 엘리먼트
 		 * @param {Object|Array|String} CSS
-		 * @returns {String|Object|true}
+		 * @returns {String|Object|Elements}
 		 * @example
  ```js
  ax5.dom.css(ax5.dom.get("#abcd"), {"color":"#ff3300"});
  ```
 		 */
+		// todo : css 값 검증 함수 추가 width, height, left, top 등에 px를 전달하지 않아도 기본단위가 설정 되도록 기본단위 설정 오브젝트 필요
 		function css(elements, O){
 			elements = validate_elements(elements, "css");
-			if(U.is_string(O)) {
-				return elements[0].style[O];
-			}
-			else
-			if(U.is_array(O)) {
-				var css = {}, len = O.length;
-				for(var i=0;i<len;i++){
-					css[O[i]] = elements[0].style[O[i]];
-				}
-				return css;
+			if(U.is_string(O) || U.is_array(O)) {
+				return style(elements[0], O, "css");
 			}
 			else
 			{
@@ -1864,7 +1918,7 @@ ax("#elementid");
 					}
 				}
 			}
-			return "this";
+			return elements;
 		}
 		/**
 		 * elements에 className 를 추가, 제거, 확인, 토글합니다.
@@ -1872,7 +1926,7 @@ ax("#elementid");
 		 * @param {Array} elements - 대상의 엘리먼트 리스트 혹은 엘리먼트
 		 * @param {String} [command=has] - add,remove,toggle,has
 		 * @param {String} O - 클래스명
-		 * @returns {String} return - "this" 또는 클래스이름
+		 * @returns {String|Elements} return - elements 또는 클래스이름
 		 * @example
  ```js
  ax5.dom.clazz(ax5.dom.get("#abcd"), "class-text"); // has 와 동일
@@ -1907,7 +1961,7 @@ ax("#elementid");
 					}
 					elements[di]["className"] = classNames.join(" ");
 				}
-				return "this";
+				return elements;
 			}
 			else
 			{ // has
@@ -1920,7 +1974,7 @@ ax("#elementid");
 				}else{
 					console.error("set_class argument error");
 				}
-				return "this";
+				return elements;
 			}
 		}
 		/**
@@ -1929,7 +1983,7 @@ ax("#elementid");
 		 * @param {Array} elements - 대상의 엘리먼트 리스트 혹은 엘리먼트
 		 * @param {String|Object} [command=get] - 명령어
 		 * @param {Object|String} O - json타입또는 문자열
-		 * @returns {String} return - "this" 또는 클래스이름
+		 * @returns {String|Elements} return - elements 또는 속성값
 		 * @example
  ```js
  ax5.dom.attr(ax5.dom.get("[data-ax-grid=A]"), "set", {"data-ax-spt":"ABCD"}); // set attribute
@@ -1967,7 +2021,7 @@ ax("#elementid");
 					}
 				}
 			}
-			return "this";
+			return elements;
 		}
 
 		/**
@@ -2226,15 +2280,26 @@ ax("#elementid");
  * @returns {Number} width
  * @example
 ```js
-
+ var el = ax5.dom.get("#list-container")
+ ax5.dom.width(el);
 ```
  */
-// todo : padding, border 반영할 것. box-sizing 에 따라 다르게 처리 해야 하는 듯.
-		function width(elements, opts){
-			return box_size(elements, "width", opts);
+		function width(elements){
+			return box_size(elements, "width");
 		}
-		function height(elements, opts){
-			return box_size(elements, "height", opts);
+/**
+ * 엘리먼트의 너비를 반환합니다.
+ * @method ax5.dom.height
+ * @param {Elements|Element} elements
+ * @returns {Number} width
+ * @example
+ ```js
+ var el = ax5.dom.get("#list-container")
+ ax5.dom.height(el);
+ ```
+ */
+		function height(elements){
+			return box_size(elements, "height");
 		}
 
 		function html(elements, val){

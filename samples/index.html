@@ -6,7 +6,7 @@
     <script type="text/javascript" src="../plugin/jquery-1.10.2.js"></script>
     <script type="text/javascript" src="../src/ax5.js"></script>
 </head>
-<body>
+<body style="padding:20px;">
     <div class="ax5-sample-view">
         <div>
             <ul id="list-container">
@@ -26,18 +26,24 @@
 
     </div>
     <script type="text/javascript">
+
+
         var el = ax5.dom.get("#list-container"), styles;
 
-        ax5.dom.css(el,  {"border":"2px solid", "padding":"50px"})
+        //ax5.dom.css(el, {"border":"2px solid", "padding":"50px"});
 
         //console.log(ax5.dom.next( ax5.dom.child(el), 3));
         //var li = el.child(el);
 
 
-        var el_width = ax5.dom.width(el);
-        //var el_height = ax5.dom.height(el);
-        console.log(el_width);
-        //console.log(el_height);
+console.log(
+    ax5.dom("#list-container").css({"width":"400px", "box-sizing":"border-box", "border":"2px solid", "padding":"50px"}).css({"background":"#ccc"}).width()
+);
+console.log(
+    ax5.dom("#list-container").css({"width":"400px", "box-sizing":"content-box", "border":"2px solid", "padding":"50px"}).css({"background":"#ccc"}).width()
+);
+
+
 
         //console.log(ax5.dom.height(window));
         //console.log(ax5.dom.height(document.body));
