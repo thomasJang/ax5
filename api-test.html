@@ -61,6 +61,16 @@
             }
         },
         {
+            label:"ax5.util.camel_case",
+            fn: function(){
+                var resultA = ax5.util.camel_case("inner-width");
+                var resultB = ax5.util.camel_case("inner_width");
+
+                return resultA +" "+ resultB;
+            },
+            r: "innerWidth innerWidth"
+        },
+        {
             label:"ax5.util.clone(object)",
             fn: function(){
                 var obja = {a:1};
@@ -97,12 +107,7 @@
             },
             r: "012abc"
         },
-        {
-            label:"console.log",
-            fn: function(){
-                return (function A(){ return typeof console.log; })();
-            }
-        },
+
         {
             label:"ax5.util.error(msg)",
             fn: function(){
@@ -293,6 +298,13 @@
             }
         },
         {
+            label:"ax5.util.is_window",
+            fn: function(){
+                var a =   window;
+                return ax5.util.is_window(a);
+            }
+        },
+        {
             label:"ax5.util.left",
             fn: function(){
                 return ax5.util.left("ab장.123", ".") + ax5.util.left("ax5-axisj", 3);
@@ -305,6 +317,12 @@
                 return ax5.util.right("ab장.123", ".") + ax5.util.right("ax5-axisj", 3);
             },
             r: "123isj"
+        },
+        {
+            label:"console.log",
+            fn: function(){
+                return (function A(){ return typeof console.log; })();
+            }
         },
         {
             label: "ax5.util.map(array)",
@@ -331,6 +349,28 @@
                 return ra.join('');
             },
             r    : "24NaNNaN"
+        },
+        {
+            label: "ax5.util.number(str, cond)",
+            fn   : function () {
+                /*
+                var cond = {
+                    round: {Number|Boolean} - 반올림할 자릿수,
+                    money: {Boolean} - 통화,
+                    abs: {Boolean} - 절대값,
+                    byte: {Boolean} - 바이트
+                }
+                */
+                var result = [];
+                result.push(ax5.util.number(123456789.678, {round:1}));
+                result.push(ax5.util.number(123456789.678, {round:1, money:true}));
+                result.push(ax5.util.number(123456789.678, {round:2, byte:true}));
+                result.push(ax5.util.number(-123456789.8888, {abs:true, round:2, money:true}));
+                result.push(ax5.util.number("A-1234~~56789.8~888PX", {abs:true, round:2, money:true}));
+
+                return result.join(' : ');
+            },
+            r    : "123456789.7 : 123,456,789.7 : 117.7MB : 123,456,789.89 : 123,456,789.89"
         },
         {
             label: "ax5.util.reduce",
@@ -389,7 +429,12 @@
             label: "ax5.util.search",
             fn   : function () {
                 var myArray = [0,1,2,3,4,5,6];
-                var myObject = {a:"123","b":"123",c:123};
+                var myObject = {
+                    a:"123",
+                    "b":"123",
+                    c:123
+                };
+
                 var result = "";
                 result = ax5.util.search(myArray,  function(){
                     return this > 3;
@@ -402,6 +447,18 @@
                 return result;
             },
             r    : "4c"
+        },
+        {
+            label:"ax5.util.snake_case",
+            fn: function(){
+                var result = [];
+                result.push(ax5.util.snake_case("innerWidth"));
+                result.push(ax5.util.snake_case("inner-Width"));
+                result.push(ax5.util.snake_case("inner_width"));
+
+                return result.join(" : ");
+            },
+            r   : "inner-width : inner-width : inner-width"
         },
         {
             label: "ax5.util.to_json(object)",
@@ -586,6 +643,17 @@
             }
         },
         {
+            label:"ax5.dom.width, ax5.dom.height(element)",
+            fn: function(){
+                var result = [];
+                var el = ax5.dom.get("#progress-bar")
+                result.push(ax5.dom.width(el));
+                result.push(ax5.dom.height(el));
+
+                return result.join(' : ');
+            }
+        },
+        {
             label:"ax5.dom.next, ax5.dom.prev ",
             fn: function(){
                 var el = ax5.dom.get("#test-result");
@@ -598,7 +666,7 @@
 
                 return nextItem.id +"_"+ prevItem.id;
             },
-            r   : "ax5.util.filter : array_ax5.util.each"
+            r   : "ax5.util.filter : array_ax5.util.clone(string)"
         },
         {
             label:"ax5.dom.on",
@@ -638,9 +706,49 @@
                  //,"custom-attr":"ca"
                  };
                  */
+                //console.log( ax5.dom.parent(tg, cond).id );
+                return ax5.dom.parent(tg, cond).id;
+            },
+            r:  "progress"
+        },
+        {
+            label:"ax5.dom.ready",
+            fn: function(callBack){
 
-                return ax5.dom.parent(tg, cond);
-            }
+                var a = 1;
+                var result = [];
+                setTimeout(function(){
+                    ax5.dom.ready(function(){
+                        result.push(("test" + a));
+                        result.push((ax5.util.left("axisj-ax5", "-")));
+
+                        if (result.join(' : ') === 'test1 : axisj' ){
+                            callBack(true);
+                        }else{
+                            callBack(false);
+                        }
+                    });
+                }, 1000);
+            },
+            r    : "ready-response"
+        },
+
+        {
+            label:"ax5.dom.resize",
+            fn: function(callBack){
+                var clientWidth = 0;
+                ax5.dom.resize(function(){
+                    clientWidth = document.body.clientWidth;
+                    //console.log(clientWidth);
+                    if (clientWidth > 0 ){
+                        callBack(true);
+                    }else{
+                        callBack(false);
+                    }
+                });
+                window.dispatchEvent(new Event('resize'));
+            },
+            r    : "ready-response"
         },
 
         //ax5.domO----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -687,6 +795,7 @@
             },
             r    : "ABCDEAnull"
         },
+
         {
             label:"ax5.dom0.attr",
             fn: function(){
@@ -701,6 +810,15 @@
             },
             r:"ABCD ca2 null"
         },
+        /*
+         {
+         label: "ax5.dom0.child",
+         fn: function () {
+
+         },
+         r:  ''
+         },
+         */
         {
             label: "ax5.dom0.clazz",
             fn   : function () {
@@ -758,6 +876,37 @@
             },
             r    : "Gulim"
         },
+
+        /*
+         {
+         label: "ax5.dom0.find",
+         fn: function () {
+
+         },
+         r:  ''
+         },
+         */
+
+        /*
+         {
+         label: "ax5.dom0.width / height",
+         fn: function () {
+
+         },
+         r:  ''
+         },
+         */
+
+        /*
+         {
+         label: "ax5.dom0.next / prev",
+         fn: function () {
+
+         },
+         r:  ''
+         },
+         */
+
         {
             label: "ax5.dom0.on",
             fn   : function (callBack) {
@@ -779,19 +928,17 @@
                 ax5.dom("#id-test").elements[0].click();
             },
             r    : "ready-response"
-        },
+        }
 
-        {
-            label: "ax5.dom0.css",
-            fn   : function () {
-                var result = "";
-                ax5.dom("#id-test").css({fontFamily:"Gulim"});
-                result = ax5.dom("#id-test").css("font-family");
-                return result;
-            },
-            r    : "Gulim"
-        },
+        /*
+         {
+         label: "ax5.dom0.parent",
+         fn: function () {
 
+         },
+         r:  ''
+         },
+         */
 
     ];
 

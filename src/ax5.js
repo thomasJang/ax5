@@ -392,7 +392,7 @@ argument
 			return results;
 		}
 /**
- * 원본 아이템들을 이용하여 사용자 함수의 리턴값이 참인 아이템의 위치를 반환합니다.
+ * 원본 아이템들을 이용하여 사용자 함수의 리턴값이 참인 아이템의 위치나 키값을 반환합니다.
  * @method ax5.util.search
  * @param {Object|Array} O
  * @param {Function|String|Number} _fn - 함수 또는 값
