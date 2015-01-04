@@ -29,34 +29,8 @@
 
 
         var el = ax5.dom.get("#list-container"), styles;
-
-        //ax5.dom.css(el, {"border":"2px solid", "padding":"50px"});
-
-        //console.log(ax5.dom.next( ax5.dom.child(el), 3));
-        //var li = el.child(el);
-
-
-console.log(
-    ax5.dom("#list-container").css({"width":"400px", "box-sizing":"border-box", "border":"2px solid", "padding":"50px"}).css({"background":"#ccc"}).width()
-);
-console.log(
-    ax5.dom("#list-container").css({"width":"400px", "box-sizing":"content-box", "border":"2px solid", "padding":"50px"}).css({"background":"#ccc"}).width()
-);
-
-
-
-        //console.log(ax5.dom.height(window));
-        //console.log(ax5.dom.height(document.body));
-
-
-        /*
-        console.log(ax5.util.number(123456789.678, {round:1}));
-        console.log(ax5.util.number(123456789.678, {round:1, money:true}));
-        console.log(ax5.util.number(123456789.678, {round:2, byte:true}));
-        console.log(ax5.util.number(-123456789.8888, {abs:true, round:2, money:true}));
-        console.log(ax5.util.number("A-1234~~56789.8~888PX", {abs:true, round:2, money:true}));
-*/
-
+        console.log(ax5.dom.html(el));
+        console.log(jQuery("#list-container").html() );
     </script>
 </body>
 </html>

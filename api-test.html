@@ -26,22 +26,37 @@
             border-style: dashed;
             border-width: 1px;
         }
-
+        .api-check-item{
+            float: left;
+            width: 20%;
+            height: 50px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: .2%;
+        }
+        #author{
+            clear: both;
+            padding: 10px;
+            text-align: center;
+        }
     </style>
 
 </head>
 <body custom-attr="ca">
 
-<div id="progress" class="progress"><div id="progress-bar" class="progress-bar" ondblclick="alert('dbClick')" custom-attr="ca"></div></div>
-<h1>AX5 API Check</h1>
-<div id="test-result" class="test-result"></div>
-<p id="author"  ondblclick="alert('author_dbClick')">tom@axisj.com - 2014-12-11</p>
+    <div id="progress" class="progress">
+        <div id="progress-bar" class="progress-bar" ondblclick="alert('dbClick')" custom-attr="ca"></div>
+    </div>
 
-<div id="id-test"></div>
-<a class="class-text"></a>
+    <h1>AX5 API Check</h1>
+    <div id="test-result" class="test-result"></div>
+    <p id="author"  ondblclick="alert('author_dbClick')">team AXISJ</p>
 
-<span data-attr="A" id="test"></span>
-<div data-attr="B"></div>
+    <div id="id-test"></div>
+    <a class="class-text"></a>
+    <span data-attr="A" id="test"></span>
+    <div data-attr="B"></div>
 
 <script type="text/javascript">
     /*
@@ -491,9 +506,9 @@
         },
 
         {
-            label: "ax5.util.url_util",
+            label: "ax5.info.url_util",
             fn   : function () {
-                return ax5.util.url_util().pathname;
+                return ax5.info.url_util().pathname;
             },
             r    : "/api-test.html"
         },
@@ -956,6 +971,7 @@
 
             var newDiv = document.createElement("div");
             newDiv["id"] = O.label;
+            newDiv.setAttribute("class", "api-check-item");
 
             var result, err_string;
 
@@ -995,7 +1011,7 @@
                 });
             }else{
                 if(O.label === "split") {
-                    newDiv.innerHTML = "<hr class='split' />";
+                    //newDiv.innerHTML = "<hr class='split' />";
                 }else{
                     try{
                         result = O.fn();
