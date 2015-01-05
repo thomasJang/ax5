@@ -28,7 +28,7 @@
         }
         .api-check-item{
             float: left;
-            width: 20%;
+            width: 19%;
             height: 50px;
             border: 1px solid #ccc;
             border-radius: 10px;
@@ -39,6 +39,7 @@
             clear: both;
             padding: 10px;
             text-align: center;
+            font-weight:bold;
         }
     </style>
 
@@ -51,7 +52,7 @@
 
     <h1>AX5 API Check</h1>
     <div id="test-result" class="test-result"></div>
-    <p id="author"  ondblclick="alert('author_dbClick')">team AXISJ</p>
+    <p id="author"  ondblclick="alert('author_dbClick')">Team AXISJ</p>
 
     <div id="id-test"></div>
     <a class="class-text"></a>
@@ -505,13 +506,6 @@
             r    : "[{\"name\": \"groovedk\", \"status\": \"hungry\"},{\"name\": \"root\", \"status\": \"starving\"},\"something\"]"
         },
 
-        {
-            label: "ax5.info.url_util",
-            fn   : function () {
-                return ax5.info.url_util().pathname;
-            },
-            r    : "/api-test.html"
-        },
         //ax5.dom----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         {
             label: "split"
@@ -542,7 +536,6 @@
             },
             r   : "DIV ca"
         },
-
         {
             label:"ax5.dom.clazz",
             fn: function(){
@@ -825,15 +818,19 @@
             },
             r:"ABCD ca2 null"
         },
-        /*
-         {
-         label: "ax5.dom0.child",
-         fn: function () {
+        {
+            label: "ax5.dom0.child",
+            fn   : function () {
+                var result = [];
+                var el = ax5.dom("#progress").child();
+                result.push(el.length);
+                result.push(el.elements[0].tagName);
+                result.push(ax5.dom(el.elements[0]).attr("custom-attr"));
+                return  result.join(" : ");
+            },
+            r   : "1 : DIV : ca"
+        },
 
-         },
-         r:  ''
-         },
-         */
         {
             label: "ax5.dom0.clazz",
             fn   : function () {
@@ -891,37 +888,40 @@
             },
             r    : "Gulim"
         },
+        {
+            label: "ax5.dom0.find",
+            fn: function () {
+                var cnt = ax5.dom('div#test-result' ).find("div").length;
+                return cnt;
+            }
+        },
+        {
+            label: "ax5.dom0.width / ax5.dom0.height",
+            fn: function () {
+                var result = [];
+                var el = ax5.dom("#progress-bar");
+                result.push(el.width());
+                result.push(el.height());
 
-        /*
-         {
-         label: "ax5.dom0.find",
-         fn: function () {
+                return result.join(' : ');
+            }
+        },
 
-         },
-         r:  ''
-         },
-         */
+        {
+            label:"ax5.dom0.next, ax5.dom0.prev ",
+            fn: function(){
+                var el = ax5.dom("#test-result");
+                var item = el.child(el).elements[5];
 
-        /*
-         {
-         label: "ax5.dom0.width / height",
-         fn: function () {
+                var nextItem;
+                var prevItem;
+                nextItem = ax5.dom(item).next(7).elements[0].id;
+                prevItem = ax5.dom(item).prev().elements[0].id;
 
-         },
-         r:  ''
-         },
-         */
-
-        /*
-         {
-         label: "ax5.dom0.next / prev",
-         fn: function () {
-
-         },
-         r:  ''
-         },
-         */
-
+                return nextItem +"_"+ prevItem;
+            },
+            r   : "ax5.util.filter : array_ax5.util.clone(string)"
+        },
         {
             label: "ax5.dom0.on",
             fn   : function (callBack) {
@@ -943,17 +943,41 @@
                 ax5.dom("#id-test").elements[0].click();
             },
             r    : "ready-response"
+        },
+
+        {
+            label:"ax5.dom0.parent",
+            fn: function(){
+                var tg = ax5.dom("#progress-bar");
+                var cond = {
+                    tagname: "div",
+                    clazz: "progress"
+                    //,"custom-attr":"ca"
+                };
+                /*
+                 var cond = {
+                 tagname: "body"
+                 //,"custom-attr":"ca"
+                 };
+                 */
+                //console.log( ax5.dom.parent(tg, cond).id );
+                return tg.parent(cond).elements[0].id;
+            }
+            //,r:  "progress"
+        },
+
+        //ax5.info ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        {
+            label: "split"
+        },
+        {
+            label: "ax5.info.url_util",
+            fn   : function () {
+                return ax5.info.url_util().pathname;
+            },
+            r    : "/api-test.html"
         }
 
-        /*
-         {
-         label: "ax5.dom0.parent",
-         fn: function () {
-
-         },
-         r:  ''
-         },
-         */
 
     ];
 
@@ -1011,7 +1035,7 @@
                 });
             }else{
                 if(O.label === "split") {
-                    //newDiv.innerHTML = "<hr class='split' />";
+
                 }else{
                     try{
                         result = O.fn();
@@ -1029,7 +1053,15 @@
                     }
                 }
 
-                target.appendChild(newDiv);
+                if(O.label === "split") {
+                    var newDiv_cb = document.createElement("div");
+                    newDiv_cb.innerHTML = "<hr class='split' />";
+                    newDiv_cb.setAttribute("style", "clear:both;padding-top:2px;");
+                    target.appendChild(newDiv_cb);
+                }else{
+                    target.appendChild(newDiv);
+                }
+
                 setTimeout(function () {
                     checker(check_list.shift());
                 }, 10);
