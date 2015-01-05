@@ -114,11 +114,15 @@
             
                 <li data-name="ax5.dom.css"><a href="ax5.dom.html#css">css</a></li>
             
+                <li data-name="ax5.dom.empty"><a href="ax5.dom.html#empty">empty</a></li>
+            
                 <li data-name="ax5.dom.get"><a href="ax5.dom.html#get">get</a></li>
             
                 <li data-name="ax5.dom.get_one"><a href="ax5.dom.html#get_one">get_one</a></li>
             
                 <li data-name="ax5.dom.height"><a href="ax5.dom.html#height">height</a></li>
+            
+                <li data-name="ax5.dom.html"><a href="ax5.dom.html#html">html</a></li>
             
                 <li data-name="ax5.dom.next"><a href="ax5.dom.html#next">next</a></li>
             
@@ -471,9 +475,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2284" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2302" target="_blank">
             ax5.js,
-            line 2284</a>
+            line 2302</a>
         </div>
         
     </div>
@@ -694,9 +698,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2408" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2426" target="_blank">
             ax5.js,
-            line 2408</a>
+            line 2426</a>
         </div>
         
     </div>
@@ -846,9 +850,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2227" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2245" target="_blank">
             ax5.js,
-            line 2227</a>
+            line 2245</a>
         </div>
         
     </div>
@@ -1065,9 +1069,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2171" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2189" target="_blank">
             ax5.js,
-            line 2171</a>
+            line 2189</a>
         </div>
         
     </div>
@@ -1220,9 +1224,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2199" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2217" target="_blank">
             ax5.js,
-            line 2199</a>
+            line 2217</a>
         </div>
         
     </div>
@@ -1373,6 +1377,142 @@
             
 <dt>
     <div class="nameContainer">
+        <h4 class="name" id="empty">
+            
+            <span class="type-signature static">static</span>ax5.dom.empty<span class="signature">(elements)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Elements}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <i class="axi axi-github"></i>
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2626" target="_blank">
+            ax5.js,
+            line 2626</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>엘리먼트의 자식을 모두 지워줍니다. 내용을 깨긋히 비워 냅니다.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>elements</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Elements</span>
+|
+
+<span class="param-type">Element</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint linenums"><code class="lang-js"> var el = ax5.dom.get(&quot;#list-container&quot;);
+ ax5.dom.empty(el);</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
         <h4 class="name" id="get">
             
             <span class="type-signature static">static</span>ax5.dom.get<span class="signature">(query, sub_query)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Array}</span>
@@ -1381,9 +1521,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2102" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2120" target="_blank">
             ax5.js,
-            line 2102</a>
+            line 2120</a>
         </div>
         
     </div>
@@ -1544,9 +1684,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2156" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2174" target="_blank">
             ax5.js,
-            line 2156</a>
+            line 2174</a>
         </div>
         
     </div>
@@ -1703,9 +1843,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2594" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2612" target="_blank">
             ax5.js,
-            line 2594</a>
+            line 2612</a>
         </div>
         
     </div>
@@ -1831,6 +1971,178 @@
             
 <dt>
     <div class="nameContainer">
+        <h4 class="name" id="html">
+            
+            <span class="type-signature static">static</span>ax5.dom.html<span class="signature">(elements, <span class="optional">htmlcode</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Elements|String}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <i class="axi axi-github"></i>
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2651" target="_blank">
+            ax5.js,
+            line 2651</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>엘리먼트안에 HTML코드를 바꿔치기 합니다.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>elements</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Elements</span>
+|
+
+<span class="param-type">Element</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>htmlcode</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint linenums"><code class="lang-js"> var el = ax5.dom.get(&quot;#list-container&quot;);
+ console.log( ax5.dom.html(el) );
+ ax5.dom.html(el, &quot;&lt;a href='#1234'&gt;링크&quot;);</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
         <h4 class="name" id="next">
             
             <span class="type-signature static">static</span>ax5.dom.next<span class="signature">(elements, <span class="optional">times</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Element|null}</span>
@@ -1839,9 +2151,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2545" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2563" target="_blank">
             ax5.js,
-            line 2545</a>
+            line 2563</a>
         </div>
         
     </div>
@@ -2046,9 +2358,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2376" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2394" target="_blank">
             ax5.js,
-            line 2376</a>
+            line 2394</a>
         </div>
         
     </div>
@@ -2238,9 +2550,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2331" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2349" target="_blank">
             ax5.js,
-            line 2331</a>
+            line 2349</a>
         </div>
         
     </div>
@@ -2430,9 +2742,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2447" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2465" target="_blank">
             ax5.js,
-            line 2447</a>
+            line 2465</a>
         </div>
         
     </div>
@@ -2593,9 +2905,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2510" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2528" target="_blank">
             ax5.js,
-            line 2510</a>
+            line 2528</a>
         </div>
         
     </div>
@@ -2800,9 +3112,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2031" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2049" target="_blank">
             ax5.js,
-            line 2031</a>
+            line 2049</a>
         </div>
         
     </div>
@@ -2933,9 +3245,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2088" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2106" target="_blank">
             ax5.js,
-            line 2088</a>
+            line 2106</a>
         </div>
         
     </div>
@@ -3062,9 +3374,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2580" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2598" target="_blank">
             ax5.js,
-            line 2580</a>
+            line 2598</a>
         </div>
         
     </div>
@@ -3203,7 +3515,7 @@
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sun Jan 04 2015 23:24:08 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Mon Jan 05 2015 15:39:09 GMT+0900 (KST)
         </footer>
     </div>
 </div>

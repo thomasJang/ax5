@@ -204,6 +204,17 @@ argument
 		/** @namespace {Object} ax5 */
 		ax5 = {}, info, U, dom, xhr, ui;
 
+	// jquery 1.10.2 from http://jquery.com
+	var nodeNames = "abbr|article|aside|audio|bdi|canvas|data|datalist|details|figcaption|figure|footer|" +
+			"header|hgroup|mark|meter|nav|output|progress|section|summary|time|video",
+		rnoshimcache = new RegExp("<(?:" + nodeNames + ")[\\s/>]", "i"),
+		rleadingWhitespace = /^\s+/,
+		rxhtmlTag = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/gi,
+		rtagName = /<([\w:]+)/,
+		rtbody = /<tbody/i,
+		rhtml = /<|&#?\w+;/,
+		rnoInnerhtml = /<(?:script|style|link)/i;
+
 	/**
 	 * guid
 	 * @member {Number} ax5.guid
@@ -357,7 +368,7 @@ argument
 	 hrefNormalized: true, // Make sure that URLs aren't manipulated
 	 htmlSerialize: true, // Make sure that link elements get serialized correctly by innerHTML
 	 inlineBlockNeedsLayout: false,
-	 leadingWhitespace: true,
+	 leadingWhitespace: true, // IE strips leading whitespace when .innerHTML is used
 	 noCloneChecked: true,
 	 noCloneEvent: true,
 	 opacity: true, // Make sure that element opacity exists
@@ -665,15 +676,15 @@ argument
 			if (O == null || typeof O === "undeinfed"){
 				return O;
 			}
-			var key, i = 0, length = O.length,
-				isObj = length === undefined || typeof O === "function";
+			var key, i = 0, l = O.length,
+				isObj = l === undefined || typeof O === "function";
 			if(isObj){
 				for(key in O){
 					if(typeof O[key] != "undefined")
 					if(_fn.call(O[key], key, O[key]) === false) break;
 				}
 			}else{
-				for( ; i < length; ){
+				for( ; i < l; ){
 					if( typeof O[ i ] != "undefined" )
 					if (_fn.call(O[ i ], i, O[ i++ ]) === false) break;
 				}
@@ -714,7 +725,7 @@ argument
 				console.error("argument error : ax5.util.map");
 				return [];
 			}
-			var key, i = 0, length = O.length, results = [], fn_result;
+			var key, i = 0, l = O.length, results = [], fn_result;
 			if (is_object(O)){
 				for (key in O) {
 					if(typeof O[key] != "undefined"){
@@ -724,7 +735,7 @@ argument
 					}
 				}
 			} else {
-				for ( ; i < length; ) {
+				for ( ; i < l; ) {
 					if(typeof O[i] != "undefined") {
 						fn_result = undefined;
 						if ( (fn_result = _fn.call(O[ i ], i, O[ i++ ])) === false ) break;
@@ -772,7 +783,7 @@ argument
 				console.error("argument error : ax5.util.find");
 				return -1;
 			}
-			var key, i = 0, length = O.length;
+			var key, i = 0, l = O.length;
 			if (is_object(O)){
 				for (key in O) {
 					if(typeof O[key] != "undefined" && is_function(_fn) && _fn.call(O[key], key, O[key])){
@@ -785,7 +796,7 @@ argument
 					}
 				}
 			} else {
-				for ( ; i < length; ) {
+				for ( ; i < l; ) {
 					if(typeof O[i] != "undefined" && is_function(_fn) && _fn.call(O[ i ], i, O[ i ])) {
 						return i;
 						break;
@@ -826,8 +837,8 @@ argument
 				return [];
 			}
 			if (is_array(O)){
-				var i = 0, length = O.length, token_item = O[i];
-				for ( ; i < length-1; ) {
+				var i = 0, l = O.length, token_item = O[i];
+				for ( ; i < l-1; ) {
 					if(typeof O[i] != "undefined") {
 						if ( ( token_item = _fn.call(root, token_item, O[ ++i ]) ) === false ) break;
 					}
@@ -912,15 +923,15 @@ argument
 				console.error("argument error : ax5.util.map");
 				return [];
 			}
-			var key, i = 0, length = O.length, isObj = length === undefined || typeof O === "function", results = [], fn_result;
-			if (isObj){
-				for (key in O) {
-					if(typeof O[key] != "undefined"){
-						if( fn_result = _fn.call(O[key], key, O[key]) ) results.push( O[key] );
+			var k, i = 0, l = O.length, results = [], fn_result;
+			if (is_object(O)){
+				for (k in O) {
+					if(typeof O[k] != "undefined"){
+						if( fn_result = _fn.call(O[k], k, O[k]) ) results.push( O[k] );
 					}
 				}
 			} else {
-				for ( ; i < length; ) {
+				for ( ; i < l; ) {
 					if(typeof O[i] != "undefined") {
 						if ( fn_result = _fn.call(O[ i ], i, O[ i ]) ) results.push( O[ i ] );
 						i++;
@@ -960,9 +971,9 @@ argument
 		function to_json(O){
 			var json_string = "";
 			if(ax5.util.is_array(O)){
-				var len = O.length;
+				var i = 0, l = O.length;
 				json_string += "[";
-				for(var i=0;i<len;i++){
+				for(;i<l;i++){
 					if(i > 0) json_string += ",";
 					json_string += to_json(O[i]);
 				}
@@ -1252,8 +1263,8 @@ argument
  */
 		function get_cookie(cname){
 			var name = cname + "=";
-			var ca = doc.cookie.split(';');
-			for(var i=0; i<ca.length; i++) {
+			var ca = doc.cookie.split(';'), i= 0, l=ca.length;
+			for(; i<l; i++) {
 				var c = ca[i];
 				while (c.charAt(0)==' ') c = c.substring(1);
 				if (c.indexOf(name) != -1) return unescape(c.substring(name.length, c.length));
@@ -1649,7 +1660,6 @@ ax("#elementid");
 					var rs = dom.css(this.elements, O);
 					return (rs === this.elements) ? this : rs;
 				};
-				// todo : clazz, on, off, attr > util로 이전
 /**
  * elements에 className 를 추가, 제거, 확인, 토글합니다.
  * @method ax5.dom0.clazz
@@ -1925,19 +1935,23 @@ ax("#elementid");
 		}
 		// 엘리먼트 인자 체크
 		function validate_elements(elem, fn_name){
-			if(elem && elem.nodeType === 9 ) {
-				elem = [elem.documentElement];
+			if(U.is_array(elem) && U.is_element(elem[0])){
+				return elem;
 			}
 			else
-			if(U.is_element(elem)) elem = [elem];
+			if(U.is_element(elem)) return [elem];
+			else
+			if(elem && elem.nodeType === 9 ) {
+				return [elem.documentElement];
+			}
 			else
 			if(elem && elem.toString() == "[object ax5.dom]"){
-				elem = elem.elements;
+				return elem.elements;
 			}
 			else
 			if(!U.is_array(elem) && !U.is_nodelist(elem)) {
-				elem = [];
 				console.error("ax5.dom."+fn_name+" : elements parameter incorrect");
+				return [];
 			}
 			return elem;
 		}
@@ -1963,8 +1977,8 @@ ax("#elementid");
 			if(U.is_string(key)) {
 				return get_style(key);
 			}else if(U.is_array(key)){
-				var css = {};
-				for(var i=0;i<key.length;i++){
+				var css = {}, i = 0, l = key.length;
+				for(;i<l;i++){
 					css[key[i]] = get_style(key[i]);
 				}
 				return css;
@@ -2024,6 +2038,10 @@ ax("#elementid");
 				}
 			}
 			return U.number(d);
+		}
+		// nodeName check
+		function node_name(el, node_nm){
+			return el.nodeName && el.nodeName.toLowerCase() === node_nm.toLowerCase();
 		}
 		/* 내장함수 끝 ~~~*/
 
@@ -2215,10 +2233,10 @@ ax("#elementid");
 			}
 			else
 			{
-				var len = elements.length;
-				for(var di=0;di<len;di++) {
-					for (var k in O) {
-						elements[di].style[k] = O[k];
+				var i = 0, l = elements.length, k;
+				for(;i<l;i++) {
+					for (k in O) {
+						elements[i].style[k] = O[k]; // todo apply_css 재 개발
 					}
 				}
 			}
@@ -2297,11 +2315,12 @@ ax("#elementid");
 		 */
 		function attr(elements, command, O){
 			elements = validate_elements(elements, "attr");
+			var i = 0, l = elements.length, k;
 			if( command === "set" || (typeof O === "undefined" && U.is_object(command)) ){
 				if(typeof O === "undefined") O = command;
-				for(var di=0;di<elements.length;di++) {
-					for (var k in O) {
-						elements[di].setAttribute(k, O[k]);
+				for(;i<l;i++) {
+					for (k in O) {
+						elements[i].setAttribute(k, O[k]);
 					}
 				}
 			}
@@ -2314,20 +2333,19 @@ ax("#elementid");
 			else
 			if( command === "remove" ){
 				if(U.is_string(O)) {
-					for (var di = 0; di < elements.length; di++) {
-						elements[di].removeAttribute(O);
+					for (;i < l;i++) {
+						elements[i].removeAttribute(O);
 					}
 				}else{
-					for (var di = 0; di < elements.length; di++) {
+					for (;i < l;i++) {
 						each(O, function(){
-							elements[di].removeAttribute(this);
+							elements[i].removeAttribute(this);
 						});
 					}
 				}
 			}
 			return elements;
 		}
-
 		/**
 		 * elements에 이벤트를 바인드 합니다.
 		 * @method ax5.dom.on
@@ -2435,10 +2453,10 @@ ax("#elementid");
 		// todo : child depth 파라미터 개발
 		function child(elements){
 			elements = validate_elements(elements, "child");
-			var return_elems = [], len;
+			var return_elems = [], i= 0, l;
 			if(elements[0]) {
-				len = elements[0].children.length;
-				for (var i = 0; i < len; i++) {
+				l = elements[0].children.length;
+				for (; i < l; i++) {
 					return_elems.push(elements[0].children[i]);
 				}
 			}
@@ -2605,21 +2623,74 @@ ax("#elementid");
 		function height(elements){
 			return box_size(elements, "height");
 		}
-
+/**
+ * 엘리먼트의 자식을 모두 지워줍니다. 내용을 깨긋히 비워 냅니다.
+ * @method ax5.dom.empty
+ * @param {Elements|Element} elements
+ * @returns {Elements}
+ * @example
+```js
+ var el = ax5.dom.get("#list-container");
+ ax5.dom.empty(el);
+```
+ */
+		function empty(elements){
+			elements = validate_elements(elements, "empty");
+			var i = 0, l = elements.length, el;
+			for (; i < l; i++) {
+				el = elements[i];
+				while ( el.firstChild ) {
+					el.removeChild( el.firstChild );
+				}
+				if ( el.options && node_name( el, "select" ) ) {
+					el.options.length = 0;
+				}
+			}
+			return elements;
+		}
+/**
+ * 엘리먼트안에 HTML코드를 바꿔치기 합니다.
+ * @method ax5.dom.html
+ * @param {Elements|Element} elements
+ * @param {String} [htmlcode]
+ * @returns {Elements|String}
+ * @example
+ ```js
+ var el = ax5.dom.get("#list-container");
+ console.log( ax5.dom.html(el) );
+ ax5.dom.html(el, "<a href='#1234'>링크");
+ ```
+ */
+// todo : html 메소드 개발중~~!!!
 		function html(elements, val){
 			elements = validate_elements(elements, "html");
-			var el = elements[0];
 			if(typeof val == "undefined"){
-				return el.innerHTML;
+				return elements[0].innerHTML;
 			}else{
-				el.innerHTML = val;
+				if(
+					U.is_string(val) &&
+					!rnoInnerhtml.test(val) &&
+					(info.support.leadingWhitespace || !rleadingWhitespace.test(val))
+				){
+					val = val.replace( rxhtmlTag, "<$1></$2>" );
+					var i = 0, l = elements.length;
+					try {
+						for (; i < l; i++) {
+							elements[i].innerHTML = val;
+						}
+					}catch(e){}
+				}
+				else
+				if(U.is_element(val) || U.is_nodelist(val)){
+					append(empty(elements), val);
+				}
 				return elements;
 			}
 		}
 		function text(){
 
 		}
-		function append(){
+		function append(elements, val){
 
 		}
 		function prepend(){
@@ -2633,27 +2704,28 @@ ax("#elementid");
 		}
 
 		U.extend(ax5.dom, {
-			ready     : ready,
-			resize    : resize,
-			get       : get,
-			get_one   : get_one,
-			create    : create,
-			css       : css,
-			clazz     : clazz,
-			attr      : attr,
-			on        : on,
-			off       : off,
-			child     : child,
-			parent    : parent,
-			prev      : prev,
-			next      : next,
-			html      : html,
-			text      : text,
-			append    : append,
-			prepend   : prepend,
-			before    : before,
-			after     : after,
-			width:width,  height:height
+			ready  : ready,
+			resize : resize,
+			get    : get,
+			get_one: get_one,
+			create : create,
+			css    : css,
+			clazz  : clazz,
+			attr   : attr,
+			on     : on,
+			off    : off,
+			child  : child,
+			parent : parent,
+			prev   : prev,
+			next   : next,
+			html   : html,
+			text   : text,
+			append : append,
+			prepend: prepend,
+			before : before,
+			after  : after,
+			width  : width,
+			height : height
 		});
 	})();
 

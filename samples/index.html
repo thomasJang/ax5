@@ -29,8 +29,11 @@
 
 
         var el = ax5.dom.get("#list-container"), styles;
-        console.log(ax5.dom.html(el));
-        console.log(jQuery("#list-container").html() );
+
+        ax5.dom.html(el, "<a href='#1234'>링크");
+
+        //console.log(ax5.dom.html(el));
+        //console.log(jQuery("#list-container").html() );
     </script>
 </body>
 </html>
