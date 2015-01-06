@@ -754,7 +754,16 @@
                         callBack(false);
                     }
                 });
-                window.dispatchEvent(new Event('resize'));
+
+                var b = ax5.info.browser;
+                if (b.name === 'ie'){
+                    var evt = document.createEvent('UIEvent');
+                    evt.initEvent("resize", true, true);
+                    window.dispatchEvent(evt);
+                }else{
+                    window.dispatchEvent(new Event('resize'));
+                }
+
             },
             r    : "ready-response"
         },
