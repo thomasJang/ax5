@@ -1336,7 +1336,6 @@ argument
 						}
 					}
 
-				//info.base_url + src
 				if(hasPlugin) {
 					loadCount--;
 					onload();
@@ -1560,6 +1559,21 @@ var cond = {
 
 			return result;
 		}
+/**
+ * 배열 비슷한 오브젝트를 배열로 변환해줍니다.
+ * @method ax5.util.to_array
+ * @param {Object|Elements|Arguments} O
+ * @returns {Array}
+ * @example
+```js
+ ax5.util.to_array(arguments);
+ //
+```
+ */
+		function to_array(O){
+			if(typeof O.length != "undefined") return Array.prototype.slice.call(O);
+			return [];
+		}
 		return {
 			alert       : alert,
 			each        : each,
@@ -1576,7 +1590,6 @@ var cond = {
 			last        : last,
 			left        : left,
 			right       : right,
-
 			get_type    : get_type,
 			is_window   : is_window,
 			is_element  : is_element,
@@ -1588,15 +1601,13 @@ var cond = {
 			is_nodelist : is_nodelist,
 			is_undefined: is_undefined,
 			is_nothing  : is_nothing,
-
-			set_cookie: set_cookie,
-			get_cookie: get_cookie,
-
-			require : require,
-
-			camel_case: camel_case,
-			snake_case: snake_case,
-			number: number
+			set_cookie  : set_cookie,
+			get_cookie  : get_cookie,
+			require     : require,
+			camel_case  : camel_case,
+			snake_case  : snake_case,
+			number      : number,
+			to_array    : to_array
 		}
 	})();
 
@@ -1901,7 +1912,21 @@ ax("#elementid");
  */
 				this.height = function(){
 					return dom.height(this.elements);
-				}
+				};
+/**
+ * 타겟 엘리먼트안에 HTML코드를 바꿔치기 합니다.
+ * @method ax5.dom0.html
+ * @returns {ax5.dom0|String}
+ * @example
+ ```
+ console.log( ax5.dom("#list-container").html() );
+ ax5.dom("#list-container").html("<a href='#1234'>링크");
+ ```
+ */
+				this.html = function(val){
+					var rs = dom.html(this.elements, val);
+					return (rs === this.elements) ? this : rs;
+				};
 			}
 			return ax;
 		})();
@@ -2132,7 +2157,7 @@ ax("#elementid");
 		 */
 		function get(query, sub_query){
 			var elements, return_elements = [], parent_element;
-
+			var i= 0,l=query.length;
 			if(query.toString() == "[object ax5.dom]"){
 				return_elements = query.elements;
 			}
@@ -2143,7 +2168,7 @@ ax("#elementid");
 			}
 			else
 			if(U.is_array(query) || U.is_nodelist(query)){
-				for(var i=0;i<query.length;i++) {
+				for(;i<l;i++) {
 					if(U.is_element(query[i])) return_elements.push( query[i] );
 				}
 			}
@@ -2154,8 +2179,8 @@ ax("#elementid");
 			}
 			else
 			{
-				elements = doc.querySelectorAll(query);
-				for(var i=0;i<elements.length;i++){
+				elements = doc.querySelectorAll(query), l = elements.length;
+				for(;i<l;i++) {
 					return_elements.push( elements[i] );
 				}
 			}
@@ -2163,8 +2188,8 @@ ax("#elementid");
 			if(typeof sub_query != "undefined") {
 				parent_element = (info.browser.name == "ie" && info.browser.version < 8) ? doc : return_elements[0];
 				return_elements = [];
-				elements = parent_element.querySelectorAll(sub_query);
-				for(var i=0;i<elements.length;i++){
+				elements = parent_element.querySelectorAll(sub_query), l = elements.length;
+				for(;i<l;i++) {
 					return_elements.push( elements[i] );
 				}
 			}
@@ -2661,7 +2686,6 @@ ax("#elementid");
  ax5.dom.html(el, "<a href='#1234'>링크");
  ```
  */
-// todo : html 메소드 개발중~~!!!
 		function html(elements, val){
 			elements = validate_elements(elements, "html");
 			if(typeof val == "undefined"){
@@ -2687,9 +2711,7 @@ ax("#elementid");
 				return elements;
 			}
 		}
-		function text(){
-
-		}
+		// todo : append 개발중
 		function append(elements, val){
 
 		}
@@ -2719,7 +2741,6 @@ ax("#elementid");
 			prev   : prev,
 			next   : next,
 			html   : html,
-			text   : text,
 			append : append,
 			prepend: prepend,
 			before : before,
