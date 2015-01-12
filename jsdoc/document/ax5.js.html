@@ -104,7 +104,13 @@
             
             <span class="subtitle">Methods</span>
             
+                <li data-name="ax5.dom.after"><a href="ax5.dom.html#after">after</a></li>
+            
+                <li data-name="ax5.dom.append"><a href="ax5.dom.html#append">append</a></li>
+            
                 <li data-name="ax5.dom.attr"><a href="ax5.dom.html#attr">attr</a></li>
+            
+                <li data-name="ax5.dom.before"><a href="ax5.dom.html#before">before</a></li>
             
                 <li data-name="ax5.dom.child"><a href="ax5.dom.html#child">child</a></li>
             
@@ -131,6 +137,8 @@
                 <li data-name="ax5.dom.on"><a href="ax5.dom.html#on">on</a></li>
             
                 <li data-name="ax5.dom.parent"><a href="ax5.dom.html#parent">parent</a></li>
+            
+                <li data-name="ax5.dom.prepend"><a href="ax5.dom.html#prepend">prepend</a></li>
             
                 <li data-name="ax5.dom.prev"><a href="ax5.dom.html#prev">prev</a></li>
             
@@ -169,7 +177,13 @@
             
             <span class="subtitle">Methods</span>
             
+                <li data-name="ax5.dom0.after"><a href="ax5.dom0.html#after">after</a></li>
+            
+                <li data-name="ax5.dom0.append"><a href="ax5.dom0.html#append">append</a></li>
+            
                 <li data-name="ax5.dom0.attr"><a href="ax5.dom0.html#attr">attr</a></li>
+            
+                <li data-name="ax5.dom0.before"><a href="ax5.dom0.html#before">before</a></li>
             
                 <li data-name="ax5.dom0.child"><a href="ax5.dom0.html#child">child</a></li>
             
@@ -190,6 +204,8 @@
                 <li data-name="ax5.dom0.on"><a href="ax5.dom0.html#on">on</a></li>
             
                 <li data-name="ax5.dom0.parent"><a href="ax5.dom0.html#parent">parent</a></li>
+            
+                <li data-name="ax5.dom0.prepend"><a href="ax5.dom0.html#prepend">prepend</a></li>
             
                 <li data-name="ax5.dom0.prev"><a href="ax5.dom0.html#prev">prev</a></li>
             
@@ -324,6 +340,8 @@
             
                 <li data-name="ax5.util.map"><a href="ax5.util.html#map">map</a></li>
             
+                <li data-name="ax5.util.merge"><a href="ax5.util.html#merge">merge</a></li>
+            
                 <li data-name="ax5.util.number"><a href="ax5.util.html#number">number</a></li>
             
                 <li data-name="ax5.util.reduce"><a href="ax5.util.html#reduce">reduce</a></li>
@@ -404,22 +422,14 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/*!
- * AX5 JavaScript UI Library v0.0.1
- * www.axisj.com
- *
- * Copyright 2013, 2015 AXISJ.com and other contributors
- * Released under the MIT license
- * www.axisj.com/ax5/license
- */
-
-/*
-argument
- - O : Object 전달받은 오브젝트 인자
- - _fn : 사용자정의 함수 인자
- - msg : 메세지
- _d : dom
- _na : new Array
+            <pre class="prettyprint source linenums"><code>/*
+ * ax5 - v0.0.1 
+ * 2015-01-13 
+ * www.axisj.com Javascript UI Library
+ * 
+ * Copyright 2013, 2015 AXISJ.com and other contributors 
+ * Released under the MIT license 
+ * www.axisj.com/ax5/license 
  */
 
 // 필수 Ployfill 확장 구문
@@ -592,8 +602,8 @@ argument
 		var dummy = function() {};
 		var properties = 'memory'.split(',');
 		var methods = ('assert,clear,count,debug,dir,dirxml,error,exception,group,' +
-			'groupCollapsed,groupEnd,info,log,markTimeline,profile,profiles,profileEnd,' +
-			'show,table,time,timeEnd,timeline,timelineEnd,timeStamp,trace,warn').split(',');
+		'groupCollapsed,groupEnd,info,log,markTimeline,profile,profiles,profileEnd,' +
+		'show,table,time,timeEnd,timeline,timelineEnd,timeStamp,trace,warn').split(',');
 		while (prop = properties.pop()) con[prop] = con[prop] || empty;
 		while (method = methods.pop()) con[method] = con[method] || dummy;
 	})(root.console = root.console || {}); // Using `this` for web workers.
@@ -619,7 +629,35 @@ argument
 		rtagName = /&lt;([\w:]+)/,
 		rtbody = /&lt;tbody/i,
 		rhtml = /&lt;|&#?\w+;/,
-		rnoInnerhtml = /&lt;(?:script|style|link)/i;
+		rnoInnerhtml = /&lt;(?:script|style|link)/i,
+
+		// We have to close these tags to support XHTML (#13200)
+		wrapMap = {
+			option: [ 1, "&lt;select multiple='multiple'>", "&lt;/select>" ],
+			legend: [ 1, "&lt;fieldset>", "&lt;/fieldset>" ],
+			area: [ 1, "&lt;map>", "&lt;/map>" ],
+			param: [ 1, "&lt;object>", "&lt;/object>" ],
+			thead: [ 1, "&lt;table>", "&lt;/table>" ],
+			tr: [ 2, "&lt;table>&lt;tbody>", "&lt;/tbody>&lt;/table>" ],
+			col: [ 2, "&lt;table>&lt;tbody>&lt;/tbody>&lt;colgroup>", "&lt;/colgroup>&lt;/table>" ],
+			td: [ 3, "&lt;table>&lt;tbody>&lt;tr>", "&lt;/tr>&lt;/tbody>&lt;/table>" ]
+		},
+		safeFragment = createSafeFragment( ),
+		fragmentDiv = safeFragment.appendChild( doc.createElement("div")),
+		core_strundefined = typeof undefined;
+
+		function createSafeFragment( ) {
+			var list = nodeNames.split( "|" ),
+				safeFrag = doc.createDocumentFragment();
+			if ( safeFrag.createElement ) {
+				while ( list.length ) {
+					safeFrag.createElement(
+						list.pop()
+					);
+				}
+			}
+			return safeFrag;
+		}
 
 	/**
 	 * guid
@@ -880,6 +918,11 @@ argument
 				shrinkWrapBlocks: false,
 				reliableMarginRight: true
 			};
+
+
+			// IE6-8 can't serialize link, script, style, or any html5 (NoScope) tags,
+			// unless wrapped in a div with non-breaking characters in front of it.
+			wrapMap._default = support.htmlSerialize ? [ 0, "", "" ] : [ 1, "X&lt;div>", "&lt;/div>"  ];
 
 			// Make sure checked status is properly cloned
 			input.checked = true;
@@ -1481,6 +1524,10 @@ argument
 				typeName = "element";
 			}
 			else
+			if( !!(O && O.nodeType == 11) ){
+				typeName = "fragment";
+			}
+			else
 			if(typeof O === "undefined") {
 				typeName = "undefined";
 			}
@@ -1523,7 +1570,7 @@ argument
  * @param {Object} O
  * @returns {Boolean}
  */
-		function is_element(O) { return !!(O && O.nodeType == 1); }
+		function is_element(O) { return !!(O && (O.nodeType == 1 || O.nodeType == 11)); }
 /**
  * 오브젝트가 Object인지 판단합니다.
  * @method ax5.util.is_object
@@ -1980,6 +2027,37 @@ var cond = {
 			if(typeof O.length != "undefined") return Array.prototype.slice.call(O);
 			return [];
 		}
+
+/**
+ * 천번째 인자에 두번째 인자 아이템을 합쳐줍니다. concat과 같은 역할을 하지만. 인자가 Array타입이 아니어도 됩니다.
+ * @method ax5.util.merge
+ * @param {Array|ArrayLike} first
+ * @param {Array|ArrayLike} second
+ * @returns {Array} first
+ * @example
+ ```
+
+ ```
+ */
+		function merge( first, second ) {
+			var l = second.length,
+				i = first.length,
+				j = 0;
+
+			if (typeof l === "number") {
+				for (; j &lt; l; j++) {
+					first[i++] = second[j];
+				}
+			} else {
+				while (second[j] !== undefined) {
+					first[i++] = second[j++];
+				}
+			}
+
+			first.length = i;
+
+			return first;
+		}
 		return {
 			alert       : alert,
 			each        : each,
@@ -2013,7 +2091,8 @@ var cond = {
 			camel_case  : camel_case,
 			snake_case  : snake_case,
 			number      : number,
-			to_array    : to_array
+			to_array    : to_array,
+			merge       : merge
 		}
 	})();
 
@@ -2333,6 +2412,74 @@ ax("#elementid");
 					var rs = dom.html(this.elements, val);
 					return (rs === this.elements) ? this : rs;
 				};
+/**
+ * 엘리먼트에 자식노드를 추가 합니다. (추가되는 위치는 맨 아래 입니다.)
+ * @method ax5.dom0.append
+ * @param {String|Element} val
+ * @returns {ax5.dom0}
+ * @example
+ ```
+ ax5.dom("[data-list-item='0']")
+    .append("ㅈㅏㅇㄱㅣㅇㅕㅇ")
+    .append("&lt;div>장기영&lt;a href='#ABCDE'>이건 어렵다&lt;/a>&lt;/div>")
+    .append(ax5.dom.get("#move-item"));
+ ```
+ */
+				this.append = function(val){
+					var rs = dom.manipulate("append", this.elements, val);
+					return (rs === this.elements) ? this : rs;
+				};
+/**
+ * 엘리먼트에 자식노드를 추가 합니다. (추가되는 위치는 맨 위 입니다.)
+ * @method ax5.dom0.prepend
+ * @param {String|Element} val
+ * @returns {ax5.dom0}
+ * @example
+ ```
+ ax5.dom("[data-list-item='0']")
+	 .prepend("ㅈㅏㅇㄱㅣㅇㅕㅇ")
+	 .prepend("&lt;div>장기영&lt;a href='#ABCDE'>이건 어렵다&lt;/a>&lt;/div>")
+	 .prepend(ax5.dom.get("#move-item"));
+ ```
+ */
+				this.prepend = function(val){
+					var rs = dom.manipulate("prepend", this.elements, val);
+					return (rs === this.elements) ? this : rs;
+				};
+/**
+ * 엘리먼트 이전위치에 노드를 추가 합니다.
+ * @method ax5.dom0.before
+ * @param {String|Element} val
+ * @returns {ax5.dom0}
+ * @example
+ ```
+ ax5.dom("[data-list-item='0']")
+	 .before("ㅈㅏㅇㄱㅣㅇㅕㅇ")
+	 .before("&lt;div>장기영&lt;a href='#ABCDE'>이건 어렵다&lt;/a>&lt;/div>")
+	 .before(ax5.dom.get("#move-item"));
+ ```
+ */
+				this.before = function(val){
+					var rs = dom.manipulate("before", this.elements, val);
+					return (rs === this.elements) ? this : rs;
+				};
+/**
+ * 엘리먼트 다음위치에 노드를 추가 합니다.
+ * @method ax5.dom0.after
+ * @param {String|Element} val
+ * @returns {ax5.dom0}
+ * @example
+ ```
+ ax5.dom("[data-list-item='0']")
+	 .after("ㅈㅏㅇㄱㅣㅇㅕㅇ")
+	 .after("&lt;div>장기영&lt;a href='#ABCDE'>이건 어렵다&lt;/a>&lt;/div>")
+	 .after(ax5.dom.get("#move-item"));
+ ```
+ */
+				this.after = function(val){
+					var rs = dom.manipulate("after", this.elements, val);
+					return (rs === this.elements) ? this : rs;
+				};
 			}
 			return ax;
 		})();
@@ -2473,6 +2620,125 @@ ax("#elementid");
 		// nodeName check
 		function node_name(el, node_nm){
 			return el.nodeName && el.nodeName.toLowerCase() === node_nm.toLowerCase();
+		}
+		// createFragment
+		function create_fragment(elems){
+			var safe = createSafeFragment(), tmp, nodes = [], tag, wrap, tbody, contains;
+			var elem, i = 0, l = elems.length, j;
+
+			for ( ; i &lt; l; i++ ) {
+				elem = elems[i];
+				if (elem || elem === 0) {
+					if (U.get_type(elem) == "fragment"){
+						nodes.push(elem.firstChild);
+					}
+					else
+					if (U.get_type(elem) == "element"){
+						nodes.push(elem);
+					}
+					else
+					if (!rhtml.test(elem)) {
+						nodes.push(doc.createTextNode(elem));
+						//safe.appendChild(doc.createTextNode(elem));
+					}
+					else
+					{
+						tmp = safe.appendChild(doc.createElement("div"));
+						// Deserialize a standard representation
+						tag = ( rtagName.exec(elem) || ["", ""] )[1].toLowerCase();
+						wrap = wrapMap[tag] || wrapMap._default;
+						tmp.innerHTML = wrap[1] + elem.replace(rxhtmlTag, "&lt;$1>&lt;/$2>") + wrap[2];
+
+						// Descend through wrappers to the right content
+						j = wrap[0];
+						while (j--) {
+							tmp = tmp.lastChild;
+						}
+
+						// Manually add leading whitespace removed by IE
+						if (!info.support.leadingWhitespace && rleadingWhitespace.test(elem)) {
+							nodes.push(doc.createTextNode(rleadingWhitespace.exec(elem)[0]));
+						}
+
+						// Remove IE's autoinserted &lt;tbody> from table fragments
+						if (!info.support.tbody) {
+
+							// String was a &lt;table>, *may* have spurious &lt;tbody>
+							elem = tag === "table" && !rtbody.test(elem) ?
+								tmp.firstChild :
+
+								// String was a bare &lt;thead> or &lt;tfoot>
+								wrap[1] === "&lt;table>" && !rtbody.test(elem) ?
+									tmp :
+									0;
+
+							j = elem && elem.childNodes.length;
+							while (j--) {
+								if (node_name((tbody = elem.childNodes[j]), "tbody") && !tbody.childNodes.length) {
+									elem.removeChild(tbody);
+								}
+							}
+						}
+
+						U.merge(nodes, tmp.childNodes);
+
+						// Fix #12392 for WebKit and IE > 9
+						tmp.textContent = "";
+
+						// Fix #12392 for oldIE
+						while (tmp.firstChild) {
+							tmp.removeChild(tmp.firstChild);
+						}
+
+						// Remember the top-level container for proper cleanup
+						tmp = safe.lastChild;
+					}
+				}
+			}
+
+			// Fix #11356: Clear elements from fragment
+			if ( tmp ) {
+				safe.removeChild( tmp );
+			}
+
+			// Reset defaultChecked for any radios and checkboxes
+			// about to be appended to the DOM in IE 6/7 (#8060)
+			if ( !info.support.appendChecked ) {
+				//jQuery.grep( getAll( nodes, "input" ), fixDefaultChecked );
+			}
+
+
+			i = 0;
+			while ( (elem = nodes[ i++ ]) ) {
+				//console.log(elem);
+				safe.appendChild(elem);
+			}
+
+
+			tmp = null;
+
+			return safe;
+		}
+		function getAll( context, tag ) {
+			var elems, elem,
+				i = 0,
+				found = typeof context.getElementsByTagName !== core_strundefined ? context.getElementsByTagName( tag || "*" ) :
+					typeof context.querySelectorAll !== core_strundefined ? context.querySelectorAll( tag || "*" ) :
+						undefined;
+
+			if ( !found ) {
+				for ( found = [], elems = context.childNodes || context; (elem = elems[i]) != null; i++ ) {
+					if ( !tag || jQuery.nodeName( elem, tag ) ) {
+						found.push( elem );
+					} else {
+						U.merge( found, getAll( elem, tag ) );
+					}
+				}
+			}
+
+			return tag === undefined || tag && node_name( context, tag ) ?
+				U.merge( [ context ], found ) :
+				found;
 		}
 		/* 내장함수 끝 ~~~*/
 
@@ -2881,7 +3147,6 @@ ax("#elementid");
  &lt;/script>
 ```
 		 */
-		// todo : child depth 파라미터 개발
 		function child(elements){
 			elements = validate_elements(elements, "child");
 			var return_elems = [], i= 0, l;
@@ -3117,18 +3382,100 @@ ax("#elementid");
 				return elements;
 			}
 		}
-		// todo : append 개발중
+
+/**
+ * 엘리먼트에 자식노드를 추가 합니다. (추가되는 위치는 맨 아래 입니다.)
+ * @method ax5.dom.append
+ * @param {Elements|Element} elements
+ * @param {String|Element} val
+ * @returns {Elements|Element}
+ * @example
+ ```
+ var el = ax5.dom.get("[data-list-item='0']");
+ ax5.dom.append(el, "ㅈㅏㅇㄱㅣㅇㅕㅇ");
+ ax5.dom.append(el, "&lt;div>장기영&lt;a href='#ABCDE'>이건 어렵다&lt;/a>&lt;/div>");
+ ax5.dom.append(ax5.dom.get("[data-list-item='2']"), ax5.dom.get("#move-item"));
+ ```
+ */
+		// todo : append 검증중
 		function append(elements, val){
-
+			return manipulate("append", elements, val);
 		}
-		function prepend(){
-
+/**
+ * 엘리먼트에 자식노드를 추가 합니다. (추가되는 위치는 맨 처음 입니다.)
+ * @method ax5.dom.prepend
+ * @param {Elements|Element} elements
+ * @param {String|Element} val
+ * @returns {Elements|Element}
+ * @example
+ ```
+ var el = ax5.dom.get("[data-list-item='0']");
+ ax5.dom.prepend(el, "ㅈㅏㅇㄱㅣㅇㅕㅇ");
+ ax5.dom.prepend(el, "&lt;div>장기영&lt;a href='#ABCDE'>이건 어렵다&lt;/a>&lt;/div>");
+ ax5.dom.prepend(ax5.dom.get("[data-list-item='2']"), ax5.dom.get("#move-item"));
+ ```
+ */
+		function prepend(elements, val){
+			return manipulate("prepend", elements, val);
 		}
-		function before(){
-
+/**
+ * 엘리먼트에 앞에 노드를 추가합니다.
+ * @method ax5.dom.before
+ * @param {Elements|Element} elements
+ * @param {String|Element} val
+ * @returns {Elements|Element}
+ * @example
+ ```
+ var el = ax5.dom.get("[data-list-item='0']");
+ ax5.dom.before(el, "before");
+ ```
+ */
+		function before(elements, val){
+			return manipulate("before", elements, val);
 		}
-		function after(){
+/**
+ * 엘리먼트에 다음에 노드를 추가합니다.
+ * @method ax5.dom.after
+ * @param {Elements|Element} elements
+ * @param {String|Element} val
+ * @returns {Elements|Element}
+ * @example
+ ```
+ var el = ax5.dom.get("[data-list-item='0']");
+ ax5.dom.after(el, "after");
+ ```
+ */
+		function after(elements, val){
+			return manipulate("after", elements, val);
+		}
+		function manipulate(act, elements, val){
+			elements = validate_elements(elements, act);
+			var flag, i= 0, l=elements.length,
+				el = [].concat(val), cf = create_fragment, els = elements;
 
+			if(act === "append") {
+				for (; i &lt; l; i++) {
+					els[i].appendChild(cf(el));
+				}
+			}
+			else
+			if(act == "prepend"){
+				for(;i&lt;l;i++) {
+					els[i].insertBefore(cf(el), els[i].firstChild);
+				}
+			}
+			else
+			if(act == "before"){
+				for(;i&lt;l;i++) {
+					els[i].parentNode.insertBefore(cf(el), els[i]);
+				}
+			}
+			else
+			if(act == "after"){
+				els[i].parentNode.insertBefore(cf(el), els[i].nextSibling);
+			}
+
+			return els;
 		}
 
 		U.extend(ax5.dom, {
@@ -3151,6 +3498,7 @@ ax("#elementid");
 			prepend: prepend,
 			before : before,
 			after  : after,
+			manipulate: manipulate,
 			width  : width,
 			height : height
 		});
@@ -3233,7 +3581,7 @@ ax("#elementid");
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Wed Jan 07 2015 20:01:47 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Tue Jan 13 2015 01:17:39 GMT+0900 (KST)
         </footer>
     </div>
 </div>

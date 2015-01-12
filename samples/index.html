@@ -29,26 +29,18 @@
     </div>
     <script type="text/javascript">
 
-        //var el = ax5.dom.get("#list-container"), styles;
-/*
-        ax5.dom("#list-container").html("<button id='button_handle'>링크</button>").find("#button_handle").on("click", function(e){
-            alert(e.type);
-        });;
-        */
-/*
-        ax5.dom("#button_handle").on("click", function(e){
-           alert(e.type);
-        });
-*/
-        //console.log(ax5.dom.html(el));
-        //console.log(jQuery("#list-container").html() );
+        //var el = ax5.dom.get("[data-list-item='0']");
+        ax5.dom("[data-list-item='0']")
+                .after("ㅈㅏㅇㄱㅣㅇㅕㅇ")
+                .after("<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>")
+                .after(ax5.dom.get("#move-item"));
 
-        var el = ax5.dom.get("[data-list-item]");
-        ax5.dom.append(el, "ㅈㅏㅇㄱㅣㅇㅕㅇ");
-        ax5.dom.append(el, "<a href='#ABCDE'>이건 어렵다</a><div>장기영</div>");
-
+/*
+        ax5.dom.prepend(el, "<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>");
+        ax5.dom.before(el, "before");
+        ax5.dom.after(el, "after");
         ax5.dom.append(ax5.dom.get("[data-list-item='2']"), ax5.dom.get("#move-item"));
-
+*/
         //$("[data-list-item]").append("ㅈㅏㅇㄱㅣㅇㅕㅇ");
 
     </script>

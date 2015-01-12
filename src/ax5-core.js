@@ -1800,6 +1800,74 @@ ax("#elementid");
 					var rs = dom.html(this.elements, val);
 					return (rs === this.elements) ? this : rs;
 				};
+/**
+ * 엘리먼트에 자식노드를 추가 합니다. (추가되는 위치는 맨 아래 입니다.)
+ * @method ax5.dom0.append
+ * @param {String|Element} val
+ * @returns {ax5.dom0}
+ * @example
+ ```
+ ax5.dom("[data-list-item='0']")
+    .append("ㅈㅏㅇㄱㅣㅇㅕㅇ")
+    .append("<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>")
+    .append(ax5.dom.get("#move-item"));
+ ```
+ */
+				this.append = function(val){
+					var rs = dom.manipulate("append", this.elements, val);
+					return (rs === this.elements) ? this : rs;
+				};
+/**
+ * 엘리먼트에 자식노드를 추가 합니다. (추가되는 위치는 맨 위 입니다.)
+ * @method ax5.dom0.prepend
+ * @param {String|Element} val
+ * @returns {ax5.dom0}
+ * @example
+ ```
+ ax5.dom("[data-list-item='0']")
+	 .prepend("ㅈㅏㅇㄱㅣㅇㅕㅇ")
+	 .prepend("<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>")
+	 .prepend(ax5.dom.get("#move-item"));
+ ```
+ */
+				this.prepend = function(val){
+					var rs = dom.manipulate("prepend", this.elements, val);
+					return (rs === this.elements) ? this : rs;
+				};
+/**
+ * 엘리먼트 이전위치에 노드를 추가 합니다.
+ * @method ax5.dom0.before
+ * @param {String|Element} val
+ * @returns {ax5.dom0}
+ * @example
+ ```
+ ax5.dom("[data-list-item='0']")
+	 .before("ㅈㅏㅇㄱㅣㅇㅕㅇ")
+	 .before("<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>")
+	 .before(ax5.dom.get("#move-item"));
+ ```
+ */
+				this.before = function(val){
+					var rs = dom.manipulate("before", this.elements, val);
+					return (rs === this.elements) ? this : rs;
+				};
+/**
+ * 엘리먼트 다음위치에 노드를 추가 합니다.
+ * @method ax5.dom0.after
+ * @param {String|Element} val
+ * @returns {ax5.dom0}
+ * @example
+ ```
+ ax5.dom("[data-list-item='0']")
+	 .after("ㅈㅏㅇㄱㅣㅇㅕㅇ")
+	 .after("<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>")
+	 .after(ax5.dom.get("#move-item"));
+ ```
+ */
+				this.after = function(val){
+					var rs = dom.manipulate("after", this.elements, val);
+					return (rs === this.elements) ? this : rs;
+				};
 			}
 			return ax;
 		})();
@@ -2711,29 +2779,91 @@ ax("#elementid");
  * @returns {Elements|Element}
  * @example
  ```
- ax5.dom.append(ax5.dom.get("[data-list-item]"), "ㅈㅏㅇㄱㅣㅇㅕㅇ");
- ax5.dom.append(ax5.dom.get("[data-list-item]"), "<a href='#ABCDE'>이건 어렵다</a><div>장기영</div>");
+ var el = ax5.dom.get("[data-list-item='0']");
+ ax5.dom.append(el, "ㅈㅏㅇㄱㅣㅇㅕㅇ");
+ ax5.dom.append(el, "<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>");
+ ax5.dom.append(ax5.dom.get("[data-list-item='2']"), ax5.dom.get("#move-item"));
  ```
  */
 		// todo : append 검증중
 		function append(elements, val){
-			elements = validate_elements(elements, "append");
+			return manipulate("append", elements, val);
+		}
+/**
+ * 엘리먼트에 자식노드를 추가 합니다. (추가되는 위치는 맨 처음 입니다.)
+ * @method ax5.dom.prepend
+ * @param {Elements|Element} elements
+ * @param {String|Element} val
+ * @returns {Elements|Element}
+ * @example
+ ```
+ var el = ax5.dom.get("[data-list-item='0']");
+ ax5.dom.prepend(el, "ㅈㅏㅇㄱㅣㅇㅕㅇ");
+ ax5.dom.prepend(el, "<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>");
+ ax5.dom.prepend(ax5.dom.get("[data-list-item='2']"), ax5.dom.get("#move-item"));
+ ```
+ */
+		function prepend(elements, val){
+			return manipulate("prepend", elements, val);
+		}
+/**
+ * 엘리먼트에 앞에 노드를 추가합니다.
+ * @method ax5.dom.before
+ * @param {Elements|Element} elements
+ * @param {String|Element} val
+ * @returns {Elements|Element}
+ * @example
+ ```
+ var el = ax5.dom.get("[data-list-item='0']");
+ ax5.dom.before(el, "before");
+ ```
+ */
+		function before(elements, val){
+			return manipulate("before", elements, val);
+		}
+/**
+ * 엘리먼트에 다음에 노드를 추가합니다.
+ * @method ax5.dom.after
+ * @param {Elements|Element} elements
+ * @param {String|Element} val
+ * @returns {Elements|Element}
+ * @example
+ ```
+ var el = ax5.dom.get("[data-list-item='0']");
+ ax5.dom.after(el, "after");
+ ```
+ */
+		function after(elements, val){
+			return manipulate("after", elements, val);
+		}
+		function manipulate(act, elements, val){
+			elements = validate_elements(elements, act);
 			var flag, i= 0, l=elements.length,
-			elemes = [].concat(val);
+				el = [].concat(val), cf = create_fragment, els = elements;
 
-			for(;i<l;i++) {
-				elements[i].appendChild(create_fragment(elemes));
+			if(act === "append") {
+				for (; i < l; i++) {
+					els[i].appendChild(cf(el));
+				}
 			}
-			return elements;
-		}
-		function prepend(){
+			else
+			if(act == "prepend"){
+				for(;i<l;i++) {
+					els[i].insertBefore(cf(el), els[i].firstChild);
+				}
+			}
+			else
+			if(act == "before"){
+				for(;i<l;i++) {
+					els[i].parentNode.insertBefore(cf(el), els[i]);
+				}
+			}
+			else
+			if(act == "after"){
+				els[i].parentNode.insertBefore(cf(el), els[i].nextSibling);
+			}
 
-		}
-		function before(){
-
-		}
-		function after(){
-
+			return els;
 		}
 
 		U.extend(ax5.dom, {
@@ -2756,6 +2886,7 @@ ax("#elementid");
 			prepend: prepend,
 			before : before,
 			after  : after,
+			manipulate: manipulate,
 			width  : width,
 			height : height
 		});
