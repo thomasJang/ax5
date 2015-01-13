@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title></title>
     <script type="text/javascript" src="../plugin/jquery-1.10.2.js"></script>
-    <script type="text/javascript" src="../src/ax5.js"></script>
+    <script type="text/javascript" src="../src/ax5-polyfill.js"></script>
+    <script type="text/javascript" src="../src/ax5-core.js"></script>
 </head>
 <body style="padding:20px;">
     <div class="ax5-sample-view">
@@ -24,16 +25,24 @@
         <button data-event-test="text-box">버튼</button>
         <button data-event-test="remove">버튼</button>
 
+        <a href="1234" id="move-item">이동할 아이템</a>
     </div>
     <script type="text/javascript">
 
+        //var el = ax5.dom.get("[data-list-item='0']");
+        ax5.dom("[data-list-item='0']")
+                .after("ㅈㅏㅇㄱㅣㅇㅕㅇ")
+                .after("<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>")
+                .after(ax5.dom.get("#move-item"));
 
-        var el = ax5.dom.get("#list-container"), styles;
+/*
+        ax5.dom.prepend(el, "<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>");
+        ax5.dom.before(el, "before");
+        ax5.dom.after(el, "after");
+        ax5.dom.append(ax5.dom.get("[data-list-item='2']"), ax5.dom.get("#move-item"));
+*/
+        //$("[data-list-item]").append("ㅈㅏㅇㄱㅣㅇㅕㅇ");
 
-        ax5.dom.html(el, "<a href='#1234'>링크");
-
-        //console.log(ax5.dom.html(el));
-        //console.log(jQuery("#list-container").html() );
     </script>
 </body>
 </html>

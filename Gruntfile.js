@@ -8,33 +8,23 @@
 			options: {
 				stripBanners: true,
 				separator: ';',
-				banner: '/*! \n<%= pkg.name %> - v<%= pkg.version %> - ' +
-				'<%= grunt.template.today("yyyy-mm-dd") %> \n*/\n',
-				separator: '\n/* ---------------------------- */\n'
+				banner: '/*\n'+
+				' * <%= pkg.name %> - v<%= pkg.version %> \n' +
+				' * <%= grunt.template.today("yyyy-mm-dd") %> \n' +
+				' * www.axisj.com Javascript UI Library\n' +
+				' * \n' +
+				' * Copyright 2013, 2015 AXISJ.com and other contributors \n' +
+				' * Released under the MIT license \n' +
+				' * www.axisj.com/ax5/license \n' +
+				' */\n\n',
+				separator: '\n\n'
 			},
 			basic: {
 				src: [
-					'lib/AXConfig.js',
-					'lib/AXUtil.js',
-					'lib/AXCore.js'
+					'src/ax5-polyfill.js',
+					'src/ax5-core.js'
 				],
-				dest: 'lib/AXJ.js'
-			},
-			tiny: {
-				src: [
-					'lib/AXJ.js',
-					'lib/AXInput.js',
-					'lib/AXSelect.js',
-					'lib/AXMobileMenu.js',
-					'lib/AXTopDownMenu.js'
-				],
-				dest: 'dist/<%= pkg.name %>.tiny.js'
-			},
-			extras: {
-				src: [
-
-				],
-				dest: 'dist/<%= pkg.name %>.all.js'
+				dest: 'src/ax5.js'
 			}
 		},
 		uglify: {
@@ -121,6 +111,6 @@
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 
 	grunt.registerTask('js-concat', ['concat']);
-	grunt.registerTask('js', ['uglify']);
+	grunt.registerTask('js', ['concat','uglify']);
 	grunt.registerTask('css', ['cssmin']);
 };
