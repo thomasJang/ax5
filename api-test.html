@@ -52,7 +52,7 @@
 
     <h1>AX5 API Check</h1>
     <div id="test-result" class="test-result"></div>
-    <p id="author"  ondblclick="alert('author_dbClick')">Team AXISJ</p>
+    <p id="author"  ondblclick="alert('Team AXISJ')">Team AXISJ</p>
 
     <div id="id-test"></div>
     <a class="class-text"></a>
@@ -367,6 +367,20 @@
             r    : "24NaNNaN"
         },
         {
+            label: "ax5.util.merge",
+            fn   : function () {
+                var arr_a = [1,2,3];
+                var arr_b = [11,22,33];
+                var str_a = "this is a str";
+
+                ax5.util.merge(arr_a, arr_b);
+                ax5.util.merge(arr_a, str_a);
+
+                return arr_a.join('');
+            },
+            r   :"123112233this is a str"
+        },
+        {
             label: "ax5.util.number(str, cond)",
             fn   : function () {
                 /*
@@ -476,6 +490,17 @@
             },
             r   : "inner-width : inner-width : inner-width"
         },
+
+        /*
+        {
+            label: "ax5.util.to_array(object)",
+            fn   : function () {
+
+            },
+            r    :''
+        },
+        */
+
         {
             label: "ax5.util.to_json(object)",
             fn   : function () {
@@ -510,6 +535,22 @@
         {
             label: "split"
         },
+
+        {
+            label: "ax5.dom.after",
+            fn   : function () {
+                var el = ax5.dom.get("#id-test");
+                var newEl = ax5.dom.create("div", {id:"afterTestDiv", "class":"afterTestDiv"});
+                ax5.dom.after(el, newEl);
+
+                var nextItem = ax5.dom.next(el);
+                return nextItem.id;
+            },
+            r   : "afterTestDiv"
+        },
+
+        //label: "ax5.dom.append",
+
         {
             label: "ax5.dom.attr",
             fn   : function () {
@@ -524,6 +565,9 @@
             },
             r   : "9999 null"
         },
+
+        //label: "ax5.dom.before",
+
         {
             label: "ax5.dom.child",
             fn   : function () {
@@ -589,6 +633,8 @@
             //r   :"#ff3300"
             r:  "rgb(255, 51, 0) dashed"
         },
+
+        //label: "ax5.dom.empty",
 
         {
             label:"ax5.dom.get : id",
@@ -661,6 +707,9 @@
                 return result.join(' : ');
             }
         },
+
+        //label: "ax5.dom.html",
+
         {
             label:"ax5.dom.next, ax5.dom.prev ",
             fn: function(){
@@ -719,6 +768,9 @@
             },
             r:  "progress"
         },
+
+        //label: "ax5.dom.prepend",
+
         {
             label:"ax5.dom.ready",
             fn: function(callBack){
