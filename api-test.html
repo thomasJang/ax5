@@ -998,9 +998,14 @@
         newDiv.innerHTML = "<h2>" + navigator.userAgent.toLowerCase() + "</h2>";
         target.appendChild(newDiv);
 
+        var resultObj = {
+            testCnt : 0
+        };
+
         function checker(O) {
-            p_bar.style.width = 100-(check_list.length / test_t_count * 100)+"%";
+            p_bar.style.width = 100 - (check_list.length / test_t_count * 100) + "%";
             if (!O) return;
+            resultObj.testCnt++;
 
             var newDiv = document.createElement("div");
             newDiv["id"] = O.label;
@@ -1044,7 +1049,7 @@
                 });
             }else{
                 if(O.label === "split") {
-
+                    resultObj.testCnt--;
                 }else{
                     try{
                         result = O.fn();
