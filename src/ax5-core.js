@@ -1868,6 +1868,17 @@ ax("#elementid");
 					var rs = dom.manipulate("after", this.elements, val);
 					return (rs === this.elements) ? this : rs;
 				};
+/**
+ * 엘리먼트 다음위치에 노드를 추가 합니다.
+ * @method ax5.dom0.remove
+ * @example
+ ```
+ ax5.dom("[data-list-item='0']").remove();
+ ```
+ */
+				this.remove = function(){
+					return dom.remove(this.elements);
+				}
 			}
 			return ax;
 		})();
@@ -1876,259 +1887,257 @@ ax("#elementid");
 
 	// dom functions
 	(function(){
-		/* 내장함수 시작 ~~~*/
-		// 이벤트 바인딩
-		function eventBind(elem, type, eventHandle){
-			type = U.left(type, ".");
-			if ( elem.addEventListener ) {
-				elem.addEventListener( type, eventHandle, false );
-			} else if ( elem.attachEvent ) {
-				elem.attachEvent( "on" + type, eventHandle );
-			}
-		}
-		// 이벤트 언바인딩
-		function eventUnBind(elem, type, eventHandle){
-			type = U.left(type, ".");
-			if ( elem.removeEventListener ) {
-				if(eventHandle) elem.removeEventListener( type, eventHandle );
-				else{
-					elem.removeEventListener( type );
+		//if("내장함수 시작") {
+			// 이벤트 바인딩
+			function eventBind(elem, type, eventHandle) {
+				type = U.left(type, ".");
+				if (elem.addEventListener) {
+					elem.addEventListener(type, eventHandle, false);
+				} else if (elem.attachEvent) {
+					elem.attachEvent("on" + type, eventHandle);
 				}
-			} else if ( elem.detachEvent ) {
-				if(eventHandle) elem.detachEvent( "on" + type, eventHandle );
-				else elem.detachEvent( "on" + type );
 			}
-		}
-		// 엘리먼트 인자 체크
-		function validate_elements(elem, fn_name){
-			if(U.is_array(elem) && U.is_element(elem[0])){
+
+			// 이벤트 언바인딩
+			function eventUnBind(elem, type, eventHandle) {
+				type = U.left(type, ".");
+				if (elem.removeEventListener) {
+					if (eventHandle) elem.removeEventListener(type, eventHandle);
+					else {
+						elem.removeEventListener(type);
+					}
+				} else if (elem.detachEvent) {
+					if (eventHandle) elem.detachEvent("on" + type, eventHandle);
+					else elem.detachEvent("on" + type);
+				}
+			}
+
+			// 엘리먼트 인자 체크
+			function validate_elements(elem, fn_name) {
+				if (U.is_array(elem) && U.is_element(elem[0])) {
+					return elem;
+				}
+				else if (U.is_element(elem)) return [elem];
+				else if (elem && elem.nodeType === 9) {
+					return [elem.documentElement];
+				}
+				else if (elem && elem.toString() == "[object ax5.dom]") {
+					return elem.elements;
+				}
+				else if (!U.is_array(elem) && !U.is_nodelist(elem)) {
+					console.error("ax5.dom." + fn_name + " : elements parameter incorrect");
+					return [];
+				}
 				return elem;
 			}
-			else
-			if(U.is_element(elem)) return [elem];
-			else
-			if(elem && elem.nodeType === 9 ) {
-				return [elem.documentElement];
-			}
-			else
-			if(elem && elem.toString() == "[object ax5.dom]"){
-				return elem.elements;
-			}
-			else
-			if(!U.is_array(elem) && !U.is_nodelist(elem)) {
-				console.error("ax5.dom."+fn_name+" : elements parameter incorrect");
-				return [];
-			}
-			return elem;
-		}
-		// 엘리먼트 순서이동
-		function sibling(elements, forward, times){
-			elements = validate_elements(elements, forward);
-			var prop = (forward == "prev") ? "previousSibling" : "nextSibling", el = elements[0];
-			times = (typeof times == "undefined" || times < 1) ? 1 : times;
-			do{
-				el = el[prop];
-			}
-			while(
-				(function(){
-					if(!el) return false;
-					if(el.nodeType == 1) times--;
-					return (times > 0)
-				})()
-				);
-			return el;
-		}
-		// 엘리먼트 스타일 값 가져오기
-		function style(el, key, fn_nm){
-			if(U.is_string(key)) {
-				return get_style(key);
-			}else if(U.is_array(key)){
-				var css = {}, i = 0, l = key.length;
-				for(;i<l;i++){
-					css[key[i]] = get_style(key[i]);
+
+			// 엘리먼트 순서이동
+			function sibling(elements, forward, times) {
+				elements = validate_elements(elements, forward);
+				var prop = (forward == "prev") ? "previousSibling" : "nextSibling", el = elements[0];
+				times = (typeof times == "undefined" || times < 1) ? 1 : times;
+				do {
+					el = el[prop];
 				}
-				return css;
+				while (
+					(function () {
+						if (!el) return false;
+						if (el.nodeType == 1) times--;
+						return (times > 0)
+					})()
+					);
+				return el;
 			}
 
-			function get_style(k){
-				if(window.getComputedStyle){
-					return window.getComputedStyle(el).getPropertyValue(k);
-				}
-				else
-				if(el.currentStyle){
-					var val = el.currentStyle[k];
-					if(val == "auto"){
-						if(U.search(["width", "height"], k) > -1){
-							val = el[ U.camel_case("offset-" + k) ];
-						}
+			// 엘리먼트 스타일 값 가져오기
+			function style(el, key, fn_nm) {
+				if (U.is_string(key)) {
+					return get_style(key);
+				} else if (U.is_array(key)) {
+					var css = {}, i = 0, l = key.length;
+					for (; i < l; i++) {
+						css[key[i]] = get_style(key[i]);
 					}
-					return val;
+					return css;
 				}
-			}
-			return null;
-		}
-		// 박스사이즈 구하기
-		function box_size(elements, fn_nm, opts){
-			var d = -1, tag_nm = "";
-			if(U.is_window(elements)){
-				return elements.document.documentElement[ U.camel_case("client-" + fn_nm) ];
-			}
-			else
-			{
-				elements = validate_elements(elements, fn_nm);
-				var el = elements[0], _sbs = U.camel_case("scroll-" + fn_nm), _obs = U.camel_case("offset-" + fn_nm), _cbs = U.camel_case("client-" + fn_nm);
-				if(el){
-					tag_nm = el.tagName.toLowerCase();
-					if(tag_nm == "html"){
-						d = Math.max( doc.body[ _sbs ], el[ _sbs ], doc.body[ _obs ], el[ _obs ], el[ _cbs ] );
+
+				function get_style(k) {
+					if (window.getComputedStyle) {
+						return window.getComputedStyle(el).getPropertyValue(k);
 					}
-					else
-					{
-						if(el.getBoundingClientRect){
-							d = el.getBoundingClientRect()[fn_nm];
-						}
-
-						if(typeof d == "undefined"){
-							d = style(el, fn_nm, fn_nm);
-							var box_cond = (fn_nm == "width") ?
-								style(el, ["box-sizing", "padding-left","padding-right","border-left-width","border-right-width"], fn_nm):
-								style(el, ["box-sizing", "padding-top","padding-bottom","border-top-width","border-bottom-width"], fn_nm);
-
-							if(box_cond["box-sizing"] == "content-box"){
-								d = parseInt(d) + (ax5.util.reduce(box_cond, function(p, n){
-									return U.number(p|0) + U.number(n);
-								}));
+					else if (el.currentStyle) {
+						var val = el.currentStyle[k];
+						if (val == "auto") {
+							if (U.search(["width", "height"], k) > -1) {
+								val = el[U.camel_case("offset-" + k)];
 							}
 						}
+						return val;
 					}
 				}
+
+				return null;
 			}
-			return U.number(d);
-		}
-		// nodeName check
-		function node_name(el, node_nm){
-			return el.nodeName && el.nodeName.toLowerCase() === node_nm.toLowerCase();
-		}
-		// createFragment
-		function create_fragment(elems){
-			var safe = createSafeFragment(), tmp, nodes = [], tag, wrap, tbody, contains;
-			var elem, i = 0, l = elems.length, j;
 
-			for ( ; i < l; i++ ) {
-				elem = elems[i];
-				if (elem || elem === 0) {
-					if (U.get_type(elem) == "fragment"){
-						nodes.push(elem.firstChild);
-					}
-					else
-					if (U.get_type(elem) == "element"){
-						nodes.push(elem);
-					}
-					else
-					if (!rhtml.test(elem)) {
-						nodes.push(doc.createTextNode(elem));
-						//safe.appendChild(doc.createTextNode(elem));
-					}
-					else
-					{
-						tmp = safe.appendChild(doc.createElement("div"));
-						// Deserialize a standard representation
-						tag = ( rtagName.exec(elem) || ["", ""] )[1].toLowerCase();
-						wrap = wrapMap[tag] || wrapMap._default;
-						tmp.innerHTML = wrap[1] + elem.replace(rxhtmlTag, "<$1></$2>") + wrap[2];
-
-						// Descend through wrappers to the right content
-						j = wrap[0];
-						while (j--) {
-							tmp = tmp.lastChild;
+			// 박스사이즈 구하기
+			function box_size(elements, fn_nm, opts) {
+				var d = -1, tag_nm = "";
+				if (U.is_window(elements)) {
+					return elements.document.documentElement[U.camel_case("client-" + fn_nm)];
+				}
+				else {
+					elements = validate_elements(elements, fn_nm);
+					var el = elements[0], _sbs = U.camel_case("scroll-" + fn_nm), _obs = U.camel_case("offset-" + fn_nm), _cbs = U.camel_case("client-" + fn_nm);
+					if (el) {
+						tag_nm = el.tagName.toLowerCase();
+						if (tag_nm == "html") {
+							d = Math.max(doc.body[_sbs], el[_sbs], doc.body[_obs], el[_obs], el[_cbs]);
 						}
+						else {
+							if (el.getBoundingClientRect) {
+								d = el.getBoundingClientRect()[fn_nm];
+							}
 
-						// Manually add leading whitespace removed by IE
-						if (!info.support.leadingWhitespace && rleadingWhitespace.test(elem)) {
-							nodes.push(doc.createTextNode(rleadingWhitespace.exec(elem)[0]));
-						}
+							if (typeof d == "undefined") {
+								d = style(el, fn_nm, fn_nm);
+								var box_cond = (fn_nm == "width") ?
+									style(el, ["box-sizing", "padding-left", "padding-right", "border-left-width", "border-right-width"], fn_nm) :
+									style(el, ["box-sizing", "padding-top", "padding-bottom", "border-top-width", "border-bottom-width"], fn_nm);
 
-						// Remove IE's autoinserted <tbody> from table fragments
-						if (!info.support.tbody) {
-
-							// String was a <table>, *may* have spurious <tbody>
-							elem = tag === "table" && !rtbody.test(elem) ?
-								tmp.firstChild :
-
-								// String was a bare <thead> or <tfoot>
-								wrap[1] === "<table>" && !rtbody.test(elem) ?
-									tmp :
-									0;
-
-							j = elem && elem.childNodes.length;
-							while (j--) {
-								if (node_name((tbody = elem.childNodes[j]), "tbody") && !tbody.childNodes.length) {
-									elem.removeChild(tbody);
+								if (box_cond["box-sizing"] == "content-box") {
+									d = parseInt(d) + (ax5.util.reduce(box_cond, function (p, n) {
+										return U.number(p | 0) + U.number(n);
+									}));
 								}
 							}
 						}
+					}
+				}
+				return U.number(d);
+			}
 
-						U.merge(nodes, tmp.childNodes);
+			// nodeName check
+			function node_name(el, node_nm) {
+				return el.nodeName && el.nodeName.toLowerCase() === node_nm.toLowerCase();
+			}
 
-						// Fix #12392 for WebKit and IE > 9
-						tmp.textContent = "";
+			// createFragment
+			function create_fragment(elems) {
+				var safe = createSafeFragment(), tmp, nodes = [], tag, wrap, tbody;
+				var elem, i = 0, l = elems.length, j;
 
-						// Fix #12392 for oldIE
-						while (tmp.firstChild) {
-							tmp.removeChild(tmp.firstChild);
+				for (; i < l; i++) {
+					elem = elems[i];
+					if (elem || elem === 0) {
+						if (U.get_type(elem) == "fragment") {
+							nodes.push(elem.firstChild);
 						}
+						else if (U.get_type(elem) == "element") {
+							nodes.push(elem);
+						}
+						else if (!rhtml.test(elem)) {
+							nodes.push(doc.createTextNode(elem));
+							//safe.appendChild(doc.createTextNode(elem));
+						}
+						else {
+							tmp = safe.appendChild(doc.createElement("div"));
+							// Deserialize a standard representation
+							tag = ( rtagName.exec(elem) || ["", ""] )[1].toLowerCase();
+							wrap = wrapMap[tag] || wrapMap._default;
+							tmp.innerHTML = wrap[1] + elem.replace(rxhtmlTag, "<$1></$2>") + wrap[2];
 
-						// Remember the top-level container for proper cleanup
-						tmp = safe.lastChild;
+							// Descend through wrappers to the right content
+							j = wrap[0];
+							while (j--) {
+								tmp = tmp.lastChild;
+							}
+
+							// Manually add leading whitespace removed by IE
+							if (!info.support.leadingWhitespace && rleadingWhitespace.test(elem)) {
+								nodes.push(doc.createTextNode(rleadingWhitespace.exec(elem)[0]));
+							}
+
+							// Remove IE's autoinserted <tbody> from table fragments
+							if (!info.support.tbody) {
+								// String was a <table>, *may* have spurious <tbody>
+								elem = tag === "table" && !rtbody.test(elem) ?
+									tmp.firstChild :
+
+									// String was a bare <thead> or <tfoot>
+									wrap[1] === "<table>" && !rtbody.test(elem) ?
+										tmp :
+										0;
+
+								j = elem && elem.childNodes.length;
+								while (j--) {
+									if (node_name((tbody = elem.childNodes[j]), "tbody") && !tbody.childNodes.length) {
+										elem.removeChild(tbody);
+									}
+								}
+							}
+
+							U.merge(nodes, tmp.childNodes);
+
+							// Fix #12392 for WebKit and IE > 9
+							tmp.textContent = "";
+
+							// Fix #12392 for oldIE
+							while (tmp.firstChild) {
+								tmp.removeChild(tmp.firstChild);
+							}
+
+							// Remember the top-level container for proper cleanup
+							tmp = safe.lastChild;
+						}
 					}
 				}
+
+				// Fix #11356: Clear elements from fragment
+				if (tmp) {
+					safe.removeChild(tmp);
+				}
+
+				// Reset defaultChecked for any radios and checkboxes
+				// about to be appended to the DOM in IE 6/7 (#8060)
+				if (!info.support.appendChecked) {
+					//jQuery.grep( getAll( nodes, "input" ), fixDefaultChecked );
+				}
+
+
+				i = 0;
+				while ((elem = nodes[i++])) {
+					//console.log(elem);
+					safe.appendChild(elem);
+				}
+
+
+				tmp = null;
+
+				return safe;
 			}
 
-			// Fix #11356: Clear elements from fragment
-			if ( tmp ) {
-				safe.removeChild( tmp );
-			}
+			function getAll(context, tag) {
+				var elems, elem,
+					i = 0,
+					found = typeof context.getElementsByTagName !== core_strundefined ? context.getElementsByTagName(tag || "*") :
+						typeof context.querySelectorAll !== core_strundefined ? context.querySelectorAll(tag || "*") :
+							undefined;
 
-			// Reset defaultChecked for any radios and checkboxes
-			// about to be appended to the DOM in IE 6/7 (#8060)
-			if ( !info.support.appendChecked ) {
-				//jQuery.grep( getAll( nodes, "input" ), fixDefaultChecked );
-			}
-
-
-			i = 0;
-			while ( (elem = nodes[ i++ ]) ) {
-				//console.log(elem);
-				safe.appendChild(elem);
-			}
-
-
-			tmp = null;
-
-			return safe;
-		}
-		function getAll( context, tag ) {
-			var elems, elem,
-				i = 0,
-				found = typeof context.getElementsByTagName !== core_strundefined ? context.getElementsByTagName( tag || "*" ) :
-					typeof context.querySelectorAll !== core_strundefined ? context.querySelectorAll( tag || "*" ) :
-						undefined;
-
-			if ( !found ) {
-				for ( found = [], elems = context.childNodes || context; (elem = elems[i]) != null; i++ ) {
-					if ( !tag || jQuery.nodeName( elem, tag ) ) {
-						found.push( elem );
-					} else {
-						U.merge( found, getAll( elem, tag ) );
+				if (!found) {
+					for (found = [], elems = context.childNodes || context; (elem = elems[i]) != null; i++) {
+						if (!tag || jQuery.nodeName(elem, tag)) {
+							found.push(elem);
+						} else {
+							U.merge(found, getAll(elem, tag));
+						}
 					}
 				}
-			}
 
-			return tag === undefined || tag && node_name( context, tag ) ?
-				U.merge( [ context ], found ) :
-				found;
-		}
-		/* 내장함수 끝 ~~~*/
+				return tag === undefined || tag && node_name(context, tag) ?
+					U.merge([context], found) :
+					found;
+			}
+		// }
 
 		// jQuery.ready.promise jquery 1.10.2
 		/**
@@ -2836,6 +2845,7 @@ ax("#elementid");
 		function after(elements, val){
 			return manipulate("after", elements, val);
 		}
+
 		function manipulate(act, elements, val){
 			elements = validate_elements(elements, act);
 			var flag, i= 0, l=elements.length,
@@ -2862,33 +2872,50 @@ ax("#elementid");
 			if(act == "after"){
 				els[i].parentNode.insertBefore(cf(el), els[i].nextSibling);
 			}
-
 			return els;
+		}
+/**
+ * 엘리먼트를 제거 합니다.
+ * @method ax5.dom.remove
+ * @param {Elements|Element} elements
+ * @example
+ ```
+ var el = ax5.dom.get("[data-list-item='0']");
+ ax5.dom.remove(el);
+ ```
+ */
+		function remove(elements, val){
+			elements = validate_elements(elements, "remove");
+			var i= 0, l=elements.length;
+			for(;i<l;i++) {
+				if(elements[i].parentNode) elements[i].parentNode.removeChild(elements[i]);
+			}
 		}
 
 		U.extend(ax5.dom, {
-			ready  : ready,
-			resize : resize,
-			get    : get,
-			get_one: get_one,
-			create : create,
-			css    : css,
-			clazz  : clazz,
-			attr   : attr,
-			on     : on,
-			off    : off,
-			child  : child,
-			parent : parent,
-			prev   : prev,
-			next   : next,
-			html   : html,
-			append : append,
-			prepend: prepend,
-			before : before,
-			after  : after,
+			ready     : ready,
+			resize    : resize,
+			get       : get,
+			get_one   : get_one,
+			create    : create,
+			css       : css,
+			clazz     : clazz,
+			attr      : attr,
+			on        : on,
+			off       : off,
+			child     : child,
+			parent    : parent,
+			prev      : prev,
+			next      : next,
+			html      : html,
+			width     : width,
+			height    : height,
+			append    : append,
+			prepend   : prepend,
+			before    : before,
+			after     : after,
 			manipulate: manipulate,
-			width  : width,
-			height : height
+			remove    : remove
 		});
 	})();
 
