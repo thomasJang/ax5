@@ -990,7 +990,7 @@
 
     ];
 
-    if ("API check 시작") {
+    if("API check 시작") {
         var test_t_count = check_list.length;
         var target = document.getElementById("test-result");
         var p_bar = document.getElementById("progress-bar");
@@ -998,15 +998,9 @@
         newDiv.innerHTML = "<h2>" + navigator.userAgent.toLowerCase() + "</h2>";
         target.appendChild(newDiv);
 
-        var resultObj = {
-            testCnt : 0
-        };
-
         function checker(O) {
-            p_bar.style.width = 100 - (check_list.length / test_t_count * 100) + "%";
+            p_bar.style.width = 100-(check_list.length / test_t_count * 100)+"%";
             if (!O) return;
-
-            resultObj.testCnt++;
 
             var newDiv = document.createElement("div");
             newDiv["id"] = O.label;
@@ -1014,7 +1008,7 @@
 
             var result, err_string;
 
-            if (O.r === "ready-response") {
+            if(O.r === "ready-response"){
                 var skipFlag = false;
 
                 /*
@@ -1030,7 +1024,7 @@
                  }, 1000);
                  */
 
-                O.fn(function (res) {
+                O.fn(function(res){
                     if (!skipFlag) {
                         //if(skipFn) clearTimeout(skipFn);
                         if (res) {
@@ -1048,13 +1042,13 @@
                         }
                     }
                 });
-            } else {
-                if (O.label === "split") {
-                    resultObj.testCnt--;
-                } else {
-                    try {
+            }else{
+                if(O.label === "split") {
+
+                }else{
+                    try{
                         result = O.fn();
-                    } catch (e) {
+                    }catch(e){
                         err_string = e.toString();
                         console.error(e);
                     }
@@ -1062,18 +1056,18 @@
                     if (typeof O.r != "undefined" && (result == O.r)) {
                         newDiv.innerHTML = "<h3 class='blue'>" + O.label + " : <u>OK</u></h3>";
                     } else if (typeof O.r == "undefined" && result) {
-                        newDiv.innerHTML = "<h3 class='blue'>" + O.label + " : <u>OK : " + result + "</u></h3>";
+                        newDiv.innerHTML = "<h3 class='blue'>" + O.label + " : <u>OK : "+ result +"</u></h3>";
                     } else {
-                        newDiv.innerHTML = "<h3 class='red'>" + O.label + " : <u>?? " + result + "[" + err_string + "]" + "</u></h3>";
+                        newDiv.innerHTML = "<h3 class='red'>" + O.label + " : <u>?? " + result + "["+ err_string +"]" + "</u></h3>";
                     }
                 }
 
-                if (O.label === "split") {
+                if(O.label === "split") {
                     var newDiv_cb = document.createElement("div");
                     newDiv_cb.innerHTML = "<hr class='split' />";
                     newDiv_cb.setAttribute("style", "clear:both;padding-top:2px;");
                     target.appendChild(newDiv_cb);
-                } else {
+                }else{
                     target.appendChild(newDiv);
                 }
 
@@ -1083,7 +1077,6 @@
 
             }
         }
-
         checker(check_list.shift());
     }
 </script>
