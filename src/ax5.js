@@ -2473,10 +2473,12 @@ ax("#elementid");
 		 * @method ax5.dom.create
 		 * @param {String} node_nm - 엘리먼트 이름
 		 * @param {Object} attr - 엘리먼트 속성정보
+		 * @param {String} val - innerHTML 값
 		 * @returns {Element}
 		 * @example
  ```js
  ax5.dom.create("script", {type:"text/javascript", src:"../ax5.js"});
+ ax5.dom.create("div", {id:"createEleId", "class":"createEleClass"}, "<a>내가만든</a>");
  ```
 		 */
 		function create(node_nm, attr, val){
@@ -2491,9 +2493,10 @@ ax("#elementid");
 			 */
 
 			var element = doc.createElement(node_nm);
-			for(var k in attr){
-				element[k] = attr[k];
+			for (var k in attr) {
+				element.setAttribute(k, attr[k]);
 			}
+			if(val) element.appendChild(create_fragment([].concat(val)));
 			return element;
 		}
 		/**

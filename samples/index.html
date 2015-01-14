@@ -29,11 +29,14 @@
     </div>
     <script type="text/javascript">
 
+        var ele = ax5.dom.create("div", {id:"createEleId", "class":"createEleClass"}, "<a>내가만든</a>");
+        console.log(ele);
+
         //var el = ax5.dom.get("[data-list-item='0']");
         ax5.dom("[data-list-item='0']")
                 .after("ㅈㅏㅇㄱㅣㅇㅕㅇ")
                 .after("<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>")
-                .after(ax5.dom.get("#move-item"));
+                .after(ele);
 
 /*
         ax5.dom.prepend(el, "<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>");
