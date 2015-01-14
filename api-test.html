@@ -58,6 +58,7 @@
     <a class="class-text"></a>
     <span data-attr="A" id="test"></span>
     <div data-attr="B"></div>
+    <div id="remove-test"></div>
 
 <script type="text/javascript">
     /*
@@ -540,7 +541,7 @@
             label: "ax5.dom.after",
             fn   : function () {
                 var el = ax5.dom.get("#id-test");
-                var newEl = ax5.dom.create("div", {id:"afterTestDiv", "class":"afterTestDiv"});
+                var newEl = ax5.dom.create("div", {"class":"afterTestDiv","id":"afterTestDiv"});
                 ax5.dom.after(el, newEl);
 
                 var nextItem = ax5.dom.next(el);
@@ -549,7 +550,18 @@
             r   : "afterTestDiv"
         },
 
-        //label: "ax5.dom.append",
+        {
+            label: "ax5.dom.append",
+            fn   : function () {
+                var el = ax5.dom.get("#id-test");
+                var newEl = ax5.dom.create("div", {"class":"appendTestDiv", id:"appendTestDiv"}, "append");
+                ax5.dom.append(el, newEl);
+
+                var children = ax5.dom.child(el);
+                return children[0].id;
+            },
+            r   : "appendTestDiv"
+        },
 
         {
             label: "ax5.dom.attr",
@@ -566,7 +578,20 @@
             r   : "9999 null"
         },
 
-        //label: "ax5.dom.before",
+        {
+            label: "ax5.dom.before",
+            fn   : function () {
+                var el = ax5.dom.get("#appendTestDiv");
+                var newEl = ax5.dom.create("div", {"class":"beforeTestDiv", id:"beforeTestDiv"}, "before");
+                ax5.dom.before(el, newEl);
+
+                var parentDiv = ax5.dom.get("#id-test");
+                var children = ax5.dom.child(parentDiv);
+
+                return children[0].id +" : "+ children.length;
+            },
+            r   : "beforeTestDiv : 2"
+        },
 
         {
             label: "ax5.dom.child",
@@ -634,7 +659,17 @@
             r:  "rgb(255, 51, 0) dashed"
         },
 
-        //label: "ax5.dom.empty",
+        {
+            label: "ax5.dom.empty",
+            fn   : function () {
+                var el = ax5.dom.get("#id-test");
+                ax5.dom.empty(el);
+
+                var children = ax5.dom.child(el);
+                return children.length;
+            },
+            r   : 0
+        },
 
         {
             label:"ax5.dom.get : id",
@@ -791,6 +826,16 @@
                 }, 1000);
             },
             r    : "ready-response"
+        },
+        {
+            label: "ax5.dom.remove",
+            fn   : function () {
+                var el = ax5.dom.get("#remove-test");
+                ax5.dom.remove(el);
+
+                return ax5.util.is_element(document.getElementById("remove-test"));
+            },
+            r   : false
         },
 
         {
