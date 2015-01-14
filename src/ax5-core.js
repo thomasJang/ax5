@@ -2918,7 +2918,8 @@ ax("#elementid");
 			before    : before,
 			after     : after,
 			manipulate: manipulate,
-			remove    : remove
+			remove    : remove,
+			empty     : empty
 		});
 	})();
 
