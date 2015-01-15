@@ -5,20 +5,27 @@
     <script type="text/javascript" src="src/ax5.js"></script>
     <title>ax5 - API TESTER</title>
     <style>
+        html, body{
+            padding: 10px;margin: 0px; height: 100%;
+            font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial;
+        }
         h1{}
-        h2{color: #9b9b9b;}
+        h2{color: #9b9b9b;font-size: 15px;}
         h3{margin: 5px;font-size: 15px;}
         .blue{color: #6fafe0;}
         .red{color: #f06433;}
         h3 u{color: #000;}
 
         #progress{
+            position: fixed; _position:absolute;
+            left: 0px; top: 0px;
             border: 1px solid #888;
             border-radius: 5px;
-            height: 6px;
+            width: auto;6px;
+            height: 100%;
         }
         #progress-bar{
-            height: 6px;width: 0%;
+            width: 6px;height: 0%;
             border-radius: 4px;
             background: #f06433;
         }
@@ -40,6 +47,7 @@
             padding: 10px;
             text-align: center;
             font-weight:bold;
+            font-size: 11px;
         }
     </style>
 
@@ -52,7 +60,7 @@
 
     <h1>AX5 API Check</h1>
     <div id="test-result" class="test-result"></div>
-    <p id="author"  ondblclick="alert('Team AXISJ')">Team AXISJ</p>
+    <p id="author"  ondblclick="alert('Team AXISJ')">Team AXISJ 2015 - http://www.axisj.com</p>
 
     <div id="id-test"></div>
     <a class="class-text"></a>
@@ -1055,7 +1063,7 @@
         };
 
         function checker(O) {
-            p_bar.style.width = 100 - (check_list.length / test_t_count * 100) + "%";
+            p_bar.style.height = 100 - (check_list.length / test_t_count * 100) + "%";
             if (!O) return;
             resultObj.testCnt++;
 

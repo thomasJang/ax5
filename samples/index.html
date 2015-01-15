@@ -7,10 +7,10 @@
     <script type="text/javascript" src="../src/ax5-polyfill.js"></script>
     <script type="text/javascript" src="../src/ax5-core.js"></script>
 </head>
-<body style="padding:20px;">
-    <div class="ax5-sample-view">
+<body style="padding:0px;">
+    <div class="ax5-sample-view" style="position:absolute;left: 100px;top: 100px;">
         <div>
-            <ul id="list-container">
+            <ul id="list-container" style="padding:0px;margin: 0px;">
                 <li data-list-item="0" id="li0">
                     <div>child>child</div>
                 </li>
@@ -28,25 +28,12 @@
         <a href="1234" id="move-item">이동할 아이템</a>
     </div>
     <script type="text/javascript">
-
-
-
-        var ele = ax5.dom.create("div", {id:"createEleId", "class":"createEleClass"}, "<a>내가만든</a>");
-        console.log(ele);
-
-        //var el = ax5.dom.get("[data-list-item='0']");
-        ax5.dom("[data-list-item='0']")
-                .after("ㅈㅏㅇㄱㅣㅇㅕㅇ")
-                .after("<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>")
-                .after(ele);
-
-/*
-        ax5.dom.prepend(el, "<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>");
-        ax5.dom.before(el, "before");
-        ax5.dom.after(el, "after");
-        ax5.dom.append(ax5.dom.get("[data-list-item='2']"), ax5.dom.get("#move-item"));
-*/
-        //$("[data-list-item]").append("ㅈㅏㅇㄱㅣㅇㅕㅇ");
+        var el = ax5.dom.get("#list-container");
+        //ax5.dom.css(el,  {"border":"1px solid"});
+        console.log(
+            ax5.dom.position(el),
+            ax5.dom.offset(el)
+        );
 
     </script>
 </body>
