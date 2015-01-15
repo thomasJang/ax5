@@ -66,6 +66,7 @@
     <a class="class-text"></a>
     <span data-attr="A" id="test"></span>
     <div data-attr="B"></div>
+    <div id="remove-test"></div>
 
 <script type="text/javascript">
     /*
@@ -548,7 +549,7 @@
             label: "ax5.dom.after",
             fn   : function () {
                 var el = ax5.dom.get("#id-test");
-                var newEl = ax5.dom.create("div", {id:"afterTestDiv", "class":"afterTestDiv"});
+                var newEl = ax5.dom.create("div", {"class":"afterTestDiv","id":"afterTestDiv"});
                 ax5.dom.after(el, newEl);
 
                 var nextItem = ax5.dom.next(el);
@@ -557,7 +558,18 @@
             r   : "afterTestDiv"
         },
 
-        //label: "ax5.dom.append",
+        {
+            label: "ax5.dom.append",
+            fn   : function () {
+                var el = ax5.dom.get("#id-test");
+                var newEl = ax5.dom.create("div", {"class":"appendTestDiv", id:"appendTestDiv"}, "append");
+                ax5.dom.append(el, newEl);
+
+                var children = ax5.dom.child(el);
+                return children[0].id;
+            },
+            r   : "appendTestDiv"
+        },
 
         {
             label: "ax5.dom.attr",
@@ -574,7 +586,20 @@
             r   : "9999 null"
         },
 
-        //label: "ax5.dom.before",
+        {
+            label: "ax5.dom.before",
+            fn   : function () {
+                var el = ax5.dom.get("#appendTestDiv");
+                var newEl = ax5.dom.create("div", {"class":"beforeTestDiv", id:"beforeTestDiv"}, "before");
+                ax5.dom.before(el, newEl);
+
+                var parentDiv = ax5.dom.get("#id-test");
+                var children = ax5.dom.child(parentDiv);
+
+                return children[0].id +" : "+ children.length;
+            },
+            r   : "beforeTestDiv : 2"
+        },
 
         {
             label: "ax5.dom.child",
@@ -641,8 +666,17 @@
             //r   :"#ff3300"
             r:  "rgb(255, 51, 0) dashed"
         },
+        {
+            label: "ax5.dom.empty",
+            fn   : function () {
+                var el = ax5.dom.get("#id-test");
+                ax5.dom.empty(el);
 
-        //label: "ax5.dom.empty",
+                var children = ax5.dom.child(el);
+                return children.length;
+            },
+            r   : 0
+        },
 
         {
             label:"ax5.dom.get : id",
@@ -715,9 +749,16 @@
                 return result.join(' : ');
             }
         },
+        {
+            label: "ax5.dom.html",
+            fn   : function () {
+                var el = ax5.dom.get("#id-test");
+                ax5.dom.html(el, "<a href='#1234'>링크</a>");
 
-        //label: "ax5.dom.html",
-
+                return ax5.dom.html(el);
+            },
+            r   : "<a href=\"#1234\">링크</a>"
+        },
         {
             label:"ax5.dom.next, ax5.dom.prev ",
             fn: function(){
@@ -776,9 +817,18 @@
             },
             r:  "progress"
         },
+        {
+            label: "ax5.dom.prepend",
+            fn   : function () {
+                var el = ax5.dom.get("#id-test");
+                var newEl = ax5.dom.create("div", {"class":"prependTestDiv", id:"prependTestDiv"}, "prepend");
+                ax5.dom.prepend(el, newEl);
 
-        //label: "ax5.dom.prepend",
-
+                var children = ax5.dom.child(el);
+                return children[0].id;
+            },
+            r   : "prependTestDiv"
+        },
         {
             label:"ax5.dom.ready",
             fn: function(callBack){
@@ -800,7 +850,16 @@
             },
             r    : "ready-response"
         },
+        {
+            label: "ax5.dom.remove",
+            fn   : function () {
+                var el = ax5.dom.get("#remove-test");
+                ax5.dom.remove(el);
 
+                return ax5.util.is_element(document.getElementById("remove-test"));
+            },
+            r   : false
+        },
         {
             label:"ax5.dom.resize",
             fn: function(callBack){
@@ -856,7 +915,30 @@
                 return ax5.util.is_element(ax5.dom("[data-attr=A]").elements[0]);
             }
         },
+        {
+            label: "ax5.dom0.after",
+            fn   : function () {
+                var newEl = ax5.dom.create("div", {"class":"dom0_afterTestDiv","id":"dom0_afterTestDiv"});
+                ax5.dom("#id-test").after(newEl);
 
+                var nextItem = ax5.dom("#id-test").next();
+                console.log(nextItem)
+                return nextItem.elements[0].id;
+            },
+            r   : "dom0_afterTestDiv"
+        },
+        {
+            label: "ax5.dom0.append",
+            fn   : function () {
+                var el = ax5.dom("#id-test");
+                var newEl = ax5.dom.create("div", {"class":"appendTestDiv", id:"appendTestDiv"}, "append");
+                el.append(newEl);
+
+                var children = ax5.dom.child(el);
+                return children[0].id;
+            },
+            r   : "prependTestDiv"
+        },
         {
             label: "ax5.dom0.attr",
             fn   : function () {
@@ -886,6 +968,20 @@
                 return ( getAttr + " " + getAttr2  + " " + getAttr3 );
             },
             r:"ABCD ca2 null"
+        },
+        {
+            label: "ax5.dom().before",
+            fn   : function () {
+                var el = ax5.dom("#appendTestDiv");
+                var newEl = ax5.dom.create("div", {"class":"beforeTestDiv", id:"beforeTestDiv"}, "before");
+                el.before(newEl);
+
+                var parentDiv = ax5.dom.get("#id-test");
+                var children = ax5.dom.child(parentDiv);
+
+                return children[2].id +" : "+ children.length;
+            },
+            r   : "beforeTestDiv : 4"
         },
         {
             label: "ax5.dom0.child",
@@ -975,12 +1071,22 @@
                 return result.join(' : ');
             }
         },
+        {
+            label: "ax5.dom0.html",
+            fn   : function () {
+                var el = ax5.dom("#id-test");
+                el.html("<a href='#1234' id='testA'>링크</a>");
 
+                return el.html();
+            },
+            r   : "<a href=\"#1234\" id=\"testA\">링크</a>"
+        },
         {
             label:"ax5.dom0.next, ax5.dom0.prev ",
             fn: function(){
                 var el = ax5.dom("#test-result");
-                var item = el.child(el).elements[5];
+                var item = el.child().elements[5];
+                //var item = el.child(el).elements[5];
 
                 var nextItem;
                 var prevItem;
@@ -1013,7 +1119,18 @@
             },
             r    : "ready-response"
         },
+        {
+            label: "ax5.dom0.prepend",
+            fn   : function () {
+                var el = ax5.dom("#id-test");
+                var newEl = ax5.dom.create("div", {"class":"prependTestDiv", id:"prependTestDiv"}, "prepend");
+                el.prepend(newEl);
 
+                var children = ax5.dom.child(el);
+                return children[0].id;
+            },
+            r   : "prependTestDiv"
+        },
         {
             label:"ax5.dom0.parent",
             fn: function(){
@@ -1033,6 +1150,15 @@
                 return tg.parent(cond).elements[0].id;
             }
             //,r:  "progress"
+        },
+        {
+            label: "ax5.dom0.remove",
+            fn   : function () {
+                ax5.dom("#prependTestDiv").remove();
+                ax5.dom("#testA").remove();
+                return ax5.util.is_element(document.getElementById("prependTestDiv"));
+            },
+            r   : false
         },
 
         //ax5.info ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1066,6 +1192,8 @@
             p_bar.style.height = 100 - (check_list.length / test_t_count * 100) + "%";
             if (!O) return;
             resultObj.testCnt++;
+
+            //if (resultObj.testCnt > 40) return false;
 
             var newDiv = document.createElement("div");
             newDiv["id"] = O.label;
