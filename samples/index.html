@@ -8,7 +8,7 @@
     <script type="text/javascript" src="../src/ax5-core.js"></script>
 </head>
 <body style="padding:0px;">
-    <div class="ax5-sample-view" style="position:absolute;left: 100px;top: 100px;">
+    <div class="ax5-sample-view" style="position:absolute;left: 100px;top: 100px;padding: 5px 4px 3px 2px;border: 2px double #222;margin: 1px 10px;">
         <div>
             <ul id="list-container" style="padding:0px;margin: 0px;">
                 <li data-list-item="0" id="li0">
@@ -28,12 +28,26 @@
         <a href="1234" id="move-item">이동할 아이템</a>
     </div>
     <script type="text/javascript">
-        var el = ax5.dom.get("#list-container");
+        var axd = ax5.dom, axu = ax5.util;
+        var el = ax5.dom.get(".ax5-sample-view");
         //ax5.dom.css(el,  {"border":"1px solid"});
         console.log(
-            ax5.dom.position(el),
-            ax5.dom.offset(el)
+            axu.to_json( axd(".ax5-sample-view").get_boxmodel() )
         );
+        console.log(
+            axu.to_json( axd.get_boxmodel(el, "offset") ),
+            axu.to_json( axd.get_boxmodel(el, "position") ),
+            axu.to_json( axd.get_boxmodel(el, "width") ),
+            axu.to_json( axd.get_boxmodel(el, "height") ),
+            axu.to_json( axd.get_boxmodel(el, "padding") ),
+            axu.to_json( axd.get_boxmodel(el, "margin") ),
+            axu.to_json( axd.get_boxmodel(el, "border") ),
+            axu.to_json( axd.get_boxmodel(el, "borderWidth") ),
+            axu.to_json( axd.get_boxmodel(el, "border-width") ),
+            axu.to_json( axd.get_boxmodel(el, "boxSizing") ),
+            axu.to_json( axd.get_boxmodel(el, "box-sizing") )
+        );
+
 
     </script>
 </body>

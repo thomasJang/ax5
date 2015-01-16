@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-01-16 
+ * 2015-01-17 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -2066,7 +2066,68 @@ ax("#elementid");
  */
 				this.remove = function(){
 					return dom.remove(this.elements);
-				}
+				};
+/**
+ * 엘리먼트의 offset 값을 반환합니다.
+ * @method ax5.dom0.offset
+ * @param {Elements|Element} elements
+ * @returns {Object}
+ * @example
+ ```
+ console.log(
+    ax5.dom("#query").offset()
+ );
+ // {"top": 8, "left": 8}
+ ```
+ */
+				this.offset = function(){
+					return dom.offset(this.elements);
+				};
+/**
+ * 엘리먼트의 position 값을 반환합니다.
+ * @method ax5.dom0.position
+ * @param {Elements|Element} elements
+ * @returns {Object}
+ * @example
+ ```
+ console.log(
+ ax5.dom("#query").position()
+ );
+ // {"top": 8, "left": 8}
+ ```
+ */
+				this.position = function(){
+					return dom.position(this.elements);
+				};
+/**
+ * 엘리먼트의 box model 속성을 반환합니다.
+ * @method ax5.dom0.box_model
+ * @param {Elements|Element} elements
+ * @param {String} [cond] - 원하는 박스 속성
+ * @returns {Object}
+ * @example
+ ```
+ var axd = ax5.dom;
+ axd(".ax5-sample-view").get_boxmodel()
+ // {"offset": {"top": 101, "left": 110}, "position": {"top": 101, "left": 110}, "width": 181.71875, "height": 153, "padding": [5,4,3,2], "margin": [1,10,1,10], "border": ["2px double rgb(34, 34, 34)","2px double rgb(34, 34, 34)","2px double rgb(34, 34, 34)","2px double rgb(34, 34, 34)"], "borderWidth": ["2","2","2","2"], "boxSizing": "content-box"}
+
+ axd(".ax5-sample-view").get_boxmodel("offset");
+ axd(".ax5-sample-view").get_boxmodel("position");
+ axd(".ax5-sample-view").get_boxmodel("width");
+ axd(".ax5-sample-view").get_boxmodel("height");
+ axd(".ax5-sample-view").get_boxmodel("padding");
+ axd(".ax5-sample-view").get_boxmodel("margin");
+ axd(".ax5-sample-view").get_boxmodel("border");
+ axd(".ax5-sample-view").get_boxmodel("borderWidth");
+ axd(".ax5-sample-view").get_boxmodel("border-width");
+ axd(".ax5-sample-view").get_boxmodel("boxSizing");
+ axd(".ax5-sample-view").get_boxmodel("box-sizing");
+ // 각각의 박스모델 속성을 지정하여 호출 할 수 있습니다. borderWidth, border-width 중 하나의 방법으로 사용 가능합니다.
+ ```
+ */
+				this.get_boxmodel = function(){
+					return dom.get_boxmodel(this.elements);
+				};
 			}
 			return ax;
 		})();
@@ -3151,9 +3212,75 @@ ax("#elementid");
 				left: pos.left - parentPos.left - (css(el, "marginLeft") || 0)
 			};
 		}
-		// todo get_boxmodel
-		function get_boxmodel(elements){
 
+		/**
+		 * 엘리먼트의 box model 속성을 반환합니다.
+		 * @method ax5.dom.box_model
+		 * @param {Elements|Element} elements
+		 * @param {String} [cond] - 원하는 박스 속성
+		 * @returns {Object}
+		 * @example
+ ```
+ var axd = ax5.dom;
+ axd.get_boxmodel(el);
+ // {"offset": {"top": 101, "left": 110}, "position": {"top": 101, "left": 110}, "width": 181.71875, "height": 153, "padding": [5,4,3,2], "margin": [1,10,1,10], "border": ["2px double rgb(34, 34, 34)","2px double rgb(34, 34, 34)","2px double rgb(34, 34, 34)","2px double rgb(34, 34, 34)"], "borderWidth": ["2","2","2","2"], "boxSizing": "content-box"}
+
+ axd.get_boxmodel(el, "offset");
+ axd.get_boxmodel(el, "position");
+ axd.get_boxmodel(el, "width");
+ axd.get_boxmodel(el, "height");
+ axd.get_boxmodel(el, "padding");
+ axd.get_boxmodel(el, "margin");
+ axd.get_boxmodel(el, "border");
+ axd.get_boxmodel(el, "borderWidth");
+ axd.get_boxmodel(el, "border-width");
+ axd.get_boxmodel(el, "boxSizing");
+ axd.get_boxmodel(el, "box-sizing");
+ // 각각의 박스모델 속성을 지정하여 호출 할 수 있습니다. borderWidth, border-width 중 하나의 방법으로 사용 가능합니다.
+ ```
+		 */
+		function get_boxmodel(elements, cond){
+			elements = validate_elements(elements, "get_boxmodel");
+			var el = elements[0],
+				model = {};
+			if(cond) cond = U.camel_case(cond);
+			if(typeof cond === "undefined" || cond == "offset"){
+				model.offset = offset(el);
+			}
+			if(typeof cond === "undefined" || cond == "position"){
+				model.position = position(el);
+			}
+			if(typeof cond === "undefined" || cond == "width"){
+				model.width = width(el);
+			}
+			if(typeof cond === "undefined" || cond == "height"){
+				model.height = height(el);
+			}
+			if(typeof cond === "undefined" || cond == "padding"){
+				model.padding = U.map(css(el, ["padding-top","padding-right","padding-bottom","padding-left"]), function(k,v){
+					return parseFloat(v);
+				});
+			}
+			if(typeof cond === "undefined" || cond == "margin"){
+				model.margin = U.map(css(el, ["margin-top","margin-right","margin-bottom","margin-left"]), function(k,v){
+					return parseFloat(v);
+				});
+			}
+			if(typeof cond === "undefined" || cond == "border"){
+				model.border = U.map(css(el, ["border-top","border-right","border-bottom","border-left"]), function(k,v){
+					return v;
+				});
+			}
+			if(typeof cond === "undefined" || cond == "borderWidth"){
+				model.borderWidth = U.map(css(el, ["border-top-width","border-right-width","border-bottom-width","border-left-width"]), function(k,v){
+					return v;
+				});
+			}
+			if(typeof cond === "undefined" || cond == "boxSizing"){
+				model.boxSizing = css(el, "box-sizing");
+			}
+
+			return (typeof cond === "undefined") ? model : model[cond];
 		}
 		U.extend(ax5.dom, {
 			ready       : ready,
