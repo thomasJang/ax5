@@ -1938,6 +1938,38 @@ ax("#elementid");
 				this.box_model = function(){
 					return dom.box_model(this.elements);
 				};
+/**
+ * 엘리먼트에 data를 속성을 추가하거나 반환합니다.
+ * @method ax5.dom0.data
+ * @param {String|Object} [command=get] - 명령어 "get|set|remove"
+ * @param {Object|String} O - json타입 또는 문자열
+ * @returns {ax5.dom0|String}
+ * @example
+ ```
+ var axd = ax5.dom, axu = ax5.util, res = "";
+
+ var el = axd("#list-container");
+ el.data({a:1}); // set data
+ el.data("set", {a:1100, b:[0,1,2,3]}); // set data
+
+ res += el.data("a"); // get data
+ res += el.data("get", "b"); // get data
+ console.log(res);
+ // 11000,1,2,3
+
+ console.log(el.data("b"));
+ // [0, 1, 2, 3]
+ el.data("remove", "b"); // remove data
+ console.log(el.data("b"));
+ // ""
+
+ el.data("remove"); // remove all
+ ```
+ */
+				this.data = function(command, O){
+					var rs = dom.data(this.elements, command, O);
+					return (rs === this.elements) ? this : rs;
+				}
 			}
 			return ax;
 		})();
@@ -2450,7 +2482,7 @@ ax("#elementid");
  * @param {Object|String} O - json타입또는 문자열
  * @returns {String|Elements} return - elements 또는 속성값
  * @example
- ```js
+ ```
  ax5.dom.attr(ax5.dom.get("[data-ax-grid=A]"), "set", {"data-ax-spt":"ABCD"}); // set attribute
  ax5.dom.attr(ax5.dom.get("[data-ax-grid=A]"), {"data-ax-spt":"9999", "data-next":"next"}); // set attribute
  ax5.dom.attr(ax5.dom.get("[data-ax-grid=A]"), "remove", "data-next");
@@ -2470,7 +2502,7 @@ ax("#elementid");
 			else
 			if( command === "get" || command === "read" || (typeof O === "undefined" && U.is_string(command)) ){
 				if(typeof O === "undefined") O = command;
-				if(!U.is_string(O)) return this;
+				if(!U.is_string(O)) return elements;
 				return elements[0].getAttribute(O);
 			}
 			else
@@ -3089,16 +3121,73 @@ ax("#elementid");
  * 엘리먼트에 data를 속성을 추가하거나 반환합니다.
  * @method ax5.dom.data
  * @param {Elements|Element} elements
- * @param {All} val
- * @returns {Elements|Element|dataVal}
+ * @param {String|Object} [command=get] - 명령어 "get|set|remove"
+ * @param {Object|String} O - json타입 또는 문자열
+ * @returns {Elements|Element|String}
  * @example
  ```
+ var axd = ax5.dom, axu = ax5.util, res = "";
 
+ var el = axd.get("#list-container");
+ axd.data(el, {a:1}); // set data
+ axd.data(el, "set", {a:1100, b:[0,1,2,3]}); // set data
+
+ res += axd.data(el, "a"); // get data
+ res += axd.data(el, "get", "b"); // get data
+ console.log(res);
+ // 11000,1,2,3
+
+ console.log(axd.data(el, "b"));
+ // [0, 1, 2, 3]
+ axd.data(el, "remove", "b"); // remove data
+ console.log(axd.data(el, "b"));
+ // ""
+
+ axd.data(el, "remove"); // remove all
  ```
  */
-		// todo : data 메소드 개발중.
-		function data(elements){
-
+		function data(elements, command, O){
+	//console.log(elements, command, O);
+			elements = validate_elements(elements, "data");
+			var i = 0, l = elements.length, k;
+			if( command === "set" || (typeof O === "undefined" && U.is_object(command)) ){
+				if(typeof O === "undefined") O = command;
+				for(;i<l;i++) {
+					for (k in O) {
+						if(typeof elements[i].ax5_data === "undefined") elements[i].ax5_data = {};
+						elements[i].ax5_data[k] = O[k];
+					}
+				}
+			}
+			else
+			if( command !== "remove" && (command === "get" || command === "read" || (typeof O === "undefined" && U.is_string(command))) ){
+				if(typeof O === "undefined") O = command;
+				if(!U.is_string(O)) return elements;
+				return (typeof elements[0].ax5_data[O] === "undefined") ? "" : elements[0].ax5_data[O];
+			}
+			else
+			if( command === "remove" ){
+				if(typeof O === "undefined") {
+					for (;i < l;i++) {
+						elements[i].ax5_data = {};
+					}
+				}
+				else
+				if(U.is_string(O)) {
+					for (;i < l;i++) {
+						delete elements[i].ax5_data[O];
+					}
+				}
+				else
+				{
+					for (;i < l;i++) {
+						each(O, function(){
+							delete elements[i].ax5_data[this];
+						});
+					}
+				}
+			}
+			return elements;
 		}
 		U.extend(ax5.dom, {
 			ready     : ready,

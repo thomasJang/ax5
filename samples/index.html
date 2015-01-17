@@ -28,27 +28,24 @@
         <a href="1234" id="move-item">이동할 아이템</a>
     </div>
     <script type="text/javascript">
-        var axd = ax5.dom, axu = ax5.util;
-        var el = ax5.dom.get(".ax5-sample-view");
-        //ax5.dom.css(el,  {"border":"1px solid"});
-        console.log(
-            axu.to_json( axd(".ax5-sample-view").box_model() )
-        );
-        console.log(
-            axu.to_json( axd.box_model(el, "offset") ),
-            axu.to_json( axd.box_model(el, "position") ),
-            axu.to_json( axd.box_model(el, "width") ),
-            axu.to_json( axd.box_model(el, "height") ),
-            axu.to_json( axd.box_model(el, "padding") ),
-            axu.to_json( axd.box_model(el, "margin") ),
-            axu.to_json( axd.box_model(el, "border") ),
-            axu.to_json( axd.box_model(el, "borderWidth") ),
-            axu.to_json( axd.box_model(el, "border-width") ),
-            axu.to_json( axd.box_model(el, "boxSizing") ),
-            axu.to_json( axd.box_model(el, "box-sizing") )
-        );
+        var axd = ax5.dom, axu = ax5.util, res = "";
 
+        var el = axd("#list-container");
+        el.data({a:1}); // set data
+        el.data("set", {a:1100, b:[0,1,2,3]}); // set data
 
+        res += el.data("a"); // get data
+        res += el.data("get", "b"); // get data
+        console.log(res);
+        // 11000,1,2,3
+
+        console.log(el.data("b"));
+        // [0, 1, 2, 3]
+        el.data("remove", "b"); // remove data
+        console.log(el.data("b"));
+        // ""
+
+        el.data("remove"); // remove all
     </script>
 </body>
 </html>
