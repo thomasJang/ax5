@@ -2548,25 +2548,25 @@ ax("#elementid");
  * @example
  ```
  var axd = ax5.dom;
- axd(".ax5-sample-view").get_boxmodel()
+ axd(".ax5-sample-view").box_model()
  // {"offset": {"top": 101, "left": 110}, "position": {"top": 101, "left": 110}, "width": 181.71875, "height": 153, "padding": [5,4,3,2], "margin": [1,10,1,10], "border": ["2px double rgb(34, 34, 34)","2px double rgb(34, 34, 34)","2px double rgb(34, 34, 34)","2px double rgb(34, 34, 34)"], "borderWidth": ["2","2","2","2"], "boxSizing": "content-box"}
 
- axd(".ax5-sample-view").get_boxmodel("offset");
- axd(".ax5-sample-view").get_boxmodel("position");
- axd(".ax5-sample-view").get_boxmodel("width");
- axd(".ax5-sample-view").get_boxmodel("height");
- axd(".ax5-sample-view").get_boxmodel("padding");
- axd(".ax5-sample-view").get_boxmodel("margin");
- axd(".ax5-sample-view").get_boxmodel("border");
- axd(".ax5-sample-view").get_boxmodel("borderWidth");
- axd(".ax5-sample-view").get_boxmodel("border-width");
- axd(".ax5-sample-view").get_boxmodel("boxSizing");
- axd(".ax5-sample-view").get_boxmodel("box-sizing");
+ axd(".ax5-sample-view").box_model("offset");
+ axd(".ax5-sample-view").box_model("position");
+ axd(".ax5-sample-view").box_model("width");
+ axd(".ax5-sample-view").box_model("height");
+ axd(".ax5-sample-view").box_model("padding");
+ axd(".ax5-sample-view").box_model("margin");
+ axd(".ax5-sample-view").box_model("border");
+ axd(".ax5-sample-view").box_model("borderWidth");
+ axd(".ax5-sample-view").box_model("border-width");
+ axd(".ax5-sample-view").box_model("boxSizing");
+ axd(".ax5-sample-view").box_model("box-sizing");
  // 각각의 박스모델 속성을 지정하여 호출 할 수 있습니다. borderWidth, border-width 중 하나의 방법으로 사용 가능합니다.
  ```
  */
-				this.get_boxmodel = function(){
-					return dom.get_boxmodel(this.elements);
+				this.box_model = function(){
+					return dom.box_model(this.elements);
 				};
 			}
 			return ax;
@@ -3662,25 +3662,25 @@ ax("#elementid");
 		 * @example
  ```
  var axd = ax5.dom;
- axd.get_boxmodel(el);
+ axd.box_model(el);
  // {"offset": {"top": 101, "left": 110}, "position": {"top": 101, "left": 110}, "width": 181.71875, "height": 153, "padding": [5,4,3,2], "margin": [1,10,1,10], "border": ["2px double rgb(34, 34, 34)","2px double rgb(34, 34, 34)","2px double rgb(34, 34, 34)","2px double rgb(34, 34, 34)"], "borderWidth": ["2","2","2","2"], "boxSizing": "content-box"}
 
- axd.get_boxmodel(el, "offset");
- axd.get_boxmodel(el, "position");
- axd.get_boxmodel(el, "width");
- axd.get_boxmodel(el, "height");
- axd.get_boxmodel(el, "padding");
- axd.get_boxmodel(el, "margin");
- axd.get_boxmodel(el, "border");
- axd.get_boxmodel(el, "borderWidth");
- axd.get_boxmodel(el, "border-width");
- axd.get_boxmodel(el, "boxSizing");
- axd.get_boxmodel(el, "box-sizing");
+ axd.box_model(el, "offset");
+ axd.box_model(el, "position");
+ axd.box_model(el, "width");
+ axd.box_model(el, "height");
+ axd.box_model(el, "padding");
+ axd.box_model(el, "margin");
+ axd.box_model(el, "border");
+ axd.box_model(el, "borderWidth");
+ axd.box_model(el, "border-width");
+ axd.box_model(el, "boxSizing");
+ axd.box_model(el, "box-sizing");
  // 각각의 박스모델 속성을 지정하여 호출 할 수 있습니다. borderWidth, border-width 중 하나의 방법으로 사용 가능합니다.
  ```
 		 */
-		function get_boxmodel(elements, cond){
-			elements = validate_elements(elements, "get_boxmodel");
+		function box_model(elements, cond){
+			elements = validate_elements(elements, "box_model");
 			var el = elements[0],
 				model = {};
 			if(cond) cond = U.camel_case(cond);
@@ -3723,33 +3723,33 @@ ax("#elementid");
 			return (typeof cond === "undefined") ? model : model[cond];
 		}
 		U.extend(ax5.dom, {
-			ready       : ready,
-			resize      : resize,
-			get         : get,
-			get_one     : get_one,
-			create      : create,
-			css         : css,
-			clazz       : clazz,
-			attr        : attr,
-			on          : on,
-			off         : off,
-			child       : child,
-			parent      : parent,
-			prev        : prev,
-			next        : next,
-			html        : html,
-			width       : width,
-			height      : height,
-			append      : append,
-			prepend     : prepend,
-			before      : before,
-			after       : after,
-			manipulate  : manipulate,
-			remove      : remove,
-			empty       : empty,
-			offset      : offset,
-			position    : position,
-			get_boxmodel: get_boxmodel
+			ready     : ready,
+			resize    : resize,
+			get       : get,
+			get_one   : get_one,
+			create    : create,
+			css       : css,
+			clazz     : clazz,
+			attr      : attr,
+			on        : on,
+			off       : off,
+			child     : child,
+			parent    : parent,
+			prev      : prev,
+			next      : next,
+			html      : html,
+			width     : width,
+			height    : height,
+			append    : append,
+			prepend   : prepend,
+			before    : before,
+			after     : after,
+			manipulate: manipulate,
+			remove    : remove,
+			empty     : empty,
+			offset    : offset,
+			position  : position,
+			box_model : box_model
 		});
 	})();
 
@@ -3829,7 +3829,7 @@ ax("#elementid");
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sat Jan 17 2015 00:32:34 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sat Jan 17 2015 13:50:42 GMT+0900 (KST)
         </footer>
     </div>
 </div>

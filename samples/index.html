@@ -32,20 +32,20 @@
         var el = ax5.dom.get(".ax5-sample-view");
         //ax5.dom.css(el,  {"border":"1px solid"});
         console.log(
-            axu.to_json( axd(".ax5-sample-view").get_boxmodel() )
+            axu.to_json( axd(".ax5-sample-view").box_model() )
         );
         console.log(
-            axu.to_json( axd.get_boxmodel(el, "offset") ),
-            axu.to_json( axd.get_boxmodel(el, "position") ),
-            axu.to_json( axd.get_boxmodel(el, "width") ),
-            axu.to_json( axd.get_boxmodel(el, "height") ),
-            axu.to_json( axd.get_boxmodel(el, "padding") ),
-            axu.to_json( axd.get_boxmodel(el, "margin") ),
-            axu.to_json( axd.get_boxmodel(el, "border") ),
-            axu.to_json( axd.get_boxmodel(el, "borderWidth") ),
-            axu.to_json( axd.get_boxmodel(el, "border-width") ),
-            axu.to_json( axd.get_boxmodel(el, "boxSizing") ),
-            axu.to_json( axd.get_boxmodel(el, "box-sizing") )
+            axu.to_json( axd.box_model(el, "offset") ),
+            axu.to_json( axd.box_model(el, "position") ),
+            axu.to_json( axd.box_model(el, "width") ),
+            axu.to_json( axd.box_model(el, "height") ),
+            axu.to_json( axd.box_model(el, "padding") ),
+            axu.to_json( axd.box_model(el, "margin") ),
+            axu.to_json( axd.box_model(el, "border") ),
+            axu.to_json( axd.box_model(el, "borderWidth") ),
+            axu.to_json( axd.box_model(el, "border-width") ),
+            axu.to_json( axd.box_model(el, "boxSizing") ),
+            axu.to_json( axd.box_model(el, "box-sizing") )
         );
 
 
