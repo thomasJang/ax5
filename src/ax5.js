@@ -191,14 +191,12 @@
 	'use strict';
 
 	// root of function
-	var root = this, doc = document, win = window,
-		fval = eval,
-		/** @namespace {Object} ax5 */
-		ax5 = {}, info, U, dom, xhr, ui;
+	var root = this, doc = document, win = window, fval = eval,
+/** @namespace {Object} ax5 */
+		ax5 = {}, info, U, dom, xhr;
 
 	// jquery 1.10.2 from http://jquery.com
-	var nodeNames = "abbr|article|aside|audio|bdi|canvas|data|datalist|details|figcaption|figure|footer|" +
-			"header|hgroup|mark|meter|nav|output|progress|section|summary|time|video",
+	var nodeNames = "abbr|article|aside|audio|bdi|canvas|data|datalist|details|figcaption|figure|footer|header|hgroup|mark|meter|nav|output|progress|section|summary|time|video",
 		rnoshimcache = new RegExp("<(?:" + nodeNames + ")[\\s/>]", "i"),
 		rleadingWhitespace = /^\s+/,
 		rxhtmlTag = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/gi,
@@ -235,22 +233,22 @@
 			return safeFrag;
 		}
 
-	/**
-	 * guid
-	 * @member {Number} ax5.guid
-	 */
+/**
+ * guid
+ * @member {Number} ax5.guid
+ */
 	ax5.guid = 1;
-	/**
-	 * ax5.guid를 구하고 증가시킵니다.
-	 * @method ax5.get_guid
-	 * @returns {Number} guid
-	 */
+/**
+ * ax5.guid를 구하고 증가시킵니다.
+ * @method ax5.get_guid
+ * @returns {Number} guid
+ */
 	ax5.get_guid = function(){return ax5.guid++;};
 
-	/**
-	 * 상수모음
-	 * @namespace ax5.info
-	 */
+/**
+ * 상수모음
+ * @namespace ax5.info
+ */
 	ax5.info = info = (function(){
 /**
  * ax5 version
@@ -1672,23 +1670,23 @@ var cond = {
 		}
 	})();
 
-	/**
-	 * Refer to this by {@link ax5}. <br/>
-	 * dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함수들과는 다른 개념입니다. ax5.dom0는 query에 의해 만들어진 인스턴스 입니다.
-	 * @namespace ax5.dom0
-	 * @param {String} query
-	 * @example
+/**
+ * Refer to this by {@link ax5}. <br/>
+ * dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함수들과는 다른 개념입니다. ax5.dom0는 query에 의해 만들어진 인스턴스 입니다.
+ * @namespace ax5.dom0
+ * @param {String} query
+ * @example
 ```
 ax5.dom("#elementid");
 var ax = ax5.dom;
 ax("#elementid");
 // 처러 사용할 수 있습니다.
 ```
-	 */
-	/**
-	 * Refer to this by {@link ax5}.
-	 * @namespace ax5.dom
-	 */
+ */
+/**
+ * Refer to this by {@link ax5}.
+ * @namespace ax5.dom
+ */
 	// dom class instance
 	ax5.dom = dom = function(query){
 		var axdom = (function(){
@@ -1757,7 +1755,7 @@ ax("#elementid");
 /**
  * elements에 이벤트를 바인드 합니다.
  * @method ax5.dom0.on
- * @param {String} type - 이벤트 타입
+ * @param {String} typ - 이벤트 타입
  * @param {Function} _fn - 이벤트 콜백함수
  * @returns {ax5.dom0}
  * @example
@@ -1790,7 +1788,7 @@ ax("#elementid");
 /**
  * elements에 이벤트를 언바인드 합니다.
  * @method ax5.dom0.off
- * @param {String} type - 이벤트 타입
+ * @param {String} typ - 이벤트 타입
  * @param {Function} [_fn] - 이벤트 콜백함수
  * @returns {ax5.dom0}
  * @example
@@ -2146,7 +2144,6 @@ ax("#elementid");
 					elem.attachEvent("on" + type, eventHandle);
 				}
 			}
-
 			// 이벤트 언바인딩
 			function eventUnBind(elem, type, eventHandle) {
 				type = U.left(type, ".");
@@ -2160,7 +2157,6 @@ ax("#elementid");
 					else elem.detachEvent("on" + type);
 				}
 			}
-
 			// 엘리먼트 인자 체크
 			function validate_elements(elem, fn_name) {
 				if (U.is_array(elem) && U.is_element(elem[0])) {
@@ -2179,7 +2175,6 @@ ax("#elementid");
 				}
 				return elem;
 			}
-
 			// 엘리먼트 순서이동
 			function sibling(elements, forward, times) {
 				elements = validate_elements(elements, forward);
@@ -2197,19 +2192,19 @@ ax("#elementid");
 					);
 				return el;
 			}
-
 			// 엘리먼트 스타일 값 가져오기
 			function style(el, key, fn_nm) {
 				if (U.is_string(key)) {
 					return get_style(key);
-				} else if (U.is_array(key)) {
+				}
+				else
+				if (U.is_array(key)) {
 					var css = {}, i = 0, l = key.length;
 					for (; i < l; i++) {
 						css[key[i]] = get_style(key[i]);
 					}
 					return css;
 				}
-
 				function get_style(k) {
 					var val, px = /\d+px$/i;
 					if (window.getComputedStyle) {
@@ -2226,10 +2221,8 @@ ax("#elementid");
 					if(typeof val == "string" && px.test(val.trim())) val = val.trim().replace("px", "");
 					return val;
 				}
-
 				return null;
 			}
-
 			// 박스사이즈 구하기
 			function box_size(elements, fn_nm, opts) {
 				var d = -1, tag_nm = "";
@@ -2266,12 +2259,10 @@ ax("#elementid");
 				}
 				return U.number(d);
 			}
-
 			// nodeName check
 			function node_name(el, node_nm) {
 				return el.nodeName && el.nodeName.toLowerCase() === node_nm.toLowerCase();
 			}
-
 			// createFragment
 			function create_fragment(elems) {
 				var safe = createSafeFragment(), tmp, nodes = [], tag, wrap, tbody;
@@ -2366,14 +2357,10 @@ ax("#elementid");
 
 				return safe;
 			}
-
+			// getAll 특정 tag인 모든 엘리먼트 불러오기
 			function getAll(context, tag) {
-				var elems, elem,
-					i = 0,
-					found = typeof context.getElementsByTagName !== core_strundefined ? context.getElementsByTagName(tag || "*") :
-						typeof context.querySelectorAll !== core_strundefined ? context.querySelectorAll(tag || "*") :
-							undefined;
-
+				var elems, elem, i = 0,
+					found = typeof context.getElementsByTagName !== core_strundefined ? context.getElementsByTagName(tag || "*") : typeof context.querySelectorAll !== core_strundefined ? context.querySelectorAll(tag || "*") : undefined;
 				if (!found) {
 					for (found = [], elems = context.childNodes || context; (elem = elems[i]) != null; i++) {
 						if (!tag || jQuery.nodeName(elem, tag)) {
@@ -2383,19 +2370,16 @@ ax("#elementid");
 						}
 					}
 				}
-
-				return tag === undefined || tag && node_name(context, tag) ?
-					U.merge([context], found) :
-					found;
+				return tag === undefined || tag && node_name(context, tag) ? U.merge([context], found) : found;
 			}
 		// }
 
 		// jQuery.ready.promise jquery 1.10.2
-		/**
-		 * document 로드 완료를 체크 합니다.
-		 * @method ax5.dom.ready
-		 * @param {Function} _fn - 로드완료시 호출함수
-		 * @example
+/**
+ * document 로드 완료를 체크 합니다.
+ * @method ax5.dom.ready
+ * @param {Function} _fn - 로드완료시 호출함수
+ * @example
 ```js
  var a = 1;
  setTimeout(function(){
@@ -2405,7 +2389,7 @@ ax("#elementid");
     });
  }, 1000);
 ```
-		 */
+ */
 		function ready( _fn ){
 			if(ax5.dom.is_ready || ax5.dom.is_reading) return;
 			ax5.dom.is_reading = true;
@@ -2453,7 +2437,7 @@ ax("#elementid");
  * @method ax5.dom.resize
  * @param {Function} _fn - 캐치후 호출될 함수
  * @example
-```js
+```
  ax5.dom.resize(function(){
     console.log( 1, document.body.clientWidth );
  });
@@ -2462,19 +2446,19 @@ ax("#elementid");
 		function resize( _fn ){
 			eventBind(window, "resize", _fn);
 		}
-		/**
-		 * CSS Selector를 이용하여 HTML Elements를 찾습니다.
-		 * @method ax5.dom.get
-		 * @param {String|Element|ax5.dom0} query - CSS Selector | Element
-		 * @param {String} sub_query - CSS Selector
-		 * @returns {Array} elements
-		 * @example
+/**
+ * CSS Selector를 이용하여 HTML Elements를 찾습니다.
+ * @method ax5.dom.get
+ * @param {String|Element|ax5.dom0} query - CSS Selector | Element
+ * @param {String} sub_query - CSS Selector
+ * @returns {Array} elements
+ * @example
  ```js
  ax5.dom.get("#element01");
  ax5.dom.get("input[type='text']");
  ax5.dom.get( ax5.dom.get("input[type='text']") );
  ```
-		 */
+ */
 		function get(query, sub_query){
 			var elements, return_elements = [], parent_element;
 			var i= 0,l=query.length;
@@ -2516,34 +2500,34 @@ ax("#elementid");
 
 			return return_elements;
 		}
-		/**
-		 * CSS Selector를 이용하여 HTML Element를 찾습니다.
-		 * @method ax5.dom.get_one
-		 * @param {String|Element} query - CSS Selector | Element
-		 * @param {String} sub_query - CSS Selector
-		 * @returns {Element} element
-		 * @example
+/**
+ * CSS Selector를 이용하여 HTML Element를 찾습니다.
+ * @method ax5.dom.get_one
+ * @param {String|Element} query - CSS Selector | Element
+ * @param {String} sub_query - CSS Selector
+ * @returns {Element} element
+ * @example
  ```js
  ax5.dom.get_one("#element01");
  ax5.dom.get_one("input[type='text']");
  ```
-		 */
+ */
 		function get_one(query, sub_query){
 			return get(query, sub_query)[0];
 		}
-		/**
-		 * createElement 구문을 효과적으로 수행합니다.
-		 * @method ax5.dom.create
-		 * @param {String} node_nm - 엘리먼트 이름
-		 * @param {Object} attr - 엘리먼트 속성정보
-		 * @param {String} val - innerHTML 값
-		 * @returns {Element}
-		 * @example
+/**
+ * createElement 구문을 효과적으로 수행합니다.
+ * @method ax5.dom.create
+ * @param {String} node_nm - 엘리먼트 이름
+ * @param {Object} attr - 엘리먼트 속성정보
+ * @param {String} val - innerHTML 값
+ * @returns {Element}
+ * @example
  ```js
  ax5.dom.create("script", {type:"text/javascript", src:"../ax5.js"});
  ax5.dom.create("div", {id:"createEleId", "class":"createEleClass"}, "<a>내가만든</a>");
  ```
-		 */
+ */
 		function create(node_nm, attr, val){
 			/*
 			 HTML - Use http://www.w3.org/1999/xhtml
@@ -2562,17 +2546,17 @@ ax("#elementid");
 			if(val) element.appendChild(create_fragment([].concat(val)));
 			return element;
 		}
-		/**
-		 * Elements에 CSS속성을 읽고 씁니다.
-		 * @method ax5.dom.css
-		 * @param {Array} elements - 대상의 엘리먼트 리스트 혹은 엘리먼트
-		 * @param {Object|Array|String} CSS
-		 * @returns {String|Object|Elements}
-		 * @example
+/**
+ * Elements에 CSS속성을 읽고 씁니다.
+ * @method ax5.dom.css
+ * @param {Array} elements - 대상의 엘리먼트 리스트 혹은 엘리먼트
+ * @param {Object|Array|String} CSS
+ * @returns {String|Object|Elements}
+ * @example
  ```js
  ax5.dom.css(ax5.dom.get("#abcd"), {"color":"#ff3300"});
  ```
-		 */
+ */
 		function css(elements, O){
 			elements = validate_elements(elements, "css");
 			if(U.is_string(O) || U.is_array(O)) {
@@ -2589,14 +2573,14 @@ ax("#elementid");
 			}
 			return elements;
 		}
-		/**
-		 * elements에 className 를 추가, 제거, 확인, 토글합니다.
-		 * @method ax5.dom.clazz
-		 * @param {Array} elements - 대상의 엘리먼트 리스트 혹은 엘리먼트
-		 * @param {String} [command=has] - add,remove,toggle,has
-		 * @param {String} O - 클래스명
-		 * @returns {String|Elements} return - elements 또는 클래스이름
-		 * @example
+/**
+ * elements에 className 를 추가, 제거, 확인, 토글합니다.
+ * @method ax5.dom.clazz
+ * @param {Array} elements - 대상의 엘리먼트 리스트 혹은 엘리먼트
+ * @param {String} [command=has] - add,remove,toggle,has
+ * @param {String} O - 클래스명
+ * @returns {String|Elements} return - elements 또는 클래스이름
+ * @example
  ```js
  ax5.dom.clazz(ax5.dom.get("#abcd"), "class-text"); // has 와 동일
  ax5.dom.clazz(ax5.dom.get("#abcd"), "add", "class-text");
@@ -2604,7 +2588,7 @@ ax("#elementid");
  ax5.dom.clazz(ax5.dom.get("#abcd"), "has", "class-text");
  ax5.dom.clazz(ax5.dom.get("#abcd"), "toggle", "class-text");
  ```
-		 */
+ */
 		function clazz(elements, command, O){
 			var classNames;
 			elements = validate_elements(elements, "clazz");
@@ -2646,20 +2630,20 @@ ax("#elementid");
 				return elements;
 			}
 		}
-		/**
-		 * elements에 attribute를 추가, 제거, 확인 합니다.
-		 * @method ax5.dom.attr
-		 * @param {Array} elements - 대상의 엘리먼트 리스트 혹은 엘리먼트
-		 * @param {String|Object} [command=get] - 명령어
-		 * @param {Object|String} O - json타입또는 문자열
-		 * @returns {String|Elements} return - elements 또는 속성값
-		 * @example
+/**
+ * elements에 attribute를 추가, 제거, 확인 합니다.
+ * @method ax5.dom.attr
+ * @param {Array} elements - 대상의 엘리먼트 리스트 혹은 엘리먼트
+ * @param {String|Object} [command=get] - 명령어
+ * @param {Object|String} O - json타입또는 문자열
+ * @returns {String|Elements} return - elements 또는 속성값
+ * @example
  ```js
  ax5.dom.attr(ax5.dom.get("[data-ax-grid=A]"), "set", {"data-ax-spt":"ABCD"}); // set attribute
  ax5.dom.attr(ax5.dom.get("[data-ax-grid=A]"), {"data-ax-spt":"9999", "data-next":"next"}); // set attribute
  ax5.dom.attr(ax5.dom.get("[data-ax-grid=A]"), "remove", "data-next");
  ```
-		 */
+ */
 		function attr(elements, command, O){
 			elements = validate_elements(elements, "attr");
 			var i = 0, l = elements.length, k;
@@ -2693,13 +2677,13 @@ ax("#elementid");
 			}
 			return elements;
 		}
-		/**
-		 * elements에 이벤트를 바인드 합니다.
-		 * @method ax5.dom.on
-		 * @param {Array} elements
-		 * @param {String} type - 이벤트 타입
-		 * @param {Function} _fn - 이벤트 콜백함수
-		 * @example
+/**
+ * elements에 이벤트를 바인드 합니다.
+ * @method ax5.dom.on
+ * @param {Array} elements
+ * @param {String} type - 이벤트 타입
+ * @param {Function} _fn - 이벤트 콜백함수
+ * @example
  ```js
  var fna = function(){console.log("fna")};
  var fnb = function(){console.log("fnb")};
@@ -2722,7 +2706,7 @@ ax("#elementid");
  ax5.dom.on(mydom, "click.fnb", window.fnb);
  ax5.dom.on(mydom, "click.fnc", window.fnc);
  ```
-		 */
+ */
 		function on(elements, typ, _fn){
 			elements = validate_elements(elements, "on");
 			for(var i=0;i<elements.length;i++) {
@@ -2738,19 +2722,19 @@ ax("#elementid");
 				eventBind(_d, typ, __fn);
 			}
 		}
-		/**
-		 * elements에 이벤트를 언바인드 합니다.
-		 * @method ax5.dom.off
-		 * @param {Array} elements
-		 * @param {String} type - 이벤트 타입
-		 * @param {Function} [_fn] - 이벤트 콜백함수
-		 * @example
+/**
+ * elements에 이벤트를 언바인드 합니다.
+ * @method ax5.dom.off
+ * @param {Array} elements
+ * @param {String} type - 이벤트 타입
+ * @param {Function} [_fn] - 이벤트 콜백함수
+ * @example
  ```js
  var mydom = ax5.dom.get("[data-event-test=text-box]")
  ax5.dom.off(mydom, "click");
  ax5.dom.off(mydom, "click.fnb");
  ```
-		 */
+ */
 		function off(elements, typ, _fn){
 			elements = validate_elements(elements, "off");
 			for(var i=0;i<elements.length;i++) {
@@ -2770,12 +2754,12 @@ ax("#elementid");
 				}
 			}
 		}
-		/**
-		 * 타겟 엘리먼트의 자식을 반환합니다.
-		 * @method ax5.dom.child
-		 * @param {Element|Elements} elements
-		 * @returns {Elements} elements
-		 * @example
+/**
+ * 타겟 엘리먼트의 자식을 반환합니다.
+ * @method ax5.dom.child
+ * @param {Element|Elements} elements
+ * @returns {Elements} elements
+ * @example
 ```
  <ul id="list-container">
 	 <li data-list-item="0">
@@ -2796,7 +2780,7 @@ ax("#elementid");
  // LI 1
  </script>
 ```
-		 */
+ */
 		function child(elements){
 			elements = validate_elements(elements, "child");
 			var return_elems = [], i= 0, l;
@@ -2808,13 +2792,13 @@ ax("#elementid");
 			}
 			return return_elems;
 		}
-		/**
-		 * 타겟엘리먼트의 부모 엘리멘트 트리에서 원하는 조건의 엘리먼트를 얻습니다.
-		 * @method ax5.dom.parent
-		 * @param {Element} elements - target element
-		 * @param {Object} cond - 원하는 element를 찾을 조건
-		 * @returns {Element}
-		 * @example
+/**
+ * 타겟엘리먼트의 부모 엘리멘트 트리에서 원하는 조건의 엘리먼트를 얻습니다.
+ * @method ax5.dom.parent
+ * @param {Element} elements - target element
+ * @param {Object} cond - 원하는 element를 찾을 조건
+ * @returns {Element}
+ * @example
  ```
  // cond 속성정의
  var cond = {
@@ -2826,7 +2810,7 @@ ax("#elementid");
  ax5.dom.parent(e.target, {tagname:"a", clazz:"ax-menu-handel", "data-custom-attr":"attr_value"})
  );
  ```
-		 */
+ */
 		function parent(elements, cond){
 			elements = validate_elements(elements, "child");
 			var _target = elements[0];
@@ -2871,13 +2855,13 @@ ax("#elementid");
 			}
 			return _target;
 		}
-		/**
-		 * 형제 엘리먼트중에 앞서 위치한 엘리먼트를 반환합니다.
-		 * @method ax5.dom.prev
-		 * @param {Elements|Element} elements
-		 * @param {Number} [times=1] - 횟수
-		 * @returns {Element|null} element - 원하는 위치에 아이템이 없으면 null 을 반환합니다.
-		 * @example
+/**
+ * 형제 엘리먼트중에 앞서 위치한 엘리먼트를 반환합니다.
+ * @method ax5.dom.prev
+ * @param {Elements|Element} elements
+ * @param {Number} [times=1] - 횟수
+ * @returns {Element|null} element - 원하는 위치에 아이템이 없으면 null 을 반환합니다.
+ * @example
 ```
  <div>
 	 <ul id="list-container">
@@ -2902,16 +2886,16 @@ ax("#elementid");
  );
  </script>
 ```
-		 */
+ */
 		function prev(elements, times){
 			return sibling(elements, "prev", times);
 		}
-		/**
-		 * 형제 엘리먼트중에 다음에 위치한 엘리먼트를 반환합니다.
-		 * @method ax5.dom.next
-		 * @param {Elements|Element} elements
-		 * @param {Number} [times=1] - 횟수
-		 * @returns {Element|null} element - 원하는 위치에 아이템이 없으면 null 을 반환합니다.
+/**
+ * 형제 엘리먼트중에 다음에 위치한 엘리먼트를 반환합니다.
+ * @method ax5.dom.next
+ * @param {Elements|Element} elements
+ * @param {Number} [times=1] - 횟수
+ * @returns {Element|null} element - 원하는 위치에 아이템이 없으면 null 을 반환합니다.
  * @example
  ```
  <div>
@@ -2937,49 +2921,49 @@ ax("#elementid");
  );
  </script>
  ```
-		*/
+*/
 		function next(elements, times){
 			return sibling(elements, "next", times);
 		}
-		/**
-		 * 엘리먼트의 너비를 반환합니다.
-		 * @method ax5.dom.width
-		 * @param {Elements|Element} elements
-		 * @returns {Number} width
+/**
+ * 엘리먼트의 너비를 반환합니다.
+ * @method ax5.dom.width
+ * @param {Elements|Element} elements
+ * @returns {Number} width
  * @example
 ```js
  var el = ax5.dom.get("#list-container")
  ax5.dom.width(el);
 ```
-        */
+*/
 		function width(elements){
 			return box_size(elements, "width");
 		}
-		/**
-		 * 엘리먼트의 너비를 반환합니다.
-		 * @method ax5.dom.height
-		 * @param {Elements|Element} elements
-		 * @returns {Number} width
+/**
+ * 엘리먼트의 너비를 반환합니다.
+ * @method ax5.dom.height
+ * @param {Elements|Element} elements
+ * @returns {Number} width
  * @example
  ```js
  var el = ax5.dom.get("#list-container")
  ax5.dom.height(el);
  ```
-        */
+*/
 		function height(elements){
 			return box_size(elements, "height");
 		}
-		/**
-		 * 엘리먼트의 자식을 모두 지워줍니다. 내용을 깨긋히 비워 냅니다.
-		 * @method ax5.dom.empty
-		 * @param {Elements|Element} elements
-		 * @returns {Elements}
+/**
+ * 엘리먼트의 자식을 모두 지워줍니다. 내용을 깨긋히 비워 냅니다.
+ * @method ax5.dom.empty
+ * @param {Elements|Element} elements
+ * @returns {Elements}
  * @example
 ```js
  var el = ax5.dom.get("#list-container");
  ax5.dom.empty(el);
 ```
-        */
+*/
 		function empty(elements){
 			elements = validate_elements(elements, "empty");
 			var i = 0, l = elements.length, el;
@@ -2994,19 +2978,19 @@ ax("#elementid");
 			}
 			return elements;
 		}
-		/**
-		 * 엘리먼트안에 HTML코드를 바꿔치기 합니다.
-		 * @method ax5.dom.html
-		 * @param {Elements|Element} elements
-		 * @param {String} [htmlcode]
-		 * @returns {Elements|String}
+/**
+ * 엘리먼트안에 HTML코드를 바꿔치기 합니다.
+ * @method ax5.dom.html
+ * @param {Elements|Element} elements
+ * @param {String} [htmlcode]
+ * @returns {Elements|String}
  * @example
  ```js
  var el = ax5.dom.get("#list-container");
  console.log( ax5.dom.html(el) );
  ax5.dom.html(el, "<a href='#1234'>링크");
  ```
-        */
+*/
 		function html(elements, val){
 			elements = validate_elements(elements, "html");
 			if(typeof val == "undefined"){
@@ -3032,72 +3016,80 @@ ax("#elementid");
 				return elements;
 			}
 		}
-		/**
-		 * 엘리먼트에 자식노드를 추가 합니다. (추가되는 위치는 맨 아래 입니다.)
-		 * @method ax5.dom.append
-		 * @param {Elements|Element} elements
-		 * @param {String|Element} val
-		 * @returns {Elements|Element}
-         * @example
+/**
+ * 엘리먼트에 자식노드를 추가 합니다. (추가되는 위치는 맨 아래 입니다.)
+ * @method ax5.dom.append
+ * @param {Elements|Element} elements
+ * @param {String|Element} val
+ * @returns {Elements|Element}
+ * @example
  ```
  var el = ax5.dom.get("[data-list-item='0']");
  ax5.dom.append(el, "ㅈㅏㅇㄱㅣㅇㅕㅇ");
  ax5.dom.append(el, "<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>");
  ax5.dom.append(ax5.dom.get("[data-list-item='2']"), ax5.dom.get("#move-item"));
  ```
-        */
+*/
 		// todo : append 검증중
 		function append(elements, val){
 			return manipulate("append", elements, val);
 		}
-		/**
-		 * 엘리먼트에 자식노드를 추가 합니다. (추가되는 위치는 맨 처음 입니다.)
-		 * @method ax5.dom.prepend
-		 * @param {Elements|Element} elements
-		 * @param {String|Element} val
-		 * @returns {Elements|Element}
-         * @example
+/**
+ * 엘리먼트에 자식노드를 추가 합니다. (추가되는 위치는 맨 처음 입니다.)
+ * @method ax5.dom.prepend
+ * @param {Elements|Element} elements
+ * @param {String|Element} val
+ * @returns {Elements|Element}
+ * @example
  ```
  var el = ax5.dom.get("[data-list-item='0']");
  ax5.dom.prepend(el, "ㅈㅏㅇㄱㅣㅇㅕㅇ");
  ax5.dom.prepend(el, "<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>");
  ax5.dom.prepend(ax5.dom.get("[data-list-item='2']"), ax5.dom.get("#move-item"));
  ```
-        */
+*/
 		function prepend(elements, val){
 			return manipulate("prepend", elements, val);
 		}
-		/**
-		 * 엘리먼트에 앞에 노드를 추가합니다.
-		 * @method ax5.dom.before
-		 * @param {Elements|Element} elements
-		 * @param {String|Element} val
-		 * @returns {Elements|Element}
-		 * @example
+/**
+ * 엘리먼트에 앞에 노드를 추가합니다.
+ * @method ax5.dom.before
+ * @param {Elements|Element} elements
+ * @param {String|Element} val
+ * @returns {Elements|Element}
+ * @example
  ```
  var el = ax5.dom.get("[data-list-item='0']");
  ax5.dom.before(el, "before");
  ```
-        */
+*/
 		function before(elements, val){
 			return manipulate("before", elements, val);
 		}
-		/**
-		 * 엘리먼트에 다음에 노드를 추가합니다.
-		 * @method ax5.dom.after
-		 * @param {Elements|Element} elements
-		 * @param {String|Element} val
-		 * @returns {Elements|Element}
-		 * @example
+/**
+ * 엘리먼트에 다음에 노드를 추가합니다.
+ * @method ax5.dom.after
+ * @param {Elements|Element} elements
+ * @param {String|Element} val
+ * @returns {Elements|Element}
+ * @example
  ```
  var el = ax5.dom.get("[data-list-item='0']");
  ax5.dom.after(el, "after");
  ```
-        */
+*/
 		function after(elements, val){
 			return manipulate("after", elements, val);
 		}
-
+/**
+ * 노드추가 조작 함수
+ * @private
+ * @method ax5.dom.manipulate
+ * @param {String} act - 조작방식
+ * @param {Elements|Element} elements
+ * @param {String} val - 추가하려는 html tag 또는 문자열
+ * @returns {Elements|Element}
+ */
 		function manipulate(act, elements, val){
 			elements = validate_elements(elements, act);
 			var flag, i= 0, l=elements.length,
@@ -3126,16 +3118,16 @@ ax("#elementid");
 			}
 			return els;
 		}
-		/**
-		 * 엘리먼트를 제거 합니다.
-		 * @method ax5.dom.remove
-		 * @param {Elements|Element} elements
-		 * @example
+/**
+ * 엘리먼트를 제거 합니다.
+ * @method ax5.dom.remove
+ * @param {Elements|Element} elements
+ * @example
  ```
  var el = ax5.dom.get("[data-list-item='0']");
  ax5.dom.remove(el);
  ```
-        */
+*/
 		function remove(elements, val){
 			elements = validate_elements(elements, "remove");
 			var i= 0, l=elements.length;
@@ -3143,19 +3135,19 @@ ax("#elementid");
 				if(elements[i].parentNode) elements[i].parentNode.removeChild(elements[i]);
 			}
 		}
-		/**
-		 * 엘리먼트의 offset 값을 반환합니다.
-		 * @method ax5.dom.offset
-		 * @param {Elements|Element} elements
-		 * @returns {Object}
-		 * @example
+/**
+ * 엘리먼트의 offset 값을 반환합니다.
+ * @method ax5.dom.offset
+ * @param {Elements|Element} elements
+ * @returns {Object}
+ * @example
  ```
  console.log(
     ax5.util.to_json(ax5.dom.offset(el))
  );
  // {"top": 8, "left": 8}
  ```
-		 */
+ */
 		function offset(elements){
 			elements = validate_elements(elements, "offset");
 			var el = elements[0], docEl = doc.documentElement, box;
@@ -3174,19 +3166,19 @@ ax("#elementid");
 			}
 			return offsetParent || doc.documentElement;
 		}
-		/**
-		 * 엘리먼트의 상대 offset 값을 반환합니다.
-		 * @method ax5.dom.position
-		 * @param {Elements|Element} elements
-		 * @returns {Object}
-		 * @example
+/**
+ * 엘리먼트의 상대 offset 값을 반환합니다.
+ * @method ax5.dom.position
+ * @param {Elements|Element} elements
+ * @returns {Object}
+ * @example
  ```
  console.log(
  ax5.util.to_json(ax5.dom.position(el))
  );
  // {"top": 8, "left": 8}
  ```
-		 */
+ */
 		function position(elements){
 			elements = validate_elements(elements, "offset");
 			var el = elements[0], docEl = doc.documentElement, el_parent,
@@ -3212,14 +3204,13 @@ ax("#elementid");
 				left: pos.left - parentPos.left - (css(el, "marginLeft") || 0)
 			};
 		}
-
-		/**
-		 * 엘리먼트의 box model 속성을 반환합니다.
-		 * @method ax5.dom.box_model
-		 * @param {Elements|Element} elements
-		 * @param {String} [cond] - 원하는 박스 속성
-		 * @returns {Object}
-		 * @example
+/**
+ * 엘리먼트의 box model 속성을 반환합니다.
+ * @method ax5.dom.box_model
+ * @param {Elements|Element} elements
+ * @param {String} [cond] - 원하는 박스 속성
+ * @returns {Object}
+ * @example
  ```
  var axd = ax5.dom;
  axd.box_model(el);
@@ -3238,7 +3229,7 @@ ax("#elementid");
  axd.box_model(el, "box-sizing");
  // 각각의 박스모델 속성을 지정하여 호출 할 수 있습니다. borderWidth, border-width 중 하나의 방법으로 사용 가능합니다.
  ```
-		 */
+ */
 		function box_model(elements, cond){
 			elements = validate_elements(elements, "box_model");
 			var el = elements[0],
@@ -3282,6 +3273,21 @@ ax("#elementid");
 
 			return (typeof cond === "undefined") ? model : model[cond];
 		}
+/**
+ * 엘리먼트에 data를 속성을 추가하거나 반환합니다.
+ * @method ax5.dom.data
+ * @param {Elements|Element} elements
+ * @param {All} val
+ * @returns {Elements|Element|dataVal}
+ * @example
+ ```
+
+ ```
+ */
+		// todo : data 메소드 개발중.
+		function data(elements){
+
+		}
 		U.extend(ax5.dom, {
 			ready     : ready,
 			resize    : resize,
@@ -3309,7 +3315,8 @@ ax("#elementid");
 			empty     : empty,
 			offset    : offset,
 			position  : position,
-			box_model : box_model
+			box_model : box_model,
+			data      : data
 		});
 	})();
 
@@ -3317,6 +3324,7 @@ ax("#elementid");
  * Refer to this by {@link ax5}.
  * @namespace ax5.xhr
  */
+	// todo : xhr 메소드 개발중
 	ax5.xhr = xhr = (function(){
 
 	})();
