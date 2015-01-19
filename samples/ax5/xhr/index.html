@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="../../../src/ax5-polyfill.js"></script>
+    <script type="text/javascript" src="../../../src/ax5-core.js"></script>
+</head>
+<body>
+    <h1>한글 입력 테스트</h1>
+    <p>샘플 코드 바디를 추출~~</p>
+    <script type="text/javascript">
+    (function(){
+        //ax5.xhr.req("GET", "url", "param", function(){});
+        //ax5.xhr.req({method:"GET", url:"url", param:"param", response:function(){});
+        ax5.xhr.req({
+            url: "data.json",
+            res: function(){
+                console.log("success");
+                console.log(this);
+            },
+            error: function(){
+                console.log("error");
+                console.log(this);
+            }
+        });
+
+        ax5.xhr.req({
+            url: "500error.php",
+            res: function(){
+                console.log("success");
+                console.log(this);
+            },
+            error: function(){
+                console.log("error");
+                console.log(this);
+            }
+        });
+    })();
+    </script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-01-17 
+ * 2015-01-19 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -1394,6 +1394,7 @@
 						plugin.addEventListener('error', plugin_onerror, false);
 						head.appendChild(plugin);
 					}else{
+						// todo : xhr함수로 교체 필요
 						var oReq = new XMLHttpRequest();
 						oReq.open("GET", plugin_src, false);
 						oReq.onreadystatechange = function(){
@@ -3415,7 +3416,87 @@ ax("#elementid");
  */
 	// todo : xhr 메소드 개발중
 	ax5.xhr = xhr = (function(){
+		var queue = [], queue_status = 0, show_progress = 0;
+		var http = (function(){
+			if (typeof XMLHttpRequest !== "undefined") {
+				return new XMLHttpRequest();
+			}
+			try {
+				return new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {
+				try {
+					return new ActiveXObject("Microsoft.XMLHTTP");
+				} catch (e) {}
+			}
+			return false;
+		})();
 
+		function request(config){
+			queue.push(U.extend({
+				method         : "GET",
+				url            : "",
+				async          : true,
+				username       : "",
+				password       : "",
+				headers        : ["contentType"],
+				timeout        : "",
+				withCredentials: "",
+				param          : ""
+			}, config, true));
+			if(queue_status === 0) send();
+		}
+
+		function send(){
+			var cfg = queue.pop(), that;
+			if(cfg) {
+				queue_status = 1;
+				if(cfg.url != "") {
+
+					if(!cfg.response) cfg.response = cfg.res; // 함수이름 확장
+					if (cfg.username) {
+						http.open(cfg.method, cfg.url, cfg.async, cfg.username, cfg.password);
+					} else {
+						http.open(cfg.method, cfg.url, cfg.async);
+					}
+					http.onreadystatechange = function () {
+						if (http.readyState == 4) {
+
+							that = {
+								url   : http.responseURL,
+								status: http.status,
+								code  : http.statusText,
+								state : http.readyState,
+								text  : http.responseText
+							};
+
+							if(http.status == 200){
+								if(cfg.response) cfg.response.call(that, that);
+								else console.log(http);
+							}
+							else
+							{
+								if(cfg.error) {
+									cfg.error.call(that, that);
+								}else{
+									if(cfg.response) cfg.response.call(that, that);
+									else console.log(http);
+								}
+							}
+
+							send();
+						}
+					};
+					http.send(cfg.param); // todo : param 값 검증
+				}
+			}else{
+				queue_status = 0;
+			}
+		}
+
+		return {
+			request: request,
+			req: request
+		}
 	})();
 
 /**

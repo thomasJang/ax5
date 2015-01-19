@@ -23,11 +23,11 @@
             left: 0px; top: 0px;
             border: 1px solid #888;
             border-radius: 5px;
-            width: auto;6px;
+            width: 6px;
             height: 100%;
         }
         #progress-bar{
-            width: 6px;height: 0%;
+            width: 6px; height: 0%;
             border-radius: 4px;
             background: #f06433;
         }
@@ -53,6 +53,7 @@
             font-weight:bold;
             font-size: 11px;
         }
+
     </style>
 
 </head>
@@ -67,6 +68,7 @@
     <p id="author"  ondblclick="alert('Team AXISJ')">Team AXISJ 2015 - http://www.axisj.com</p>
 
     <div id="id-test"></div>
+    <div id="id-test-s"></div>
     <a class="class-text"></a>
     <span data-attr="A" id="test"></span>
     <div data-attr="B"></div>
@@ -662,8 +664,8 @@
             fn: function(){
                 ax5.dom.css(ax5.dom.get("#progress"), {"border-color":"#ff3300"});
                 var result = ax5.dom.css(ax5.dom.get("#progress"), "border-color");
-                ax5.dom.css(ax5.dom.get("#progress"), {"border-top-style":"dotted", "border-bottom-style":"dashed" });
-                var result2 = ax5.dom.css(ax5.dom.get("#progress"), "border-bottom-style");
+                ax5.dom.css(ax5.dom.get("#progress"), {"border-style":"dotted" });
+                var result2 = ax5.dom.css(ax5.dom.get("#progress"), "border");
 
                 return result +" "+ result2 ;
             },
@@ -761,7 +763,7 @@
 
                 return ax5.dom.html(el);
             },
-            r   : "<a href=\"#1234\">링크</a>"
+            r   : '<a href="#1234">링크</a>'
         },
         {
             label:"ax5.dom.next, ax5.dom.prev ",
@@ -926,7 +928,7 @@
                 ax5.dom("#id-test").after(newEl);
 
                 var nextItem = ax5.dom("#id-test").next();
-                console.log(nextItem)
+                //console.log(nextItem)
                 return nextItem.elements[0].id;
             },
             r   : "dom0_afterTestDiv"
@@ -1079,11 +1081,11 @@
             label: "ax5.dom0.html",
             fn   : function () {
                 var el = ax5.dom("#id-test");
-                el.html("<a href='#1234' id='testA'>링크</a>");
-
+                el.html('<a href="#1234" id="testA">링크</a>');
+                console.log(el.html());
                 return el.html();
             },
-            r   : "<a href=\"#1234\" id=\"testA\">링크</a>"
+            r   : '<a id="testA" href="#1234">링크</a>'
         },
         {
             label:"ax5.dom0.next, ax5.dom0.prev ",

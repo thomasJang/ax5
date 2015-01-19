@@ -3232,7 +3232,8 @@ ax("#elementid");
 		var http = (function(){
 			if (typeof XMLHttpRequest !== "undefined") {
 				return new XMLHttpRequest();
-			} try {
+			}
+			try {
 				return new ActiveXObject("Msxml2.XMLHTTP");
 			} catch (e) {
 				try {
@@ -3253,15 +3254,17 @@ ax("#elementid");
 				timeout        : "",
 				withCredentials: "",
 				param          : ""
-			}, config));
+			}, config, true));
 			if(queue_status === 0) send();
 		}
 
 		function send(){
-			var cfg = queue.pop();
+			var cfg = queue.pop(), that;
 			if(cfg) {
 				queue_status = 1;
 				if(cfg.url != "") {
+
+					if(!cfg.response) cfg.response = cfg.res; // 함수이름 확장
 					if (cfg.username) {
 						http.open(cfg.method, cfg.url, cfg.async, cfg.username, cfg.password);
 					} else {
@@ -3269,10 +3272,33 @@ ax("#elementid");
 					}
 					http.onreadystatechange = function () {
 						if (http.readyState == 4) {
-							console.log(http.responseText);
+
+							that = {
+								url   : http.responseURL,
+								status: http.status,
+								code  : http.statusText,
+								state : http.readyState,
+								text  : http.responseText
+							};
+
+							if(http.status == 200){
+								if(cfg.response) cfg.response.call(that, that);
+								else console.log(http);
+							}
+							else
+							{
+								if(cfg.error) {
+									cfg.error.call(that, that);
+								}else{
+									if(cfg.response) cfg.response.call(that, that);
+									else console.log(http);
+								}
+							}
+
+							send();
 						}
 					};
-					http.send();
+					http.send(cfg.param); // todo : param 값 검증
 				}
 			}else{
 				queue_status = 0;
