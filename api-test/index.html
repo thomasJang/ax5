@@ -3,7 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="http://cdn.axisj.com/axicon/axicon.min.css" />
-    <script type="text/javascript" src="src/ax5.js"></script>
+    <script type="text/javascript" src="../src/ax5.js"></script>
     <title>ax5 - API TESTER</title>
     <style>
         html, body{
@@ -60,7 +60,7 @@
         <div id="progress-bar" class="progress-bar" ondblclick="alert('dbClick')" custom-attr="ca"></div>
     </div>
 
-    <h1>AX5 API Check <a href="samples"><i class="axi axi-arrow-circle-o-right"></i></a></h1>
+    <h1>AX5 API Check <a href="../samples"><i class="axi axi-arrow-circle-o-right"></i></a></h1>
     <div id="test-result" class="test-result"></div>
     <p id="author"  ondblclick="alert('Team AXISJ')">Team AXISJ 2015 - http://www.axisj.com</p>
 
@@ -436,7 +436,7 @@
         {
             label: "ax5.util.require",
             fn   : function (callBack) {
-                ax5.util.require(["src/ax5_class_sample.js"], function(){
+                ax5.util.require(["ax5_class_sample.js"], function(){
                     callBack(true);
                 });
             },
@@ -458,7 +458,7 @@
         {
             label: "ax5.util.require(large file)",
             fn   : function (callBack) {
-                ax5.util.require(["src/ax5_large_class_sample.js?v="+parseInt(Math.random()*100) ], function(){
+                ax5.util.require(["ax5_large_class_sample.js?v="+parseInt(Math.random()*100) ], function(){
                     callBack(true);
                 }, function(){
                     callBack(false);
@@ -1172,7 +1172,7 @@
             fn   : function () {
                 return ax5.info.url_util().pathname;
             },
-            r    : "/api-test.html"
+            r    : "/api-test/"
         }
 
 

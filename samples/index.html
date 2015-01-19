@@ -29,23 +29,12 @@
     </div>
     <script type="text/javascript">
         var axd = ax5.dom, axu = ax5.util, res = "";
-
         var el = axd("#list-container");
-        el.data({a:1}); // set data
-        el.data("set", {a:1100, b:[0,1,2,3]}); // set data
 
-        res += el.data("a"); // get data
-        res += el.data("get", "b"); // get data
-        console.log(res);
-        // 11000,1,2,3
+        ax5.xhr.req({
 
-        console.log(el.data("b"));
-        // [0, 1, 2, 3]
-        el.data("remove", "b"); // remove data
-        console.log(el.data("b"));
-        // ""
+        });
 
-        el.data("remove"); // remove all
     </script>
 </body>
 </html>

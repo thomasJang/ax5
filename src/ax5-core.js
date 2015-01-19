@@ -1206,6 +1206,7 @@
 						plugin.addEventListener('error', plugin_onerror, false);
 						head.appendChild(plugin);
 					}else{
+						// todo : xhr함수로 교체 필요
 						var oReq = new XMLHttpRequest();
 						oReq.open("GET", plugin_src, false);
 						oReq.onreadystatechange = function(){
@@ -3227,7 +3228,61 @@ ax("#elementid");
  */
 	// todo : xhr 메소드 개발중
 	ax5.xhr = xhr = (function(){
+		var queue = [], queue_status = 0, show_progress = 0;
+		var http = (function(){
+			if (typeof XMLHttpRequest !== "undefined") {
+				return new XMLHttpRequest();
+			} try {
+				return new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {
+				try {
+					return new ActiveXObject("Microsoft.XMLHTTP");
+				} catch (e) {}
+			}
+			return false;
+		})();
 
+		function request(config){
+			queue.push(U.extend({
+				method         : "GET",
+				url            : "",
+				async          : true,
+				username       : "",
+				password       : "",
+				headers        : ["contentType"],
+				timeout        : "",
+				withCredentials: "",
+				param          : ""
+			}, config));
+			if(queue_status === 0) send();
+		}
+
+		function send(){
+			var cfg = queue.pop();
+			if(cfg) {
+				queue_status = 1;
+				if(cfg.url != "") {
+					if (cfg.username) {
+						http.open(cfg.method, cfg.url, cfg.async, cfg.username, cfg.password);
+					} else {
+						http.open(cfg.method, cfg.url, cfg.async);
+					}
+					http.onreadystatechange = function () {
+						if (http.readyState == 4) {
+							console.log(http.responseText);
+						}
+					};
+					http.send();
+				}
+			}else{
+				queue_status = 0;
+			}
+		}
+
+		return {
+			request: request,
+			req: request
+		}
 	})();
 
 /**
