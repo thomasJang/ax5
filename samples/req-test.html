@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="../plugin/require.js"></script>
+</head>
+<body style="padding:0px;">
+
+    <script type="text/javascript">
+
+        requirejs.config({
+            //By default load any module IDs from js/lib
+            baseUrl: '../src/'
+        });
+
+        // Start the main app logic.
+        requirejs(
+            ['ax5-core'],
+            function() {
+
+
+            }
+        );
+
+    </script>
+</body>
+</html>

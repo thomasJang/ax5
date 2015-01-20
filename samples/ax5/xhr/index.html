@@ -14,28 +14,31 @@
         //ax5.xhr.req("GET", "url", "param", function(){});
         //ax5.xhr.req({method:"GET", url:"url", param:"param", response:function(){});
         ax5.xhr.req({
-            url: "data.json",
-            res: function(){
+            method: "POST",
+            url   : "data.php",
+            param : "str=1234",
+            res   : function (response, status) {
                 console.log("success");
                 console.log(this);
             },
-            error: function(){
+            error : function () {
                 console.log("error");
                 console.log(this);
             }
         });
 
+        /*
         ax5.xhr.req({
             url: "500error.php",
             res: function(){
-                console.log("success");
-                console.log(this);
-            },
-            error: function(){
-                console.log("error");
-                console.log(this);
+                if(this.status == 200){
+                    console.log(this.result);
+                }else{
+                    console.log(this);
+                }
             }
         });
+        */
     })();
     </script>
 </body>
