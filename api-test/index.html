@@ -422,6 +422,9 @@
             },
             r    : "123456789.7 : 123,456,789.7 : 117.7MB : 123,456,789.89 : 123,456,789.89"
         },
+
+        ///label: "ax5.util.param"
+
         {
             label: "ax5.util.reduce",
             fn   : function () {
@@ -512,6 +515,7 @@
         },
 
         /*
+        ///
         {
             label: "ax5.util.to_array(object)",
             fn   : function () {
@@ -612,6 +616,8 @@
             r   : "beforeTestDiv : 2"
         },
 
+        ///    label: "ax5.dom.box_model",
+
         {
             label: "ax5.dom.child",
             fn   : function () {
@@ -675,8 +681,10 @@
                 return result +" "+ result2 ;
             },
             //r   :"#ff3300"
-            r:  "rgb(255, 51, 0) dashed"
+            r:  "rgb(255, 51, 0) 1px dotted rgb(255, 51, 0)"
         },
+
+        ///label: "ax5.dom.data",
         {
             label: "ax5.dom.empty",
             fn   : function () {
@@ -808,6 +816,9 @@
             },
             r: "off"
         },
+
+        ///label: "ax5.dom.offset",
+
         {
             label:"ax5.dom.parent",
             fn: function(){
@@ -994,6 +1005,8 @@
             },
             r   : "beforeTestDiv : 4"
         },
+
+        ///label: "ax5.dom0.box_model",
         {
             label: "ax5.dom0.child",
             fn   : function () {
@@ -1064,6 +1077,9 @@
             },
             r    : "Gulim"
         },
+
+        ///label: "ax5.dom.data",
+
         {
             label: "ax5.dom0.find",
             fn: function () {
@@ -1086,11 +1102,11 @@
             label: "ax5.dom0.html",
             fn   : function () {
                 var el = ax5.dom("#id-test");
-                el.html('<a href="#1234" id="testA">링크</a>');
-                console.log(el.html());
+                el.html('<a href="#1234" id="testA">link</a>');
+
                 return el.html();
-            },
-            r   : '<a id="testA" href="#1234">링크</a>'
+            }
+            ,r   :  (ax5.info.browser.name === 'ie') ? '<a id="testA" href="#1234">link</a>' : '<a href="#1234" id="testA">link</a>'
         },
         {
             label:"ax5.dom0.next, ax5.dom0.prev ",
@@ -1130,6 +1146,9 @@
             },
             r    : "ready-response"
         },
+
+        ///label: "ax5.dom0.offset",
+            
         {
             label: "ax5.dom0.prepend",
             fn   : function () {
@@ -1167,6 +1186,7 @@
             fn   : function () {
                 ax5.dom("#prependTestDiv").remove();
                 ax5.dom("#testA").remove();
+
                 return ax5.util.is_element(document.getElementById("prependTestDiv"));
             },
             r   : false
