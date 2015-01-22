@@ -2120,9 +2120,16 @@
 					return css;
 				}
 				function get_style(k) {
-					var val, px = /\d+px$/i;
+					var val, px = /\d+px$/i, k = U.camel_case(k);
+
+
+
 					if (window.getComputedStyle) {
+
+						console.log(k);
+
 						val = window.getComputedStyle(el).getPropertyValue(k);
+
 					}
 					else if (el.currentStyle) {
 						val = el.currentStyle[k];
@@ -2491,7 +2498,7 @@
 					var i = 0, l = elements.length, k;
 					for (; i < l; i++) {
 						for (k in O) {
-							elements[i].style[k] = O[k]; // todo apply_css 재 개발 필요, css 값 검증 함수 추가 width, height, left, top 등에 px를 전달하지 않아도 기본단위가 설정 되도록 기본단위 설정 오브젝트 필요
+							elements[i].style[U.camel_case(k)] = O[k]; // todo apply_css 재 개발 필요, css 값 검증 함수 추가 width, height, left, top 등에 px를 전달하지 않아도 기본단위가 설정 되도록 기본단위 설정 오브젝트 필요
 						}
 					}
 				}

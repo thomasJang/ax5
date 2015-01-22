@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-    <link rel="stylesheet" type="text/css" href="../../../plugin/prettify/prettify-tomorrow.css">
-    <script type="text/javascript" src="../../../plugin/prettify/prettify.js"></script>
-    <script type="text/javascript" src="../../../src/ax5-polyfill.js"></script>
-    <script type="text/javascript" src="../../../src/ax5-core.js"></script>
-</head>
-<body>
 
 <h1>ax5.xhr.req | ax5.chr.request</h1>
 <h3>일반적인 방법</h3>
@@ -53,42 +42,31 @@ ax5.xhr.req({
 });
 </pre>
 
+<script type="text/javascript">
+    ax5.xhr.req({
+        method: "POST",
+        url   : "ax5/xhr/data.php",
+        param : "str=1234",
+        res   : function (response, status) {
+            console.log("success");
+            console.log(this);
+        },
+        error : function () {
+            console.log("error");
+            console.log(this);
+        }
+    });
 
-    <script type="text/javascript">
-    (function(){
-
-        prettyPrint();
-
-        //ax5.xhr.req("GET", "url", "param", function(){});
-        //ax5.xhr.req({method:"GET", url:"url", param:"param", response:function(){});
-
-        ax5.xhr.req({
-            method: "POST",
-            url   : "data.php",
-            param : "str=1234",
-            res   : function (response, status) {
-                console.log("success");
-                console.log(this);
-            },
-            error : function () {
-                console.log("error");
+    /*
+    ax5.xhr.req({
+        url: "ax5/xhr/500error.php",
+        res: function(){
+            if(this.status == 200){
+                console.log(this.result);
+            }else{
                 console.log(this);
             }
-        });
-
-        /*
-        ax5.xhr.req({
-            url: "500error.php",
-            res: function(){
-                if(this.status == 200){
-                    console.log(this.result);
-                }else{
-                    console.log(this);
-                }
-            }
-        });
-        */
-    })();
-    </script>
-</body>
-</html>
+        }
+    });
+    */
+</script>
