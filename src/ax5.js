@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-01-20 
+ * 2015-01-24 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -1380,34 +1380,22 @@
 						plugin_onerror = function (e) {
 							loadCount--;
 							loadErrors.push({
-								src: info.base_url + src
+								src: info.base_url + src, error:e
 							});
 							if (onerrorTimer) clearTimeout(onerrorTimer);
 							onerrorTimer = setTimeout(onerror, 1);
 						};
 
-					if (plugin.addEventListener) {
-						plugin.addEventListener('load', plugin_onload, false);
-						plugin.addEventListener('error', plugin_onerror, false);
-						head.appendChild(plugin);
-					} else {
-						// todo : xhr함수로 교체 필요
-						var oReq = new XMLHttpRequest();
-						oReq.open("GET", plugin_src, false);
-						oReq.onreadystatechange = function () {
-							if (oReq.readyState == 4 /* complete */) {
-								if (oReq.status == 200 || oReq.status == 304) {
-									head.appendChild(plugin);
-									plugin_onload({type: "load"});
-								}
-								else {
-									// error occurred
-									plugin_onerror();
-								}
-							}
-						};
-						oReq.send();
-					}
+					ax5.xhr.req({
+						url : plugin_src, contentType: "",
+						res : function (response, status) {
+							head.appendChild(plugin);
+							plugin_onload({type: "load"});
+						},
+						error : function () {
+							plugin_onerror(this);
+						}
+					});
 				}
 			}
 		}
@@ -2308,9 +2296,16 @@
 					return css;
 				}
 				function get_style(k) {
-					var val, px = /\d+px$/i;
+					var val, px = /\d+px$/i, k = U.camel_case(k);
+
+
+
 					if (window.getComputedStyle) {
+
+						console.log(k);
+
 						val = window.getComputedStyle(el).getPropertyValue(k);
+
 					}
 					else if (el.currentStyle) {
 						val = el.currentStyle[k];
@@ -2679,7 +2674,7 @@
 					var i = 0, l = elements.length, k;
 					for (; i < l; i++) {
 						for (k in O) {
-							elements[i].style[k] = O[k]; // todo apply_css 재 개발 필요, css 값 검증 함수 추가 width, height, left, top 등에 px를 전달하지 않아도 기본단위가 설정 되도록 기본단위 설정 오브젝트 필요
+							elements[i].style[U.camel_case(k)] = O[k]; // todo apply_css 재 개발 필요, css 값 검증 함수 추가 width, height, left, top 등에 px를 전달하지 않아도 기본단위가 설정 되도록 기본단위 설정 오브젝트 필요
 						}
 					}
 				}
@@ -3520,7 +3515,7 @@
  * @namespace ax5.xhr
  */
 	// todo : xhr 메소드 개발중
-ax5.xhr = xhr = (function () {
+ax5.xhr = (function () {
 	var queue = [], queue_status = 0, show_progress = 0, U = ax5.util;
 	var http = (function () {
 		if (typeof XMLHttpRequest !== "undefined") {

@@ -1192,34 +1192,22 @@
 						plugin_onerror = function (e) {
 							loadCount--;
 							loadErrors.push({
-								src: info.base_url + src
+								src: info.base_url + src, error:e
 							});
 							if (onerrorTimer) clearTimeout(onerrorTimer);
 							onerrorTimer = setTimeout(onerror, 1);
 						};
 
-					if (plugin.addEventListener) {
-						plugin.addEventListener('load', plugin_onload, false);
-						plugin.addEventListener('error', plugin_onerror, false);
-						head.appendChild(plugin);
-					} else {
-						// todo : xhr함수로 교체 필요
-						var oReq = new XMLHttpRequest();
-						oReq.open("GET", plugin_src, false);
-						oReq.onreadystatechange = function () {
-							if (oReq.readyState == 4 /* complete */) {
-								if (oReq.status == 200 || oReq.status == 304) {
-									head.appendChild(plugin);
-									plugin_onload({type: "load"});
-								}
-								else {
-									// error occurred
-									plugin_onerror();
-								}
-							}
-						};
-						oReq.send();
-					}
+					ax5.xhr.req({
+						url : plugin_src, contentType: "",
+						res : function (response, status) {
+							head.appendChild(plugin);
+							plugin_onload({type: "load"});
+						},
+						error : function () {
+							plugin_onerror(this);
+						}
+					});
 				}
 			}
 		}
@@ -3339,7 +3327,7 @@
  * @namespace ax5.xhr
  */
 	// todo : xhr 메소드 개발중
-ax5.xhr = xhr = (function () {
+ax5.xhr = (function () {
 	var queue = [], queue_status = 0, show_progress = 0, U = ax5.util;
 	var http = (function () {
 		if (typeof XMLHttpRequest !== "undefined") {

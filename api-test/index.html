@@ -3,7 +3,8 @@
 <head lang="en">
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="http://cdn.axisj.com/axicon/axicon.min.css" />
-    <script type="text/javascript" src="../src/ax5.js"></script>
+    <script type="text/javascript" src="../src/ax5-polyfill.js"></script>
+    <script type="text/javascript" src="../src/ax5-core.js"></script>
     <title>ax5 - API TESTER</title>
     <style>
         html, body{
@@ -472,7 +473,8 @@
             fn   : function (callBack) {
                 ax5.util.require(["ax5_large_class_sample.js?v="+parseInt(Math.random()*100) ], function(){
                     callBack(true);
-                }, function(){
+                }, function(res){
+                    console.log(res);
                     callBack(false);
                 });
             },
