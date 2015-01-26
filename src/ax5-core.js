@@ -7,10 +7,9 @@
 /** @namespace {Object} ax5 */
 		ax5 = {}, info, U, dom, xhr;
 
-	// jquery 1.10.2 from http://jquery.com
-	var core_pnum = /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source;
-	
+	// jquery 1.10.2 from http://jquery.com -- start
 	var nodeNames = "abbr|article|aside|audio|bdi|canvas|data|datalist|details|figcaption|figure|footer|header|hgroup|mark|meter|nav|output|progress|section|summary|time|video",
+		core_pnum = /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source,
 		rnoshimcache = new RegExp("<(?:" + nodeNames + ")[\\s/>]", "i"),
 		rleadingWhitespace = /^\s+/,
 		rxhtmlTag = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/gi,
@@ -50,6 +49,7 @@
 			}
 			return safeFrag;
 		}
+	// jquery 1.10.2 from http://jquery.com -- end
 
 /**
  * guid
@@ -140,9 +140,9 @@
 		var is_browser = !!(typeof window !== 'undefined' && typeof navigator !== 'undefined' && win.document);
 	/**
 	 * 브라우저에 따른 마우스 휠 이벤트이름
-	 * @member {Object} ax5.info.mousewheelevt
+	 * @member {Object} ax5.info.wheel_enm
 	 */
-		var mousewheelevt = ((/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel");
+		var wheel_enm = ((/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel");
 
 /**
  * 현재 페이지의 Url 정보를 리턴합니다.
@@ -184,7 +184,7 @@
 			return url;
 		}
 
-		// jquery 1.10.2 jQuery.support from http://jquery.com
+		// jquery 1.10.2 jQuery.support from http://jquery.com -- start
 /**
  * 브라우저 API 지원여부
  * @member {Object} ax5.info.support
@@ -473,6 +473,7 @@
 			return support;
 
 		})();
+		// jquery 1.10.2 jQuery.support from http://jquery.com -- start
 
 		var info = {
 			version: version,
@@ -480,7 +481,7 @@
 			event_keys: event_keys,
 			browser: browser,
 			is_browser: is_browser,
-			mousewheelevt: mousewheelevt,
+			wheel_enm: wheel_enm,
 			url_util: url_util,
 			support: support
 		};
@@ -513,9 +514,7 @@
  ```
  */
 		function each(O, _fn) {
-			if (O == null || typeof O === "undeinfed") {
-				return O;
-			}
+			if(is_nothing(O)) return [];
 			var key, i = 0, l = O.length,
 				isObj = l === undefined || typeof O === "function";
 			if (isObj) {
@@ -562,10 +561,7 @@
  ```
  */
 		function map(O, _fn) {
-			if (O == null || typeof O === "undeinfed") {
-				console.error("argument error : ax5.util.map");
-				return [];
-			}
+			if(is_nothing(O)) return [];
 			var key, i = 0, l = O.length, results = [], fn_result;
 			if (is_object(O)) {
 				for (key in O) {
@@ -621,10 +617,7 @@
  ```
  */
 		function search(O, _fn) {
-			if (O == null || typeof O === "undeinfed") {
-				console.error("argument error : ax5.util.find");
-				return -1;
-			}
+			if(is_nothing(O)) return -1;
 			var key, i = 0, l = O.length;
 			if (is_object(O)) {
 				for (key in O) {
@@ -675,10 +668,6 @@
  ```
  */
 		function reduce(O, _fn) {
-			if (O == null || typeof O === "undeinfed") {
-				console.error("argument error : ax5.util.reduce");
-				return [];
-			}
 			var i, l, token_item;
 			if (is_array(O)) {
 				i = 0, l = O.length, token_item = O[i];
@@ -721,14 +710,6 @@
  ```
  */
 		function reduce_right(O, _fn) {
-			if (O == null || typeof O === "undeinfed") {
-				console.error("argument error : ax5.util.reduce_right - use Array");
-				return [];
-			}
-			if (!is_array(O)) {
-				console.error("argument error : ax5.util.reduce_right - use Array");
-				return []
-			}
 			var i = O.length - 1, token_item = O[i];
 			for (; i > 0;) {
 				if (typeof O[i] != "undefined") {
@@ -762,10 +743,7 @@
  ```
  */
 		function filter(O, _fn) {
-			if (O == null || typeof O === "undeinfed") {
-				console.error("argument error : ax5.util.map");
-				return [];
-			}
+			if(is_nothing(O)) return [];
 			var k, i = 0, l = O.length, results = [], fn_result;
 			if (is_object(O)) {
 				for (k in O) {
@@ -2039,7 +2017,6 @@
 
 		// dom functions
 		(function () {
-			var getStyles, curCSS;
 			//if("내장함수 시작") {
 			// 이벤트 바인딩
 			function eventBind(elem, type, eventHandle) {
@@ -2066,7 +2043,7 @@
 			}
 
 			// 엘리먼트 인자 체크
-			function validate_elements(elem, fn_name) {
+			function va_elem(elem, fn_name) {
 				if (U.is_array(elem) && U.is_element(elem[0])) {
 					return elem;
 				}
@@ -2086,7 +2063,7 @@
 
 			// 엘리먼트 순서이동
 			function sibling(elements, forward, times) {
-				elements = validate_elements(elements, forward);
+				elements = va_elem(elements, forward);
 				var prop = (forward == "prev") ? "previousSibling" : "nextSibling", el = elements[0];
 				times = (typeof times == "undefined" || times < 1) ? 1 : times;
 				do {
@@ -2104,56 +2081,52 @@
 
 
 // jQuery 1.10.2 이 소스를 참고하여 getStyles와 curCSS를 작성하였습니다.
-			if ( window.getComputedStyle ) {
-				getStyles = function( elem ) {
-					return window.getComputedStyle( elem, null );
-				};
-
-				curCSS = function( elem, name, _computed ) {
-					var width, minWidth, maxWidth,
-						computed = _computed || getStyles( elem ),
-
-					// getPropertyValue is only needed for .css('filter') in IE9, see #12537
-						ret = computed ? computed.getPropertyValue( name ) || computed[ name ] : undefined,
-						style = elem.style;
-
-					 if ( computed ) {
-						 //if ( ret === "" && !jQuery.contains( elem.ownerDocument, elem ) ) {
-						 //   ret = jQuery.style( elem, name );
-						 //}
-
-						 // A tribute to the "awesome hack by Dean Edwards"
-						 // Chrome < 17 and Safari 5.0 uses "computed value" instead of "used value" for margin-right
-						 // Safari 5.1.7 (at least) returns percentage for a larger set of values, but width seems to be reliably pixels
-						 // this is against the CSSOM draft spec: http://dev.w3.org/csswg/cssom/#resolved-values
-						 if ( rnumnonpx.test( ret ) && rmargin.test( name ) ) {
-							 // Remember the original values
-							 width = style.width;
-							 minWidth = style.minWidth;
-							 maxWidth = style.maxWidth;
-
-							 // Put in the new values to get a computed value out
-							 style.minWidth = style.maxWidth = style.width = ret;
-							 ret = computed.width;
-
-							 // Revert the changed values
-							 style.width = width;
-							 style.minWidth = minWidth;
-							 style.maxWidth = maxWidth;
-						 }
-					 }
-					return ret;
-				};
-			}
-			else
-			if ( document.documentElement.currentStyle ) {
-				getStyles = function( elem ) {
+			function getStyles(elem) {
+				if ( window.getComputedStyle ) {
+					return window.getComputedStyle(elem, null);
+				} else { 
+					//if (document.documentElement.currentStyle) {
 					return elem.currentStyle;
-				};
+				}
+			}
 
-				curCSS = function( elem, name, _computed ) {
-					var left, rs, rsLeft,
-						computed = _computed || getStyles( elem ),
+			function curCSS(elem, name, num) {
+				var width, minWidth, maxWidth, computed, ret, style, left, rs, rsLeft;
+
+				if ( window.getComputedStyle ) {
+					computed = getStyles(elem),
+					ret = computed ? computed.getPropertyValue(name) || computed[name] : undefined,
+					style = elem.style;
+
+					if ( computed ) {
+						//if ( ret === "" && !jQuery.contains( elem.ownerDocument, elem ) ) {
+						//   ret = jQuery.style( elem, name );
+						//}
+
+						// A tribute to the "awesome hack by Dean Edwards"
+						// Chrome < 17 and Safari 5.0 uses "computed value" instead of "used value" for margin-right
+						// Safari 5.1.7 (at least) returns percentage for a larger set of values, but width seems to be reliably pixels
+						// this is against the CSSOM draft spec: http://dev.w3.org/csswg/cssom/#resolved-values
+						if ( rnumnonpx.test( ret ) && rmargin.test( name ) ) {
+							// Remember the original values
+							width = style.width;
+							minWidth = style.minWidth;
+							maxWidth = style.maxWidth;
+
+							// Put in the new values to get a computed value out
+							style.minWidth = style.maxWidth = style.width = ret;
+							ret = computed.width;
+
+							// Revert the changed values
+							style.width = width;
+							style.minWidth = minWidth;
+							style.maxWidth = maxWidth;
+						}
+					}
+
+				} else {
+					//if (document.documentElement.currentStyle) {
+					computed = getStyles( elem ),
 						ret = computed ? computed[ name ] : undefined,
 						style = elem.style;
 
@@ -2190,57 +2163,24 @@
 							rs.left = rsLeft;
 						}
 					}
-
-					return ret === "" ? "auto" : ret;
-				};
+					ret = ret === "" ? "auto" : ret;
+				}
+				if(num) ret = parseFloat(ret) || 0;
+				return ret;
 			}
 
-			
 			// 엘리먼트 스타일 값 가져오기
 			function style(el, key, fn_nm) {
 				if (U.is_string(key)) {
-					//return get_style(key);
 					return curCSS( el, key );
 				}
 				else if (U.is_array(key)) {
 					var css = {}, i = 0, l = key.length;
 					for (; i < l; i++) {
-						css[key[i]] = get_style(key[i]);
+						css[key[i]] = curCSS(el, key[i]);
 					}
 					return css;
 				}
-				
-				
-				/* 2015-01-28 :18:02 방식 변경
-				function get_style(k) {
-					var val, el_styles, px = /\d+px$/i, k = U.camel_case(k);
-
-					if(el.currentStyle){
-						val = el.currentStyle[k];
-						if (val == "auto") {
-							if (U.search(["width", "height"], k) > -1) {
-								val = el[U.camel_case("offset-" + k)];
-							}
-						}
-					}else{
-						if (window.getComputedStyle) {
-							el_styles = window.getComputedStyle(el)
-							if(el_styles) val = el_styles.getPropertyValue(k);
-						}
-					}
-					
-					//console.log(window.getComputedStyle(el).getPropertyValue(k));
-					// IE OK console.log(el.currentStyle[k]);
-					// console.log(el.runtimeStyle);
-					//console.log(el.style[k]);
-					
-					
-					if (typeof val == "string" && px.test(val.trim())) val = val.trim().replace("px", "");
-					console.log(typeof val);
-					return val;
-				}
-				*/
-
 				return null;
 			}
 
@@ -2251,7 +2191,7 @@
 					return elements.document.documentElement[U.camel_case("client-" + fn_nm)];
 				}
 				else {
-					elements = validate_elements(elements, fn_nm);
+					elements = va_elem(elements, fn_nm);
 					var el = elements[0], _sbs = U.camel_case("scroll-" + fn_nm), _obs = U.camel_case("offset-" + fn_nm), _cbs = U.camel_case("client-" + fn_nm);
 					if (el) {
 						tag_nm = el.tagName.toLowerCase();
@@ -2362,11 +2302,13 @@
 					safe.removeChild(tmp);
 				}
 
+				/*
 				// Reset defaultChecked for any radios and checkboxes
 				// about to be appended to the DOM in IE 6/7 (#8060)
 				if (!info.support.appendChecked) {
 					//jQuery.grep( getAll( nodes, "input" ), fixDefaultChecked );
 				}
+				*/
 
 
 				i = 0;
@@ -2382,6 +2324,7 @@
 			}
 
 			// getAll 특정 tag인 모든 엘리먼트 불러오기
+			/*
 			function getAll(context, tag) {
 				var elems, elem, i = 0,
 					found = typeof context.getElementsByTagName !== core_strundefined ? context.getElementsByTagName(tag || "*") : typeof context.querySelectorAll !== core_strundefined ? context.querySelectorAll(tag || "*") : undefined;
@@ -2396,8 +2339,7 @@
 				}
 				return tag === undefined || tag && node_name(context, tag) ? U.merge([context], found) : found;
 			}
-
-			// }
+			*/
 
 // jQuery.ready.promise jquery 1.10.2
 /**
@@ -2563,17 +2505,13 @@
 				 document.createElement("div")
 				 document.createTextNode(text)
 				 */
-
-				var
-
-					element = doc.createElement(node_nm);
+				var element = doc.createElement(node_nm);
 				for (var k in attr) {
 					element.setAttribute(k, attr[k]);
 				}
 				if
 				(val) element.appendChild(create_fragment([].concat(val)));
 				return element;
-
 			}
 
 /**
@@ -2588,7 +2526,7 @@
  ```
  */
 			function css(elements, O) {
-				elements = validate_elements(elements, "css");
+				elements = va_elem(elements, "css");
 				if (U.is_string(O) || U.is_array(O)) {
 					return style(elements[0], O, "css");
 				}
@@ -2621,7 +2559,7 @@
  */
 			function clazz(elements, command, O) {
 				var classNames;
-				elements = validate_elements(elements, "clazz");
+				elements = va_elem(elements, "clazz");
 				if (command === "add" || command === "remove" || command === "toggle") {
 					for (var di = 0; di < elements.length; di++) {
 						classNames = elements[di]["className"].split(/ /g);
@@ -2677,7 +2615,7 @@
  ```
  */
 			function attr(elements, command, O) {
-				elements = validate_elements(elements, "attr");
+				elements = va_elem(elements, "attr");
 				var i = 0, l = elements.length, k;
 				if (command === "set" || (typeof O === "undefined" && U.is_object(command))) {
 					if (typeof O === "undefined") O = command;
@@ -2739,7 +2677,7 @@
  ```
  */
 			function on(elements, typ, _fn) {
-				elements = validate_elements(elements, "on");
+				elements = va_elem(elements, "on");
 				for (var i = 0; i < elements.length; i++) {
 					var __fn, _d = elements[i];
 					if (!_d.e_hd) _d.e_hd = {};
@@ -2768,7 +2706,7 @@
  ```
  */
 			function off(elements, typ, _fn) {
-				elements = validate_elements(elements, "off");
+				elements = va_elem(elements, "off");
 				for (var i = 0; i < elements.length; i++) {
 					var _d = elements[i];
 					if (U.is_array(_d.e_hd[typ])) {
@@ -2815,7 +2753,7 @@
  ```
  */
 			function child(elements) {
-				elements = validate_elements(elements, "child");
+				elements = va_elem(elements, "child");
 				var return_elems = [], i = 0, l;
 				if (elements[0]) {
 					l = elements[0].children.length;
@@ -2846,7 +2784,7 @@
  ```
  */
 			function parent(elements, cond) {
-				elements = validate_elements(elements, "child");
+				elements = va_elem(elements, "child");
 				var _target = elements[0];
 				if (_target) {
 					while ((function () {
@@ -3003,7 +2941,7 @@
  ```
  */
 			function empty(elements) {
-				elements = validate_elements(elements, "empty");
+				elements = va_elem(elements, "empty");
 				var i = 0, l = elements.length, el;
 				for (; i < l; i++) {
 					el = elements[i];
@@ -3031,7 +2969,7 @@
  ```
  */
 			function html(elements, val) {
-				elements = validate_elements(elements, "html");
+				elements = va_elem(elements, "html");
 				if (typeof val == "undefined") {
 					return elements[0].innerHTML;
 				} else {
@@ -3134,7 +3072,7 @@
  * @returns {Elements|Element}
  */
 			function manipulate(act, elements, val) {
-				elements = validate_elements(elements, act);
+				elements = va_elem(elements, act);
 				var flag, i = 0, l = elements.length,
 					el = [].concat(val), cf = create_fragment, els = elements;
 
@@ -3170,7 +3108,7 @@
  ```
  */
 			function remove(elements, val) {
-				elements = validate_elements(elements, "remove");
+				elements = va_elem(elements, "remove");
 				var i = 0, l = elements.length;
 				for (; i < l; i++) {
 					if (elements[i].parentNode) elements[i].parentNode.removeChild(elements[i]);
@@ -3191,7 +3129,7 @@
  ```
  */
 			function offset(elements) {
-				elements = validate_elements(elements, "offset");
+				elements = va_elem(elements, "offset");
 				var el = elements[0], docEl = doc.documentElement, box;
 				if (el.getBoundingClientRect) {
 					box = el.getBoundingClientRect();
@@ -3204,7 +3142,7 @@
 
 			function offset_parent(el) {
 				var offsetParent = el.offsetParent || doc.documentElement;
-				while (offsetParent && ( !node_name(offsetParent, "html") && css(offsetParent, "position") === "static" )) {
+				while (offsetParent && ( !node_name(offsetParent, "html") && curCSS(offsetParent, "position") === "static" )) {
 					offsetParent = offsetParent.offsetParent;
 				}
 				return offsetParent || doc.documentElement;
@@ -3224,7 +3162,7 @@
  ```
  */
 			function position(elements) {
-				elements = validate_elements(elements, "offset");
+				elements = va_elem(elements, "offset");
 				var el = elements[0], docEl = doc.documentElement, el_parent,
 					pos = {top: 0, left: 0}, parentPos = {top: 0, left: 0};
 
@@ -3239,12 +3177,12 @@
 						parentPos = offset(el_parent);
 					}
 					// Add offsetParent borders
-					parentPos.top += css(el_parent, "borderTopWidth");
-					parentPos.left += css(el_parent, "borderLeftWidth");
+					parentPos.top += curCSS(el_parent, "borderTopWidth", "float");
+					parentPos.left += curCSS(el_parent, "borderLeftWidth", "float");
 				}
 				return {
-					top : pos.top - parentPos.top - (css(el, "marginTop") || 0),
-					left: pos.left - parentPos.left - (css(el, "marginLeft") || 0)
+					top : pos.top - parentPos.top - (curCSS(el, "marginTop", "float") || 0),
+					left: pos.left - parentPos.left - (curCSS(el, "marginLeft", "float") || 0)
 				};
 			}
 
@@ -3275,7 +3213,7 @@
  ```
  */
 			function box_model(elements, cond) {
-				elements = validate_elements(elements, "box_model");
+				elements = va_elem(elements, "box_model");
 				var el = elements[0],
 					model = {};
 				if (cond) cond = U.camel_case(cond);
@@ -3292,27 +3230,27 @@
 					model.height = height(el);
 				}
 				if (typeof cond === "undefined" || cond == "padding") {
-					model.padding = U.map(css(el, ["padding-top", "padding-right", "padding-bottom", "padding-left"]), function (k, v) {
+					model.padding = U.map(style(el, ["padding-top", "padding-right", "padding-bottom", "padding-left"]), function (k, v) {
 						return parseFloat(v);
 					});
 				}
 				if (typeof cond === "undefined" || cond == "margin") {
-					model.margin = U.map(css(el, ["margin-top", "margin-right", "margin-bottom", "margin-left"]), function (k, v) {
+					model.margin = U.map(style(el, ["margin-top", "margin-right", "margin-bottom", "margin-left"]), function (k, v) {
 						return parseFloat(v);
 					});
 				}
 				if (typeof cond === "undefined" || cond == "border") {
-					model.border = U.map(css(el, ["border-top", "border-right", "border-bottom", "border-left"]), function (k, v) {
+					model.border = U.map(style(el, ["border-top", "border-right", "border-bottom", "border-left"]), function (k, v) {
 						return v;
 					});
 				}
 				if (typeof cond === "undefined" || cond == "borderWidth") {
-					model.borderWidth = U.map(css(el, ["border-top-width", "border-right-width", "border-bottom-width", "border-left-width"]), function (k, v) {
-						return v;
+					model.borderWidth = U.map(style(el, ["border-top-width", "border-right-width", "border-bottom-width", "border-left-width"]), function (k, v) {
+						return parseFloat(v);
 					});
 				}
 				if (typeof cond === "undefined" || cond == "boxSizing") {
-					model.boxSizing = css(el, "box-sizing");
+					model.boxSizing = style(el, "box-sizing");
 				}
 
 				return (typeof cond === "undefined") ? model : model[cond];
@@ -3349,7 +3287,7 @@
  */
 			function data(elements, command, O) {
 				//console.log(elements, command, O);
-				elements = validate_elements(elements, "data");
+				elements = va_elem(elements, "data");
 				var i = 0, l = elements.length, k;
 				if (command === "set" || (typeof O === "undefined" && U.is_object(command))) {
 					if (typeof O === "undefined") O = command;

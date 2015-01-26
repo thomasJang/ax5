@@ -4733,7 +4733,7 @@ jQuery.event = {
 // todo : jQuery event add
 	add: function( elem, types, handler, data, selector ) {
 		// 1
-		console.log(elem, types, handler, data, selector);
+		//console.log(elem, types, handler, data, selector);
 
 		var tmp, events, t, handleObjIn,
 			special, eventHandle, handleObj,
@@ -6047,7 +6047,7 @@ jQuery.fn.extend({
 	},
 
 	append: function() {
-		console.log(arguments);
+		//console.log(arguments);
 
 		return this.domManip( arguments, function( elem ) {
 			if ( this.nodeType === 1 || this.nodeType === 11 || this.nodeType === 9 ) {
@@ -6909,6 +6909,7 @@ jQuery.fn.extend({
 			var len, styles,
 				map = {},
 				i = 0;
+			
 			if ( jQuery.isArray( name ) ) {
 				styles = getStyles( elem );
 				len = name.length;
@@ -6919,7 +6920,7 @@ jQuery.fn.extend({
 			}
 			
 //			console.log("1", jQuery.style( elem, name, value ));
-			console.log("2", jQuery.css( elem, name ));
+			//console.log("2", jQuery.css( elem, name ));
 
 			return value !== undefined ? jQuery.style( elem, name, value ) : jQuery.css( elem, name );
 		}, name, value, arguments.length > 1 );
@@ -6989,8 +6990,8 @@ jQuery.extend({
 			return;
 		}
 
-		console.trace();
-		console.log( elem, name, value, extra );
+		//console.trace();
+		//console.log( elem, name, value, extra );
 
 		// Make sure that we're working with the right name
 		var ret, type, hooks,
@@ -7003,7 +7004,7 @@ jQuery.extend({
 		// followed by the unprefixed version
 		hooks = jQuery.cssHooks[ name ] || jQuery.cssHooks[ origName ];
 		
-		console.log(hooks);
+		//console.log(hooks);
 
 		// Check if we're setting a value
 		if ( value !== undefined ) {
@@ -7137,7 +7138,7 @@ if ( window.getComputedStyle ) {
 		}
 		*/
 		
-		console.log(ret);
+		//console.log(ret);
 		return ret;
 	};
 }

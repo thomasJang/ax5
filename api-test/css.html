@@ -54,12 +54,20 @@
     var el = ax5.dom.get("#css-target-div"), po = [];
     
     po.push('<table border="1">');
+    po.push('<thead>');
+    po.push('<tr>');
+        po.push('<th>속성</th>');
+        po.push('<th>AX5</th>');
+        po.push('<th>jQuery</th>');
+    po.push('</tr>');
+    po.push('</thead>');
     po.push('<tbody>');
     styles.forEach(function(css_name){
         //console.log(css_name, ax5.dom.css(el, css_name));
         po.push('<tr>');
             po.push('<th>'+ css_name +'</th>');
             po.push('<td>'+ ax5.dom.css(el, css_name) +'</td>');
+            po.push('<td>'+ $(el).css(css_name) +'</td>');
         po.push('</tr>');
     });
     po.push('</tbody>');
