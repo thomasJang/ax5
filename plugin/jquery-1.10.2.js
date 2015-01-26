@@ -6906,26 +6906,22 @@ jQuery.fn.extend({
 	css: function( name, value ) {
 
 		return jQuery.access( this, function( elem, name, value ) {
-			console.log(elem, name, value);
-
 			var len, styles,
 				map = {},
 				i = 0;
-
 			if ( jQuery.isArray( name ) ) {
 				styles = getStyles( elem );
 				len = name.length;
-
 				for ( ; i < len; i++ ) {
 					map[ name[ i ] ] = jQuery.css( elem, name[ i ], false, styles );
 				}
-
 				return map;
 			}
+			
+//			console.log("1", jQuery.style( elem, name, value ));
+			console.log("2", jQuery.css( elem, name ));
 
-			return value !== undefined ?
-				jQuery.style( elem, name, value ) :
-				jQuery.css( elem, name );
+			return value !== undefined ? jQuery.style( elem, name, value ) : jQuery.css( elem, name );
 		}, name, value, arguments.length > 1 );
 	},
 	show: function() {
@@ -6988,12 +6984,13 @@ jQuery.extend({
 	// Get and set the style property on a DOM Node
 	style: function( elem, name, value, extra ) {
 
-		console.log(name, value);
-
 		// Don't set styles on text and comment nodes
 		if ( !elem || elem.nodeType === 3 || elem.nodeType === 8 || !elem.style ) {
 			return;
 		}
+
+		console.trace();
+		console.log( elem, name, value, extra );
 
 		// Make sure that we're working with the right name
 		var ret, type, hooks,
@@ -7005,6 +7002,8 @@ jQuery.extend({
 		// gets hook for the prefixed version
 		// followed by the unprefixed version
 		hooks = jQuery.cssHooks[ name ] || jQuery.cssHooks[ origName ];
+		
+		console.log(hooks);
 
 		// Check if we're setting a value
 		if ( value !== undefined ) {
@@ -7065,6 +7064,8 @@ jQuery.extend({
 		// followed by the unprefixed version
 		hooks = jQuery.cssHooks[ name ] || jQuery.cssHooks[ origName ];
 
+		//console.log(hooks);
+		
 		// If a hook was provided get the computed value from there
 		if ( hooks && "get" in hooks ) {
 			val = hooks.get( elem, true, extra );
@@ -7100,10 +7101,13 @@ if ( window.getComputedStyle ) {
 		var width, minWidth, maxWidth,
 			computed = _computed || getStyles( elem ),
 
+			
 			// getPropertyValue is only needed for .css('filter') in IE9, see #12537
 			ret = computed ? computed.getPropertyValue( name ) || computed[ name ] : undefined,
 			style = elem.style;
-
+		//console.log(computed);
+		//console.log(elem.nodeName);
+		/*
 		if ( computed ) {
 
 			if ( ret === "" && !jQuery.contains( elem.ownerDocument, elem ) ) {
@@ -7131,7 +7135,9 @@ if ( window.getComputedStyle ) {
 				style.maxWidth = maxWidth;
 			}
 		}
-
+		*/
+		
+		console.log(ret);
 		return ret;
 	};
 }
