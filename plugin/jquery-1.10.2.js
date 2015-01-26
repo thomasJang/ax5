@@ -7108,7 +7108,7 @@ if ( window.getComputedStyle ) {
 			style = elem.style;
 		//console.log(computed);
 		//console.log(elem.nodeName);
-		/*
+
 		if ( computed ) {
 
 			if ( ret === "" && !jQuery.contains( elem.ownerDocument, elem ) ) {
@@ -7136,7 +7136,6 @@ if ( window.getComputedStyle ) {
 				style.maxWidth = maxWidth;
 			}
 		}
-		*/
 		
 		//console.log(ret);
 		return ret;

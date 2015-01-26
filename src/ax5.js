@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-01-26 
+ * 2015-01-27 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -1336,7 +1336,8 @@
 			// 로드해야 할 모듈들을 doc.head에 삽입하고 로드가 성공여부를 리턴합니다.
 			for (var i = 0; i < mods.length; i++) {
 				var src = mods[i], type = right(src, "."), hasPlugin = false,
-					plugin, plugin_src = info.base_url + src, attr_nm = (type === "js") ? "src" : "href";
+					plugin, plugin_src = info.base_url + src, attr_nm = (type === "js") ? "src" : "href",
+					plug_load, plug_err;
 				for (var s = 0; s < scripts.length; s++) {
 					if (scripts[s].getAttribute(attr_nm) === plugin_src) {
 						hasPlugin = true;
@@ -1353,31 +1354,30 @@
 						dom.create("script", {type: "text/javascript", src: plugin_src}) :
 						dom.create("link", {rel: "stylesheet", type: "text/css", href: plugin_src});
 
-					var
-						plugin_onload = function (e) {
-							if (e.type === 'load' || (readyRegExp.test((e.currentTarget || e.srcElement).readyState))) {
-								loadCount--;
-								if (onloadTimer) clearTimeout(onloadTimer);
-								onloadTimer = setTimeout(onload, 1);
-							}
-						},
-						plugin_onerror = function (e) {
+					plug_load = function (e) {
+						if (e.type === 'load' || (readyRegExp.test((e.currentTarget || e.srcElement).readyState))) {
 							loadCount--;
-							loadErrors.push({
-								src: info.base_url + src, error:e
-							});
-							if (onerrorTimer) clearTimeout(onerrorTimer);
-							onerrorTimer = setTimeout(onerror, 1);
-						};
+							if (onloadTimer) clearTimeout(onloadTimer);
+							onloadTimer = setTimeout(onload, 1);
+						}
+					},
+					plug_err = function (e) {
+						loadCount--;
+						loadErrors.push({
+							src: info.base_url + src, error:e
+						});
+						if (onerrorTimer) clearTimeout(onerrorTimer);
+						onerrorTimer = setTimeout(onerror, 1);
+					};
 
 					ax5.xhr.req({
 						url : plugin_src, contentType: "",
 						res : function (response, status) {
 							head.appendChild(plugin);
-							plugin_onload({type: "load"});
+							plug_load({type: "load"});
 						},
 						error : function () {
-							plugin_onerror(this);
+							plug_err(this);
 						}
 					});
 				}
@@ -2287,9 +2287,6 @@
 					style = elem.style;
 
 					if ( computed ) {
-						//if ( ret === "" && !jQuery.contains( elem.ownerDocument, elem ) ) {
-						//   ret = jQuery.style( elem, name );
-						//}
 
 						// A tribute to the "awesome hack by Dean Edwards"
 						// Chrome < 17 and Safari 5.0 uses "computed value" instead of "used value" for margin-right
@@ -2719,15 +2716,16 @@
 					return style(elements[0], O, "css");
 				}
 				else {
-					var i = 0, l = elements.length, k;
+					var i = 0, l = elements.length, k, matchs;
 					for (; i < l; i++) {
 						for (k in O) {
-							elements[i].style[U.camel_case(k)] = O[k]; // todo apply_css 재 개발 필요, css 값 검증 함수 추가 width, height, left, top 등에 px를 전달하지 않아도 기본단위가 설정 되도록 기본단위 설정 오브젝트 필요
+							elements[i].style[U.camel_case(k)] = (matchs = rnumsplit.exec(O[k])) ? Math.max(0, matchs[1]) + ( matchs[2] || "px" ) : O[k];
 						}
 					}
 				}
 				return elements;
 			}
+			// todo : opacity 컨트롤 테스트
 
 /**
  * elements에 className 를 추가, 제거, 확인, 토글합니다.
