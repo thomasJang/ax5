@@ -1818,7 +1818,7 @@
  axd("[data-event-test=text-box]").on("click.fnc", window.fnc);
  ```
  */
-						// todo: event type 모두 체크
+					// todo: event type 모두 체크
 					this.on = function (typ, _fn) {
 						dom.on(this.elements, typ, _fn);
 						return this;
@@ -2708,6 +2708,7 @@
  * @example
  ```js
  ax5.dom.css(ax5.dom.get("#abcd"), {"color":"#ff3300"});
+ ax5.dom.css(ax5.dom.get("#abcd"), {"width":100});
  ```
  */
 			function css(elements, O) {
@@ -3193,7 +3194,6 @@
  ax5.dom.append(ax5.dom.get("[data-list-item='2']"), ax5.dom.get("#move-item"));
  ```
  */
-// todo : append 검증중
 			function append(elements, val) {
 				return manipulate("append", elements, val);
 			}
@@ -3560,7 +3560,7 @@
  * ax5.xhr은 내부에서 AJAX 요청에 대해 queue처리를 하여 순차적으로 요청을 처리하고 응답합니다. 이 처리 과정을 모니터링 할 순 있는 도구도 지원합니다.
  * @namespace ax5.xhr
  */
-	// todo : xhr 메소드 개발중
+	// todo : xhr onprocessing 구현
 ax5.xhr = (function () {
 	var queue = [], queue_status = 0, show_progress = 0, U = ax5.util;
 	var http = (function () {
@@ -3726,8 +3726,6 @@ ax5.xhr = (function () {
 
 				// 데이터 전송
 				http.send(cfg.param);
-				// todo : timeout 설정값 확인
-
 			}
 		} else {
 			queue_status = 0;
