@@ -1849,23 +1849,20 @@
 				/**
 				 * element의 attribute를 추가 삭제 가져오기 합니다.
 				 * @method ax5.dom0.attr
-				 * @param {String|Object} [command=get] - 명령어
-				 * @param {Object|String} O - json타입또는 문자열
+				 * @param {Object|String|null} O - json타입또는 문자열
 				 * @returns {ax5.dom0|String}
 				 * @example
 				 ```js
-				 ax5.dom("[data-ax-grid=A]").attr("set", {"data-ax-spt":"ABCD"}); // set attribute
-				 ax5.dom("[data-ax-grid=A]").attr({"data-ax-spt":"9999", "data-next":"next"}); // set attribute
-
-				 console.log( ax5.dom("[data-ax-grid=A]").attr("data-ax-spt") ); // get or read
-				 console.log( ax5.dom("[data-ax-grid=A]").attr("get", "data-next") ); // get or read
-
-				 ax5.dom("[data-ax-grid=A]").attr("remove", "data-next");
-				 ax5.dom("[data-ax-grid=A]").attr("remove", "data-next2");
+				 // set attribute
+				 ax5.dom("[data-ax-grid=A]").attr({"data-ax-spt":"9999", "data-next":"next"});
+				 // get or read
+				 console.log( ax5.dom("[data-ax-grid=A]").attr("data-ax-spt") );
+				 // remove attribute, set null
+				 ax5.dom("[data-ax-grid=A]").attr({"data-next2":null});
 				 ```
 				 */
-				this.attr = function (command, O) {
-					var rs = dom.attr(this.elements, command, O);
+				this.attr = function (O) {
+					var rs = dom.attr(this.elements, O);
 					return (rs === this.elements) ? this : rs;
 				};
 				/**
@@ -2796,44 +2793,30 @@
 		 * elements에 attribute를 추가, 제거, 확인 합니다.
 		 * @method ax5.dom.attr
 		 * @param {Array} elements - 대상의 엘리먼트 리스트 혹은 엘리먼트
-		 * @param {String|Object} [command=get] - 명령어
 		 * @param {Object|String} O - json타입또는 문자열
 		 * @returns {String|Elements} return - elements 또는 속성값
 		 * @example
 		 ```
-		 ax5.dom.attr(ax5.dom.get("[data-ax-grid=A]"), "set", {"data-ax-spt":"ABCD"}); // set attribute
+		 ax5.dom.attr(ax5.dom.get("[data-ax-grid=A]"), {"data-ax-spt":"ABCD"}); // set attribute
 		 ax5.dom.attr(ax5.dom.get("[data-ax-grid=A]"), {"data-ax-spt":"9999", "data-next":"next"}); // set attribute
-		 ax5.dom.attr(ax5.dom.get("[data-ax-grid=A]"), "remove", "data-next");
+		 ax5.dom.attr(ax5.dom.get("[data-ax-grid=A]"), "data-ax-spt"); // get attribute
+		 ax5.dom.attr(ax5.dom.get("[data-ax-grid=A]"), {"data-next":null}); // remove attribute
 		 ```
 		 */
-		function attr(elements, command, O) {
+		function attr(elements, O) {
 			elements = va_elem(elements, "attr");
 			var i = 0, l = elements.length, k;
-			if (command === "set" || (typeof O === "undefined" && U.is_object(command))) {
-				if (typeof O === "undefined") O = command;
+			if (U.is_object(O)) {
 				for (; i < l; i++) {
-					for (k in O) {
-						elements[i].setAttribute(k, O[k]);
+					if(O[k] == null){
+						for (k in O) elements[i].removeAttribute(k);
+					}else{
+						for (k in O) elements[i].setAttribute(k, O[k]);
 					}
 				}
 			}
-			else if (command === "get" || command === "read" || (typeof O === "undefined" && U.is_string(command))) {
-				if (typeof O === "undefined") O = command;
-				if (!U.is_string(O)) return elements;
+			else if (U.is_string(O)) {
 				return elements[0].getAttribute(O);
-			}
-			else if (command === "remove") {
-				if (U.is_string(O)) {
-					for (; i < l; i++) {
-						elements[i].removeAttribute(O);
-					}
-				} else {
-					for (; i < l; i++) {
-						each(O, function () {
-							elements[i].removeAttribute(this);
-						});
-					}
-				}
 			}
 			return elements;
 		}

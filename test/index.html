@@ -15,12 +15,11 @@
 </head>
 <body>
 
-<script type="text/javascript">
+<div id="test-target"></div>
 
-    var a = {a:function(){}, b:1};
-    console.log(ax5.util.to_json(a));
-    console.log(JSON.stringify(a));
-    
+<script type="text/javascript">
+    var el = ax5.dom.get("#test-target");
+    ax5.dom.attr(el, {"data-my-attr":"12345"});
 </script>
 
 <!-- split -->
