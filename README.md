@@ -1,5 +1,4 @@
 # ax5 새로운 JS UI 라이브러리
----
 
 ## link
 - [API테스터] (http://ax5.io)
@@ -30,9 +29,12 @@ UI를 위한 CSS 박스모델정의를 연구하여 연구자료를 공개하여
 ax5.js는 ax5-polyfill.js + ax5-core.js + ax5-xhr.js + ax5-ui.js의 합친파일입니다. 
 >개발시에는 헤드에 개밸파일별로 import하여 개발테스트 하고 커밋합니다. ax5.js에 직접 작업하고 커밋하면 여러사람이 고생하게 됩니다.
 
-** 개발은 반드시 ax5-core, xhr, ui에 하고 커밋합니다. **<br/>
-*** [주의!!] ax5.js파일을 푸시해도 머지하지 않습니다. ***
+**개발은 반드시 ax5-core, xhr, ui에 하고 커밋합니다.*<br/>
+**[주의!!] ax5.js파일을 푸시해도 머지하지 않습니다.**
 
+### Pull Request
+포크한 소스를 풀리퀘 하실 때에는 다음 그림에서와 같이 왼쪽의 브랜치를 alpha로 선택하여 풀리퀘스트 해주시면 감사하겠습니다.
+
+![pullrequest](http://ax5.io/samples/images/pullrequest.png)
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/tom-axisj/ax5/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
