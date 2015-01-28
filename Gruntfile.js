@@ -22,7 +22,9 @@
 			basic: {
 				src: [
 					'src/ax5-polyfill.js',
-					'src/ax5-core.js'
+					'src/ax5-core.js',
+					'src/ax5-xhr.js',
+					'src/ax5-ui.js'
 				],
 				dest: 'src/ax5.js'
 			}
