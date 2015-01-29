@@ -5,6 +5,8 @@
     <link rel="stylesheet" type="text/css" href="http://cdn.axisj.com/axicon/axicon.min.css" />
     <script type="text/javascript" src="../src/ax5-polyfill.js"></script>
     <script type="text/javascript" src="../src/ax5-core.js"></script>
+    <script type="text/javascript" src="../src/ax5-xhr.js"></script>
+    
     <title>ax5 - API TESTER</title>
     <style>
         html, body{
@@ -591,9 +593,9 @@
         {
             label: "ax5.dom.attr",
             fn   : function () {
-                ax5.dom.attr(ax5.dom.get("#id-test"), "set", {"data-ax-spt":"ABCD"}); // set attribute
+                ax5.dom.attr(ax5.dom.get("#id-test"), {"data-ax-spt":"ABCD"}); // set attribute
                 ax5.dom.attr(ax5.dom.get("#id-test"), {"data-ax-spt":"9999", "data-next":"next"}); // set attribute
-                ax5.dom.attr(ax5.dom.get("#id-test"), "remove", "data-next");
+                ax5.dom.attr(ax5.dom.get("#id-test"), {"data-next":null});
 
                 var result1 = ax5.dom.attr(ax5.dom.get("#id-test"), "data-ax-spt");
                 var result2 = ax5.dom.attr(ax5.dom.get("#id-test"), "data-next");
@@ -633,18 +635,18 @@
             r   : "DIV ca"
         },
         {
-            label:"ax5.dom.clazz",
+            label:"ax5.dom.class_name",
             fn: function(){
-                var hasResult1      = ax5.dom.clazz(ax5.dom.get("#progress"), "test-result");
-                var hasResult_false = ax5.dom.clazz(ax5.dom.get("#progress"), "no-exist");
-                var addResult       = ax5.dom.clazz(ax5.dom.get("#progress"), "add", "add-class-name");
-                var hasResult2      = ax5.dom.clazz(ax5.dom.get("#progress"), "add-class-name");
-                var removeResult    = ax5.dom.clazz(ax5.dom.get("#progress"), "remove", "add-class-name");
-                var hasResult3      = ax5.dom.clazz(ax5.dom.get("#progress"), "add-class-name");
-                var toggleResult    = ax5.dom.clazz(ax5.dom.get("#progress"), "toggle", "add-class-name");
-                var hasResult4      = ax5.dom.clazz(ax5.dom.get("#progress"), "add-class-name");
-                var toggleResult    = ax5.dom.clazz(ax5.dom.get("#progress"), "toggle", "add-class-name");
-                var hasResult5      = ax5.dom.clazz(ax5.dom.get("#progress"), "add-class-name");
+                var hasResult1      = ax5.dom.class_name(ax5.dom.get("#progress"), "test-result");
+                var hasResult_false = ax5.dom.class_name(ax5.dom.get("#progress"), "no-exist");
+                var addResult       = ax5.dom.class_name(ax5.dom.get("#progress"), "add", "add-class-name");
+                var hasResult2      = ax5.dom.class_name(ax5.dom.get("#progress"), "add-class-name");
+                var removeResult    = ax5.dom.class_name(ax5.dom.get("#progress"), "remove", "add-class-name");
+                var hasResult3      = ax5.dom.class_name(ax5.dom.get("#progress"), "add-class-name");
+                var toggleResult    = ax5.dom.class_name(ax5.dom.get("#progress"), "toggle", "add-class-name");
+                var hasResult4      = ax5.dom.class_name(ax5.dom.get("#progress"), "add-class-name");
+                var toggleResult    = ax5.dom.class_name(ax5.dom.get("#progress"), "toggle", "add-class-name");
+                var hasResult5      = ax5.dom.class_name(ax5.dom.get("#progress"), "add-class-name");
 
                 var po = [];
                 po.push(hasResult1);
@@ -653,7 +655,8 @@
                 po.push(hasResult3);
                 po.push(hasResult4);
                 po.push(hasResult5);
-
+                
+                console.log(po.join(' '));
                 return po.join(' ');
             },
             r    : "false false true false true false"
@@ -827,7 +830,7 @@
                 var tg = ax5.dom.get_one("#progress-bar");
                 var cond = {
                     tagname: "div",
-                    clazz: "progress"
+                    class_name: "progress"
                     //,"custom-attr":"ca"
                 };
                 /*
@@ -966,12 +969,12 @@
         {
             label: "ax5.dom0.attr",
             fn   : function () {
-                ax5.dom("#id-test").attr("set", {"data-ax-spt":"ABCDE"}); // set attribute
+                ax5.dom("#id-test").attr({"data-ax-spt":"ABCDE"}); // set attribute
                 ax5.dom("#id-test").attr({"data-ax-0":"A", "data-ax-1":"B"}); // set attribute
 
                 var result = ax5.dom("#id-test").attr("data-ax-spt") +
-                        ax5.dom("#id-test").attr("get", "data-ax-0");
-                ax5.dom("#id-test").attr("remove", "data-ax-1");
+                        ax5.dom("#id-test").attr("data-ax-0");
+                ax5.dom("#id-test").attr({"data-ax-1":null});
                 result += ax5.dom("#id-test").attr("data-ax-1");
 
                 return result;
@@ -982,11 +985,11 @@
         {
             label:"ax5.dom0.attr",
             fn: function(){
-                ax5.dom(ax5.dom.get("[data-attr=A]")).attr("set", {"data-ax-spt":"ABCD"});
-                ax5.dom(ax5.dom.get("[data-attr=A]")).attr("set", {"customn-attr-1":"ca1", "customn-attr-2":"ca2"});
+                ax5.dom(ax5.dom.get("[data-attr=A]")).attr({"data-ax-spt":"ABCD"});
+                ax5.dom(ax5.dom.get("[data-attr=A]")).attr({"customn-attr-1":"ca1", "customn-attr-2":"ca2"});
                 var getAttr = ax5.dom(ax5.dom.get("[data-attr=A]")).attr("data-ax-spt");
                 var getAttr2 = ax5.dom(ax5.dom.get("[data-attr=A]")).attr("customn-attr-2");
-                ax5.dom(ax5.dom.get("[data-attr=A]")).attr("remove", "customn-attr-1" );
+                ax5.dom(ax5.dom.get("[data-attr=A]")).attr({"customn-attr-1":null});
                 var getAttr3 = ax5.dom(ax5.dom.get("[data-attr=A]")).attr("customn-attr-1");
 
                 return ( getAttr + " " + getAttr2  + " " + getAttr3 );
@@ -1023,19 +1026,19 @@
         },
 
         {
-            label: "ax5.dom0.clazz",
+            label: "ax5.dom0.class_name",
             fn   : function () {
 
                 var result = "";
-                result += ax5.dom(".class-text").clazz("class-text");
-                ax5.dom(".class-text").clazz("add", "newclass-0");
-                result += ax5.dom(".class-text").clazz("has", "newclass-0");
-                ax5.dom(".class-text").clazz("remove", "newclass-0");
-                result += ax5.dom(".class-text").clazz("has", "newclass-0");
-                ax5.dom(".class-text").clazz("toggle", "newclass-1");
-                result += ax5.dom(".class-text").clazz("has", "newclass-1");
-                ax5.dom(".class-text").clazz("toggle", "newclass-1");
-                result += ax5.dom(".class-text").clazz("has", "newclass-1");
+                result += ax5.dom(".class-text").class_name("class-text");
+                ax5.dom(".class-text").class_name("add", "newclass-0");
+                result += ax5.dom(".class-text").class_name("has", "newclass-0");
+                ax5.dom(".class-text").class_name("remove", "newclass-0");
+                result += ax5.dom(".class-text").class_name("has", "newclass-0");
+                ax5.dom(".class-text").class_name("toggle", "newclass-1");
+                result += ax5.dom(".class-text").class_name("has", "newclass-1");
+                ax5.dom(".class-text").class_name("toggle", "newclass-1");
+                result += ax5.dom(".class-text").class_name("has", "newclass-1");
 
                 return result;
 
@@ -1043,18 +1046,18 @@
             r    : "truetruefalsetruefalse"
         },
         {
-            label:"ax5.dom0.clazz",
+            label:"ax5.dom0.class_name",
             fn: function(){
-                var hasResult1      = ax5.dom(ax5.dom.get("#test-result")).clazz("test-result");
-                var hasResult_false = ax5.dom(ax5.dom.get("#test-result")).clazz("no-exist");
-                var addResult       = ax5.dom(ax5.dom.get("#test-result")).clazz("add", "add-class-name");
-                var hasResult2      = ax5.dom(ax5.dom.get("#test-result")).clazz("add-class-name");
-                var removeResult    = ax5.dom(ax5.dom.get("#test-result")).clazz("remove", "add-class-name");
-                var hasResult3      = ax5.dom(ax5.dom.get("#test-result")).clazz("add-class-name");
-                var toggleResult    = ax5.dom(ax5.dom.get("#test-result")).clazz("toggle", "add-class-name");
-                var hasResult4      = ax5.dom(ax5.dom.get("#test-result")).clazz("add-class-name");
-                var toggleResult    = ax5.dom(ax5.dom.get("#test-result")).clazz("toggle", "add-class-name");
-                var hasResult5      = ax5.dom(ax5.dom.get("#test-result")).clazz("add-class-name");
+                var hasResult1      = ax5.dom(ax5.dom.get("#test-result")).class_name("test-result");
+                var hasResult_false = ax5.dom(ax5.dom.get("#test-result")).class_name("no-exist");
+                var addResult       = ax5.dom(ax5.dom.get("#test-result")).class_name("add", "add-class-name");
+                var hasResult2      = ax5.dom(ax5.dom.get("#test-result")).class_name("add-class-name");
+                var removeResult    = ax5.dom(ax5.dom.get("#test-result")).class_name("remove", "add-class-name");
+                var hasResult3      = ax5.dom(ax5.dom.get("#test-result")).class_name("add-class-name");
+                var toggleResult    = ax5.dom(ax5.dom.get("#test-result")).class_name("toggle", "add-class-name");
+                var hasResult4      = ax5.dom(ax5.dom.get("#test-result")).class_name("add-class-name");
+                var toggleResult    = ax5.dom(ax5.dom.get("#test-result")).class_name("toggle", "add-class-name");
+                var hasResult5      = ax5.dom(ax5.dom.get("#test-result")).class_name("add-class-name");
 
                 var po = [];
                 po.push(hasResult1);
@@ -1169,7 +1172,7 @@
                 var tg = ax5.dom("#progress-bar");
                 var cond = {
                     tagname: "div",
-                    clazz: "progress"
+                    class_name: "progress"
                     //,"custom-attr":"ca"
                 };
                 /*

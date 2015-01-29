@@ -2649,7 +2649,6 @@
 					return_elements.push(elements[i]);
 				}
 			}
-
 			return return_elements;
 		}
 
@@ -2751,7 +2750,7 @@
 			elements = va_elem(elements, "clazz");
 			if (command === "add" || command === "remove" || command === "toggle") {
 				for (var di = 0; di < elements.length; di++) {
-					classNames = elements[di]["className"].split(/\S+/g);
+					classNames = elements[di]["className"].split(/[ ]+/g);
 					if (command === "add") {
 						if (U.search(classNames, function () {
 								return O.trim() == this;
@@ -2808,10 +2807,12 @@
 			var i = 0, l = elements.length, k;
 			if (U.is_object(O)) {
 				for (; i < l; i++) {
-					if(O[k] == null){
-						for (k in O) elements[i].removeAttribute(k);
-					}else{
-						for (k in O) elements[i].setAttribute(k, O[k]);
+					for (k in O){
+						if(O[k] == null){
+							elements[i].removeAttribute(k);
+						}else{
+							elements[i].setAttribute(k, O[k]);
+						}
 					}
 				}
 			}
@@ -2971,8 +2972,8 @@
 								break;
 							}
 						}
-						else if (k === "clazz") {
-							var klasss = _target.className.split(/ /g);
+						else if (k === "clazz" || k === "class_name") {
+							var klasss = _target.className.split(/[ ]+/g);
 							var hasClass = false;
 							for (var a = 0; a < klasss.length; a++) {
 								if (klasss[a] == cond[k]) {
@@ -3506,7 +3507,7 @@
 			get_one   : get_one,
 			create    : create,
 			css       : css,
-			clazz     : clazz,
+			class_name: class_name,
 			attr      : attr,
 			on        : on,
 			off       : off,
