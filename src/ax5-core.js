@@ -2334,7 +2334,29 @@
 		 return tag === undefined || tag && node_name(context, tag) ? U.merge([context], found) : found;
 		 }
 		 */
+		
+		// 엘리먼트와 자식 엘리먼트의 이벤트와 데이터를 모두 지워줍니다.
+		function clear_element_data(el){
+			var e_hds, ei, el,
+				c_el, ci, cl;
+			for(var hd in el.e_hd){
+				if(typeof el.e_hd[hd] === "function"){
+					eventUnBind(el, hd, el.e_hd[hd]);
+				}else{
+					for(var ehi=0;ehi<el.e_hd[hd].length;ehi++)
+						eventUnBind(el, hd, el.e_hd[hd][ehi]);
+				}
+			}
+			delete el["e_hd"];
+			delete el["ax5_data"];
 
+			if(el.hasChildNodes()){
+				c_el = el.childNodes, ci = 0, cl = c_el.length;
+				for (;ci < cl; ci++)
+					clear_element_data(c_el[ci]);
+			}
+		}
+		
 // jQuery.ready.promise jquery 1.10.2
 /**
  * document 로드 완료를 체크 합니다.
@@ -2929,6 +2951,7 @@
 			for (; i < l; i++) {
 				el = elements[i];
 				while (el.firstChild) {
+					clear_element_data(el.firstChild);
 					el.removeChild(el.firstChild);
 				}
 				if (el.options && node_name(el, "select")) {
@@ -3093,7 +3116,10 @@
 			elements = va_elem(elements, "remove");
 			var i = 0, l = elements.length;
 			for (; i < l; i++) {
-				if (elements[i].parentNode) elements[i].parentNode.removeChild(elements[i]);
+				if (elements[i].parentNode) {
+					clear_element_data(elements[i]);
+					elements[i].parentNode.removeChild(elements[i]);
+				}
 			}
 		}
 

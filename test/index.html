@@ -17,9 +17,20 @@
 
 <div id="test-target"></div>
 
+<table>
+    <tbody id="table-target">
+    </tbody>
+</table>
+
 <script type="text/javascript">
-    var el = ax5.dom.get("#test-target");
-    ax5.dom.attr(el, {"data-my-attr":"12345"});
+    var el = ax5.dom.get("#table-target");
+    //ax5.dom.attr(el, {"data-my-attr":"12345"});
+    ax5.dom.html(el, "<tr><td>1234</td></tr>");
+
+
+    ax5.dom.on(el, "click", function(){console.log(123);});
+    ax5.dom.on(el, "click.ax5", function(){console.log(123);});
+    ax5.dom.on(el, "click.ax5", function(){console.log(345);});
 </script>
 
 <!-- split -->
