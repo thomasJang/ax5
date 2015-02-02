@@ -1225,7 +1225,7 @@
 						onerrorTimer = setTimeout(onerror, 1);
 					};
 
-					ax5.xhr.req({
+					ax5.xhr({
 						url : plugin_src, contentType: "",
 						res : function (response, status) {
 							head.appendChild(plugin);

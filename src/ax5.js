@@ -1418,7 +1418,7 @@
 						onerrorTimer = setTimeout(onerror, 1);
 					};
 
-					ax5.xhr.req({
+					ax5.xhr({
 						url : plugin_src, contentType: "",
 						res : function (response, status) {
 							head.appendChild(plugin);
@@ -3728,6 +3728,8 @@ ax5.xhr = (function (){
 			
 		}
 	}
+	
+	// todo : CORS지원 / 예외사항 처리
 /**
  * Refer to this by {@link ax5}. <br/>
  * ax5.xhr({Object}[, {Function}]); 으로 사용하는 함수입니다. XHR요청을 개별또는 큐단위로 처리 합니다.
@@ -3805,7 +3807,6 @@ ax5.xhr = (function (){
  */
 	return function(opts, onend){
 		var queue = [].concat(opts);
-		//console.log(options);
 		request(queue, function(){
 			if(onend) onend();
 		});
@@ -3893,9 +3894,6 @@ ax5.xhr = (function (){
 		config : config
 	});
 })();
-
-
-
 
 ax5.ui = (function () {
 	/**
