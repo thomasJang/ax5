@@ -831,7 +831,7 @@
  * @method ax5.util.extend
  * @param {Object} O - 타겟 오브젝트
  * @param {Object} _O - 대상 오브젝트
- * @param {Boolean} overwrite - 덮어쓰기 여부
+ * @param {Boolean} [overwrite=false] - 덮어쓰기 여부
  * @returns {Object} extened Object
  * @example
  ```js
@@ -851,6 +851,49 @@
 				}
 				else {
 					for (var k in _O) if (typeof O[k] === "undefined") O[k] = _O[k];
+				}
+			}
+			return O;
+		}
+
+/**
+ * 타겟 오브젝트의 키를 대상 오브젝트의 키만큼 확장합니다. (깊숙히)
+ * @method ax5.util.extend_all
+ * @param {Object} O - 타겟 오브젝트
+ * @param {Object} _O - 대상 오브젝트
+ * @param {Boolean} [overwrite=false] - 덮어쓰기 여부
+ * @returns {Object} extened Object
+ * @example
+ ```
+ var aa = {a:1, b:{a:1, b:2}};
+ ax5.util.extend_all(aa, {b:{a:2, c:3}});
+ // {"a": 1, "b": {"a": 1, "b": 2, "c": 3}} 
+ // 덮어쓰지 않음.
+ ax5.util.extend_all(aa, {b:{a:2, c:3}}, true);
+ // {"a": 1, "b": {"a": 2, "b": 2, "c": 3}}
+ // 덮어씀.
+ ```
+ */
+		function extend_all(O, _O, overwrite){
+			if (typeof O !== "object" && typeof O !== "function") O = {};
+			if (typeof _O === "string") O = _O;
+			else {
+				for (var k in _O){
+					if(typeof O[k] === "undefined") {
+						O[k] = _O[k];
+					}
+					else
+					if(Object.prototype.toString.call(O[k]) == "[object Object]")
+					{
+						// 키값이 오브젝트인 경우.
+						O[k] = extend_all(O[k], _O[k], overwrite);
+					}
+					else
+					{
+						if (overwrite === true) {
+							O[k] = _O[k];
+						}
+					}
 				}
 			}
 			return O;
@@ -1491,6 +1534,7 @@
 			error       : error,
 			to_json     : to_json,
 			extend      : extend,
+			extend_all  : extend_all,
 			clone       : clone,
 			first       : first,
 			last        : last,
@@ -2339,6 +2383,7 @@
 		function clear_element_data(el){
 			var e_hds, ei, el,
 				c_el, ci, cl;
+			
 			for(var hd in el.e_hd){
 				if(typeof el.e_hd[hd] === "function"){
 					eventUnBind(el, hd, el.e_hd[hd]);
@@ -2349,7 +2394,14 @@
 			}
 			delete el["e_hd"];
 			delete el["ax5_data"];
-
+			// todo : attributes 걸리는 것이 없지만 혹시나 모를 데이터를 위해.
+			for(var a in el.attributes){
+				if(typeof el.attributes[a] === "object"){
+					//console.log(el.attributes[a]);
+					el.attributes[a] = null
+				}
+			}
+			// 자식들도 확인 합니다.
 			if(el.hasChildNodes()){
 				c_el = el.childNodes, ci = 0, cl = c_el.length;
 				for (;ci < cl; ci++)
@@ -3375,5 +3427,3 @@
 	}
 
 }).call(this);
-
-// todo : remove, empty 에서 자식 노드들을 찾아 e_hd와 ax5_data 값 제거하는 구문 추가

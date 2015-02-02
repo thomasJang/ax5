@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-01-30 
+ * 2015-02-02 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -1024,7 +1024,7 @@
  * @method ax5.util.extend
  * @param {Object} O - 타겟 오브젝트
  * @param {Object} _O - 대상 오브젝트
- * @param {Boolean} overwrite - 덮어쓰기 여부
+ * @param {Boolean} [overwrite=false] - 덮어쓰기 여부
  * @returns {Object} extened Object
  * @example
  ```js
@@ -1044,6 +1044,49 @@
 				}
 				else {
 					for (var k in _O) if (typeof O[k] === "undefined") O[k] = _O[k];
+				}
+			}
+			return O;
+		}
+
+/**
+ * 타겟 오브젝트의 키를 대상 오브젝트의 키만큼 확장합니다. (깊숙히)
+ * @method ax5.util.extend_all
+ * @param {Object} O - 타겟 오브젝트
+ * @param {Object} _O - 대상 오브젝트
+ * @param {Boolean} [overwrite=false] - 덮어쓰기 여부
+ * @returns {Object} extened Object
+ * @example
+ ```
+ var aa = {a:1, b:{a:1, b:2}};
+ ax5.util.extend_all(aa, {b:{a:2, c:3}});
+ // {"a": 1, "b": {"a": 1, "b": 2, "c": 3}} 
+ // 덮어쓰지 않음.
+ ax5.util.extend_all(aa, {b:{a:2, c:3}}, true);
+ // {"a": 1, "b": {"a": 2, "b": 2, "c": 3}}
+ // 덮어씀.
+ ```
+ */
+		function extend_all(O, _O, overwrite){
+			if (typeof O !== "object" && typeof O !== "function") O = {};
+			if (typeof _O === "string") O = _O;
+			else {
+				for (var k in _O){
+					if(typeof O[k] === "undefined") {
+						O[k] = _O[k];
+					}
+					else
+					if(Object.prototype.toString.call(O[k]) == "[object Object]")
+					{
+						// 키값이 오브젝트인 경우.
+						O[k] = extend_all(O[k], _O[k], overwrite);
+					}
+					else
+					{
+						if (overwrite === true) {
+							O[k] = _O[k];
+						}
+					}
 				}
 			}
 			return O;
@@ -1684,6 +1727,7 @@
 			error       : error,
 			to_json     : to_json,
 			extend      : extend,
+			extend_all  : extend_all,
 			clone       : clone,
 			first       : first,
 			last        : last,
@@ -2532,6 +2576,7 @@
 		function clear_element_data(el){
 			var e_hds, ei, el,
 				c_el, ci, cl;
+			
 			for(var hd in el.e_hd){
 				if(typeof el.e_hd[hd] === "function"){
 					eventUnBind(el, hd, el.e_hd[hd]);
@@ -2542,7 +2587,14 @@
 			}
 			delete el["e_hd"];
 			delete el["ax5_data"];
-
+			// todo : attributes 걸리는 것이 없지만 혹시나 모를 데이터를 위해.
+			for(var a in el.attributes){
+				if(typeof el.attributes[a] === "object"){
+					//console.log(el.attributes[a]);
+					el.attributes[a] = null
+				}
+			}
+			// 자식들도 확인 합니다.
 			if(el.hasChildNodes()){
 				c_el = el.childNodes, ci = 0, cl = c_el.length;
 				for (;ci < cl; ci++)
@@ -3569,12 +3621,11 @@
 
 }).call(this);
 
-// todo : remove, empty 에서 자식 노드들을 찾아 e_hd와 ax5_data 값 제거하는 구문 추가
 
-// todo : xhr onprocessing 구현
-ax5.xhr = (function () {
-	var queue = [], queue_status = 0, show_progress = 0, U = ax5.util;
-	var http = (function () {
+
+ax5.xhr = (function (){
+	var U = ax5.util;
+	function getXHR(){
 		if (typeof XMLHttpRequest !== "undefined") {
 			return new XMLHttpRequest();
 		}
@@ -3587,85 +3638,18 @@ ax5.xhr = (function () {
 			}
 		}
 		return false;
-	})();
-
-	/**
-	 * XMLHttpRequest 오브젝트를 이용하여 AJAX 통신을 지원합니다.
-	 * @method ax5.xhr.request
-	 * @param {Object} config
-	 * @returns {Boolean}
-	 * @example
-	 ```
-	 // request 옵션정의
-	 config = {
-	contentType    : {String} ["application/x-www-form-urlencoded; charset=UTF-8"] - request 되는 문서의 content Type,
-	accept         : {String} ["*＼*"] - 서버에 응답받기 희망하는 문서 타입,
-	addHeader      : {Object} [{}] - setRequestHeader 로 추가하게될 헤드 속성,
-	method         : {String} ["GET"],
-	url            : {String} [""],
-	param          : {String|Object} [""] - 파라미터 형식이나 오브젝트 형식 모두 지원합니다.,
-	async          : {Boolean} [true] - 비동기 요청 여부,
-	username       : {String} [""] - XMLHttpRequest 스펙에 정의된 open() 옶션 사용 안해봐서 잘 모름,
-	password       : {String} [""] - XMLHttpRequest 스펙에 정의된 open() 옶션 사용 안해봐서 잘 모름,
-	withCredentials: {Boolean} [false] - 자격증명을 사용하게 할지 여부,
-	crossDomain    : {Boolean} [false] - 크로스 도메인 허용 여부 : header 속성이 약간 바뀝니다.,
-	timeout        : 0
- }
-
-	 ax5.xhr.req({
-    method: "POST",
-    url   : "data.php",
-    param : "str=1234",
-    res   : function (response, status) {
-        console.log("success");
-        console.log(this);
-    },
-    error : function () {
-        console.log("error");
-        console.log(this);
-    }
- });
-
-	 // req 또는 request 둘다 사용 가능합니다.
-	 ax5.xhr.request({
-    url   : "data.php",
-    param : "str=1234",
-    res   : function (response, status) {
-        // status 값이 200 인지 판단 가능
-        console.log(this);
-    }
- });
-	 // 위와 같이 필요한 옵션만 정의 해서 사용 가능합니다.
-	 ```
-	 */
-	function request(config) {
-		if(U.is_object(config)) {
-			queue.push(U.extend({
-				contentType    : "application/x-www-form-urlencoded; charset=UTF-8",
-				accept         : "*/*",
-				addHeader      : {},
-				method         : "GET",
-				url            : "",
-				param          : "",
-				async          : true,
-				username       : "",
-				password       : "",
-				withCredentials: false,
-				crossDomain    : false,
-				timeout        : 0
-			}, config, true));
-			if (queue_status === 0) send();
-			return true;
-		}else{
-			return false;
-		}
 	}
-
-	function send() {
-		var cfg = queue.pop(), header = [], that, i;
-		if (cfg) {
-			queue_status = 1;
+	function request(queue, onend){
+		var cfg = queue.pop(), http, header = [], that, i;
+		
+		if (typeof cfg === "undefined") {
+			onend();
+		}
+		else
+		{
+			cfg = U.extend_all(cfg, ax5.xhr.options);
 			if (cfg.url != "") {
+				http = getXHR();
 				// 파라미터 값 문자열로 맞춤 : 오브젝트이면 문자열로 치환합니다.
 				cfg.param = U.param(cfg.param, "param");
 				// method : GET이면 url 뒤에 ? 파라미터 연결
@@ -3680,17 +3664,20 @@ ax5.xhr = (function () {
 				// todo : async 값 교차 테스트 필요
 
 				// header 셋팅
-				// You must call setRequestHeader() after open(), but before send().
-				http.setRequestHeader('Content-Type', cfg.contentType);
-				http.setRequestHeader('Accept', cfg.accept);
-				if(!cfg.crossDomain && !cfg.addHeader["X-Requested-With"]){
-					cfg.addHeader["X-Requested-With"] = "XMLHttpRequest"
+				if(cfg.method.toUpperCase() == "GET"){
+					// GET이면 head 무시
+					cfg.header = {
+						'accept'      : "*/*",
+						'content-type': "text/plain"
+					};
 				}
+				
 				try {
-					for ( i in cfg.addHeader ) {
-						http.setRequestHeader( i, cfg.addHeader[i] );
+					for ( i in cfg.header ) {
+						http.setRequestHeader( i, cfg.header[i] );
 					}
 				} catch(e) {}
+				
 				//  authorization headers. The default is false.
 				http.withCredentials = cfg.withCredentials;
 				// The number of milliseconds a request can take before automatically being terminated. A value of 0 (which is the default) means there is no timeout.
@@ -3721,7 +3708,7 @@ ax5.xhr = (function () {
 								else console.log(http);
 							}
 						}
-						send(); // 다음 큐 호출
+						request(queue, onend);
 					}
 				};
 
@@ -3738,26 +3725,177 @@ ax5.xhr = (function () {
 				// 데이터 전송
 				http.send(cfg.param);
 			}
-		} else {
-			queue_status = 0;
+			
 		}
 	}
+/**
+ * Refer to this by {@link ax5}. <br/>
+ * ax5.xhr({Object}[, {Function}]); 으로 사용하는 함수입니다. XHR요청을 개별또는 큐단위로 처리 합니다.
+ * @namespace ax5.xhr
+ * @param {Object} opts
+ * @param {Function} [onend] - xhr전송이 완료되면 호출되는 콜백함수
+ * @example
+ ```
+ // request 옵션정의
+ config = {
+	header         : {
+		//setRequestHeader 로 추가하게될 헤드 속성
+		'content-type' : {String} ["application/x-www-form-urlencoded; charset=UTF-8"] - request 되는 문서의 content Type,
+		'accept'       : {String} ["*＼*"] - 서버에 응답받기 희망하는 문서 타입,
+	},
+	method         : {String} ["GET"],
+	url            : {String} [""],
+	param          : {String|Object} [""] - 파라미터 형식이나 오브젝트 형식 모두 지원합니다.,
+	async          : {Boolean} [true] - 비동기 요청 여부,
+	username       : {String} [""] - XMLHttpRequest 스펙에 정의된 open() 옶션 사용 안해봐서 잘 모름,
+	password       : {String} [""] - XMLHttpRequest 스펙에 정의된 open() 옶션 사용 안해봐서 잘 모름,
+	withCredentials: {Boolean} [false] - 자격증명을 사용하게 할지 여부,
+	crossDomain    : {Boolean} [false] - 크로스 도메인 허용 여부 : header 속성이 약간 바뀝니다.,
+	timeout        : 0
+ }
 
-	function stop(){
-		if(queue_status === 1) {
-			var rs = http.abort();
-			queue = [];
-			return rs;
-		}
-		else return true;
-	}
+ ax5.xhr({
+    method: "POST",
+    url   : "data.php",
+    param : "str=1234",
+    res   : function (response, status) {
+        console.log("success");
+        console.log(this);
+    },
+    error : function () {
+        console.log("error");
+        console.log(this);
+    }
+ });
 
-	return {
-		request: request,
-		req    : request,
-		stop   : stop
+ // req 또는 request 둘다 사용 가능합니다.
+ ax5.xhr({
+    url   : "data.php",
+    param : "str=1234",
+    res   : function (response, status) {
+        // status 값이 200 인지 판단 가능
+        console.log(this);
+    }
+ });
+ // 위와 같이 필요한 옵션만 정의 해서 사용 가능합니다.
+
+ // 요청을 큐로 만들어 순차적으로 작동하게 하고 종료 시점을 컨트롤 할 수 있습니다.
+ var xhr_queue = [];
+ xhr_queue.push({
+    method: "POST",
+    url   : "../samples/ax5/xhr/data.php",
+    param : "str=1234",
+    res   : function (response, status) {
+        console.log(response);
+    }
+ });
+ xhr_queue.push({
+    method: "POST",
+    url   : "../samples/ax5/xhr/data.php",
+    param : "str=1234",
+    res   : function (response, status) {
+        console.log(response);
+    }
+ });
+
+ ax5.xhr(xhr_queue, function() {
+    console.log("큐 완료")
+ });
+ ```
+ */
+	return function(opts, onend){
+		var queue = [].concat(opts);
+		//console.log(options);
+		request(queue, function(){
+			if(onend) onend();
+		});
 	}
 })();
+
+(function () {
+	var U = ax5.util, 
+		options = {
+			header      : {
+				'accept'      : "*/*",
+				'content-type': "application/x-www-form-urlencoded; charset=UTF-8"
+			},
+			method         : "GET",
+			url            : "",
+			param          : "",
+			async          : true,
+			username       : "",
+			password       : "",
+			withCredentials: false,
+			crossDomain    : false,
+			timeout        : 0
+		};
+/**
+ * @member {type} ax5.xhr.options
+ * @example
+ ```
+ ax5.xhr.options = {
+	header         : {
+		//setRequestHeader 로 추가하게될 헤드 속성
+		'content-type' : {String} ["application/x-www-form-urlencoded; charset=UTF-8"] - request 되는 문서의 content Type,
+		'accept'       : {String} ["*＼*"] - 서버에 응답받기 희망하는 문서 타입,
+	},
+	method         : {String} ["GET"],
+	url            : {String} [""],
+	param          : {String|Object} [""] - 파라미터 형식이나 오브젝트 형식 모두 지원합니다.,
+	async          : {Boolean} [true] - 비동기 요청 여부,
+	username       : {String} [""] - XMLHttpRequest 스펙에 정의된 open() 옶션 사용 안해봐서 잘 모름,
+	password       : {String} [""] - XMLHttpRequest 스펙에 정의된 open() 옶션 사용 안해봐서 잘 모름,
+	withCredentials: {Boolean} [false] - 자격증명을 사용하게 할지 여부,
+	crossDomain    : {Boolean} [false] - 크로스 도메인 허용 여부 : header 속성이 약간 바뀝니다.,
+	timeout        : 0
+ }
+ ```
+ */
+/**
+ * ax5.xhr 통신 기본 값을 설정합니다.
+ * @method ax5.xhr.config
+ * @param {Object} opts - XHR 요청옵션 기본 값
+ * @returns {Object} opts
+ * @example
+ ```
+ ax5.xhr.config({
+    header      : {
+        'accept'      : "*.*",
+		'content-type': "application/x-www-form-urlencoded; charset=UTF-8"
+	},
+	method         : "GET",
+	url            : "",
+	param          : "",
+	async          : true,
+	username       : "",
+	password       : "",
+	withCredentials: false,
+	crossDomain    : false,
+	timeout        : 0
+ });
+ 
+ ax5.xhr.config({
+	header      : {
+		'accept' : "*.html"
+	}
+ });
+ 
+ // ax5.xhr 요청 기본값 설정
+ ```
+ */
+	function config(opts){
+		U.extend_all(options, opts, true);
+		return options;
+	}
+
+	ax5.util.extend(ax5.xhr, {
+		options: options,
+		config : config
+	});
+})();
+
+
+
 
 ax5.ui = (function () {
 	/**

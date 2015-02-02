@@ -305,6 +305,8 @@
             
                 <li data-name="ax5.util.extend"><a href="ax5.util.html#extend">extend</a></li>
             
+                <li data-name="ax5.util.extend_all"><a href="ax5.util.html#extend_all">extend_all</a></li>
+            
                 <li data-name="ax5.util.filter"><a href="ax5.util.html#filter">filter</a></li>
             
                 <li data-name="ax5.util.first"><a href="ax5.util.html#first">first</a></li>
@@ -362,6 +364,35 @@
                 <li data-name="ax5.util.to_array"><a href="ax5.util.html#to_array">to_array</a></li>
             
                 <li data-name="ax5.util.to_json"><a href="ax5.util.html#to_json">to_json</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="ax5.xhr">
+            <span class="title">
+                <a href="ax5.xhr.html">ax5.xhr</a>
+                
+                <span class="static">static</span>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="ax5.xhr.options"><a href="ax5.xhr.html#options">options</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="ax5.xhr.config"><a href="ax5.xhr.html#config">config</a></li>
             
             </ul>
             <ul class="events itemMembers">
@@ -477,9 +508,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1392" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1435" target="_blank">
             ax5.js,
-            line 1392</a>
+            line 1435</a>
         </div>
         
     </div>
@@ -619,9 +650,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1458" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1501" target="_blank">
             ax5.js,
-            line 1458</a>
+            line 1501</a>
         </div>
         
     </div>
@@ -753,9 +784,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1052" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1095" target="_blank">
             ax5.js,
-            line 1052</a>
+            line 1095</a>
         </div>
         
     </div>
@@ -1174,7 +1205,7 @@ Object
     <div class="nameContainer">
         <h4 class="name" id="extend">
             
-            <span class="type-signature static">static</span>ax5.util.extend<span class="signature">(O, _O, overwrite)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Object}</span>
+            <span class="type-signature static">static</span>ax5.util.extend<span class="signature">(O, _O, <span class="optional">overwrite</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Object}</span>
         </h4>
     
         
@@ -1214,6 +1245,8 @@ Object
 		<th>Type</th>
 		
 		
+		<th>Default</th>
+		
 		
 		<th class="last">Description</th>
 	</tr>
@@ -1237,8 +1270,17 @@ Object
             </td>
             
             
+                <td class="default">
+                
+                </td>
+            
             
             <td class="description last">
+                
+                    
+                    
+                        
+                    
                 
                 <p>타겟 오브젝트</p></td>
         </tr>
@@ -1260,8 +1302,17 @@ Object
             </td>
             
             
+                <td class="default">
+                
+                </td>
+            
             
             <td class="description last">
+                
+                    
+                    
+                        
+                    
                 
                 <p>대상 오브젝트</p></td>
         </tr>
@@ -1283,8 +1334,21 @@ Object
             </td>
             
             
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
             
             <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
                 
                 <p>덮어쓰기 여부</p></td>
         </tr>
@@ -1349,6 +1413,227 @@ Object
  axf.extend(obja, {b:2});
  axf.extend(obja, {a:2});
  axf.extend(obja, {a:2}, true);</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="extend_all">
+            
+            <span class="type-signature static">static</span>ax5.util.extend_all<span class="signature">(O, _O, <span class="optional">overwrite</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Object}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <i class="axi axi-github"></i>
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1052" target="_blank">
+            ax5.js,
+            line 1052</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>타겟 오브젝트의 키를 대상 오브젝트의 키만큼 확장합니다. (깊숙히)</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>O</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                <p>타겟 오브젝트</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>_O</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                <p>대상 오브젝트</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>overwrite</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>덮어쓰기 여부</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+<h5>Returns:</h5>
+Object
+<br />
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint linenums"><code> var aa = {a:1, b:{a:1, b:2}};
+ ax5.util.extend_all(aa, {b:{a:2, c:3}});
+ // {&quot;a&quot;: 1, &quot;b&quot;: {&quot;a&quot;: 1, &quot;b&quot;: 2, &quot;c&quot;: 3}} 
+ // 덮어쓰지 않음.
+ ax5.util.extend_all(aa, {b:{a:2, c:3}}, true);
+ // {&quot;a&quot;: 1, &quot;b&quot;: {&quot;a&quot;: 2, &quot;b&quot;: 2, &quot;c&quot;: 3}}
+ // 덮어씀.</code></pre>
     
 
     
@@ -1536,9 +1821,9 @@ Object
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1207" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1250" target="_blank">
             ax5.js,
-            line 1207</a>
+            line 1250</a>
         </div>
         
     </div>
@@ -1672,9 +1957,9 @@ Object
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1282" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1325" target="_blank">
             ax5.js,
-            line 1282</a>
+            line 1325</a>
         </div>
         
     </div>
@@ -1808,9 +2093,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1071" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1114" target="_blank">
             ax5.js,
-            line 1071</a>
+            line 1114</a>
         </div>
         
     </div>
@@ -1959,9 +2244,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1144" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1187" target="_blank">
             ax5.js,
-            line 1144</a>
+            line 1187</a>
         </div>
         
     </div>
@@ -2083,9 +2368,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1126" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1169" target="_blank">
             ax5.js,
-            line 1126</a>
+            line 1169</a>
         </div>
         
     </div>
@@ -2207,9 +2492,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1153" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1196" target="_blank">
             ax5.js,
-            line 1153</a>
+            line 1196</a>
         </div>
         
     </div>
@@ -2331,9 +2616,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1180" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1223" target="_blank">
             ax5.js,
-            line 1180</a>
+            line 1223</a>
         </div>
         
     </div>
@@ -2455,9 +2740,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1198" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1241" target="_blank">
             ax5.js,
-            line 1198</a>
+            line 1241</a>
         </div>
         
     </div>
@@ -2579,9 +2864,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1171" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1214" target="_blank">
             ax5.js,
-            line 1171</a>
+            line 1214</a>
         </div>
         
     </div>
@@ -2703,9 +2988,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1135" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1178" target="_blank">
             ax5.js,
-            line 1135</a>
+            line 1178</a>
         </div>
         
     </div>
@@ -2827,9 +3112,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1162" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1205" target="_blank">
             ax5.js,
-            line 1162</a>
+            line 1205</a>
         </div>
         
     </div>
@@ -2951,9 +3236,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1189" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1232" target="_blank">
             ax5.js,
-            line 1189</a>
+            line 1232</a>
         </div>
         
     </div>
@@ -3075,9 +3360,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1117" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1160" target="_blank">
             ax5.js,
-            line 1117</a>
+            line 1160</a>
         </div>
         
     </div>
@@ -3199,9 +3484,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1233" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1276" target="_blank">
             ax5.js,
-            line 1233</a>
+            line 1276</a>
         </div>
         
     </div>
@@ -3335,9 +3620,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1408" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1451" target="_blank">
             ax5.js,
-            line 1408</a>
+            line 1451</a>
         </div>
         
     </div>
@@ -3671,9 +3956,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1598" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1641" target="_blank">
             ax5.js,
-            line 1598</a>
+            line 1641</a>
         </div>
         
     </div>
@@ -3833,9 +4118,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1495" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1538" target="_blank">
             ax5.js,
-            line 1495</a>
+            line 1538</a>
         </div>
         
     </div>
@@ -4008,9 +4293,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1629" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1672" target="_blank">
             ax5.js,
-            line 1629</a>
+            line 1672</a>
         </div>
         
     </div>
@@ -4514,9 +4799,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1303" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1346" target="_blank">
             ax5.js,
-            line 1303</a>
+            line 1346</a>
         </div>
         
     </div>
@@ -4707,9 +4992,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1433" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1476" target="_blank">
             ax5.js,
-            line 1433</a>
+            line 1476</a>
         </div>
         
     </div>
@@ -5054,9 +5339,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1259" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1302" target="_blank">
             ax5.js,
-            line 1259</a>
+            line 1302</a>
         </div>
         
     </div>
@@ -5245,9 +5530,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1476" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1519" target="_blank">
             ax5.js,
-            line 1476</a>
+            line 1519</a>
         </div>
         
     </div>
@@ -5380,9 +5665,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1582" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1625" target="_blank">
             ax5.js,
-            line 1582</a>
+            line 1625</a>
         </div>
         
     </div>
@@ -5666,7 +5951,7 @@ value
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Fri Jan 30 2015 01:37:33 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Mon Feb 02 2015 12:25:16 GMT+0900 (KST)
         </footer>
     </div>
 </div>
