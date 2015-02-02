@@ -4,7 +4,7 @@
 
 	// root of function
 	var root = this, doc = document, win = window, fval = eval,
-/** @namespace {Object} ax5 */
+	/** @namespace {Object} ax5 */
 		ax5 = {}, info, U, dom;
 
 	// jquery 1.10.2 from http://jquery.com -- start
@@ -50,58 +50,63 @@
 			return safeFrag;
 		}
 	// jquery 1.10.2 from http://jquery.com -- end
+	
 
-/**
- * guid
- * @member {Number} ax5.guid
- */
+
+
+
+
+	/**
+	 * guid
+	 * @member {Number} ax5.guid
+	 */
 	ax5.guid = 1;
-/**
- * ax5.guid를 구하고 증가시킵니다.
- * @method ax5.get_guid
- * @returns {Number} guid
- */
+	/**
+	 * ax5.guid를 구하고 증가시킵니다.
+	 * @method ax5.get_guid
+	 * @returns {Number} guid
+	 */
 	ax5.get_guid = function(){return ax5.guid++;};
 
-/**
- * 상수모음
- * @namespace ax5.info
- */
+	/**
+	 * 상수모음
+	 * @namespace ax5.info
+	 */
 	ax5.info = info = (function(){
-/**
- * ax5 version
- * @member {String} ax5.info.version
- */
+		/**
+		 * ax5 version
+		 * @member {String} ax5.info.version
+		 */
 		var version = "0.0.1";
 		var base_url = "";
 
-/**
- * event keyCodes
- * @member {Object} ax5.info.event_keys
- * @example
- ```
- {
-	BACKSPACE: 8, TAB: 9,
-	RETURN: 13, ESC: 27, LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40, DELETE: 46,
-	HOME: 36, END: 35, PAGEUP: 33, PAGEDOWN: 34, INSERT: 45, SPACE: 32
- }
- ```
- */
+		/**
+		 * event keyCodes
+		 * @member {Object} ax5.info.event_keys
+		 * @example
+		 * ```
+		 * {
+		 * 	BACKSPACE: 8, TAB: 9,
+		 * 	RETURN: 13, ESC: 27, LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40, DELETE: 46,
+		 * 	HOME: 36, END: 35, PAGEUP: 33, PAGEDOWN: 34, INSERT: 45, SPACE: 32
+		 * }
+		 * ```
+		 */
 		var event_keys = {
 			BACKSPACE: 8, TAB: 9,
 			RETURN: 13, ESC: 27, LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40, DELETE: 46,
 			HOME: 36, END: 35, PAGEUP: 33, PAGEDOWN: 34, INSERT: 45, SPACE: 32
 		};
 
-/**
- * 사용자 브라우저 식별용 오브젝트
- * @member {Object} ax5.info.browser
- * @example
- ```
- console.log( ax5.info.browser );
- //Object {name: "chrome", version: "39.0.2171.71", mobile: false}
- ```
- */
+		/**
+		 * 사용자 브라우저 식별용 오브젝트
+		 * @member {Object} ax5.info.browser
+		 * @example
+		 * ```
+		 * console.log( ax5.info.browser );
+		 * //Object {name: "chrome", version: "39.0.2171.71", mobile: false}
+		 * ```
+		 */
 		var browser = (function () {
 			var ua = navigator.userAgent.toLowerCase();
 			var mobile = (ua.search(/mobile/g) != -1);
@@ -133,38 +138,37 @@
 				}
 			}
 		})();
-	/**
-	 * 브라우저 여부
-	 * @member {Boolean} ax5.info.is_browser
-	 */
+		/**
+		 * 브라우저 여부
+		 * @member {Boolean} ax5.info.is_browser
+		 */
 		var is_browser = !!(typeof window !== 'undefined' && typeof navigator !== 'undefined' && win.document);
-	/**
-	 * 브라우저에 따른 마우스 휠 이벤트이름
-	 * @member {Object} ax5.info.wheel_enm
-	 */
+		/**
+		 * 브라우저에 따른 마우스 휠 이벤트이름
+		 * @member {Object} ax5.info.wheel_enm
+		 */
 		var wheel_enm = ((/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel");
 
-/**
- * 현재 페이지의 Url 정보를 리턴합니다.
- * @method ax5.info.url_util
- * @returns {Object}
- * @example
- ```js
-
- console.log( ax5.util.to_json( ax5.util.url_util() ) );
- {
-	"base_url": "http://ax5:2018",
-	"href": "http://ax5:2018/samples/index.html?a=1&b=1#abc",
-	"param": "a=1&b=1",
-	"referrer": "",
-	"pathname": "/samples/index.html",
-	"hostname": "ax5",
-	"port": "2018",
-	"url": "http://ax5:2018/samples/index.html",
-	"hashdata": "abc"
- }
- ```
- */
+		/**
+		 * 현재 페이지의 Url 정보를 리턴합니다.
+		 * @method ax5.info.url_util
+		 * @returns {Object}
+		 * @example
+		 * ```
+		 * console.log( ax5.util.to_json( ax5.util.url_util() ) );
+		 * {
+		 *	"base_url": "http://ax5:2018",
+		 *	"href": "http://ax5:2018/samples/index.html?a=1&b=1#abc",
+		 *	"param": "a=1&b=1",
+		 *	"referrer": "",
+		 *	"pathname": "/samples/index.html",
+		 *	"hostname": "ax5",
+		 *	"port": "2018",
+		 *	"url": "http://ax5:2018/samples/index.html",
+		 *	"hashdata": "abc"
+		 * }
+		 * ```
+		 */
 		function url_util() {
 			var url = {
 				href: win.location.href,
@@ -185,41 +189,41 @@
 		}
 
 		// jquery 1.10.2 jQuery.support from http://jquery.com -- start
-/**
- * 브라우저 API 지원여부
- * @member {Object} ax5.info.support
- * @example
-```json
- //ax5.info.support Object JSON
- {
-	 appendChecked: true,
-	 boxModel: true,
-	 changeBubbles: true,
-	 checkClone: undefined,
-	 checkOn: true, // Make sure that if no value is specified for a checkbox, that it defaults to "on". (WebKit defaults to "" instead)
-	 cssFloat: true, // Verify style float existence (IE uses styleFloat instead of cssFloat)
-	 deleteExpando: true,
-	 focusinBubbles: false,
-	 getSetAttribute: true, // Test setAttribute on camelCase class. If it works, we need attrFixes when doing get/setAttribute (ie6/7)
-	 hrefNormalized: true, // Make sure that URLs aren't manipulated
-	 htmlSerialize: true, // Make sure that link elements get serialized correctly by innerHTML
-	 inlineBlockNeedsLayout: false,
-	 leadingWhitespace: true, // IE strips leading whitespace when .innerHTML is used
-	 noCloneChecked: true,
-	 noCloneEvent: true,
-	 opacity: true, // Make sure that element opacity exists
-	 optDisabled: true,
-	 optSelected: true,
-	 radioValue: true,
-	 reliableHiddenOffsets: true,
-	 reliableMarginRight: true,
-	 shrinkWrapBlocks: false,
-	 style: true, // Get the style information from getAttribute
-	 submitBubbles: true,
-	 tbody: true
- }
-```
- */
+		/**
+		 * 브라우저 API 지원여부
+		 * @member {Object} ax5.info.support
+		 * @example
+		 * ```json
+		 * //ax5.info.support Object JSON
+		 * {
+		 *	 appendChecked: true,
+		 *	 boxModel: true,
+		 *	 changeBubbles: true,
+		 *	 checkClone: undefined,
+		 *	 checkOn: true, // Make sure that if no value is specified for a checkbox, that it defaults to "on". (WebKit defaults to "" instead)
+		 *	 cssFloat: true, // Verify style float existence (IE uses styleFloat instead of cssFloat)
+		 *	 deleteExpando: true,
+		 *	 focusinBubbles: false,
+		 *	 getSetAttribute: true, // Test setAttribute on camelCase class. If it works, we need attrFixes when doing get/setAttribute (ie6/7)
+		 *	 hrefNormalized: true, // Make sure that URLs aren't manipulated
+		 *	 htmlSerialize: true, // Make sure that link elements get serialized correctly by innerHTML
+		 *	 inlineBlockNeedsLayout: false,
+		 *	 leadingWhitespace: true, // IE strips leading whitespace when .innerHTML is used
+		 *	 noCloneChecked: true,
+		 *	 noCloneEvent: true,
+		 *	 opacity: true, // Make sure that element opacity exists
+		 *	 optDisabled: true,
+		 *	 optSelected: true,
+		 *	 radioValue: true,
+		 *	 reliableHiddenOffsets: true,
+		 *	 reliableMarginRight: true,
+		 *	 shrinkWrapBlocks: false,
+		 *	 style: true, // Get the style information from getAttribute
+		 *	 submitBubbles: true,
+		 *	 tbody: true
+		 * }
+		 * ```
+		 */
 		var support = (function(){
 
 			var div = document.createElement( "div" ),
@@ -497,22 +501,22 @@
 	ax5['util'] = U = (function(){
 		var _toString = Object.prototype.toString;
 
-/**
- * Object나 Array의 아이템으로 사용자 함수를 호출합니다.
- * @method ax5.util.each
- * @param {Object|Array} O
- * @param {Function} _fn
- * @example
- ```js
- var axf = ax5.util;
- axf.each([0,1,2], function(){
-	// with this
- });
- axf.each({a:1, b:2}, function(){
-	// with this
- });
- ```
- */
+		/**
+		 * Object나 Array의 아이템으로 사용자 함수를 호출합니다.
+		 * @method ax5.util.each
+		 * @param {Object|Array} O
+		 * @param {Function} _fn
+		 * @example
+		 * ```js
+		 * var axf = ax5.util;
+		 * axf.each([0,1,2], function(){
+		 * 	// with this
+		 * });
+		 * axf.each({a:1, b:2}, function(){
+		 * 	// with this
+		 * });
+		 * ```
+		 */
 		function each(O, _fn) {
 			if(is_nothing(O)) return [];
 			var key, i = 0, l = O.length,
@@ -532,34 +536,34 @@
 		}
 
 		// In addition to using the http://underscorejs.org : map, reduce, reduce_right, find
-/**
- * 원본 아이템들을 이용하여 사용자 함수의 리턴값으로 이루어진 새로운 배열을 만듭니다.
- * @method ax5.util.map
- * @param {Object|Array} O
- * @param {Function} _fn
- * @returns {Array}
- * @example
- ```js
- var myArray = [0,1,2,3,4];
- var myObject = {a:1, b:"2", c:{axj:"what", arrs:[0,2,"3"]},
-    fn: function(abcdd){
-        return abcdd;
-    }
- };
-
- var _arr = ax5.util.map( myArray,  function(index, I){
-    return index+1;
- });
- console.log(_arr);
- // [1, 2, 3, 4, 5]
-
- var _arr = ax5.util.map( myObject,  function(k, v){
-    return v * 2;
- });
- console.log(_arr);
- // [2, 4, NaN, NaN]
- ```
- */
+		/**
+		 * 원본 아이템들을 이용하여 사용자 함수의 리턴값으로 이루어진 새로운 배열을 만듭니다.
+		 * @method ax5.util.map
+		 * @param {Object|Array} O
+		 * @param {Function} _fn
+		 * @returns {Array}
+		 * @example
+		 * ```js
+		 * var myArray = [0,1,2,3,4];
+		 * var myObject = {a:1, b:"2", c:{axj:"what", arrs:[0,2,"3"]},
+		 *    fn: function(abcdd){
+		 *        return abcdd;
+		 *    }
+		 * };
+		 *
+		 * var _arr = ax5.util.map( myArray,  function(index, I){
+		 *    return index+1;
+		 * });
+		 * console.log(_arr);
+		 * // [1, 2, 3, 4, 5]
+		 *
+		 * var _arr = ax5.util.map( myObject,  function(k, v){
+		 *    return v * 2;
+		 * });
+		 * console.log(_arr);
+		 * // [2, 4, NaN, NaN]
+		 * ```
+		 */
 		function map(O, _fn) {
 			if(is_nothing(O)) return [];
 			var key, i = 0, l = O.length, results = [], fn_result;
@@ -583,39 +587,39 @@
 			return results;
 		}
 
-/**
- * 원본 아이템들을 이용하여 사용자 함수의 리턴값이 참인 아이템의 위치나 키값을 반환합니다.
- * @method ax5.util.search
- * @param {Object|Array} O
- * @param {Function|String|Number} _fn - 함수 또는 값
- * @returns {Number|String}
- * @example
- ```js
- var myArray = [0,1,2,3,4,5,6];
- var myObject = {a:"123","b":"123",c:123};
-
- ax5.util.search(myArray,  function(){
-    return this > 3;
- });
- // 4
- ax5.util.search(myObject,  function(k, v){
-    return v === 123;
- });
- // "c"
- ax5.util.search([1,2,3,4], 3);
- // 2
- ax5.util.search([1,2], 4);
- // -1
- ax5.util.search(["name","value"], "value");
- // 1
- ax5.util.search(["name","value"], "values");
- // -1
- ax5.util.search({k1:"name",k2:"value"}, "value2");
- // -1
- ax5.util.search({k1:"name",k2:"value"}, "value");
- // "k2"
- ```
- */
+		/**
+		 * 원본 아이템들을 이용하여 사용자 함수의 리턴값이 참인 아이템의 위치나 키값을 반환합니다.
+		 * @method ax5.util.search
+		 * @param {Object|Array} O
+		 * @param {Function|String|Number} _fn - 함수 또는 값
+		 * @returns {Number|String}
+		 * @example
+		 * ```js
+		 * var myArray = [0,1,2,3,4,5,6];
+		 * var myObject = {a:"123","b":"123",c:123};
+		 *
+		 * ax5.util.search(myArray,  function(){
+		 *    return this > 3;
+		 * });
+		 * // 4
+		 * ax5.util.search(myObject,  function(k, v){
+		 *    return v === 123;
+		 * });
+		 * // "c"
+		 * ax5.util.search([1,2,3,4], 3);
+		 * // 2
+		 * ax5.util.search([1,2], 4);
+		 * // -1
+		 * ax5.util.search(["name","value"], "value");
+		 * // 1
+		 * ax5.util.search(["name","value"], "values");
+		 * // -1
+		 * ax5.util.search({k1:"name",k2:"value"}, "value2");
+		 * // -1
+		 * ax5.util.search({k1:"name",k2:"value"}, "value");
+		 * // "k2"
+		 * ```
+		 */
 		function search(O, _fn) {
 			if(is_nothing(O)) return -1;
 			var key, i = 0, l = O.length;
@@ -646,27 +650,27 @@
 			return -1;
 		}
 
-/**
- * 배열의 왼쪽에서 오른쪽으로 연산을 진행하는데 수행한 결과가 왼쪽 값으로 반영되어 최종 왼쪽 값을 반환합니다.
- * @method ax5.util.reduce
- * @param {Array|Object} O
- * @param {Function} _fn
- * @returns {Alltypes}
- * @example
- ```js
- var aarray = [5,4,3,2,1];
- result = ax5.util.reduce( aarray, function(p, n){
-   return p * n;
-});
- console.log(result, aarray);
- // 120 [5, 4, 3, 2, 1]
-
- ax5.util.reduce({a:1, b:2}, function(p, n){
-    return parseInt(p|0) + parseInt(n);
- });
- // 3
- ```
- */
+		/**
+		 * 배열의 왼쪽에서 오른쪽으로 연산을 진행하는데 수행한 결과가 왼쪽 값으로 반영되어 최종 왼쪽 값을 반환합니다.
+		 * @method ax5.util.reduce
+		 * @param {Array|Object} O
+		 * @param {Function} _fn
+		 * @returns {Alltypes}
+		 * @example
+		 * ```js
+		 * var aarray = [5,4,3,2,1];
+		 * result = ax5.util.reduce( aarray, function(p, n){
+		 *   return p * n;
+		 * });
+		 * console.log(result, aarray);
+		 * // 120 [5, 4, 3, 2, 1]
+		 *
+		 * ax5.util.reduce({a:1, b:2}, function(p, n){
+		 *    return parseInt(p|0) + parseInt(n);
+		 * });
+		 * // 3
+		 * ```
+		 */
 		function reduce(O, _fn) {
 			var i, l, token_item;
 			if (is_array(O)) {
@@ -692,23 +696,23 @@
 			}
 		}
 
-/**
- * 배열의 오른쪽에서 왼쪽으로 연산을 진행하는데 수행한 결과가 오른쪽 값으로 반영되어 최종 오른쪽 값을 반환합니다.
- * @method ax5.util.reduce_right
- * @param {Array} O
- * @param {Function} _fn
- * @returns {Alltypes}
- * @example
- ```js
- var aarray = [5,4,3,2,1];
- result = ax5.util.reduce_right( aarray, function(p, n){
-    console.log( n );
-    return p * n;
- });
- console.log(result, aarray);
- 120 [5, 4, 3, 2, 1]
- ```
- */
+		/**
+		 * 배열의 오른쪽에서 왼쪽으로 연산을 진행하는데 수행한 결과가 오른쪽 값으로 반영되어 최종 오른쪽 값을 반환합니다.
+		 * @method ax5.util.reduce_right
+		 * @param {Array} O
+		 * @param {Function} _fn
+		 * @returns {Alltypes}
+		 * @example
+		 * ```js
+		 * var aarray = [5,4,3,2,1];
+		 * result = ax5.util.reduce_right( aarray, function(p, n){
+		 *    console.log( n );
+		 *    return p * n;
+		 * });
+		 * console.log(result, aarray);
+		 * 120 [5, 4, 3, 2, 1]
+		 * ```
+		 */
 		function reduce_right(O, _fn) {
 			var i = O.length - 1, token_item = O[i];
 			for (; i > 0;) {
@@ -719,29 +723,29 @@
 			return token_item;
 		}
 
-/**
- * 배열또는 오브젝트의 각 아이템을 인자로 하는 사용자 함수의 결과가 참인 아이템들의 배열을 반환합니다.
- * @method ax5.util.filter
- * @param {Object|Array} O
- * @param {Function} _fn
- * @returns {Array}
- * @example
- ```js
- var aarray = [5,4,3,2,1];
- result = ax5.util.filter( aarray, function(){
-    return this % 2;
- });
- console.log(result);
- // [5, 3, 1]
-
- var filObject = {a:1, s:"string", oa:{pickup:true, name:"AXISJ"}, os:{pickup:true, name:"AX5"}};
- result = ax5.util.filter( filObject, function(){
-	return this.pickup;
- });
- console.log( ax5.util.to_json(result) );
- // [{"pickup": , "name": "AXISJ"}, {"pickup": , "name": "AX5"}]
- ```
- */
+		/**
+		 * 배열또는 오브젝트의 각 아이템을 인자로 하는 사용자 함수의 결과가 참인 아이템들의 배열을 반환합니다.
+		 * @method ax5.util.filter
+		 * @param {Object|Array} O
+		 * @param {Function} _fn
+		 * @returns {Array}
+		 * @example
+		 * ```js
+		 * var aarray = [5,4,3,2,1];
+		 * result = ax5.util.filter( aarray, function(){
+		 *    return this % 2;
+		 * });
+		 * console.log(result);
+		 * // [5, 3, 1]
+		 *
+		 * var filObject = {a:1, s:"string", oa:{pickup:true, name:"AXISJ"}, os:{pickup:true, name:"AX5"}};
+		 * result = ax5.util.filter( filObject, function(){
+		 * 	return this.pickup;
+		 * });
+		 * console.log( ax5.util.to_json(result) );
+		 * // [{"pickup": , "name": "AXISJ"}, {"pickup": , "name": "AX5"}]
+		 * ```
+		 */
 		function filter(O, _fn) {
 			if(is_nothing(O)) return [];
 			var k, i = 0, l = O.length, results = [], fn_result;
@@ -762,36 +766,36 @@
 			return results;
 		}
 
-/**
- * 에러를 발생시킵니다.
- * @method ax5.util.error
- * @param {String} msg
- * @example
- ```js
- ax5.util.error( "에러가 발생되었습니다." );
- ```
- */
+		/**
+		 * 에러를 발생시킵니다.
+		 * @method ax5.util.error
+		 * @param {String} msg
+		 * @example
+		 * ```js
+		 * ax5.util.error( "에러가 발생되었습니다." );
+		 * ```
+		 */
 		function error(msg) {
 			throw new Error(msg);
 		}
 
-/**
- * Object를 JSONString 으로 반환합니다.
- * @method ax5.util.to_json
- * @param {Object|Array} O
- * @returns {String} JSON
- * @example
- ```js
- var ax = ax5.util;
- var myObject = {
-    a:1, b:"2", c:{axj:"what", arrs:[0,2,"3"]},
-    fn: function(abcdd){
-        return abcdd;
-    }
- };
- console.log( ax.to_json(myObject) );
- ```
- */
+		/**
+		 * Object를 JSONString 으로 반환합니다.
+		 * @method ax5.util.to_json
+		 * @param {Object|Array} O
+		 * @returns {String} JSON
+		 * @example
+		 * ```js
+		 * var ax = ax5.util;
+		 * var myObject = {
+		 *    a:1, b:"2", c:{axj:"what", arrs:[0,2,"3"]},
+		 *    fn: function(abcdd){
+		 *        return abcdd;
+		 *    }
+		 * };
+		 * console.log( ax.to_json(myObject) );
+		 * ```
+		 */
 		function to_json(O) {
 			var json_string = "";
 			if (ax5.util.is_array(O)) {
@@ -826,22 +830,23 @@
 			}
 			return json_string;
 		}
-/**
- * 타겟 오브젝트의 키를 대상 오브젝트의 키만큼 확장합니다.
- * @method ax5.util.extend
- * @param {Object} O - 타겟 오브젝트
- * @param {Object} _O - 대상 오브젝트
- * @param {Boolean} overwrite - 덮어쓰기 여부
- * @returns {Object} extened Object
- * @example
- ```js
- var axf = ax5.util;
- var obja = {a:1};
- axf.extend(obja, {b:2});
- axf.extend(obja, {a:2});
- axf.extend(obja, {a:2}, true);
- ```
- */
+		
+		/**
+		 * 타겟 오브젝트의 키를 대상 오브젝트의 키만큼 확장합니다.
+		 * @method ax5.util.extend
+		 * @param {Object} O - 타겟 오브젝트
+		 * @param {Object} _O - 대상 오브젝트
+		 * @param {Boolean} [overwrite=false] - 덮어쓰기 여부
+		 * @returns {Object} extened Object
+		 * @example
+		 * ```js
+		 * var axf = ax5.util;
+		 * var obja = {a:1};
+		 * axf.extend(obja, {b:2});
+		 * axf.extend(obja, {a:2});
+		 * axf.extend(obja, {a:2}, true);
+		 * ```
+		 */
 		function extend(O, _O, overwrite) {
 			if (typeof O !== "object" && typeof O !== "function") O = {};
 			if (typeof _O === "string") O = _O;
@@ -856,39 +861,82 @@
 			return O;
 		}
 
-/**
- * 타겟 오브젝트를 복제하여 참조를 다르게 합니다.
- * @method ax5.util.clone
- * @param {Object} O - 타겟 오브젝트
- * @returns {Object} clone Object
- * @example
- ```js
- var axf = ax5.util;
- var obja = {a:1};
- var objb = axf.clone( obja );
- obja.a = 3; // 원본 오브젝트 수정
- console.log(obja, objb);
- // Object {a: 3} Object {a: 1}
- ```
- */
+		/**
+		 * 타겟 오브젝트의 키를 대상 오브젝트의 키만큼 확장합니다. (깊숙히)
+		 * @method ax5.util.extend_all
+		 * @param {Object} O - 타겟 오브젝트
+		 * @param {Object} _O - 대상 오브젝트
+		 * @param {Boolean} [overwrite=false] - 덮어쓰기 여부
+		 * @returns {Object} extened Object
+		 * @example
+		 * ```
+		 * var aa = {a:1, b:{a:1, b:2}};
+		 * ax5.util.extend_all(aa, {b:{a:2, c:3}});
+		 * // {"a": 1, "b": {"a": 1, "b": 2, "c": 3}}
+		 * // 덮어쓰지 않음.
+		 * ax5.util.extend_all(aa, {b:{a:2, c:3}}, true);
+		 * // {"a": 1, "b": {"a": 2, "b": 2, "c": 3}}
+		 * // 덮어씀.
+		 * ```
+		 */
+		function extend_all(O, _O, overwrite){
+			if (typeof O !== "object" && typeof O !== "function") O = {};
+			if (typeof _O === "string") O = _O;
+			else {
+				for (var k in _O){
+					if(typeof O[k] === "undefined") {
+						O[k] = _O[k];
+					}
+					else
+					if(Object.prototype.toString.call(O[k]) == "[object Object]")
+					{
+						// 키값이 오브젝트인 경우.
+						O[k] = extend_all(O[k], _O[k], overwrite);
+					}
+					else
+					{
+						if (overwrite === true) {
+							O[k] = _O[k];
+						}
+					}
+				}
+			}
+			return O;
+		}
+
+		/**
+		 * 타겟 오브젝트를 복제하여 참조를 다르게 합니다.
+		 * @method ax5.util.clone
+		 * @param {Object} O - 타겟 오브젝트
+		 * @returns {Object} clone Object
+		 * @example
+		 * ```js
+		 * var axf = ax5.util;
+		 * var obja = {a:1};
+		 * var objb = axf.clone( obja );
+		 * obja.a = 3; // 원본 오브젝트 수정
+		 * console.log(obja, objb);
+		 * // Object {a: 3} Object {a: 1}
+		 * ```
+		 */
 		function clone(O) {
 			return extend({}, O);
 		}
 
-/**
- * 인자의 타입을 반환합니다.
- * @method ax5.util.get_type
- * @param {Object|Array|String|Number|Element|Etc} O
- * @returns {String} element|object|array|function|string|number|undefined|nodelist
- * @example
- ```js
- var axf = ax5.util;
- var a = 11;
- var b = "11";
- console.log( axf.get_type(a) );
- console.log( axf.get_type(b) );
- ```
- */
+		/**
+		 * 인자의 타입을 반환합니다.
+		 * @method ax5.util.get_type
+		 * @param {Object|Array|String|Number|Element|Etc} O
+		 * @returns {String} element|object|array|function|string|number|undefined|nodelist
+		 * @example
+		 * ```js
+		 * var axf = ax5.util;
+		 * var a = 11;
+		 * var b = "11";
+		 * console.log( axf.get_type(a) );
+		 * console.log( axf.get_type(b) );
+		 * ```
+		 */
 		function get_type(O) {
 			var typeName;
 			if (!!(O && O.nodeType == 1)) {
@@ -921,107 +969,107 @@
 			return typeName;
 		}
 
-/**
- * 오브젝트가 window 인지 판단합니다.
- * @method ax5.util.is_window
- * @param {Object} O
- * @returns {Boolean}
- */
+		/**
+		 * 오브젝트가 window 인지 판단합니다.
+		 * @method ax5.util.is_window
+		 * @param {Object} O
+		 * @returns {Boolean}
+		 */
 		function is_window(O) {
 			return O != null && O == O.window;
 		}
-/**
- * 오브젝트가 HTML 엘리먼트여부인지 판단합니다.
- * @method ax5.util.is_element
- * @param {Object} O
- * @returns {Boolean}
- */
+		/**
+		 * 오브젝트가 HTML 엘리먼트여부인지 판단합니다.
+		 * @method ax5.util.is_element
+		 * @param {Object} O
+		 * @returns {Boolean}
+		 */
 		function is_element(O) {
 			return !!(O && (O.nodeType == 1 || O.nodeType == 11));
 		}
-/**
- * 오브젝트가 Object인지 판단합니다.
- * @method ax5.util.is_object
- * @param {Object} O
- * @returns {Boolean}
- */
+		/**
+		 * 오브젝트가 Object인지 판단합니다.
+		 * @method ax5.util.is_object
+		 * @param {Object} O
+		 * @returns {Boolean}
+		 */
 		function is_object(O) {
 			return _toString.call(O) == "[object Object]";
 		}
-/**
- * 오브젝트가 Array인지 판단합니다.
- * @method ax5.util.is_array
- * @param {Object} O
- * @returns {Boolean}
- */
+		/**
+		 * 오브젝트가 Array인지 판단합니다.
+		 * @method ax5.util.is_array
+		 * @param {Object} O
+		 * @returns {Boolean}
+		 */
 		function is_array(O) {
 			return _toString.call(O) == "[object Array]";
 		}
-/**
- * 오브젝트가 Function인지 판단합니다.
- * @method ax5.util.is_function
- * @param {Object} O
- * @returns {Boolean}
- */
+		/**
+		 * 오브젝트가 Function인지 판단합니다.
+		 * @method ax5.util.is_function
+		 * @param {Object} O
+		 * @returns {Boolean}
+		 */
 		function is_function(O) {
 			return typeof O === "function";
 		}
-/**
- * 오브젝트가 String인지 판단합니다.
- * @method ax5.util.is_string
- * @param {Object} O
- * @returns {Boolean}
- */
+		/**
+		 * 오브젝트가 String인지 판단합니다.
+		 * @method ax5.util.is_string
+		 * @param {Object} O
+		 * @returns {Boolean}
+		 */
 		function is_string(O) {
 			return _toString.call(O) == "[object String]";
 		}
-/**
- * 오브젝트가 Number인지 판단합니다.
- * @method ax5.util.is_number
- * @param {Object} O
- * @returns {Boolean}
- */
+		/**
+		 * 오브젝트가 Number인지 판단합니다.
+		 * @method ax5.util.is_number
+		 * @param {Object} O
+		 * @returns {Boolean}
+		 */
 		function is_number(O) {
 			return _toString.call(O) == "[object Number]";
 		}
-/**
- * 오브젝트가 NodeList인지 판단합니다.
- * @method ax5.util.is_nodelist
- * @param {Object} O
- * @returns {Boolean}
- */
+		/**
+		 * 오브젝트가 NodeList인지 판단합니다.
+		 * @method ax5.util.is_nodelist
+		 * @param {Object} O
+		 * @returns {Boolean}
+		 */
 		function is_nodelist(O) {
 			return (_toString.call(O) == "[object NodeList]" || (O && O[0] && O[0].nodeType == 1));
 		}
-/**
- * 오브젝트가 undefined인지 판단합니다.
- * @method ax5.util.is_undefined
- * @param {Object} O
- * @returns {Boolean}
- */
+		/**
+		 * 오브젝트가 undefined인지 판단합니다.
+		 * @method ax5.util.is_undefined
+		 * @param {Object} O
+		 * @returns {Boolean}
+		 */
 		function is_undefined(O) {
 			return typeof O === "undefined";
 		}
-/**
- * 오브젝트가 undefined이거나 null이거나 빈값인지 판단합니다.
- * @method ax5.util.is_nothing
- * @param {Object} O
- * @returns {Boolean}
- */
+		/**
+		 * 오브젝트가 undefined이거나 null이거나 빈값인지 판단합니다.
+		 * @method ax5.util.is_nothing
+		 * @param {Object} O
+		 * @returns {Boolean}
+		 */
 		function is_nothing(O) {
 			return (typeof O === "undefined" || O === null || O === "");
 		}
-/**
- * 오브젝트의 첫번째 아이템을 반환합니다.
- * @method ax5.util.first
- * @param {Object|Array} O
- * @returns {Object}
- * @example
- ```js
- ax5.util.first({a:1, b:2});
- // Object {a: 1}
- ```
- */
+		/**
+		 * 오브젝트의 첫번째 아이템을 반환합니다.
+		 * @method ax5.util.first
+		 * @param {Object|Array} O
+		 * @returns {Object}
+		 * @example
+		 * ```js
+		 * ax5.util.first({a:1, b:2});
+		 * // Object {a: 1}
+		 * ```
+		 */
 		function first(O) {
 			if (is_object(O)) {
 				var keys = Object.keys(O);
@@ -1037,17 +1085,17 @@
 				return undefined;
 			}
 		}
-/**
- * 오브젝트의 마지막 아이템을 반환합니다.
- * @method ax5.util.last
- * @param {Object|Array} O
- * @returns {Object}
- * @example
- ```js
- ax5.util.last({a:1, b:2});
- // Object {b: 2}
- ```
- */
+		/**
+		 * 오브젝트의 마지막 아이템을 반환합니다.
+		 * @method ax5.util.last
+		 * @param {Object|Array} O
+		 * @returns {Object}
+		 * @example
+		 * ```js
+		 * ax5.util.last({a:1, b:2});
+		 * // Object {b: 2}
+		 * ```
+		 */
 		function last(O) {
 			if (is_object(O)) {
 				var keys = Object.keys(O);
@@ -1063,18 +1111,18 @@
 				return undefined;
 			}
 		}
-/**
- * 쿠키를 설정합니다.
- * @method ax5.util.set_cookie
- * @param {String} cname - 쿠키이름
- * @param {String} cvalue - 쿠키값
- * @param {Number} [exdays] - 쿠키 유지일수
- * @example
- ```js
- ax5.util.set_cookie("jslib", "AX5");
- ax5.util.set_cookie("jslib", "AX5", 3);
- ```
- */
+		/**
+		 * 쿠키를 설정합니다.
+		 * @method ax5.util.set_cookie
+		 * @param {String} cname - 쿠키이름
+		 * @param {String} cvalue - 쿠키값
+		 * @param {Number} [exdays] - 쿠키 유지일수
+		 * @example
+		 * ```js
+		 * ax5.util.set_cookie("jslib", "AX5");
+		 * ax5.util.set_cookie("jslib", "AX5", 3);
+		 * ```
+		 */
 		function set_cookie(cname, cvalue, exdays) {
 			doc.cookie = cname + "=" + escape(cvalue) + "; path=/;" + (function () {
 				if (typeof exdays != "undefined") {
@@ -1086,16 +1134,16 @@
 				}
 			})();
 		}
-/**
- * 쿠키를 가져옵니다.
- * @method ax5.util.get_cookie
- * @param {String} cname
- * @returns {String} cookie value
- * @example
- ```js
- ax5.util.get_cookie("jslib");
- ```
- */
+		/**
+		 * 쿠키를 가져옵니다.
+		 * @method ax5.util.get_cookie
+		 * @param {String} cname
+		 * @returns {String} cookie value
+		 * @example
+		 * ```js
+		 * ax5.util.get_cookie("jslib");
+		 * ```
+		 */
 		function get_cookie(cname) {
 			var name = cname + "=";
 			var ca = doc.cookie.split(';'), i = 0, l = ca.length;
@@ -1107,20 +1155,20 @@
 			return "";
 		}
 
-/**
- * ax5 require
- * @method ax5.util.require
- * @param {Array} mods - load modules
- * @param {Function} callBack - 로드 성공시 호출함수
- * @param {Function} [errorBack] - 로드 실패시 호출함수
- * @example
- ```js
- ax5.info.base_url = "../src/";
- ax5.util.require(["ax5_class_sample.js"], function(){
-	alert("ok");
- });
- ```
- */
+		/**
+		 * ax5 require
+		 * @method ax5.util.require
+		 * @param {Array} mods - load modules
+		 * @param {Function} callBack - 로드 성공시 호출함수
+		 * @param {Function} [errorBack] - 로드 실패시 호출함수
+		 * @example
+		 * ```js
+		 * ax5.info.base_url = "../src/";
+		 * ax5.util.require(["ax5_class_sample.js"], function(){
+		 * 	alert("ok");
+		 * });
+		 * ```
+		 */
 		// RequireJS 2.1.15 소스코드 참고
 		function require(mods, callBack, errorBack) {
 			var
@@ -1182,7 +1230,7 @@
 						onerrorTimer = setTimeout(onerror, 1);
 					};
 
-					ax5.xhr.req({
+					ax5.xhr({
 						url : plugin_src, contentType: "",
 						res : function (response, status) {
 							head.appendChild(plugin);
@@ -1196,36 +1244,35 @@
 			}
 		}
 
-/**
- * jsonString 으로 alert 합니다.
- * @method ax5.util.alert
- * @param {Object|Array|String|Number} O
- * @returns {Object|Array|String|Number} O
- * @example
- ```js
- ax5.util.alert({a:1,b:2});
- ax5.util.alert("정말?");
- ```
- */
+		/**
+		 * jsonString 으로 alert 합니다.
+		 * @method ax5.util.alert
+		 * @param {Object|Array|String|Number} O
+		 * @returns {Object|Array|String|Number} O
+		 * @example ```js
+		 * ax5.util.alert({a:1,b:2});
+		 * ax5.util.alert("정말?");
+		 * ```
+		 */
 		function alert(O) {
 			win.alert(to_json(O));
 			return O;
 		}
 
-/**
- * 문자열의 특정 문자열까지 잘라주거나 원하는 포지션까지 잘라줍니다.
- * @method ax5.util.left
- * @param {String} str - 문자열
- * @param {String|Number} pos - 찾을 문자열 또는 포지션
- * @returns {String}
- * @example
- ```js
- ax5.util.left("abcd.efd", 3);
- // abc
- ax5.util.left("abcd.efd", ".");
- // abcd
- ```
- */
+		/**
+		 * 문자열의 특정 문자열까지 잘라주거나 원하는 포지션까지 잘라줍니다.
+		 * @method ax5.util.left
+		 * @param {String} str - 문자열
+		 * @param {String|Number} pos - 찾을 문자열 또는 포지션
+		 * @returns {String}
+		 * @example
+		 * ```js
+		 * ax5.util.left("abcd.efd", 3);
+		 * // abc
+		 * ax5.util.left("abcd.efd", ".");
+		 * // abcd
+		 * ```
+		 */
 		function left(str, pos) {
 			if (typeof str === "undefined" || typeof pos === "undefined") return "";
 			if (is_string(pos)) {
@@ -1237,20 +1284,20 @@
 			}
 		}
 
-/**
- * 문자열의 특정 문자열까지 잘라주거나 원하는 포지션까지 잘라줍니다.
- * @method ax5.util.right
- * @param {String} str - 문자열
- * @param {String|Number} pos - 찾을 문자열 또는 포지션
- * @returns {String}
- * @example
- ```js
- ax5.util.right("abcd.efd", 3);
- // efd
- ax5.util.right("abcd.efd", ".");
- // efd
- ```
- */
+		/**
+		 * 문자열의 특정 문자열까지 잘라주거나 원하는 포지션까지 잘라줍니다.
+		 * @method ax5.util.right
+		 * @param {String} str - 문자열
+		 * @param {String|Number} pos - 찾을 문자열 또는 포지션
+		 * @returns {String}
+		 * @example
+		 * ```js
+		 * ax5.util.right("abcd.efd", 3);
+		 * // efd
+		 * ax5.util.right("abcd.efd", ".");
+		 * // efd
+		 * ```
+		 */
 		function right(str, pos) {
 			if (typeof str === "undefined" || typeof pos === "undefined") return "";
 			if (is_string(pos)) {
@@ -1262,71 +1309,71 @@
 			}
 		}
 
-/**
- * css형 문자열이나 특수문자가 포함된 문자열을 카멜케이스로 바꾸어 반환합니다.
- * @method ax5.util.camel_case
- * @param {String} str
- * @returns {String}
- * @example
- ```js
- ax5.util.camel_case("inner-width");
- ax5.util.camel_case("inner_width");
- // innerWidth
- ```
- */
+		/**
+		 * css형 문자열이나 특수문자가 포함된 문자열을 카멜케이스로 바꾸어 반환합니다.
+		 * @method ax5.util.camel_case
+		 * @param {String} str
+		 * @returns {String}
+		 * @example
+		 * ```js
+		 * ax5.util.camel_case("inner-width");
+		 * ax5.util.camel_case("inner_width");
+		 * // innerWidth
+		 * ```
+		 */
 		function camel_case(str) {
 			return str.replace(/^-ms-/, "ms-").replace(/[\-_]([\da-z])/gi, function (all, letter) {
 				return letter.toUpperCase();
 			});
 		}
 
-/**
- * css형 문자열이나 카멜케이스문자열을 스네이크 케이스 문자열로 바꾸어 반환합니다.
- * @method ax5.util.snake_case
- * @param {String} str
- * @returns {String}
- * @example
- ```js
- ax5.util.snake_case("innerWidth");
- ax5.util.snake_case("inner-Width");
- ax5.util.snake_case("inner_width");
- // inner-width
- ```
- */
+		/**
+		 * css형 문자열이나 카멜케이스문자열을 스네이크 케이스 문자열로 바꾸어 반환합니다.
+		 * @method ax5.util.snake_case
+		 * @param {String} str
+		 * @returns {String}
+		 * @example
+		 * ```js
+		 * ax5.util.snake_case("innerWidth");
+		 * ax5.util.snake_case("inner-Width");
+		 * ax5.util.snake_case("inner_width");
+		 * // inner-width
+		 * ```
+		 */
 		function snake_case(str) {
 			return camel_case(str).replace(/([A-Z])/g, function (all, letter) {
 				return "-" + letter.toLowerCase();
 			});
 		}
 
-/**
- * 문자열에서 -. 을 제외한 모든 문자열을 제거하고 숫자로 반환합니다. 옵션에 따라 원하는 형식의 숫자로 변환 할 수 도 있습니다.
- * @method ax5.util.number
- * @param {String|Number} str
- * @param {Object} cond - 옵션
- * @returns {String|Number}
- * @example
- ```js
- var cond = {
-	round: {Number|Boolean} - 반올림할 자릿수,
-	money: {Boolean} - 통화,
-	abs: {Boolean} - 절대값,
-	byte: {Boolean} - 바이트
- }
-
- console.log(ax5.util.number(123456789.678, {round:1}));
- console.log(ax5.util.number(123456789.678, {round:1, money:true}));
- console.log(ax5.util.number(123456789.678, {round:2, byte:true}));
- console.log(ax5.util.number(-123456789.8888, {abs:true, round:2, money:true}));
- console.log(ax5.util.number("A-1234~~56789.8~888PX", {abs:true, round:2, money:true}));
-
- //123456789.7
- //123,456,789.7
- //117.7MB
- //123,456,789.89
- //123,456,789.89
- ```
- */
+		/**
+		 * 문자열에서 -. 을 제외한 모든 문자열을 제거하고 숫자로 반환합니다. 옵션에 따라 원하는 형식의 숫자로 변환 할 수 도 있습니다.
+		 * @method ax5.util.number
+		 * @param {String|Number} str
+		 * @param {Object} cond - 옵션
+		 * @returns {String|Number}
+		 * @example
+		 * ```js
+		 * var cond = {
+		 * 	round: {Number|Boolean} - 반올림할 자릿수,
+		 * 	money: {Boolean} - 통화,
+		 * 	abs: {Boolean} - 절대값,
+		 * 	byte: {Boolean} - 바이트
+		 * }
+		 *
+		 * console.log(ax5.util.number(123456789.678, {round:1}));
+		 * console.log(ax5.util.number(123456789.678, {round:1, money:true}));
+		 * console.log(ax5.util.number(123456789.678, {round:2, byte:true}));
+		 * console.log(ax5.util.number(-123456789.8888, {abs:true, round:2, money:true}));
+		 * console.log(ax5.util.number("A-1234~~56789.8~888PX", {abs:true, round:2, money:true}));
+		 *
+		 * //123456789.7
+		 * //123,456,789.7
+		 * //117.7MB
+		 * //123,456,789.89
+		 * //123,456,789.89
+		 * ```
+		 */
 		function number(str, cond) {
 			var result, pair = ('' + str).split(/\./), isMinus = (parseFloat(pair[0]) < 0 || pair[0] == "-0"), returnValue = 0.0;
 			pair[0] = pair[0].replace(/[-|+]?[\D]/gi, "");
@@ -1386,33 +1433,33 @@
 
 			return result;
 		}
-/**
- * 배열 비슷한 오브젝트를 배열로 변환해줍니다.
- * @method ax5.util.to_array
- * @param {Object|Elements|Arguments} O
- * @returns {Array}
- * @example
- ```js
- ax5.util.to_array(arguments);
- //
- ```
- */
+		/**
+		 * 배열 비슷한 오브젝트를 배열로 변환해줍니다.
+		 * @method ax5.util.to_array
+		 * @param {Object|Elements|Arguments} O
+		 * @returns {Array}
+		 * @example
+		 * ```js
+		 * ax5.util.to_array(arguments);
+		 * //
+		 * ```
+		 */
 		function to_array(O) {
 			if (typeof O.length != "undefined") return Array.prototype.slice.call(O);
 			return [];
 		}
 
-/**
- * 천번째 인자에 두번째 인자 아이템을 합쳐줍니다. concat과 같은 역할을 하지만. 인자가 Array타입이 아니어도 됩니다.
- * @method ax5.util.merge
- * @param {Array|ArrayLike} first
- * @param {Array|ArrayLike} second
- * @returns {Array} first
- * @example
- ```
-
- ```
- */
+		/**
+		 * 천번째 인자에 두번째 인자 아이템을 합쳐줍니다. concat과 같은 역할을 하지만. 인자가 Array타입이 아니어도 됩니다.
+		 * @method ax5.util.merge
+		 * @param {Array|ArrayLike} first
+		 * @param {Array|ArrayLike} second
+		 * @returns {Array} first
+		 * @example
+		 * ```
+		 *
+		 * ```
+		 */
 		function merge(first, second) {
 			var l = second.length,
 				i = first.length,
@@ -1433,21 +1480,21 @@
 			return first;
 		}
 
-/**
- * 오브젝트를 파라미터형식으로 또는 파라미터를 오브젝트 형식으로 변환합니다.
- * @method ax5.util.param
- * @param {Object|Array|String} O
- * @param {String} [cond] - param|object
- * @returns {Object|String}
- * @example
- ```
- ax5.util.param({a:1,b:'1232'}, "param");
- ax5.util.param("a=1&b=1232", "param");
- // "a=1&b=1232"
- ax5.util.param("a=1&b=1232");
- // {a: "1", b: "1232"}
- ```
- */
+		/**
+		 * 오브젝트를 파라미터형식으로 또는 파라미터를 오브젝트 형식으로 변환합니다.
+		 * @method ax5.util.param
+		 * @param {Object|Array|String} O
+		 * @param {String} [cond] - param|object
+		 * @returns {Object|String}
+		 * @example
+		 * ```
+		 * ax5.util.param({a:1,b:'1232'}, "param");
+		 * ax5.util.param("a=1&b=1232", "param");
+		 * // "a=1&b=1232"
+		 * ax5.util.param("a=1&b=1232");
+		 * // {a: "1", b: "1232"}
+		 * ```
+		 */
 		function param(O, cond) {
 			var p;
 			if (is_string(O) && typeof cond !== "undefined" && cond == "param") {
@@ -1491,6 +1538,7 @@
 			error       : error,
 			to_json     : to_json,
 			extend      : extend,
+			extend_all  : extend_all,
 			clone       : clone,
 			first       : first,
 			last        : last,
@@ -1525,19 +1573,19 @@
 	 * @namespace ax5.dom0
 	 * @param {String} query
 	 * @example
-	 ```
-	 ax5.dom("#elementid");
-	 var ax = ax5.dom;
-	 ax("#elementid");
-	 // 처러 사용할 수 있습니다.
-	 ```
+	 * ```
+	 * ax5.dom("#elementid");
+	 * var ax = ax5.dom;
+	 * ax("#elementid");
+	 * // 처러 사용할 수 있습니다.
+	 * ```
 	 */
 
 	/**
 	 * Refer to this by {@link ax5}.
 	 * @namespace ax5.dom
 	 */
-// dom class instance
+	// dom class instance
 	ax5.dom = dom = function (query) {
 		var axdom = (function () {
 			function ax(query) {
@@ -1548,18 +1596,18 @@
 				 * query selected elements
 				 * @member {Array} ax5.dom0.elements
 				 * @example
-				 ```
-				 ax5.dom("[data-ax-grid").elements
-				 ```
+				 * ```
+				 * ax5.dom("[data-ax-grid").elements
+				 * ```
 				 */
 				this.elements = dom.get(query);
 				/**
 				 * query selected elements length
 				 * @member {Number} ax5.dom0.length
 				 * @example
-				 ```
-				 ax5.dom("[data-ax-grid").length
-				 ```
+				 * ```
+				 * ax5.dom("[data-ax-grid").length
+				 * ```
 				 */
 				this.length = this.elements.length;
 				/**
@@ -1568,13 +1616,13 @@
 				 * @param {Object|Array|String} O
 				 * @returns {ax5.dom0|String|Object}
 				 * @example
-				 ```js
-				 ax5.dom("[data-ax-grid]").css({"color":"#ff3300", border:"1px solid #000"});
-				 console.log( ax5.dom("[data-ax-grid]").css("color") );
-				 // rgb(255, 51, 0)
-				 console.log( ax5.dom("[data-ax-grid]").css(["border","color"]) );
-				 // {border: "1px solid rgb(0, 0, 0)", color: "rgb(255, 51, 0)"}
-				 ```
+				 * ```js
+				 * ax5.dom("[data-ax-grid]").css({"color":"#ff3300", border:"1px solid #000"});
+				 * console.log( ax5.dom("[data-ax-grid]").css("color") );
+				 * // rgb(255, 51, 0)
+				 * console.log( ax5.dom("[data-ax-grid]").css(["border","color"]) );
+				 * // {border: "1px solid rgb(0, 0, 0)", color: "rgb(255, 51, 0)"}
+				 * ```
 				 */
 				this.css = function (O) {
 					var rs = dom.css(this.elements, O);
@@ -1582,24 +1630,24 @@
 				};
 				/**
 				 * elements에 className 를 추가, 제거, 확인, 토글합니다.
-				 * @method ax5.dom0.clazz
+				 * @method ax5.dom0.class_name
 				 * @param {String} [command=has] - add,remove,toggle,has
 				 * @param {String} O - 클래스명
 				 * @returns {ax5.dom0|String} return - ax5.dom 또는 클래스이름
 				 * @example
-				 ```js
-				 console.log(
-				 ax5.dom("[data-ax-grid=A]").clazz("A"),
-				 ax5.dom("[data-ax-grid='A']").clazz("has","A")
-				 );
-				 ax5.dom("[data-ax-grid=A]").clazz("add", "adclass").class("remove", "adclass").class("remove", "A");
-
-				 ax5.dom("[data-ax-grid=A]").clazz("toggle", "red");
-				 ax5.dom("[data-ax-grid=\"9B\"]").clazz("toggle", "red");
-				 ```
+				 * ```
+				 * console.log(
+				 * ax5.dom("[data-ax-grid=A]").class_name("A"),
+				 * ax5.dom("[data-ax-grid='A']").class_name("has","A")
+				 * );
+				 * ax5.dom("[data-ax-grid=A]").class_name("add", "adclass").class("remove", "adclass").class("remove", "A");
+				 *
+				 * ax5.dom("[data-ax-grid=A]").class_name("toggle", "red");
+				 * ax5.dom("[data-ax-grid=\"9B\"]").class_name("toggle", "red");
+				 * ```
 				 */
-				this.clazz = function (command, O) {
-					var rs = dom.clazz(this.elements, command, O);
+				this.class_name = function (command, O) {
+					var rs = dom.class_name(this.elements, command, O);
 					return (rs === this.elements) ? this : rs;
 				};
 				/**
@@ -1609,26 +1657,26 @@
 				 * @param {Function} _fn - 이벤트 콜백함수
 				 * @returns {ax5.dom0}
 				 * @example
-				 ```js
-				 var axd = ax5.dom;
-				 var mydom = axd("[data-event-test=text-box]"),
-				 remove_dom = axd("[data-event-test=remove]");
-
-				 mydom.on("click", window.fna);
-				 mydom.on("click", window.fnb);
-				 mydom.on("click", window.fnc);
-
-				 remove_dom.on("click", function(){
-    mydom.off("click", window.fna);
-    remove_dom.off("click");
-    alert("이벤트 제거");
- });
-
-				 // 핸들방식
-				 axd("[data-event-test=text-box]").on("click.fna", window.fna);
-				 axd("[data-event-test=text-box]").on("click.fnb", window.fnb);
-				 axd("[data-event-test=text-box]").on("click.fnc", window.fnc);
-				 ```
+				 * ```js
+				 * var axd = ax5.dom;
+				 * var mydom = axd("[data-event-test=text-box]"),
+				 * remove_dom = axd("[data-event-test=remove]");
+				 *
+				 * mydom.on("click", window.fna);
+				 * mydom.on("click", window.fnb);
+				 * mydom.on("click", window.fnc);
+				 *
+				 * remove_dom.on("click", function(){
+				 *    mydom.off("click", window.fna);
+				 *    remove_dom.off("click");
+				 *    alert("이벤트 제거");
+				 * });
+				 *
+				 * // 핸들방식
+				 * axd("[data-event-test=text-box]").on("click.fna", window.fna);
+				 * axd("[data-event-test=text-box]").on("click.fnb", window.fnb);
+				 * axd("[data-event-test=text-box]").on("click.fnc", window.fnc);
+				 * ```
 				 */
 					// todo: event type 모두 체크
 				this.on = function (typ, _fn) {
@@ -1642,11 +1690,11 @@
 				 * @param {Function} [_fn] - 이벤트 콜백함수
 				 * @returns {ax5.dom0}
 				 * @example
-				 ```js
-				 var axd = ax5.dom;
-				 axd("[data-event-test=text-box]").off("click");
-				 axd("[data-event-test=text-box]").off("click.fnb").off("click.fnc");
-				 ```
+				 * ```js
+				 * var axd = ax5.dom;
+				 * axd("[data-event-test=text-box]").off("click");
+				 * axd("[data-event-test=text-box]").off("click.fnb").off("click.fnc");
+				 * ```
 				 */
 				this.off = function (typ, _fn) {
 					dom.off(this.elements, typ, _fn);
@@ -1656,23 +1704,20 @@
 				/**
 				 * element의 attribute를 추가 삭제 가져오기 합니다.
 				 * @method ax5.dom0.attr
-				 * @param {String|Object} [command=get] - 명령어
-				 * @param {Object|String} O - json타입또는 문자열
+				 * @param {Object|String|null} O - json타입또는 문자열
 				 * @returns {ax5.dom0|String}
 				 * @example
-				 ```js
-				 ax5.dom("[data-ax-grid=A]").attr("set", {"data-ax-spt":"ABCD"}); // set attribute
-				 ax5.dom("[data-ax-grid=A]").attr({"data-ax-spt":"9999", "data-next":"next"}); // set attribute
-
-				 console.log( ax5.dom("[data-ax-grid=A]").attr("data-ax-spt") ); // get or read
-				 console.log( ax5.dom("[data-ax-grid=A]").attr("get", "data-next") ); // get or read
-
-				 ax5.dom("[data-ax-grid=A]").attr("remove", "data-next");
-				 ax5.dom("[data-ax-grid=A]").attr("remove", "data-next2");
-				 ```
+				 * ```js
+				 * // set attribute
+				 * ax5.dom("[data-ax-grid=A]").attr({"data-ax-spt":"9999", "data-next":"next"});
+				 * // get or read
+				 * console.log( ax5.dom("[data-ax-grid=A]").attr("data-ax-spt") );
+				 * // remove attribute, set null
+				 * ax5.dom("[data-ax-grid=A]").attr({"data-next2":null});
+				 * ```
 				 */
-				this.attr = function (command, O) {
-					var rs = dom.attr(this.elements, command, O);
+				this.attr = function (O) {
+					var rs = dom.attr(this.elements, O);
 					return (rs === this.elements) ? this : rs;
 				};
 				/**
@@ -1681,9 +1726,9 @@
 				 * @param {String} query - selector query
 				 * @returns {ax5.dom0} ax5.dom0
 				 * @example
-				 ```
-
-				 ```
+				 * ```
+				 *
+				 * ```
 				 */
 				this.find = function (query) {
 					return new axdom(dom.get(this.elements[0], query));
@@ -1695,29 +1740,29 @@
 				 * @param {Number} [times=0] - 횟수
 				 * @returns {ax5.dom0} ax5.dom0
 				 * @example
-				 ```
-				 <div>
-				 <ul id="list-container">
-				 <li data-list-item="0" id="li0">
-				 <div>child>child</div>
-				 </li>
-				 <li data-list-item="1" id="li1"></li>
-				 <li data-list-item="2" id="li2"></li>
-				 <li data-list-item="3" id="li3"></li>
-				 <li data-list-item="4" id="li4"></li>
-				 <li data-list-item="5" id="li5"></li>
-				 </ul>
-				 </div>
-				 <script>
-				 var el = ax5.dom("#list-container");
-				 var li = el.child(el);
-
-				 console.log(
-				 (c_li = li.next(2)).elements[0].id,
-				 (c_li = c_li.prev()).elements[0].id
-				 );
-				 </script>
-				 ```
+				 * ```
+				 * <div>
+				 * 	 <ul id="list-container">
+				 * 		 <li data-list-item="0" id="li0">
+				 * 		    <div>child>child</div>
+				 * 		 </li>
+				 * 		 <li data-list-item="1" id="li1"></li>
+				 * 		 <li data-list-item="2" id="li2"></li>
+				 * 		 <li data-list-item="3" id="li3"></li>
+				 * 		 <li data-list-item="4" id="li4"></li>
+				 * 		 <li data-list-item="5" id="li5"></li>
+				 * 	 </ul>
+				 * </div>
+				 * <script>
+				 * var el = ax5.dom("#list-container");
+				 * var li = el.child(el);
+				 *
+				 * console.log(
+				 * 	 (c_li = li.next(2)).elements[0].id,
+				 * 	 (c_li = c_li.prev()).elements[0].id
+				 * );
+				 * </script>
+				 * ```
 				 */
 				this.prev = function (times) {
 					return new axdom(dom.prev(this.elements, times));
@@ -1728,29 +1773,29 @@
 				 * @param {Number} [times=0] - 횟수
 				 * @returns {ax5.dom0} ax5.dom0
 				 * @example
-				 ```
-				 <div>
-				 <ul id="list-container">
-				 <li data-list-item="0" id="li0">
-				 <div>child>child</div>
-				 </li>
-				 <li data-list-item="1" id="li1"></li>
-				 <li data-list-item="2" id="li2"></li>
-				 <li data-list-item="3" id="li3"></li>
-				 <li data-list-item="4" id="li4"></li>
-				 <li data-list-item="5" id="li5"></li>
-				 </ul>
-				 </div>
-				 <script>
-				 var el = ax5.dom("#list-container");
-				 var li = el.child(el);
-
-				 console.log(
-				 (c_li = li.next(2)).elements[0].id,
-				 (c_li = c_li.prev()).elements[0].id
-				 );
-				 </script>
-				 ```
+				 * ```
+				 * <div>
+				 * 	 <ul id="list-container">
+				 * 		 <li data-list-item="0" id="li0">
+				 * 		    <div>child>child</div>
+				 * 		 </li>
+				 * 		 <li data-list-item="1" id="li1"></li>
+				 * 		 <li data-list-item="2" id="li2"></li>
+				 * 		 <li data-list-item="3" id="li3"></li>
+				 * 		 <li data-list-item="4" id="li4"></li>
+				 * 		 <li data-list-item="5" id="li5"></li>
+				 * 	 </ul>
+				 * </div>
+				 * <script>
+				 * var el = ax5.dom("#list-container");
+				 * var li = el.child(el);
+				 *
+				 * console.log(
+				 * 	 (c_li = li.next(2)).elements[0].id,
+				 * 	 (c_li = c_li.prev()).elements[0].id
+				 * );
+				 * </script>
+				 * ```
 				 */
 				this.next = function (times) {
 					return new axdom(dom.next(this.elements, times));
@@ -1762,16 +1807,16 @@
 				 * @param {Object} cond - 원하는 element를 찾을 조건
 				 * @returns {ax5.dom0} ax5.dom0 - 부모엘리먼트로 만들어진 새로운 ax5.dom0
 				 * @example
-				 ```
-				 var dom_child = ax5.dom("#list-container").child();
-				 console.log(
-				 dom_child.parent({tagname:"div", clazz:"ax5-sample-view"}).elements[0]
-				 );
-				 console.log(
-				 ax5.dom(dom_child).parent({tagname:"div", clazz:"ax5-sample-view"}).elements[0]
-				 );
-				 // 같은 결과
-				 ```
+				 * ```
+				 * var dom_child = ax5.dom("#list-container").child();
+				 * console.log(
+				 *    dom_child.parent({tagname:"div", clazz:"ax5-sample-view"}).elements[0]
+				 * );
+				 * console.log(
+				 *    ax5.dom(dom_child).parent({tagname:"div", clazz:"ax5-sample-view"}).elements[0]
+				 * );
+				 * // 같은 결과
+				 * ```
 				 */
 				this.parent = function (cond) {
 					return new axdom(dom.parent(this.elements, cond));
@@ -1781,12 +1826,12 @@
 				 * @method ax5.dom0.child
 				 * @returns {ax5.dom0} ax5.dom0 - 자식엘리먼트로 만들어진 새로운 ax5.dom0
 				 * @example
-				 ```
-				 var dom_child = ax5.dom("#list-container").child();
-				 ax5.dom(dom_child).child();
-				 dom_child.child();
-				 // 원하는 대로~
-				 ```
+				 * ```
+				 * var dom_child = ax5.dom("#list-container").child();
+				 * ax5.dom(dom_child).child();
+				 * dom_child.child();
+				 * // 원하는 대로~
+				 * ```
 				 */
 				this.child = function () {
 					return new axdom(dom.child(this.elements));
@@ -1796,16 +1841,16 @@
 				 * @method ax5.dom0.width
 				 * @returns {Number}
 				 * @example
-				 ```
-				 console.log(
-				 ax5.dom("#list-container").css({"width":"400px", "box-sizing":"border-box",
-"border":"2px solid", "padding":"50px"}).css({"background":"#ccc"}).width()
-				 );
-				 console.log(
-				 ax5.dom("#list-container").css({"width":"400px", "box-sizing":"content-box",
-"border":"2px solid", "padding":"50px"}).css({"background":"#ccc"}).width()
-				 );
-				 ```
+				 * ```
+				 * console.log(
+				 * 	 ax5.dom("#list-container").css({"width":"400px", "box-sizing":"border-box",
+				 * 	 "border":"2px solid", "padding":"50px"}).css({"background":"#ccc"}).width()
+				 * );
+				 * console.log(
+				 *    ax5.dom("#list-container").css({"width":"400px", "box-sizing":"content-box",
+				 * 	"border":"2px solid", "padding":"50px"}).css({"background":"#ccc"}).width()
+				 * );
+				 * ```
 				 */
 				this.width = function () {
 					return dom.width(this.elements);
@@ -1815,9 +1860,9 @@
 				 * @method ax5.dom0.height
 				 * @returns {Number}
 				 * @example
-				 ```
-				 // width 와 동일
-				 ```
+				 * ```
+				 * // width 와 동일
+				 * ```
 				 */
 				this.height = function () {
 					return dom.height(this.elements);
@@ -1827,10 +1872,10 @@
 				 * @method ax5.dom0.html
 				 * @returns {ax5.dom0|String}
 				 * @example
-				 ```
-				 console.log( ax5.dom("#list-container").html() );
-				 ax5.dom("#list-container").html("<a href='#1234'>링크");
-				 ```
+				 * ```
+				 * console.log( ax5.dom("#list-container").html() );
+				 * ax5.dom("#list-container").html("<a href='#1234'>링크");
+				 * ```
 				 */
 				this.html = function (val) {
 					var rs = dom.html(this.elements, val);
@@ -1842,12 +1887,12 @@
 				 * @param {String|Element} val
 				 * @returns {ax5.dom0}
 				 * @example
-				 ```
-				 ax5.dom("[data-list-item='0']")
-				 .append("ㅈㅏㅇㄱㅣㅇㅕㅇ")
-				 .append("<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>")
-				 .append(ax5.dom.get("#move-item"));
-				 ```
+				 * ```
+				 * ax5.dom("[data-list-item='0']")
+				 * .append("ㅈㅏㅇㄱㅣㅇㅕㅇ")
+				 * .append("<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>")
+				 * .append(ax5.dom.get("#move-item"));
+				 * ```
 				 */
 				this.append = function (val) {
 					var rs = dom.manipulate("append", this.elements, val);
@@ -1859,12 +1904,12 @@
 				 * @param {String|Element} val
 				 * @returns {ax5.dom0}
 				 * @example
-				 ```
-				 ax5.dom("[data-list-item='0']")
-				 .prepend("ㅈㅏㅇㄱㅣㅇㅕㅇ")
-				 .prepend("<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>")
-				 .prepend(ax5.dom.get("#move-item"));
-				 ```
+				 * ```
+				 * ax5.dom("[data-list-item='0']")
+				 * .prepend("ㅈㅏㅇㄱㅣㅇㅕㅇ")
+				 * .prepend("<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>")
+				 * .prepend(ax5.dom.get("#move-item"));
+				 * ```
 				 */
 				this.prepend = function (val) {
 					var rs = dom.manipulate("prepend", this.elements, val);
@@ -1876,12 +1921,12 @@
 				 * @param {String|Element} val
 				 * @returns {ax5.dom0}
 				 * @example
-				 ```
-				 ax5.dom("[data-list-item='0']")
-				 .before("ㅈㅏㅇㄱㅣㅇㅕㅇ")
-				 .before("<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>")
-				 .before(ax5.dom.get("#move-item"));
-				 ```
+				 * ```
+				 * ax5.dom("[data-list-item='0']")
+				 * .before("ㅈㅏㅇㄱㅣㅇㅕㅇ")
+				 * .before("<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>")
+				 * .before(ax5.dom.get("#move-item"));
+				 * ```
 				 */
 				this.before = function (val) {
 					var rs = dom.manipulate("before", this.elements, val);
@@ -1893,12 +1938,12 @@
 				 * @param {String|Element} val
 				 * @returns {ax5.dom0}
 				 * @example
-				 ```
-				 ax5.dom("[data-list-item='0']")
-				 .after("ㅈㅏㅇㄱㅣㅇㅕㅇ")
-				 .after("<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>")
-				 .after(ax5.dom.get("#move-item"));
-				 ```
+				 * ```
+				 * ax5.dom("[data-list-item='0']")
+				 * .after("ㅈㅏㅇㄱㅣㅇㅕㅇ")
+				 * .after("<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>")
+				 * .after(ax5.dom.get("#move-item"));
+				 * ```
 				 */
 				this.after = function (val) {
 					var rs = dom.manipulate("after", this.elements, val);
@@ -1908,9 +1953,9 @@
 				 * 엘리먼트 다음위치에 노드를 추가 합니다.
 				 * @method ax5.dom0.remove
 				 * @example
-				 ```
-				 ax5.dom("[data-list-item='0']").remove();
-				 ```
+				 * ```
+				 * ax5.dom("[data-list-item='0']").remove();
+				 * ```
 				 */
 				this.remove = function () {
 					return dom.remove(this.elements);
@@ -1921,12 +1966,12 @@
 				 * @param {Elements|Element} elements
 				 * @returns {Object}
 				 * @example
-				 ```
-				 console.log(
-				 ax5.dom("#query").offset()
-				 );
-				 // {"top": 8, "left": 8}
-				 ```
+				 * ```
+				 * console.log(
+				 * 	ax5.dom("#query").offset()
+				 * );
+				 * // {"top": 8, "left": 8}
+				 * ```
 				 */
 				this.offset = function () {
 					return dom.offset(this.elements);
@@ -1937,12 +1982,12 @@
 				 * @param {Elements|Element} elements
 				 * @returns {Object}
 				 * @example
-				 ```
-				 console.log(
-				 ax5.dom("#query").position()
-				 );
-				 // {"top": 8, "left": 8}
-				 ```
+				 * ```
+				 * console.log(
+				 * 	ax5.dom("#query").position()
+				 * );
+				 * // {"top": 8, "left": 8}
+				 * ```
 				 */
 				this.position = function () {
 					return dom.position(this.elements);
@@ -1954,24 +1999,24 @@
 				 * @param {String} [cond] - 원하는 박스 속성
 				 * @returns {Object}
 				 * @example
-				 ```
-				 var axd = ax5.dom;
-				 axd(".ax5-sample-view").box_model()
-				 // {"offset": {"top": 101, "left": 110}, "position": {"top": 101, "left": 110}, "width": 181.71875, "height": 153, "padding": [5,4,3,2], "margin": [1,10,1,10], "border": ["2px double rgb(34, 34, 34)","2px double rgb(34, 34, 34)","2px double rgb(34, 34, 34)","2px double rgb(34, 34, 34)"], "borderWidth": ["2","2","2","2"], "boxSizing": "content-box"}
-
-				 axd(".ax5-sample-view").box_model("offset");
-				 axd(".ax5-sample-view").box_model("position");
-				 axd(".ax5-sample-view").box_model("width");
-				 axd(".ax5-sample-view").box_model("height");
-				 axd(".ax5-sample-view").box_model("padding");
-				 axd(".ax5-sample-view").box_model("margin");
-				 axd(".ax5-sample-view").box_model("border");
-				 axd(".ax5-sample-view").box_model("borderWidth");
-				 axd(".ax5-sample-view").box_model("border-width");
-				 axd(".ax5-sample-view").box_model("boxSizing");
-				 axd(".ax5-sample-view").box_model("box-sizing");
-				 // 각각의 박스모델 속성을 지정하여 호출 할 수 있습니다. borderWidth, border-width 중 하나의 방법으로 사용 가능합니다.
-				 ```
+				 * ```
+				 * var axd = ax5.dom;
+				 * axd(".ax5-sample-view").box_model()
+				 * // {"offset": {"top": 101, "left": 110}, "position": {"top": 101, "left": 110}, "width": 181.71875, "height": 153, "padding": [5,4,3,2], "margin": [1,10,1,10], "border": ["2px double rgb(34, 34, 34)","2px double rgb(34, 34, 34)","2px double rgb(34, 34, 34)","2px double rgb(34, 34, 34)"], "borderWidth": ["2","2","2","2"], "boxSizing": "content-box"}
+				 *
+				 * axd(".ax5-sample-view").box_model("offset");
+				 * axd(".ax5-sample-view").box_model("position");
+				 * axd(".ax5-sample-view").box_model("width");
+				 * axd(".ax5-sample-view").box_model("height");
+				 * axd(".ax5-sample-view").box_model("padding");
+				 * axd(".ax5-sample-view").box_model("margin");
+				 * axd(".ax5-sample-view").box_model("border");
+				 * axd(".ax5-sample-view").box_model("borderWidth");
+				 * axd(".ax5-sample-view").box_model("border-width");
+				 * axd(".ax5-sample-view").box_model("boxSizing");
+				 * axd(".ax5-sample-view").box_model("box-sizing");
+				 * // 각각의 박스모델 속성을 지정하여 호출 할 수 있습니다. borderWidth, border-width 중 하나의 방법으로 사용 가능합니다.
+				 * ```
 				 */
 				this.box_model = function () {
 					return dom.box_model(this.elements);
@@ -1983,26 +2028,26 @@
 				 * @param {Object|String} O - json타입 또는 문자열
 				 * @returns {ax5.dom0|String}
 				 * @example
-				 ```
-				 var axd = ax5.dom, axu = ax5.util, res = "";
-
-				 var el = axd("#list-container");
-				 el.data({a:1}); // set data
-				 el.data("set", {a:1100, b:[0,1,2,3]}); // set data
-
-				 res += el.data("a"); // get data
-				 res += el.data("get", "b"); // get data
-				 console.log(res);
-				 // 11000,1,2,3
-
-				 console.log(el.data("b"));
-				 // [0, 1, 2, 3]
-				 el.data("remove", "b"); // remove data
-				 console.log(el.data("b"));
-				 // ""
-
-				 el.data("remove"); // remove all
-				 ```
+				 * ```
+				 * var axd = ax5.dom, axu = ax5.util, res = "";
+				 *
+				 * var el = axd("#list-container");
+				 * el.data({a:1}); // set data
+				 * el.data("set", {a:1100, b:[0,1,2,3]}); // set data
+				 *
+				 * res += el.data("a"); // get data
+				 * res += el.data("get", "b"); // get data
+				 * console.log(res);
+				 * // 11000,1,2,3
+				 *
+				 * console.log(el.data("b"));
+				 * // [0, 1, 2, 3]
+				 * el.data("remove", "b"); // remove data
+				 * console.log(el.data("b"));
+				 * // ""
+				 *
+				 * el.data("remove"); // remove all
+				 * ```
 				 */
 				this.data = function (command, O) {
 					var rs = dom.data(this.elements, command, O);
@@ -2337,22 +2382,52 @@
 		 return tag === undefined || tag && node_name(context, tag) ? U.merge([context], found) : found;
 		 }
 		 */
-
-// jQuery.ready.promise jquery 1.10.2
+		
+		// 엘리먼트와 자식 엘리먼트의 이벤트와 데이터를 모두 지워줍니다.
+		function clear_element_data(el){
+			var e_hds, ei, el,
+				c_el, ci, cl;
+			
+			for(var hd in el.e_hd){
+				if(typeof el.e_hd[hd] === "function"){
+					eventUnBind(el, hd, el.e_hd[hd]);
+				}else{
+					for(var ehi=0;ehi<el.e_hd[hd].length;ehi++)
+						eventUnBind(el, hd, el.e_hd[hd][ehi]);
+				}
+			}
+			delete el["e_hd"];
+			delete el["ax5_data"];
+			// todo : attributes 걸리는 것이 없지만 혹시나 모를 데이터를 위해.
+			for(var a in el.attributes){
+				if(typeof el.attributes[a] === "object"){
+					//console.log(el.attributes[a]);
+					el.attributes[a] = null
+				}
+			}
+			// 자식들도 확인 합니다.
+			if(el.hasChildNodes()){
+				c_el = el.childNodes, ci = 0, cl = c_el.length;
+				for (;ci < cl; ci++)
+					clear_element_data(c_el[ci]);
+			}
+		}
+		
+		// jQuery.ready.promise jquery 1.10.2
 		/**
 		 * document 로드 완료를 체크 합니다.
 		 * @method ax5.dom.ready
 		 * @param {Function} _fn - 로드완료시 호출함수
 		 * @example
-		 ```js
-		 var a = 1;
-		 setTimeout(function(){
-    ax5.dom.ready(function(){
-        console.log("test" + a);
-        console.log(ax5.util.left("axisj-ax5", "-"));
-    });
- }, 1000);
-		 ```
+		 * ```js
+		 * var a = 1;
+		 * setTimeout(function(){
+		 *    ax5.dom.ready(function(){
+		 *        console.log("test" + a);
+		 *        console.log(ax5.util.left("axisj-ax5", "-"));
+		 *    });
+		 * }, 1000);
+		 * ```
 		 */
 		function ready(_fn) {
 			if (ax5.dom.is_ready || ax5.dom.is_reading) return;
@@ -2404,11 +2479,11 @@
 		 * @method ax5.dom.resize
 		 * @param {Function} _fn - 캐치후 호출될 함수
 		 * @example
-		 ```
-		 ax5.dom.resize(function(){
-    console.log( 1, document.body.clientWidth );
- });
-		 ```
+		 * ```
+		 * ax5.dom.resize(function(){
+		 * 	console.log( 1, document.body.clientWidth );
+		 * });
+		 * ```
 		 */
 		function resize(_fn) {
 			eventBind(window, "resize", _fn);
@@ -2421,11 +2496,11 @@
 		 * @param {String} sub_query - CSS Selector
 		 * @returns {Array} elements
 		 * @example
-		 ```js
-		 ax5.dom.get("#element01");
-		 ax5.dom.get("input[type='text']");
-		 ax5.dom.get( ax5.dom.get("input[type='text']") );
-		 ```
+		 * ```js
+		 * ax5.dom.get("#element01");
+		 * ax5.dom.get("input[type='text']");
+		 * ax5.dom.get( ax5.dom.get("input[type='text']") );
+		 * ```
 		 */
 		function get(query, sub_query) {
 			var elements, return_elements = [], parent_element;
@@ -2459,7 +2534,6 @@
 					return_elements.push(elements[i]);
 				}
 			}
-
 			return return_elements;
 		}
 
@@ -2470,10 +2544,10 @@
 		 * @param {String} sub_query - CSS Selector
 		 * @returns {Element} element
 		 * @example
-		 ```js
-		 ax5.dom.get_one("#element01");
-		 ax5.dom.get_one("input[type='text']");
-		 ```
+		 * ```js
+		 * ax5.dom.get_one("#element01");
+		 * ax5.dom.get_one("input[type='text']");
+		 * ```
 		 */
 		function get_one(query, sub_query) {
 			return get(query, sub_query)[0];
@@ -2487,10 +2561,10 @@
 		 * @param {String} val - innerHTML 값
 		 * @returns {Element}
 		 * @example
-		 ```js
-		 ax5.dom.create("script", {type:"text/javascript", src:"../ax5.js"});
-		 ax5.dom.create("div", {id:"createEleId", "class":"createEleClass"}, "<a>내가만든</a>");
-		 ```
+		 * ```js
+		 * ax5.dom.create("script", {type:"text/javascript", src:"../ax5.js"});
+		 * ax5.dom.create("div", {id:"createEleId", "class":"createEleClass"}, "<a>내가만든</a>");
+		 * ```
 		 */
 		function create(node_nm, attr, val) {
 			/*
@@ -2518,10 +2592,10 @@
 		 * @param {Object|Array|String} CSS
 		 * @returns {String|Object|Elements}
 		 * @example
-		 ```js
-		 ax5.dom.css(ax5.dom.get("#abcd"), {"color":"#ff3300"});
-		 ax5.dom.css(ax5.dom.get("#abcd"), {"width":100});
-		 ```
+		 * ```js
+		 * ax5.dom.css(ax5.dom.get("#abcd"), {"color":"#ff3300"});
+		 * ax5.dom.css(ax5.dom.get("#abcd"), {"width":100});
+		 * ```
 		 */
 		function css(elements, O) {
 			elements = va_elem(elements, "css");
@@ -2542,26 +2616,26 @@
 
 		/**
 		 * elements에 className 를 추가, 제거, 확인, 토글합니다.
-		 * @method ax5.dom.clazz
+		 * @method ax5.dom.class_name
 		 * @param {Array} elements - 대상의 엘리먼트 리스트 혹은 엘리먼트
 		 * @param {String} [command=has] - add,remove,toggle,has
 		 * @param {String} O - 클래스명
 		 * @returns {String|Elements} return - elements 또는 클래스이름
 		 * @example
-		 ```js
-		 ax5.dom.clazz(ax5.dom.get("#abcd"), "class-text"); // has 와 동일
-		 ax5.dom.clazz(ax5.dom.get("#abcd"), "add", "class-text");
-		 ax5.dom.clazz(ax5.dom.get("#abcd"), "remove", "class-text");
-		 ax5.dom.clazz(ax5.dom.get("#abcd"), "has", "class-text");
-		 ax5.dom.clazz(ax5.dom.get("#abcd"), "toggle", "class-text");
-		 ```
+		 * ```js
+		 * ax5.dom.class_name(ax5.dom.get("#abcd"), "class-text"); // has 와 동일
+		 * ax5.dom.class_name(ax5.dom.get("#abcd"), "add", "class-text");
+		 * ax5.dom.class_name(ax5.dom.get("#abcd"), "remove", "class-text");
+		 * ax5.dom.class_name(ax5.dom.get("#abcd"), "has", "class-text");
+		 * ax5.dom.class_name(ax5.dom.get("#abcd"), "toggle", "class-text");
+		 * ```
 		 */
-		function clazz(elements, command, O) {
+		function class_name(elements, command, O) {
 			var classNames;
 			elements = va_elem(elements, "clazz");
 			if (command === "add" || command === "remove" || command === "toggle") {
 				for (var di = 0; di < elements.length; di++) {
-					classNames = elements[di]["className"].split(/ /g);
+					classNames = elements[di]["className"].split(/[ ]+/g);
 					if (command === "add") {
 						if (U.search(classNames, function () {
 								return O.trim() == this;
@@ -2603,44 +2677,32 @@
 		 * elements에 attribute를 추가, 제거, 확인 합니다.
 		 * @method ax5.dom.attr
 		 * @param {Array} elements - 대상의 엘리먼트 리스트 혹은 엘리먼트
-		 * @param {String|Object} [command=get] - 명령어
 		 * @param {Object|String} O - json타입또는 문자열
 		 * @returns {String|Elements} return - elements 또는 속성값
 		 * @example
-		 ```
-		 ax5.dom.attr(ax5.dom.get("[data-ax-grid=A]"), "set", {"data-ax-spt":"ABCD"}); // set attribute
-		 ax5.dom.attr(ax5.dom.get("[data-ax-grid=A]"), {"data-ax-spt":"9999", "data-next":"next"}); // set attribute
-		 ax5.dom.attr(ax5.dom.get("[data-ax-grid=A]"), "remove", "data-next");
-		 ```
+		 * ```
+		 * ax5.dom.attr(ax5.dom.get("[data-ax-grid=A]"), {"data-ax-spt":"ABCD"}); // set attribute
+		 * ax5.dom.attr(ax5.dom.get("[data-ax-grid=A]"), {"data-ax-spt":"9999", "data-next":"next"}); // set attribute
+		 * ax5.dom.attr(ax5.dom.get("[data-ax-grid=A]"), "data-ax-spt"); // get attribute
+		 * ax5.dom.attr(ax5.dom.get("[data-ax-grid=A]"), {"data-next":null}); // remove attribute
+		 * ```
 		 */
-		function attr(elements, command, O) {
+		function attr(elements, O) {
 			elements = va_elem(elements, "attr");
 			var i = 0, l = elements.length, k;
-			if (command === "set" || (typeof O === "undefined" && U.is_object(command))) {
-				if (typeof O === "undefined") O = command;
+			if (U.is_object(O)) {
 				for (; i < l; i++) {
-					for (k in O) {
-						elements[i].setAttribute(k, O[k]);
+					for (k in O){
+						if(O[k] == null){
+							elements[i].removeAttribute(k);
+						}else{
+							elements[i].setAttribute(k, O[k]);
+						}
 					}
 				}
 			}
-			else if (command === "get" || command === "read" || (typeof O === "undefined" && U.is_string(command))) {
-				if (typeof O === "undefined") O = command;
-				if (!U.is_string(O)) return elements;
+			else if (U.is_string(O)) {
 				return elements[0].getAttribute(O);
-			}
-			else if (command === "remove") {
-				if (U.is_string(O)) {
-					for (; i < l; i++) {
-						elements[i].removeAttribute(O);
-					}
-				} else {
-					for (; i < l; i++) {
-						each(O, function () {
-							elements[i].removeAttribute(this);
-						});
-					}
-				}
 			}
 			return elements;
 		}
@@ -2652,28 +2714,28 @@
 		 * @param {String} type - 이벤트 타입
 		 * @param {Function} _fn - 이벤트 콜백함수
 		 * @example
-		 ```js
-		 var fna = function(){console.log("fna")};
-		 var fnb = function(){console.log("fnb")};
-		 var fnc = function(){console.log("fnc")};
-
-		 var mydom = ax5.dom.get("[data-event-test=text-box]"), remove_dom = ax5.dom.get("[data-event-test=remove]");
-
-		 ax5.dom.on(mydom, "click", window.fna);
-		 ax5.dom.on(mydom, "click", window.fnb);
-		 ax5.dom.on(mydom, "click", window.fnc);
-
-		 ax5.dom.on(remove_dom, "click", function(){
-    ax5.dom.off(mydom, "click", window.fna);
-    ax5.dom.off(remove_dom, "click");
-    alert("이벤트 제거");
- });
-
-		 // 핸들방식
-		 ax5.dom.on(mydom, "click.fna", window.fna);
-		 ax5.dom.on(mydom, "click.fnb", window.fnb);
-		 ax5.dom.on(mydom, "click.fnc", window.fnc);
-		 ```
+		 * ```js
+		 * var fna = function(){console.log("fna")};
+		 * var fnb = function(){console.log("fnb")};
+		 * var fnc = function(){console.log("fnc")};
+		 *
+		 * var mydom = ax5.dom.get("[data-event-test=text-box]"), remove_dom = ax5.dom.get("[data-event-test=remove]");
+		 *
+		 * ax5.dom.on(mydom, "click", window.fna);
+		 * ax5.dom.on(mydom, "click", window.fnb);
+		 * ax5.dom.on(mydom, "click", window.fnc);
+		 *
+		 * ax5.dom.on(remove_dom, "click", function(){
+		 * 	ax5.dom.off(mydom, "click", window.fna);
+		 * 	ax5.dom.off(remove_dom, "click");
+		 * 	alert("이벤트 제거");
+		 * });
+		 *
+		 * // 핸들방식
+		 * ax5.dom.on(mydom, "click.fna", window.fna);
+		 * ax5.dom.on(mydom, "click.fnb", window.fnb);
+		 * ax5.dom.on(mydom, "click.fnc", window.fnc);
+		 * ```
 		 */
 		function on(elements, typ, _fn) {
 			elements = va_elem(elements, "on");
@@ -2698,11 +2760,11 @@
 		 * @param {String} type - 이벤트 타입
 		 * @param {Function} [_fn] - 이벤트 콜백함수
 		 * @example
-		 ```js
-		 var mydom = ax5.dom.get("[data-event-test=text-box]")
-		 ax5.dom.off(mydom, "click");
-		 ax5.dom.off(mydom, "click.fnb");
-		 ```
+		 * ```js
+		 * var mydom = ax5.dom.get("[data-event-test=text-box]")
+		 * ax5.dom.off(mydom, "click");
+		 * ax5.dom.off(mydom, "click.fnb");
+		 * ```
 		 */
 		function off(elements, typ, _fn) {
 			elements = va_elem(elements, "off");
@@ -2730,26 +2792,26 @@
 		 * @param {Element|Elements} elements
 		 * @returns {Elements} elements
 		 * @example
-		 ```
-		 <ul id="list-container">
-		 <li data-list-item="0">
-		 <div>child>child</div>
-		 </li>
-		 <li data-list-item="1"></li>
-		 <li data-list-item="2"></li>
-		 <li data-list-item="3"></li>
-		 <li data-list-item="4"></li>
-		 <li data-list-item="5"></li>
-		 </ul>
-		 <script>
-		 var el = ax5.dom.get("#list-container");
-		 console.log(
-		 ax5.dom.child(el)[1].tagName,
-		 ax5.dom.attr(ax5.dom.child(el)[1], "data-list-item")
-		 );
-		 // LI 1
-		 </script>
-		 ```
+		 * ```
+		 * <ul id="list-container">
+		 * 	 <li data-list-item="0">
+		 * 		<div>child>child</div>
+		 * 	 </li>
+		 * 	 <li data-list-item="1"></li>
+		 * 	 <li data-list-item="2"></li>
+		 * 	 <li data-list-item="3"></li>
+		 * 	 <li data-list-item="4"></li>
+		 * 	 <li data-list-item="5"></li>
+		 * </ul>
+		 * <script>
+		 * var el = ax5.dom.get("#list-container");
+		 * console.log(
+		 * 	 ax5.dom.child(el)[1].tagName,
+		 * 	 ax5.dom.attr(ax5.dom.child(el)[1], "data-list-item")
+		 * );
+		 * // LI 1
+		 * </script>
+		 * ```
 		 */
 		function child(elements) {
 			elements = va_elem(elements, "child");
@@ -2770,17 +2832,17 @@
 		 * @param {Object} cond - 원하는 element를 찾을 조건
 		 * @returns {Element}
 		 * @example
-		 ```
-		 // cond 속성정의
-		 var cond = {
-    tagname: {String} - 태그명 (ex. a, div, span..),
-    clazz: {String} - 클래스명
-    [, 그 외 찾고 싶은 attribute명들]
- };
-		 console.log(
-		 ax5.dom.parent(e.target, {tagname:"a", clazz:"ax-menu-handel", "data-custom-attr":"attr_value"})
-		 );
-		 ```
+		 * ```
+		 * // cond 속성정의
+		 * var cond = {
+		 * 	tagname: {String} - 태그명 (ex. a, div, span..),
+		 * 	clazz: {String} - 클래스명
+		 * 	[, 그 외 찾고 싶은 attribute명들]
+		 * };
+		 * console.log(
+		 * 	ax5.dom.parent(e.target, {tagname:"a", clazz:"ax-menu-handel", "data-custom-attr":"attr_value"})
+		 * );
+		 * ```
 		 */
 		function parent(elements, cond) {
 			elements = va_elem(elements, "child");
@@ -2795,8 +2857,8 @@
 								break;
 							}
 						}
-						else if (k === "clazz") {
-							var klasss = _target.className.split(/ /g);
+						else if (k === "clazz" || k === "class_name") {
+							var klasss = _target.className.split(/[ ]+/g);
 							var hasClass = false;
 							for (var a = 0; a < klasss.length; a++) {
 								if (klasss[a] == cond[k]) {
@@ -2833,30 +2895,30 @@
 		 * @param {Number} [times=1] - 횟수
 		 * @returns {Element|null} element - 원하는 위치에 아이템이 없으면 null 을 반환합니다.
 		 * @example
-		 ```
-		 <div>
-		 <ul id="list-container">
-		 <li data-list-item="0" id="li0">
-		 <div>child>child</div>
-		 </li>
-		 <li data-list-item="1" id="li1"></li>
-		 <li data-list-item="2" id="li2"></li>
-		 <li data-list-item="3" id="li3"></li>
-		 <li data-list-item="4" id="li4"></li>
-		 <li data-list-item="5" id="li5"></li>
-		 </ul>
-		 </div>
-		 <script>
-		 var el = ax5.dom.get("#list-container");
-		 var li = ax5.dom.child(el)[0];
-		 var c_li;
-
-		 console.log(
-		 (c_li = ax5.dom.next(li, 2)).id,
-		 (c_li = ax5.dom.prev(c_li)).id
-		 );
-		 </script>
-		 ```
+		 * ```
+		 * <div>
+		 * 	 <ul id="list-container">
+		 * 		 <li data-list-item="0" id="li0">
+		 * 			<div>child>child</div>
+		 * 		 </li>
+		 * 		 <li data-list-item="1" id="li1"></li>
+		 * 		 <li data-list-item="2" id="li2"></li>
+		 * 		 <li data-list-item="3" id="li3"></li>
+		 * 		 <li data-list-item="4" id="li4"></li>
+		 * 		 <li data-list-item="5" id="li5"></li>
+		 * 	 </ul>
+		 * </div>
+		 * <script>
+		 * var el = ax5.dom.get("#list-container");
+		 * var li = ax5.dom.child(el)[0];
+		 * var c_li;
+		 *
+		 * console.log(
+		 * 	 (c_li = ax5.dom.next(li, 2)).id,
+		 * 	 (c_li = ax5.dom.prev(c_li)).id
+		 * );
+		 * </script>
+		 * ```
 		 */
 		function prev(elements, times) {
 			return sibling(elements, "prev", times);
@@ -2869,30 +2931,30 @@
 		 * @param {Number} [times=1] - 횟수
 		 * @returns {Element|null} element - 원하는 위치에 아이템이 없으면 null 을 반환합니다.
 		 * @example
-		 ```
-		 <div>
-		 <ul id="list-container">
-		 <li data-list-item="0" id="li0">
-		 <div>child>child</div>
-		 </li>
-		 <li data-list-item="1" id="li1"></li>
-		 <li data-list-item="2" id="li2"></li>
-		 <li data-list-item="3" id="li3"></li>
-		 <li data-list-item="4" id="li4"></li>
-		 <li data-list-item="5" id="li5"></li>
-		 </ul>
-		 </div>
-		 <script>
-		 var el = ax5.dom.get("#list-container");
-		 var li = ax5.dom.child(el)[0];
-		 var c_li;
-
-		 console.log(
-		 (c_li = ax5.dom.next(li, 2)).id,
-		 (c_li = ax5.dom.prev(c_li)).id
-		 );
-		 </script>
-		 ```
+		 * ```
+		 * <div>
+		 * 	 <ul id="list-container">
+		 * 		 <li data-list-item="0" id="li0">
+		 * 			<div>child>child</div>
+		 * 		 </li>
+		 * 		 <li data-list-item="1" id="li1"></li>
+		 * 		 <li data-list-item="2" id="li2"></li>
+		 * 		 <li data-list-item="3" id="li3"></li>
+		 * 		 <li data-list-item="4" id="li4"></li>
+		 * 		 <li data-list-item="5" id="li5"></li>
+		 * 	 </ul>
+		 * </div>
+		 * <script>
+		 * var el = ax5.dom.get("#list-container");
+		 * var li = ax5.dom.child(el)[0];
+		 * var c_li;
+		 *
+		 * console.log(
+		 * 	 (c_li = ax5.dom.next(li, 2)).id,
+		 * 	 (c_li = ax5.dom.prev(c_li)).id
+		 * );
+		 * </script>
+		 * ```
 		 */
 		function next(elements, times) {
 			return sibling(elements, "next", times);
@@ -2904,10 +2966,10 @@
 		 * @param {Elements|Element} elements
 		 * @returns {Number} width
 		 * @example
-		 ```js
-		 var el = ax5.dom.get("#list-container")
-		 ax5.dom.width(el);
-		 ```
+		 * ```js
+		 * var el = ax5.dom.get("#list-container")
+		 * ax5.dom.width(el);
+		 * ```
 		 */
 		function width(elements) {
 			return box_size(elements, "width");
@@ -2919,10 +2981,10 @@
 		 * @param {Elements|Element} elements
 		 * @returns {Number} width
 		 * @example
-		 ```js
-		 var el = ax5.dom.get("#list-container")
-		 ax5.dom.height(el);
-		 ```
+		 * ```js
+		 * var el = ax5.dom.get("#list-container")
+		 * ax5.dom.height(el);
+		 * ```
 		 */
 		function height(elements) {
 			return box_size(elements, "height");
@@ -2934,10 +2996,10 @@
 		 * @param {Elements|Element} elements
 		 * @returns {Elements}
 		 * @example
-		 ```js
-		 var el = ax5.dom.get("#list-container");
-		 ax5.dom.empty(el);
-		 ```
+		 * ```js
+		 * var el = ax5.dom.get("#list-container");
+		 * ax5.dom.empty(el);
+		 * ```
 		 */
 		function empty(elements) {
 			elements = va_elem(elements, "empty");
@@ -2945,6 +3007,7 @@
 			for (; i < l; i++) {
 				el = elements[i];
 				while (el.firstChild) {
+					clear_element_data(el.firstChild);
 					el.removeChild(el.firstChild);
 				}
 				if (el.options && node_name(el, "select")) {
@@ -2961,11 +3024,11 @@
 		 * @param {String} [htmlcode]
 		 * @returns {Elements|String}
 		 * @example
-		 ```js
-		 var el = ax5.dom.get("#list-container");
-		 console.log( ax5.dom.html(el) );
-		 ax5.dom.html(el, "<a href='#1234'>링크");
-		 ```
+		 * ```js
+		 * var el = ax5.dom.get("#list-container");
+		 * console.log( ax5.dom.html(el) );
+		 * ax5.dom.html(el, "<a href='#1234'>링크");
+		 * ```
 		 */
 		function html(elements, val) {
 			elements = va_elem(elements, "html");
@@ -2999,12 +3062,12 @@
 		 * @param {String|Element} val
 		 * @returns {Elements|Element}
 		 * @example
-		 ```
-		 var el = ax5.dom.get("[data-list-item='0']");
-		 ax5.dom.append(el, "ㅈㅏㅇㄱㅣㅇㅕㅇ");
-		 ax5.dom.append(el, "<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>");
-		 ax5.dom.append(ax5.dom.get("[data-list-item='2']"), ax5.dom.get("#move-item"));
-		 ```
+		 * ```
+		 * var el = ax5.dom.get("[data-list-item='0']");
+		 * ax5.dom.append(el, "ㅈㅏㅇㄱㅣㅇㅕㅇ");
+		 * ax5.dom.append(el, "<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>");
+		 * ax5.dom.append(ax5.dom.get("[data-list-item='2']"), ax5.dom.get("#move-item"));
+		 * ```
 		 */
 		function append(elements, val) {
 			return manipulate("append", elements, val);
@@ -3017,12 +3080,12 @@
 		 * @param {String|Element} val
 		 * @returns {Elements|Element}
 		 * @example
-		 ```
-		 var el = ax5.dom.get("[data-list-item='0']");
-		 ax5.dom.prepend(el, "ㅈㅏㅇㄱㅣㅇㅕㅇ");
-		 ax5.dom.prepend(el, "<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>");
-		 ax5.dom.prepend(ax5.dom.get("[data-list-item='2']"), ax5.dom.get("#move-item"));
-		 ```
+		 * ```
+		 * var el = ax5.dom.get("[data-list-item='0']");
+		 * ax5.dom.prepend(el, "ㅈㅏㅇㄱㅣㅇㅕㅇ");
+		 * ax5.dom.prepend(el, "<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>");
+		 * ax5.dom.prepend(ax5.dom.get("[data-list-item='2']"), ax5.dom.get("#move-item"));
+		 * ```
 		 */
 		function prepend(elements, val) {
 			return manipulate("prepend", elements, val);
@@ -3035,10 +3098,10 @@
 		 * @param {String|Element} val
 		 * @returns {Elements|Element}
 		 * @example
-		 ```
-		 var el = ax5.dom.get("[data-list-item='0']");
-		 ax5.dom.before(el, "before");
-		 ```
+		 * ```
+		 * var el = ax5.dom.get("[data-list-item='0']");
+		 * ax5.dom.before(el, "before");
+		 * ```
 		 */
 		function before(elements, val) {
 			return manipulate("before", elements, val);
@@ -3051,10 +3114,10 @@
 		 * @param {String|Element} val
 		 * @returns {Elements|Element}
 		 * @example
-		 ```
-		 var el = ax5.dom.get("[data-list-item='0']");
-		 ax5.dom.after(el, "after");
-		 ```
+		 * ```
+		 * var el = ax5.dom.get("[data-list-item='0']");
+		 * ax5.dom.after(el, "after");
+		 * ```
 		 */
 		function after(elements, val) {
 			return manipulate("after", elements, val);
@@ -3100,16 +3163,19 @@
 		 * @method ax5.dom.remove
 		 * @param {Elements|Element} elements
 		 * @example
-		 ```
-		 var el = ax5.dom.get("[data-list-item='0']");
-		 ax5.dom.remove(el);
-		 ```
+		 * ```
+		 * var el = ax5.dom.get("[data-list-item='0']");
+		 * ax5.dom.remove(el);
+		 * ```
 		 */
 		function remove(elements, val) {
 			elements = va_elem(elements, "remove");
 			var i = 0, l = elements.length;
 			for (; i < l; i++) {
-				if (elements[i].parentNode) elements[i].parentNode.removeChild(elements[i]);
+				if (elements[i].parentNode) {
+					clear_element_data(elements[i]);
+					elements[i].parentNode.removeChild(elements[i]);
+				}
 			}
 		}
 
@@ -3119,12 +3185,12 @@
 		 * @param {Elements|Element} elements
 		 * @returns {Object}
 		 * @example
-		 ```
-		 console.log(
-		 ax5.util.to_json(ax5.dom.offset(el))
-		 );
-		 // {"top": 8, "left": 8}
-		 ```
+		 * ```
+		 * console.log(
+		 * ax5.util.to_json(ax5.dom.offset(el))
+		 * );
+		 * // {"top": 8, "left": 8}
+		 * ```
 		 */
 		function offset(elements) {
 			elements = va_elem(elements, "offset");
@@ -3152,12 +3218,12 @@
 		 * @param {Elements|Element} elements
 		 * @returns {Object}
 		 * @example
-		 ```
-		 console.log(
-		 ax5.util.to_json(ax5.dom.position(el))
-		 );
-		 // {"top": 8, "left": 8}
-		 ```
+		 * ```
+		 * console.log(
+		 * ax5.util.to_json(ax5.dom.position(el))
+		 * );
+		 * // {"top": 8, "left": 8}
+		 * ```
 		 */
 		function position(elements) {
 			elements = va_elem(elements, "offset");
@@ -3191,24 +3257,24 @@
 		 * @param {String} [cond] - 원하는 박스 속성
 		 * @returns {Object}
 		 * @example
-		 ```
-		 var axd = ax5.dom;
-		 axd.box_model(el);
-		 // {"offset": {"top": 101, "left": 110}, "position": {"top": 101, "left": 110}, "width": 181.71875, "height": 153, "padding": [5,4,3,2], "margin": [1,10,1,10], "border": ["2px double rgb(34, 34, 34)","2px double rgb(34, 34, 34)","2px double rgb(34, 34, 34)","2px double rgb(34, 34, 34)"], "borderWidth": ["2","2","2","2"], "boxSizing": "content-box"}
-
-		 axd.box_model(el, "offset");
-		 axd.box_model(el, "position");
-		 axd.box_model(el, "width");
-		 axd.box_model(el, "height");
-		 axd.box_model(el, "padding");
-		 axd.box_model(el, "margin");
-		 axd.box_model(el, "border");
-		 axd.box_model(el, "borderWidth");
-		 axd.box_model(el, "border-width");
-		 axd.box_model(el, "boxSizing");
-		 axd.box_model(el, "box-sizing");
-		 // 각각의 박스모델 속성을 지정하여 호출 할 수 있습니다. borderWidth, border-width 중 하나의 방법으로 사용 가능합니다.
-		 ```
+		 * ```
+		 * var axd = ax5.dom;
+		 * axd.box_model(el);
+		 * // {"offset": {"top": 101, "left": 110}, "position": {"top": 101, "left": 110}, "width": 181.71875, "height": 153, "padding": [5,4,3,2], "margin": [1,10,1,10], "border": ["2px double rgb(34, 34, 34)","2px double rgb(34, 34, 34)","2px double rgb(34, 34, 34)","2px double rgb(34, 34, 34)"], "borderWidth": ["2","2","2","2"], "boxSizing": "content-box"}
+		 *
+		 * axd.box_model(el, "offset");
+		 * axd.box_model(el, "position");
+		 * axd.box_model(el, "width");
+		 * axd.box_model(el, "height");
+		 * axd.box_model(el, "padding");
+		 * axd.box_model(el, "margin");
+		 * axd.box_model(el, "border");
+		 * axd.box_model(el, "borderWidth");
+		 * axd.box_model(el, "border-width");
+		 * axd.box_model(el, "boxSizing");
+		 * axd.box_model(el, "box-sizing");
+		 * // 각각의 박스모델 속성을 지정하여 호출 할 수 있습니다. borderWidth, border-width 중 하나의 방법으로 사용 가능합니다.
+		 * ```
 		 */
 		function box_model(elements, cond) {
 			elements = va_elem(elements, "box_model");
@@ -3262,26 +3328,26 @@
 		 * @param {Object|String} O - json타입 또는 문자열
 		 * @returns {Elements|Element|String}
 		 * @example
-		 ```
-		 var axd = ax5.dom, axu = ax5.util, res = "";
-
-		 var el = axd.get("#list-container");
-		 axd.data(el, {a:1}); // set data
-		 axd.data(el, "set", {a:1100, b:[0,1,2,3]}); // set data
-
-		 res += axd.data(el, "a"); // get data
-		 res += axd.data(el, "get", "b"); // get data
-		 console.log(res);
-		 // 11000,1,2,3
-
-		 console.log(axd.data(el, "b"));
-		 // [0, 1, 2, 3]
-		 axd.data(el, "remove", "b"); // remove data
-		 console.log(axd.data(el, "b"));
-		 // ""
-
-		 axd.data(el, "remove"); // remove all
-		 ```
+		 * ```
+		 * var axd = ax5.dom, axu = ax5.util, res = "";
+		 *
+		 * var el = axd.get("#list-container");
+		 * axd.data(el, {a:1}); // set data
+		 * axd.data(el, "set", {a:1100, b:[0,1,2,3]}); // set data
+		 *
+		 * res += axd.data(el, "a"); // get data
+		 * res += axd.data(el, "get", "b"); // get data
+		 * console.log(res);
+		 * // 11000,1,2,3
+		 *
+		 * console.log(axd.data(el, "b"));
+		 * // [0, 1, 2, 3]
+		 * axd.data(el, "remove", "b"); // remove data
+		 * console.log(axd.data(el, "b"));
+		 * // ""
+		 *
+		 * axd.data(el, "remove"); // remove all
+		 * ```
 		 */
 		function data(elements, command, O) {
 			//console.log(elements, command, O);
@@ -3330,7 +3396,7 @@
 			get_one   : get_one,
 			create    : create,
 			css       : css,
-			clazz     : clazz,
+			class_name: class_name,
 			attr      : attr,
 			on        : on,
 			off       : off,

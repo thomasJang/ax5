@@ -116,7 +116,7 @@
             
                 <li data-name="ax5.dom.child"><a href="ax5.dom.html#child">child</a></li>
             
-                <li data-name="ax5.dom.clazz"><a href="ax5.dom.html#clazz">clazz</a></li>
+                <li data-name="ax5.dom.class_name"><a href="ax5.dom.html#class_name">class_name</a></li>
             
                 <li data-name="ax5.dom.create"><a href="ax5.dom.html#create">create</a></li>
             
@@ -199,7 +199,7 @@
             
                 <li data-name="ax5.dom0.child"><a href="ax5.dom0.html#child">child</a></li>
             
-                <li data-name="ax5.dom0.clazz"><a href="ax5.dom0.html#clazz">clazz</a></li>
+                <li data-name="ax5.dom0.class_name"><a href="ax5.dom0.html#class_name">class_name</a></li>
             
                 <li data-name="ax5.dom0.css"><a href="ax5.dom0.html#css">css</a></li>
             
@@ -276,27 +276,6 @@
             </ul>
         </li>
     
-        <li class="item" data-name="ax5.ui">
-            <span class="title">
-                <a href="ax5.ui.html">ax5.ui</a>
-                
-                <span class="static">static</span>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
         <li class="item" data-name="ax5.util">
             <span class="title">
                 <a href="ax5.util.html">ax5.util</a>
@@ -325,6 +304,8 @@
                 <li data-name="ax5.util.error"><a href="ax5.util.html#error">error</a></li>
             
                 <li data-name="ax5.util.extend"><a href="ax5.util.html#extend">extend</a></li>
+            
+                <li data-name="ax5.util.extend_all"><a href="ax5.util.html#extend_all">extend_all</a></li>
             
                 <li data-name="ax5.util.filter"><a href="ax5.util.html#filter">filter</a></li>
             
@@ -399,6 +380,10 @@
             </span>
             <ul class="members itemMembers">
             
+            <span class="subtitle">Members</span>
+            
+                <li data-name="ax5.xhr.options"><a href="ax5.xhr.html#options">options</a></li>
+            
             </ul>
             <ul class="typedefs itemMembers">
             
@@ -407,7 +392,7 @@
             
             <span class="subtitle">Methods</span>
             
-                <li data-name="ax5.xhr.request"><a href="ax5.xhr.html#request">request</a></li>
+                <li data-name="ax5.xhr.config"><a href="ax5.xhr.html#config">config</a></li>
             
             </ul>
             <ul class="events itemMembers">
@@ -556,8 +541,8 @@
         
 
     
-    <pre class="prettyprint linenums"><code> console.log( ax5.info.browser );
- //Object {name: &quot;chrome&quot;, version: &quot;39.0.2171.71&quot;, mobile: false}</code></pre>
+    <pre class="prettyprint linenums"><code>console.log( ax5.info.browser );
+//Object {name: &quot;chrome&quot;, version: &quot;39.0.2171.71&quot;, mobile: false}</code></pre>
     
 
     
@@ -610,11 +595,11 @@
         
 
     
-    <pre class="prettyprint linenums"><code> {
+    <pre class="prettyprint linenums"><code>{
     BACKSPACE: 8, TAB: 9,
     RETURN: 13, ESC: 27, LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40, DELETE: 46,
     HOME: 36, END: 35, PAGEUP: 33, PAGEDOWN: 34, INSERT: 45, SPACE: 32
- }</code></pre>
+}</code></pre>
     
 
     
@@ -712,8 +697,8 @@
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-json"> //ax5.info.support Object JSON
- {
+    <pre class="prettyprint linenums"><code class="lang-json">//ax5.info.support Object JSON
+{
      appendChecked: true,
      boxModel: true,
      changeBubbles: true,
@@ -739,7 +724,7 @@
      style: true, // Get the style information from getAttribute
      submitBubbles: true,
      tbody: true
- }</code></pre>
+}</code></pre>
     
 
     
@@ -853,9 +838,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L335" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L345" target="_blank">
             ax5.js,
-            line 335</a>
+            line 345</a>
         </div>
         
     </div>
@@ -922,9 +907,8 @@
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-js">
- console.log( ax5.util.to_json( ax5.util.url_util() ) );
- {
+    <pre class="prettyprint linenums"><code>console.log( ax5.util.to_json( ax5.util.url_util() ) );
+{
     &quot;base_url&quot;: &quot;http://ax5:2018&quot;,
     &quot;href&quot;: &quot;http://ax5:2018/samples/index.html?a=1&amp;b=1#abc&quot;,
     &quot;param&quot;: &quot;a=1&amp;b=1&quot;,
@@ -934,7 +918,7 @@
     &quot;port&quot;: &quot;2018&quot;,
     &quot;url&quot;: &quot;http://ax5:2018/samples/index.html&quot;,
     &quot;hashdata&quot;: &quot;abc&quot;
- }</code></pre>
+}</code></pre>
     
 
     
@@ -957,7 +941,7 @@
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Tue Jan 27 2015 00:45:07 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Mon Feb 02 2015 19:28:41 GMT+0900 (KST)
         </footer>
     </div>
 </div>
