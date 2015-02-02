@@ -116,7 +116,7 @@
             
                 <li data-name="ax5.dom.child"><a href="ax5.dom.html#child">child</a></li>
             
-                <li data-name="ax5.dom.clazz"><a href="ax5.dom.html#clazz">clazz</a></li>
+                <li data-name="ax5.dom.class_name"><a href="ax5.dom.html#class_name">class_name</a></li>
             
                 <li data-name="ax5.dom.create"><a href="ax5.dom.html#create">create</a></li>
             
@@ -199,7 +199,7 @@
             
                 <li data-name="ax5.dom0.child"><a href="ax5.dom0.html#child">child</a></li>
             
-                <li data-name="ax5.dom0.clazz"><a href="ax5.dom0.html#clazz">clazz</a></li>
+                <li data-name="ax5.dom0.class_name"><a href="ax5.dom0.html#class_name">class_name</a></li>
             
                 <li data-name="ax5.dom0.css"><a href="ax5.dom0.html#css">css</a></li>
             
@@ -276,27 +276,6 @@
             </ul>
         </li>
     
-        <li class="item" data-name="ax5.ui">
-            <span class="title">
-                <a href="ax5.ui.html">ax5.ui</a>
-                
-                <span class="static">static</span>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
         <li class="item" data-name="ax5.util">
             <span class="title">
                 <a href="ax5.util.html">ax5.util</a>
@@ -325,6 +304,8 @@
                 <li data-name="ax5.util.error"><a href="ax5.util.html#error">error</a></li>
             
                 <li data-name="ax5.util.extend"><a href="ax5.util.html#extend">extend</a></li>
+            
+                <li data-name="ax5.util.extend_all"><a href="ax5.util.html#extend_all">extend_all</a></li>
             
                 <li data-name="ax5.util.filter"><a href="ax5.util.html#filter">filter</a></li>
             
@@ -399,6 +380,10 @@
             </span>
             <ul class="members itemMembers">
             
+            <span class="subtitle">Members</span>
+            
+                <li data-name="ax5.xhr.options"><a href="ax5.xhr.html#options">options</a></li>
+            
             </ul>
             <ul class="typedefs itemMembers">
             
@@ -407,7 +392,7 @@
             
             <span class="subtitle">Methods</span>
             
-                <li data-name="ax5.xhr.request"><a href="ax5.xhr.html#request">request</a></li>
+                <li data-name="ax5.xhr.config"><a href="ax5.xhr.html#config">config</a></li>
             
             </ul>
             <ul class="events itemMembers">
@@ -463,8 +448,8 @@
     
     
         
-            <div class="description"><p>Refer to this by <a href="ax5.html"><code>ax5</code></a>.
-ax5.xhr은 내부에서 AJAX 요청에 대해 queue처리를 하여 순차적으로 요청을 처리하고 응답합니다. 이 처리 과정을 모니터링 할 순 있는 도구도 지원합니다.</p></div>
+            <div class="description"><p>Refer to this by <a href="ax5.html"><code>ax5</code></a>. <br/>
+ax5.xhr({Object}[, {Function}]); 으로 사용하는 함수입니다. XHR요청을 개별또는 큐단위로 처리 합니다.</p></div>
         
         
         
@@ -494,6 +479,78 @@ ax5.xhr은 내부에서 AJAX 요청에 대해 queue처리를 하여 순차적으
 
         
         
+            <h3>Example</h3>
+            
+
+    
+    <pre class="prettyprint linenums"><code>// request 옵션정의
+config = {
+    header         : {
+        //setRequestHeader 로 추가하게될 헤드 속성
+        'content-type' : {String} [&quot;application/x-www-form-urlencoded; charset=UTF-8&quot;] - request 되는 문서의 content Type,
+        'accept'       : {String} [&quot;*＼*&quot;] - 서버에 응답받기 희망하는 문서 타입,
+    },
+    method         : {String} [&quot;GET&quot;],
+    url            : {String} [&quot;&quot;],
+    param          : {String|Object} [&quot;&quot;] - 파라미터 형식이나 오브젝트 형식 모두 지원합니다.,
+    async          : {Boolean} [true] - 비동기 요청 여부,
+    username       : {String} [&quot;&quot;] - XMLHttpRequest 스펙에 정의된 open() 옶션 사용 안해봐서 잘 모름,
+    password       : {String} [&quot;&quot;] - XMLHttpRequest 스펙에 정의된 open() 옶션 사용 안해봐서 잘 모름,
+    withCredentials: {Boolean} [false] - 자격증명을 사용하게 할지 여부,
+    crossDomain    : {Boolean} [false] - 크로스 도메인 허용 여부 : header 속성이 약간 바뀝니다.,
+    timeout        : 0
+}
+
+ax5.xhr({
+   method: &quot;POST&quot;,
+   url   : &quot;data.php&quot;,
+   param : &quot;str=1234&quot;,
+   res   : function (response, status) {
+       console.log(&quot;success&quot;);
+       console.log(this);
+   },
+   error : function () {
+       console.log(&quot;error&quot;);
+       console.log(this);
+   }
+});
+
+// req 또는 request 둘다 사용 가능합니다.
+ax5.xhr({
+   url   : &quot;data.php&quot;,
+   param : &quot;str=1234&quot;,
+   res   : function (response, status) {
+       // status 값이 200 인지 판단 가능
+       console.log(this);
+   }
+});
+// 위와 같이 필요한 옵션만 정의 해서 사용 가능합니다.
+
+// 요청을 큐로 만들어 순차적으로 작동하게 하고 종료 시점을 컨트롤 할 수 있습니다.
+var xhr_queue = [];
+xhr_queue.push({
+   method: &quot;POST&quot;,
+   url   : &quot;../samples/ax5/xhr/data.php&quot;,
+   param : &quot;str=1234&quot;,
+   res   : function (response, status) {
+       console.log(response);
+   }
+});
+xhr_queue.push({
+   method: &quot;POST&quot;,
+   url   : &quot;../samples/ax5/xhr/data.php&quot;,
+   param : &quot;str=1234&quot;,
+   res   : function (response, status) {
+       console.log(response);
+   }
+});
+
+ax5.xhr(xhr_queue, function() {
+   console.log(&quot;큐 완료&quot;)
+});</code></pre>
+    
+
+        
     
     </div>
     
@@ -508,6 +565,74 @@ ax5.xhr은 내부에서 AJAX 요청에 대해 queue처리를 하여 순차적으
     
     
     
+        <h3 class="subsection-title">Members</h3>
+        
+        <dl>
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="options"><span class="type-signature static">static</span>ax5.xhr.options<span class="type-signature type type">type</span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint linenums"><code>ax5.xhr.options = {
+    header         : {
+        //setRequestHeader 로 추가하게될 헤드 속성
+        'content-type' : {String} [&quot;application/x-www-form-urlencoded; charset=UTF-8&quot;] - request 되는 문서의 content Type,
+        'accept'       : {String} [&quot;*＼*&quot;] - 서버에 응답받기 희망하는 문서 타입,
+    },
+    method         : {String} [&quot;GET&quot;],
+    url            : {String} [&quot;&quot;],
+    param          : {String|Object} [&quot;&quot;] - 파라미터 형식이나 오브젝트 형식 모두 지원합니다.,
+    async          : {Boolean} [true] - 비동기 요청 여부,
+    username       : {String} [&quot;&quot;] - XMLHttpRequest 스펙에 정의된 open() 옶션 사용 안해봐서 잘 모름,
+    password       : {String} [&quot;&quot;] - XMLHttpRequest 스펙에 정의된 open() 옶션 사용 안해봐서 잘 모름,
+    withCredentials: {Boolean} [false] - 자격증명을 사용하게 할지 여부,
+    crossDomain    : {Boolean} [false] - 크로스 도메인 허용 여부 : header 속성이 약간 바뀝니다.,
+    timeout        : 0
+}</code></pre>
+    
+
+    
+</dd>
+
+        </dl>
+    
     
     
         <h3 class="subsection-title">Methods</h3>
@@ -516,17 +641,17 @@ ax5.xhr은 내부에서 AJAX 요청에 대해 queue처리를 하여 순차적으
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="request">
+        <h4 class="name" id="config">
             
-            <span class="type-signature static">static</span>ax5.xhr.request<span class="signature">(config)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Boolean}</span>
+            <span class="type-signature static">static</span>ax5.xhr.config<span class="signature">(opts)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Object}</span>
         </h4>
     
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3581" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3840" target="_blank">
             ax5.js,
-            line 3581</a>
+            line 3840</a>
         </div>
         
     </div>
@@ -537,7 +662,7 @@ ax5.xhr은 내부에서 AJAX 요청에 대해 queue처리를 하여 순차적으
     
     
     <div class="description">
-        <p>XMLHttpRequest 오브젝트를 이용하여 AJAX 통신을 지원합니다.</p>
+        <p>ax5.xhr 통신 기본 값을 설정합니다.</p>
     </div>
     
 
@@ -568,7 +693,7 @@ ax5.xhr은 내부에서 AJAX 요청에 대해 queue처리를 하여 순차적으
 	
         <tr>
             
-                <td class="name"><code>config</code></td>
+                <td class="name"><code>opts</code></td>
             
             
             <td class="type">
@@ -584,7 +709,7 @@ ax5.xhr은 내부에서 AJAX 요청에 대해 queue처리를 하여 순차적으
             
             <td class="description last">
                 
-                </td>
+                <p>XHR 요청옵션 기본 값</p></td>
         </tr>
 	
 	
@@ -638,46 +763,28 @@ ax5.xhr은 내부에서 AJAX 요청에 대해 queue처리를 하여 순차적으
         
 
     
-    <pre class="prettyprint linenums"><code> // request 옵션정의
- config = {
-    contentType    : {String} [&quot;application/x-www-form-urlencoded; charset=UTF-8&quot;] - request 되는 문서의 content Type,
-    accept         : {String} [&quot;*＼*&quot;] - 서버에 응답받기 희망하는 문서 타입,
-    addHeader      : {Object} [{}] - setRequestHeader 로 추가하게될 헤드 속성,
-    method         : {String} [&quot;GET&quot;],
-    url            : {String} [&quot;&quot;],
-    param          : {String|Object} [&quot;&quot;] - 파라미터 형식이나 오브젝트 형식 모두 지원합니다.,
-    async          : {Boolean} [true] - 비동기 요청 여부,
-    username       : {String} [&quot;&quot;] - XMLHttpRequest 스펙에 정의된 open() 옶션 사용 안해봐서 잘 모름,
-    password       : {String} [&quot;&quot;] - XMLHttpRequest 스펙에 정의된 open() 옶션 사용 안해봐서 잘 모름,
-    withCredentials: {Boolean} [false] - 자격증명을 사용하게 할지 여부,
-    crossDomain    : {Boolean} [false] - 크로스 도메인 허용 여부 : header 속성이 약간 바뀝니다.,
-    timeout        : 0
- }
-
- ax5.xhr.req({
-    method: &quot;POST&quot;,
-    url   : &quot;data.php&quot;,
-    param : &quot;str=1234&quot;,
-    res   : function (response, status) {
-        console.log(&quot;success&quot;);
-        console.log(this);
+    <pre class="prettyprint linenums"><code>ax5.xhr.config({
+  header      : {
+      'accept'      : &quot;*.*&quot;,
+        'content-type': &quot;application/x-www-form-urlencoded; charset=UTF-8&quot;
     },
-    error : function () {
-        console.log(&quot;error&quot;);
-        console.log(this);
-    }
- });
+    method         : &quot;GET&quot;,
+    url            : &quot;&quot;,
+    param          : &quot;&quot;,
+    async          : true,
+    username       : &quot;&quot;,
+    password       : &quot;&quot;,
+    withCredentials: false,
+    crossDomain    : false,
+    timeout        : 0
+});
 
- // req 또는 request 둘다 사용 가능합니다.
- ax5.xhr.request({
-    url   : &quot;data.php&quot;,
-    param : &quot;str=1234&quot;,
-    res   : function (response, status) {
-        // status 값이 200 인지 판단 가능
-        console.log(this);
+ax5.xhr.config({
+    header      : {
+        'accept' : &quot;*.html&quot;
     }
- });
- // 위와 같이 필요한 옵션만 정의 해서 사용 가능합니다.</code></pre>
+});
+// ax5.xhr 요청 기본값 설정</code></pre>
     
 
     
@@ -700,7 +807,7 @@ ax5.xhr은 내부에서 AJAX 요청에 대해 queue처리를 하여 순차적으
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Tue Jan 27 2015 00:45:07 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Mon Feb 02 2015 19:28:41 GMT+0900 (KST)
         </footer>
     </div>
 </div>

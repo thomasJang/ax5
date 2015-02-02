@@ -116,7 +116,7 @@
             
                 <li data-name="ax5.dom.child"><a href="ax5.dom.html#child">child</a></li>
             
-                <li data-name="ax5.dom.clazz"><a href="ax5.dom.html#clazz">clazz</a></li>
+                <li data-name="ax5.dom.class_name"><a href="ax5.dom.html#class_name">class_name</a></li>
             
                 <li data-name="ax5.dom.create"><a href="ax5.dom.html#create">create</a></li>
             
@@ -199,7 +199,7 @@
             
                 <li data-name="ax5.dom0.child"><a href="ax5.dom0.html#child">child</a></li>
             
-                <li data-name="ax5.dom0.clazz"><a href="ax5.dom0.html#clazz">clazz</a></li>
+                <li data-name="ax5.dom0.class_name"><a href="ax5.dom0.html#class_name">class_name</a></li>
             
                 <li data-name="ax5.dom0.css"><a href="ax5.dom0.html#css">css</a></li>
             
@@ -276,27 +276,6 @@
             </ul>
         </li>
     
-        <li class="item" data-name="ax5.ui">
-            <span class="title">
-                <a href="ax5.ui.html">ax5.ui</a>
-                
-                <span class="static">static</span>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
         <li class="item" data-name="ax5.util">
             <span class="title">
                 <a href="ax5.util.html">ax5.util</a>
@@ -325,6 +304,8 @@
                 <li data-name="ax5.util.error"><a href="ax5.util.html#error">error</a></li>
             
                 <li data-name="ax5.util.extend"><a href="ax5.util.html#extend">extend</a></li>
+            
+                <li data-name="ax5.util.extend_all"><a href="ax5.util.html#extend_all">extend_all</a></li>
             
                 <li data-name="ax5.util.filter"><a href="ax5.util.html#filter">filter</a></li>
             
@@ -399,6 +380,10 @@
             </span>
             <ul class="members itemMembers">
             
+            <span class="subtitle">Members</span>
+            
+                <li data-name="ax5.xhr.options"><a href="ax5.xhr.html#options">options</a></li>
+            
             </ul>
             <ul class="typedefs itemMembers">
             
@@ -407,7 +392,7 @@
             
             <span class="subtitle">Methods</span>
             
-                <li data-name="ax5.xhr.request"><a href="ax5.xhr.html#request">request</a></li>
+                <li data-name="ax5.xhr.config"><a href="ax5.xhr.html#config">config</a></li>
             
             </ul>
             <ul class="events itemMembers">
@@ -523,9 +508,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3235" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3303" target="_blank">
             ax5.js,
-            line 3235</a>
+            line 3303</a>
         </div>
         
     </div>
@@ -666,8 +651,8 @@
         
 
     
-    <pre class="prettyprint linenums"><code> var el = ax5.dom.get(&quot;[data-list-item='0']&quot;);
- ax5.dom.after(el, &quot;after&quot;);</code></pre>
+    <pre class="prettyprint linenums"><code>var el = ax5.dom.get(&quot;[data-list-item='0']&quot;);
+ax5.dom.after(el, &quot;after&quot;);</code></pre>
     
 
     
@@ -685,9 +670,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3183" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3251" target="_blank">
             ax5.js,
-            line 3183</a>
+            line 3251</a>
         </div>
         
     </div>
@@ -828,10 +813,10 @@
         
 
     
-    <pre class="prettyprint linenums"><code> var el = ax5.dom.get(&quot;[data-list-item='0']&quot;);
- ax5.dom.append(el, &quot;ㅈㅏㅇㄱㅣㅇㅕㅇ&quot;);
- ax5.dom.append(el, &quot;&lt;div&gt;장기영&lt;a href='#ABCDE'&gt;이건 어렵다&lt;/a&gt;&lt;/div&gt;&quot;);
- ax5.dom.append(ax5.dom.get(&quot;[data-list-item='2']&quot;), ax5.dom.get(&quot;#move-item&quot;));</code></pre>
+    <pre class="prettyprint linenums"><code>var el = ax5.dom.get(&quot;[data-list-item='0']&quot;);
+ax5.dom.append(el, &quot;ㅈㅏㅇㄱㅣㅇㅕㅇ&quot;);
+ax5.dom.append(el, &quot;&lt;div&gt;장기영&lt;a href='#ABCDE'&gt;이건 어렵다&lt;/a&gt;&lt;/div&gt;&quot;);
+ax5.dom.append(ax5.dom.get(&quot;[data-list-item='2']&quot;), ax5.dom.get(&quot;#move-item&quot;));</code></pre>
     
 
     
@@ -843,15 +828,15 @@
     <div class="nameContainer">
         <h4 class="name" id="attr">
             
-            <span class="type-signature static">static</span>ax5.dom.attr<span class="signature">(elements, <span class="optional">command</span>, O)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{String|Elements}</span>
+            <span class="type-signature static">static</span>ax5.dom.attr<span class="signature">(elements, O)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{String|Elements}</span>
         </h4>
     
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2790" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2869" target="_blank">
             ax5.js,
-            line 2790</a>
+            line 2869</a>
         </div>
         
     </div>
@@ -883,8 +868,6 @@
 		<th>Type</th>
 		
 		
-		<th>Default</th>
-		
 		
 		<th class="last">Description</th>
 	</tr>
@@ -908,58 +891,10 @@
             </td>
             
             
-                <td class="default">
-                
-                </td>
-            
             
             <td class="description last">
-                
-                    
-                    
-                        
-                    
                 
                 <p>대상의 엘리먼트 리스트 혹은 엘리먼트</p></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>command</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-|
-
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-            
-            
-                <td class="default">
-                
-                    get
-                
-                </td>
-            
-            
-            <td class="description last">
-                
-                    
-                        <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                <p>명령어</p></td>
         </tr>
 	
 	
@@ -982,17 +917,8 @@
             </td>
             
             
-                <td class="default">
-                
-                </td>
-            
             
             <td class="description last">
-                
-                    
-                    
-                        
-                    
                 
                 <p>json타입또는 문자열</p></td>
         </tr>
@@ -1052,9 +978,10 @@
         
 
     
-    <pre class="prettyprint linenums"><code> ax5.dom.attr(ax5.dom.get(&quot;[data-ax-grid=A]&quot;), &quot;set&quot;, {&quot;data-ax-spt&quot;:&quot;ABCD&quot;}); // set attribute
- ax5.dom.attr(ax5.dom.get(&quot;[data-ax-grid=A]&quot;), {&quot;data-ax-spt&quot;:&quot;9999&quot;, &quot;data-next&quot;:&quot;next&quot;}); // set attribute
- ax5.dom.attr(ax5.dom.get(&quot;[data-ax-grid=A]&quot;), &quot;remove&quot;, &quot;data-next&quot;);</code></pre>
+    <pre class="prettyprint linenums"><code>ax5.dom.attr(ax5.dom.get(&quot;[data-ax-grid=A]&quot;), {&quot;data-ax-spt&quot;:&quot;ABCD&quot;}); // set attribute
+ax5.dom.attr(ax5.dom.get(&quot;[data-ax-grid=A]&quot;), {&quot;data-ax-spt&quot;:&quot;9999&quot;, &quot;data-next&quot;:&quot;next&quot;}); // set attribute
+ax5.dom.attr(ax5.dom.get(&quot;[data-ax-grid=A]&quot;), &quot;data-ax-spt&quot;); // get attribute
+ax5.dom.attr(ax5.dom.get(&quot;[data-ax-grid=A]&quot;), {&quot;data-next&quot;:null}); // remove attribute</code></pre>
     
 
     
@@ -1072,9 +999,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3219" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3287" target="_blank">
             ax5.js,
-            line 3219</a>
+            line 3287</a>
         </div>
         
     </div>
@@ -1215,8 +1142,8 @@
         
 
     
-    <pre class="prettyprint linenums"><code> var el = ax5.dom.get(&quot;[data-list-item='0']&quot;);
- ax5.dom.before(el, &quot;before&quot;);</code></pre>
+    <pre class="prettyprint linenums"><code>var el = ax5.dom.get(&quot;[data-list-item='0']&quot;);
+ax5.dom.before(el, &quot;before&quot;);</code></pre>
     
 
     
@@ -1234,9 +1161,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3375" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3446" target="_blank">
             ax5.js,
-            line 3375</a>
+            line 3446</a>
         </div>
         
     </div>
@@ -1386,22 +1313,22 @@
         
 
     
-    <pre class="prettyprint linenums"><code> var axd = ax5.dom;
- axd.box_model(el);
- // {&quot;offset&quot;: {&quot;top&quot;: 101, &quot;left&quot;: 110}, &quot;position&quot;: {&quot;top&quot;: 101, &quot;left&quot;: 110}, &quot;width&quot;: 181.71875, &quot;height&quot;: 153, &quot;padding&quot;: [5,4,3,2], &quot;margin&quot;: [1,10,1,10], &quot;border&quot;: [&quot;2px double rgb(34, 34, 34)&quot;,&quot;2px double rgb(34, 34, 34)&quot;,&quot;2px double rgb(34, 34, 34)&quot;,&quot;2px double rgb(34, 34, 34)&quot;], &quot;borderWidth&quot;: [&quot;2&quot;,&quot;2&quot;,&quot;2&quot;,&quot;2&quot;], &quot;boxSizing&quot;: &quot;content-box&quot;}
+    <pre class="prettyprint linenums"><code>var axd = ax5.dom;
+axd.box_model(el);
+// {&quot;offset&quot;: {&quot;top&quot;: 101, &quot;left&quot;: 110}, &quot;position&quot;: {&quot;top&quot;: 101, &quot;left&quot;: 110}, &quot;width&quot;: 181.71875, &quot;height&quot;: 153, &quot;padding&quot;: [5,4,3,2], &quot;margin&quot;: [1,10,1,10], &quot;border&quot;: [&quot;2px double rgb(34, 34, 34)&quot;,&quot;2px double rgb(34, 34, 34)&quot;,&quot;2px double rgb(34, 34, 34)&quot;,&quot;2px double rgb(34, 34, 34)&quot;], &quot;borderWidth&quot;: [&quot;2&quot;,&quot;2&quot;,&quot;2&quot;,&quot;2&quot;], &quot;boxSizing&quot;: &quot;content-box&quot;}
 
- axd.box_model(el, &quot;offset&quot;);
- axd.box_model(el, &quot;position&quot;);
- axd.box_model(el, &quot;width&quot;);
- axd.box_model(el, &quot;height&quot;);
- axd.box_model(el, &quot;padding&quot;);
- axd.box_model(el, &quot;margin&quot;);
- axd.box_model(el, &quot;border&quot;);
- axd.box_model(el, &quot;borderWidth&quot;);
- axd.box_model(el, &quot;border-width&quot;);
- axd.box_model(el, &quot;boxSizing&quot;);
- axd.box_model(el, &quot;box-sizing&quot;);
- // 각각의 박스모델 속성을 지정하여 호출 할 수 있습니다. borderWidth, border-width 중 하나의 방법으로 사용 가능합니다.</code></pre>
+axd.box_model(el, &quot;offset&quot;);
+axd.box_model(el, &quot;position&quot;);
+axd.box_model(el, &quot;width&quot;);
+axd.box_model(el, &quot;height&quot;);
+axd.box_model(el, &quot;padding&quot;);
+axd.box_model(el, &quot;margin&quot;);
+axd.box_model(el, &quot;border&quot;);
+axd.box_model(el, &quot;borderWidth&quot;);
+axd.box_model(el, &quot;border-width&quot;);
+axd.box_model(el, &quot;boxSizing&quot;);
+axd.box_model(el, &quot;box-sizing&quot;);
+// 각각의 박스모델 속성을 지정하여 호출 할 수 있습니다. borderWidth, border-width 중 하나의 방법으로 사용 가능합니다.</code></pre>
     
 
     
@@ -1419,9 +1346,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2915" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2982" target="_blank">
             ax5.js,
-            line 2915</a>
+            line 2982</a>
         </div>
         
     </div>
@@ -1536,7 +1463,7 @@
         
 
     
-    <pre class="prettyprint linenums"><code> &lt;ul id=&quot;list-container&quot;&gt;
+    <pre class="prettyprint linenums"><code>&lt;ul id=&quot;list-container&quot;&gt;
      &lt;li data-list-item=&quot;0&quot;&gt;
         &lt;div&gt;child&gt;child&lt;/div&gt;
      &lt;/li&gt;
@@ -1545,15 +1472,15 @@
      &lt;li data-list-item=&quot;3&quot;&gt;&lt;/li&gt;
      &lt;li data-list-item=&quot;4&quot;&gt;&lt;/li&gt;
      &lt;li data-list-item=&quot;5&quot;&gt;&lt;/li&gt;
- &lt;/ul&gt;
- &lt;script&gt;
- var el = ax5.dom.get(&quot;#list-container&quot;);
- console.log(
+&lt;/ul&gt;
+&lt;script&gt;
+var el = ax5.dom.get(&quot;#list-container&quot;);
+console.log(
      ax5.dom.child(el)[1].tagName,
      ax5.dom.attr(ax5.dom.child(el)[1], &quot;data-list-item&quot;)
- );
- // LI 1
- &lt;/script&gt;</code></pre>
+);
+// LI 1
+&lt;/script&gt;</code></pre>
     
 
     
@@ -1563,17 +1490,17 @@
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="clazz">
+        <h4 class="name" id="class_name">
             
-            <span class="type-signature static">static</span>ax5.dom.clazz<span class="signature">(elements, <span class="optional">command</span>, O)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{String|Elements}</span>
+            <span class="type-signature static">static</span>ax5.dom.class_name<span class="signature">(elements, <span class="optional">command</span>, O)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{String|Elements}</span>
         </h4>
     
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2731" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2810" target="_blank">
             ax5.js,
-            line 2731</a>
+            line 2810</a>
         </div>
         
     </div>
@@ -1768,11 +1695,11 @@
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-js"> ax5.dom.clazz(ax5.dom.get(&quot;#abcd&quot;), &quot;class-text&quot;); // has 와 동일
- ax5.dom.clazz(ax5.dom.get(&quot;#abcd&quot;), &quot;add&quot;, &quot;class-text&quot;);
- ax5.dom.clazz(ax5.dom.get(&quot;#abcd&quot;), &quot;remove&quot;, &quot;class-text&quot;);
- ax5.dom.clazz(ax5.dom.get(&quot;#abcd&quot;), &quot;has&quot;, &quot;class-text&quot;);
- ax5.dom.clazz(ax5.dom.get(&quot;#abcd&quot;), &quot;toggle&quot;, &quot;class-text&quot;);</code></pre>
+    <pre class="prettyprint linenums"><code class="lang-js">ax5.dom.class_name(ax5.dom.get(&quot;#abcd&quot;), &quot;class-text&quot;); // has 와 동일
+ax5.dom.class_name(ax5.dom.get(&quot;#abcd&quot;), &quot;add&quot;, &quot;class-text&quot;);
+ax5.dom.class_name(ax5.dom.get(&quot;#abcd&quot;), &quot;remove&quot;, &quot;class-text&quot;);
+ax5.dom.class_name(ax5.dom.get(&quot;#abcd&quot;), &quot;has&quot;, &quot;class-text&quot;);
+ax5.dom.class_name(ax5.dom.get(&quot;#abcd&quot;), &quot;toggle&quot;, &quot;class-text&quot;);</code></pre>
     
 
     
@@ -1790,9 +1717,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2670" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2749" target="_blank">
             ax5.js,
-            line 2670</a>
+            line 2749</a>
         </div>
         
     </div>
@@ -1950,8 +1877,8 @@
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-js"> ax5.dom.create(&quot;script&quot;, {type:&quot;text/javascript&quot;, src:&quot;../ax5.js&quot;});
- ax5.dom.create(&quot;div&quot;, {id:&quot;createEleId&quot;, &quot;class&quot;:&quot;createEleClass&quot;}, &quot;&lt;a&gt;내가만든&lt;/a&gt;&quot;);</code></pre>
+    <pre class="prettyprint linenums"><code class="lang-js">ax5.dom.create(&quot;script&quot;, {type:&quot;text/javascript&quot;, src:&quot;../ax5.js&quot;});
+ax5.dom.create(&quot;div&quot;, {id:&quot;createEleId&quot;, &quot;class&quot;:&quot;createEleClass&quot;}, &quot;&lt;a&gt;내가만든&lt;/a&gt;&quot;);</code></pre>
     
 
     
@@ -1969,9 +1896,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2702" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2781" target="_blank">
             ax5.js,
-            line 2702</a>
+            line 2781</a>
         </div>
         
     </div>
@@ -2112,8 +2039,8 @@
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-js"> ax5.dom.css(ax5.dom.get(&quot;#abcd&quot;), {&quot;color&quot;:&quot;#ff3300&quot;});
- ax5.dom.css(ax5.dom.get(&quot;#abcd&quot;), {&quot;width&quot;:100});</code></pre>
+    <pre class="prettyprint linenums"><code class="lang-js">ax5.dom.css(ax5.dom.get(&quot;#abcd&quot;), {&quot;color&quot;:&quot;#ff3300&quot;});
+ax5.dom.css(ax5.dom.get(&quot;#abcd&quot;), {&quot;width&quot;:100});</code></pre>
     
 
     
@@ -2131,9 +2058,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3445" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3516" target="_blank">
             ax5.js,
-            line 3445</a>
+            line 3516</a>
         </div>
         
     </div>
@@ -2333,24 +2260,24 @@
         
 
     
-    <pre class="prettyprint linenums"><code> var axd = ax5.dom, axu = ax5.util, res = &quot;&quot;;
+    <pre class="prettyprint linenums"><code>var axd = ax5.dom, axu = ax5.util, res = &quot;&quot;;
 
- var el = axd.get(&quot;#list-container&quot;);
- axd.data(el, {a:1}); // set data
- axd.data(el, &quot;set&quot;, {a:1100, b:[0,1,2,3]}); // set data
+var el = axd.get(&quot;#list-container&quot;);
+axd.data(el, {a:1}); // set data
+axd.data(el, &quot;set&quot;, {a:1100, b:[0,1,2,3]}); // set data
 
- res += axd.data(el, &quot;a&quot;); // get data
- res += axd.data(el, &quot;get&quot;, &quot;b&quot;); // get data
- console.log(res);
- // 11000,1,2,3
+res += axd.data(el, &quot;a&quot;); // get data
+res += axd.data(el, &quot;get&quot;, &quot;b&quot;); // get data
+console.log(res);
+// 11000,1,2,3
 
- console.log(axd.data(el, &quot;b&quot;));
- // [0, 1, 2, 3]
- axd.data(el, &quot;remove&quot;, &quot;b&quot;); // remove data
- console.log(axd.data(el, &quot;b&quot;));
- // &quot;&quot;
+console.log(axd.data(el, &quot;b&quot;));
+// [0, 1, 2, 3]
+axd.data(el, &quot;remove&quot;, &quot;b&quot;); // remove data
+console.log(axd.data(el, &quot;b&quot;));
+// &quot;&quot;
 
- axd.data(el, &quot;remove&quot;); // remove all</code></pre>
+axd.data(el, &quot;remove&quot;); // remove all</code></pre>
     
 
     
@@ -2368,9 +2295,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3119" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3186" target="_blank">
             ax5.js,
-            line 3119</a>
+            line 3186</a>
         </div>
         
     </div>
@@ -2485,8 +2412,8 @@
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-js"> var el = ax5.dom.get(&quot;#list-container&quot;);
- ax5.dom.empty(el);</code></pre>
+    <pre class="prettyprint linenums"><code class="lang-js">var el = ax5.dom.get(&quot;#list-container&quot;);
+ax5.dom.empty(el);</code></pre>
     
 
     
@@ -2504,9 +2431,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2605" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2685" target="_blank">
             ax5.js,
-            line 2605</a>
+            line 2685</a>
         </div>
         
     </div>
@@ -2647,9 +2574,9 @@
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-js"> ax5.dom.get(&quot;#element01&quot;);
- ax5.dom.get(&quot;input[type='text']&quot;);
- ax5.dom.get( ax5.dom.get(&quot;input[type='text']&quot;) );</code></pre>
+    <pre class="prettyprint linenums"><code class="lang-js">ax5.dom.get(&quot;#element01&quot;);
+ax5.dom.get(&quot;input[type='text']&quot;);
+ax5.dom.get( ax5.dom.get(&quot;input[type='text']&quot;) );</code></pre>
     
 
     
@@ -2667,9 +2594,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2654" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2733" target="_blank">
             ax5.js,
-            line 2654</a>
+            line 2733</a>
         </div>
         
     </div>
@@ -2807,8 +2734,8 @@
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-js"> ax5.dom.get_one(&quot;#element01&quot;);
- ax5.dom.get_one(&quot;input[type='text']&quot;);</code></pre>
+    <pre class="prettyprint linenums"><code class="lang-js">ax5.dom.get_one(&quot;#element01&quot;);
+ax5.dom.get_one(&quot;input[type='text']&quot;);</code></pre>
     
 
     
@@ -2826,9 +2753,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3104" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3171" target="_blank">
             ax5.js,
-            line 3104</a>
+            line 3171</a>
         </div>
         
     </div>
@@ -2943,8 +2870,8 @@
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-js"> var el = ax5.dom.get(&quot;#list-container&quot;)
- ax5.dom.height(el);</code></pre>
+    <pre class="prettyprint linenums"><code class="lang-js">var el = ax5.dom.get(&quot;#list-container&quot;)
+ax5.dom.height(el);</code></pre>
     
 
     
@@ -2962,9 +2889,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3145" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3213" target="_blank">
             ax5.js,
-            line 3145</a>
+            line 3213</a>
         </div>
         
     </div>
@@ -3114,9 +3041,9 @@
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-js"> var el = ax5.dom.get(&quot;#list-container&quot;);
- console.log( ax5.dom.html(el) );
- ax5.dom.html(el, &quot;&lt;a href='#1234'&gt;링크&quot;);</code></pre>
+    <pre class="prettyprint linenums"><code class="lang-js">var el = ax5.dom.get(&quot;#list-container&quot;);
+console.log( ax5.dom.html(el) );
+ax5.dom.html(el, &quot;&lt;a href='#1234'&gt;링크&quot;);</code></pre>
     
 
     
@@ -3134,9 +3061,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3053" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3120" target="_blank">
             ax5.js,
-            line 3053</a>
+            line 3120</a>
         </div>
         
     </div>
@@ -3302,9 +3229,9 @@
         
 
     
-    <pre class="prettyprint linenums"><code> &lt;div&gt;
+    <pre class="prettyprint linenums"><code>&lt;div&gt;
      &lt;ul id=&quot;list-container&quot;&gt;
-        &lt;li data-list-item=&quot;0&quot; id=&quot;li0&quot;&gt;
+         &lt;li data-list-item=&quot;0&quot; id=&quot;li0&quot;&gt;
             &lt;div&gt;child&gt;child&lt;/div&gt;
          &lt;/li&gt;
          &lt;li data-list-item=&quot;1&quot; id=&quot;li1&quot;&gt;&lt;/li&gt;
@@ -3313,17 +3240,17 @@
          &lt;li data-list-item=&quot;4&quot; id=&quot;li4&quot;&gt;&lt;/li&gt;
          &lt;li data-list-item=&quot;5&quot; id=&quot;li5&quot;&gt;&lt;/li&gt;
      &lt;/ul&gt;
- &lt;/div&gt;
- &lt;script&gt;
- var el = ax5.dom.get(&quot;#list-container&quot;);
- var li = ax5.dom.child(el)[0];
- var c_li;
+&lt;/div&gt;
+&lt;script&gt;
+var el = ax5.dom.get(&quot;#list-container&quot;);
+var li = ax5.dom.child(el)[0];
+var c_li;
 
- console.log(
+console.log(
      (c_li = ax5.dom.next(li, 2)).id,
      (c_li = ax5.dom.prev(c_li)).id
- );
- &lt;/script&gt;</code></pre>
+);
+&lt;/script&gt;</code></pre>
     
 
     
@@ -3341,9 +3268,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2882" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2949" target="_blank">
             ax5.js,
-            line 2882</a>
+            line 2949</a>
         </div>
         
     </div>
@@ -3513,9 +3440,9 @@
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-js"> var mydom = ax5.dom.get(&quot;[data-event-test=text-box]&quot;)
- ax5.dom.off(mydom, &quot;click&quot;);
- ax5.dom.off(mydom, &quot;click.fnb&quot;);</code></pre>
+    <pre class="prettyprint linenums"><code class="lang-js">var mydom = ax5.dom.get(&quot;[data-event-test=text-box]&quot;)
+ax5.dom.off(mydom, &quot;click&quot;);
+ax5.dom.off(mydom, &quot;click.fnb&quot;);</code></pre>
     
 
     
@@ -3533,9 +3460,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3304" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3375" target="_blank">
             ax5.js,
-            line 3304</a>
+            line 3375</a>
         </div>
         
     </div>
@@ -3650,10 +3577,10 @@
         
 
     
-    <pre class="prettyprint linenums"><code> console.log(
- ax5.util.to_json(ax5.dom.offset(el))
- );
- // {&quot;top&quot;: 8, &quot;left&quot;: 8}</code></pre>
+    <pre class="prettyprint linenums"><code>console.log(
+ax5.util.to_json(ax5.dom.offset(el))
+);
+// {&quot;top&quot;: 8, &quot;left&quot;: 8}</code></pre>
     
 
     
@@ -3671,9 +3598,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2836" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2903" target="_blank">
             ax5.js,
-            line 2836</a>
+            line 2903</a>
         </div>
         
     </div>
@@ -3826,26 +3753,26 @@
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-js"> var fna = function(){console.log(&quot;fna&quot;)};
- var fnb = function(){console.log(&quot;fnb&quot;)};
- var fnc = function(){console.log(&quot;fnc&quot;)};
+    <pre class="prettyprint linenums"><code class="lang-js">var fna = function(){console.log(&quot;fna&quot;)};
+var fnb = function(){console.log(&quot;fnb&quot;)};
+var fnc = function(){console.log(&quot;fnc&quot;)};
 
- var mydom = ax5.dom.get(&quot;[data-event-test=text-box]&quot;), remove_dom = ax5.dom.get(&quot;[data-event-test=remove]&quot;);
+var mydom = ax5.dom.get(&quot;[data-event-test=text-box]&quot;), remove_dom = ax5.dom.get(&quot;[data-event-test=remove]&quot;);
 
- ax5.dom.on(mydom, &quot;click&quot;, window.fna);
- ax5.dom.on(mydom, &quot;click&quot;, window.fnb);
- ax5.dom.on(mydom, &quot;click&quot;, window.fnc);
+ax5.dom.on(mydom, &quot;click&quot;, window.fna);
+ax5.dom.on(mydom, &quot;click&quot;, window.fnb);
+ax5.dom.on(mydom, &quot;click&quot;, window.fnc);
 
- ax5.dom.on(remove_dom, &quot;click&quot;, function(){
+ax5.dom.on(remove_dom, &quot;click&quot;, function(){
     ax5.dom.off(mydom, &quot;click&quot;, window.fna);
     ax5.dom.off(remove_dom, &quot;click&quot;);
     alert(&quot;이벤트 제거&quot;);
- });
+});
 
- // 핸들방식
- ax5.dom.on(mydom, &quot;click.fna&quot;, window.fna);
- ax5.dom.on(mydom, &quot;click.fnb&quot;, window.fnb);
- ax5.dom.on(mydom, &quot;click.fnc&quot;, window.fnc);</code></pre>
+// 핸들방식
+ax5.dom.on(mydom, &quot;click.fna&quot;, window.fna);
+ax5.dom.on(mydom, &quot;click.fnb&quot;, window.fnb);
+ax5.dom.on(mydom, &quot;click.fnc&quot;, window.fnc);</code></pre>
     
 
     
@@ -3863,9 +3790,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2954" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3021" target="_blank">
             ax5.js,
-            line 2954</a>
+            line 3021</a>
         </div>
         
     </div>
@@ -4000,15 +3927,15 @@
         
 
     
-    <pre class="prettyprint linenums"><code> // cond 속성정의
- var cond = {
+    <pre class="prettyprint linenums"><code>// cond 속성정의
+var cond = {
     tagname: {String} - 태그명 (ex. a, div, span..),
     clazz: {String} - 클래스명
     [, 그 외 찾고 싶은 attribute명들]
- };
- console.log(
+};
+console.log(
     ax5.dom.parent(e.target, {tagname:&quot;a&quot;, clazz:&quot;ax-menu-handel&quot;, &quot;data-custom-attr&quot;:&quot;attr_value&quot;})
- );</code></pre>
+);</code></pre>
     
 
     
@@ -4026,9 +3953,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3337" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3408" target="_blank">
             ax5.js,
-            line 3337</a>
+            line 3408</a>
         </div>
         
     </div>
@@ -4143,10 +4070,10 @@
         
 
     
-    <pre class="prettyprint linenums"><code> console.log(
-    ax5.util.to_json(ax5.dom.position(el))
- );
- // {&quot;top&quot;: 8, &quot;left&quot;: 8}</code></pre>
+    <pre class="prettyprint linenums"><code>console.log(
+ax5.util.to_json(ax5.dom.position(el))
+);
+// {&quot;top&quot;: 8, &quot;left&quot;: 8}</code></pre>
     
 
     
@@ -4164,9 +4091,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3201" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3269" target="_blank">
             ax5.js,
-            line 3201</a>
+            line 3269</a>
         </div>
         
     </div>
@@ -4307,10 +4234,10 @@
         
 
     
-    <pre class="prettyprint linenums"><code> var el = ax5.dom.get(&quot;[data-list-item='0']&quot;);
- ax5.dom.prepend(el, &quot;ㅈㅏㅇㄱㅣㅇㅕㅇ&quot;);
- ax5.dom.prepend(el, &quot;&lt;div&gt;장기영&lt;a href='#ABCDE'&gt;이건 어렵다&lt;/a&gt;&lt;/div&gt;&quot;);
- ax5.dom.prepend(ax5.dom.get(&quot;[data-list-item='2']&quot;), ax5.dom.get(&quot;#move-item&quot;));</code></pre>
+    <pre class="prettyprint linenums"><code>var el = ax5.dom.get(&quot;[data-list-item='0']&quot;);
+ax5.dom.prepend(el, &quot;ㅈㅏㅇㄱㅣㅇㅕㅇ&quot;);
+ax5.dom.prepend(el, &quot;&lt;div&gt;장기영&lt;a href='#ABCDE'&gt;이건 어렵다&lt;/a&gt;&lt;/div&gt;&quot;);
+ax5.dom.prepend(ax5.dom.get(&quot;[data-list-item='2']&quot;), ax5.dom.get(&quot;#move-item&quot;));</code></pre>
     
 
     
@@ -4328,9 +4255,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3017" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3084" target="_blank">
             ax5.js,
-            line 3017</a>
+            line 3084</a>
         </div>
         
     </div>
@@ -4496,28 +4423,28 @@
         
 
     
-    <pre class="prettyprint linenums"><code> &lt;div&gt;
- &lt;ul id=&quot;list-container&quot;&gt;
-     &lt;li data-list-item=&quot;0&quot; id=&quot;li0&quot;&gt;
-        &lt;div&gt;child&gt;child&lt;/div&gt;
-     &lt;/li&gt;
-     &lt;li data-list-item=&quot;1&quot; id=&quot;li1&quot;&gt;&lt;/li&gt;
-     &lt;li data-list-item=&quot;2&quot; id=&quot;li2&quot;&gt;&lt;/li&gt;
-     &lt;li data-list-item=&quot;3&quot; id=&quot;li3&quot;&gt;&lt;/li&gt;
-     &lt;li data-list-item=&quot;4&quot; id=&quot;li4&quot;&gt;&lt;/li&gt;
-     &lt;li data-list-item=&quot;5&quot; id=&quot;li5&quot;&gt;&lt;/li&gt;
- &lt;/ul&gt;
- &lt;/div&gt;
- &lt;script&gt;
- var el = ax5.dom.get(&quot;#list-container&quot;);
- var li = ax5.dom.child(el)[0];
- var c_li;
+    <pre class="prettyprint linenums"><code>&lt;div&gt;
+     &lt;ul id=&quot;list-container&quot;&gt;
+         &lt;li data-list-item=&quot;0&quot; id=&quot;li0&quot;&gt;
+            &lt;div&gt;child&gt;child&lt;/div&gt;
+         &lt;/li&gt;
+         &lt;li data-list-item=&quot;1&quot; id=&quot;li1&quot;&gt;&lt;/li&gt;
+         &lt;li data-list-item=&quot;2&quot; id=&quot;li2&quot;&gt;&lt;/li&gt;
+         &lt;li data-list-item=&quot;3&quot; id=&quot;li3&quot;&gt;&lt;/li&gt;
+         &lt;li data-list-item=&quot;4&quot; id=&quot;li4&quot;&gt;&lt;/li&gt;
+         &lt;li data-list-item=&quot;5&quot; id=&quot;li5&quot;&gt;&lt;/li&gt;
+     &lt;/ul&gt;
+&lt;/div&gt;
+&lt;script&gt;
+var el = ax5.dom.get(&quot;#list-container&quot;);
+var li = ax5.dom.child(el)[0];
+var c_li;
 
- console.log(
+console.log(
      (c_li = ax5.dom.next(li, 2)).id,
      (c_li = ax5.dom.prev(c_li)).id
- );
- &lt;/script&gt;</code></pre>
+);
+&lt;/script&gt;</code></pre>
     
 
     
@@ -4535,9 +4462,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2515" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2610" target="_blank">
             ax5.js,
-            line 2515</a>
+            line 2610</a>
         </div>
         
     </div>
@@ -4644,13 +4571,13 @@
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-js"> var a = 1;
- setTimeout(function(){
-    ax5.dom.ready(function(){
-        console.log(&quot;test&quot; + a);
-        console.log(ax5.util.left(&quot;axisj-ax5&quot;, &quot;-&quot;));
-    });
- }, 1000);</code></pre>
+    <pre class="prettyprint linenums"><code class="lang-js">var a = 1;
+setTimeout(function(){
+   ax5.dom.ready(function(){
+       console.log(&quot;test&quot; + a);
+       console.log(ax5.util.left(&quot;axisj-ax5&quot;, &quot;-&quot;));
+   });
+}, 1000);</code></pre>
     
 
     
@@ -4668,9 +4595,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3286" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3354" target="_blank">
             ax5.js,
-            line 3286</a>
+            line 3354</a>
         </div>
         
     </div>
@@ -4780,8 +4707,8 @@
         
 
     
-    <pre class="prettyprint linenums"><code> var el = ax5.dom.get(&quot;[data-list-item='0']&quot;);
- ax5.dom.remove(el);</code></pre>
+    <pre class="prettyprint linenums"><code>var el = ax5.dom.get(&quot;[data-list-item='0']&quot;);
+ax5.dom.remove(el);</code></pre>
     
 
     
@@ -4799,9 +4726,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2590" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2670" target="_blank">
             ax5.js,
-            line 2590</a>
+            line 2670</a>
         </div>
         
     </div>
@@ -4908,9 +4835,9 @@
         
 
     
-    <pre class="prettyprint linenums"><code> ax5.dom.resize(function(){
+    <pre class="prettyprint linenums"><code>ax5.dom.resize(function(){
     console.log( 1, document.body.clientWidth );
- });</code></pre>
+});</code></pre>
     
 
     
@@ -4928,9 +4855,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3089" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3156" target="_blank">
             ax5.js,
-            line 3089</a>
+            line 3156</a>
         </div>
         
     </div>
@@ -5045,8 +4972,8 @@
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-js"> var el = ax5.dom.get(&quot;#list-container&quot;)
- ax5.dom.width(el);</code></pre>
+    <pre class="prettyprint linenums"><code class="lang-js">var el = ax5.dom.get(&quot;#list-container&quot;)
+ax5.dom.width(el);</code></pre>
     
 
     
@@ -5069,7 +4996,7 @@
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Tue Jan 27 2015 00:45:07 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Mon Feb 02 2015 19:28:41 GMT+0900 (KST)
         </footer>
     </div>
 </div>

@@ -11,9 +11,9 @@ ax5.ui = (function () {
 	 * @logs
 	 * 2014-12-12 tom : 시작
 	 * @example
-	 ```
-	 var myui = new ax5.ui.ax_ui();
-	 ```
+	 * ```
+	 * var myui = new ax5.ui.ax_ui();
+	 * ```
 	 */
 	function ax_ui() {
 		this.config = {};
@@ -25,12 +25,12 @@ ax5.ui = (function () {
 		 * @param {Boolean} [call_init=true] - init 함수 호출 여부
 		 * @returns {ax5.ui.ax_ui}
 		 * @example
-		 ```js
-		 var myui = new ax5.ui.ax_ui();
-		 myui.set_config({
-    id:"abcd"
- });
-		 ```
+		 * ```
+		 * var myui = new ax5.ui.ax_ui();
+		 * myui.set_config({
+		 * 	id:"abcd"
+		 * });
+		 * ```
 		 */
 		this.set_config = function (cfg, call_init) {
 			U.extend(this.config, cfg, true);
