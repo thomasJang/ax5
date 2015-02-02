@@ -483,10 +483,10 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
             
 
     
-    <pre class="prettyprint linenums"><code> ax5.dom(&quot;#elementid&quot;);
- var ax = ax5.dom;
- ax(&quot;#elementid&quot;);
- // 처러 사용할 수 있습니다.</code></pre>
+    <pre class="prettyprint linenums"><code>ax5.dom(&quot;#elementid&quot;);
+var ax = ax5.dom;
+ax(&quot;#elementid&quot;);
+// 처러 사용할 수 있습니다.</code></pre>
     
 
         
@@ -553,7 +553,7 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
 
     
-    <pre class="prettyprint linenums"><code> ax5.dom(&quot;[data-ax-grid&quot;).elements</code></pre>
+    <pre class="prettyprint linenums"><code>ax5.dom(&quot;[data-ax-grid&quot;).elements</code></pre>
     
 
     
@@ -606,7 +606,7 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
 
     
-    <pre class="prettyprint linenums"><code> ax5.dom(&quot;[data-ax-grid&quot;).length</code></pre>
+    <pre class="prettyprint linenums"><code>ax5.dom(&quot;[data-ax-grid&quot;).length</code></pre>
     
 
     
@@ -630,9 +630,9 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2124" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2128" target="_blank">
             ax5.js,
-            line 2124</a>
+            line 2128</a>
         </div>
         
     </div>
@@ -747,10 +747,10 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
 
     
-    <pre class="prettyprint linenums"><code> ax5.dom(&quot;[data-list-item='0']&quot;)
- .after(&quot;ㅈㅏㅇㄱㅣㅇㅕㅇ&quot;)
- .after(&quot;&lt;div&gt;장기영&lt;a href='#ABCDE'&gt;이건 어렵다&lt;/a&gt;&lt;/div&gt;&quot;)
- .after(ax5.dom.get(&quot;#move-item&quot;));</code></pre>
+    <pre class="prettyprint linenums"><code>ax5.dom(&quot;[data-list-item='0']&quot;)
+.after(&quot;ㅈㅏㅇㄱㅣㅇㅕㅇ&quot;)
+.after(&quot;&lt;div&gt;장기영&lt;a href='#ABCDE'&gt;이건 어렵다&lt;/a&gt;&lt;/div&gt;&quot;)
+.after(ax5.dom.get(&quot;#move-item&quot;));</code></pre>
     
 
     
@@ -768,9 +768,9 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2073" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2077" target="_blank">
             ax5.js,
-            line 2073</a>
+            line 2077</a>
         </div>
         
     </div>
@@ -885,10 +885,10 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
 
     
-    <pre class="prettyprint linenums"><code> ax5.dom(&quot;[data-list-item='0']&quot;)
- .append(&quot;ㅈㅏㅇㄱㅣㅇㅕㅇ&quot;)
- .append(&quot;&lt;div&gt;장기영&lt;a href='#ABCDE'&gt;이건 어렵다&lt;/a&gt;&lt;/div&gt;&quot;)
- .append(ax5.dom.get(&quot;#move-item&quot;));</code></pre>
+    <pre class="prettyprint linenums"><code>ax5.dom(&quot;[data-list-item='0']&quot;)
+.append(&quot;ㅈㅏㅇㄱㅣㅇㅕㅇ&quot;)
+.append(&quot;&lt;div&gt;장기영&lt;a href='#ABCDE'&gt;이건 어렵다&lt;/a&gt;&lt;/div&gt;&quot;)
+.append(ax5.dom.get(&quot;#move-item&quot;));</code></pre>
     
 
     
@@ -906,9 +906,9 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1893" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1897" target="_blank">
             ax5.js,
-            line 1893</a>
+            line 1897</a>
         </div>
         
     </div>
@@ -1026,12 +1026,12 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-js"> // set attribute
- ax5.dom(&quot;[data-ax-grid=A]&quot;).attr({&quot;data-ax-spt&quot;:&quot;9999&quot;, &quot;data-next&quot;:&quot;next&quot;});
- // get or read
- console.log( ax5.dom(&quot;[data-ax-grid=A]&quot;).attr(&quot;data-ax-spt&quot;) );
- // remove attribute, set null
- ax5.dom(&quot;[data-ax-grid=A]&quot;).attr({&quot;data-next2&quot;:null});</code></pre>
+    <pre class="prettyprint linenums"><code class="lang-js">// set attribute
+ax5.dom(&quot;[data-ax-grid=A]&quot;).attr({&quot;data-ax-spt&quot;:&quot;9999&quot;, &quot;data-next&quot;:&quot;next&quot;});
+// get or read
+console.log( ax5.dom(&quot;[data-ax-grid=A]&quot;).attr(&quot;data-ax-spt&quot;) );
+// remove attribute, set null
+ax5.dom(&quot;[data-ax-grid=A]&quot;).attr({&quot;data-next2&quot;:null});</code></pre>
     
 
     
@@ -1049,9 +1049,9 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2107" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2111" target="_blank">
             ax5.js,
-            line 2107</a>
+            line 2111</a>
         </div>
         
     </div>
@@ -1166,10 +1166,10 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
 
     
-    <pre class="prettyprint linenums"><code> ax5.dom(&quot;[data-list-item='0']&quot;)
- .before(&quot;ㅈㅏㅇㄱㅣㅇㅕㅇ&quot;)
- .before(&quot;&lt;div&gt;장기영&lt;a href='#ABCDE'&gt;이건 어렵다&lt;/a&gt;&lt;/div&gt;&quot;)
- .before(ax5.dom.get(&quot;#move-item&quot;));</code></pre>
+    <pre class="prettyprint linenums"><code>ax5.dom(&quot;[data-list-item='0']&quot;)
+.before(&quot;ㅈㅏㅇㄱㅣㅇㅕㅇ&quot;)
+.before(&quot;&lt;div&gt;장기영&lt;a href='#ABCDE'&gt;이건 어렵다&lt;/a&gt;&lt;/div&gt;&quot;)
+.before(ax5.dom.get(&quot;#move-item&quot;));</code></pre>
     
 
     
@@ -1187,9 +1187,9 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2184" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2188" target="_blank">
             ax5.js,
-            line 2184</a>
+            line 2188</a>
         </div>
         
     </div>
@@ -1339,22 +1339,22 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
 
     
-    <pre class="prettyprint linenums"><code> var axd = ax5.dom;
- axd(&quot;.ax5-sample-view&quot;).box_model()
- // {&quot;offset&quot;: {&quot;top&quot;: 101, &quot;left&quot;: 110}, &quot;position&quot;: {&quot;top&quot;: 101, &quot;left&quot;: 110}, &quot;width&quot;: 181.71875, &quot;height&quot;: 153, &quot;padding&quot;: [5,4,3,2], &quot;margin&quot;: [1,10,1,10], &quot;border&quot;: [&quot;2px double rgb(34, 34, 34)&quot;,&quot;2px double rgb(34, 34, 34)&quot;,&quot;2px double rgb(34, 34, 34)&quot;,&quot;2px double rgb(34, 34, 34)&quot;], &quot;borderWidth&quot;: [&quot;2&quot;,&quot;2&quot;,&quot;2&quot;,&quot;2&quot;], &quot;boxSizing&quot;: &quot;content-box&quot;}
+    <pre class="prettyprint linenums"><code>var axd = ax5.dom;
+axd(&quot;.ax5-sample-view&quot;).box_model()
+// {&quot;offset&quot;: {&quot;top&quot;: 101, &quot;left&quot;: 110}, &quot;position&quot;: {&quot;top&quot;: 101, &quot;left&quot;: 110}, &quot;width&quot;: 181.71875, &quot;height&quot;: 153, &quot;padding&quot;: [5,4,3,2], &quot;margin&quot;: [1,10,1,10], &quot;border&quot;: [&quot;2px double rgb(34, 34, 34)&quot;,&quot;2px double rgb(34, 34, 34)&quot;,&quot;2px double rgb(34, 34, 34)&quot;,&quot;2px double rgb(34, 34, 34)&quot;], &quot;borderWidth&quot;: [&quot;2&quot;,&quot;2&quot;,&quot;2&quot;,&quot;2&quot;], &quot;boxSizing&quot;: &quot;content-box&quot;}
 
- axd(&quot;.ax5-sample-view&quot;).box_model(&quot;offset&quot;);
- axd(&quot;.ax5-sample-view&quot;).box_model(&quot;position&quot;);
- axd(&quot;.ax5-sample-view&quot;).box_model(&quot;width&quot;);
- axd(&quot;.ax5-sample-view&quot;).box_model(&quot;height&quot;);
- axd(&quot;.ax5-sample-view&quot;).box_model(&quot;padding&quot;);
- axd(&quot;.ax5-sample-view&quot;).box_model(&quot;margin&quot;);
- axd(&quot;.ax5-sample-view&quot;).box_model(&quot;border&quot;);
- axd(&quot;.ax5-sample-view&quot;).box_model(&quot;borderWidth&quot;);
- axd(&quot;.ax5-sample-view&quot;).box_model(&quot;border-width&quot;);
- axd(&quot;.ax5-sample-view&quot;).box_model(&quot;boxSizing&quot;);
- axd(&quot;.ax5-sample-view&quot;).box_model(&quot;box-sizing&quot;);
- // 각각의 박스모델 속성을 지정하여 호출 할 수 있습니다. borderWidth, border-width 중 하나의 방법으로 사용 가능합니다.</code></pre>
+axd(&quot;.ax5-sample-view&quot;).box_model(&quot;offset&quot;);
+axd(&quot;.ax5-sample-view&quot;).box_model(&quot;position&quot;);
+axd(&quot;.ax5-sample-view&quot;).box_model(&quot;width&quot;);
+axd(&quot;.ax5-sample-view&quot;).box_model(&quot;height&quot;);
+axd(&quot;.ax5-sample-view&quot;).box_model(&quot;padding&quot;);
+axd(&quot;.ax5-sample-view&quot;).box_model(&quot;margin&quot;);
+axd(&quot;.ax5-sample-view&quot;).box_model(&quot;border&quot;);
+axd(&quot;.ax5-sample-view&quot;).box_model(&quot;borderWidth&quot;);
+axd(&quot;.ax5-sample-view&quot;).box_model(&quot;border-width&quot;);
+axd(&quot;.ax5-sample-view&quot;).box_model(&quot;boxSizing&quot;);
+axd(&quot;.ax5-sample-view&quot;).box_model(&quot;box-sizing&quot;);
+// 각각의 박스모델 속성을 지정하여 호출 할 수 있습니다. borderWidth, border-width 중 하나의 방법으로 사용 가능합니다.</code></pre>
     
 
     
@@ -1372,9 +1372,9 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2013" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2017" target="_blank">
             ax5.js,
-            line 2013</a>
+            line 2017</a>
         </div>
         
     </div>
@@ -1445,10 +1445,10 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
 
     
-    <pre class="prettyprint linenums"><code> var dom_child = ax5.dom(&quot;#list-container&quot;).child();
- ax5.dom(dom_child).child();
- dom_child.child();
- // 원하는 대로~</code></pre>
+    <pre class="prettyprint linenums"><code>var dom_child = ax5.dom(&quot;#list-container&quot;).child();
+ax5.dom(dom_child).child();
+dom_child.child();
+// 원하는 대로~</code></pre>
     
 
     
@@ -1466,9 +1466,9 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1820" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1824" target="_blank">
             ax5.js,
-            line 1820</a>
+            line 1824</a>
         </div>
         
     </div>
@@ -1631,14 +1631,14 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
 
     
-    <pre class="prettyprint linenums"><code> console.log(
- ax5.dom(&quot;[data-ax-grid=A]&quot;).class_name(&quot;A&quot;),
- ax5.dom(&quot;[data-ax-grid='A']&quot;).class_name(&quot;has&quot;,&quot;A&quot;)
- );
- ax5.dom(&quot;[data-ax-grid=A]&quot;).class_name(&quot;add&quot;, &quot;adclass&quot;).class(&quot;remove&quot;, &quot;adclass&quot;).class(&quot;remove&quot;, &quot;A&quot;);
+    <pre class="prettyprint linenums"><code>console.log(
+ax5.dom(&quot;[data-ax-grid=A]&quot;).class_name(&quot;A&quot;),
+ax5.dom(&quot;[data-ax-grid='A']&quot;).class_name(&quot;has&quot;,&quot;A&quot;)
+);
+ax5.dom(&quot;[data-ax-grid=A]&quot;).class_name(&quot;add&quot;, &quot;adclass&quot;).class(&quot;remove&quot;, &quot;adclass&quot;).class(&quot;remove&quot;, &quot;A&quot;);
 
- ax5.dom(&quot;[data-ax-grid=A]&quot;).class_name(&quot;toggle&quot;, &quot;red&quot;);
- ax5.dom(&quot;[data-ax-grid=\&quot;9B\&quot;]&quot;).class_name(&quot;toggle&quot;, &quot;red&quot;);</code></pre>
+ax5.dom(&quot;[data-ax-grid=A]&quot;).class_name(&quot;toggle&quot;, &quot;red&quot;);
+ax5.dom(&quot;[data-ax-grid=\&quot;9B\&quot;]&quot;).class_name(&quot;toggle&quot;, &quot;red&quot;);</code></pre>
     
 
     
@@ -1656,9 +1656,9 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1802" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1806" target="_blank">
             ax5.js,
-            line 1802</a>
+            line 1806</a>
         </div>
         
     </div>
@@ -1776,11 +1776,11 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-js"> ax5.dom(&quot;[data-ax-grid]&quot;).css({&quot;color&quot;:&quot;#ff3300&quot;, border:&quot;1px solid #000&quot;});
- console.log( ax5.dom(&quot;[data-ax-grid]&quot;).css(&quot;color&quot;) );
- // rgb(255, 51, 0)
- console.log( ax5.dom(&quot;[data-ax-grid]&quot;).css([&quot;border&quot;,&quot;color&quot;]) );
- // {border: &quot;1px solid rgb(0, 0, 0)&quot;, color: &quot;rgb(255, 51, 0)&quot;}</code></pre>
+    <pre class="prettyprint linenums"><code class="lang-js">ax5.dom(&quot;[data-ax-grid]&quot;).css({&quot;color&quot;:&quot;#ff3300&quot;, border:&quot;1px solid #000&quot;});
+console.log( ax5.dom(&quot;[data-ax-grid]&quot;).css(&quot;color&quot;) );
+// rgb(255, 51, 0)
+console.log( ax5.dom(&quot;[data-ax-grid]&quot;).css([&quot;border&quot;,&quot;color&quot;]) );
+// {border: &quot;1px solid rgb(0, 0, 0)&quot;, color: &quot;rgb(255, 51, 0)&quot;}</code></pre>
     
 
     
@@ -1798,9 +1798,9 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2213" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2217" target="_blank">
             ax5.js,
-            line 2213</a>
+            line 2217</a>
         </div>
         
     </div>
@@ -1965,24 +1965,24 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
 
     
-    <pre class="prettyprint linenums"><code> var axd = ax5.dom, axu = ax5.util, res = &quot;&quot;;
+    <pre class="prettyprint linenums"><code>var axd = ax5.dom, axu = ax5.util, res = &quot;&quot;;
 
- var el = axd(&quot;#list-container&quot;);
- el.data({a:1}); // set data
- el.data(&quot;set&quot;, {a:1100, b:[0,1,2,3]}); // set data
+var el = axd(&quot;#list-container&quot;);
+el.data({a:1}); // set data
+el.data(&quot;set&quot;, {a:1100, b:[0,1,2,3]}); // set data
 
- res += el.data(&quot;a&quot;); // get data
- res += el.data(&quot;get&quot;, &quot;b&quot;); // get data
- console.log(res);
- // 11000,1,2,3
+res += el.data(&quot;a&quot;); // get data
+res += el.data(&quot;get&quot;, &quot;b&quot;); // get data
+console.log(res);
+// 11000,1,2,3
 
- console.log(el.data(&quot;b&quot;));
- // [0, 1, 2, 3]
- el.data(&quot;remove&quot;, &quot;b&quot;); // remove data
- console.log(el.data(&quot;b&quot;));
- // &quot;&quot;
+console.log(el.data(&quot;b&quot;));
+// [0, 1, 2, 3]
+el.data(&quot;remove&quot;, &quot;b&quot;); // remove data
+console.log(el.data(&quot;b&quot;));
+// &quot;&quot;
 
- el.data(&quot;remove&quot;); // remove all</code></pre>
+el.data(&quot;remove&quot;); // remove all</code></pre>
     
 
     
@@ -2000,9 +2000,9 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1912" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1916" target="_blank">
             ax5.js,
-            line 1912</a>
+            line 1916</a>
         </div>
         
     </div>
@@ -2133,9 +2133,9 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2047" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2051" target="_blank">
             ax5.js,
-            line 2047</a>
+            line 2051</a>
         </div>
         
     </div>
@@ -2202,7 +2202,7 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
 
     
-    <pre class="prettyprint linenums"><code> // width 와 동일</code></pre>
+    <pre class="prettyprint linenums"><code>// width 와 동일</code></pre>
     
 
     
@@ -2220,9 +2220,9 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2059" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2063" target="_blank">
             ax5.js,
-            line 2059</a>
+            line 2063</a>
         </div>
         
     </div>
@@ -2289,8 +2289,8 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
 
     
-    <pre class="prettyprint linenums"><code> console.log( ax5.dom(&quot;#list-container&quot;).html() );
- ax5.dom(&quot;#list-container&quot;).html(&quot;&lt;a href='#1234'&gt;링크&quot;);</code></pre>
+    <pre class="prettyprint linenums"><code>console.log( ax5.dom(&quot;#list-container&quot;).html() );
+ax5.dom(&quot;#list-container&quot;).html(&quot;&lt;a href='#1234'&gt;링크&quot;);</code></pre>
     
 
     
@@ -2308,9 +2308,9 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1926" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1930" target="_blank">
             ax5.js,
-            line 1926</a>
+            line 1930</a>
         </div>
         
     </div>
@@ -2437,7 +2437,7 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
 
     
-    <pre class="prettyprint linenums"><code> &lt;div&gt;
+    <pre class="prettyprint linenums"><code>&lt;div&gt;
      &lt;ul id=&quot;list-container&quot;&gt;
          &lt;li data-list-item=&quot;0&quot; id=&quot;li0&quot;&gt;
             &lt;div&gt;child&gt;child&lt;/div&gt;
@@ -2448,16 +2448,16 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
          &lt;li data-list-item=&quot;4&quot; id=&quot;li4&quot;&gt;&lt;/li&gt;
          &lt;li data-list-item=&quot;5&quot; id=&quot;li5&quot;&gt;&lt;/li&gt;
      &lt;/ul&gt;
- &lt;/div&gt;
- &lt;script&gt;
- var el = ax5.dom(&quot;#list-container&quot;);
- var li = el.child(el);
+&lt;/div&gt;
+&lt;script&gt;
+var el = ax5.dom(&quot;#list-container&quot;);
+var li = el.child(el);
 
- console.log(
+console.log(
      (c_li = li.next(2)).elements[0].id,
      (c_li = c_li.prev()).elements[0].id
- );
- &lt;/script&gt;</code></pre>
+);
+&lt;/script&gt;</code></pre>
     
 
     
@@ -2475,9 +2475,9 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1875" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1879" target="_blank">
             ax5.js,
-            line 1875</a>
+            line 1879</a>
         </div>
         
     </div>
@@ -2624,9 +2624,9 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-js"> var axd = ax5.dom;
- axd(&quot;[data-event-test=text-box]&quot;).off(&quot;click&quot;);
- axd(&quot;[data-event-test=text-box]&quot;).off(&quot;click.fnb&quot;).off(&quot;click.fnc&quot;);</code></pre>
+    <pre class="prettyprint linenums"><code class="lang-js">var axd = ax5.dom;
+axd(&quot;[data-event-test=text-box]&quot;).off(&quot;click&quot;);
+axd(&quot;[data-event-test=text-box]&quot;).off(&quot;click.fnb&quot;).off(&quot;click.fnc&quot;);</code></pre>
     
 
     
@@ -2644,9 +2644,9 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2152" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2156" target="_blank">
             ax5.js,
-            line 2152</a>
+            line 2156</a>
         </div>
         
     </div>
@@ -2761,10 +2761,10 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
 
     
-    <pre class="prettyprint linenums"><code> console.log(
+    <pre class="prettyprint linenums"><code>console.log(
     ax5.dom(&quot;#query&quot;).offset()
- );
- // {&quot;top&quot;: 8, &quot;left&quot;: 8}</code></pre>
+);
+// {&quot;top&quot;: 8, &quot;left&quot;: 8}</code></pre>
     
 
     
@@ -2782,9 +2782,9 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1842" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1846" target="_blank">
             ax5.js,
-            line 1842</a>
+            line 1846</a>
         </div>
         
     </div>
@@ -2919,24 +2919,24 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
 
     
-    <pre class="prettyprint linenums"><code class="lang-js"> var axd = ax5.dom;
- var mydom = axd(&quot;[data-event-test=text-box]&quot;),
- remove_dom = axd(&quot;[data-event-test=remove]&quot;);
+    <pre class="prettyprint linenums"><code class="lang-js">var axd = ax5.dom;
+var mydom = axd(&quot;[data-event-test=text-box]&quot;),
+remove_dom = axd(&quot;[data-event-test=remove]&quot;);
 
- mydom.on(&quot;click&quot;, window.fna);
- mydom.on(&quot;click&quot;, window.fnb);
- mydom.on(&quot;click&quot;, window.fnc);
+mydom.on(&quot;click&quot;, window.fna);
+mydom.on(&quot;click&quot;, window.fnb);
+mydom.on(&quot;click&quot;, window.fnc);
 
- remove_dom.on(&quot;click&quot;, function(){
-    mydom.off(&quot;click&quot;, window.fna);
-    remove_dom.off(&quot;click&quot;);
-    alert(&quot;이벤트 제거&quot;);
- });
+remove_dom.on(&quot;click&quot;, function(){
+   mydom.off(&quot;click&quot;, window.fna);
+   remove_dom.off(&quot;click&quot;);
+   alert(&quot;이벤트 제거&quot;);
+});
 
- // 핸들방식
- axd(&quot;[data-event-test=text-box]&quot;).on(&quot;click.fna&quot;, window.fna);
- axd(&quot;[data-event-test=text-box]&quot;).on(&quot;click.fnb&quot;, window.fnb);
- axd(&quot;[data-event-test=text-box]&quot;).on(&quot;click.fnc&quot;, window.fnc);</code></pre>
+// 핸들방식
+axd(&quot;[data-event-test=text-box]&quot;).on(&quot;click.fna&quot;, window.fna);
+axd(&quot;[data-event-test=text-box]&quot;).on(&quot;click.fnb&quot;, window.fnb);
+axd(&quot;[data-event-test=text-box]&quot;).on(&quot;click.fnc&quot;, window.fnc);</code></pre>
     
 
     
@@ -2954,9 +2954,9 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1993" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1997" target="_blank">
             ax5.js,
-            line 1993</a>
+            line 1997</a>
         </div>
         
     </div>
@@ -3072,14 +3072,14 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
 
     
-    <pre class="prettyprint linenums"><code> var dom_child = ax5.dom(&quot;#list-container&quot;).child();
- console.log(
-    dom_child.parent({tagname:&quot;div&quot;, clazz:&quot;ax5-sample-view&quot;}).elements[0]
- );
- console.log(
-    ax5.dom(dom_child).parent({tagname:&quot;div&quot;, clazz:&quot;ax5-sample-view&quot;}).elements[0]
- );
- // 같은 결과</code></pre>
+    <pre class="prettyprint linenums"><code>var dom_child = ax5.dom(&quot;#list-container&quot;).child();
+console.log(
+   dom_child.parent({tagname:&quot;div&quot;, clazz:&quot;ax5-sample-view&quot;}).elements[0]
+);
+console.log(
+   ax5.dom(dom_child).parent({tagname:&quot;div&quot;, clazz:&quot;ax5-sample-view&quot;}).elements[0]
+);
+// 같은 결과</code></pre>
     
 
     
@@ -3097,9 +3097,9 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2168" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2172" target="_blank">
             ax5.js,
-            line 2168</a>
+            line 2172</a>
         </div>
         
     </div>
@@ -3214,10 +3214,10 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
 
     
-    <pre class="prettyprint linenums"><code> console.log(
+    <pre class="prettyprint linenums"><code>console.log(
     ax5.dom(&quot;#query&quot;).position()
- );
- // {&quot;top&quot;: 8, &quot;left&quot;: 8}</code></pre>
+);
+// {&quot;top&quot;: 8, &quot;left&quot;: 8}</code></pre>
     
 
     
@@ -3235,9 +3235,9 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2090" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2094" target="_blank">
             ax5.js,
-            line 2090</a>
+            line 2094</a>
         </div>
         
     </div>
@@ -3352,10 +3352,10 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
 
     
-    <pre class="prettyprint linenums"><code> ax5.dom(&quot;[data-list-item='0']&quot;)
- .prepend(&quot;ㅈㅏㅇㄱㅣㅇㅕㅇ&quot;)
- .prepend(&quot;&lt;div&gt;장기영&lt;a href='#ABCDE'&gt;이건 어렵다&lt;/a&gt;&lt;/div&gt;&quot;)
- .prepend(ax5.dom.get(&quot;#move-item&quot;));</code></pre>
+    <pre class="prettyprint linenums"><code>ax5.dom(&quot;[data-list-item='0']&quot;)
+.prepend(&quot;ㅈㅏㅇㄱㅣㅇㅕㅇ&quot;)
+.prepend(&quot;&lt;div&gt;장기영&lt;a href='#ABCDE'&gt;이건 어렵다&lt;/a&gt;&lt;/div&gt;&quot;)
+.prepend(ax5.dom.get(&quot;#move-item&quot;));</code></pre>
     
 
     
@@ -3373,9 +3373,9 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1959" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L1963" target="_blank">
             ax5.js,
-            line 1959</a>
+            line 1963</a>
         </div>
         
     </div>
@@ -3502,7 +3502,7 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
 
     
-    <pre class="prettyprint linenums"><code> &lt;div&gt;
+    <pre class="prettyprint linenums"><code>&lt;div&gt;
      &lt;ul id=&quot;list-container&quot;&gt;
          &lt;li data-list-item=&quot;0&quot; id=&quot;li0&quot;&gt;
             &lt;div&gt;child&gt;child&lt;/div&gt;
@@ -3513,16 +3513,16 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
          &lt;li data-list-item=&quot;4&quot; id=&quot;li4&quot;&gt;&lt;/li&gt;
          &lt;li data-list-item=&quot;5&quot; id=&quot;li5&quot;&gt;&lt;/li&gt;
      &lt;/ul&gt;
- &lt;/div&gt;
- &lt;script&gt;
- var el = ax5.dom(&quot;#list-container&quot;);
- var li = el.child(el);
+&lt;/div&gt;
+&lt;script&gt;
+var el = ax5.dom(&quot;#list-container&quot;);
+var li = el.child(el);
 
- console.log(
+console.log(
      (c_li = li.next(2)).elements[0].id,
      (c_li = c_li.prev()).elements[0].id
- );
- &lt;/script&gt;</code></pre>
+);
+&lt;/script&gt;</code></pre>
     
 
     
@@ -3540,9 +3540,9 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2141" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2145" target="_blank">
             ax5.js,
-            line 2141</a>
+            line 2145</a>
         </div>
         
     </div>
@@ -3604,7 +3604,7 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
 
     
-    <pre class="prettyprint linenums"><code> ax5.dom(&quot;[data-list-item='0']&quot;).remove();</code></pre>
+    <pre class="prettyprint linenums"><code>ax5.dom(&quot;[data-list-item='0']&quot;).remove();</code></pre>
     
 
     
@@ -3622,9 +3622,9 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2028" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L2032" target="_blank">
             ax5.js,
-            line 2028</a>
+            line 2032</a>
         </div>
         
     </div>
@@ -3691,14 +3691,14 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
 
     
-    <pre class="prettyprint linenums"><code> console.log(
+    <pre class="prettyprint linenums"><code>console.log(
      ax5.dom(&quot;#list-container&quot;).css({&quot;width&quot;:&quot;400px&quot;, &quot;box-sizing&quot;:&quot;border-box&quot;,
      &quot;border&quot;:&quot;2px solid&quot;, &quot;padding&quot;:&quot;50px&quot;}).css({&quot;background&quot;:&quot;#ccc&quot;}).width()
- );
- console.log(
-    ax5.dom(&quot;#list-container&quot;).css({&quot;width&quot;:&quot;400px&quot;, &quot;box-sizing&quot;:&quot;content-box&quot;,
+);
+console.log(
+   ax5.dom(&quot;#list-container&quot;).css({&quot;width&quot;:&quot;400px&quot;, &quot;box-sizing&quot;:&quot;content-box&quot;,
     &quot;border&quot;:&quot;2px solid&quot;, &quot;padding&quot;:&quot;50px&quot;}).css({&quot;background&quot;:&quot;#ccc&quot;}).width()
- );</code></pre>
+);</code></pre>
     
 
     
@@ -3721,7 +3721,7 @@ dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함�
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Mon Feb 02 2015 12:25:16 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Mon Feb 02 2015 19:28:41 GMT+0900 (KST)
         </footer>
     </div>
 </div>

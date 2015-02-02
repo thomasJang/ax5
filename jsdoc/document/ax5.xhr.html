@@ -483,8 +483,8 @@ ax5.xhr({Object}[, {Function}]); 으로 사용하는 함수입니다. XHR요청�
             
 
     
-    <pre class="prettyprint linenums"><code> // request 옵션정의
- config = {
+    <pre class="prettyprint linenums"><code>// request 옵션정의
+config = {
     header         : {
         //setRequestHeader 로 추가하게될 헤드 속성
         'content-type' : {String} [&quot;application/x-www-form-urlencoded; charset=UTF-8&quot;] - request 되는 문서의 content Type,
@@ -499,55 +499,55 @@ ax5.xhr({Object}[, {Function}]); 으로 사용하는 함수입니다. XHR요청�
     withCredentials: {Boolean} [false] - 자격증명을 사용하게 할지 여부,
     crossDomain    : {Boolean} [false] - 크로스 도메인 허용 여부 : header 속성이 약간 바뀝니다.,
     timeout        : 0
- }
+}
 
- ax5.xhr({
-    method: &quot;POST&quot;,
-    url   : &quot;data.php&quot;,
-    param : &quot;str=1234&quot;,
-    res   : function (response, status) {
-        console.log(&quot;success&quot;);
-        console.log(this);
-    },
-    error : function () {
-        console.log(&quot;error&quot;);
-        console.log(this);
-    }
- });
+ax5.xhr({
+   method: &quot;POST&quot;,
+   url   : &quot;data.php&quot;,
+   param : &quot;str=1234&quot;,
+   res   : function (response, status) {
+       console.log(&quot;success&quot;);
+       console.log(this);
+   },
+   error : function () {
+       console.log(&quot;error&quot;);
+       console.log(this);
+   }
+});
 
- // req 또는 request 둘다 사용 가능합니다.
- ax5.xhr({
-    url   : &quot;data.php&quot;,
-    param : &quot;str=1234&quot;,
-    res   : function (response, status) {
-        // status 값이 200 인지 판단 가능
-        console.log(this);
-    }
- });
- // 위와 같이 필요한 옵션만 정의 해서 사용 가능합니다.
+// req 또는 request 둘다 사용 가능합니다.
+ax5.xhr({
+   url   : &quot;data.php&quot;,
+   param : &quot;str=1234&quot;,
+   res   : function (response, status) {
+       // status 값이 200 인지 판단 가능
+       console.log(this);
+   }
+});
+// 위와 같이 필요한 옵션만 정의 해서 사용 가능합니다.
 
- // 요청을 큐로 만들어 순차적으로 작동하게 하고 종료 시점을 컨트롤 할 수 있습니다.
- var xhr_queue = [];
- xhr_queue.push({
-    method: &quot;POST&quot;,
-    url   : &quot;../samples/ax5/xhr/data.php&quot;,
-    param : &quot;str=1234&quot;,
-    res   : function (response, status) {
-        console.log(response);
-    }
- });
- xhr_queue.push({
-    method: &quot;POST&quot;,
-    url   : &quot;../samples/ax5/xhr/data.php&quot;,
-    param : &quot;str=1234&quot;,
-    res   : function (response, status) {
-        console.log(response);
-    }
- });
+// 요청을 큐로 만들어 순차적으로 작동하게 하고 종료 시점을 컨트롤 할 수 있습니다.
+var xhr_queue = [];
+xhr_queue.push({
+   method: &quot;POST&quot;,
+   url   : &quot;../samples/ax5/xhr/data.php&quot;,
+   param : &quot;str=1234&quot;,
+   res   : function (response, status) {
+       console.log(response);
+   }
+});
+xhr_queue.push({
+   method: &quot;POST&quot;,
+   url   : &quot;../samples/ax5/xhr/data.php&quot;,
+   param : &quot;str=1234&quot;,
+   res   : function (response, status) {
+       console.log(response);
+   }
+});
 
- ax5.xhr(xhr_queue, function() {
-    console.log(&quot;큐 완료&quot;)
- });</code></pre>
+ax5.xhr(xhr_queue, function() {
+   console.log(&quot;큐 완료&quot;)
+});</code></pre>
     
 
         
@@ -610,7 +610,7 @@ ax5.xhr({Object}[, {Function}]); 으로 사용하는 함수입니다. XHR요청�
         
 
     
-    <pre class="prettyprint linenums"><code> ax5.xhr.options = {
+    <pre class="prettyprint linenums"><code>ax5.xhr.options = {
     header         : {
         //setRequestHeader 로 추가하게될 헤드 속성
         'content-type' : {String} [&quot;application/x-www-form-urlencoded; charset=UTF-8&quot;] - request 되는 문서의 content Type,
@@ -625,7 +625,7 @@ ax5.xhr({Object}[, {Function}]); 으로 사용하는 함수입니다. XHR요청�
     withCredentials: {Boolean} [false] - 자격증명을 사용하게 할지 여부,
     crossDomain    : {Boolean} [false] - 크로스 도메인 허용 여부 : header 속성이 약간 바뀝니다.,
     timeout        : 0
- }</code></pre>
+}</code></pre>
     
 
     
@@ -649,9 +649,9 @@ ax5.xhr({Object}[, {Function}]); 으로 사용하는 함수입니다. XHR요청�
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3833" target="_blank">
+            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3840" target="_blank">
             ax5.js,
-            line 3833</a>
+            line 3840</a>
         </div>
         
     </div>
@@ -763,9 +763,9 @@ ax5.xhr({Object}[, {Function}]); 으로 사용하는 함수입니다. XHR요청�
         
 
     
-    <pre class="prettyprint linenums"><code> ax5.xhr.config({
-    header      : {
-        'accept'      : &quot;*.*&quot;,
+    <pre class="prettyprint linenums"><code>ax5.xhr.config({
+  header      : {
+      'accept'      : &quot;*.*&quot;,
         'content-type': &quot;application/x-www-form-urlencoded; charset=UTF-8&quot;
     },
     method         : &quot;GET&quot;,
@@ -777,15 +777,14 @@ ax5.xhr({Object}[, {Function}]); 으로 사용하는 함수입니다. XHR요청�
     withCredentials: false,
     crossDomain    : false,
     timeout        : 0
- });
+});
 
- ax5.xhr.config({
+ax5.xhr.config({
     header      : {
         'accept' : &quot;*.html&quot;
     }
- });
-
- // ax5.xhr 요청 기본값 설정</code></pre>
+});
+// ax5.xhr 요청 기본값 설정</code></pre>
     
 
     
@@ -808,7 +807,7 @@ ax5.xhr({Object}[, {Function}]); 으로 사용하는 함수입니다. XHR요청�
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Mon Feb 02 2015 12:25:16 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Mon Feb 02 2015 19:28:41 GMT+0900 (KST)
         </footer>
     </div>
 </div>
