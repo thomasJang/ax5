@@ -81,4 +81,26 @@ ax5.xhr({
         }
     });
 
+    var xhr_queue = [];
+     xhr_queue.push({
+        method: "POST",
+        url   : "../samples/ax5/xhr/data.php",
+        param : "str=1234",
+        res   : function (response, status) {
+            console.log(response);
+        }
+     });
+     xhr_queue.push({
+        method: "POST",
+        url   : "../samples/ax5/xhr/data.php",
+        param : "str=1234",
+        res   : function (response, status) {
+            console.log(response);
+        }
+     });
+
+     ax5.xhr(xhr_queue, function() {
+        console.log("큐 완료");
+     });
+
 </script>
