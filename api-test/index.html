@@ -199,26 +199,6 @@
             r: "key1value_key2value"
         },
         {
-            label:"ax5.util.extend_all : add keys, overwrite_false",
-            fn: function(){
-                var origin_obj = {a:1, b:{a:1, b:2}};
-                ax5.util.extend_all(origin_obj, {b:{a:22, c:33}} );
-
-                return origin_obj.a +"_"+ origin_obj.b.a  +"_"+ origin_obj.b.c ;
-            },
-            r: "1_1_33"
-        },
-        {
-            label:"ax5.util.extend_all : add keys, overwrite_true",
-            fn: function(){
-                var origin_obj = {a:1, b:{a:1, b:2}};
-                ax5.util.extend_all(origin_obj, {b:{a:22, c:33}}, true );
-
-                return origin_obj.a +"_"+ origin_obj.b.a  +"_"+ origin_obj.b.c ;
-            },
-            r: "1_22_33"
-        },
-        {
             label:"ax5.util.filter : array",
             fn: function(){
                 var aarray = [5,4,3,2,1];
@@ -537,15 +517,18 @@
             },
             r   : "inner-width : inner-width : inner-width"
         },
-        {
-            label: "ax5.util.to_array",
-            fn   : function () {
-                var testDiv = ax5.dom.get('div#test-result, div' );
 
-                return ax5.util.to_array(testDiv)[0].id;
+        /*
+        ///
+        {
+            label: "ax5.util.to_array(object)",
+            fn   : function () {
+
             },
-            r   : "progress"
+            r    :''
         },
+        */
+
         {
             label: "ax5.util.to_json(object)",
             fn   : function () {
