@@ -17,7 +17,16 @@
         re_numnonpx = new RegExp( "^(" + core_pnum + ")(?!px)[a-z%]+$", "i" ),
         re_position = /^(top|right|bottom|left)$/,
         re_is_json = /^(["'](\\.|[^"\\\n\r])*?["']|[,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t])+?$/,
-        
+        re_ms = /^-ms-/,
+        re_snake_case = /[\-_]([\da-z])/gi,
+        re_camel_case = /([A-Z])/g,
+        re_dot = /\./,
+        re_int = /[-|+]?[\D]/gi,
+        re_not_num = /\D/gi,
+        re_money_split = new RegExp('([0-9])([0-9][0-9][0-9][,.])'),
+        re_amp = /&/g,
+        re_eq = /=/,
+        re_class_name_split = /[ ]+/g,
         tag_map = {
             option: [ 1, "<select multiple='multiple'>", "</select>" ],
             legend: [ 1, "<fieldset>", "</fieldset>" ],
@@ -1038,9 +1047,8 @@
 		 * // innerWidth
 		 * ```
 		 */
-        // todo : 정규식 내부 변수로 모아서 한번만 선언하기
 		function camel_case(str) {
-			return str.replace(/^-ms-/, "ms-").replace(/[\-_]([\da-z])/gi, function (all, letter) {
+			return str.replace(re_ms, "ms-").replace(re_snake_case, function (all, letter) {
 				return letter.toUpperCase();
 			});
 		}
@@ -1059,7 +1067,7 @@
 		 * ```
 		 */
 		function snake_case(str) {
-			return camel_case(str).replace(/([A-Z])/g, function (all, letter) {
+			return camel_case(str).replace(re_camel_case, function (all, letter) {
 				return "-" + letter.toLowerCase();
 			});
 		}
@@ -1093,10 +1101,10 @@
 		 * ```
 		 */
 		function number(str, cond) {
-			var result, pair = ('' + str).split(/\./), isMinus = (parseFloat(pair[0]) < 0 || pair[0] == "-0"), returnValue = 0.0;
-			pair[0] = pair[0].replace(/[-|+]?[\D]/gi, "");
+			var result, pair = ('' + str).split(re_dot), isMinus = (parseFloat(pair[0]) < 0 || pair[0] == "-0"), returnValue = 0.0;
+			pair[0] = pair[0].replace(re_int, "");
 			if (pair[1]) {
-				pair[1] = pair[1].replace(/\D/gi, "");
+				pair[1] = pair[1].replace(re_not_num, "");
 				returnValue = parseFloat(pair[0] + "." + pair[1]) || 0;
 			} else {
 				returnValue = parseFloat(pair[0]) || 0;
@@ -1114,12 +1122,11 @@
 							return "";
 						}
 						else {
-							var rxSplit = new RegExp('([0-9])([0-9][0-9][0-9][,.])');
 							var arrNumber = txtNumber.split('.');
 							arrNumber[0] += '.';
 							do {
-								arrNumber[0] = arrNumber[0].replace(rxSplit, '$1,$2');
-							} while (rxSplit.test(arrNumber[0]));
+								arrNumber[0] = arrNumber[0].replace(re_money_split, '$1,$2');
+							} while (re_money_split.test(arrNumber[0]));
 							if (arrNumber.length > 1) {
 								return arrNumber.join('');
 							} else {
@@ -1221,8 +1228,8 @@
 			else
 			if ( (is_string(O) && typeof cond !== "undefined" && cond == "object") || (is_string(O) && typeof cond === "undefined") ){
 				p = {};
-				each(O.split(/&/g), function () {
-					var item = this.split(/=/);
+				each(O.split(re_amp), function () {
+					var item = this.split(re_eq);
 					p[item[0]] = item[1];
 				});
 				return p;
@@ -2316,7 +2323,7 @@
 			elements = va_elem(elements, "clazz");
 			if (command === "add" || command === "remove" || command === "toggle") {
 				for (var di = 0; di < elements.length; di++) {
-					classNames = elements[di]["className"].split(/[ ]+/g);
+					classNames = elements[di]["className"].split(re_class_name_split);
 					if (command === "add") {
 						if (U.search(classNames, function () {
 								return O.trim() == this;
@@ -2340,7 +2347,7 @@
 			}
 			else { // has
 				if (typeof O === "undefined") O = command;
-				classNames = elements[0]["className"].trim().split(/ /g);
+				classNames = elements[0]["className"].trim().split(re_class_name_split);
 				//if(U.is_string(classNames)) classNames = [classNames];
 				if (U.is_string(O)) { // hasClass
 					// get Class Name
@@ -2539,7 +2546,7 @@
 							}
 						}
 						else if (k === "clazz" || k === "class_name") {
-							var klasss = _target.className.split(/[ ]+/g);
+							var klasss = _target.className.split(re_class_name_split);
 							var hasClass = false;
 							for (var a = 0; a < klasss.length; a++) {
 								if (klasss[a] == cond[k]) {
