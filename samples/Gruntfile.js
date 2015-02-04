@@ -10,11 +10,12 @@
 				' <%= pkg.name %> - v<%= pkg.version %> \n' +
 				' publish date : <%= grunt.template.today("yyyy-mm-dd") %> \n' +
 				'-->\n',
-				separator: '\n\n<!-- split -->\n\n'
+				separator: '\n\n<!-- split -->\n<div class="block-end"></div>\n\n'
 			},
 			basic: {
 				src: [
 					'head.html',
+                    'install.html',
 					'ax5/util/*.html',
 					'ax5/dom/*.html',
 					'ax5/xhr/*.html',
@@ -24,7 +25,7 @@
 			}
 		},
 		watch: {
-			files: ['ax5/util/*.html','ax5/dom/*.html','ax5/xhr/*.html'],
+			files: ['install.html','ax5/util/*.html','ax5/dom/*.html','ax5/xhr/*.html'],
 			tasks: ['concat']
 		}
 	});

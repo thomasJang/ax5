@@ -209,6 +209,8 @@
         re_numsplit = new RegExp( "^(" + core_pnum + ")(.*)$", "i" ),
         re_numnonpx = new RegExp( "^(" + core_pnum + ")(?!px)[a-z%]+$", "i" ),
         re_position = /^(top|right|bottom|left)$/,
+        re_is_json = /^(["'](\\.|[^"\\\n\r])*?["']|[,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t])+?$/,
+        
         tag_map = {
             option: [ 1, "<select multiple='multiple'>", "</select>" ],
             legend: [ 1, "<fieldset>", "</fieldset>" ],
@@ -352,28 +354,6 @@
 			return url;
 		}
 
-		// jquery 1.10.2 jQuery.support from http://jquery.com -- start
-		/**
-		 * 브라우저 API 지원여부
-		 * @member {Object} ax5.info.support
-		 * @example
-		 * ```json
-		 * //ax5.info.support Object JSON
-		 * {
-		 * // 다지우고 시작
-		 * }
-		 * ```
-		 */
-		var support = (function(){
-			support = {
-
-			};
-            
-			return support;
-
-		})();
-		// jquery 1.10.2 jQuery.support from http://jquery.com -- start
-
 		var info = {
 			version: version,
 			base_url: base_url,
@@ -381,8 +361,7 @@
 			browser: browser,
 			is_browser: is_browser,
 			wheel_enm: wheel_enm,
-			url_util: url_util,
-			support: support
+			url_util: url_util
 		};
 
 		return info;
@@ -725,6 +704,42 @@
 			}
 			return json_string;
 		}
+
+        /**
+         * 관용의 JSON Parser
+         * @method ax5.util.parse_json
+         * @param {String} JSONString
+         * @param {Boolean} [force] - 강제 적용 여부 (json 문자열 검사를 무시하고 오브젝트 변환을 시도합니다.)
+         * @returns {Object}
+         * @example
+         * ```
+         * console.log(ax5.util.parse_json('{"a":1}'));
+         * // Object {a: 1} 
+         * console.log(ax5.util.parse_json("{'a':1, 'b':'b'}"));
+         * // Object {a: 1, b: "b"}
+         * console.log(ax5.util.parse_json("{'a':1, 'b':function(){return 1;}}", true));
+         * // Object {a: 1, b: function}
+         * console.log(ax5.util.parse_json("{a:1}"));
+         * // Object {a: 1}
+         * console.log(ax5.util.parse_json("[1,2,3]"));
+         * // [1, 2, 3]
+         * console.log(ax5.util.parse_json("['1','2','3']"));
+         * // ["1", "2", "3"]
+         * console.log(ax5.util.parse_json("[{'a':'99'},'2','3']"));
+         * // [Object, "2", "3"]
+         * ```
+         */
+        function parse_json(str, force){
+            if( force || (re_is_json).test(str) ){
+                try {
+                    return (new Function('', 'return ' + str))();
+                }catch(e){
+                    return {error:500, msg:'syntax error'};
+                }
+            }else {
+                return {error:500, msg:'syntax error'};
+            }
+        }
 		
 		/**
 		 * 타겟 오브젝트의 키를 대상 오브젝트의 키만큼 확장합니다.
@@ -1216,6 +1231,7 @@
 		 * // innerWidth
 		 * ```
 		 */
+        // todo : 정규식 내부 변수로 모아서 한번만 선언하기
 		function camel_case(str) {
 			return str.replace(/^-ms-/, "ms-").replace(/[\-_]([\da-z])/gi, function (all, letter) {
 				return letter.toUpperCase();
@@ -1423,42 +1439,43 @@
 		}
 
 		return {
-			alert       : alert,
-			each        : each,
-			map         : map,
-			search      : search,
-			reduce      : reduce,
-			reduce_right: reduce_right,
-			filter      : filter,
-			error       : error,
-			to_json     : to_json,
-			extend      : extend,
-			extend_all  : extend_all,
-			clone       : clone,
-			first       : first,
-			last        : last,
-			left        : left,
-			right       : right,
-			get_type    : get_type,
-			is_window   : is_window,
-			is_element  : is_element,
-			is_object   : is_object,
-			is_array    : is_array,
-			is_function : is_function,
-			is_string   : is_string,
-			is_number   : is_number,
-			is_nodelist : is_nodelist,
-			is_undefined: is_undefined,
-			is_nothing  : is_nothing,
-			set_cookie  : set_cookie,
-			get_cookie  : get_cookie,
-			require     : require,
-			camel_case  : camel_case,
-			snake_case  : snake_case,
-			number      : number,
-			to_array    : to_array,
-			merge       : merge,
-			param       : param
+            alert       : alert,
+            each        : each,
+            map         : map,
+            search      : search,
+            reduce      : reduce,
+            reduce_right: reduce_right,
+            filter      : filter,
+            error       : error,
+            to_json     : to_json,
+            parse_json  : parse_json,
+            extend      : extend,
+            extend_all  : extend_all,
+            clone       : clone,
+            first       : first,
+            last        : last,
+            left        : left,
+            right       : right,
+            get_type    : get_type,
+            is_window   : is_window,
+            is_element  : is_element,
+            is_object   : is_object,
+            is_array    : is_array,
+            is_function : is_function,
+            is_string   : is_string,
+            is_number   : is_number,
+            is_nodelist : is_nodelist,
+            is_undefined: is_undefined,
+            is_nothing  : is_nothing,
+            set_cookie  : set_cookie,
+            get_cookie  : get_cookie,
+            require     : require,
+            camel_case  : camel_case,
+            snake_case  : snake_case,
+            number      : number,
+            to_array    : to_array,
+            merge       : merge,
+            param       : param
 		}
 	})();
 
@@ -3288,7 +3305,6 @@
 	}
 
 }).call(this);
-
 
 
 ax5.xhr = (function (){

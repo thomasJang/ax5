@@ -1,0 +1,19 @@
+<h1>ax5.util.alert</h1>
+
+<h3>JSON alert</h3>
+<pre class="prettyprint linenums">
+&lt;button data-button="ax5-util-alert-0">{a:1, b:2}&lt;/button>
+&lt;script>
+    ax5.dom("[data-button='ax5-util-alert-0']").on("click", function(){
+        ax5.util.alert({a:1, b:2});
+    });
+&lt;/script>
+</pre>
+
+<p class="tip">아래의 버튼을 클릭하시면 alert이 출력됩니다.</p>
+<button data-button="ax5-util-alert-0">{a:1, b:2}</button>
+<script>
+    ax5.dom("[data-button='ax5-util-alert-0']").on("click", function(){
+        ax5.util.alert({a:1, b:2});
+    });
+</script>

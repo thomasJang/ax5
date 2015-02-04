@@ -1,45 +1,76 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-02-03 
+ publish date : 2015-02-04 
 -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>ax5</title>
     <link rel="stylesheet" type="text/css" href="../plugin/prettify/prettify-tomorrow.css">
+    <link rel="stylesheet" type="text/css" href="css/sample-docs.css">
     <script type="text/javascript" src="../plugin/prettify/prettify.js"></script>
     <script type="text/javascript" src="../src/ax5-polyfill.js"></script>
     <script type="text/javascript" src="../src/ax5-core.js"></script>
     <script type="text/javascript" src="../src/ax5-xhr.js"></script>
     <script type="text/javascript" src="../src/ax5-ui.js"></script>
+    
 </head>
 <body>
 
 <!-- split -->
+<div class="block-end"></div>
 
-util 1 그런거지
-<hr/>
+<h1>Install ax5</h1>
+
+<h3>ax5 시작하기</h3>
+<li>ax5라이브러리 파일을 html head안에 insert 합니다.</li>
+<pre class="prettyprint linenums">
+&lt;!DOCTYPE html>
+&lt;html lang="en">
+    &lt;head>
+        &lt;meta charset="UTF-8"/>
+        &lt;title>ax5&lt;/title>
+    &lt;/head>
+    &lt;body>
+
+    &lt;/body>
+&lt;/html>
+</pre>
+<li>ax5라이브러리 파일을 html head안에 insert 합니다.</li>
+<pre class="prettyprint linenums">
+&lt;head>
+    &lt;meta charset="UTF-8"/>
+    &lt;title>ax5&lt;/title>
+    <u>&lt;script type="text/javascript" src="pub/ax5.min.js">&lt;/script></u>
+&lt;/head>
+</pre>
 
 <!-- split -->
+<div class="block-end"></div>
 
-util 2 줄 넘기기는 해줘야 쓸만 하지 않은가?
-<br/>
+<h1>ax5.util.alert</h1>
+
+<h3>JSON alert</h3>
+<pre class="prettyprint linenums">
+&lt;button data-button="ax5-util-alert-0">{a:1, b:2}&lt;/button>
+&lt;script>
+    ax5.dom("[data-button='ax5-util-alert-0']").on("click", function(){
+        ax5.util.alert({a:1, b:2});
+    });
+&lt;/script>
+</pre>
+
+<p class="tip">아래의 버튼을 클릭하시면 alert이 출력됩니다.</p>
+<button data-button="ax5-util-alert-0">{a:1, b:2}</button>
+<script>
+    ax5.dom("[data-button='ax5-util-alert-0']").on("click", function(){
+        ax5.util.alert({a:1, b:2});
+    });
+</script>
 
 <!-- split -->
-
-<hr/>
-
-dom 1
-
-<hr/>
-
-<!-- split -->
-
-dom 2
-
-<!-- split -->
-
+<div class="block-end"></div>
 
 <h1>ax5.xhr</h1>
 <h3>일반적인 방법</h3>
@@ -148,6 +179,7 @@ ax5.xhr({
 </script>
 
 <!-- split -->
+<div class="block-end"></div>
 
 <script type="text/javascript">
     (function(){
