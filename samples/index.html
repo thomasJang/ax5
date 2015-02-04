@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-02-02 
+ publish date : 2015-02-03 
 -->
 <html lang="en">
 <head>
@@ -122,6 +122,28 @@ ax5.xhr({
             console.log(this);
         }
     });
+
+    var xhr_queue = [];
+     xhr_queue.push({
+        method: "POST",
+        url   : "../samples/ax5/xhr/data.php",
+        param : "str=1234",
+        res   : function (response, status) {
+            console.log(response);
+        }
+     });
+     xhr_queue.push({
+        method: "POST",
+        url   : "../samples/ax5/xhr/data.php",
+        param : "str=1234",
+        res   : function (response, status) {
+            console.log(response);
+        }
+     });
+
+     ax5.xhr(xhr_queue, function() {
+        console.log("큐 완료");
+     });
 
 </script>
 

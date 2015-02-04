@@ -1,22 +1,21 @@
 
 ax5.xhr = (function (){
-	var U = ax5.util;
-	function getXHR(){
-		if (typeof XMLHttpRequest !== "undefined") {
-			return new XMLHttpRequest();
+	var U = ax5.util, getXHR;
+
+	try{
+		new ActiveXObject("Msxml2.XMLHTTP");
+		getXHR = function(){return new ActiveXObject("Msxml2.XMLHTTP");}
+	}catch(e){
+		try{
+			new ActiveXObject("Microsoft.XMLHTTP");
+			getXHR = function(){return new ActiveXObject("Microsoft.XMLHTTP");}
+		}catch(e){
+			getXHR = "XMLHttpRequest" in window ? function(){return new XMLHttpRequest();} : function(){};
 		}
-		try {
-			return new ActiveXObject("Msxml2.XMLHTTP");
-		} catch (e) {
-			try {
-				return new ActiveXObject("Microsoft.XMLHTTP");
-			} catch (e) {
-			}
-		}
-		return false;
 	}
+	
 	function request(queue, onend){
-		var cfg = queue.pop(), http, header = [], that, i;
+		var cfg = queue.pop(), http, that, i;
 		
 		if (typeof cfg === "undefined") {
 			onend();
@@ -88,6 +87,7 @@ ax5.xhr = (function (){
 					}
 				};
 
+                // todo : ontimeout 을 지원하지 않는 브라우저에 대한 예외처리
 				http.ontimeout = function(){
 					that = {error:"timeout"};
 					if (cfg.error) {
@@ -238,8 +238,8 @@ ax5.xhr = (function (){
  * @example
  * ```
  * ax5.xhr.config({
- *   header      : {
- *       'accept'      : "*.*",
+ *	header      : {
+ *		'accept'      : "*.*",
  *		'content-type': "application/x-www-form-urlencoded; charset=UTF-8"
  *	},
  *	method         : "GET",

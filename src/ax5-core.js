@@ -7,54 +7,25 @@
 	/** @namespace {Object} ax5 */
 		ax5 = {}, info, U, dom;
 
-	// jquery 1.10.2 from http://jquery.com -- start
-	var nodeNames = "abbr|article|aside|audio|bdi|canvas|data|datalist|details|figcaption|figure|footer|header|hgroup|mark|meter|nav|output|progress|section|summary|time|video",
-		core_pnum = /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source,
-		rnoshimcache = new RegExp("<(?:" + nodeNames + ")[\\s/>]", "i"),
-		rleadingWhitespace = /^\s+/,
-		rxhtmlTag = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/gi,
-		rtagName = /<([\w:]+)/,
-		rtbody = /<tbody/i,
-		rhtml = /<|&#?\w+;/,
-		rnoInnerhtml = /<(?:script|style|link)/i,
-		rmargin = /^margin/,
-		rnumsplit = new RegExp( "^(" + core_pnum + ")(.*)$", "i" ),
-		rnumnonpx = new RegExp( "^(" + core_pnum + ")(?!px)[a-z%]+$", "i" ),
-		rposition = /^(top|right|bottom|left)$/,
-
-		// We have to close these tags to support XHTML (#13200)
-		wrapMap = {
-			option: [ 1, "<select multiple='multiple'>", "</select>" ],
-			legend: [ 1, "<fieldset>", "</fieldset>" ],
-			area: [ 1, "<map>", "</map>" ],
-			param: [ 1, "<object>", "</object>" ],
-			thead: [ 1, "<table>", "</table>" ],
-			tr: [ 2, "<table><tbody>", "</tbody></table>" ],
-			col: [ 2, "<table><tbody></tbody><colgroup>", "</colgroup></table>" ],
-			td: [ 3, "<table><tbody><tr>", "</tr></tbody></table>" ]
-		},
-		safeFragment = createSafeFragment( ),
-		fragmentDiv = safeFragment.appendChild( doc.createElement("div")),
-		core_strundefined = typeof undefined;
-
-		function createSafeFragment( ) {
-			var list = nodeNames.split( "|" ),
-				safeFrag = doc.createDocumentFragment();
-			if ( safeFrag.createElement ) {
-				while ( list.length ) {
-					safeFrag.createElement(
-						list.pop()
-					);
-				}
-			}
-			return safeFrag;
-		}
-	// jquery 1.10.2 from http://jquery.com -- end
-	
-
-
-
-
+    var re_tag = /<([\w:]+)/,
+        re_single_tags = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/gi,
+        re_html = /<|&#?\w+;/,
+        re_noInnerhtml = /<(?:script|style|link)/i,
+        core_pnum = /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source,
+        re_margin = /^margin/,
+        re_numsplit = new RegExp( "^(" + core_pnum + ")(.*)$", "i" ),
+        re_numnonpx = new RegExp( "^(" + core_pnum + ")(?!px)[a-z%]+$", "i" ),
+        re_position = /^(top|right|bottom|left)$/,
+        tag_map = {
+            option: [ 1, "<select multiple='multiple'>", "</select>" ],
+            legend: [ 1, "<fieldset>", "</fieldset>" ],
+            area: [ 1, "<map>", "</map>" ],
+            param: [ 1, "<object>", "</object>" ],
+            thead: [ 1, "<table>", "</table>" ],
+            tr: [ 2, "<table><tbody>", "</tbody></table>" ],
+            col: [ 2, "<table><tbody></tbody><colgroup>", "</colgroup></table>" ],
+            td: [ 3, "<table><tbody><tr>", "</tr></tbody></table>" ]
+        };
 
 	/**
 	 * guid
@@ -196,284 +167,15 @@
 		 * ```json
 		 * //ax5.info.support Object JSON
 		 * {
-		 *	 appendChecked: true,
-		 *	 boxModel: true,
-		 *	 changeBubbles: true,
-		 *	 checkClone: undefined,
-		 *	 checkOn: true, // Make sure that if no value is specified for a checkbox, that it defaults to "on". (WebKit defaults to "" instead)
-		 *	 cssFloat: true, // Verify style float existence (IE uses styleFloat instead of cssFloat)
-		 *	 deleteExpando: true,
-		 *	 focusinBubbles: false,
-		 *	 getSetAttribute: true, // Test setAttribute on camelCase class. If it works, we need attrFixes when doing get/setAttribute (ie6/7)
-		 *	 hrefNormalized: true, // Make sure that URLs aren't manipulated
-		 *	 htmlSerialize: true, // Make sure that link elements get serialized correctly by innerHTML
-		 *	 inlineBlockNeedsLayout: false,
-		 *	 leadingWhitespace: true, // IE strips leading whitespace when .innerHTML is used
-		 *	 noCloneChecked: true,
-		 *	 noCloneEvent: true,
-		 *	 opacity: true, // Make sure that element opacity exists
-		 *	 optDisabled: true,
-		 *	 optSelected: true,
-		 *	 radioValue: true,
-		 *	 reliableHiddenOffsets: true,
-		 *	 reliableMarginRight: true,
-		 *	 shrinkWrapBlocks: false,
-		 *	 style: true, // Get the style information from getAttribute
-		 *	 submitBubbles: true,
-		 *	 tbody: true
+		 * // 다지우고 시작
 		 * }
 		 * ```
 		 */
 		var support = (function(){
-
-			var div = document.createElement( "div" ),
-				documentElement = document.documentElement,
-				all,
-				a,
-				select,
-				opt,
-				input,
-				marginDiv,
-				support,
-				fragment,
-				body,
-				testElementParent,
-				testElement,
-				testElementStyle,
-				tds,
-				events,
-				eventName,
-				i,
-				isSupported;
-
-			// Preliminary tests
-			div.setAttribute("className", "t");
-			div.innerHTML = "   <link/><table></table><a href='/a' style='top:1px;float:left;opacity:.55;'>a</a><input type='checkbox'/>";
-
-			all = div.getElementsByTagName( "*" );
-			a = div.getElementsByTagName( "a" )[ 0 ];
-
-			// Can't get basic test support
-			if ( !all || !all.length || !a ) {
-				return {};
-			}
-
-			// First batch of supports tests
-			select = document.createElement( "select" );
-			opt = select.appendChild( document.createElement("option") );
-			input = div.getElementsByTagName( "input" )[ 0 ];
-
 			support = {
-				// IE strips leading whitespace when .innerHTML is used
-				leadingWhitespace: ( div.firstChild.nodeType === 3 ),
 
-				// Make sure that tbody elements aren't automatically inserted
-				// IE will insert them into empty tables
-				tbody: !div.getElementsByTagName( "tbody" ).length,
-
-				// Make sure that link elements get serialized correctly by innerHTML
-				// This requires a wrapper element in IE
-				htmlSerialize: !!div.getElementsByTagName( "link" ).length,
-
-				// Get the style information from getAttribute
-				// (IE uses .cssText instead)
-				style: /top/.test( a.getAttribute("style") ),
-
-				// Make sure that URLs aren't manipulated
-				// (IE normalizes it by default)
-				hrefNormalized: ( a.getAttribute( "href" ) === "/a" ),
-
-				// Make sure that element opacity exists
-				// (IE uses filter instead)
-				// Use a regex to work around a WebKit issue. See #5145
-				opacity: /^0.55$/.test( a.style.opacity ),
-
-				// Verify style float existence
-				// (IE uses styleFloat instead of cssFloat)
-				cssFloat: !!a.style.cssFloat,
-
-				// Make sure that if no value is specified for a checkbox
-				// that it defaults to "on".
-				// (WebKit defaults to "" instead)
-				checkOn: ( input.value === "on" ),
-
-				// Make sure that a selected-by-default option has a working selected property.
-				// (WebKit defaults to false instead of true, IE too, if it's in an optgroup)
-				optSelected: opt.selected,
-
-				// Test setAttribute on camelCase class. If it works, we need attrFixes when doing get/setAttribute (ie6/7)
-				getSetAttribute: div.className !== "t",
-
-				// Will be defined later
-				submitBubbles: true,
-				changeBubbles: true,
-				focusinBubbles: false,
-				deleteExpando: true,
-				noCloneEvent: true,
-				inlineBlockNeedsLayout: false,
-				shrinkWrapBlocks: false,
-				reliableMarginRight: true
 			};
-
-
-			// IE6-8 can't serialize link, script, style, or any html5 (NoScope) tags,
-			// unless wrapped in a div with non-breaking characters in front of it.
-			wrapMap._default = support.htmlSerialize ? [ 0, "", "" ] : [ 1, "X<div>", "</div>"  ];
-
-			// Make sure checked status is properly cloned
-			input.checked = true;
-			support.noCloneChecked = input.cloneNode( true ).checked;
-
-			// Make sure that the options inside disabled selects aren't marked as disabled
-			// (WebKit marks them as disabled)
-			select.disabled = true;
-			support.optDisabled = !opt.disabled;
-
-			// Test to see if it's possible to delete an expando from an element
-			// Fails in Internet Explorer
-			try {
-				delete div.test;
-			} catch( e ) {
-				support.deleteExpando = false;
-			}
-
-			if ( !div.addEventListener && div.attachEvent && div.fireEvent ) {
-				div.attachEvent( "onclick", function() {
-					// Cloning a node shouldn't copy over any
-					// bound event handlers (IE does this)
-					support.noCloneEvent = false;
-				});
-				div.cloneNode( true ).fireEvent( "onclick" );
-			}
-
-			// Check if a radio maintains it's value
-			// after being appended to the DOM
-			input = document.createElement("input");
-			input.value = "t";
-			input.setAttribute("type", "radio");
-			support.radioValue = input.value === "t";
-
-			input.setAttribute("checked", "checked");
-			div.appendChild( input );
-			fragment = document.createDocumentFragment();
-			fragment.appendChild( div.firstChild );
-
-			// WebKit doesn't clone checked state correctly in fragments
-			support.checkClone = fragment.cloneNode( true ).cloneNode( true ).lastChild.checked;
-
-			div.innerHTML = "";
-
-			// Figure out if the W3C box model works as expected
-			div.style.width = div.style.paddingLeft = "1px";
-
-			body = document.getElementsByTagName( "body" )[ 0 ];
-			// We use our own, invisible, body unless the body is already present
-			// in which case we use a div (#9239)
-			testElement = document.createElement( body ? "div" : "body" );
-			testElementStyle = {
-				visibility: "hidden",
-				width: 0,
-				height: 0,
-				border: 0,
-				margin: 0
-			};
-			if ( body ) {
-				testElementStyle.position = "absolute";
-				testElementStyle.left = -1000;
-				testElementStyle.top = -1000;
-			}
-			for ( i in testElementStyle ) {
-				testElement.style[ i ] = testElementStyle[ i ];
-			}
-			testElement.appendChild( div );
-			testElementParent = body || documentElement;
-			testElementParent.insertBefore( testElement, testElementParent.firstChild );
-
-			// Check if a disconnected checkbox will retain its checked
-			// value of true after appended to the DOM (IE6/7)
-			support.appendChecked = input.checked;
-
-			support.boxModel = div.offsetWidth === 2;
-
-			if ( "zoom" in div.style ) {
-				// Check if natively block-level elements act like inline-block
-				// elements when setting their display to 'inline' and giving
-				// them layout
-				// (IE < 8 does this)
-				div.style.display = "inline";
-				div.style.zoom = 1;
-				support.inlineBlockNeedsLayout = ( div.offsetWidth === 2 );
-
-				// Check if elements with layout shrink-wrap their children
-				// (IE 6 does this)
-				div.style.display = "";
-				div.innerHTML = "<div style='width:4px;'></div>";
-				support.shrinkWrapBlocks = ( div.offsetWidth !== 2 );
-			}
-
-			div.innerHTML = "<table><tr><td style='padding:0;border:0;display:none'></td><td>t</td></tr></table>";
-			tds = div.getElementsByTagName( "td" );
-
-			// Check if table cells still have offsetWidth/Height when they are set
-			// to display:none and there are still other visible table cells in a
-			// table row; if so, offsetWidth/Height are not reliable for use when
-			// determining if an element has been hidden directly using
-			// display:none (it is still safe to use offsets if a parent element is
-			// hidden; don safety goggles and see bug #4512 for more information).
-			// (only IE 8 fails this test)
-			isSupported = ( tds[ 0 ].offsetHeight === 0 );
-
-			tds[ 0 ].style.display = "";
-			tds[ 1 ].style.display = "none";
-
-			// Check if empty table cells still have offsetWidth/Height
-			// (IE < 8 fail this test)
-			support.reliableHiddenOffsets = isSupported && ( tds[ 0 ].offsetHeight === 0 );
-			div.innerHTML = "";
-
-			// Check if div with explicit width and no margin-right incorrectly
-			// gets computed margin-right based on width of container. For more
-			// info see bug #3333
-			// Fails in WebKit before Feb 2011 nightlies
-			// WebKit Bug 13343 - getComputedStyle returns wrong value for margin-right
-			if ( document.defaultView && document.defaultView.getComputedStyle ) {
-				marginDiv = document.createElement( "div" );
-				marginDiv.style.width = "0";
-				marginDiv.style.marginRight = "0";
-				div.appendChild( marginDiv );
-				support.reliableMarginRight =
-					( parseInt( ( document.defaultView.getComputedStyle( marginDiv, null ) || { marginRight: 0 } ).marginRight, 10 ) || 0 ) === 0;
-			}
-
-			// Remove the body element we added
-			testElement.innerHTML = "";
-			testElementParent.removeChild( testElement );
-
-			// Technique from Juriy Zaytsev
-			// http://thinkweb2.com/projects/prototype/detecting-event-support-without-browser-sniffing/
-			// We only care about the case where non-standard event systems
-			// are used, namely in IE. Short-circuiting here helps us to
-			// avoid an eval call (in setAttribute) which can cause CSP
-			// to go haywire. See: https://developer.mozilla.org/en/Security/CSP
-			if ( div.attachEvent ) {
-				for( i in {
-					submit: 1,
-					change: 1,
-					focusin: 1
-				} ) {
-					eventName = "on" + i;
-					isSupported = ( eventName in div );
-					if ( !isSupported ) {
-						div.setAttribute( eventName, "return;" );
-						isSupported = ( typeof div[ eventName ] === "function" );
-					}
-					support[ i + "Bubbles" ] = isSupported;
-				}
-			}
-
-			// Null connected elements to avoid leaks in IE
-			testElement = fragment = select = opt = body = marginDiv = div = input = null;
-
+            
 			return support;
 
 		})();
@@ -1738,7 +1440,7 @@
 				 * 형제 엘리먼트중에 다음에 위치한 엘리먼트를 반환합니다.
 				 * @method ax5.dom0.next
 				 * @param {Number} [times=0] - 횟수
-				 * @returns {ax5.dom0} ax5.dom0
+				 * @returns {axdom} ax5.dom0
 				 * @example
 				 * ```
 				 * <div>
@@ -2149,7 +1851,7 @@
 					// Chrome < 17 and Safari 5.0 uses "computed value" instead of "used value" for margin-right
 					// Safari 5.1.7 (at least) returns percentage for a larger set of values, but width seems to be reliably pixels
 					// this is against the CSSOM draft spec: http://dev.w3.org/csswg/cssom/#resolved-values
-					if ( rnumnonpx.test( ret ) && rmargin.test( name ) ) {
+					if ( re_numnonpx.test( ret ) && re_margin.test( name ) ) {
 						// Remember the original values
 						width = style.width;
 						minWidth = style.minWidth;
@@ -2185,7 +1887,7 @@
 				// but a number that has a weird ending, we need to convert it to pixels
 				// but not position css attributes, as those are proportional to the parent element instead
 				// and we can't measure the parent instead because it might trigger a "stacking dolls" problem
-				if ( rnumnonpx.test( ret ) && !rposition.test( name ) ) {
+				if ( re_numnonpx.test( ret ) && !re_position.test( name ) ) {
 
 					// Remember the original values
 					left = style.left;
@@ -2270,7 +1972,7 @@
 
 		// createFragment
 		function create_fragment(elems) {
-			var safe = createSafeFragment(), tmp, nodes = [], tag, wrap, tbody;
+			var safe = doc.createDocumentFragment(), tmp, nodes = [], tag, wrap, tbody;
 			var elem, i = 0, l = elems.length, j;
 
 			for (; i < l; i++) {
@@ -2282,16 +1984,16 @@
 					else if (U.get_type(elem) == "element") {
 						nodes.push(elem);
 					}
-					else if (!rhtml.test(elem)) {
+					else if (!re_html.test(elem)) {
 						nodes.push(doc.createTextNode(elem));
 						//safe.appendChild(doc.createTextNode(elem));
 					}
 					else {
 						tmp = safe.appendChild(doc.createElement("div"));
 						// Deserialize a standard representation
-						tag = ( rtagName.exec(elem) || ["", ""] )[1].toLowerCase();
-						wrap = wrapMap[tag] || wrapMap._default;
-						tmp.innerHTML = wrap[1] + elem.replace(rxhtmlTag, "<$1></$2>") + wrap[2];
+						tag = ( re_tag.exec(elem) || ["", ""] )[1].toLowerCase();
+						wrap = tag_map[tag] || [ 0, "", "" ];
+						tmp.innerHTML = wrap[1] + elem.replace(re_single_tags, "<$1></$2>") + wrap[2];
 
 						// Descend through wrappers to the right content
 						j = wrap[0];
@@ -2299,30 +2001,26 @@
 							tmp = tmp.lastChild;
 						}
 
-						// Manually add leading whitespace removed by IE
-						if (!info.support.leadingWhitespace && rleadingWhitespace.test(elem)) {
-							nodes.push(doc.createTextNode(rleadingWhitespace.exec(elem)[0]));
-						}
+                        /*
+                        if (!info.support.tbody) {
+                            // String was a <table>, *may* have spurious <tbody>
+                            elem = tag === "table" && !rtbody.test(elem) ?
+                                tmp.firstChild :
 
-						// Remove IE's autoinserted <tbody> from table fragments
-						if (!info.support.tbody) {
-							// String was a <table>, *may* have spurious <tbody>
-							elem = tag === "table" && !rtbody.test(elem) ?
-								tmp.firstChild :
+                                // String was a bare <thead> or <tfoot>
+                                wrap[1] === "<table>" && !rtbody.test(elem) ?
+                                    tmp :
+                                    0;
 
-								// String was a bare <thead> or <tfoot>
-								wrap[1] === "<table>" && !rtbody.test(elem) ?
-									tmp :
-									0;
-
-							j = elem && elem.childNodes.length;
-							while (j--) {
-								if (node_name((tbody = elem.childNodes[j]), "tbody") && !tbody.childNodes.length) {
-									elem.removeChild(tbody);
-								}
-							}
-						}
-
+                            j = elem && elem.childNodes.length;
+                            while (j--) {
+                                if (node_name((tbody = elem.childNodes[j]), "tbody") && !tbody.childNodes.length) {
+                                    elem.removeChild(tbody);
+                                }
+                            }
+                        }
+                        */
+                        
 						U.merge(nodes, tmp.childNodes);
 
 						// Fix #12392 for WebKit and IE > 9
@@ -2335,53 +2033,19 @@
 
 						// Remember the top-level container for proper cleanup
 						tmp = safe.lastChild;
+                        safe.removeChild(tmp);
+                        tmp = null;
 					}
 				}
 			}
-
-			// Fix #11356: Clear elements from fragment
-			if (tmp) {
-				safe.removeChild(tmp);
-			}
-
-			/*
-			 // Reset defaultChecked for any radios and checkboxes
-			 // about to be appended to the DOM in IE 6/7 (#8060)
-			 if (!info.support.appendChecked) {
-			 //jQuery.grep( getAll( nodes, "input" ), fixDefaultChecked );
-			 }
-			 */
-
 
 			i = 0;
 			while ((elem = nodes[i++])) {
 				//console.log(elem);
 				safe.appendChild(elem);
 			}
-
-
-			tmp = null;
-
 			return safe;
 		}
-
-		// getAll 특정 tag인 모든 엘리먼트 불러오기
-		/*
-		 function getAll(context, tag) {
-		 var elems, elem, i = 0,
-		 found = typeof context.getElementsByTagName !== core_strundefined ? context.getElementsByTagName(tag || "*") : typeof context.querySelectorAll !== core_strundefined ? context.querySelectorAll(tag || "*") : undefined;
-		 if (!found) {
-		 for (found = [], elems = context.childNodes || context; (elem = elems[i]) != null; i++) {
-		 if (!tag || jQuery.nodeName(elem, tag)) {
-		 found.push(elem);
-		 } else {
-		 U.merge(found, getAll(elem, tag));
-		 }
-		 }
-		 }
-		 return tag === undefined || tag && node_name(context, tag) ? U.merge([context], found) : found;
-		 }
-		 */
 		
 		// 엘리먼트와 자식 엘리먼트의 이벤트와 데이터를 모두 지워줍니다.
 		function clear_element_data(el){
@@ -2606,7 +2270,7 @@
 				var i = 0, l = elements.length, k, matchs;
 				for (; i < l; i++) {
 					for (k in O) {
-						elements[i].style[U.camel_case(k)] = (matchs = rnumsplit.exec(O[k])) ? Math.max(0, matchs[1]) + ( matchs[2] || "px" ) : O[k];
+						elements[i].style[U.camel_case(k)] = (matchs = re_numsplit.exec(O[k])) ? Math.max(0, matchs[1]) + ( matchs[2] || "px" ) : O[k];
 					}
 				}
 			}
@@ -3032,21 +2696,21 @@
 		 */
 		function html(elements, val) {
 			elements = va_elem(elements, "html");
+            var tag, wrap;
 			if (typeof val == "undefined") {
 				return elements[0].innerHTML;
 			} else {
-				if (
-					U.is_string(val) && !rnoInnerhtml.test(val) &&
-					(info.support.leadingWhitespace || !rleadingWhitespace.test(val))
-				) {
-					val = val.replace(rxhtmlTag, "<$1></$2>");
-					var i = 0, l = elements.length;
-					try {
-						for (; i < l; i++) {
-							elements[i].innerHTML = val;
-						}
-					} catch (e) {
-					}
+                tag = ( re_tag.exec(val) || ["", ""] )[1].toLowerCase();
+				if (U.is_string(val) && !re_noInnerhtml.test(val)) {
+                    if(tag == "tr" || tag == "td"){
+                        append(empty(elements), val);
+                    }else{
+                        val = val.replace(re_single_tags, "<$1></$2>");
+                        var i = 0, l = elements.length;
+                        for (; i < l; i++) {
+                            if("innerHTML" in elements[i]) elements[i].innerHTML = val;
+                        }                        
+                    }
 				}
 				else if (U.is_element(val) || U.is_nodelist(val)) {
 					append(empty(elements), val);

@@ -20,87 +20,17 @@
     <span>span</span>
 </div>
 
-<table>
+<table border="1">
     <tbody id="table-target">
     </tbody>
 </table>
 
 <script type="text/javascript">
-    /*
+
     var el = ax5.dom.get("#table-target");
     ax5.dom.html(el, "<tr><td>1234</td></tr>");
-
-
-    ax5.dom.on(el, "click", function(){console.log(123);});
-    ax5.dom.on(el, "click.ax5", function(){console.log(123);});
-    ax5.dom.on(el, "click.ax5", function(){console.log(345);});
-
-    ax5.dom("#test-target").find("b").css({"font-size":"20px"});
-    ax5.dom("#test-target").find("span").css({"font-size":"20px"});
-    */
-
-
-    ax5.xhr.config({
-        header      : {
-            'accept'      : "*/*",
-            'content-type': "application/x-www-form-urlencoded; charset=UTF-8"
-        },
-        method         : "GET",
-        url            : "",
-        param          : "",
-        async          : true,
-        username       : "",
-        password       : "",
-        withCredentials: false,
-        crossDomain    : false,
-        timeout        : 0
-    });
-    
-    ax5.xhr.config({
-        header      : {
-            'accept'      : "*/*"
-        }
-    });
-    
-    /*
-    ax5.xhr({
-        method: "POST",
-        url   : "../samples/ax5/xhr/data.php",
-        param : "str=1234",
-        res   : function (response, status) {
-            //console.log("success");
-            console.log(response);
-            console.log(this);
-        },
-        error : function () {
-            console.log("error");
-            console.log(this);
-        }
-    });
-    */
-
-    var xhr_queue = [];
-    xhr_queue.push({
-        method: "POST",
-        url   : "../samples/ax5/xhr/data.php",
-        param : "str=1234",
-        res   : function (response, status) {
-            console.log(response);
-        }
-    });
-    xhr_queue.push({
-        method: "POST",
-        url   : "../samples/ax5/xhr/data.php",
-        param : "str=1234",
-        res   : function (response, status) {
-            console.log(response);
-        }
-    });    
-    
-    ax5.xhr(xhr_queue, function() {
-        console.log("큐 완료")
-    });    
-    
+    ax5.dom.append(el, "<tr><td>999</td></tr>");
+    ax5.dom.prepend(el, "<tr><td>000</td></tr>");
     
 </script>
 
