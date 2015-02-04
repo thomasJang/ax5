@@ -25,7 +25,7 @@
 			}
 		},
 		watch: {
-			files: ['install.html','ax5/util/*.html','ax5/dom/*.html','ax5/xhr/*.html'],
+			files: ['*.html','ax5/util/*.html','ax5/dom/*.html','ax5/xhr/*.html'],
 			tasks: ['concat']
 		}
 	});

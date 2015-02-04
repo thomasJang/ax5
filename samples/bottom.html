@@ -1,6 +1,22 @@
+</div>
+<!--div class="sample-doc-content"-->
+<div class="sample-doc-menu" id="sample-doc-menu">
+    
+</div>
 <script type="text/javascript">
     (function(){
         prettyPrint();
+        
+        var util = ax5.util, dom = ax5.dom;
+        var po = [];
+        util.each(dom("h1").elements, function() {
+            console.log(this.innerHTML);
+            dom.before(this, '<a name="'+this.innerHTML+'"></a>');
+            po.push('<a href="#' + this.innerHTML + '">' + this.innerHTML + '</a>');
+        });
+        
+        dom("#sample-doc-menu").html(po.join(''));
+        
     })();
 </script>
 </body>

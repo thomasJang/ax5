@@ -1,5 +1,6 @@
 html, body{
   margin:0px;padding:10px;font-size: 13px;
+  height:100%;
 }
 
 *{}
@@ -11,10 +12,31 @@ h4{}
 p{}
 li{}
 
-div.block-end{height:50px;}
+div.block-end{height:30px;}
 pre.prettyprint{
   border:1px solid #e3e3e3;
   border-radius: 10px;
   padding:10px 10px 10px 0px;
   background-color: #f3f3f3;
+}
+
+.sample-doc-content{
+  padding-left:200px;
+  a[name]{
+    display: block;
+    height: 10px;
+  }
+}
+.sample-doc-menu{
+  position: fixed;
+  left:0px; top: 0px;
+  height:100%;width:200px;
+  box-sizing: border-box;
+  padding:20px;
+  overflow: auto;
+  a{
+    display: block;
+    font-size:15px;
+    line-height: 1.5em;
+  }
 }
