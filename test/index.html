@@ -27,10 +27,21 @@
 
 <script type="text/javascript">
 
-    var el = ax5.dom.get("#table-target");
+    var el = ax5.dom.get("#table-target"), div = ax5.dom.get("#test-target");
     ax5.dom.html(el, "<tr><td>1234</td></tr>");
     ax5.dom.append(el, "<tr><td>999</td></tr>");
     ax5.dom.prepend(el, "<tr><td>000</td></tr>");
+    ax5.dom.after(div, "<div>after</div>");
+    ax5.dom.before(div, "<div>before</div>");
+
+    ax5.dom(div).on("click", function(){
+        alert(1);
+    });
+    ax5.dom(div).on("click.ax5", function(){
+        alert(2);
+    });
+    
+    
     
 </script>
 

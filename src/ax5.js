@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-02-05 
+ * 2015-02-06 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -10,16 +10,17 @@
 
 // 필수 Ployfill 확장 구문
 (function(){
-
-	var root = this;
+    'use strict';
+    
+	var root = this,
+        re_trim = /^\s*|\s*$/g;
 
 	// From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
 	if (!Object.keys) {
 		Object.keys = (function() {
-			'use strict';
-			var hasOwnProperty = Object.prototype.hasOwnProperty,
-				hasDontEnumBug = !({ toString: null }).propertyIsEnumerable('toString'),
-				dontEnums = [
+			var hwp = Object.prototype.hasOwnProperty,
+                hdeb = !({ toString: null }).propertyIsEnumerable('toString'),
+				de = [
 					'toString',
 					'toLocaleString',
 					'valueOf',
@@ -28,27 +29,14 @@
 					'propertyIsEnumerable',
 					'constructor'
 				],
-				dontEnumsLength = dontEnums.length;
+				del = de.length;
 
 			return function(obj) {
-				if (typeof obj !== 'object' && (typeof obj !== 'function' || obj === null)) {
-					throw new TypeError('Object.keys called on non-object');
-				}
-
-				var result = [], prop, i;
-
-				for (prop in obj) {
-					if (hasOwnProperty.call(obj, prop)) {
-						result.push(prop);
-					}
-				}
-
-				if (hasDontEnumBug) {
-					for (i = 0; i < dontEnumsLength; i++) {
-						if (hasOwnProperty.call(obj, dontEnums[i])) {
-							result.push(dontEnums[i]);
-						}
-					}
+				if (typeof obj !== 'object' && (typeof obj !== 'function' || obj === null)) throw new TypeError('type err');
+				var r = [], prop, i;
+				for (prop in obj) if (hwp.call(obj, prop)) r.push(prop);
+				if (hdeb) {
+					for (i = 0; i < del; i++) if (hwp.call(obj, de[i])) r.push(de[i]);
 				}
 				return result;
 			};
@@ -60,11 +48,9 @@
 	if (!Array.prototype.forEach) {
 		Array.prototype.forEach = function (fun /*, thisp */) {
 			if (this === void 0 || this === null) { throw TypeError(); }
-
 			var t = Object(this);
 			var len = t.length >>> 0;
 			if (typeof fun !== "function") { throw TypeError(); }
-
 			var thisp = arguments[1], i;
 			for (i = 0; i < len; i++) {
 				if (i in t) {
@@ -78,7 +64,7 @@
 	// https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/bind
 	if (!Function.prototype.bind) {
 		Function.prototype.bind = function (o) {
-			if (typeof this !== 'function') { throw TypeError("Bind must be called on a function"); }
+			if (typeof this !== 'function') { throw TypeError("function"); }
 			var slice = [].slice,
 				args = slice.call(arguments, 1),
 				self = this,
@@ -138,10 +124,8 @@
 
 	if (!String.prototype.trim) {
 		(function() {
-			// Make sure we trim BOM and NBSP
-			var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
 			String.prototype.trim = function() {
-				return this.replace(rtrim, '');
+				return this.replace(re_trim, '');
 			};
 		})();
 	}
@@ -177,7 +161,6 @@
 	// Console-polyfill. MIT license. https://github.com/paulmillr/console-polyfill
 	// Make it safe to do console.log() always.
 	(function(con) {
-		'use strict';
 		var prop, method;
 		var empty = {};
 		var dummy = function() {};
@@ -200,7 +183,8 @@
 	/** @namespace {Object} ax5 */
 		ax5 = {}, info, U, dom;
 
-    var re_tag = /<([\w:]+)/,
+    var node_names = "abbr|article|aside|audio|bdi|canvas|data|datalist|details|figcaption|figure|footer|header|hgroup|mark|meter|nav|output|progress|section|summary|time|video",
+        re_tag = /<([\w:]+)/,
         re_single_tags = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/gi,
         re_html = /<|&#?\w+;/,
         re_noInnerhtml = /<(?:script|style|link)/i,
@@ -220,6 +204,20 @@
         re_amp = /&/g,
         re_eq = /=/,
         re_class_name_split = /[ ]+/g,
+        body = doc.createElement('body'),
+        safe_fragment = (function(){
+            var list = node_names.split( "|" ),
+                safeFrag = doc.createDocumentFragment();
+            if ( safeFrag.createElement ) {
+                while ( list.length ) {
+                    safeFrag.createElement(
+                        list.pop()
+                    );
+                }
+            }
+            return safeFrag;
+        })(),
+        fragment_div = safe_fragment.appendChild( doc.createElement("div")),
         tag_map = {
             option: [ 1, "<select multiple='multiple'>", "</select>" ],
             legend: [ 1, "<fieldset>", "</fieldset>" ],
@@ -1988,7 +1986,7 @@
         var curCSS;
 		//if("내장함수 시작") {
 		// 이벤트 바인딩
-		function eventBind(elem, type, eventHandle) {
+		function eBind(elem, type, eventHandle) {
 			type = U.left(type, ".");
 			if (elem.addEventListener) {
 				elem.addEventListener(type, eventHandle, false);
@@ -1998,7 +1996,7 @@
 		}
 
 		// 이벤트 언바인딩
-		function eventUnBind(elem, type, eventHandle) {
+		function eUnBind(elem, type, eventHandle) {
 			type = U.left(type, ".");
 			if (elem.removeEventListener) {
 				if (eventHandle) elem.removeEventListener(type, eventHandle);
@@ -2031,9 +2029,8 @@
 		}
 
 		// 엘리먼트 순서이동
-		function sibling(elements, forward, times) {
-			elements = va_elem(elements, forward);
-			var prop = (forward == "prev") ? "previousSibling" : "nextSibling", el = elements[0];
+		function sibling(els, forward, times) {
+			var prop = (forward == "prev") ? "previousSibling" : "nextSibling", el = els[0];
 			times = (typeof times == "undefined" || times < 1) ? 1 : times;
 			do {
 				el = el[prop];
@@ -2148,14 +2145,13 @@
 		}
 
 		// 박스사이즈 구하기
-		function box_size(elements, fn_nm, opts) {
+		function box_size(els, fn_nm, opts) {
 			var d = -1, tag_nm = "";
-			if (U.is_window(elements)) {
-				return elements.document.documentElement[U.camel_case("client-" + fn_nm)];
+			if (U.is_window(els)) {
+				return els.document.documentElement[U.camel_case("client-" + fn_nm)];
 			}
 			else {
-				elements = va_elem(elements, fn_nm);
-				var el = elements[0], _sbs = U.camel_case("scroll-" + fn_nm), _obs = U.camel_case("offset-" + fn_nm), _cbs = U.camel_case("client-" + fn_nm);
+				var el = els[0], _sbs = U.camel_case("scroll-" + fn_nm), _obs = U.camel_case("offset-" + fn_nm), _cbs = U.camel_case("client-" + fn_nm);
 				if (el) {
 					tag_nm = el.tagName.toLowerCase();
 					if (tag_nm == "html") {
@@ -2191,8 +2187,9 @@
 
 		// createFragment
 		function create_fragment(elems) {
-			var safe = doc.createDocumentFragment(), tmp, nodes = [], tag, wrap, tbody;
-			var elem, i = 0, l = elems.length, j;
+			var safe = safe_fragment, tmp, nodes = [], tag, wrap, tbody,
+                elem, i = 0, l = elems.length, j;
+            // safe = doc.createDocumentFragment();
 
 			for (; i < l; i++) {
 				elem = elems[i];
@@ -2220,7 +2217,7 @@
 							tmp = tmp.lastChild;
 						}
 
-                        /*
+                        /* ax5 에겐 필요없는 구문이 될 듯.
                         if (!info.support.tbody) {
                             // String was a <table>, *may* have spurious <tbody>
                             elem = tag === "table" && !rtbody.test(elem) ?
@@ -2239,7 +2236,6 @@
                             }
                         }
                         */
-                        
 						U.merge(nodes, tmp.childNodes);
 
 						// Fix #12392 for WebKit and IE > 9
@@ -2273,10 +2269,10 @@
 			
 			for(var hd in el.e_hd){
 				if(typeof el.e_hd[hd] === "function"){
-					eventUnBind(el, hd, el.e_hd[hd]);
+					eUnBind(el, hd, el.e_hd[hd]);
 				}else{
 					for(var ehi=0;ehi<el.e_hd[hd].length;ehi++)
-						eventUnBind(el, hd, el.e_hd[hd][ehi]);
+						eUnBind(el, hd, el.e_hd[hd][ehi]);
 				}
 			}
 			delete el["e_hd"];
@@ -2369,7 +2365,7 @@
 		 * ```
 		 */
 		function resize(_fn) {
-			eventBind(window, "resize", _fn);
+			eBind(window, "resize", _fn);
 		}
 
 		/**
@@ -2386,38 +2382,26 @@
 		 * ```
 		 */
 		function get(query, sub_query) {
-			var elements, return_elements = [], parent_element;
+			var els, r_els = [], p_els;
 			var i = 0, l = query.length;
 			if (query.toString() == "[object ax5.dom]") {
-				return_elements = query.elements;
+                r_els = query.elements;
 			}
-			else if (U.is_element(query)) {
-				return_elements.push(query);
-			}
+			else if (U.is_element(query)) r_els.push(query);
 			else if (U.is_array(query) || U.is_nodelist(query)) {
-				for (; i < l; i++) {
-					if (U.is_element(query[i])) return_elements.push(query[i]);
-				}
+				for (; i < l; i++)  if (U.is_element(query[i])) r_els.push(query[i]);
 			}
-			else if (U.is_string(query) && query.substr(0, 1) === "#") {
-				return_elements.push(doc.getElementById(query.substr(1)));
-			}
+			else if (U.is_string(query) && query.substr(0, 1) === "#") r_els.push(doc.getElementById(query.substr(1)));
 			else {
-				elements = doc.querySelectorAll(query), l = elements.length;
-				for (; i < l; i++) {
-					return_elements.push(elements[i]);
-				}
+                els = doc.querySelectorAll(query), l = els.length;
+				for (; i < l; i++) r_els.push(els[i]);
 			}
-
 			if (typeof sub_query != "undefined") {
-				parent_element = (info.browser.name == "ie" && info.browser.version < 8) ? doc : return_elements[0];
-				return_elements = [];
-				elements = parent_element.querySelectorAll(sub_query), l = elements.length;
-				for (; i < l; i++) {
-					return_elements.push(elements[i]);
-				}
+				p_els = (info.browser.name == "ie" && info.browser.version < 8) ? doc : r_els[0];
+                r_els = [], els = p_els.querySelectorAll(sub_query), l = els.length;
+				for (; i < l; i++) r_els.push(els[i]);
 			}
-			return return_elements;
+			return r_els;
 		}
 
 		/**
@@ -2463,8 +2447,7 @@
 			for (var k in attr) {
 				element.setAttribute(k, attr[k]);
 			}
-			if
-			(val) element.appendChild(create_fragment([].concat(val)));
+			if(val) element.appendChild(create_fragment([].concat(val)));
 			return element;
 		}
 
@@ -2480,20 +2463,20 @@
 		 * ax5.dom.css(ax5.dom.get("#abcd"), {"width":100});
 		 * ```
 		 */
-		function css(elements, O) {
-			elements = va_elem(elements, "css");
+		function css(els, O) {
+			els = va_elem(els, "css");
 			if (U.is_string(O) || U.is_array(O)) {
-				return style(elements[0], O, "css");
+				return style(els[0], O, "css");
 			}
 			else {
-				var i = 0, l = elements.length, k, matchs;
+				var i = 0, l = els.length, k, matchs;
 				for (; i < l; i++) {
 					for (k in O) {
-						elements[i].style[U.camel_case(k)] = (matchs = re_numsplit.exec(O[k])) ? Math.max(0, matchs[1]) + ( matchs[2] || "px" ) : O[k];
+						els[i].style[U.camel_case(k)] = (matchs = re_numsplit.exec(O[k])) ? Math.max(0, matchs[1]) + ( matchs[2] || "px" ) : O[k];
 					}
 				}
 			}
-			return elements;
+			return els;
 		}
 		// todo : opacity 컨트롤 테스트
 
@@ -2513,46 +2496,43 @@
 		 * ax5.dom.class_name(ax5.dom.get("#abcd"), "toggle", "class-text");
 		 * ```
 		 */
-		function class_name(elements, command, O) {
-			var classNames;
-			elements = va_elem(elements, "clazz");
+		function class_name(els, command, O) {
+			var cns;
+			els = va_elem(els, "clazz");
 			if (command === "add" || command === "remove" || command === "toggle") {
-				for (var di = 0; di < elements.length; di++) {
-					classNames = elements[di]["className"].split(re_class_name_split);
+				for (var di = 0; di < els.length; di++) {
+                    cns = els[di]["className"].split(re_class_name_split);
 					if (command === "add") {
-						if (U.search(classNames, function () {
+						if (U.search(cns, function () {
 								return O.trim() == this;
-							}) == -1) {
-							classNames.push(O.trim());
-						}
+							}) == -1) cns.push(O.trim());
 					} else if (command === "remove") {
-						classNames = U.filter(classNames, function () {
+                        cns = U.filter(cns, function () {
 							return O.trim() != this;
 						});
 					} else if (command === "toggle") {
-						var class_count = classNames.length;
-						classNames = U.filter(classNames, function () {
+						var class_count = cns.length;
+                        cns = U.filter(cns, function () {
 							return O.trim() != this;
 						});
-						if (class_count === classNames.length) classNames.push(O.trim());
+						if (class_count === cns.length) cns.push(O.trim());
 					}
-					elements[di]["className"] = classNames.join(" ");
+					els[di]["className"] = cns.join(" ");
 				}
-				return elements;
+				return els;
 			}
 			else { // has
 				if (typeof O === "undefined") O = command;
-				classNames = elements[0]["className"].trim().split(re_class_name_split);
-				//if(U.is_string(classNames)) classNames = [classNames];
+                cns = els[0]["className"].trim().split(re_class_name_split);
 				if (U.is_string(O)) { // hasClass
 					// get Class Name
-					return (U.search(classNames, function () {
+					return (U.search(cns, function () {
 						return this.trim() === O
 					}) > -1);
 				} else {
 					console.error("set_class argument error");
 				}
-				return elements;
+				return els;
 			}
 		}
 
@@ -2570,24 +2550,24 @@
 		 * ax5.dom.attr(ax5.dom.get("[data-ax-grid=A]"), {"data-next":null}); // remove attribute
 		 * ```
 		 */
-		function attr(elements, O) {
-			elements = va_elem(elements, "attr");
-			var i = 0, l = elements.length, k;
+		function attr(els, O) {
+			els = va_elem(els, "attr");
+			var i = 0, l = els.length, k;
 			if (U.is_object(O)) {
 				for (; i < l; i++) {
 					for (k in O){
 						if(O[k] == null){
-							elements[i].removeAttribute(k);
+							els[i].removeAttribute(k);
 						}else{
-							elements[i].setAttribute(k, O[k]);
+							els[i].setAttribute(k, O[k]);
 						}
 					}
 				}
 			}
 			else if (U.is_string(O)) {
-				return elements[0].getAttribute(O);
+				return els[0].getAttribute(O);
 			}
-			return elements;
+			return els;
 		}
 
 		/**
@@ -2620,10 +2600,10 @@
 		 * ax5.dom.on(mydom, "click.fnc", window.fnc);
 		 * ```
 		 */
-		function on(elements, typ, _fn) {
-			elements = va_elem(elements, "on");
-			for (var i = 0; i < elements.length; i++) {
-				var __fn, _d = elements[i];
+		function on(els, typ, _fn) {
+			els = va_elem(els, "on");
+			for (var i = 0; i < els.length; i++) {
+				var __fn, _d = els[i];
 				if (!_d.e_hd) _d.e_hd = {};
 				if (typeof _d.e_hd[typ] === "undefined") {
 					__fn = _d.e_hd[typ] = _fn;
@@ -2632,7 +2612,7 @@
 					_d.e_hd[typ].push(_fn);
 					__fn = _d.e_hd[typ][_d.e_hd[typ].length - 1];
 				}
-				eventBind(_d, typ, __fn);
+				eBind(_d, typ, __fn);
 			}
 		}
 
@@ -2649,20 +2629,20 @@
 		 * ax5.dom.off(mydom, "click.fnb");
 		 * ```
 		 */
-		function off(elements, typ, _fn) {
-			elements = va_elem(elements, "off");
-			for (var i = 0; i < elements.length; i++) {
-				var _d = elements[i];
+		function off(els, typ, _fn) {
+			els = va_elem(els, "off");
+			for (var i = 0; i < els.length; i++) {
+				var _d = els[i];
 				if (U.is_array(_d.e_hd[typ])) {
 					var _na = [];
 					for (var i = 0; i < _d.e_hd[typ].length; i++) {
-						if (_d.e_hd[typ][i] == _fn || typeof _fn === "undefined") eventUnBind(_d, typ, _d.e_hd[typ][i]);
+						if (_d.e_hd[typ][i] == _fn || typeof _fn === "undefined") eUnBind(_d, typ, _d.e_hd[typ][i]);
 						else _na.push(_d.e_hd[typ][i]);
 					}
 					_d.e_hd[typ] = _na;
 				} else {
 					if (_d.e_hd[typ] == _fn || typeof _fn === "undefined") {
-						eventUnBind(_d, typ, _d.e_hd[typ]);
+						eUnBind(_d, typ, _d.e_hd[typ]);
 						delete _d.e_hd[typ]; // 함수 제거
 					}
 				}
@@ -2696,13 +2676,13 @@
 		 * </script>
 		 * ```
 		 */
-		function child(elements) {
-			elements = va_elem(elements, "child");
+		function child(els) {
+			els = va_elem(els, "child");
 			var return_elems = [], i = 0, l;
-			if (elements[0]) {
-				l = elements[0].children.length;
+			if (els[0]) {
+				l = els[0].children.length;
 				for (; i < l; i++) {
-					return_elems.push(elements[0].children[i]);
+					return_elems.push(els[0].children[i]);
 				}
 			}
 			return return_elems;
@@ -2727,9 +2707,9 @@
 		 * );
 		 * ```
 		 */
-		function parent(elements, cond) {
-			elements = va_elem(elements, "child");
-			var _target = elements[0];
+		function parent(els, cond) {
+			els = va_elem(els, "child");
+			var _target = els[0];
 			if (_target) {
 				while ((function () {
 					var result = true;
@@ -2803,8 +2783,8 @@
 		 * </script>
 		 * ```
 		 */
-		function prev(elements, times) {
-			return sibling(elements, "prev", times);
+		function prev(els, times) {
+			return sibling(els, "prev", times);
 		}
 
 		/**
@@ -2839,8 +2819,8 @@
 		 * </script>
 		 * ```
 		 */
-		function next(elements, times) {
-			return sibling(elements, "next", times);
+		function next(els, times) {
+			return sibling(els, "next", times);
 		}
 
 		/**
@@ -2854,8 +2834,8 @@
 		 * ax5.dom.width(el);
 		 * ```
 		 */
-		function width(elements) {
-			return box_size(elements, "width");
+		function width(els) {
+			return box_size(els, "width");
 		}
 
 		/**
@@ -2869,8 +2849,8 @@
 		 * ax5.dom.height(el);
 		 * ```
 		 */
-		function height(elements) {
-			return box_size(elements, "height");
+		function height(els) {
+			return box_size(els, "height");
 		}
 
 		/**
@@ -2884,11 +2864,11 @@
 		 * ax5.dom.empty(el);
 		 * ```
 		 */
-		function empty(elements) {
-			elements = va_elem(elements, "empty");
-			var i = 0, l = elements.length, el;
+		function empty(els) {
+			els = va_elem(els, "empty");
+			var i = 0, l = els.length, el;
 			for (; i < l; i++) {
-				el = elements[i];
+				el = els[i];
 				while (el.firstChild) {
 					clear_element_data(el.firstChild);
 					el.removeChild(el.firstChild);
@@ -2897,7 +2877,7 @@
 					el.options.length = 0;
 				}
 			}
-			return elements;
+			return els;
 		}
 
 		/**
@@ -2913,28 +2893,28 @@
 		 * ax5.dom.html(el, "<a href='#1234'>링크");
 		 * ```
 		 */
-		function html(elements, val) {
-			elements = va_elem(elements, "html");
+		function html(els, val) {
+			els = va_elem(els, "html");
             var tag, wrap;
 			if (typeof val == "undefined") {
-				return elements[0].innerHTML;
+				return els[0].innerHTML;
 			} else {
                 tag = ( re_tag.exec(val) || ["", ""] )[1].toLowerCase();
 				if (U.is_string(val) && !re_noInnerhtml.test(val)) {
                     if(tag_not_support_innerhtml[tag]){
-                        append(empty(elements), val);
+                        append(empty(els), val);
                     }else{
                         val = val.replace(re_single_tags, "<$1></$2>");
-                        var i = 0, l = elements.length;
+                        var i = 0, l = els.length;
                         for (; i < l; i++) {
-                            if("innerHTML" in elements[i]) elements[i].innerHTML = val;
+                            if("innerHTML" in els[i]) els[i].innerHTML = val;
                         }                        
                     }
 				}
 				else if (U.is_element(val) || U.is_nodelist(val)) {
-					append(empty(elements), val);
+					append(empty(els), val);
 				}
-				return elements;
+				return els;
 			}
 		}
 
@@ -2952,14 +2932,14 @@
 		 * ax5.dom.append(ax5.dom.get("[data-list-item='2']"), ax5.dom.get("#move-item"));
 		 * ```
 		 */
-		function append(elements, val) {
-			return manipulate("append", elements, val);
+		function append(els, val) {
+			return manipulate("append", els, val);
 		}
 
 		/**
 		 * 엘리먼트에 자식노드를 추가 합니다. (추가되는 위치는 맨 처음 입니다.)
 		 * @method ax5.dom.prepend
-		 * @param {Elements|Element} elements
+		 * @param {els|Element} elements
 		 * @param {String|Element} val
 		 * @returns {Elements|Element}
 		 * @example
@@ -2970,8 +2950,8 @@
 		 * ax5.dom.prepend(ax5.dom.get("[data-list-item='2']"), ax5.dom.get("#move-item"));
 		 * ```
 		 */
-		function prepend(elements, val) {
-			return manipulate("prepend", elements, val);
+		function prepend(els, val) {
+			return manipulate("prepend", els, val);
 		}
 
 		/**
@@ -2986,8 +2966,8 @@
 		 * ax5.dom.before(el, "before");
 		 * ```
 		 */
-		function before(elements, val) {
-			return manipulate("before", elements, val);
+		function before(els, val) {
+			return manipulate("before", els, val);
 		}
 
 		/**
@@ -3002,8 +2982,8 @@
 		 * ax5.dom.after(el, "after");
 		 * ```
 		 */
-		function after(elements, val) {
-			return manipulate("after", elements, val);
+		function after(els, val) {
+			return manipulate("after", els, val);
 		}
 
 		/**
@@ -3015,10 +2995,10 @@
 		 * @param {String} val - 추가하려는 html tag 또는 문자열
 		 * @returns {Elements|Element}
 		 */
-		function manipulate(act, elements, val) {
-			elements = va_elem(elements, act);
-			var flag, i = 0, l = elements.length,
-				el = [].concat(val), cf = create_fragment, els = elements;
+		function manipulate(act, els, val) {
+			els = va_elem(els, act);
+			var flag, i = 0, l = els.length,
+				el = [].concat(val), cf = create_fragment, els = els;
 
 			if (act === "append") {
 				for (; i < l; i++) {
@@ -3051,13 +3031,13 @@
 		 * ax5.dom.remove(el);
 		 * ```
 		 */
-		function remove(elements, val) {
-			elements = va_elem(elements, "remove");
-			var i = 0, l = elements.length;
+		function remove(els, val) {
+			els = va_elem(els, "remove");
+			var i = 0, l = els.length;
 			for (; i < l; i++) {
-				if (elements[i].parentNode) {
-					clear_element_data(elements[i]);
-					elements[i].parentNode.removeChild(elements[i]);
+				if (els[i].parentNode) {
+					clear_element_data(els[i]);
+					els[i].parentNode.removeChild(els[i]);
 				}
 			}
 		}
@@ -3075,9 +3055,9 @@
 		 * // {"top": 8, "left": 8}
 		 * ```
 		 */
-		function offset(elements) {
-			elements = va_elem(elements, "offset");
-			var el = elements[0], docEl = doc.documentElement, box;
+		function offset(els) {
+			els = va_elem(els, "offset");
+			var el = els[0], docEl = doc.documentElement, box;
 			if (el.getBoundingClientRect) {
 				box = el.getBoundingClientRect();
 			}
@@ -3108,9 +3088,9 @@
 		 * // {"top": 8, "left": 8}
 		 * ```
 		 */
-		function position(elements) {
-			elements = va_elem(elements, "offset");
-			var el = elements[0], docEl = doc.documentElement, el_parent,
+		function position(els) {
+			els = va_elem(els, "offset");
+			var el = els[0], docEl = doc.documentElement, el_parent,
 				pos = {top: 0, left: 0}, parentPos = {top: 0, left: 0};
 
 			if (css(el, "position") === "fixed") {
@@ -3159,9 +3139,9 @@
 		 * // 각각의 박스모델 속성을 지정하여 호출 할 수 있습니다. borderWidth, border-width 중 하나의 방법으로 사용 가능합니다.
 		 * ```
 		 */
-		function box_model(elements, cond) {
-			elements = va_elem(elements, "box_model");
-			var el = elements[0],
+		function box_model(els, cond) {
+			els = va_elem(els, "box_model");
+			var el = els[0],
 				model = {};
 			if (cond) cond = U.camel_case(cond);
 			if (typeof cond === "undefined" || cond == "offset") {
@@ -3232,44 +3212,44 @@
 		 * axd.data(el, "remove"); // remove all
 		 * ```
 		 */
-		function data(elements, command, O) {
-			//console.log(elements, command, O);
-			elements = va_elem(elements, "data");
-			var i = 0, l = elements.length, k;
+		function data(els, command, O) {
+			//console.log(els, command, O);
+			els = va_elem(els, "data");
+			var i = 0, l = els.length, k;
 			if (command === "set" || (typeof O === "undefined" && U.is_object(command))) {
 				if (typeof O === "undefined") O = command;
 				for (; i < l; i++) {
 					for (k in O) {
-						if (typeof elements[i].ax5_data === "undefined") elements[i].ax5_data = {};
-						elements[i].ax5_data[k] = O[k];
+						if (typeof els[i].ax5_data === "undefined") els[i].ax5_data = {};
+						els[i].ax5_data[k] = O[k];
 					}
 				}
 			}
 			else if (command !== "remove" && (command === "get" || command === "read" || (typeof O === "undefined" && U.is_string(command)))) {
 				if (typeof O === "undefined") O = command;
-				if (!U.is_string(O)) return elements;
-				return (typeof elements[0].ax5_data[O] === "undefined") ? "" : elements[0].ax5_data[O];
+				if (!U.is_string(O)) return els;
+				return (typeof els[0].ax5_data[O] === "undefined") ? "" : els[0].ax5_data[O];
 			}
 			else if (command === "remove") {
 				if (typeof O === "undefined") {
 					for (; i < l; i++) {
-						elements[i].ax5_data = {};
+						els[i].ax5_data = {};
 					}
 				}
 				else if (U.is_string(O)) {
 					for (; i < l; i++) {
-						delete elements[i].ax5_data[O];
+						delete els[i].ax5_data[O];
 					}
 				}
 				else {
 					for (; i < l; i++) {
 						each(O, function () {
-							delete elements[i].ax5_data[this];
+							delete els[i].ax5_data[this];
 						});
 					}
 				}
 			}
-			return elements;
+			return els;
 		}
 
 		U.extend(ax5.dom, {
