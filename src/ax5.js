@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-02-04 
+ * 2015-02-05 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -229,6 +229,10 @@
             tr: [ 2, "<table><tbody>", "</tbody></table>" ],
             col: [ 2, "<table><tbody></tbody><colgroup>", "</colgroup></table>" ],
             td: [ 3, "<table><tbody><tr>", "</tr></tbody></table>" ]
+        },
+        tag_not_support_innerhtml = {
+            col:1, colGroup:1, frameSet:1, html:1, head:1, style:1, table:1,
+            tBody:1, tFoot:1, tHead:1, title:1, tr:1
         };
 
 	/**
@@ -1981,6 +1985,7 @@
 
 	// dom functions
 	(function () {
+        var curCSS;
 		//if("내장함수 시작") {
 		// 이벤트 바인딩
 		function eventBind(elem, type, eventHandle) {
@@ -2043,92 +2048,89 @@
 			return el;
 		}
 
+        if ( window.getComputedStyle ) {
+            curCSS = function (elem, name, num) {
+                var width, minWidth, maxWidth, computed, ret, style, left, rs, rsLeft;
 
-// jQuery 1.10.2 이 소스를 참고하여 getStyles와 curCSS를 작성하였습니다.
-		function getStyles(elem) {
-			if ( window.getComputedStyle ) {
-				return window.getComputedStyle(elem, null);
-			} else {
-				//if (document.documentElement.currentStyle) {
-				return elem.currentStyle;
-			}
-		}
+                computed = window.getComputedStyle(elem, null),
+                ret = computed ? computed.getPropertyValue(name) || computed[name] : undefined,
+                style = elem.style;
 
-		function curCSS(elem, name, num) {
-			var width, minWidth, maxWidth, computed, ret, style, left, rs, rsLeft;
+                if ( computed ) {
 
-			if ( window.getComputedStyle ) {
-				computed = getStyles(elem),
-					ret = computed ? computed.getPropertyValue(name) || computed[name] : undefined,
-					style = elem.style;
+                    // A tribute to the "awesome hack by Dean Edwards"
+                    // Chrome < 17 and Safari 5.0 uses "computed value" instead of "used value" for margin-right
+                    // Safari 5.1.7 (at least) returns percentage for a larger set of values, but width seems to be reliably pixels
+                    // this is against the CSSOM draft spec: http://dev.w3.org/csswg/cssom/#resolved-values
+                    if ( re_numnonpx.test( ret ) && re_margin.test( name ) ) {
+                        // Remember the original values
+                        width = style.width;
+                        minWidth = style.minWidth;
+                        maxWidth = style.maxWidth;
 
-				if ( computed ) {
+                        // Put in the new values to get a computed value out
+                        style.minWidth = style.maxWidth = style.width = ret;
+                        ret = computed.width;
 
-					// A tribute to the "awesome hack by Dean Edwards"
-					// Chrome < 17 and Safari 5.0 uses "computed value" instead of "used value" for margin-right
-					// Safari 5.1.7 (at least) returns percentage for a larger set of values, but width seems to be reliably pixels
-					// this is against the CSSOM draft spec: http://dev.w3.org/csswg/cssom/#resolved-values
-					if ( re_numnonpx.test( ret ) && re_margin.test( name ) ) {
-						// Remember the original values
-						width = style.width;
-						minWidth = style.minWidth;
-						maxWidth = style.maxWidth;
+                        // Revert the changed values
+                        style.width = width;
+                        style.minWidth = minWidth;
+                        style.maxWidth = maxWidth;
+                    }
+                }
 
-						// Put in the new values to get a computed value out
-						style.minWidth = style.maxWidth = style.width = ret;
-						ret = computed.width;
+                if(num) ret = parseFloat(ret) || 0;
+                return ret;
+            }
+        }else{
+            curCSS = function(elem, name, num) {
+                var width, minWidth, maxWidth, computed, ret, style, left, rs, rsLeft;
 
-						// Revert the changed values
-						style.width = width;
-						style.minWidth = minWidth;
-						style.maxWidth = maxWidth;
-					}
-				}
+                computed = elem.currentStyle,
+                ret = computed ? computed[ name ] : undefined,
+                style = elem.style;
 
-			} else {
-				//if (document.documentElement.currentStyle) {
-				computed = getStyles( elem ),
-					ret = computed ? computed[ name ] : undefined,
-					style = elem.style;
+                // Avoid setting ret to empty string here
+                // so we don't default to auto
+                if ( ret == null && style && style[ name ] ) {
+                    ret = style[ name ];
+                }
 
-				// Avoid setting ret to empty string here
-				// so we don't default to auto
-				if ( ret == null && style && style[ name ] ) {
-					ret = style[ name ];
-				}
+                // From the awesome hack by Dean Edwards
+                // http://erik.eae.net/archives/2007/07/27/18.54.15/#comment-102291
 
-				// From the awesome hack by Dean Edwards
-				// http://erik.eae.net/archives/2007/07/27/18.54.15/#comment-102291
+                // If we're not dealing with a regular pixel number
+                // but a number that has a weird ending, we need to convert it to pixels
+                // but not position css attributes, as those are proportional to the parent element instead
+                // and we can't measure the parent instead because it might trigger a "stacking dolls" problem
+                if ( re_numnonpx.test( ret ) && !re_position.test( name ) ) {
 
-				// If we're not dealing with a regular pixel number
-				// but a number that has a weird ending, we need to convert it to pixels
-				// but not position css attributes, as those are proportional to the parent element instead
-				// and we can't measure the parent instead because it might trigger a "stacking dolls" problem
-				if ( re_numnonpx.test( ret ) && !re_position.test( name ) ) {
+                    // Remember the original values
+                    left = style.left;
+                    rs = elem.runtimeStyle;
+                    rsLeft = rs && rs.left;
 
-					// Remember the original values
-					left = style.left;
-					rs = elem.runtimeStyle;
-					rsLeft = rs && rs.left;
+                    // Put in the new values to get a computed value out
+                    if ( rsLeft ) {
+                        rs.left = elem.currentStyle.left;
+                    }
+                    style.left = name === "fontSize" ? "1em" : ret;
+                    ret = style.pixelLeft + "px";
 
-					// Put in the new values to get a computed value out
-					if ( rsLeft ) {
-						rs.left = elem.currentStyle.left;
-					}
-					style.left = name === "fontSize" ? "1em" : ret;
-					ret = style.pixelLeft + "px";
+                    // Revert the changed values
+                    style.left = left;
+                    if ( rsLeft ) {
+                        rs.left = rsLeft;
+                    }
+                }
+                ret = ret === "" ? "auto" : ret;
 
-					// Revert the changed values
-					style.left = left;
-					if ( rsLeft ) {
-						rs.left = rsLeft;
-					}
-				}
-				ret = ret === "" ? "auto" : ret;
-			}
-			if(num) ret = parseFloat(ret) || 0;
-			return ret;
-		}
+                if(num) ret = parseFloat(ret) || 0;
+                return ret;
+            }
+        }
+        // jQuery 1.10.2 소스를 참고하여 curCSS를 재작성하였습니다.
+
 
 		// 엘리먼트 스타일 값 가져오기
 		function style(el, key, fn_nm) {
@@ -2294,7 +2296,7 @@
 			}
 		}
 		
-		// jQuery.ready.promise jquery 1.10.2
+		// jQuery.ready.promise jquery 1.10.2 를 참고하여 재 작성 했습니다.
 		/**
 		 * document 로드 완료를 체크 합니다.
 		 * @method ax5.dom.ready
@@ -2919,7 +2921,7 @@
 			} else {
                 tag = ( re_tag.exec(val) || ["", ""] )[1].toLowerCase();
 				if (U.is_string(val) && !re_noInnerhtml.test(val)) {
-                    if(tag == "tr" || tag == "td"){
+                    if(tag_not_support_innerhtml[tag]){
                         append(empty(elements), val);
                     }else{
                         val = val.replace(re_single_tags, "<$1></$2>");
