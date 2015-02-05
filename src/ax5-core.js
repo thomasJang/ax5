@@ -7,7 +7,8 @@
 	/** @namespace {Object} ax5 */
 		ax5 = {}, info, U, dom;
 
-    var re_tag = /<([\w:]+)/,
+    var node_names = "abbr|article|aside|audio|bdi|canvas|data|datalist|details|figcaption|figure|footer|header|hgroup|mark|meter|nav|output|progress|section|summary|time|video",
+        re_tag = /<([\w:]+)/,
         re_single_tags = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/gi,
         re_html = /<|&#?\w+;/,
         re_noInnerhtml = /<(?:script|style|link)/i,
@@ -27,6 +28,19 @@
         re_amp = /&/g,
         re_eq = /=/,
         re_class_name_split = /[ ]+/g,
+        safe_fragment = (function(){
+            var list = node_names.split( "|" ),
+                safeFrag = doc.createDocumentFragment();
+            if ( safeFrag.createElement ) {
+                while ( list.length ) {
+                    safeFrag.createElement(
+                        list.pop()
+                    );
+                }
+            }
+            return safeFrag;
+        })(),
+        fragment_div = safe_fragment.appendChild( doc.createElement("div")),
         tag_map = {
             option: [ 1, "<select multiple='multiple'>", "</select>" ],
             legend: [ 1, "<fieldset>", "</fieldset>" ],
@@ -1998,8 +2012,9 @@
 
 		// createFragment
 		function create_fragment(elems) {
-			var safe = doc.createDocumentFragment(), tmp, nodes = [], tag, wrap, tbody;
-			var elem, i = 0, l = elems.length, j;
+			var safe = safe_fragment, tmp, nodes = [], tag, wrap, tbody,
+                elem, i = 0, l = elems.length, j;
+            // safe = doc.createDocumentFragment();
 
 			for (; i < l; i++) {
 				elem = elems[i];
@@ -2027,7 +2042,7 @@
 							tmp = tmp.lastChild;
 						}
 
-                        /*
+                        /* ax5 에겐 필요없는 구문이 될 듯.
                         if (!info.support.tbody) {
                             // String was a <table>, *may* have spurious <tbody>
                             elem = tag === "table" && !rtbody.test(elem) ?
@@ -2046,7 +2061,6 @@
                             }
                         }
                         */
-                        
 						U.merge(nodes, tmp.childNodes);
 
 						// Fix #12392 for WebKit and IE > 9
