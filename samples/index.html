@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-02-05 
+ publish date : 2015-02-06 
 -->
 <html lang="en">
 <head>
@@ -19,165 +19,179 @@
 <body>
 
 <div class="sample-doc-content">
-    본 문서는 ax5 사용자를 위해 제작되었습니다.
+    <article class="cover">
+        본 문서는 ax5 사용자를 위해 제작되었습니다.
+    </article>
 
 <!-- split -->
 <div class="block-end"></div>
 
-<h1>Install ax5</h1>
-
-<h3>ax5 시작하기</h3>
-<p>ax5라이브러리 파일을 html head안에 insert 합니다.</p>
-<pre class="prettyprint linenums">
-&lt;!DOCTYPE html>
-&lt;html lang="en">
-    &lt;head>
-        &lt;meta charset="UTF-8"/>
-        &lt;title>ax5&lt;/title>
-    &lt;/head>
-    &lt;body>
-
-    &lt;/body>
-&lt;/html>
-</pre>
-<p>ax5라이브러리 파일을 html head안에 insert 합니다.</p>
-<pre class="prettyprint linenums">
-&lt;head>
-    &lt;meta charset="UTF-8"/>
-    &lt;title>ax5&lt;/title>
-    &lt;u>&lt;script type="text/javascript" src="pub/ax5.min.js">&lt;/script>&lt;/u>
-&lt;/head>
-</pre>
-<p>
-    이렇게 준비된 html파일에 script 태그를 페이지 최 하단에 삽입하고 원하는 코드를 타이핑 합니다.
-</p>
-<pre class="prettyprint linenums">
-&lt;!DOCTYPE html>
-&lt;html lang="en">
-    &lt;head>
-        &lt;meta charset="UTF-8"/>
-        &lt;title>ax5&lt;/title>
-    &lt;/head>
-    &lt;body>
-
-    &lt;script>
-    var util = ax5.util, dom = ax5.dom;
-    // 개발에 편의상 ax5.util을 util로 바꾸어 코딩하는 것을 권장합니다. util이라는 변수를 기존에 사용하지 않는 경우입니다.
-    console.log( ax5.info.url_util() );
+<article class="content">
+    <h1>Install</h1>
     
+    <h3>ax5 시작하기</h3>
+    <p>ax5라이브러리 파일을 html head안에 insert 합니다.</p>
+    <pre class="prettyprint linenums">
+    &lt;!DOCTYPE html>
+    &lt;html lang="en">
+        &lt;head>
+            &lt;meta charset="UTF-8"/>
+            &lt;title>ax5&lt;/title>
+        &lt;/head>
+        &lt;body>
+    
+        &lt;/body>
+    &lt;/html>
+    </pre>
+    <p>ax5라이브러리 파일을 html head안에 insert 합니다.</p>
+    <pre class="prettyprint linenums">
+    &lt;head>
+        &lt;meta charset="UTF-8"/>
+        &lt;title>ax5&lt;/title>
+        &lt;u>&lt;script type="text/javascript" src="pub/ax5.min.js">&lt;/script>&lt;/u>
+    &lt;/head>
+    </pre>
+    <p>
+        이렇게 준비된 html파일에 script 태그를 페이지 최 하단에 삽입하고 원하는 코드를 타이핑 합니다.
+    </p>
+    <pre class="prettyprint linenums">
+    &lt;!DOCTYPE html>
+    &lt;html lang="en">
+        &lt;head>
+            &lt;meta charset="UTF-8"/>
+            &lt;title>ax5&lt;/title>
+        &lt;/head>
+        &lt;body>
+    
+        &lt;script>
+        var util = ax5.util, dom = ax5.dom;
+        // 개발에 편의상 ax5.util을 util로 바꾸어 코딩하는 것을 권장합니다. util이라는 변수를 기존에 사용하지 않는 경우입니다.
+        console.log( ax5.info.url_util() );
+        
+        &lt;/script>
+        &lt;/body>
+    &lt;/html>
+    </pre>
+    <p>다음과 같은 출력결과를 얻을 수 있습니다.</p>
+    <pre class="prettyprint linenums">
+    {
+        "href": "http://ax5a:2018/samples/#Install ax5", 
+        "param": "", 
+        "referrer": "", 
+        "pathname": "/samples/", 
+        "hostname": "ax5a", 
+        "port": "2018", 
+        "url": "http://ax5a:2018/samples/", 
+        "hashdata": "Install ax5", 
+        "base_url": "http://ax5a:2018#Install ax5"
+    }
+    </pre>
+    <p>자 이제 지옥문이 열렸습니다. 본격적으로 지옥의 문을 열고 도전 하시겠습니까? AXISJ는 여러분의 도전을 기다리고 있습니다. 환영합니다.</p>
+</article>
+
+<!-- split -->
+<div class="block-end"></div>
+
+<article class="cover">
+    <h1>ax5 Core<small></small></h1>
+    <p>ax5.js에 포함된 API 샘플입니다.</p>
+</article>
+
+<!-- split -->
+<div class="block-end"></div>
+
+<article class="content">
+    <h1>ax5.util.alert</h1>
+    <h3>JSON alert</h3>
+    <pre class="prettyprint linenums">
+    &lt;button data-button="ax5-util-alert-0">{a:1, b:2}&lt;/button>
+    &lt;script>
+        ax5.dom("[data-button='ax5-util-alert-0']").on("click", function(){
+            ax5.util.alert({a:1, b:2});
+        });
     &lt;/script>
-    &lt;/body>
-&lt;/html>
-</pre>
-<p>다음과 같은 출력결과를 얻을 수 있습니다.</p>
-<pre class="prettyprint linenums">
-{
-    "href": "http://ax5a:2018/samples/#Install ax5", 
-    "param": "", 
-    "referrer": "", 
-    "pathname": "/samples/", 
-    "hostname": "ax5a", 
-    "port": "2018", 
-    "url": "http://ax5a:2018/samples/", 
-    "hashdata": "Install ax5", 
-    "base_url": "http://ax5a:2018#Install ax5"
-}
-</pre>
-<p>자 이제 지옥문이 열렸습니다. 본격적으로 지옥의 문을 열고 도전 하시겠습니까? AXISJ는 여러분의 도전을 기다리고 있습니다. 환영합니다.</p>
+    </pre>
+
+    <p class="tip">아래의 버튼을 클릭하시면 alert이 출력됩니다.</p>
+    <button data-button="ax5-util-alert-0">{a:1, b:2}</button>
+    <script>
+        ax5.dom("[data-button='ax5-util-alert-0']").on("click", function(){
+            ax5.util.alert({a:1, b:2});
+        });
+    </script>
+</article>
 
 <!-- split -->
 <div class="block-end"></div>
 
-<h1>ax5.util.alert</h1>
-
-<h3>JSON alert</h3>
-<pre class="prettyprint linenums">
-&lt;button data-button="ax5-util-alert-0">{a:1, b:2}&lt;/button>
-&lt;script>
-    ax5.dom("[data-button='ax5-util-alert-0']").on("click", function(){
-        ax5.util.alert({a:1, b:2});
+<article class="content">
+    <h1>ax5.xhr</h1>
+    <h3>일반적인 방법</h3>
+    <pre class="prettyprint linenums">
+    ax5.xhr{
+        method: "POST",
+        url   : "data.php",
+        param : "str=1234",
+        res   : function (response, status) {
+            console.log("success");
+            console.log(this);
+        },
+        error : function () {
+            console.log("error");
+            console.log(this);
+        }
     });
-&lt;/script>
-</pre>
-
-<p class="tip">아래의 버튼을 클릭하시면 alert이 출력됩니다.</p>
-<button data-button="ax5-util-alert-0">{a:1, b:2}</button>
-<script>
-    ax5.dom("[data-button='ax5-util-alert-0']").on("click", function(){
-        ax5.util.alert({a:1, b:2});
+    </pre>
+    <h3>error 를 사용하지 않는 방법</h3>
+    <pre class="prettyprint linenums">
+    ax5.xhr({ // req 또는 request 둘다 사용 가능합니다.
+        method: "POST",
+        url   : "data.php",
+        param : "str=1234",
+        res   : function (response, status) {
+            // status 값이 200 인지 판단 가능
+            console.log(this);
+        }
     });
-</script>
+    </pre>
+    <h3>timeout 값 설정</h3>
+    <pre class="prettyprint linenums">
+    ax5.xhr({
+        method: "POST",
+        url   : "data.php",
+        param : "str=1234",
+        res   : function (response, status) {
+            // status 값이 200 인지 판단 가능
+            console.log(this);
+        },
+        timeout: 1
+    });
+    </pre>
+    <h3>queue 처리</h3>
+    <pre class="prettyprint linenums">
+     var xhr_queue = [];
+     xhr_queue.push({
+        method: "POST",
+        url   : "../samples/ax5/xhr/data.php",
+        param : "str=1234",
+        res   : function (response, status) {
+            console.log(response);
+        }
+     });
+     xhr_queue.push({
+        method: "POST",
+        url   : "../samples/ax5/xhr/data.php",
+        param : "str=1234",
+        res   : function (response, status) {
+            console.log(response);
+        }
+     });
 
-<!-- split -->
-<div class="block-end"></div>
-
-<h1>ax5.xhr</h1>
-<h3>일반적인 방법</h3>
-<pre class="prettyprint linenums">
-ax5.xhr{
-    method: "POST",
-    url   : "data.php",
-    param : "str=1234",
-    res   : function (response, status) {
-        console.log("success");
-        console.log(this);
-    },
-    error : function () {
-        console.log("error");
-        console.log(this);
-    }
-});
-</pre>
-<h3>error 를 사용하지 않는 방법</h3>
-<pre class="prettyprint linenums">
-ax5.xhr({ // req 또는 request 둘다 사용 가능합니다.
-    method: "POST",
-    url   : "data.php",
-    param : "str=1234",
-    res   : function (response, status) {
-        // status 값이 200 인지 판단 가능
-        console.log(this);
-    }
-});
-</pre>
-<h3>timeout 값 설정</h3>
-<pre class="prettyprint linenums">
-ax5.xhr({
-    method: "POST",
-    url   : "data.php",
-    param : "str=1234",
-    res   : function (response, status) {
-        // status 값이 200 인지 판단 가능
-        console.log(this);
-    },
-    timeout: 1
-});
-</pre>
-<h3>queue 처리</h3>
-<pre class="prettyprint linenums">
- var xhr_queue = [];
- xhr_queue.push({
-    method: "POST",
-    url   : "../samples/ax5/xhr/data.php",
-    param : "str=1234",
-    res   : function (response, status) {
-        console.log(response);
-    }
- });
- xhr_queue.push({
-    method: "POST",
-    url   : "../samples/ax5/xhr/data.php",
-    param : "str=1234",
-    res   : function (response, status) {
-        console.log(response);
-    }
- });
-
- ax5.xhr(xhr_queue, function() {
-    console.log("큐 완료")
- });
-</pre>
-
+     ax5.xhr(xhr_queue, function() {
+        console.log("큐 완료")
+     });
+    </pre>
+</article>
 <script type="text/javascript">
     ax5.xhr({
         method: "POST",
