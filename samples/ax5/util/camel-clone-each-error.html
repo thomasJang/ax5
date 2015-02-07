@@ -1,0 +1,116 @@
+<article class="content">
+    <h2>ax5.util.camel_case</h2>
+<pre>
+<div id="ax5-util-camel-case" style="padding:10px;border: 1px solid;"></div>
+<script>
+    (function(){
+        var po = [];
+        po.push(ax5.util.camel_case("inner-width"));
+        po.push(ax5.util.camel_case("camelCase"));
+        po.push(ax5.util.camel_case("a_bc"));
+        ax5.dom("#ax5-util-camel-case").html(po.join('<br/>'));
+    })();
+</script>
+</pre>
+
+<p><b>Result</b></p>
+<div id="ax5-util-camel-case" style="padding:10px;border: 1px solid;"></div>
+<script>
+(function(){
+    var po = [];
+    po.push(ax5.util.camel_case("inner-width"));
+    po.push(ax5.util.camel_case("camelCase"));
+    po.push(ax5.util.camel_case("a_bc"));
+    ax5.dom("#ax5-util-camel-case").html(po.join('<br/>'));
+})();
+</script>
+</article>
+
+<article class="content">
+    <h2>ax5.util.clone</h2>
+    
+<pre>
+<div id="ax5-util-clone" style="padding:10px;border: 1px solid;"></div>
+<script>
+    (function(){
+        var a = {a:1};
+        var b = a;
+        var el = ax5.dom("#ax5-util-clone");
+
+        el.append("(a == b) => " + (a == b) + "<br/>");
+        b = ax5.util.clone(a);
+        el.append("(a == b) => " + (a == b));
+    })();
+</script>
+</pre>
+
+<p><b>Result</b></p>
+<div id="ax5-util-clone" style="padding:10px;border: 1px solid;"></div>
+<script>
+    (function(){
+        var a = {a:1};
+        var b = a;
+        var el = ax5.dom("#ax5-util-clone");
+        
+        el.append("(a == b) => " + (a == b) + "<br/>");
+        b = ax5.util.clone(a);
+        el.append("(a == b) => " + (a == b));
+    })();
+</script>
+<p>
+    변수 a를 b에 대입하면 변수 b는 a의 참조가 됩니다. 참조가 된 변수 b의 속성 b.a의 값을 바꾸었을 때 a.a의 값도 함께 바뀌는 상황을 초래합니다.
+    그런 이유로 때로 원치 않는 결과를 얻을 수 있습니다. 이럴 때엔 ax5.util.clone함수를 이용하여 변수 a의 복제된 오브젝트를 만들어 사용할 수 있습니다.
+</p>
+</article>
+
+<article class="content">
+    <h2>ax5.util.each</h2>
+
+<pre>
+<div id="ax5-util-each" style="padding:10px;border: 1px solid;"></div>
+<script>
+    (function(){
+        var util = ax5.util;
+        var a = {a:"axisj", b:"ax5"};
+        var b = [9,8,5,4,3,1];
+        var el = ax5.dom("#ax5-util-each");
+
+        var po = [];
+        po.push("* a");
+        util.each(a, function(k, v){
+            po.push(k + ":" + v + " | " + this);
+        });
+        po.push("* b");
+        util.each(b, function(index, item){
+            po.push(index + ":" + item + " | " + this);
+        });
+        el.html(po.join('<br/>'));
+    })();
+</script>
+</pre>
+
+<p><b>Result</b></p>
+<div id="ax5-util-each" style="padding:10px;border: 1px solid;"></div>
+<script>
+    (function(){
+        var util = ax5.util;
+        var a = {a:"axisj", b:"ax5"};
+        var b = [9,8,5,4,3,1];
+        var el = ax5.dom("#ax5-util-each");
+
+        var po = [];
+        po.push("* a");
+        util.each(a, function(k, v){
+           po.push(k + ":" + v + " | " + this);
+        });
+        po.push("* b");
+        util.each(b, function(index, item){
+            po.push(index + ":" + item + " | " + this);
+        });
+        el.html(po.join('<br/>'));
+    })();
+</script>
+<p>
+    each를 이용하여 Array또는 Object의 아이템을 순환처리 할수 있습니다.
+</p>
+</article>

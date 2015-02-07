@@ -475,18 +475,6 @@
 			return results;
 		}
 
-		/**
-		 * 에러를 발생시킵니다.
-		 * @method ax5.util.error
-		 * @param {String} msg
-		 * @example
-		 * ```js
-		 * ax5.util.error( "에러가 발생되었습니다." );
-		 * ```
-		 */
-		function error(msg) {
-			throw new Error(msg);
-		}
 
 		/**
 		 * Object를 JSONString 으로 반환합니다.
@@ -1279,7 +1267,6 @@
             reduce      : reduce,
             reduce_right: reduce_right,
             filter      : filter,
-            error       : error,
             to_json     : to_json,
             parse_json  : parse_json,
             extend      : extend,

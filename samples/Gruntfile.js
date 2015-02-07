@@ -10,7 +10,7 @@
 				' <%= pkg.name %> - v<%= pkg.version %> \n' +
 				' publish date : <%= grunt.template.today("yyyy-mm-dd") %> \n' +
 				'-->\n',
-				separator: '\n\n<!-- split -->\n<div class="block-end"></div>\n\n'
+				separator: '\n\n<!-- split -->\n\n'
 			},
 			basic: {
 				src: [

@@ -1,4 +1,3 @@
-
 ax5.xhr = (function (){
 	var U = ax5.util, getXHR;
 
@@ -15,7 +14,8 @@ ax5.xhr = (function (){
 	}
 	
 	function request(queue, onend){
-		var cfg = queue.pop(), http, that, i;
+		var cfg = queue.pop(), http, that, i,
+            time_id, ontimeout;
 		
 		if (typeof cfg === "undefined") {
 			onend();
@@ -36,15 +36,11 @@ ax5.xhr = (function (){
 				// xhr.open
 				if (cfg.username)   http.open(cfg.method, cfg.url, cfg.async, cfg.username, cfg.password);
 				else                http.open(cfg.method, cfg.url, cfg.async);
-				// todo : async 값 교차 테스트 필요
 
 				// header 셋팅
 				if(cfg.method.toUpperCase() == "GET"){
 					// GET이면 head 무시
-					cfg.header = {
-						'accept'      : "*/*",
-						'content-type': "text/plain"
-					};
+					cfg.header.accept = "*/*", cfg.header['content-type'] = "text/plain";
 				}
 				
 				try {
@@ -55,11 +51,12 @@ ax5.xhr = (function (){
 				
 				//  authorization headers. The default is false.
 				http.withCredentials = cfg.withCredentials;
-				// The number of milliseconds a request can take before automatically being terminated. A value of 0 (which is the default) means there is no timeout.
-				http.timeout = cfg.timeout;
+
 				// 응답
 				http.onreadystatechange = function () {
 					if (http.readyState == 4) {
+                        if(time_id == -1) return;
+                        clearTimeout(time_id), time_id = -1;
 						that = {
 							response_url: http.responseURL,
 							status      : http.status,
@@ -86,17 +83,21 @@ ax5.xhr = (function (){
 						request(queue, onend);
 					}
 				};
-
-                // todo : ontimeout 을 지원하지 않는 브라우저에 대한 예외처리
-				http.ontimeout = function(){
-					that = {error:"timeout"};
-					if (cfg.error) {
-						cfg.error.call(that, that);
-					} else {
-						if (cfg.response) cfg.response.call(that, that, that.data, that.status, http);
-						else console.log(http);
-					}
-				};
+                ontimeout = function(){
+                    if(time_id == -1) return;
+                    if(http.readyState !== 4) http.abort();
+                    time_id = -1, http.onreadystatechange = null;
+                    
+                    that = {error:"timeout"};
+                    if (cfg.error) {
+                        cfg.error.call(that, that);
+                    } else {
+                        if (cfg.response) cfg.response.call(that, that, that.data, that.status, http);
+                        else console.log(http);
+                    }
+                };
+                if( "ontimeout" in http ) http.timeout = cfg.timeout, http.ontimeout = ontimeout;
+                else time_id = setTimeout( ontimeout, cfg.timeout);
 
 				// 데이터 전송
 				http.send(cfg.param);

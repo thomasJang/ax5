@@ -10,7 +10,7 @@
         var util = ax5.util, dom = ax5.dom;
         var po = [];
         util.each(dom("h1").elements, function() {
-            console.log(this.innerHTML);
+            //console.log(this.innerHTML);
             dom.before(this, '<a name="'+this.innerHTML+'"></a>');
             po.push('<a href="#' + this.innerHTML + '">' + this.innerHTML + '</a>');
         });

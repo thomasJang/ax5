@@ -9,15 +9,16 @@
 
 [tint and sahde](http://en.wikipedia.org/wiki/Tints_and_shades)
 
-# 용도
-* button
-* input
+# 구조
+* body
 * title
-* section
 * table
 * list
 * menu
-* panel
+* form
+* button
+* input
+* code
 
 # 레이아웃
 * header

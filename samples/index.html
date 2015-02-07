@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-02-06 
+ publish date : 2015-02-08 
 -->
 <html lang="en">
 <head>
@@ -24,7 +24,6 @@
     </article>
 
 <!-- split -->
-<div class="block-end"></div>
 
 <article class="content">
     <h1>Install</h1>
@@ -90,39 +89,154 @@
 </article>
 
 <!-- split -->
-<div class="block-end"></div>
 
 <article class="cover">
-    <h1>ax5 Core<small></small></h1>
-    <p>ax5.js에 포함된 API 샘플입니다.</p>
+    <h1>ax5.util</h1>
 </article>
 
 <!-- split -->
-<div class="block-end"></div>
 
 <article class="content">
-    <h1>ax5.util.alert</h1>
-    <h3>JSON alert</h3>
-    <pre class="prettyprint linenums">
-    &lt;button data-button="ax5-util-alert-0">{a:1, b:2}&lt;/button>
-    &lt;script>
-        ax5.dom("[data-button='ax5-util-alert-0']").on("click", function(){
-            ax5.util.alert({a:1, b:2});
-        });
-    &lt;/script>
-    </pre>
+    <h2>ax5.util.alert</h2>
+<pre class="prettyprint linenums">
+&lt;button data-button="ax5-util-alert-0">{a:1, b:2}&lt;/button>
+&lt;script>
+    ax5.dom("[data-button='ax5-util-alert-0']").on("click", function(){
+        ax5.util.alert({a:1, b:2});
+    });
+&lt;/script>
+</pre>
 
-    <p class="tip">아래의 버튼을 클릭하시면 alert이 출력됩니다.</p>
-    <button data-button="ax5-util-alert-0">{a:1, b:2}</button>
-    <script>
-        ax5.dom("[data-button='ax5-util-alert-0']").on("click", function(){
-            ax5.util.alert({a:1, b:2});
-        });
-    </script>
+<p class="tip">아래의 버튼을 클릭하시면 alert가 출력됩니다.</p>
+<button data-button="ax5-util-alert-0">{a:1, b:2}</button>
+<script>
+    ax5.dom("[data-button='ax5-util-alert-0']").on("click", function(){
+        ax5.util.alert({a:1, b:2});
+    });
+</script>
 </article>
 
 <!-- split -->
-<div class="block-end"></div>
+
+<article class="content">
+    <h2>ax5.util.camel_case</h2>
+<pre class="prettyprint linenums">
+&lt;div id="ax5-util-camel-case" style="padding:10px;border: 1px solid;">&lt;/div>
+&lt;script>
+    (function(){
+        var po = [];
+        po.push(ax5.util.camel_case("inner-width"));
+        po.push(ax5.util.camel_case("camelCase"));
+        po.push(ax5.util.camel_case("a_bc"));
+        ax5.dom("#ax5-util-camel-case").html(po.join('&lt;br/>'));
+    })();
+&lt;/script>
+</pre>
+
+<p><b>Result</b></p>
+<div id="ax5-util-camel-case" style="padding:10px;border: 1px solid;"></div>
+<script>
+(function(){
+    var po = [];
+    po.push(ax5.util.camel_case("inner-width"));
+    po.push(ax5.util.camel_case("camelCase"));
+    po.push(ax5.util.camel_case("a_bc"));
+    ax5.dom("#ax5-util-camel-case").html(po.join('<br/>'));
+})();
+</script>
+</article>
+
+<article class="content">
+    <h2>ax5.util.clone</h2>
+    
+<pre class="prettyprint linenums">
+&lt;div id="ax5-util-clone" style="padding:10px;border: 1px solid;">&lt;/div>
+&lt;script>
+    (function(){
+        var a = {a:1};
+        var b = a;
+        var el = ax5.dom("#ax5-util-clone");
+
+        el.append("(a == b) => " + (a == b) + "&lt;br/>");
+        b = ax5.util.clone(a);
+        el.append("(a == b) => " + (a == b));
+    })();
+&lt;/script>
+</pre>
+
+<p><b>Result</b></p>
+<div id="ax5-util-clone" style="padding:10px;border: 1px solid;"></div>
+<script>
+    (function(){
+        var a = {a:1};
+        var b = a;
+        var el = ax5.dom("#ax5-util-clone");
+        
+        el.append("(a == b) => " + (a == b) + "<br/>");
+        b = ax5.util.clone(a);
+        el.append("(a == b) => " + (a == b));
+    })();
+</script>
+<p>
+    변수 a를 b에 대입하면 변수 b는 a의 참조가 됩니다. 참조가 된 변수 b의 속성 b.a의 값을 바꾸었을 때 a.a의 값도 함께 바뀌는 상황을 초래합니다.
+    그런 이유로 때로 원치 않는 결과를 얻을 수 있습니다. 이럴 때엔 ax5.util.clone함수를 이용하여 변수 a의 복제된 오브젝트를 만들어 사용할 수 있습니다.
+</p>
+</article>
+
+<article class="content">
+    <h2>ax5.util.each</h2>
+
+<pre class="prettyprint linenums">
+&lt;div id="ax5-util-each" style="padding:10px;border: 1px solid;">&lt;/div>
+&lt;script>
+    (function(){
+        var util = ax5.util;
+        var a = {a:"axisj", b:"ax5"};
+        var b = [9,8,5,4,3,1];
+        var el = ax5.dom("#ax5-util-each");
+
+        var po = [];
+        po.push("* a");
+        util.each(a, function(k, v){
+            po.push(k + ":" + v + " | " + this);
+        });
+        po.push("* b");
+        util.each(b, function(index, item){
+            po.push(index + ":" + item + " | " + this);
+        });
+        el.html(po.join('&lt;br/>'));
+    })();
+&lt;/script>
+</pre>
+
+<p><b>Result</b></p>
+<div id="ax5-util-each" style="padding:10px;border: 1px solid;"></div>
+<script>
+    (function(){
+        var util = ax5.util;
+        var a = {a:"axisj", b:"ax5"};
+        var b = [9,8,5,4,3,1];
+        var el = ax5.dom("#ax5-util-each");
+
+        var po = [];
+        po.push("* a");
+        util.each(a, function(k, v){
+           po.push(k + ":" + v + " | " + this);
+        });
+        po.push("* b");
+        util.each(b, function(index, item){
+            po.push(index + ":" + item + " | " + this);
+        });
+        el.html(po.join('<br/>'));
+    })();
+</script>
+<p>
+    each를 이용하여 Array또는 Object의 아이템을 순환처리 할수 있습니다.
+</p>
+</article>
+
+
+<!-- split -->
 
 <article class="content">
     <h1>ax5.xhr</h1>
@@ -232,7 +346,6 @@
 </script>
 
 <!-- split -->
-<div class="block-end"></div>
 
 </div>
 <!--div class="sample-doc-content"-->
@@ -246,7 +359,7 @@
         var util = ax5.util, dom = ax5.dom;
         var po = [];
         util.each(dom("h1").elements, function() {
-            console.log(this.innerHTML);
+            //console.log(this.innerHTML);
             dom.before(this, '<a name="'+this.innerHTML+'"></a>');
             po.push('<a href="#' + this.innerHTML + '">' + this.innerHTML + '</a>');
         });
