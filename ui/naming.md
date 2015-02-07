@@ -1,4 +1,4 @@
-# Colors
+# 색상
 * WHITE
 * BLACK
 * GRAY
@@ -9,7 +9,6 @@
 
 [tint and sahde](http://en.wikipedia.org/wiki/Tints_and_shades)
 
-
 # 용도
 * button
 * input
@@ -19,6 +18,15 @@
 * list
 * menu
 * panel
+
+# 레이아웃
+* header
+* nav
+* section
+* aside
+* footer
+
+![](http://cfile21.uf.tistory.com/image/2705FF3F52CEC1DF162FDD)
 
 # 상황
 * `` [basic]
@@ -36,9 +44,11 @@
 * `xs` (extra small)
 
 # 조합룰
+
 1. 색상정의
 2. 상황정의
 3. 용도정의
+
 
 * basic, basic-pure, basic-tint, basic-tone, basic-shade
 * good, good-pure, good-tint, good-tone, good-shade
