@@ -1,0 +1,36 @@
+</div>
+<!--div class="sample-doc-content"-->
+<div class="sample-doc-menu" id="sample-doc-menu">
+    
+</div>
+<script type="text/javascript">
+    (function(){
+        prettyPrint();
+        
+        var util = ax5.util, dom = ax5.dom;
+        var po = [], prev_tag;
+        po.push("<ul>");
+        
+        util.each(dom("h1,h2").elements, function() {
+            //console.log(this.innerHTML);
+            dom.before(this, '<a name="'+this.innerHTML+'"></a>');
+            if(this.tagName == "H1") {
+                if (prev_tag == "H2") po.push("</ul>");
+            }
+            po.push('<li><a href="#' + this.innerHTML + '">' + this.innerHTML + '</a></li>');
+             
+            if(this.tagName == "H1" && po.length > 0){
+                
+                po.push("<ul>");
+            }else{
+                
+            }
+            prev_tag = this.tagName;
+        });
+        po.push("</ul>");
+        dom("#sample-doc-menu").html(po.join(''));
+        
+    })();
+</script>
+</body>
+</html>

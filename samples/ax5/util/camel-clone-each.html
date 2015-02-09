@@ -1,139 +1,16 @@
-<!DOCTYPE html>
-<!-- 
- ax5 - v0.0.1 
- publish date : 2015-02-09 
--->
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>ax5</title>
-    <link rel="stylesheet" type="text/css" href="../plugin/prettify/prettify-tomorrow.css">
-    <link rel="stylesheet" type="text/css" href="css/sample-docs.css">
-    <script type="text/javascript" src="../plugin/prettify/prettify.js"></script>
-    <script type="text/javascript" src="../src/ax5-polyfill.js"></script>
-    <script type="text/javascript" src="../src/ax5-core.js"></script>
-    <script type="text/javascript" src="../src/ax5-xhr.js"></script>
-    <script type="text/javascript" src="../src/ax5-ui.js"></script>
-    
-</head>
-<body>
-<div class="nav-page">
-    <ul>
-        <li><a href="index.html">ax5.core</a></li>
-        <li><a href="ui.html">ax5.ui</a></li>
-    </ul>
-</div>
-<div class="sample-doc-content">
-
-<!-- split -->
-
-<article class="cover">
-    <h1>Install</h1>
-</article>
-<article class="content">
-    <h2>ax5 시작하기</h2>
-    <p>ax5라이브러리 파일을 html head안에 insert 합니다.</p>
-<pre class="prettyprint linenums">
-&lt;!DOCTYPE html>
-&lt;html lang="en">
-    &lt;head>
-        &lt;meta charset="UTF-8"/>
-        &lt;title>ax5&lt;/title>
-    &lt;/head>
-    &lt;body>
-
-    &lt;/body>
-&lt;/html>
-</pre>
-    <p>ax5라이브러리 파일을 html head안에 insert 합니다.</p>
-<pre class="prettyprint linenums">
-&lt;head>
-    &lt;meta charset="UTF-8"/>
-    &lt;title>ax5&lt;/title>
-    &lt;u>&lt;script type="text/javascript" src="pub/ax5.min.js">&lt;/script>&lt;/u>
-&lt;/head>
-</pre>
-    <p>
-        이렇게 준비된 html파일에 script 태그를 페이지 최 하단에 삽입하고 원하는 코드를 타이핑 합니다.
-    </p>
-<pre class="prettyprint linenums">
-&lt;!DOCTYPE html>
-&lt;html lang="en">
-    &lt;head>
-        &lt;meta charset="UTF-8"/>
-        &lt;title>ax5&lt;/title>
-    &lt;/head>
-    &lt;body>
-
-    &lt;script>
-    var util = ax5.util, dom = ax5.dom;
-    // 개발에 편의상 ax5.util을 util로 바꾸어 코딩하는 것을 권장합니다. util이라는 변수를 기존에 사용하지 않는 경우입니다.
-    console.log( ax5.info.url_util() );
-
-    &lt;/script>
-    &lt;/body>
-&lt;/html>
-</pre>
-    <p>다음과 같은 출력결과를 얻을 수 있습니다.</p>
-<pre class="prettyprint linenums">
-{
-    "href": "http://ax5a:2018/samples/#Install ax5",
-    "param": "",
-    "referrer": "",
-    "pathname": "/samples/",
-    "hostname": "ax5a",
-    "port": "2018",
-    "url": "http://ax5a:2018/samples/",
-    "hashdata": "Install ax5",
-    "base_url": "http://ax5a:2018#Install ax5"
-}
-</pre>
-    <p>자 이제 지옥문이 열렸습니다. 본격적으로 지옥의 문을 열고 도전 하시겠습니까? AXISJ는 여러분의 도전을 기다리고 있습니다. 환영합니다.</p>
-</article>
-
-<!-- split -->
-
-<article class="cover">
-    <h1>ax5.util</h1>
-</article>
-
-<!-- split -->
-
-<article class="content">
-    <h2>ax5.util.alert</h2>
-<pre class="prettyprint linenums">
-&lt;button data-button="ax5-util-alert-0">{a:1, b:2}&lt;/button>
-&lt;script>
-    ax5.dom("[data-button='ax5-util-alert-0']").on("click", function(){
-        ax5.util.alert({a:1, b:2});
-    });
-&lt;/script>
-</pre>
-
-<p class="tip">아래의 버튼을 클릭하시면 alert가 출력됩니다.</p>
-<button data-button="ax5-util-alert-0">{a:1, b:2}</button>
-<script>
-    ax5.dom("[data-button='ax5-util-alert-0']").on("click", function(){
-        ax5.util.alert({a:1, b:2});
-    });
-</script>
-</article>
-
-<!-- split -->
-
 <article class="content">
     <h2>ax5.util.camel_case</h2>
-<pre class="prettyprint linenums">
-&lt;div id="ax5-util-camel-case" class="script-result">&lt;/div>
-&lt;script>
+<pre>
+<div id="ax5-util-camel-case" class="script-result"></div>
+<script>
     (function(){
         var po = [];
         po.push(ax5.util.camel_case("inner-width"));
         po.push(ax5.util.camel_case("camelCase"));
         po.push(ax5.util.camel_case("a_bc"));
-        ax5.dom("#ax5-util-camel-case").html(po.join('&lt;br/>'));
+        ax5.dom("#ax5-util-camel-case").html(po.join('<br/>'));
     })();
-&lt;/script>
+</script>
 </pre>
 
 <h4>Result</h4>
@@ -151,18 +28,18 @@
 
 <article class="content">
     <h2>ax5.util.snake_case</h2>
-<pre class="prettyprint linenums">
-&lt;div id="ax5-util-snake_case" class="script-result">&lt;/div>
-&lt;script>
+<pre>
+<div id="ax5-util-snake_case" class="script-result"></div>
+<script>
     (function(){
         var util = ax5.util, el = ax5.dom("#ax5-util-snake_case");
         var po = [];
         po.push(util.snake_case("inner-width"));
         po.push(util.snake_case("camelCase"));
         po.push(util.snake_case("a_bc"));
-        el.html(po.join('&lt;br/>'));
+        el.html(po.join('<br/>'));
     })();
-&lt;/script>
+</script>
 </pre>
 
 <h4>Result</h4>
@@ -182,19 +59,19 @@
 <article class="content">
     <h2>ax5.util.clone</h2>
     
-<pre class="prettyprint linenums">
-&lt;div id="ax5-util-clone" class="script-result">&lt;/div>
-&lt;script>
+<pre>
+<div id="ax5-util-clone" class="script-result"></div>
+<script>
     (function(){
         var a = {a:1};
         var b = a;
         var el = ax5.dom("#ax5-util-clone");
 
-        el.append("(a == b) => " + (a == b) + "&lt;br/>");
+        el.append("(a == b) => " + (a == b) + "<br/>");
         b = ax5.util.clone(a);
         el.append("(a == b) => " + (a == b));
     })();
-&lt;/script>
+</script>
 </pre>
 
 <h4>Result</h4>
@@ -219,9 +96,9 @@
 <article class="content">
     <h2>ax5.util.each</h2>
 
-<pre class="prettyprint linenums">
-&lt;div id="ax5-util-each" class="script-result">&lt;/div>
-&lt;script>
+<pre>
+<div id="ax5-util-each" class="script-result"></div>
+<script>
     (function(){
         var util = ax5.util;
         var a = {a:"axisj", b:"ax5"};
@@ -237,9 +114,9 @@
         util.each(b, function(index, item){
             po.push(index + ":" + item + " | " + this);
         });
-        el.html(po.join('&lt;br/>'));
+        el.html(po.join('<br/>'));
     })();
-&lt;/script>
+</script>
 </pre>
 
 <h4>Result</h4>
@@ -270,9 +147,9 @@
 
 <article class="content">
     <h2>ax5.util.filter</h2>
-<pre class="prettyprint linenums">
-&lt;div id="ax5-util-filter" class="script-result">&lt;/div>
-&lt;script>
+<pre>
+<div id="ax5-util-filter" class="script-result"></div>
+<script>
     (function(){
         var util = ax5.util, result, el = ax5.dom("#ax5-util-filter");
         
@@ -281,7 +158,7 @@
             return this % 2;
         });
         el.append( result.join(",") );
-        el.append( "&lt;hr/>" );
+        el.append( "<hr/>" );
         
         var list = [
             {isdel:1, name:"ax5-1"},{name:"ax5-2"},{isdel:1, name:"ax5-3"},{name:"ax5-4"},{name:"ax5-5"}
@@ -291,7 +168,7 @@
         });
         el.append( JSON.stringify(result) );
     })();
-&lt;/script>
+</script>
 </pre>
 
 <h4>Result</h4>
@@ -321,9 +198,9 @@
 
 <article class="content">
 <h2>ax5.util.search</h2>
-<pre class="prettyprint linenums">
-&lt;div id="ax5-util-search" class="script-result">&lt;/div>
-&lt;script>
+<pre>
+<div id="ax5-util-search" class="script-result"></div>
+<script>
     (function(){
         var util = ax5.util, el = ax5.dom("#ax5-util-search");
         var a = ["A","X","5"];
@@ -346,7 +223,7 @@
                 })
             ]);
     })();
-&lt;/script>
+</script>
 </pre>
 
 <h4>Result</h4>
@@ -382,9 +259,9 @@
 
 <article class="content">
     <h2>ax5.util.map</h2>
-<pre class="prettyprint linenums">
-&lt;div id="ax5-util-map" class="script-result">&lt;/div>
-&lt;script>
+<pre>
+<div id="ax5-util-map" class="script-result"></div>
+<script>
     (function(){
         var util = ax5.util, el = ax5.dom("#ax5-util-map");
         var a = [1,2,3,4,5];
@@ -393,7 +270,7 @@
         });
         el.append( util.to_json(a) );
     })();
-&lt;/script>
+</script>
 </pre>
 
 <h4>Result</h4>
@@ -416,16 +293,16 @@
 
 <article class="content">
     <h2>ax5.util.merge</h2>
-<pre class="prettyprint linenums">
-&lt;div id="ax5-util-merge" class="script-result">&lt;/div>
-&lt;script>
+<pre>
+<div id="ax5-util-merge" class="script-result"></div>
+<script>
     (function(){
         var util = ax5.util, el = ax5.dom("#ax5-util-merge");
         var a = [1,2,3], b = [7,8,9];
         a = util.merge(a, b);
         el.append( util.to_json(a) );
     })();
-&lt;/script>
+</script>
 </pre>
 
 <h4>Result</h4>
@@ -445,9 +322,9 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 
 <article class="content">
     <h2>ax5.util.reduce</h2>
-<pre class="prettyprint linenums">
-&lt;div id="ax5-util-reduce" class="script-result">&lt;/div>
-&lt;script>
+<pre>
+<div id="ax5-util-reduce" class="script-result"></div>
+<script>
     (function(){
         var util = ax5.util, el = ax5.dom("#ax5-util-reduce");
         var aarray = [5,4,3,2,1], result;
@@ -461,9 +338,9 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
             // Object의 경우 첫번째 p 값이 undefined 입니다.
             return parseInt(p|0) + parseInt(n);
         });
-        el.append('&lt;br/>result = ' + result);
+        el.append('<br/>result = ' + result);
     })();
-&lt;/script>
+</script>
 </pre>
 
 <h4>Result</h4>
@@ -492,9 +369,9 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 
 <article class="content">
     <h2>ax5.util.reduce_right</h2>
-<pre class="prettyprint linenums">
-&lt;div id="ax5-util-reduce_right" class="script-result">&lt;/div>
-&lt;script>
+<pre>
+<div id="ax5-util-reduce_right" class="script-result"></div>
+<script>
     (function(){
         var util = ax5.util, el = ax5.dom("#ax5-util-reduce_right");
         var aarray = [5,4,3,2,1], result;
@@ -504,7 +381,7 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
         el.append('result = ' + result);
         el.append('/' + util.to_json(aarray) );
     })();
-&lt;/script>
+</script>
 </pre>
 
 <h4>Result</h4>
@@ -524,186 +401,3 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
     reduce의 역순입니다. reduce_right는 Object타입을 지원하지 않습니다.
 </p>
 </article>
-
-<!-- split -->
-
-<article class="content">
-    <h2>ax5.util.extend</h2>
-<pre class="prettyprint linenums">
-
-</pre>
-
-<h4>Result</h4>
-<div id="ax5-util-extend" class="script-result"></div>
-<script>
-(function(){
-    var util = ax5.util, el = ax5.dom("#ax5-util-extend");
-})();
-</script>
-</article>
-
-<article class="content">
-    <h2>ax5.util.extend_all</h2>
-<pre class="prettyprint linenums">
-
-</pre>
-
-    <h4>Result</h4>
-    <div id="ax5-util-extend_all" class="script-result"></div>
-    <script>
-        (function(){
-            var util = ax5.util, el = ax5.dom("#ax5-util-extend_all");
-        })();
-    </script>
-</article>
-
-
-<!-- split -->
-
-<article class="cover">
-    <h1>ax5.xhr</h1>
-</article>
-<article class="content">
-    <h3>일반적인 방법</h3>
-    <pre class="prettyprint linenums">
-    ax5.xhr{
-        method: "POST",
-        url   : "data.php",
-        param : "str=1234",
-        res   : function (response, status) {
-            console.log("success");
-            console.log(this);
-        },
-        error : function () {
-            console.log("error");
-            console.log(this);
-        }
-    });
-    </pre>
-    <h3>error 를 사용하지 않는 방법</h3>
-    <pre class="prettyprint linenums">
-    ax5.xhr({ // req 또는 request 둘다 사용 가능합니다.
-        method: "POST",
-        url   : "data.php",
-        param : "str=1234",
-        res   : function (response, status) {
-            // status 값이 200 인지 판단 가능
-            console.log(this);
-        }
-    });
-    </pre>
-    <h3>timeout 값 설정</h3>
-    <pre class="prettyprint linenums">
-    ax5.xhr({
-        method: "POST",
-        url   : "data.php",
-        param : "str=1234",
-        res   : function (response, status) {
-            // status 값이 200 인지 판단 가능
-            console.log(this);
-        },
-        timeout: 1
-    });
-    </pre>
-    <h3>queue 처리</h3>
-    <pre class="prettyprint linenums">
-     var xhr_queue = [];
-     xhr_queue.push({
-        method: "POST",
-        url   : "../samples/ax5/xhr/data.php",
-        param : "str=1234",
-        res   : function (response, status) {
-            console.log(response);
-        }
-     });
-     xhr_queue.push({
-        method: "POST",
-        url   : "../samples/ax5/xhr/data.php",
-        param : "str=1234",
-        res   : function (response, status) {
-            console.log(response);
-        }
-     });
-
-     ax5.xhr(xhr_queue, function() {
-        console.log("큐 완료")
-     });
-    </pre>
-</article>
-<script type="text/javascript">
-    ax5.xhr({
-        method: "POST",
-        url   : "ax5/xhr/data.php",
-        param : "str=1234",
-        res   : function (response, status) {
-            console.log("success");
-            console.log(this);
-        },
-        error : function () {
-            console.log("error");
-            console.log(this);
-        }
-    });
-
-    var xhr_queue = [];
-     xhr_queue.push({
-        method: "POST",
-        url   : "../samples/ax5/xhr/data.php",
-        param : "str=1234",
-        res   : function (response, status) {
-            console.log(response);
-        }
-     });
-     xhr_queue.push({
-        method: "POST",
-        url   : "../samples/ax5/xhr/data.php",
-        param : "str=1234",
-        res   : function (response, status) {
-            console.log(response);
-        }
-     });
-
-     ax5.xhr(xhr_queue, function() {
-        console.log("큐 완료");
-     });
-
-</script>
-
-<!-- split -->
-
-</div>
-<!--div class="sample-doc-content"-->
-<div class="sample-doc-menu" id="sample-doc-menu">
-    
-</div>
-<script type="text/javascript">
-    (function(){
-        prettyPrint();
-        
-        var util = ax5.util, dom = ax5.dom;
-        var po = [], prev_tag;
-        po.push("<ul>");
-        
-        util.each(dom("h1,h2").elements, function() {
-            //console.log(this.innerHTML);
-            dom.before(this, '<a name="'+this.innerHTML+'"></a>');
-            if(this.tagName == "H1") {
-                if (prev_tag == "H2") po.push("</ul>");
-            }
-            po.push('<li><a href="#' + this.innerHTML + '">' + this.innerHTML + '</a></li>');
-             
-            if(this.tagName == "H1" && po.length > 0){
-                
-                po.push("<ul>");
-            }else{
-                
-            }
-            prev_tag = this.tagName;
-        });
-        po.push("</ul>");
-        dom("#sample-doc-menu").html(po.join(''));
-        
-    })();
-</script>
-</body>
-</html>
