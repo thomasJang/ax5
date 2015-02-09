@@ -12,25 +12,57 @@
 				'-->\n',
 				separator: '\n\n<!-- split -->\n\n'
 			},
-			basic: {
+            core: {
 				src: [
-					'head.html',
-                    'install.html',
+					'core/head.html',
+                    'core/install.html',
 					'ax5/util/*.html',
 					'ax5/dom/*.html',
 					'ax5/xhr/*.html',
-					'bottom.html'
+					'core/bottom.html'
 				],
 				dest: 'index.html'
-			}
+			},
+            ui: {
+                src: [
+                    'ui/head.html',
+                    'ax5/ui/*.html',
+                    'ui/bottom.html'
+                ],
+                dest: 'ui.html'
+            }
 		},
 		watch: {
-			files: ['install.html','head.html','bottom.html','ax5/util/*.html','ax5/dom/*.html','ax5/xhr/*.html'],
-			tasks: ['concat','replace']
+            core: {
+                files: ['core/*.html', 'ax5/util/*.html', 'ax5/dom/*.html', 'ax5/xhr/*.html'],
+                tasks: ['concat:core', 'replace:core']
+            },
+            ui: {
+                files: ['ui/*.html','ax5/ui/*.html'],
+                tasks: ['concat:ui', 'replace:ui']
+            }
 		},
         replace: {
-            prettyprint: {
+            core: {
                 src: ['index.html'],
+                overwrite: true,                 // overwrite matched source files
+                options: {
+                    processTemplates: false
+                },
+                replacements: [{
+                    from: /<pre[^>]*>([^<]*(?:(?!<\/?pre)<[^<]*)*)<\/pre\s*>/gi,
+                    to: function (matchedWord, index, fullText, regexMatches) {
+
+                        // matchedWord:  "world"
+                        // index:  6
+                        // fullText:  "Hello world"
+                        // regexMatches:  ["ld"]
+                        return '<pre class="prettyprint linenums">'+ regexMatches.join('').replace(/</g, "&lt;") +'</pre>';
+                    }
+                }]
+            },
+            ui: {
+                src: ['ui.html'],
                 overwrite: true,                 // overwrite matched source files
                 options: {
                     processTemplates: false
@@ -53,5 +85,6 @@
 	grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-text-replace');
     
-	grunt.registerTask('합치고-바구꼬-감시하고', ['concat','replace','watch']);
+	grunt.registerTask('ax5-core', ['concat:core','replace:core','watch:core']);
+    grunt.registerTask('ax5-ui', ['concat:ui','replace:ui','watch:ui']);
 };

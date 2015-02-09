@@ -8,7 +8,9 @@ h1,
 h2,
 h3,
 h4,
-h5{margin: 0.5em auto;color:#222;}
+h5,
+h6
+{margin: 0.5em auto;color:#222;}
 
 article {
   h1 {
@@ -38,7 +40,23 @@ pre.prettyprint{
   padding:10px 10px 10px 10px;
   background-color: #f3f3f3;
 }
-
+.nav-page{
+  position: fixed;
+  right:0px;top:0px;
+  background: #000;
+  color:#fff;
+  padding: 5px;
+  ul{
+    margin:0px;padding:0px;
+    li{
+      padding:0px;
+      display: inline-block;
+      list-style: none;
+      margin: 0px 5px;
+      a{color:#fff;text-decoration: none;}
+    }
+  }
+}
 .sample-doc-content{
   padding-left:250px;
   a[name]{
@@ -56,6 +74,13 @@ pre.prettyprint{
     &.content{padding:50px 0px;}
   }
   .script-result{
+    border:1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 1.2em;
+  }
+  .ax-section{
+    position: relative;
     border:1px solid #ccc;
     border-radius: 10px;
     padding: 10px;
