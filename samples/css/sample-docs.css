@@ -54,7 +54,6 @@ pre.prettyprint {
 }
 .nav-page ul li {
   padding: 0px;
-  display: inline-block;
   list-style: none;
   margin: 0px 5px;
 }
@@ -68,7 +67,7 @@ pre.prettyprint {
   margin: 0px auto;
 }
 .sample-doc-page .sample-doc-content {
-  padding-left: 200px;
+  padding-left: 220px;
 }
 .sample-doc-page .sample-doc-content a[name] {
   display: block;
@@ -102,6 +101,8 @@ pre.prettyprint {
   box-sizing: border-box;
   padding: 20px;
   overflow: auto;
+  text-align: right;
+  border-right: 1px solid #888;
 }
 .sample-doc-page .sample-doc-menu a {
   display: block;
@@ -111,17 +112,30 @@ pre.prettyprint {
 }
 .sample-doc-page .sample-doc-menu li {
   list-style: none;
+  text-align: right;
 }
 .sample-doc-page .sample-doc-menu ul {
   margin: 0px;
   padding: 0px;
 }
+.sample-doc-page .sample-doc-menu ul li {
+  padding-top: 10px;
+  padding-right: 0px;
+}
 .sample-doc-page .sample-doc-menu ul li a {
   font-size: 1.2em;
+  line-height: 2em;
+  color: #000;
 }
 .sample-doc-page .sample-doc-menu ul ul {
-  padding: 0px 0px 0px 15px;
+  padding: 0px 0px 0px 0px;
+}
+.sample-doc-page .sample-doc-menu ul ul li {
+  padding-top: 0px;
+  padding-right: 0px;
 }
 .sample-doc-page .sample-doc-menu ul ul li a {
   font-size: 1em;
+  line-height: 1.5em;
+  color: #444;
 }
