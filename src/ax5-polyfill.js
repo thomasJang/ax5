@@ -1,15 +1,16 @@
 // 필수 Ployfill 확장 구문
 (function(){
-
-	var root = this;
+    'use strict';
+    
+	var root = this,
+        re_trim = /^\s*|\s*$/g;
 
 	// From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
 	if (!Object.keys) {
 		Object.keys = (function() {
-			'use strict';
-			var hasOwnProperty = Object.prototype.hasOwnProperty,
-				hasDontEnumBug = !({ toString: null }).propertyIsEnumerable('toString'),
-				dontEnums = [
+			var hwp = Object.prototype.hasOwnProperty,
+                hdeb = !({ toString: null }).propertyIsEnumerable('toString'),
+				de = [
 					'toString',
 					'toLocaleString',
 					'valueOf',
@@ -18,27 +19,14 @@
 					'propertyIsEnumerable',
 					'constructor'
 				],
-				dontEnumsLength = dontEnums.length;
+				del = de.length;
 
 			return function(obj) {
-				if (typeof obj !== 'object' && (typeof obj !== 'function' || obj === null)) {
-					throw new TypeError('Object.keys called on non-object');
-				}
-
-				var result = [], prop, i;
-
-				for (prop in obj) {
-					if (hasOwnProperty.call(obj, prop)) {
-						result.push(prop);
-					}
-				}
-
-				if (hasDontEnumBug) {
-					for (i = 0; i < dontEnumsLength; i++) {
-						if (hasOwnProperty.call(obj, dontEnums[i])) {
-							result.push(dontEnums[i]);
-						}
-					}
+				if (typeof obj !== 'object' && (typeof obj !== 'function' || obj === null)) throw new TypeError('type err');
+				var r = [], prop, i;
+				for (prop in obj) if (hwp.call(obj, prop)) r.push(prop);
+				if (hdeb) {
+					for (i = 0; i < del; i++) if (hwp.call(obj, de[i])) r.push(de[i]);
 				}
 				return result;
 			};
@@ -50,11 +38,9 @@
 	if (!Array.prototype.forEach) {
 		Array.prototype.forEach = function (fun /*, thisp */) {
 			if (this === void 0 || this === null) { throw TypeError(); }
-
 			var t = Object(this);
 			var len = t.length >>> 0;
 			if (typeof fun !== "function") { throw TypeError(); }
-
 			var thisp = arguments[1], i;
 			for (i = 0; i < len; i++) {
 				if (i in t) {
@@ -68,7 +54,7 @@
 	// https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/bind
 	if (!Function.prototype.bind) {
 		Function.prototype.bind = function (o) {
-			if (typeof this !== 'function') { throw TypeError("Bind must be called on a function"); }
+			if (typeof this !== 'function') { throw TypeError("function"); }
 			var slice = [].slice,
 				args = slice.call(arguments, 1),
 				self = this,
@@ -128,10 +114,8 @@
 
 	if (!String.prototype.trim) {
 		(function() {
-			// Make sure we trim BOM and NBSP
-			var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
 			String.prototype.trim = function() {
-				return this.replace(rtrim, '');
+				return this.replace(re_trim, '');
 			};
 		})();
 	}
@@ -167,7 +151,6 @@
 	// Console-polyfill. MIT license. https://github.com/paulmillr/console-polyfill
 	// Make it safe to do console.log() always.
 	(function(con) {
-		'use strict';
 		var prop, method;
 		var empty = {};
 		var dummy = function() {};

@@ -199,6 +199,26 @@
             r: "key1value_key2value"
         },
         {
+            label:"ax5.util.extend_all : add keys, overwrite_false",
+            fn: function(){
+                var origin_obj = {a:1, b:{a:1, b:2}};
+                ax5.util.extend_all(origin_obj, {b:{a:22, c:33}} );
+
+                return origin_obj.a +"_"+ origin_obj.b.a  +"_"+ origin_obj.b.c ;
+            },
+            r: "1_1_33"
+        },
+        {
+            label:"ax5.util.extend_all : add keys, overwrite_true",
+            fn: function(){
+                var origin_obj = {a:1, b:{a:1, b:2}};
+                ax5.util.extend_all(origin_obj, {b:{a:22, c:33}}, true );
+
+                return origin_obj.a +"_"+ origin_obj.b.a  +"_"+ origin_obj.b.c ;
+            },
+            r: "1_22_33"
+        },
+        {
             label:"ax5.util.filter : array",
             fn: function(){
                 var aarray = [5,4,3,2,1];
@@ -517,18 +537,14 @@
             },
             r   : "inner-width : inner-width : inner-width"
         },
-
-        /*
-        ///
         {
-            label: "ax5.util.to_array(object)",
+            label: "ax5.util.to_array",
             fn   : function () {
-
+                var testDiv = ax5.dom.get('div#test-result, div' );
+                return ax5.util.to_array(testDiv)[0].id;
             },
-            r    :''
+            r   : "progress"
         },
-        */
-
         {
             label: "ax5.util.to_json(object)",
             fn   : function () {
@@ -787,7 +803,7 @@
             label:"ax5.dom.next, ax5.dom.prev ",
             fn: function(){
                 var el = ax5.dom.get("#test-result");
-                var item = ax5.dom.child(el)[5];
+                var item = ax5.dom.child(el)[7];
 
                 var nextItem;
                 var prevItem;
@@ -796,7 +812,7 @@
 
                 return nextItem.id +"_"+ prevItem.id;
             },
-            r   : "ax5.util.filter : array_ax5.util.clone(string)"
+            r   : "ax5.util.filter : array_ax5.util.error(msg)"
         },
         {
             label:"ax5.dom.on",
@@ -1117,7 +1133,7 @@
             label:"ax5.dom0.next, ax5.dom0.prev ",
             fn: function(){
                 var el = ax5.dom("#test-result");
-                var item = el.child().elements[5];
+                var item = el.child().elements[7];
                 //var item = el.child(el).elements[5];
 
                 var nextItem;
@@ -1127,7 +1143,7 @@
 
                 return nextItem +"_"+ prevItem;
             },
-            r   : "ax5.util.filter : array_ax5.util.clone(string)"
+            r   : "ax5.util.filter : array_ax5.util.error(msg)"
         },
         {
             label: "ax5.dom0.on",

@@ -1,612 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>ax5 API</title>
-
-    <link rel="shortcut icon" href="https://www.axisj.com/sys-datas/plugins/axisj/ui/axisj.ico" type="image/x-icon" />
-    <link rel="icon" href="https://www.axisj.com/sys-datas/plugins/axisj/ui/axisj.ico" type="image/x-icon" />
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://www.axisj.com/sys-datas/layouts/axisj/images/ax-symbol.png" />
-    <link rel="apple-touch-icon-precomposed" href="https://www.axisj.com/sys-datas/layouts/axisj/images/ax-symbol.png" />
-
-    
-    <meta name="description" content="자바스크립트 UI Library ax5 JSDOC API서비스 입니다." />
-    
-        <meta name="keywords" content="AXISJ, JSDOC, API" />
-        <meta name="keyword" content="AXISJ, JSDOC, API" />
-    
-    
-    
-    <meta property="og:title" content="ax5.io"/>
-    <meta property="og:type" content="JSDOC API"/>
-    <meta property="og:image" content="http://dev.axisj.com/ui/AXJ.png"/>
-    <meta property="og:site_name" content="new html5 javascript framework"/>
-    <meta property="og:url" content="http://newdoc.axisj.com"/>
-    
-
-    <script src="scripts/prettify/prettify.js"></script>
-    <script src="scripts/prettify/lang-css.js"></script>
-    <script src="scripts/jquery.min.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <link type="text/css" rel="stylesheet" media="only screen and (color)"  href="styles/sunburst.css">
-    <link type="text/css" rel="stylesheet" media="only print" href="styles/prettify-jsdoc.css">
-
-    <link type="text/css" rel="stylesheet" href="styles/axisjdoc.css" />
-    <link rel="stylesheet" type="text/css" href="http://cdn.axisj.com/axicon/axicon.min.css" />
-
-
-
-    
-    <script>
-    var config = {"monospaceLinks":true,"cleverLinks":true,"default":{"outputSourceFiles":true},"applicationName":"ax5.io","git_liblink":"https://github.com/tom-axisj/ax5/tree/master/src/","disqus":"","googleAnalytics":"","openGraph":{"title":"ax5.io","type":"JSDOC API","image":"http://dev.axisj.com/ui/AXJ.png","site_name":"new html5 javascript framework","url":"http://newdoc.axisj.com"},"meta":{"title":"ax5 API","description":"자바스크립트 UI Library ax5 JSDOC API서비스 입니다.","keyword":"AXISJ, JSDOC, API"}};
-    </script>
-    
-
-    
-</head>
-<body>
-<div id="wrap" class="clearfix ax5.js">
-    
-<div class="navigation">
-    <h3 class="applicationName"><a href="index.html"><i class="axi axi-axisj"></i> ax5.io</a></h3>
-
-    <div class="search">
-        <input id="search" type="text" class="form-control input-sm" placeholder="Search Documentations">
-    </div>
-    <ul class="list">
-    
-        <li class="item" data-name="ax5">
-            <span class="title">
-                <a href="ax5.html">ax5</a>
-                
-                <span class="static">static</span>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            <span class="subtitle">Members</span>
-            
-                <li data-name="ax5.guid"><a href="ax5.html#guid">guid</a></li>
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            <span class="subtitle">Methods</span>
-            
-                <li data-name="ax5.get_guid"><a href="ax5.html#get_guid">get_guid</a></li>
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
-        <li class="item" data-name="ax5.dom">
-            <span class="title">
-                <a href="ax5.dom.html">ax5.dom</a>
-                
-                <span class="static">static</span>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            <span class="subtitle">Methods</span>
-            
-                <li data-name="ax5.dom.after"><a href="ax5.dom.html#after">after</a></li>
-            
-                <li data-name="ax5.dom.append"><a href="ax5.dom.html#append">append</a></li>
-            
-                <li data-name="ax5.dom.attr"><a href="ax5.dom.html#attr">attr</a></li>
-            
-                <li data-name="ax5.dom.before"><a href="ax5.dom.html#before">before</a></li>
-            
-                <li data-name="ax5.dom.box_model"><a href="ax5.dom.html#box_model">box_model</a></li>
-            
-                <li data-name="ax5.dom.child"><a href="ax5.dom.html#child">child</a></li>
-            
-                <li data-name="ax5.dom.class_name"><a href="ax5.dom.html#class_name">class_name</a></li>
-            
-                <li data-name="ax5.dom.create"><a href="ax5.dom.html#create">create</a></li>
-            
-                <li data-name="ax5.dom.css"><a href="ax5.dom.html#css">css</a></li>
-            
-                <li data-name="ax5.dom.data"><a href="ax5.dom.html#data">data</a></li>
-            
-                <li data-name="ax5.dom.empty"><a href="ax5.dom.html#empty">empty</a></li>
-            
-                <li data-name="ax5.dom.get"><a href="ax5.dom.html#get">get</a></li>
-            
-                <li data-name="ax5.dom.get_one"><a href="ax5.dom.html#get_one">get_one</a></li>
-            
-                <li data-name="ax5.dom.height"><a href="ax5.dom.html#height">height</a></li>
-            
-                <li data-name="ax5.dom.html"><a href="ax5.dom.html#html">html</a></li>
-            
-                <li data-name="ax5.dom.next"><a href="ax5.dom.html#next">next</a></li>
-            
-                <li data-name="ax5.dom.off"><a href="ax5.dom.html#off">off</a></li>
-            
-                <li data-name="ax5.dom.offset"><a href="ax5.dom.html#offset">offset</a></li>
-            
-                <li data-name="ax5.dom.on"><a href="ax5.dom.html#on">on</a></li>
-            
-                <li data-name="ax5.dom.parent"><a href="ax5.dom.html#parent">parent</a></li>
-            
-                <li data-name="ax5.dom.position"><a href="ax5.dom.html#position">position</a></li>
-            
-                <li data-name="ax5.dom.prepend"><a href="ax5.dom.html#prepend">prepend</a></li>
-            
-                <li data-name="ax5.dom.prev"><a href="ax5.dom.html#prev">prev</a></li>
-            
-                <li data-name="ax5.dom.ready"><a href="ax5.dom.html#ready">ready</a></li>
-            
-                <li data-name="ax5.dom.remove"><a href="ax5.dom.html#remove">remove</a></li>
-            
-                <li data-name="ax5.dom.resize"><a href="ax5.dom.html#resize">resize</a></li>
-            
-                <li data-name="ax5.dom.width"><a href="ax5.dom.html#width">width</a></li>
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
-        <li class="item" data-name="ax5.dom0">
-            <span class="title">
-                <a href="ax5.dom0.html">ax5.dom0</a>
-                
-                <span class="static">static</span>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            <span class="subtitle">Members</span>
-            
-                <li data-name="ax5.dom0.elements"><a href="ax5.dom0.html#elements">elements</a></li>
-            
-                <li data-name="ax5.dom0.length"><a href="ax5.dom0.html#length">length</a></li>
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            <span class="subtitle">Methods</span>
-            
-                <li data-name="ax5.dom0.after"><a href="ax5.dom0.html#after">after</a></li>
-            
-                <li data-name="ax5.dom0.append"><a href="ax5.dom0.html#append">append</a></li>
-            
-                <li data-name="ax5.dom0.attr"><a href="ax5.dom0.html#attr">attr</a></li>
-            
-                <li data-name="ax5.dom0.before"><a href="ax5.dom0.html#before">before</a></li>
-            
-                <li data-name="ax5.dom0.box_model"><a href="ax5.dom0.html#box_model">box_model</a></li>
-            
-                <li data-name="ax5.dom0.child"><a href="ax5.dom0.html#child">child</a></li>
-            
-                <li data-name="ax5.dom0.class_name"><a href="ax5.dom0.html#class_name">class_name</a></li>
-            
-                <li data-name="ax5.dom0.css"><a href="ax5.dom0.html#css">css</a></li>
-            
-                <li data-name="ax5.dom0.data"><a href="ax5.dom0.html#data">data</a></li>
-            
-                <li data-name="ax5.dom0.find"><a href="ax5.dom0.html#find">find</a></li>
-            
-                <li data-name="ax5.dom0.height"><a href="ax5.dom0.html#height">height</a></li>
-            
-                <li data-name="ax5.dom0.html"><a href="ax5.dom0.html#html">html</a></li>
-            
-                <li data-name="ax5.dom0.next"><a href="ax5.dom0.html#next">next</a></li>
-            
-                <li data-name="ax5.dom0.off"><a href="ax5.dom0.html#off">off</a></li>
-            
-                <li data-name="ax5.dom0.offset"><a href="ax5.dom0.html#offset">offset</a></li>
-            
-                <li data-name="ax5.dom0.on"><a href="ax5.dom0.html#on">on</a></li>
-            
-                <li data-name="ax5.dom0.parent"><a href="ax5.dom0.html#parent">parent</a></li>
-            
-                <li data-name="ax5.dom0.position"><a href="ax5.dom0.html#position">position</a></li>
-            
-                <li data-name="ax5.dom0.prepend"><a href="ax5.dom0.html#prepend">prepend</a></li>
-            
-                <li data-name="ax5.dom0.prev"><a href="ax5.dom0.html#prev">prev</a></li>
-            
-                <li data-name="ax5.dom0.remove"><a href="ax5.dom0.html#remove">remove</a></li>
-            
-                <li data-name="ax5.dom0.width"><a href="ax5.dom0.html#width">width</a></li>
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
-        <li class="item" data-name="ax5.info">
-            <span class="title">
-                <a href="ax5.info.html">ax5.info</a>
-                
-                <span class="static">static</span>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            <span class="subtitle">Members</span>
-            
-                <li data-name="ax5.info.browser"><a href="ax5.info.html#browser">browser</a></li>
-            
-                <li data-name="ax5.info.event_keys"><a href="ax5.info.html#event_keys">event_keys</a></li>
-            
-                <li data-name="ax5.info.is_browser"><a href="ax5.info.html#is_browser">is_browser</a></li>
-            
-                <li data-name="ax5.info.version"><a href="ax5.info.html#version">version</a></li>
-            
-                <li data-name="ax5.info.wheel_enm"><a href="ax5.info.html#wheel_enm">wheel_enm</a></li>
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            <span class="subtitle">Methods</span>
-            
-                <li data-name="ax5.info.url_util"><a href="ax5.info.html#url_util">url_util</a></li>
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
-        <li class="item" data-name="ax5.util">
-            <span class="title">
-                <a href="ax5.util.html">ax5.util</a>
-                
-                <span class="static">static</span>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            <span class="subtitle">Methods</span>
-            
-                <li data-name="ax5.util.alert"><a href="ax5.util.html#alert">alert</a></li>
-            
-                <li data-name="ax5.util.camel_case"><a href="ax5.util.html#camel_case">camel_case</a></li>
-            
-                <li data-name="ax5.util.clone"><a href="ax5.util.html#clone">clone</a></li>
-            
-                <li data-name="ax5.util.each"><a href="ax5.util.html#each">each</a></li>
-            
-                <li data-name="ax5.util.extend"><a href="ax5.util.html#extend">extend</a></li>
-            
-                <li data-name="ax5.util.extend_all"><a href="ax5.util.html#extend_all">extend_all</a></li>
-            
-                <li data-name="ax5.util.filter"><a href="ax5.util.html#filter">filter</a></li>
-            
-                <li data-name="ax5.util.first"><a href="ax5.util.html#first">first</a></li>
-            
-                <li data-name="ax5.util.get_cookie"><a href="ax5.util.html#get_cookie">get_cookie</a></li>
-            
-                <li data-name="ax5.util.get_type"><a href="ax5.util.html#get_type">get_type</a></li>
-            
-                <li data-name="ax5.util.is_array"><a href="ax5.util.html#is_array">is_array</a></li>
-            
-                <li data-name="ax5.util.is_element"><a href="ax5.util.html#is_element">is_element</a></li>
-            
-                <li data-name="ax5.util.is_function"><a href="ax5.util.html#is_function">is_function</a></li>
-            
-                <li data-name="ax5.util.is_nodelist"><a href="ax5.util.html#is_nodelist">is_nodelist</a></li>
-            
-                <li data-name="ax5.util.is_nothing"><a href="ax5.util.html#is_nothing">is_nothing</a></li>
-            
-                <li data-name="ax5.util.is_number"><a href="ax5.util.html#is_number">is_number</a></li>
-            
-                <li data-name="ax5.util.is_object"><a href="ax5.util.html#is_object">is_object</a></li>
-            
-                <li data-name="ax5.util.is_string"><a href="ax5.util.html#is_string">is_string</a></li>
-            
-                <li data-name="ax5.util.is_undefined"><a href="ax5.util.html#is_undefined">is_undefined</a></li>
-            
-                <li data-name="ax5.util.is_window"><a href="ax5.util.html#is_window">is_window</a></li>
-            
-                <li data-name="ax5.util.last"><a href="ax5.util.html#last">last</a></li>
-            
-                <li data-name="ax5.util.left"><a href="ax5.util.html#left">left</a></li>
-            
-                <li data-name="ax5.util.map"><a href="ax5.util.html#map">map</a></li>
-            
-                <li data-name="ax5.util.merge"><a href="ax5.util.html#merge">merge</a></li>
-            
-                <li data-name="ax5.util.number"><a href="ax5.util.html#number">number</a></li>
-            
-                <li data-name="ax5.util.param"><a href="ax5.util.html#param">param</a></li>
-            
-                <li data-name="ax5.util.parse_json"><a href="ax5.util.html#parse_json">parse_json</a></li>
-            
-                <li data-name="ax5.util.reduce"><a href="ax5.util.html#reduce">reduce</a></li>
-            
-                <li data-name="ax5.util.reduce_right"><a href="ax5.util.html#reduce_right">reduce_right</a></li>
-            
-                <li data-name="ax5.util.require"><a href="ax5.util.html#require">require</a></li>
-            
-                <li data-name="ax5.util.right"><a href="ax5.util.html#right">right</a></li>
-            
-                <li data-name="ax5.util.search"><a href="ax5.util.html#search">search</a></li>
-            
-                <li data-name="ax5.util.set_cookie"><a href="ax5.util.html#set_cookie">set_cookie</a></li>
-            
-                <li data-name="ax5.util.snake_case"><a href="ax5.util.html#snake_case">snake_case</a></li>
-            
-                <li data-name="ax5.util.to_array"><a href="ax5.util.html#to_array">to_array</a></li>
-            
-                <li data-name="ax5.util.to_json"><a href="ax5.util.html#to_json">to_json</a></li>
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
-        <li class="item" data-name="ax5.xhr">
-            <span class="title">
-                <a href="ax5.xhr.html">ax5.xhr</a>
-                
-                <span class="static">static</span>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            <span class="subtitle">Members</span>
-            
-                <li data-name="ax5.xhr.options"><a href="ax5.xhr.html#options">options</a></li>
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            <span class="subtitle">Methods</span>
-            
-                <li data-name="ax5.xhr.config"><a href="ax5.xhr.html#config">config</a></li>
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
-        <li class="item" data-name="ax5.ui.ax_ui">
-            <span class="title">
-                <a href="ax5.ui.ax_ui.html">ax5.ui.ax_ui</a>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            <span class="subtitle">Methods</span>
-            
-                <li data-name="ax5.ui.ax_ui.set_config"><a href="ax5.ui.ax_ui.html#set_config">set_config</a></li>
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
-    </ul>
-</div>
-    <div class="main">
-        <h1 class="page-title" data-filename="ax5.js.html">Source: ax5.js</h1>
-        
-
-
-    
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/*
- * ax5 - v0.0.1 
- * 2015-02-08 
- * www.axisj.com Javascript UI Library
- * 
- * Copyright 2013, 2015 AXISJ.com and other contributors 
- * Released under the MIT license 
- * www.axisj.com/ax5/license 
- */
-
-// 필수 Ployfill 확장 구문
-(function(){
-    'use strict';
-    
-	var root = this,
-        re_trim = /^\s*|\s*$/g;
-
-	// From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
-	if (!Object.keys) {
-		Object.keys = (function() {
-			var hwp = Object.prototype.hasOwnProperty,
-                hdeb = !({ toString: null }).propertyIsEnumerable('toString'),
-				de = [
-					'toString',
-					'toLocaleString',
-					'valueOf',
-					'hasOwnProperty',
-					'isPrototypeOf',
-					'propertyIsEnumerable',
-					'constructor'
-				],
-				del = de.length;
-
-			return function(obj) {
-				if (typeof obj !== 'object' && (typeof obj !== 'function' || obj === null)) throw new TypeError('type err');
-				var r = [], prop, i;
-				for (prop in obj) if (hwp.call(obj, prop)) r.push(prop);
-				if (hdeb) {
-					for (i = 0; i &lt; del; i++) if (hwp.call(obj, de[i])) r.push(de[i]);
-				}
-				return result;
-			};
-		}());
-	}
-
-	// ES5 15.4.4.18 Array.prototype.forEach ( callbackfn [ , thisArg ] )
-	// From https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/forEach
-	if (!Array.prototype.forEach) {
-		Array.prototype.forEach = function (fun /*, thisp */) {
-			if (this === void 0 || this === null) { throw TypeError(); }
-			var t = Object(this);
-			var len = t.length >>> 0;
-			if (typeof fun !== "function") { throw TypeError(); }
-			var thisp = arguments[1], i;
-			for (i = 0; i &lt; len; i++) {
-				if (i in t) {
-					fun.call(thisp, t[i], i, t);
-				}
-			}
-		};
-	}
-
-	// ES5 15.3.4.5 Function.prototype.bind ( thisArg [, arg1 [, arg2, ... ]] )
-	// https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/bind
-	if (!Function.prototype.bind) {
-		Function.prototype.bind = function (o) {
-			if (typeof this !== 'function') { throw TypeError("function"); }
-			var slice = [].slice,
-				args = slice.call(arguments, 1),
-				self = this,
-				bound = function () {
-					return self.apply(this instanceof nop ? this : o,
-						args.concat(slice.call(arguments)));
-				};
-
-			function nop() {}
-			nop.prototype = self.prototype;
-			bound.prototype = new nop();
-			return bound;
-		};
-	}
-
-	/*global document */
-	/**
-	 * define document.querySelector & document.querySelectorAll for IE7
-	 *
-	 * A not very fast but small hack. The approach is taken from
-	 * http://weblogs.asp.net/bleroy/archive/2009/08/31/queryselectorall-on-old-ie-versions-something-that-doesn-t-work.aspx
-	 *
-	 */
-	(function () {
-		if (document.querySelectorAll || document.querySelector) {
-			return;
-		}
-		if(!document.createStyleSheet) return;
-		var style = document.createStyleSheet(),
-			select = function (selector, maxCount) {
-				var
-					all = document.all,
-					l = all.length,
-					i,
-					resultSet = [];
-
-				style.addRule(selector, "foo:bar");
-				for (i = 0; i &lt; l; i += 1) {
-					if (all[i].currentStyle.foo === "bar") {
-						resultSet.push(all[i]);
-						if (resultSet.length > maxCount) {
-							break;
-						}
-					}
-				}
-				style.removeRule(0);
-				return resultSet;
-			};
-
-		document.querySelectorAll = function (selector) {
-			return select(selector, Infinity);
-		};
-		document.querySelector = function (selector) {
-			return select(selector, 1)[0] || null;
-		};
-	}());
-
-	if (!String.prototype.trim) {
-		(function() {
-			String.prototype.trim = function() {
-				return this.replace(re_trim, '');
-			};
-		})();
-	}
-
-	if (!window.JSON) {
-		window.JSON = {
-			parse: function (sJSON) { return (new Function('', 'return ' + sJSON))(); },
-			stringify:(function(){
-				var r = /["]/g, f;
-				return f = function(vContent){
-					var result, i, j;
-					switch( result = typeof vContent ){
-					case'string':return '"' + vContent.replace( r, '\\"' ) + '"';
-					case'number':case'boolean':return vContent.toString();
-					case'undefined':return 'undefined';
-					case'function':return '""';
-					case'object':
-						if(!vContent) return 'null';
-						result = '';
-						if(vContent.splice){
-							for(i = 0, j = vContent.length ; i &lt; j ; i++) result += ',' + f(vContent[i]);
-							return '[' + result.substr(1) + ']';
-						}else{
-							for(i in vContent) if(vContent.hasOwnProperty(i) && vContent[i] !== undefined && typeof vContent[i] != 'function') result += ',"'+i+'":' + f(vContent[i]);
-							return '{' + result.substr(1) + '}';
-						}
-					}
-				};
-			})()
-		};
-	}
-
-	// Console-polyfill. MIT license. https://github.com/paulmillr/console-polyfill
-	// Make it safe to do console.log() always.
-	(function(con) {
-		var prop, method;
-		var empty = {};
-		var dummy = function() {};
-		var properties = 'memory'.split(',');
-		var methods = ('assert,clear,count,debug,dir,dirxml,error,exception,group,' +
-		'groupCollapsed,groupEnd,info,log,markTimeline,profile,profiles,profileEnd,' +
-		'show,table,time,timeEnd,timeline,timelineEnd,timeStamp,trace,warn').split(',');
-		while (prop = properties.pop()) con[prop] = con[prop] || empty;
-		while (method = methods.pop()) con[method] = con[method] || dummy;
-	})(root.console = root.console || {}); // Using `this` for web workers.
-
-}.call(this));
-
 // ax5 선언
 (function() {
 	'use strict';
@@ -616,55 +7,54 @@
 	/** @namespace {Object} ax5 */
 		ax5 = {}, info, U, dom;
 
-    var node_names = "abbr|article|aside|audio|bdi|canvas|data|datalist|details|figcaption|figure|footer|header|hgroup|mark|meter|nav|output|progress|section|summary|time|video",
-        re_tag = /&lt;([\w:]+)/,
-        re_single_tags = /&lt;(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/gi,
-        re_html = /&lt;|&#?\w+;/,
-        re_noInnerhtml = /&lt;(?:script|style|link)/i,
-        core_pnum = /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source,
-        re_margin = /^margin/,
-        re_numsplit = new RegExp( "^(" + core_pnum + ")(.*)$", "i" ),
-        re_numnonpx = new RegExp( "^(" + core_pnum + ")(?!px)[a-z%]+$", "i" ),
-        re_position = /^(top|right|bottom|left)$/,
-        re_is_json = /^(["'](\\.|[^"\\\n\r])*?["']|[,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t])+?$/,
-        re_ms = /^-ms-/,
-        re_snake_case = /[\-_]([\da-z])/gi,
-        re_camel_case = /([A-Z])/g,
-        re_dot = /\./,
-        re_int = /[-|+]?[\D]/gi,
-        re_not_num = /\D/gi,
-        re_money_split = new RegExp('([0-9])([0-9][0-9][0-9][,.])'),
-        re_amp = /&/g,
-        re_eq = /=/,
-        re_class_name_split = /[ ]+/g,
-        body = doc.createElement('body'),
-        safe_fragment = (function(){
-            var list = node_names.split( "|" ),
-                safeFrag = doc.createDocumentFragment();
-            if ( safeFrag.createElement ) {
-                while ( list.length ) {
-                    safeFrag.createElement(
-                        list.pop()
-                    );
-                }
-            }
-            return safeFrag;
-        })(),
-        fragment_div = safe_fragment.appendChild( doc.createElement("div")),
-        tag_map = {
-            option: [ 1, "&lt;select multiple='multiple'>", "&lt;/select>" ],
-            legend: [ 1, "&lt;fieldset>", "&lt;/fieldset>" ],
-            area: [ 1, "&lt;map>", "&lt;/map>" ],
-            param: [ 1, "&lt;object>", "&lt;/object>" ],
-            thead: [ 1, "&lt;table>", "&lt;/table>" ],
-            tr: [ 2, "&lt;table>&lt;tbody>", "&lt;/tbody>&lt;/table>" ],
-            col: [ 2, "&lt;table>&lt;tbody>&lt;/tbody>&lt;colgroup>", "&lt;/colgroup>&lt;/table>" ],
-            td: [ 3, "&lt;table>&lt;tbody>&lt;tr>", "&lt;/tr>&lt;/tbody>&lt;/table>" ]
-        },
-        tag_not_support_innerhtml = {
-            col:1, colGroup:1, frameSet:1, html:1, head:1, style:1, table:1,
-            tBody:1, tFoot:1, tHead:1, title:1, tr:1
-        };
+	// jquery 1.10.2 from http://jquery.com -- start
+	var nodeNames = "abbr|article|aside|audio|bdi|canvas|data|datalist|details|figcaption|figure|footer|header|hgroup|mark|meter|nav|output|progress|section|summary|time|video",
+		core_pnum = /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source,
+		rnoshimcache = new RegExp("<(?:" + nodeNames + ")[\\s/>]", "i"),
+		rleadingWhitespace = /^\s+/,
+		rxhtmlTag = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/gi,
+		rtagName = /<([\w:]+)/,
+		rtbody = /<tbody/i,
+		rhtml = /<|&#?\w+;/,
+		rnoInnerhtml = /<(?:script|style|link)/i,
+		rmargin = /^margin/,
+		rnumsplit = new RegExp( "^(" + core_pnum + ")(.*)$", "i" ),
+		rnumnonpx = new RegExp( "^(" + core_pnum + ")(?!px)[a-z%]+$", "i" ),
+		rposition = /^(top|right|bottom|left)$/,
+
+		// We have to close these tags to support XHTML (#13200)
+		wrapMap = {
+			option: [ 1, "<select multiple='multiple'>", "</select>" ],
+			legend: [ 1, "<fieldset>", "</fieldset>" ],
+			area: [ 1, "<map>", "</map>" ],
+			param: [ 1, "<object>", "</object>" ],
+			thead: [ 1, "<table>", "</table>" ],
+			tr: [ 2, "<table><tbody>", "</tbody></table>" ],
+			col: [ 2, "<table><tbody></tbody><colgroup>", "</colgroup></table>" ],
+			td: [ 3, "<table><tbody><tr>", "</tr></tbody></table>" ]
+		},
+		safeFragment = createSafeFragment( ),
+		fragmentDiv = safeFragment.appendChild( doc.createElement("div")),
+		core_strundefined = typeof undefined;
+
+		function createSafeFragment( ) {
+			var list = nodeNames.split( "|" ),
+				safeFrag = doc.createDocumentFragment();
+			if ( safeFrag.createElement ) {
+				while ( list.length ) {
+					safeFrag.createElement(
+						list.pop()
+					);
+				}
+			}
+			return safeFrag;
+		}
+	// jquery 1.10.2 from http://jquery.com -- end
+	
+
+
+
+
 
 	/**
 	 * guid
@@ -734,7 +124,7 @@
 					/(chrome)[ \/]([\w.]+)/.exec(ua) ||
 					/(webkit)[ \/]([\w.]+)/.exec(ua) ||
 					/(msie) ([\w.]+)/.exec(ua) ||
-					ua.indexOf("compatible") &lt; 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) ||
+					ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) ||
 					[];
 
 				var browser = (match[1] || "");
@@ -798,6 +188,297 @@
 			return url;
 		}
 
+		// jquery 1.10.2 jQuery.support from http://jquery.com -- start
+		/**
+		 * 브라우저 API 지원여부
+		 * @member {Object} ax5.info.support
+		 * @example
+		 * ```json
+		 * //ax5.info.support Object JSON
+		 * {
+		 *	 appendChecked: true,
+		 *	 boxModel: true,
+		 *	 changeBubbles: true,
+		 *	 checkClone: undefined,
+		 *	 checkOn: true, // Make sure that if no value is specified for a checkbox, that it defaults to "on". (WebKit defaults to "" instead)
+		 *	 cssFloat: true, // Verify style float existence (IE uses styleFloat instead of cssFloat)
+		 *	 deleteExpando: true,
+		 *	 focusinBubbles: false,
+		 *	 getSetAttribute: true, // Test setAttribute on camelCase class. If it works, we need attrFixes when doing get/setAttribute (ie6/7)
+		 *	 hrefNormalized: true, // Make sure that URLs aren't manipulated
+		 *	 htmlSerialize: true, // Make sure that link elements get serialized correctly by innerHTML
+		 *	 inlineBlockNeedsLayout: false,
+		 *	 leadingWhitespace: true, // IE strips leading whitespace when .innerHTML is used
+		 *	 noCloneChecked: true,
+		 *	 noCloneEvent: true,
+		 *	 opacity: true, // Make sure that element opacity exists
+		 *	 optDisabled: true,
+		 *	 optSelected: true,
+		 *	 radioValue: true,
+		 *	 reliableHiddenOffsets: true,
+		 *	 reliableMarginRight: true,
+		 *	 shrinkWrapBlocks: false,
+		 *	 style: true, // Get the style information from getAttribute
+		 *	 submitBubbles: true,
+		 *	 tbody: true
+		 * }
+		 * ```
+		 */
+		var support = (function(){
+
+			var div = document.createElement( "div" ),
+				documentElement = document.documentElement,
+				all,
+				a,
+				select,
+				opt,
+				input,
+				marginDiv,
+				support,
+				fragment,
+				body,
+				testElementParent,
+				testElement,
+				testElementStyle,
+				tds,
+				events,
+				eventName,
+				i,
+				isSupported;
+
+			// Preliminary tests
+			div.setAttribute("className", "t");
+			div.innerHTML = "   <link/><table></table><a href='/a' style='top:1px;float:left;opacity:.55;'>a</a><input type='checkbox'/>";
+
+			all = div.getElementsByTagName( "*" );
+			a = div.getElementsByTagName( "a" )[ 0 ];
+
+			// Can't get basic test support
+			if ( !all || !all.length || !a ) {
+				return {};
+			}
+
+			// First batch of supports tests
+			select = document.createElement( "select" );
+			opt = select.appendChild( document.createElement("option") );
+			input = div.getElementsByTagName( "input" )[ 0 ];
+
+			support = {
+				// IE strips leading whitespace when .innerHTML is used
+				leadingWhitespace: ( div.firstChild.nodeType === 3 ),
+
+				// Make sure that tbody elements aren't automatically inserted
+				// IE will insert them into empty tables
+				tbody: !div.getElementsByTagName( "tbody" ).length,
+
+				// Make sure that link elements get serialized correctly by innerHTML
+				// This requires a wrapper element in IE
+				htmlSerialize: !!div.getElementsByTagName( "link" ).length,
+
+				// Get the style information from getAttribute
+				// (IE uses .cssText instead)
+				style: /top/.test( a.getAttribute("style") ),
+
+				// Make sure that URLs aren't manipulated
+				// (IE normalizes it by default)
+				hrefNormalized: ( a.getAttribute( "href" ) === "/a" ),
+
+				// Make sure that element opacity exists
+				// (IE uses filter instead)
+				// Use a regex to work around a WebKit issue. See #5145
+				opacity: /^0.55$/.test( a.style.opacity ),
+
+				// Verify style float existence
+				// (IE uses styleFloat instead of cssFloat)
+				cssFloat: !!a.style.cssFloat,
+
+				// Make sure that if no value is specified for a checkbox
+				// that it defaults to "on".
+				// (WebKit defaults to "" instead)
+				checkOn: ( input.value === "on" ),
+
+				// Make sure that a selected-by-default option has a working selected property.
+				// (WebKit defaults to false instead of true, IE too, if it's in an optgroup)
+				optSelected: opt.selected,
+
+				// Test setAttribute on camelCase class. If it works, we need attrFixes when doing get/setAttribute (ie6/7)
+				getSetAttribute: div.className !== "t",
+
+				// Will be defined later
+				submitBubbles: true,
+				changeBubbles: true,
+				focusinBubbles: false,
+				deleteExpando: true,
+				noCloneEvent: true,
+				inlineBlockNeedsLayout: false,
+				shrinkWrapBlocks: false,
+				reliableMarginRight: true
+			};
+
+
+			// IE6-8 can't serialize link, script, style, or any html5 (NoScope) tags,
+			// unless wrapped in a div with non-breaking characters in front of it.
+			wrapMap._default = support.htmlSerialize ? [ 0, "", "" ] : [ 1, "X<div>", "</div>"  ];
+
+			// Make sure checked status is properly cloned
+			input.checked = true;
+			support.noCloneChecked = input.cloneNode( true ).checked;
+
+			// Make sure that the options inside disabled selects aren't marked as disabled
+			// (WebKit marks them as disabled)
+			select.disabled = true;
+			support.optDisabled = !opt.disabled;
+
+			// Test to see if it's possible to delete an expando from an element
+			// Fails in Internet Explorer
+			try {
+				delete div.test;
+			} catch( e ) {
+				support.deleteExpando = false;
+			}
+
+			if ( !div.addEventListener && div.attachEvent && div.fireEvent ) {
+				div.attachEvent( "onclick", function() {
+					// Cloning a node shouldn't copy over any
+					// bound event handlers (IE does this)
+					support.noCloneEvent = false;
+				});
+				div.cloneNode( true ).fireEvent( "onclick" );
+			}
+
+			// Check if a radio maintains it's value
+			// after being appended to the DOM
+			input = document.createElement("input");
+			input.value = "t";
+			input.setAttribute("type", "radio");
+			support.radioValue = input.value === "t";
+
+			input.setAttribute("checked", "checked");
+			div.appendChild( input );
+			fragment = document.createDocumentFragment();
+			fragment.appendChild( div.firstChild );
+
+			// WebKit doesn't clone checked state correctly in fragments
+			support.checkClone = fragment.cloneNode( true ).cloneNode( true ).lastChild.checked;
+
+			div.innerHTML = "";
+
+			// Figure out if the W3C box model works as expected
+			div.style.width = div.style.paddingLeft = "1px";
+
+			body = document.getElementsByTagName( "body" )[ 0 ];
+			// We use our own, invisible, body unless the body is already present
+			// in which case we use a div (#9239)
+			testElement = document.createElement( body ? "div" : "body" );
+			testElementStyle = {
+				visibility: "hidden",
+				width: 0,
+				height: 0,
+				border: 0,
+				margin: 0
+			};
+			if ( body ) {
+				testElementStyle.position = "absolute";
+				testElementStyle.left = -1000;
+				testElementStyle.top = -1000;
+			}
+			for ( i in testElementStyle ) {
+				testElement.style[ i ] = testElementStyle[ i ];
+			}
+			testElement.appendChild( div );
+			testElementParent = body || documentElement;
+			testElementParent.insertBefore( testElement, testElementParent.firstChild );
+
+			// Check if a disconnected checkbox will retain its checked
+			// value of true after appended to the DOM (IE6/7)
+			support.appendChecked = input.checked;
+
+			support.boxModel = div.offsetWidth === 2;
+
+			if ( "zoom" in div.style ) {
+				// Check if natively block-level elements act like inline-block
+				// elements when setting their display to 'inline' and giving
+				// them layout
+				// (IE < 8 does this)
+				div.style.display = "inline";
+				div.style.zoom = 1;
+				support.inlineBlockNeedsLayout = ( div.offsetWidth === 2 );
+
+				// Check if elements with layout shrink-wrap their children
+				// (IE 6 does this)
+				div.style.display = "";
+				div.innerHTML = "<div style='width:4px;'></div>";
+				support.shrinkWrapBlocks = ( div.offsetWidth !== 2 );
+			}
+
+			div.innerHTML = "<table><tr><td style='padding:0;border:0;display:none'></td><td>t</td></tr></table>";
+			tds = div.getElementsByTagName( "td" );
+
+			// Check if table cells still have offsetWidth/Height when they are set
+			// to display:none and there are still other visible table cells in a
+			// table row; if so, offsetWidth/Height are not reliable for use when
+			// determining if an element has been hidden directly using
+			// display:none (it is still safe to use offsets if a parent element is
+			// hidden; don safety goggles and see bug #4512 for more information).
+			// (only IE 8 fails this test)
+			isSupported = ( tds[ 0 ].offsetHeight === 0 );
+
+			tds[ 0 ].style.display = "";
+			tds[ 1 ].style.display = "none";
+
+			// Check if empty table cells still have offsetWidth/Height
+			// (IE < 8 fail this test)
+			support.reliableHiddenOffsets = isSupported && ( tds[ 0 ].offsetHeight === 0 );
+			div.innerHTML = "";
+
+			// Check if div with explicit width and no margin-right incorrectly
+			// gets computed margin-right based on width of container. For more
+			// info see bug #3333
+			// Fails in WebKit before Feb 2011 nightlies
+			// WebKit Bug 13343 - getComputedStyle returns wrong value for margin-right
+			if ( document.defaultView && document.defaultView.getComputedStyle ) {
+				marginDiv = document.createElement( "div" );
+				marginDiv.style.width = "0";
+				marginDiv.style.marginRight = "0";
+				div.appendChild( marginDiv );
+				support.reliableMarginRight =
+					( parseInt( ( document.defaultView.getComputedStyle( marginDiv, null ) || { marginRight: 0 } ).marginRight, 10 ) || 0 ) === 0;
+			}
+
+			// Remove the body element we added
+			testElement.innerHTML = "";
+			testElementParent.removeChild( testElement );
+
+			// Technique from Juriy Zaytsev
+			// http://thinkweb2.com/projects/prototype/detecting-event-support-without-browser-sniffing/
+			// We only care about the case where non-standard event systems
+			// are used, namely in IE. Short-circuiting here helps us to
+			// avoid an eval call (in setAttribute) which can cause CSP
+			// to go haywire. See: https://developer.mozilla.org/en/Security/CSP
+			if ( div.attachEvent ) {
+				for( i in {
+					submit: 1,
+					change: 1,
+					focusin: 1
+				} ) {
+					eventName = "on" + i;
+					isSupported = ( eventName in div );
+					if ( !isSupported ) {
+						div.setAttribute( eventName, "return;" );
+						isSupported = ( typeof div[ eventName ] === "function" );
+					}
+					support[ i + "Bubbles" ] = isSupported;
+				}
+			}
+
+			// Null connected elements to avoid leaks in IE
+			testElement = fragment = select = opt = body = marginDiv = div = input = null;
+
+			return support;
+
+		})();
+		// jquery 1.10.2 jQuery.support from http://jquery.com -- start
+
 		var info = {
 			version: version,
 			base_url: base_url,
@@ -805,7 +486,8 @@
 			browser: browser,
 			is_browser: is_browser,
 			wheel_enm: wheel_enm,
-			url_util: url_util
+			url_util: url_util,
+			support: support
 		};
 
 		return info;
@@ -845,7 +527,7 @@
 						if (_fn.call(O[key], key, O[key]) === false) break;
 				}
 			} else {
-				for (; i &lt; l;) {
+				for (; i < l;) {
 					if (typeof O[i] != "undefined")
 						if (_fn.call(O[i], i, O[i++]) === false) break;
 				}
@@ -894,7 +576,7 @@
 					}
 				}
 			} else {
-				for (; i &lt; l;) {
+				for (; i < l;) {
 					if (typeof O[i] != "undefined") {
 						fn_result = undefined;
 						if ((fn_result = _fn.call(O[i], i, O[i++])) === false) break;
@@ -953,7 +635,7 @@
 					}
 				}
 			} else {
-				for (; i &lt; l;) {
+				for (; i < l;) {
 					if (typeof O[i] != "undefined" && is_function(_fn) && _fn.call(O[i], i, O[i])) {
 						return i;
 						break;
@@ -993,7 +675,7 @@
 			var i, l, token_item;
 			if (is_array(O)) {
 				i = 0, l = O.length, token_item = O[i];
-				for (; i &lt; l - 1;) {
+				for (; i < l - 1;) {
 					if (typeof O[i] != "undefined") {
 						if (( token_item = _fn.call(root, token_item, O[++i]) ) === false) break;
 					}
@@ -1074,7 +756,7 @@
 					}
 				}
 			} else {
-				for (; i &lt; l;) {
+				for (; i < l;) {
 					if (typeof O[i] != "undefined") {
 						if (fn_result = _fn.call(O[i], i, O[i])) results.push(O[i]);
 						i++;
@@ -1084,6 +766,18 @@
 			return results;
 		}
 
+		/**
+		 * 에러를 발생시킵니다.
+		 * @method ax5.util.error
+		 * @param {String} msg
+		 * @example
+		 * ```js
+		 * ax5.util.error( "에러가 발생되었습니다." );
+		 * ```
+		 */
+		function error(msg) {
+			throw new Error(msg);
+		}
 
 		/**
 		 * Object를 JSONString 으로 반환합니다.
@@ -1107,7 +801,7 @@
 			if (ax5.util.is_array(O)) {
 				var i = 0, l = O.length;
 				json_string += "[";
-				for (; i &lt; l; i++) {
+				for (; i < l; i++) {
 					if (i > 0) json_string += ",";
 					json_string += to_json(O[i]);
 				}
@@ -1136,42 +830,6 @@
 			}
 			return json_string;
 		}
-
-        /**
-         * 관용의 JSON Parser
-         * @method ax5.util.parse_json
-         * @param {String} JSONString
-         * @param {Boolean} [force] - 강제 적용 여부 (json 문자열 검사를 무시하고 오브젝트 변환을 시도합니다.)
-         * @returns {Object}
-         * @example
-         * ```
-         * console.log(ax5.util.parse_json('{"a":1}'));
-         * // Object {a: 1} 
-         * console.log(ax5.util.parse_json("{'a':1, 'b':'b'}"));
-         * // Object {a: 1, b: "b"}
-         * console.log(ax5.util.parse_json("{'a':1, 'b':function(){return 1;}}", true));
-         * // Object {a: 1, b: function}
-         * console.log(ax5.util.parse_json("{a:1}"));
-         * // Object {a: 1}
-         * console.log(ax5.util.parse_json("[1,2,3]"));
-         * // [1, 2, 3]
-         * console.log(ax5.util.parse_json("['1','2','3']"));
-         * // ["1", "2", "3"]
-         * console.log(ax5.util.parse_json("[{'a':'99'},'2','3']"));
-         * // [Object, "2", "3"]
-         * ```
-         */
-        function parse_json(str, force){
-            if( force || (re_is_json).test(str) ){
-                try {
-                    return (new Function('', 'return ' + str))();
-                }catch(e){
-                    return {error:500, msg:'syntax error'};
-                }
-            }else {
-                return {error:500, msg:'syntax error'};
-            }
-        }
 		
 		/**
 		 * 타겟 오브젝트의 키를 대상 오브젝트의 키만큼 확장합니다.
@@ -1489,7 +1147,7 @@
 		function get_cookie(cname) {
 			var name = cname + "=";
 			var ca = doc.cookie.split(';'), i = 0, l = ca.length;
-			for (; i &lt; l; i++) {
+			for (; i < l; i++) {
 				var c = ca[i];
 				while (c.charAt(0) == ' ') c = c.substring(1);
 				if (c.indexOf(name) != -1) return unescape(c.substring(name.length, c.length));
@@ -1519,13 +1177,13 @@
 				loadCount = mods.length, loadErrors = [], onloadTimer, onerrorTimer, returned = false,
 				scripts = dom.get("script[src]"), styles = dom.get("style[href]"),
 				onload = function () {
-					if (loadCount &lt; 1 && loadErrors.length == 0 && !returned) {
+					if (loadCount < 1 && loadErrors.length == 0 && !returned) {
 						if (callBack) callBack({});
 						returned = true;
 					}
 				},
 				onerror = function () {
-					if (loadCount &lt; 1 && loadErrors.length > 0 && !returned) {
+					if (loadCount < 1 && loadErrors.length > 0 && !returned) {
 						console.error(loadErrors);
 						if (errorBack) errorBack({
 							type: "loadFail",
@@ -1536,11 +1194,11 @@
 				};
 
 			// 로드해야 할 모듈들을 doc.head에 삽입하고 로드가 성공여부를 리턴합니다.
-			for (var i = 0; i &lt; mods.length; i++) {
+			for (var i = 0; i < mods.length; i++) {
 				var src = mods[i], type = right(src, "."), hasPlugin = false,
 					plugin, plugin_src = info.base_url + src, attr_nm = (type === "js") ? "src" : "href",
 					plug_load, plug_err;
-				for (var s = 0; s &lt; scripts.length; s++) {
+				for (var s = 0; s < scripts.length; s++) {
 					if (scripts[s].getAttribute(attr_nm) === plugin_src) {
 						hasPlugin = true;
 						break;
@@ -1664,7 +1322,7 @@
 		 * ```
 		 */
 		function camel_case(str) {
-			return str.replace(re_ms, "ms-").replace(re_snake_case, function (all, letter) {
+			return str.replace(/^-ms-/, "ms-").replace(/[\-_]([\da-z])/gi, function (all, letter) {
 				return letter.toUpperCase();
 			});
 		}
@@ -1683,7 +1341,7 @@
 		 * ```
 		 */
 		function snake_case(str) {
-			return camel_case(str).replace(re_camel_case, function (all, letter) {
+			return camel_case(str).replace(/([A-Z])/g, function (all, letter) {
 				return "-" + letter.toLowerCase();
 			});
 		}
@@ -1717,10 +1375,10 @@
 		 * ```
 		 */
 		function number(str, cond) {
-			var result, pair = ('' + str).split(re_dot), isMinus = (parseFloat(pair[0]) &lt; 0 || pair[0] == "-0"), returnValue = 0.0;
-			pair[0] = pair[0].replace(re_int, "");
+			var result, pair = ('' + str).split(/\./), isMinus = (parseFloat(pair[0]) < 0 || pair[0] == "-0"), returnValue = 0.0;
+			pair[0] = pair[0].replace(/[-|+]?[\D]/gi, "");
 			if (pair[1]) {
-				pair[1] = pair[1].replace(re_not_num, "");
+				pair[1] = pair[1].replace(/\D/gi, "");
 				returnValue = parseFloat(pair[0] + "." + pair[1]) || 0;
 			} else {
 				returnValue = parseFloat(pair[0]) || 0;
@@ -1738,11 +1396,12 @@
 							return "";
 						}
 						else {
+							var rxSplit = new RegExp('([0-9])([0-9][0-9][0-9][,.])');
 							var arrNumber = txtNumber.split('.');
 							arrNumber[0] += '.';
 							do {
-								arrNumber[0] = arrNumber[0].replace(re_money_split, '$1,$2');
-							} while (re_money_split.test(arrNumber[0]));
+								arrNumber[0] = arrNumber[0].replace(rxSplit, '$1,$2');
+							} while (rxSplit.test(arrNumber[0]));
 							if (arrNumber.length > 1) {
 								return arrNumber.join('');
 							} else {
@@ -1807,7 +1466,7 @@
 				j = 0;
 
 			if (typeof l === "number") {
-				for (; j &lt; l; j++) {
+				for (; j < l; j++) {
 					first[i++] = second[j];
 				}
 			} else {
@@ -1844,8 +1503,8 @@
 			else
 			if ( (is_string(O) && typeof cond !== "undefined" && cond == "object") || (is_string(O) && typeof cond === "undefined") ){
 				p = {};
-				each(O.split(re_amp), function () {
-					var item = this.split(re_eq);
+				each(O.split(/&/g), function () {
+					var item = this.split(/=/);
 					p[item[0]] = item[1];
 				});
 				return p;
@@ -1869,47 +1528,47 @@
 		}
 
 		return {
-            alert       : alert,
-            each        : each,
-            map         : map,
-            search      : search,
-            reduce      : reduce,
-            reduce_right: reduce_right,
-            filter      : filter,
-            to_json     : to_json,
-            parse_json  : parse_json,
-            extend      : extend,
-            extend_all  : extend_all,
-            clone       : clone,
-            first       : first,
-            last        : last,
-            left        : left,
-            right       : right,
-            get_type    : get_type,
-            is_window   : is_window,
-            is_element  : is_element,
-            is_object   : is_object,
-            is_array    : is_array,
-            is_function : is_function,
-            is_string   : is_string,
-            is_number   : is_number,
-            is_nodelist : is_nodelist,
-            is_undefined: is_undefined,
-            is_nothing  : is_nothing,
-            set_cookie  : set_cookie,
-            get_cookie  : get_cookie,
-            require     : require,
-            camel_case  : camel_case,
-            snake_case  : snake_case,
-            number      : number,
-            to_array    : to_array,
-            merge       : merge,
-            param       : param
+			alert       : alert,
+			each        : each,
+			map         : map,
+			search      : search,
+			reduce      : reduce,
+			reduce_right: reduce_right,
+			filter      : filter,
+			error       : error,
+			to_json     : to_json,
+			extend      : extend,
+			extend_all  : extend_all,
+			clone       : clone,
+			first       : first,
+			last        : last,
+			left        : left,
+			right       : right,
+			get_type    : get_type,
+			is_window   : is_window,
+			is_element  : is_element,
+			is_object   : is_object,
+			is_array    : is_array,
+			is_function : is_function,
+			is_string   : is_string,
+			is_number   : is_number,
+			is_nodelist : is_nodelist,
+			is_undefined: is_undefined,
+			is_nothing  : is_nothing,
+			set_cookie  : set_cookie,
+			get_cookie  : get_cookie,
+			require     : require,
+			camel_case  : camel_case,
+			snake_case  : snake_case,
+			number      : number,
+			to_array    : to_array,
+			merge       : merge,
+			param       : param
 		}
 	})();
 
 	/**
-	 * Refer to this by {@link ax5}. &lt;br/>
+	 * Refer to this by {@link ax5}. <br/>
 	 * dom0는 dom(query)를 줄여서 칭하는 말 입니다. ax5.dom 에 있는 함수들과는 다른 개념입니다. ax5.dom0는 query에 의해 만들어진 인스턴스 입니다.
 	 * @namespace ax5.dom0
 	 * @param {String} query
@@ -2079,22 +1738,22 @@
 				 * 형제 엘리먼트중에 다음에 위치한 엘리먼트를 반환합니다.
 				 * @method ax5.dom0.next
 				 * @param {Number} [times=0] - 횟수
-				 * @returns {axdom} ax5.dom0
+				 * @returns {ax5.dom0} ax5.dom0
 				 * @example
 				 * ```
-				 * &lt;div>
-				 * 	 &lt;ul id="list-container">
-				 * 		 &lt;li data-list-item="0" id="li0">
-				 * 		    &lt;div>child>child&lt;/div>
-				 * 		 &lt;/li>
-				 * 		 &lt;li data-list-item="1" id="li1">&lt;/li>
-				 * 		 &lt;li data-list-item="2" id="li2">&lt;/li>
-				 * 		 &lt;li data-list-item="3" id="li3">&lt;/li>
-				 * 		 &lt;li data-list-item="4" id="li4">&lt;/li>
-				 * 		 &lt;li data-list-item="5" id="li5">&lt;/li>
-				 * 	 &lt;/ul>
-				 * &lt;/div>
-				 * &lt;script>
+				 * <div>
+				 * 	 <ul id="list-container">
+				 * 		 <li data-list-item="0" id="li0">
+				 * 		    <div>child>child</div>
+				 * 		 </li>
+				 * 		 <li data-list-item="1" id="li1"></li>
+				 * 		 <li data-list-item="2" id="li2"></li>
+				 * 		 <li data-list-item="3" id="li3"></li>
+				 * 		 <li data-list-item="4" id="li4"></li>
+				 * 		 <li data-list-item="5" id="li5"></li>
+				 * 	 </ul>
+				 * </div>
+				 * <script>
 				 * var el = ax5.dom("#list-container");
 				 * var li = el.child(el);
 				 *
@@ -2102,7 +1761,7 @@
 				 * 	 (c_li = li.next(2)).elements[0].id,
 				 * 	 (c_li = c_li.prev()).elements[0].id
 				 * );
-				 * &lt;/script>
+				 * </script>
 				 * ```
 				 */
 				this.prev = function (times) {
@@ -2115,19 +1774,19 @@
 				 * @returns {ax5.dom0} ax5.dom0
 				 * @example
 				 * ```
-				 * &lt;div>
-				 * 	 &lt;ul id="list-container">
-				 * 		 &lt;li data-list-item="0" id="li0">
-				 * 		    &lt;div>child>child&lt;/div>
-				 * 		 &lt;/li>
-				 * 		 &lt;li data-list-item="1" id="li1">&lt;/li>
-				 * 		 &lt;li data-list-item="2" id="li2">&lt;/li>
-				 * 		 &lt;li data-list-item="3" id="li3">&lt;/li>
-				 * 		 &lt;li data-list-item="4" id="li4">&lt;/li>
-				 * 		 &lt;li data-list-item="5" id="li5">&lt;/li>
-				 * 	 &lt;/ul>
-				 * &lt;/div>
-				 * &lt;script>
+				 * <div>
+				 * 	 <ul id="list-container">
+				 * 		 <li data-list-item="0" id="li0">
+				 * 		    <div>child>child</div>
+				 * 		 </li>
+				 * 		 <li data-list-item="1" id="li1"></li>
+				 * 		 <li data-list-item="2" id="li2"></li>
+				 * 		 <li data-list-item="3" id="li3"></li>
+				 * 		 <li data-list-item="4" id="li4"></li>
+				 * 		 <li data-list-item="5" id="li5"></li>
+				 * 	 </ul>
+				 * </div>
+				 * <script>
 				 * var el = ax5.dom("#list-container");
 				 * var li = el.child(el);
 				 *
@@ -2135,7 +1794,7 @@
 				 * 	 (c_li = li.next(2)).elements[0].id,
 				 * 	 (c_li = c_li.prev()).elements[0].id
 				 * );
-				 * &lt;/script>
+				 * </script>
 				 * ```
 				 */
 				this.next = function (times) {
@@ -2215,7 +1874,7 @@
 				 * @example
 				 * ```
 				 * console.log( ax5.dom("#list-container").html() );
-				 * ax5.dom("#list-container").html("&lt;a href='#1234'>링크");
+				 * ax5.dom("#list-container").html("<a href='#1234'>링크");
 				 * ```
 				 */
 				this.html = function (val) {
@@ -2231,7 +1890,7 @@
 				 * ```
 				 * ax5.dom("[data-list-item='0']")
 				 * .append("ㅈㅏㅇㄱㅣㅇㅕㅇ")
-				 * .append("&lt;div>장기영&lt;a href='#ABCDE'>이건 어렵다&lt;/a>&lt;/div>")
+				 * .append("<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>")
 				 * .append(ax5.dom.get("#move-item"));
 				 * ```
 				 */
@@ -2248,7 +1907,7 @@
 				 * ```
 				 * ax5.dom("[data-list-item='0']")
 				 * .prepend("ㅈㅏㅇㄱㅣㅇㅕㅇ")
-				 * .prepend("&lt;div>장기영&lt;a href='#ABCDE'>이건 어렵다&lt;/a>&lt;/div>")
+				 * .prepend("<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>")
 				 * .prepend(ax5.dom.get("#move-item"));
 				 * ```
 				 */
@@ -2265,7 +1924,7 @@
 				 * ```
 				 * ax5.dom("[data-list-item='0']")
 				 * .before("ㅈㅏㅇㄱㅣㅇㅕㅇ")
-				 * .before("&lt;div>장기영&lt;a href='#ABCDE'>이건 어렵다&lt;/a>&lt;/div>")
+				 * .before("<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>")
 				 * .before(ax5.dom.get("#move-item"));
 				 * ```
 				 */
@@ -2282,7 +1941,7 @@
 				 * ```
 				 * ax5.dom("[data-list-item='0']")
 				 * .after("ㅈㅏㅇㄱㅣㅇㅕㅇ")
-				 * .after("&lt;div>장기영&lt;a href='#ABCDE'>이건 어렵다&lt;/a>&lt;/div>")
+				 * .after("<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>")
 				 * .after(ax5.dom.get("#move-item"));
 				 * ```
 				 */
@@ -2403,10 +2062,9 @@
 
 	// dom functions
 	(function () {
-        var curCSS;
 		//if("내장함수 시작") {
 		// 이벤트 바인딩
-		function eBind(elem, type, eventHandle) {
+		function eventBind(elem, type, eventHandle) {
 			type = U.left(type, ".");
 			if (elem.addEventListener) {
 				elem.addEventListener(type, eventHandle, false);
@@ -2416,7 +2074,7 @@
 		}
 
 		// 이벤트 언바인딩
-		function eUnBind(elem, type, eventHandle) {
+		function eventUnBind(elem, type, eventHandle) {
 			type = U.left(type, ".");
 			if (elem.removeEventListener) {
 				if (eventHandle) elem.removeEventListener(type, eventHandle);
@@ -2449,9 +2107,10 @@
 		}
 
 		// 엘리먼트 순서이동
-		function sibling(els, forward, times) {
-			var prop = (forward == "prev") ? "previousSibling" : "nextSibling", el = els[0];
-			times = (typeof times == "undefined" || times &lt; 1) ? 1 : times;
+		function sibling(elements, forward, times) {
+			elements = va_elem(elements, forward);
+			var prop = (forward == "prev") ? "previousSibling" : "nextSibling", el = elements[0];
+			times = (typeof times == "undefined" || times < 1) ? 1 : times;
 			do {
 				el = el[prop];
 			}
@@ -2465,89 +2124,92 @@
 			return el;
 		}
 
-        if ( window.getComputedStyle ) {
-            curCSS = function (elem, name, num) {
-                var width, minWidth, maxWidth, computed, ret, style, left, rs, rsLeft;
 
-                computed = window.getComputedStyle(elem, null),
-                ret = computed ? computed.getPropertyValue(name) || computed[name] : undefined,
-                style = elem.style;
+// jQuery 1.10.2 이 소스를 참고하여 getStyles와 curCSS를 작성하였습니다.
+		function getStyles(elem) {
+			if ( window.getComputedStyle ) {
+				return window.getComputedStyle(elem, null);
+			} else {
+				//if (document.documentElement.currentStyle) {
+				return elem.currentStyle;
+			}
+		}
 
-                if ( computed ) {
+		function curCSS(elem, name, num) {
+			var width, minWidth, maxWidth, computed, ret, style, left, rs, rsLeft;
 
-                    // A tribute to the "awesome hack by Dean Edwards"
-                    // Chrome &lt; 17 and Safari 5.0 uses "computed value" instead of "used value" for margin-right
-                    // Safari 5.1.7 (at least) returns percentage for a larger set of values, but width seems to be reliably pixels
-                    // this is against the CSSOM draft spec: http://dev.w3.org/csswg/cssom/#resolved-values
-                    if ( re_numnonpx.test( ret ) && re_margin.test( name ) ) {
-                        // Remember the original values
-                        width = style.width;
-                        minWidth = style.minWidth;
-                        maxWidth = style.maxWidth;
+			if ( window.getComputedStyle ) {
+				computed = getStyles(elem),
+					ret = computed ? computed.getPropertyValue(name) || computed[name] : undefined,
+					style = elem.style;
 
-                        // Put in the new values to get a computed value out
-                        style.minWidth = style.maxWidth = style.width = ret;
-                        ret = computed.width;
+				if ( computed ) {
 
-                        // Revert the changed values
-                        style.width = width;
-                        style.minWidth = minWidth;
-                        style.maxWidth = maxWidth;
-                    }
-                }
+					// A tribute to the "awesome hack by Dean Edwards"
+					// Chrome < 17 and Safari 5.0 uses "computed value" instead of "used value" for margin-right
+					// Safari 5.1.7 (at least) returns percentage for a larger set of values, but width seems to be reliably pixels
+					// this is against the CSSOM draft spec: http://dev.w3.org/csswg/cssom/#resolved-values
+					if ( rnumnonpx.test( ret ) && rmargin.test( name ) ) {
+						// Remember the original values
+						width = style.width;
+						minWidth = style.minWidth;
+						maxWidth = style.maxWidth;
 
-                if(num) ret = parseFloat(ret) || 0;
-                return ret;
-            }
-        }else{
-            curCSS = function(elem, name, num) {
-                var width, minWidth, maxWidth, computed, ret, style, left, rs, rsLeft;
+						// Put in the new values to get a computed value out
+						style.minWidth = style.maxWidth = style.width = ret;
+						ret = computed.width;
 
-                computed = elem.currentStyle,
-                ret = computed ? computed[ name ] : undefined,
-                style = elem.style;
+						// Revert the changed values
+						style.width = width;
+						style.minWidth = minWidth;
+						style.maxWidth = maxWidth;
+					}
+				}
 
-                // Avoid setting ret to empty string here
-                // so we don't default to auto
-                if ( ret == null && style && style[ name ] ) {
-                    ret = style[ name ];
-                }
+			} else {
+				//if (document.documentElement.currentStyle) {
+				computed = getStyles( elem ),
+					ret = computed ? computed[ name ] : undefined,
+					style = elem.style;
 
-                // From the awesome hack by Dean Edwards
-                // http://erik.eae.net/archives/2007/07/27/18.54.15/#comment-102291
+				// Avoid setting ret to empty string here
+				// so we don't default to auto
+				if ( ret == null && style && style[ name ] ) {
+					ret = style[ name ];
+				}
 
-                // If we're not dealing with a regular pixel number
-                // but a number that has a weird ending, we need to convert it to pixels
-                // but not position css attributes, as those are proportional to the parent element instead
-                // and we can't measure the parent instead because it might trigger a "stacking dolls" problem
-                if ( re_numnonpx.test( ret ) && !re_position.test( name ) ) {
+				// From the awesome hack by Dean Edwards
+				// http://erik.eae.net/archives/2007/07/27/18.54.15/#comment-102291
 
-                    // Remember the original values
-                    left = style.left;
-                    rs = elem.runtimeStyle;
-                    rsLeft = rs && rs.left;
+				// If we're not dealing with a regular pixel number
+				// but a number that has a weird ending, we need to convert it to pixels
+				// but not position css attributes, as those are proportional to the parent element instead
+				// and we can't measure the parent instead because it might trigger a "stacking dolls" problem
+				if ( rnumnonpx.test( ret ) && !rposition.test( name ) ) {
 
-                    // Put in the new values to get a computed value out
-                    if ( rsLeft ) {
-                        rs.left = elem.currentStyle.left;
-                    }
-                    style.left = name === "fontSize" ? "1em" : ret;
-                    ret = style.pixelLeft + "px";
+					// Remember the original values
+					left = style.left;
+					rs = elem.runtimeStyle;
+					rsLeft = rs && rs.left;
 
-                    // Revert the changed values
-                    style.left = left;
-                    if ( rsLeft ) {
-                        rs.left = rsLeft;
-                    }
-                }
-                ret = ret === "" ? "auto" : ret;
+					// Put in the new values to get a computed value out
+					if ( rsLeft ) {
+						rs.left = elem.currentStyle.left;
+					}
+					style.left = name === "fontSize" ? "1em" : ret;
+					ret = style.pixelLeft + "px";
 
-                if(num) ret = parseFloat(ret) || 0;
-                return ret;
-            }
-        }
-        // jQuery 1.10.2 소스를 참고하여 curCSS를 재작성하였습니다.
-
+					// Revert the changed values
+					style.left = left;
+					if ( rsLeft ) {
+						rs.left = rsLeft;
+					}
+				}
+				ret = ret === "" ? "auto" : ret;
+			}
+			if(num) ret = parseFloat(ret) || 0;
+			return ret;
+		}
 
 		// 엘리먼트 스타일 값 가져오기
 		function style(el, key, fn_nm) {
@@ -2556,7 +2218,7 @@
 			}
 			else if (U.is_array(key)) {
 				var css = {}, i = 0, l = key.length;
-				for (; i &lt; l; i++) {
+				for (; i < l; i++) {
 					css[key[i]] = curCSS(el, key[i]);
 				}
 				return css;
@@ -2565,13 +2227,14 @@
 		}
 
 		// 박스사이즈 구하기
-		function box_size(els, fn_nm, opts) {
+		function box_size(elements, fn_nm, opts) {
 			var d = -1, tag_nm = "";
-			if (U.is_window(els)) {
-				return els.document.documentElement[U.camel_case("client-" + fn_nm)];
+			if (U.is_window(elements)) {
+				return elements.document.documentElement[U.camel_case("client-" + fn_nm)];
 			}
 			else {
-				var el = els[0], _sbs = U.camel_case("scroll-" + fn_nm), _obs = U.camel_case("offset-" + fn_nm), _cbs = U.camel_case("client-" + fn_nm);
+				elements = va_elem(elements, fn_nm);
+				var el = elements[0], _sbs = U.camel_case("scroll-" + fn_nm), _obs = U.camel_case("offset-" + fn_nm), _cbs = U.camel_case("client-" + fn_nm);
 				if (el) {
 					tag_nm = el.tagName.toLowerCase();
 					if (tag_nm == "html") {
@@ -2607,11 +2270,10 @@
 
 		// createFragment
 		function create_fragment(elems) {
-			var safe = safe_fragment, tmp, nodes = [], tag, wrap, tbody,
-                elem, i = 0, l = elems.length, j;
-            // safe = doc.createDocumentFragment();
+			var safe = createSafeFragment(), tmp, nodes = [], tag, wrap, tbody;
+			var elem, i = 0, l = elems.length, j;
 
-			for (; i &lt; l; i++) {
+			for (; i < l; i++) {
 				elem = elems[i];
 				if (elem || elem === 0) {
 					if (U.get_type(elem) == "fragment") {
@@ -2620,16 +2282,16 @@
 					else if (U.get_type(elem) == "element") {
 						nodes.push(elem);
 					}
-					else if (!re_html.test(elem)) {
+					else if (!rhtml.test(elem)) {
 						nodes.push(doc.createTextNode(elem));
 						//safe.appendChild(doc.createTextNode(elem));
 					}
 					else {
 						tmp = safe.appendChild(doc.createElement("div"));
 						// Deserialize a standard representation
-						tag = ( re_tag.exec(elem) || ["", ""] )[1].toLowerCase();
-						wrap = tag_map[tag] || [ 0, "", "" ];
-						tmp.innerHTML = wrap[1] + elem.replace(re_single_tags, "&lt;$1>&lt;/$2>") + wrap[2];
+						tag = ( rtagName.exec(elem) || ["", ""] )[1].toLowerCase();
+						wrap = wrapMap[tag] || wrapMap._default;
+						tmp.innerHTML = wrap[1] + elem.replace(rxhtmlTag, "<$1></$2>") + wrap[2];
 
 						// Descend through wrappers to the right content
 						j = wrap[0];
@@ -2637,25 +2299,30 @@
 							tmp = tmp.lastChild;
 						}
 
-                        /* ax5 에겐 필요없는 구문이 될 듯.
-                        if (!info.support.tbody) {
-                            // String was a &lt;table>, *may* have spurious &lt;tbody>
-                            elem = tag === "table" && !rtbody.test(elem) ?
-                                tmp.firstChild :
+						// Manually add leading whitespace removed by IE
+						if (!info.support.leadingWhitespace && rleadingWhitespace.test(elem)) {
+							nodes.push(doc.createTextNode(rleadingWhitespace.exec(elem)[0]));
+						}
 
-                                // String was a bare &lt;thead> or &lt;tfoot>
-                                wrap[1] === "&lt;table>" && !rtbody.test(elem) ?
-                                    tmp :
-                                    0;
+						// Remove IE's autoinserted <tbody> from table fragments
+						if (!info.support.tbody) {
+							// String was a <table>, *may* have spurious <tbody>
+							elem = tag === "table" && !rtbody.test(elem) ?
+								tmp.firstChild :
 
-                            j = elem && elem.childNodes.length;
-                            while (j--) {
-                                if (node_name((tbody = elem.childNodes[j]), "tbody") && !tbody.childNodes.length) {
-                                    elem.removeChild(tbody);
-                                }
-                            }
-                        }
-                        */
+								// String was a bare <thead> or <tfoot>
+								wrap[1] === "<table>" && !rtbody.test(elem) ?
+									tmp :
+									0;
+
+							j = elem && elem.childNodes.length;
+							while (j--) {
+								if (node_name((tbody = elem.childNodes[j]), "tbody") && !tbody.childNodes.length) {
+									elem.removeChild(tbody);
+								}
+							}
+						}
+
 						U.merge(nodes, tmp.childNodes);
 
 						// Fix #12392 for WebKit and IE > 9
@@ -2668,19 +2335,53 @@
 
 						// Remember the top-level container for proper cleanup
 						tmp = safe.lastChild;
-                        safe.removeChild(tmp);
-                        tmp = null;
 					}
 				}
 			}
+
+			// Fix #11356: Clear elements from fragment
+			if (tmp) {
+				safe.removeChild(tmp);
+			}
+
+			/*
+			 // Reset defaultChecked for any radios and checkboxes
+			 // about to be appended to the DOM in IE 6/7 (#8060)
+			 if (!info.support.appendChecked) {
+			 //jQuery.grep( getAll( nodes, "input" ), fixDefaultChecked );
+			 }
+			 */
+
 
 			i = 0;
 			while ((elem = nodes[i++])) {
 				//console.log(elem);
 				safe.appendChild(elem);
 			}
+
+
+			tmp = null;
+
 			return safe;
 		}
+
+		// getAll 특정 tag인 모든 엘리먼트 불러오기
+		/*
+		 function getAll(context, tag) {
+		 var elems, elem, i = 0,
+		 found = typeof context.getElementsByTagName !== core_strundefined ? context.getElementsByTagName(tag || "*") : typeof context.querySelectorAll !== core_strundefined ? context.querySelectorAll(tag || "*") : undefined;
+		 if (!found) {
+		 for (found = [], elems = context.childNodes || context; (elem = elems[i]) != null; i++) {
+		 if (!tag || jQuery.nodeName(elem, tag)) {
+		 found.push(elem);
+		 } else {
+		 U.merge(found, getAll(elem, tag));
+		 }
+		 }
+		 }
+		 return tag === undefined || tag && node_name(context, tag) ? U.merge([context], found) : found;
+		 }
+		 */
 		
 		// 엘리먼트와 자식 엘리먼트의 이벤트와 데이터를 모두 지워줍니다.
 		function clear_element_data(el){
@@ -2689,10 +2390,10 @@
 			
 			for(var hd in el.e_hd){
 				if(typeof el.e_hd[hd] === "function"){
-					eUnBind(el, hd, el.e_hd[hd]);
+					eventUnBind(el, hd, el.e_hd[hd]);
 				}else{
-					for(var ehi=0;ehi&lt;el.e_hd[hd].length;ehi++)
-						eUnBind(el, hd, el.e_hd[hd][ehi]);
+					for(var ehi=0;ehi<el.e_hd[hd].length;ehi++)
+						eventUnBind(el, hd, el.e_hd[hd][ehi]);
 				}
 			}
 			delete el["e_hd"];
@@ -2707,12 +2408,12 @@
 			// 자식들도 확인 합니다.
 			if(el.hasChildNodes()){
 				c_el = el.childNodes, ci = 0, cl = c_el.length;
-				for (;ci &lt; cl; ci++)
+				for (;ci < cl; ci++)
 					clear_element_data(c_el[ci]);
 			}
 		}
 		
-		// jQuery.ready.promise jquery 1.10.2 를 참고하여 재 작성 했습니다.
+		// jQuery.ready.promise jquery 1.10.2
 		/**
 		 * document 로드 완료를 체크 합니다.
 		 * @method ax5.dom.ready
@@ -2785,7 +2486,7 @@
 		 * ```
 		 */
 		function resize(_fn) {
-			eBind(window, "resize", _fn);
+			eventBind(window, "resize", _fn);
 		}
 
 		/**
@@ -2802,26 +2503,38 @@
 		 * ```
 		 */
 		function get(query, sub_query) {
-			var els, r_els = [], p_els;
+			var elements, return_elements = [], parent_element;
 			var i = 0, l = query.length;
 			if (query.toString() == "[object ax5.dom]") {
-                r_els = query.elements;
+				return_elements = query.elements;
 			}
-			else if (U.is_element(query)) r_els.push(query);
+			else if (U.is_element(query)) {
+				return_elements.push(query);
+			}
 			else if (U.is_array(query) || U.is_nodelist(query)) {
-				for (; i &lt; l; i++)  if (U.is_element(query[i])) r_els.push(query[i]);
+				for (; i < l; i++) {
+					if (U.is_element(query[i])) return_elements.push(query[i]);
+				}
 			}
-			else if (U.is_string(query) && query.substr(0, 1) === "#") r_els.push(doc.getElementById(query.substr(1)));
+			else if (U.is_string(query) && query.substr(0, 1) === "#") {
+				return_elements.push(doc.getElementById(query.substr(1)));
+			}
 			else {
-                els = doc.querySelectorAll(query), l = els.length;
-				for (; i &lt; l; i++) r_els.push(els[i]);
+				elements = doc.querySelectorAll(query), l = elements.length;
+				for (; i < l; i++) {
+					return_elements.push(elements[i]);
+				}
 			}
+
 			if (typeof sub_query != "undefined") {
-				p_els = (info.browser.name == "ie" && info.browser.version &lt; 8) ? doc : r_els[0];
-                r_els = [], els = p_els.querySelectorAll(sub_query), l = els.length;
-				for (; i &lt; l; i++) r_els.push(els[i]);
+				parent_element = (info.browser.name == "ie" && info.browser.version < 8) ? doc : return_elements[0];
+				return_elements = [];
+				elements = parent_element.querySelectorAll(sub_query), l = elements.length;
+				for (; i < l; i++) {
+					return_elements.push(elements[i]);
+				}
 			}
-			return r_els;
+			return return_elements;
 		}
 
 		/**
@@ -2850,7 +2563,7 @@
 		 * @example
 		 * ```js
 		 * ax5.dom.create("script", {type:"text/javascript", src:"../ax5.js"});
-		 * ax5.dom.create("div", {id:"createEleId", "class":"createEleClass"}, "&lt;a>내가만든&lt;/a>");
+		 * ax5.dom.create("div", {id:"createEleId", "class":"createEleClass"}, "<a>내가만든</a>");
 		 * ```
 		 */
 		function create(node_nm, attr, val) {
@@ -2867,7 +2580,8 @@
 			for (var k in attr) {
 				element.setAttribute(k, attr[k]);
 			}
-			if(val) element.appendChild(create_fragment([].concat(val)));
+			if
+			(val) element.appendChild(create_fragment([].concat(val)));
 			return element;
 		}
 
@@ -2883,20 +2597,20 @@
 		 * ax5.dom.css(ax5.dom.get("#abcd"), {"width":100});
 		 * ```
 		 */
-		function css(els, O) {
-			els = va_elem(els, "css");
+		function css(elements, O) {
+			elements = va_elem(elements, "css");
 			if (U.is_string(O) || U.is_array(O)) {
-				return style(els[0], O, "css");
+				return style(elements[0], O, "css");
 			}
 			else {
-				var i = 0, l = els.length, k, matchs;
-				for (; i &lt; l; i++) {
+				var i = 0, l = elements.length, k, matchs;
+				for (; i < l; i++) {
 					for (k in O) {
-						els[i].style[U.camel_case(k)] = (matchs = re_numsplit.exec(O[k])) ? Math.max(0, matchs[1]) + ( matchs[2] || "px" ) : O[k];
+						elements[i].style[U.camel_case(k)] = (matchs = rnumsplit.exec(O[k])) ? Math.max(0, matchs[1]) + ( matchs[2] || "px" ) : O[k];
 					}
 				}
 			}
-			return els;
+			return elements;
 		}
 		// todo : opacity 컨트롤 테스트
 
@@ -2916,43 +2630,46 @@
 		 * ax5.dom.class_name(ax5.dom.get("#abcd"), "toggle", "class-text");
 		 * ```
 		 */
-		function class_name(els, command, O) {
-			var cns;
-			els = va_elem(els, "clazz");
+		function class_name(elements, command, O) {
+			var classNames;
+			elements = va_elem(elements, "clazz");
 			if (command === "add" || command === "remove" || command === "toggle") {
-				for (var di = 0; di &lt; els.length; di++) {
-                    cns = els[di]["className"].split(re_class_name_split);
+				for (var di = 0; di < elements.length; di++) {
+					classNames = elements[di]["className"].split(/[ ]+/g);
 					if (command === "add") {
-						if (U.search(cns, function () {
+						if (U.search(classNames, function () {
 								return O.trim() == this;
-							}) == -1) cns.push(O.trim());
+							}) == -1) {
+							classNames.push(O.trim());
+						}
 					} else if (command === "remove") {
-                        cns = U.filter(cns, function () {
+						classNames = U.filter(classNames, function () {
 							return O.trim() != this;
 						});
 					} else if (command === "toggle") {
-						var class_count = cns.length;
-                        cns = U.filter(cns, function () {
+						var class_count = classNames.length;
+						classNames = U.filter(classNames, function () {
 							return O.trim() != this;
 						});
-						if (class_count === cns.length) cns.push(O.trim());
+						if (class_count === classNames.length) classNames.push(O.trim());
 					}
-					els[di]["className"] = cns.join(" ");
+					elements[di]["className"] = classNames.join(" ");
 				}
-				return els;
+				return elements;
 			}
 			else { // has
 				if (typeof O === "undefined") O = command;
-                cns = els[0]["className"].trim().split(re_class_name_split);
+				classNames = elements[0]["className"].trim().split(/ /g);
+				//if(U.is_string(classNames)) classNames = [classNames];
 				if (U.is_string(O)) { // hasClass
 					// get Class Name
-					return (U.search(cns, function () {
+					return (U.search(classNames, function () {
 						return this.trim() === O
 					}) > -1);
 				} else {
 					console.error("set_class argument error");
 				}
-				return els;
+				return elements;
 			}
 		}
 
@@ -2970,24 +2687,24 @@
 		 * ax5.dom.attr(ax5.dom.get("[data-ax-grid=A]"), {"data-next":null}); // remove attribute
 		 * ```
 		 */
-		function attr(els, O) {
-			els = va_elem(els, "attr");
-			var i = 0, l = els.length, k;
+		function attr(elements, O) {
+			elements = va_elem(elements, "attr");
+			var i = 0, l = elements.length, k;
 			if (U.is_object(O)) {
-				for (; i &lt; l; i++) {
+				for (; i < l; i++) {
 					for (k in O){
 						if(O[k] == null){
-							els[i].removeAttribute(k);
+							elements[i].removeAttribute(k);
 						}else{
-							els[i].setAttribute(k, O[k]);
+							elements[i].setAttribute(k, O[k]);
 						}
 					}
 				}
 			}
 			else if (U.is_string(O)) {
-				return els[0].getAttribute(O);
+				return elements[0].getAttribute(O);
 			}
-			return els;
+			return elements;
 		}
 
 		/**
@@ -3020,10 +2737,10 @@
 		 * ax5.dom.on(mydom, "click.fnc", window.fnc);
 		 * ```
 		 */
-		function on(els, typ, _fn) {
-			els = va_elem(els, "on");
-			for (var i = 0; i &lt; els.length; i++) {
-				var __fn, _d = els[i];
+		function on(elements, typ, _fn) {
+			elements = va_elem(elements, "on");
+			for (var i = 0; i < elements.length; i++) {
+				var __fn, _d = elements[i];
 				if (!_d.e_hd) _d.e_hd = {};
 				if (typeof _d.e_hd[typ] === "undefined") {
 					__fn = _d.e_hd[typ] = _fn;
@@ -3032,7 +2749,7 @@
 					_d.e_hd[typ].push(_fn);
 					__fn = _d.e_hd[typ][_d.e_hd[typ].length - 1];
 				}
-				eBind(_d, typ, __fn);
+				eventBind(_d, typ, __fn);
 			}
 		}
 
@@ -3049,20 +2766,20 @@
 		 * ax5.dom.off(mydom, "click.fnb");
 		 * ```
 		 */
-		function off(els, typ, _fn) {
-			els = va_elem(els, "off");
-			for (var i = 0; i &lt; els.length; i++) {
-				var _d = els[i];
+		function off(elements, typ, _fn) {
+			elements = va_elem(elements, "off");
+			for (var i = 0; i < elements.length; i++) {
+				var _d = elements[i];
 				if (U.is_array(_d.e_hd[typ])) {
 					var _na = [];
-					for (var i = 0; i &lt; _d.e_hd[typ].length; i++) {
-						if (_d.e_hd[typ][i] == _fn || typeof _fn === "undefined") eUnBind(_d, typ, _d.e_hd[typ][i]);
+					for (var i = 0; i < _d.e_hd[typ].length; i++) {
+						if (_d.e_hd[typ][i] == _fn || typeof _fn === "undefined") eventUnBind(_d, typ, _d.e_hd[typ][i]);
 						else _na.push(_d.e_hd[typ][i]);
 					}
 					_d.e_hd[typ] = _na;
 				} else {
 					if (_d.e_hd[typ] == _fn || typeof _fn === "undefined") {
-						eUnBind(_d, typ, _d.e_hd[typ]);
+						eventUnBind(_d, typ, _d.e_hd[typ]);
 						delete _d.e_hd[typ]; // 함수 제거
 					}
 				}
@@ -3076,33 +2793,33 @@
 		 * @returns {Elements} elements
 		 * @example
 		 * ```
-		 * &lt;ul id="list-container">
-		 * 	 &lt;li data-list-item="0">
-		 * 		&lt;div>child>child&lt;/div>
-		 * 	 &lt;/li>
-		 * 	 &lt;li data-list-item="1">&lt;/li>
-		 * 	 &lt;li data-list-item="2">&lt;/li>
-		 * 	 &lt;li data-list-item="3">&lt;/li>
-		 * 	 &lt;li data-list-item="4">&lt;/li>
-		 * 	 &lt;li data-list-item="5">&lt;/li>
-		 * &lt;/ul>
-		 * &lt;script>
+		 * <ul id="list-container">
+		 * 	 <li data-list-item="0">
+		 * 		<div>child>child</div>
+		 * 	 </li>
+		 * 	 <li data-list-item="1"></li>
+		 * 	 <li data-list-item="2"></li>
+		 * 	 <li data-list-item="3"></li>
+		 * 	 <li data-list-item="4"></li>
+		 * 	 <li data-list-item="5"></li>
+		 * </ul>
+		 * <script>
 		 * var el = ax5.dom.get("#list-container");
 		 * console.log(
 		 * 	 ax5.dom.child(el)[1].tagName,
 		 * 	 ax5.dom.attr(ax5.dom.child(el)[1], "data-list-item")
 		 * );
 		 * // LI 1
-		 * &lt;/script>
+		 * </script>
 		 * ```
 		 */
-		function child(els) {
-			els = va_elem(els, "child");
+		function child(elements) {
+			elements = va_elem(elements, "child");
 			var return_elems = [], i = 0, l;
-			if (els[0]) {
-				l = els[0].children.length;
-				for (; i &lt; l; i++) {
-					return_elems.push(els[0].children[i]);
+			if (elements[0]) {
+				l = elements[0].children.length;
+				for (; i < l; i++) {
+					return_elems.push(elements[0].children[i]);
 				}
 			}
 			return return_elems;
@@ -3127,9 +2844,9 @@
 		 * );
 		 * ```
 		 */
-		function parent(els, cond) {
-			els = va_elem(els, "child");
-			var _target = els[0];
+		function parent(elements, cond) {
+			elements = va_elem(elements, "child");
+			var _target = elements[0];
 			if (_target) {
 				while ((function () {
 					var result = true;
@@ -3141,9 +2858,9 @@
 							}
 						}
 						else if (k === "clazz" || k === "class_name") {
-							var klasss = _target.className.split(re_class_name_split);
+							var klasss = _target.className.split(/[ ]+/g);
 							var hasClass = false;
-							for (var a = 0; a &lt; klasss.length; a++) {
+							for (var a = 0; a < klasss.length; a++) {
 								if (klasss[a] == cond[k]) {
 									hasClass = true;
 									break;
@@ -3179,19 +2896,19 @@
 		 * @returns {Element|null} element - 원하는 위치에 아이템이 없으면 null 을 반환합니다.
 		 * @example
 		 * ```
-		 * &lt;div>
-		 * 	 &lt;ul id="list-container">
-		 * 		 &lt;li data-list-item="0" id="li0">
-		 * 			&lt;div>child>child&lt;/div>
-		 * 		 &lt;/li>
-		 * 		 &lt;li data-list-item="1" id="li1">&lt;/li>
-		 * 		 &lt;li data-list-item="2" id="li2">&lt;/li>
-		 * 		 &lt;li data-list-item="3" id="li3">&lt;/li>
-		 * 		 &lt;li data-list-item="4" id="li4">&lt;/li>
-		 * 		 &lt;li data-list-item="5" id="li5">&lt;/li>
-		 * 	 &lt;/ul>
-		 * &lt;/div>
-		 * &lt;script>
+		 * <div>
+		 * 	 <ul id="list-container">
+		 * 		 <li data-list-item="0" id="li0">
+		 * 			<div>child>child</div>
+		 * 		 </li>
+		 * 		 <li data-list-item="1" id="li1"></li>
+		 * 		 <li data-list-item="2" id="li2"></li>
+		 * 		 <li data-list-item="3" id="li3"></li>
+		 * 		 <li data-list-item="4" id="li4"></li>
+		 * 		 <li data-list-item="5" id="li5"></li>
+		 * 	 </ul>
+		 * </div>
+		 * <script>
 		 * var el = ax5.dom.get("#list-container");
 		 * var li = ax5.dom.child(el)[0];
 		 * var c_li;
@@ -3200,11 +2917,11 @@
 		 * 	 (c_li = ax5.dom.next(li, 2)).id,
 		 * 	 (c_li = ax5.dom.prev(c_li)).id
 		 * );
-		 * &lt;/script>
+		 * </script>
 		 * ```
 		 */
-		function prev(els, times) {
-			return sibling(els, "prev", times);
+		function prev(elements, times) {
+			return sibling(elements, "prev", times);
 		}
 
 		/**
@@ -3215,19 +2932,19 @@
 		 * @returns {Element|null} element - 원하는 위치에 아이템이 없으면 null 을 반환합니다.
 		 * @example
 		 * ```
-		 * &lt;div>
-		 * 	 &lt;ul id="list-container">
-		 * 		 &lt;li data-list-item="0" id="li0">
-		 * 			&lt;div>child>child&lt;/div>
-		 * 		 &lt;/li>
-		 * 		 &lt;li data-list-item="1" id="li1">&lt;/li>
-		 * 		 &lt;li data-list-item="2" id="li2">&lt;/li>
-		 * 		 &lt;li data-list-item="3" id="li3">&lt;/li>
-		 * 		 &lt;li data-list-item="4" id="li4">&lt;/li>
-		 * 		 &lt;li data-list-item="5" id="li5">&lt;/li>
-		 * 	 &lt;/ul>
-		 * &lt;/div>
-		 * &lt;script>
+		 * <div>
+		 * 	 <ul id="list-container">
+		 * 		 <li data-list-item="0" id="li0">
+		 * 			<div>child>child</div>
+		 * 		 </li>
+		 * 		 <li data-list-item="1" id="li1"></li>
+		 * 		 <li data-list-item="2" id="li2"></li>
+		 * 		 <li data-list-item="3" id="li3"></li>
+		 * 		 <li data-list-item="4" id="li4"></li>
+		 * 		 <li data-list-item="5" id="li5"></li>
+		 * 	 </ul>
+		 * </div>
+		 * <script>
 		 * var el = ax5.dom.get("#list-container");
 		 * var li = ax5.dom.child(el)[0];
 		 * var c_li;
@@ -3236,11 +2953,11 @@
 		 * 	 (c_li = ax5.dom.next(li, 2)).id,
 		 * 	 (c_li = ax5.dom.prev(c_li)).id
 		 * );
-		 * &lt;/script>
+		 * </script>
 		 * ```
 		 */
-		function next(els, times) {
-			return sibling(els, "next", times);
+		function next(elements, times) {
+			return sibling(elements, "next", times);
 		}
 
 		/**
@@ -3254,8 +2971,8 @@
 		 * ax5.dom.width(el);
 		 * ```
 		 */
-		function width(els) {
-			return box_size(els, "width");
+		function width(elements) {
+			return box_size(elements, "width");
 		}
 
 		/**
@@ -3269,8 +2986,8 @@
 		 * ax5.dom.height(el);
 		 * ```
 		 */
-		function height(els) {
-			return box_size(els, "height");
+		function height(elements) {
+			return box_size(elements, "height");
 		}
 
 		/**
@@ -3284,11 +3001,11 @@
 		 * ax5.dom.empty(el);
 		 * ```
 		 */
-		function empty(els) {
-			els = va_elem(els, "empty");
-			var i = 0, l = els.length, el;
-			for (; i &lt; l; i++) {
-				el = els[i];
+		function empty(elements) {
+			elements = va_elem(elements, "empty");
+			var i = 0, l = elements.length, el;
+			for (; i < l; i++) {
+				el = elements[i];
 				while (el.firstChild) {
 					clear_element_data(el.firstChild);
 					el.removeChild(el.firstChild);
@@ -3297,7 +3014,7 @@
 					el.options.length = 0;
 				}
 			}
-			return els;
+			return elements;
 		}
 
 		/**
@@ -3310,31 +3027,31 @@
 		 * ```js
 		 * var el = ax5.dom.get("#list-container");
 		 * console.log( ax5.dom.html(el) );
-		 * ax5.dom.html(el, "&lt;a href='#1234'>링크");
+		 * ax5.dom.html(el, "<a href='#1234'>링크");
 		 * ```
 		 */
-		function html(els, val) {
-			els = va_elem(els, "html");
-            var tag, wrap;
+		function html(elements, val) {
+			elements = va_elem(elements, "html");
 			if (typeof val == "undefined") {
-				return els[0].innerHTML;
+				return elements[0].innerHTML;
 			} else {
-                tag = ( re_tag.exec(val) || ["", ""] )[1].toLowerCase();
-				if (U.is_string(val) && !re_noInnerhtml.test(val)) {
-                    if(tag_not_support_innerhtml[tag]){
-                        append(empty(els), val);
-                    }else{
-                        val = val.replace(re_single_tags, "&lt;$1>&lt;/$2>");
-                        var i = 0, l = els.length;
-                        for (; i &lt; l; i++) {
-                            if("innerHTML" in els[i]) els[i].innerHTML = val;
-                        }                        
-                    }
+				if (
+					U.is_string(val) && !rnoInnerhtml.test(val) &&
+					(info.support.leadingWhitespace || !rleadingWhitespace.test(val))
+				) {
+					val = val.replace(rxhtmlTag, "<$1></$2>");
+					var i = 0, l = elements.length;
+					try {
+						for (; i < l; i++) {
+							elements[i].innerHTML = val;
+						}
+					} catch (e) {
+					}
 				}
 				else if (U.is_element(val) || U.is_nodelist(val)) {
-					append(empty(els), val);
+					append(empty(elements), val);
 				}
-				return els;
+				return elements;
 			}
 		}
 
@@ -3348,30 +3065,30 @@
 		 * ```
 		 * var el = ax5.dom.get("[data-list-item='0']");
 		 * ax5.dom.append(el, "ㅈㅏㅇㄱㅣㅇㅕㅇ");
-		 * ax5.dom.append(el, "&lt;div>장기영&lt;a href='#ABCDE'>이건 어렵다&lt;/a>&lt;/div>");
+		 * ax5.dom.append(el, "<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>");
 		 * ax5.dom.append(ax5.dom.get("[data-list-item='2']"), ax5.dom.get("#move-item"));
 		 * ```
 		 */
-		function append(els, val) {
-			return manipulate("append", els, val);
+		function append(elements, val) {
+			return manipulate("append", elements, val);
 		}
 
 		/**
 		 * 엘리먼트에 자식노드를 추가 합니다. (추가되는 위치는 맨 처음 입니다.)
 		 * @method ax5.dom.prepend
-		 * @param {els|Element} elements
+		 * @param {Elements|Element} elements
 		 * @param {String|Element} val
 		 * @returns {Elements|Element}
 		 * @example
 		 * ```
 		 * var el = ax5.dom.get("[data-list-item='0']");
 		 * ax5.dom.prepend(el, "ㅈㅏㅇㄱㅣㅇㅕㅇ");
-		 * ax5.dom.prepend(el, "&lt;div>장기영&lt;a href='#ABCDE'>이건 어렵다&lt;/a>&lt;/div>");
+		 * ax5.dom.prepend(el, "<div>장기영<a href='#ABCDE'>이건 어렵다</a></div>");
 		 * ax5.dom.prepend(ax5.dom.get("[data-list-item='2']"), ax5.dom.get("#move-item"));
 		 * ```
 		 */
-		function prepend(els, val) {
-			return manipulate("prepend", els, val);
+		function prepend(elements, val) {
+			return manipulate("prepend", elements, val);
 		}
 
 		/**
@@ -3386,8 +3103,8 @@
 		 * ax5.dom.before(el, "before");
 		 * ```
 		 */
-		function before(els, val) {
-			return manipulate("before", els, val);
+		function before(elements, val) {
+			return manipulate("before", elements, val);
 		}
 
 		/**
@@ -3402,8 +3119,8 @@
 		 * ax5.dom.after(el, "after");
 		 * ```
 		 */
-		function after(els, val) {
-			return manipulate("after", els, val);
+		function after(elements, val) {
+			return manipulate("after", elements, val);
 		}
 
 		/**
@@ -3415,23 +3132,23 @@
 		 * @param {String} val - 추가하려는 html tag 또는 문자열
 		 * @returns {Elements|Element}
 		 */
-		function manipulate(act, els, val) {
-			els = va_elem(els, act);
-			var flag, i = 0, l = els.length,
-				el = [].concat(val), cf = create_fragment, els = els;
+		function manipulate(act, elements, val) {
+			elements = va_elem(elements, act);
+			var flag, i = 0, l = elements.length,
+				el = [].concat(val), cf = create_fragment, els = elements;
 
 			if (act === "append") {
-				for (; i &lt; l; i++) {
+				for (; i < l; i++) {
 					els[i].appendChild(cf(el));
 				}
 			}
 			else if (act == "prepend") {
-				for (; i &lt; l; i++) {
+				for (; i < l; i++) {
 					els[i].insertBefore(cf(el), els[i].firstChild);
 				}
 			}
 			else if (act == "before") {
-				for (; i &lt; l; i++) {
+				for (; i < l; i++) {
 					els[i].parentNode.insertBefore(cf(el), els[i]);
 				}
 			}
@@ -3451,13 +3168,13 @@
 		 * ax5.dom.remove(el);
 		 * ```
 		 */
-		function remove(els, val) {
-			els = va_elem(els, "remove");
-			var i = 0, l = els.length;
-			for (; i &lt; l; i++) {
-				if (els[i].parentNode) {
-					clear_element_data(els[i]);
-					els[i].parentNode.removeChild(els[i]);
+		function remove(elements, val) {
+			elements = va_elem(elements, "remove");
+			var i = 0, l = elements.length;
+			for (; i < l; i++) {
+				if (elements[i].parentNode) {
+					clear_element_data(elements[i]);
+					elements[i].parentNode.removeChild(elements[i]);
 				}
 			}
 		}
@@ -3475,9 +3192,9 @@
 		 * // {"top": 8, "left": 8}
 		 * ```
 		 */
-		function offset(els) {
-			els = va_elem(els, "offset");
-			var el = els[0], docEl = doc.documentElement, box;
+		function offset(elements) {
+			elements = va_elem(elements, "offset");
+			var el = elements[0], docEl = doc.documentElement, box;
 			if (el.getBoundingClientRect) {
 				box = el.getBoundingClientRect();
 			}
@@ -3508,9 +3225,9 @@
 		 * // {"top": 8, "left": 8}
 		 * ```
 		 */
-		function position(els) {
-			els = va_elem(els, "offset");
-			var el = els[0], docEl = doc.documentElement, el_parent,
+		function position(elements) {
+			elements = va_elem(elements, "offset");
+			var el = elements[0], docEl = doc.documentElement, el_parent,
 				pos = {top: 0, left: 0}, parentPos = {top: 0, left: 0};
 
 			if (css(el, "position") === "fixed") {
@@ -3559,9 +3276,9 @@
 		 * // 각각의 박스모델 속성을 지정하여 호출 할 수 있습니다. borderWidth, border-width 중 하나의 방법으로 사용 가능합니다.
 		 * ```
 		 */
-		function box_model(els, cond) {
-			els = va_elem(els, "box_model");
-			var el = els[0],
+		function box_model(elements, cond) {
+			elements = va_elem(elements, "box_model");
+			var el = elements[0],
 				model = {};
 			if (cond) cond = U.camel_case(cond);
 			if (typeof cond === "undefined" || cond == "offset") {
@@ -3632,44 +3349,44 @@
 		 * axd.data(el, "remove"); // remove all
 		 * ```
 		 */
-		function data(els, command, O) {
-			//console.log(els, command, O);
-			els = va_elem(els, "data");
-			var i = 0, l = els.length, k;
+		function data(elements, command, O) {
+			//console.log(elements, command, O);
+			elements = va_elem(elements, "data");
+			var i = 0, l = elements.length, k;
 			if (command === "set" || (typeof O === "undefined" && U.is_object(command))) {
 				if (typeof O === "undefined") O = command;
-				for (; i &lt; l; i++) {
+				for (; i < l; i++) {
 					for (k in O) {
-						if (typeof els[i].ax5_data === "undefined") els[i].ax5_data = {};
-						els[i].ax5_data[k] = O[k];
+						if (typeof elements[i].ax5_data === "undefined") elements[i].ax5_data = {};
+						elements[i].ax5_data[k] = O[k];
 					}
 				}
 			}
 			else if (command !== "remove" && (command === "get" || command === "read" || (typeof O === "undefined" && U.is_string(command)))) {
 				if (typeof O === "undefined") O = command;
-				if (!U.is_string(O)) return els;
-				return (typeof els[0].ax5_data[O] === "undefined") ? "" : els[0].ax5_data[O];
+				if (!U.is_string(O)) return elements;
+				return (typeof elements[0].ax5_data[O] === "undefined") ? "" : elements[0].ax5_data[O];
 			}
 			else if (command === "remove") {
 				if (typeof O === "undefined") {
-					for (; i &lt; l; i++) {
-						els[i].ax5_data = {};
+					for (; i < l; i++) {
+						elements[i].ax5_data = {};
 					}
 				}
 				else if (U.is_string(O)) {
-					for (; i &lt; l; i++) {
-						delete els[i].ax5_data[O];
+					for (; i < l; i++) {
+						delete elements[i].ax5_data[O];
 					}
 				}
 				else {
-					for (; i &lt; l; i++) {
+					for (; i < l; i++) {
 						each(O, function () {
-							delete els[i].ax5_data[this];
+							delete elements[i].ax5_data[this];
 						});
 					}
 				}
 			}
-			return els;
+			return elements;
 		}
 
 		U.extend(ax5.dom, {
@@ -3714,346 +3431,3 @@
 	}
 
 }).call(this);
-
-ax5.xhr = (function (){
-	var U = ax5.util, getXHR;
-
-	try{
-		new ActiveXObject("Msxml2.XMLHTTP");
-		getXHR = function(){return new ActiveXObject("Msxml2.XMLHTTP");}
-	}catch(e){
-		try{
-			new ActiveXObject("Microsoft.XMLHTTP");
-			getXHR = function(){return new ActiveXObject("Microsoft.XMLHTTP");}
-		}catch(e){
-			getXHR = "XMLHttpRequest" in window ? function(){return new XMLHttpRequest();} : function(){};
-		}
-	}
-	
-	function request(queue, onend){
-		var cfg = queue.pop(), http, that, i,
-            time_id, ontimeout;
-		
-		if (typeof cfg === "undefined") {
-			onend();
-		}
-		else
-		{
-			cfg = U.extend_all(cfg, ax5.xhr.options);
-			if (cfg.url != "") {
-				http = getXHR();
-				// 파라미터 값 문자열로 맞춤 : 오브젝트이면 문자열로 치환합니다.
-				cfg.param = U.param(cfg.param, "param");
-				// method : GET이면 url 뒤에 ? 파라미터 연결
-				if(cfg.method.toUpperCase() == "GET" && cfg.param != "") {
-					cfg.url = (cfg.url.search(/\?/) != -1) ? cfg.url + "&" + cfg.param : cfg.url + "?" + cfg.param;
-				}
-
-				if (!cfg.response)  cfg.response = cfg.res; // 함수이름 확장
-				// xhr.open
-				if (cfg.username)   http.open(cfg.method, cfg.url, cfg.async, cfg.username, cfg.password);
-				else                http.open(cfg.method, cfg.url, cfg.async);
-
-				// header 셋팅
-				if(cfg.method.toUpperCase() == "GET"){
-					// GET이면 head 무시
-					cfg.header.accept = "*/*", cfg.header['content-type'] = "text/plain";
-				}
-				
-				try {
-					for ( i in cfg.header ) {
-						http.setRequestHeader( i, cfg.header[i] );
-					}
-				} catch(e) {}
-				
-				//  authorization headers. The default is false.
-				http.withCredentials = cfg.withCredentials;
-
-				// 응답
-				http.onreadystatechange = function () {
-					if (http.readyState == 4) {
-                        if(time_id == -1) return;
-                        clearTimeout(time_id), time_id = -1;
-						that = {
-							response_url: http.responseURL,
-							status      : http.status,
-							result      : http.statusText,
-							state       : http.readyState,
-							data        : http.responseText,
-							type        : http.responseType
-						};
-						if (http.status == 200) {
-							if (cfg.response) cfg.response.call(that, that.data, that.status, http);
-							else console.log(http);
-						}
-						else
-						if (http.status != 0)
-						{
-							that.error = that.result; // 에러키 추가
-							if (cfg.error) {
-								cfg.error.call(that, that);
-							} else {
-								if (cfg.response) cfg.response.call(that, that.data, that.status, http);
-								else console.log(http);
-							}
-						}
-						request(queue, onend);
-					}
-				};
-                ontimeout = function(){
-                    if(time_id == -1) return;
-                    if(http.readyState !== 4) http.abort();
-                    time_id = -1, http.onreadystatechange = null;
-                    
-                    that = {error:"timeout"};
-                    if (cfg.error) {
-                        cfg.error.call(that, that);
-                    } else {
-                        if (cfg.response) cfg.response.call(that, that, that.data, that.status, http);
-                        else console.log(http);
-                    }
-                };
-                if( "ontimeout" in http ) http.timeout = cfg.timeout, http.ontimeout = ontimeout;
-                else time_id = setTimeout( ontimeout, cfg.timeout);
-
-				// 데이터 전송
-				http.send(cfg.param);
-			}
-			
-		}
-	}
-	
-	// todo : CORS지원 / 예외사항 처리
-	/**
-	 * Refer to this by {@link ax5}. &lt;br/>
-	 * ax5.xhr({Object}[, {Function}]); 으로 사용하는 함수입니다. XHR요청을 개별또는 큐단위로 처리 합니다.
-	 * @namespace ax5.xhr
-	 * @param {Object} opts
-	 * @param {Function} [onend] - xhr전송이 완료되면 호출되는 콜백함수
-	 * @example
-	 * ```
-	 * // request 옵션정의
-	 * config = {
-	 * 	header         : {
-	 * 		//setRequestHeader 로 추가하게될 헤드 속성
-	 * 		'content-type' : {String} ["application/x-www-form-urlencoded; charset=UTF-8"] - request 되는 문서의 content Type,
-	 * 		'accept'       : {String} ["*＼*"] - 서버에 응답받기 희망하는 문서 타입,
-	 * 	},
-	 * 	method         : {String} ["GET"],
-	 * 	url            : {String} [""],
-	 * 	param          : {String|Object} [""] - 파라미터 형식이나 오브젝트 형식 모두 지원합니다.,
-	 * 	async          : {Boolean} [true] - 비동기 요청 여부,
-	 * 	username       : {String} [""] - XMLHttpRequest 스펙에 정의된 open() 옶션 사용 안해봐서 잘 모름,
-	 * 	password       : {String} [""] - XMLHttpRequest 스펙에 정의된 open() 옶션 사용 안해봐서 잘 모름,
-	 * 	withCredentials: {Boolean} [false] - 자격증명을 사용하게 할지 여부,
-	 * 	crossDomain    : {Boolean} [false] - 크로스 도메인 허용 여부 : header 속성이 약간 바뀝니다.,
-	 * 	timeout        : 0
-	 * }
-	 * 
-	 * ax5.xhr({
-	 *    method: "POST",
-	 *    url   : "data.php",
-	 *    param : "str=1234",
-	 *    res   : function (response, status) {
-	 *        console.log("success");
-	 *        console.log(this);
-	 *    },
-	 *    error : function () {
-	 *        console.log("error");
-	 *        console.log(this);
-	 *    }
-	 * });
-	 * 
-	 * // req 또는 request 둘다 사용 가능합니다.
-	 * ax5.xhr({
-	 *    url   : "data.php",
-	 *    param : "str=1234",
-	 *    res   : function (response, status) {
-	 *        // status 값이 200 인지 판단 가능
-	 *        console.log(this);
-	 *    }
-	 * });
-	 * // 위와 같이 필요한 옵션만 정의 해서 사용 가능합니다.
-	 * 
-	 * // 요청을 큐로 만들어 순차적으로 작동하게 하고 종료 시점을 컨트롤 할 수 있습니다.
-	 * var xhr_queue = [];
-	 * xhr_queue.push({
-	 *    method: "POST",
-	 *    url   : "../samples/ax5/xhr/data.php",
-	 *    param : "str=1234",
-	 *    res   : function (response, status) {
-	 *        console.log(response);
-	 *    }
-	 * });
-	 * xhr_queue.push({
-	 *    method: "POST",
-	 *    url   : "../samples/ax5/xhr/data.php",
-	 *    param : "str=1234",
-	 *    res   : function (response, status) {
-	 *        console.log(response);
-	 *    }
-	 * });
-	 * 
-	 * ax5.xhr(xhr_queue, function() {
-	 *    console.log("큐 완료")
-	 * });
-	 * ```
-	 */
-	return function(opts, onend){
-		var queue = [].concat(opts);
-		request(queue, function(){
-			if(onend) onend();
-		});
-	}
-})();
-
-(function () {
-	var U = ax5.util, 
-		options = {
-			header      : {
-				'accept'      : "*/*",
-				'content-type': "application/x-www-form-urlencoded; charset=UTF-8"
-			},
-			method         : "GET",
-			url            : "",
-			param          : "",
-			async          : true,
-			username       : "",
-			password       : "",
-			withCredentials: false,
-			crossDomain    : false,
-			timeout        : 0
-		};
-		
-/**
- * @member {type} ax5.xhr.options
- * @example
- * ```
- * ax5.xhr.options = {
- * 	header         : {
- * 		//setRequestHeader 로 추가하게될 헤드 속성
- * 		'content-type' : {String} ["application/x-www-form-urlencoded; charset=UTF-8"] - request 되는 문서의 content Type,
- * 		'accept'       : {String} ["*＼*"] - 서버에 응답받기 희망하는 문서 타입,
- * 	},
- * 	method         : {String} ["GET"],
- * 	url            : {String} [""],
- * 	param          : {String|Object} [""] - 파라미터 형식이나 오브젝트 형식 모두 지원합니다.,
- * 	async          : {Boolean} [true] - 비동기 요청 여부,
- * 	username       : {String} [""] - XMLHttpRequest 스펙에 정의된 open() 옶션 사용 안해봐서 잘 모름,
- * 	password       : {String} [""] - XMLHttpRequest 스펙에 정의된 open() 옶션 사용 안해봐서 잘 모름,
- * 	withCredentials: {Boolean} [false] - 자격증명을 사용하게 할지 여부,
- * 	crossDomain    : {Boolean} [false] - 크로스 도메인 허용 여부 : header 속성이 약간 바뀝니다.,
- * 	timeout        : 0
- * } 
- * ```
- */
-
-/**
- * ax5.xhr 통신 기본 값을 설정합니다.
- * @method ax5.xhr.config
- * @param {Object} opts - XHR 요청옵션 기본 값
- * @returns {Object} opts
- * @example
- * ```
- * ax5.xhr.config({
- *	header      : {
- *		'accept'      : "*.*",
- *		'content-type': "application/x-www-form-urlencoded; charset=UTF-8"
- *	},
- *	method         : "GET",
- *	url            : "",
- *	param          : "",
- *	async          : true,
- *	username       : "",
- *	password       : "",
- *	withCredentials: false,
- *	crossDomain    : false,
- *	timeout        : 0
- * });
- *
- * ax5.xhr.config({
- *	header      : {
- *		'accept' : "*.html"
- *	}
- * });
- * // ax5.xhr 요청 기본값 설정
- * ```
- */
-	function config(opts){
-		U.extend_all(options, opts, true);
-		return options;
-	}
-
-	ax5.util.extend(ax5.xhr, {
-		options: options,
-		config : config
-	});
-})();
-
-ax5.ui = (function () {
-	/**
-	 * @class ax5.ui.ax_ui
-	 * @classdesc ax5 ui class 코어 클래스 모든 클래스의 공통 함수를 가지고 있습니다.
-	 * @version v0.0.1
-	 * @author tom@axisj.com
-	 * @logs
-	 * 2014-12-12 tom : 시작
-	 * @example
-	 * ```
-	 * var myui = new ax5.ui.ax_ui();
-	 * ```
-	 */
-	function ax_ui() {
-		this.config = {};
-		this.name = "ax_ui";
-		/**
-		 * 클래스의 속성 정의 메소드 속성 확장후에 내부에 init 함수를 호출합니다.
-		 * @method ax5.ui.ax_ui.set_config
-		 * @param {Object} config - 클래스 속성값
-		 * @param {Boolean} [call_init=true] - init 함수 호출 여부
-		 * @returns {ax5.ui.ax_ui}
-		 * @example
-		 * ```
-		 * var myui = new ax5.ui.ax_ui();
-		 * myui.set_config({
-		 * 	id:"abcd"
-		 * });
-		 * ```
-		 */
-		this.set_config = function (cfg, call_init) {
-			U.extend(this.config, cfg, true);
-			if (typeof call_init == "undefined" || call_init === true) {
-				this.init();
-			}
-			return this;
-		};
-		this.init = function () {
-			console.log(this.config);
-		};
-	}
-
-	return {
-		ax_ui: ax_ui
-	}
-})();</code></pre>
-        </article>
-    </section>
-
-
-
-
-
-        
-
-        <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sun Feb 08 2015 00:40:07 GMT+0900 (KST)
-        </footer>
-    </div>
-</div>
-
-<script>prettyPrint();</script>
-<script src="scripts/linenumber.js"></script>
-<script src="scripts/main.js"></script>
-
-</body>
-</html>

@@ -1,0 +1,123 @@
+html,
+body {
+  margin: 0px;
+  padding: 10px;
+  font-size: 14px;
+  color: #444;
+  height: 100%;
+  line-height: 1.6em;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0.5em auto;
+  color: #222;
+}
+article h1 {
+  font-size: 2.5em;
+}
+article h2 {
+  font-size: 1.8em;
+}
+article h3 {
+  font-size: 1.5em;
+}
+article h4 {
+  font-size: 1.2em;
+}
+article h5 {
+  font-size: 1em;
+}
+div.block-end {
+  height: 30px;
+}
+pre.prettyprint {
+  border: 1px solid #e3e3e3;
+  border-radius: 10px;
+  padding: 10px 10px 10px 10px;
+  background-color: #f3f3f3;
+}
+.nav-page {
+  position: fixed;
+  right: 0px;
+  top: 0px;
+  background: #000;
+  color: #fff;
+  padding: 5px;
+}
+.nav-page ul {
+  margin: 0px;
+  padding: 0px;
+}
+.nav-page ul li {
+  padding: 0px;
+  display: inline-block;
+  list-style: none;
+  margin: 0px 5px;
+}
+.nav-page ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+.sample-doc-content {
+  padding-left: 250px;
+}
+.sample-doc-content a[name] {
+  display: block;
+  height: 10px;
+}
+.sample-doc-content article.cover h1 {
+  font-size: 2.5em;
+  text-align: center;
+}
+.sample-doc-content article.content {
+  padding: 50px 0px;
+}
+.sample-doc-content .script-result {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 1.2em;
+}
+.sample-doc-content .ax-section {
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 1.2em;
+}
+.sample-doc-menu {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 250px;
+  box-sizing: border-box;
+  padding: 20px;
+  overflow: auto;
+}
+.sample-doc-menu a {
+  display: block;
+  line-height: 1.5em;
+  text-decoration: none;
+  color: #444;
+}
+.sample-doc-menu li {
+  list-style: none;
+}
+.sample-doc-menu ul {
+  margin: 0px;
+  padding: 0px;
+}
+.sample-doc-menu ul li a {
+  font-size: 1.2em;
+}
+.sample-doc-menu ul ul {
+  padding: 0px 0px 0px 15px;
+}
+.sample-doc-menu ul ul li a {
+  font-size: 1em;
+}
