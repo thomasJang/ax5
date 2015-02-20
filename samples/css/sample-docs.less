@@ -50,69 +50,82 @@ pre.prettyprint{
     margin:0px;padding:0px;
     li{
       padding:0px;
-      display: inline-block;
       list-style: none;
       margin: 0px 5px;
       a{color:#fff;text-decoration: none;}
     }
   }
 }
-.sample-doc-content{
-  padding-left:250px;
-  a[name]{
-    display: block;
-    height: 10px;
-  }
-  article{
-    &.cover{
-      h1{
-        font-size: 2.5em;
-        text-align: center;
-      }
-      
+.sample-doc-page{
+  position: relative;
+  width:970px;
+  margin:0px auto;
+  .sample-doc-content{
+    padding-left:220px;
+    a[name]{
+      display: block;
+      height: 10px;
     }
-    &.content{padding:50px 0px;}
+    article{
+      &.cover{
+        h1{
+          font-size: 2.5em;
+          text-align: center;
+        }
+
+      }
+      &.content{padding:50px 0px;}
+    }
+    .script-result{
+      border:1px solid #ccc;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 1.2em;
+    }
+    .ax-section{
+      position: relative;
+      border:1px solid #ccc;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 1.2em;
+    }
   }
-  .script-result{
-    border:1px solid #ccc;
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 1.2em;
-  }
-  .ax-section{
-    position: relative;
-    border:1px solid #ccc;
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 1.2em;
-  }
-}
-.sample-doc-menu{
-  position: fixed;
-  left:0px; top: 0px;
-  height:100%;width:250px;
-  box-sizing: border-box;
-  padding:20px;
-  overflow: auto;
-  a{
-    display: block;
-    line-height: 1.5em;
-    text-decoration: none;
-    color: #444;
-  }
-  li{
-    list-style: none;
-  }
-  ul{
-    margin:0px;
-    padding: 0px;
+  .sample-doc-menu{
+    position: fixed;
+    top: 0px;
+    height:100%;width:200px;
+    box-sizing: border-box;
+    padding:20px;
+    overflow: auto;
+    text-align: right;
+    border-right:1px solid #888;
+    a{
+      display: block;
+      line-height: 1.5em;
+      text-decoration: none;
+      color: #444;
+    }
     li{
-      a{font-size: 1.2em;}
+      list-style: none;
+      text-align: right;
     }
     ul{
-      padding: 0px 0px 0px 15px;
+      margin:0px;
+      padding: 0px;
       li{
-        a{font-size: 1em;}
+        //text-align: center;
+        padding-top: 10px;
+        padding-right: 0px;
+        a{font-size: 1.2em;line-height: 2em;color: #000;}
+      }
+      ul{
+        padding: 0px 0px 0px 0px;
+        li{
+          //text-align: right;
+          padding-top: 0px;
+          padding-right: 0px;
+          a{font-size: 1em;line-height: 1.5em;color: #444;}
+        }
       }
     }
   }
