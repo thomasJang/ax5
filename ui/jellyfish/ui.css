@@ -1,0 +1,520 @@
+/* less loop
+.generate-height-class(9);
+.generate-height-class(@n, @i: 1) when (@i =< @n) {
+  .height@{i} {
+    height: 1px * @i;
+  }
+  .generate-height-class(@n, (@i + 1));
+}
+*/
+.align-left {
+  text-align: left;
+}
+.align-center {
+  text-align: center;
+}
+.align-right {
+  text-align: right;
+}
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+.clear {
+  clear: both;
+}
+.position-right {
+  position: absolute;
+  right: 0px;
+  top: 0%;
+}
+.position-right-top {
+  position: absolute;
+  right: 0px;
+  bottom: 100%;
+}
+.position-right-bottom {
+  position: absolute;
+  right: 0px;
+  top: 100%;
+}
+.position-left {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+}
+.position-left-top {
+  position: absolute;
+  left: 0%;
+  bottom: 100%;
+}
+.position-left-bottom {
+  position: absolute;
+  left: 0%;
+  top: 100%;
+}
+.position-center {
+  position: absolute;
+  left: 50%;
+  top: 0%;
+}
+.position-center-top {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+}
+.position-center-bottom {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+}
+.var-section {
+  font-size: 14px;
+  line-height: 1.5em;
+}
+.var-header-H {
+  position: relative;
+  margin: 0;
+  padding: 10px 0px 5px 0px;
+  line-height: 1.2em;
+  color: #222222;
+}
+.var-header-H small {
+  font-size: 0.5em;
+  color: #a2a2a2;
+}
+.var-header-H .caption {
+  display: inline;
+  font-size: 14px;
+  line-height: 1.5em;
+  color: #a2a2a2;
+}
+.var-header-H .caption.right {
+  position: absolute;
+  right: 0px;
+  top: 0%;
+}
+.var-header-H .caption.right-top {
+  position: absolute;
+  right: 0px;
+  bottom: 100%;
+}
+.var-header-H .caption.right-bottom {
+  position: absolute;
+  right: 0px;
+  top: 100%;
+}
+.var-header-H .caption.left {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+}
+.var-header-H .caption.left-top {
+  position: absolute;
+  left: 0%;
+  bottom: 100%;
+}
+.var-header-H .caption.left-bottom {
+  position: absolute;
+  left: 0%;
+  top: 100%;
+}
+.var-header-H .caption.center {
+  position: absolute;
+  left: 50%;
+  top: 0%;
+}
+.var-header-H .caption.center-top {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+}
+.var-header-H .caption.center-bottom {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+}
+.ax-section {
+  font-size: 14px;
+  line-height: 1.5em;
+}
+.ax-section h1 {
+  position: relative;
+  margin: 0;
+  padding: 10px 0px 5px 0px;
+  line-height: 1.2em;
+  color: #222222;
+  font-size: 2.5em;
+}
+.ax-section h1 small {
+  font-size: 0.5em;
+  color: #a2a2a2;
+}
+.ax-section h1 .caption {
+  display: inline;
+  font-size: 14px;
+  line-height: 1.5em;
+  color: #a2a2a2;
+}
+.ax-section h1 .caption.right {
+  position: absolute;
+  right: 0px;
+  top: 0%;
+}
+.ax-section h1 .caption.right-top {
+  position: absolute;
+  right: 0px;
+  bottom: 100%;
+}
+.ax-section h1 .caption.right-bottom {
+  position: absolute;
+  right: 0px;
+  top: 100%;
+}
+.ax-section h1 .caption.left {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+}
+.ax-section h1 .caption.left-top {
+  position: absolute;
+  left: 0%;
+  bottom: 100%;
+}
+.ax-section h1 .caption.left-bottom {
+  position: absolute;
+  left: 0%;
+  top: 100%;
+}
+.ax-section h1 .caption.center {
+  position: absolute;
+  left: 50%;
+  top: 0%;
+}
+.ax-section h1 .caption.center-top {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+}
+.ax-section h1 .caption.center-bottom {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+}
+.ax-section h2 {
+  position: relative;
+  margin: 0;
+  padding: 10px 0px 5px 0px;
+  line-height: 1.2em;
+  color: #222222;
+  font-size: 2em;
+}
+.ax-section h2 small {
+  font-size: 0.5em;
+  color: #a2a2a2;
+}
+.ax-section h2 .caption {
+  display: inline;
+  font-size: 14px;
+  line-height: 1.5em;
+  color: #a2a2a2;
+}
+.ax-section h2 .caption.right {
+  position: absolute;
+  right: 0px;
+  top: 0%;
+}
+.ax-section h2 .caption.right-top {
+  position: absolute;
+  right: 0px;
+  bottom: 100%;
+}
+.ax-section h2 .caption.right-bottom {
+  position: absolute;
+  right: 0px;
+  top: 100%;
+}
+.ax-section h2 .caption.left {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+}
+.ax-section h2 .caption.left-top {
+  position: absolute;
+  left: 0%;
+  bottom: 100%;
+}
+.ax-section h2 .caption.left-bottom {
+  position: absolute;
+  left: 0%;
+  top: 100%;
+}
+.ax-section h2 .caption.center {
+  position: absolute;
+  left: 50%;
+  top: 0%;
+}
+.ax-section h2 .caption.center-top {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+}
+.ax-section h2 .caption.center-bottom {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+}
+.ax-section h3 {
+  position: relative;
+  margin: 0;
+  padding: 10px 0px 5px 0px;
+  line-height: 1.2em;
+  color: #222222;
+  font-size: 1.8em;
+}
+.ax-section h3 small {
+  font-size: 0.5em;
+  color: #a2a2a2;
+}
+.ax-section h3 .caption {
+  display: inline;
+  font-size: 14px;
+  line-height: 1.5em;
+  color: #a2a2a2;
+}
+.ax-section h3 .caption.right {
+  position: absolute;
+  right: 0px;
+  top: 0%;
+}
+.ax-section h3 .caption.right-top {
+  position: absolute;
+  right: 0px;
+  bottom: 100%;
+}
+.ax-section h3 .caption.right-bottom {
+  position: absolute;
+  right: 0px;
+  top: 100%;
+}
+.ax-section h3 .caption.left {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+}
+.ax-section h3 .caption.left-top {
+  position: absolute;
+  left: 0%;
+  bottom: 100%;
+}
+.ax-section h3 .caption.left-bottom {
+  position: absolute;
+  left: 0%;
+  top: 100%;
+}
+.ax-section h3 .caption.center {
+  position: absolute;
+  left: 50%;
+  top: 0%;
+}
+.ax-section h3 .caption.center-top {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+}
+.ax-section h3 .caption.center-bottom {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+}
+.ax-section h4 {
+  position: relative;
+  margin: 0;
+  padding: 10px 0px 5px 0px;
+  line-height: 1.2em;
+  color: #222222;
+  font-size: 1.5em;
+}
+.ax-section h4 small {
+  font-size: 0.5em;
+  color: #a2a2a2;
+}
+.ax-section h4 .caption {
+  display: inline;
+  font-size: 14px;
+  line-height: 1.5em;
+  color: #a2a2a2;
+}
+.ax-section h4 .caption.right {
+  position: absolute;
+  right: 0px;
+  top: 0%;
+}
+.ax-section h4 .caption.right-top {
+  position: absolute;
+  right: 0px;
+  bottom: 100%;
+}
+.ax-section h4 .caption.right-bottom {
+  position: absolute;
+  right: 0px;
+  top: 100%;
+}
+.ax-section h4 .caption.left {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+}
+.ax-section h4 .caption.left-top {
+  position: absolute;
+  left: 0%;
+  bottom: 100%;
+}
+.ax-section h4 .caption.left-bottom {
+  position: absolute;
+  left: 0%;
+  top: 100%;
+}
+.ax-section h4 .caption.center {
+  position: absolute;
+  left: 50%;
+  top: 0%;
+}
+.ax-section h4 .caption.center-top {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+}
+.ax-section h4 .caption.center-bottom {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+}
+.ax-section h5 {
+  position: relative;
+  margin: 0;
+  padding: 10px 0px 5px 0px;
+  line-height: 1.2em;
+  color: #222222;
+  font-size: 1.2em;
+}
+.ax-section h5 small {
+  font-size: 0.5em;
+  color: #a2a2a2;
+}
+.ax-section h5 .caption {
+  display: inline;
+  font-size: 14px;
+  line-height: 1.5em;
+  color: #a2a2a2;
+}
+.ax-section h5 .caption.right {
+  position: absolute;
+  right: 0px;
+  top: 0%;
+}
+.ax-section h5 .caption.right-top {
+  position: absolute;
+  right: 0px;
+  bottom: 100%;
+}
+.ax-section h5 .caption.right-bottom {
+  position: absolute;
+  right: 0px;
+  top: 100%;
+}
+.ax-section h5 .caption.left {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+}
+.ax-section h5 .caption.left-top {
+  position: absolute;
+  left: 0%;
+  bottom: 100%;
+}
+.ax-section h5 .caption.left-bottom {
+  position: absolute;
+  left: 0%;
+  top: 100%;
+}
+.ax-section h5 .caption.center {
+  position: absolute;
+  left: 50%;
+  top: 0%;
+}
+.ax-section h5 .caption.center-top {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+}
+.ax-section h5 .caption.center-bottom {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+}
+.ax-section h6 {
+  position: relative;
+  margin: 0;
+  padding: 10px 0px 5px 0px;
+  line-height: 1.2em;
+  color: #222222;
+  font-size: 1em;
+}
+.ax-section h6 small {
+  font-size: 0.5em;
+  color: #a2a2a2;
+}
+.ax-section h6 .caption {
+  display: inline;
+  font-size: 14px;
+  line-height: 1.5em;
+  color: #a2a2a2;
+}
+.ax-section h6 .caption.right {
+  position: absolute;
+  right: 0px;
+  top: 0%;
+}
+.ax-section h6 .caption.right-top {
+  position: absolute;
+  right: 0px;
+  bottom: 100%;
+}
+.ax-section h6 .caption.right-bottom {
+  position: absolute;
+  right: 0px;
+  top: 100%;
+}
+.ax-section h6 .caption.left {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+}
+.ax-section h6 .caption.left-top {
+  position: absolute;
+  left: 0%;
+  bottom: 100%;
+}
+.ax-section h6 .caption.left-bottom {
+  position: absolute;
+  left: 0%;
+  top: 100%;
+}
+.ax-section h6 .caption.center {
+  position: absolute;
+  left: 50%;
+  top: 0%;
+}
+.ax-section h6 .caption.center-top {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+}
+.ax-section h6 .caption.center-bottom {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+}
