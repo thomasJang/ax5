@@ -23,7 +23,6 @@ UI를 위한 CSS 박스모델정의를 연구하여 연구자료를 공개하여
 - [pub] src코드를 압축하여 배포용으로 저장합니다. 이때 버전별로 파일을 생성합니다.
 - [samples] 소스코드 레벨로 설명서를 작성하는 공간입니다. ax5 폴더아래에 html파일을 만들어 두면 (이때 head는 선언하지 않고 내용만 코딩하면) samples/Gruntfile.js에서 samples/index.html 에 만들어냅니다. (watch 를 실행하면 편집될 때 마다 자동 퍼블리시 합니다.) 추후에 정리하여 데모페이지로 활용하고 디자인도 한번에 처리 합니다.
 - [src] 실제 소스 코드가 있는 공간입니다.
-- [ui] less/css파일을 담아두는 공간입니다. 추후 이 아래에 theme가 폴더별로 담기게 됩니다.
 
 ### [src]
 ax5.js는 ax5-polyfill.js + ax5-core.js + ax5-xhr.js + ax5-ui.js의 합친파일입니다. 

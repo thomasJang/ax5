@@ -134,7 +134,7 @@ module.exports = function (grunt) {
     // Definitions of tasks
     /*
         watch_run 실행 시켜주면 끝~
-        $ /usr/local/bin/grunt --gruntfile /Users/tom/Works/AXISJ/axisj-jsdoc/Gruntfile.js watch_run
+        $ /usr/local/bin/grunt --gruntfile /Users/tom/Works/AXISJ/axisj-jsdoc/Gruntfile-for-samples.js watch_run
     */
     grunt.registerTask('watch_run', 'Watch project files', [
         'axisj_jsdoc_bulid',
@@ -143,7 +143,7 @@ module.exports = function (grunt) {
     ]);
     /*
         watch 안하고 빌드만 하려면 axisj_jsdoc_bulid
-        $ /usr/local/bin/grunt --gruntfile /Users/tom/Works/AXISJ/axisj-jsdoc/Gruntfile.js axisj_jsdoc_bulid
+        $ /usr/local/bin/grunt --gruntfile /Users/tom/Works/AXISJ/axisj-jsdoc/Gruntfile-for-samples.js axisj_jsdoc_bulid
     */
     grunt.registerTask('axisj_jsdoc_bulid', 'Create documentations for demo', [
         'less',

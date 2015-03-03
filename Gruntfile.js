@@ -3,7 +3,6 @@
   // Project configuration.
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
-
 		concat: {
 			options: {
 				stripBanners: true,
@@ -41,68 +40,16 @@
 				}
 			}
 		},
-		cssmin: {
-			add_banner: {
-				options: {
-					banner: '/*! \n<%= pkg.name %> - v<%= pkg.version %> - ' +
-						'<%= grunt.template.today("yyyy-mm-dd") %> \n*/\n'
-				},
+		watch: {
+			theme: {
+				files: ['src/less/*.less','src/less/**/*.less'],
+				tasks: ['less:theme']
+			}
+		},
+		less: {
+			theme: {
 				files: {
-					'ui/arongi/AXJ.min.css':
-						[
-							'ui/arongi/*.css',
-							'!ui/arongi/dx-*.css',
-							'!ui/arongi/tx-*.css',
-							'!ui/arongi/mx-*.css',
-							'!ui/arongi/font-*.css',
-							'!ui/arongi/*.min.css',
-							'!ui/arongi/page.css',
-							'!ui/arongi/preset.css'
-						],
-					'ui/bulldog/AXJ.min.css':
-						[
-							'ui/bulldog/*.css',
-							'!ui/bulldog/dx-*.css',
-							'!ui/bulldog/tx-*.css',
-							'!ui/bulldog/mx-*.css',
-							'!ui/bulldog/font-*.css',
-							'!ui/bulldog/*.min.css',
-							'!ui/bulldog/page.css',
-							'!ui/bulldog/preset.css'
-						],
-					'ui/cocker/AXJ.min.css':
-						[
-							'ui/cocker/*.css',
-							'!ui/cocker/dx-*.css',
-							'!ui/cocker/tx-*.css',
-							'!ui/cocker/mx-*.css',
-							'!ui/cocker/font-*.css',
-							'!ui/cocker/*.min.css',
-							'!ui/cocker/page.css',
-							'!ui/cocker/preset.css'
-						],
-					'ui/flybasket/AXJ.min.css':
-						[
-							'ui/flybasket/*.css',
-							'!ui/flybasket/dx-*.css',
-							'!ui/flybasket/tx-*.css',
-							'!ui/flybasket/mx-*.css',
-							'!ui/flybasket/font-*.css',
-							'!ui/flybasket/*.min.css',
-							'!ui/flybasket/page.css',
-							'!ui/flybasket/preset.css'
-						],
-					'ui/kakao/AXJ.min.css':
-						[
-							'ui/kakao/*.css',
-							'!ui/kakao/dx-*.css',
-							'!ui/kakao/tx-*.css',
-							'!ui/kakao/mx-*.css',
-							'!ui/kakao/font-*.css',
-							'!ui/kakao/*.min.css',
-							'!ui/kakao/page.css',
-							'!ui/kakao/preset.css'
-						]
+					"src/css/jellyfish/ax5.css": "src/less/jellyfish/ax5.less"
 				}
 			}
 		}
@@ -111,8 +58,12 @@
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-less');
 
 	grunt.registerTask('js-concat', ['concat']);
 	grunt.registerTask('js', ['concat','uglify']);
 	grunt.registerTask('css', ['cssmin']);
+
+	grunt.registerTask('theme-watch', ['less:theme','watch:theme']);
 };
