@@ -1,0 +1,91 @@
+/*
+* theme index file : mixin less files 
+*/
+/* less loop
+.generate-height-class(9);
+.generate-height-class(@n, @i: 1) when (@i =< @n) {
+  .height@{i} {
+    height: 1px * @i;
+  }
+  .generate-height-class(@n, (@i + 1));
+}
+*/
+.align-left {
+  text-align: left;
+}
+.align-center {
+  text-align: center;
+}
+.align-right {
+  text-align: right;
+}
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+.clear-both {
+  clear: both;
+}
+.position-right {
+  position: absolute;
+  right: 0px;
+  top: 0%;
+}
+.position-right-top {
+  position: absolute;
+  right: 0px;
+  bottom: 100%;
+}
+.position-right-bottom {
+  position: absolute;
+  right: 0px;
+  top: 100%;
+}
+.position-left {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+}
+.position-left-top {
+  position: absolute;
+  left: 0%;
+  bottom: 100%;
+}
+.position-left-bottom {
+  position: absolute;
+  left: 0%;
+  top: 100%;
+}
+.position-center {
+  position: absolute;
+  left: 50%;
+  top: 0%;
+}
+.position-center-top {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+}
+.position-center-bottom {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+}
+.ax-text {
+  color: #333333;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 20px;
+}
+.ax-btn {
+  color: #333333;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 20px;
+  background-color: #337ab7;
+  box-sizing: border-box;
+}

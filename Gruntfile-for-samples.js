@@ -1,7 +1,7 @@
 ﻿module.exports = function(grunt) {
   // sample code 빌드
 	grunt.initConfig({
-		pkg: grunt.file.readJSON('../package.json'),
+		pkg: grunt.file.readJSON('package.json'),
 		concat: {
 			options: {
 				stripBanners: true,
@@ -14,37 +14,37 @@
 			},
             core: {
 				src: [
-					'core/head.html',
-                    'core/install.html',
-					'ax5/util/*.html',
-					'ax5/dom/*.html',
-					'ax5/xhr/*.html',
-					'core/bottom.html'
+					'samples/core/head.html',
+                    'samples/core/install.html',
+					'samples/ax5/util/*.html',
+					'samples/ax5/dom/*.html',
+					'samples/ax5/xhr/*.html',
+					'samples/core/bottom.html'
 				],
-				dest: 'index.html'
+				dest: 'samples/index.html'
 			},
             ui: {
                 src: [
-                    'ui/head.html',
-                    'ax5/ui/*.html',
-                    'ui/bottom.html'
+                    'samples/ui/head.html',
+                    'samples/ax5/ui/*.html',
+                    'samples/ui/bottom.html'
                 ],
-                dest: 'ui.html'
+                dest: 'samples/ui.html'
             }
 		},
 		watch: {
             core: {
-                files: ['core/*.html', 'ax5/util/*.html', 'ax5/dom/*.html', 'ax5/xhr/*.html'],
+                files: ['samples/core/*.html', 'samples/ax5/util/*.html', 'samples/ax5/dom/*.html', 'samples/ax5/xhr/*.html'],
                 tasks: ['concat:core', 'replace:core']
             },
             ui: {
-                files: ['ui/*.html','ax5/ui/*.html'],
+                files: ['samples/ui/*.html','samples/ax5/ui/*.html'],
                 tasks: ['concat:ui', 'replace:ui']
             }
 		},
         replace: {
             core: {
-                src: ['index.html'],
+                src: ['samples/index.html'],
                 overwrite: true,                 // overwrite matched source files
                 options: {
                     processTemplates: false
@@ -62,7 +62,7 @@
                 }]
             },
             ui: {
-                src: ['ui.html'],
+                src: ['samples/ui.html'],
                 overwrite: true,                 // overwrite matched source files
                 options: {
                     processTemplates: false
