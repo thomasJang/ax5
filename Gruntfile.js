@@ -48,6 +48,10 @@
 		},
 		less: {
 			theme: {
+				options: {
+					compress: false,
+					banner: "// <%= pkg.name %>-<%= pkg.version %>\n\n"
+				},
 				files: {
 					"src/css/jellyfish/ax5.css": "src/less/jellyfish/ax5.less"
 				}

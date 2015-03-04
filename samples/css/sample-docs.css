@@ -86,6 +86,12 @@ pre.prettyprint {
   padding: 10px;
   font-size: 1.2em;
 }
+.sample-doc-page .sample-doc-content .tag-result {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 1.2em;
+}
 .sample-doc-page .sample-doc-content .ax-section {
   position: relative;
   border: 1px solid #ccc;
