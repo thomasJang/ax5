@@ -37,3 +37,7 @@ ax5.js는 ax5-polyfill.js + ax5-core.js + ax5-xhr.js + ax5-ui.js의 합친파일
 ![pullrequest](http://ax5.io/samples/images/pullrequest.png)
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/tom-axisj/ax5/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/axisj-com/ax5/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
