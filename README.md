@@ -33,6 +33,6 @@ ax5.js는 ax5-polyfill.js + ax5-core.js + ax5-xhr.js + ax5-ui.js의 합친파일
 
 ### Pull Request
 포크한 소스를 풀리퀘 하실 때에는 다음 그림에서와 같이 왼쪽의 브랜치를 alpha로 선택하여 풀리퀘스트 해주시면 감사하겠습니다.
-**[주의!!] alpha 브랜치는 삭제 되었습니다. dev 브랜치로 풀리퀘스트 해주세요.
+**[주의!!] alpha 브랜치는 삭제 되었습니다. dev 브랜치로 풀리퀘스트 해주세요.**
 
 ![pullrequest](samples/images/pullrequest.png)
