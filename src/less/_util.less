@@ -1,3 +1,6 @@
+
+
+
 /* less loop
 .generate-height-class(9);
 .generate-height-class(@n, @i: 1) when (@i =< @n) {
@@ -8,19 +11,72 @@
 }
 */
 
-.align-left{text-align: left;}
-.align-center{text-align: center;}
-.align-right{text-align: right;}
-.float-left{float: left;}
-.float-right{float:right;}
-.clear-both{clear:both;}
 
-.position-right{position: absolute;right:0px;top:0%;}
-.position-right-top{position: absolute;right:0px;bottom:100%;}
-.position-right-bottom{position: absolute;right:0px;top:100%;}
-.position-left{position: absolute;left:0%;top:0%;}
-.position-left-top{position: absolute;left:0%;bottom:100%;}
-.position-left-bottom{position: absolute;left:0%;top:100%;}
-.position-center{position: absolute;left:50%;top:0%;}
-.position-center-top{position: absolute;left:50%;bottom:100%;}
-.position-center-bottom{position: absolute;left:50%;top:100%;}
+// setup of link color on "hover"
+.get-text-link(@color) {
+	color: @color;
+	a&:hover {
+		color: darken(@color, 10%);
+	}
+}
+
+
+// Button variants
+//
+// Easily pump out default styles, as well as :hover, :focus, :active,
+// and disabled options for all buttons
+.button-variant(@color; @background; @border) {
+	color: @color;
+	background-color: @background;
+	border-color: @border;
+
+	&:hover,
+	&:focus,
+	&.focus,
+	&:active,
+	&.active,
+	.open > .dropdown-toggle& {
+		color: @color;
+		background-color: darken(@background, 10%);
+		border-color: darken(@border, 12%);
+	}
+	&:active,
+	&.active,
+	.open > .dropdown-toggle& {
+		background-image: none;
+	}
+	&.disabled,
+	&[disabled],
+	fieldset[disabled] & {
+		&,
+		&:hover,
+		&:focus,
+		&.focus,
+		&:active,
+		&.active {
+			background-color: @background;
+			border-color: @border;
+		}
+	}
+
+	.badge {
+		color: @background;
+		background-color: @color;
+	}
+}
+// Button sizes
+.button-size(@padding-vertical; @padding-horizontal; @font-size; @line-height; @border-radius) {
+	padding: @padding-vertical @padding-horizontal;
+	font-size: @font-size;
+	line-height: @line-height;
+	border-radius: @border-radius;
+}
+
+// WebKit-style focus
+.tab-focus() {
+	// Default
+	outline: thin dotted;
+	// WebKit
+	outline: 5px auto -webkit-focus-ring-color;
+	outline-offset: -2px;
+}

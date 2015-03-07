@@ -11,22 +11,26 @@
         
         var util = ax5.util, dom = ax5.dom;
         var po = [], prev_tag;
-        po.push("<ul>");
         
         util.each(dom(".menu").elements, function() {
-            //console.log(this.innerHTML);
+
+	        if(this.tagName == "H1" && po.length > 0){
+		        if(prev_tag == "H2") po.push("</ul>");
+		        po.push("</ul>");
+	        }
+	        if(this.tagName == "H1") {
+		        
+		        po.push("<ul>");
+	        }
+
+	        if(this.tagName == "H2" && prev_tag == "H1") {
+		        po.push("<ul>");
+	        }
+	        
             dom.before(this, '<a name="'+this.innerHTML+'"></a>');
-            if(this.tagName == "H1") {
-                if (prev_tag == "H2") po.push("</ul>");
-            }
+
             po.push('<li><a href="#' + this.innerHTML + '">' + this.innerHTML + '</a></li>');
-             
-            if(this.tagName == "H1" && po.length > 0){
-                
-                po.push("<ul>");
-            }else{
-                
-            }
+
             prev_tag = this.tagName;
         });
         po.push("</ul>");
@@ -86,8 +90,8 @@
         window.addEventListener("load", updateSoon);
         window.addEventListener("hashchange", function() {
             setTimeout(function() {
-                var hash = document.location.hash, found = null, m;
-                var marks = document.getElementById("nav").getElementsByTagName("a");
+                //var hash = document.location.hash, found = null, m;
+                //var marks = document.getElementById("nav").getElementsByTagName("a");
                 
                 /*
                 for (var i = 0; i < marks.length; i++)

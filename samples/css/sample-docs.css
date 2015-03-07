@@ -35,10 +35,7 @@ div.block-end {
   height: 30px;
 }
 pre.prettyprint {
-  border: 1px solid #e3e3e3;
   border-radius: 10px;
-  padding: 10px 10px 10px 10px;
-  background-color: #f3f3f3;
 }
 .nav-page {
   position: fixed;
@@ -81,6 +78,12 @@ pre.prettyprint {
   padding: 50px 0px;
 }
 .sample-doc-page .sample-doc-content .script-result {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 1.2em;
+}
+.sample-doc-page .sample-doc-content .tag-result {
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 10px;

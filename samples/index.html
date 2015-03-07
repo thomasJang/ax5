@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-03-04 
+ publish date : 2015-03-06 
 -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>ax5</title>
-    <link rel="stylesheet" type="text/css" href="../plugin/prettify/prettify-tomorrow.css">
+    <link rel="stylesheet" type="text/css" href="../plugin/prettify/github.css">
     <link rel="stylesheet" type="text/css" href="css/sample-docs.css">
     <script type="text/javascript" src="../plugin/prettify/prettify.js"></script>
     <script type="text/javascript" src="../src/ax5-polyfill.js"></script>
@@ -686,22 +686,27 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
         var util = ax5.util, dom = ax5.dom;
         var po = [], prev_tag;
         po.push("<ul>");
-        
+
         util.each(dom("h1,h2").elements, function() {
-            //console.log(this.innerHTML);
-            dom.before(this, '<a name="'+this.innerHTML+'"></a>');
-            if(this.tagName == "H1") {
-                if (prev_tag == "H2") po.push("</ul>");
-            }
-            po.push('<li><a href="#' + this.innerHTML + '">' + this.innerHTML + '</a></li>');
-             
-            if(this.tagName == "H1" && po.length > 0){
-                
-                po.push("<ul>");
-            }else{
-                
-            }
-            prev_tag = this.tagName;
+
+	        if(this.tagName == "H1" && po.length > 0){
+		        if(prev_tag == "H2") po.push("</ul>");
+		        po.push("</ul>");
+	        }
+	        if(this.tagName == "H1") {
+
+		        po.push("<ul>");
+	        }
+
+	        if(this.tagName == "H2" && prev_tag == "H1") {
+		        po.push("<ul>");
+	        }
+
+	        dom.before(this, '<a name="'+this.innerHTML+'"></a>');
+
+	        po.push('<li><a href="#' + this.innerHTML + '">' + this.innerHTML + '</a></li>');
+
+	        prev_tag = this.tagName;
         });
         po.push("</ul>");
         dom("#sample-doc-menu").html(po.join(''));

@@ -1,161 +1,123 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-03-04 
+ publish date : 2015-03-06 
 -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+	
     <title>ax5</title>
-    <link rel="stylesheet" type="text/css" href="../plugin/prettify/prettify-tomorrow.css">
+    <link rel="stylesheet" type="text/css" href="../plugin/prettify/github.css">
     <link rel="stylesheet" type="text/css" href="css/sample-docs.css">
-    <link rel="stylesheet" type="text/css" href="../src/css/jellyfish/ui.css">
+    <link rel="stylesheet" type="text/css" href="../src/css/jellyfish/ax5.css">
     
     <script type="text/javascript" src="../plugin/prettify/prettify.js"></script>
     <script type="text/javascript" src="../src/ax5-polyfill.js"></script>
     <script type="text/javascript" src="../src/ax5-core.js"></script>
     <script type="text/javascript" src="../src/ax5-xhr.js"></script>
     <script type="text/javascript" src="../src/ax5-ui.js"></script>
-    
+	
 </head>
 <body>
-<div class="sample-doc-page">
-<div class="nav-page">
-    <ul>
-        <li><a href="index.html">ax5.core</a></li>
-        <li><a href="ui.html">ax5.ui</a></li>
-    </ul>
-</div>
-<div class="sample-doc-content">
+	<div class="sample-doc-page">
+
+		<div class="nav-page">
+		    <ul>
+		        <li><a href="index.html">ax5.core</a></li>
+		        <li><a href="ui.html">ax5.ui</a></li>
+		    </ul>
+		</div>
+
+		<div class="sample-doc-content">
 
 <!-- split -->
 
 <article class="cover">
-    <h1 class="menu">타이포그라피</h1>
+    <h1 class="menu">ax5.text</h1>
 </article>
+<article class="content">
+
+	<h3>Tag</h3>
+	<div class="tag-result">
+		<a class="ax5" href="#">AX5 ax5 에이액스5</a>
+		<div class="ax5">AX5 ax5 에이액스5</div>
+	</div>
+
+	<pre class="prettyprint linenums">
+&lt;a class="ax5" href="#">AX5 ax5 에이액스5&lt;/a>
+&lt;div class="ax5">AX5 ax5 에이액스5&lt;/div>
+</pre>
+	
+	<h3>Situations</h3>
+	<div class="tag-result">
+		<div class="ax5 mute">AX5 ax5 에이액스5</div>
+		<div class="ax5 basic">AX5 ax5 에이액스5</div>
+		<div class="ax5 good">AX5 ax5 에이액스5</div>
+		<div class="ax5 info">AX5 ax5 에이액스5</div>
+		<div class="ax5 warning">AX5 ax5 에이액스5</div>
+		<div class="ax5 danger">AX5 ax5 에이액스5</div>
+		<div class="ax5 special">AX5 ax5 에이액스5</div>
+	</div>
+
+	<pre class="prettyprint linenums">
+&lt;div class="ax5 mute">AX5 ax5 에이액스5&lt;/div>
+&lt;div class="ax5 basic">AX5 ax5 에이액스5&lt;/div>
+&lt;div class="ax5 good">AX5 ax5 에이액스5&lt;/div>
+&lt;div class="ax5 info">AX5 ax5 에이액스5&lt;/div>
+&lt;div class="ax5 warning">AX5 ax5 에이액스5&lt;/div>
+&lt;div class="ax5 danger">AX5 ax5 에이액스5&lt;/div>
+&lt;div class="ax5 special">AX5 ax5 에이액스5&lt;/div>
+</pre>
+	
+	<h3>Misc.</h3>
+	<div class="tag-result">
+		<div class="ax5 align-left special">ax5 align-left</div>
+		<div class="ax5 align-right">ax5 align-right</div>
+		<div class="ax5 align-center good">ax5 align-center good</div>
+		<div class="ax5 align-justify">ax5 align-justify</div>
+		<div class="ax5 nowrap">ax5 nowrap : AX5 ax5 에이액스5 AX5 ax5 에이액스5 AX5 ax5 에이액스5 AX5 ax5 에이액스5 AX5 ax5 에이액스5 AX5 ax5 에이액스5 AX5 ax5 에이액스5 AX5 ax5 에이액스5 </div>
+		<div class="ax5 lowercase info">ax5 lowercase : ABCDEFG AX5</div>
+		<div class="ax5 uppercase">ax5 uppercase : abcdefg ax5</div>
+		<div class="ax5 capitalize danger">ax5 capitalize : abcdefg ax5</div>
+	</div>
+
+	<pre class="prettyprint linenums">
+&lt;div class="ax5 align-left special">AX5 ax5 에이액스5&lt;/div>
+&lt;div class="ax5 align-right">AX5 ax5 에이액스5&lt;/div>
+&lt;div class="ax5 align-center good">AX5 ax5 에이액스5&lt;/div>
+&lt;div class="ax5 align-justify">AX5 ax5 에이액스5&lt;/div>
+&lt;div class="ax5 nowrap">AX5 ax5 에이액스5 AX5 ax5 에이액스5 AX5 ax5 에이액스5 AX5 ax5 에이액스5 AX5 ax5 에이액스5 AX5 ax5 에이액스5 AX5 ax5 에이액스5 AX5 ax5 에이액스5 &lt;/div>
+&lt;div class="ax5 lowercase">ABCDEFG AX5&lt;/div>
+&lt;div class="ax5 uppercase">abcdefg ax5&lt;/div>
+&lt;div class="ax5 capitalize">abcdefg ax5&lt;/div>
+</pre>
+
+</article>
+
 
 <!-- split -->
 
+
+<article class="cover">
+	<h1 class="menu">ax5.button</h1>
+</article>
 <article class="content">
-    <h2 class="menu">제목</h2>
-<div class="ax-section">
-    <h1>h1. 제목입니다.</h1>
-    <h2>h2. 제목입니다.</h2>
-    <h3>h3. 제목입니다.</h3>
-    <h4>h4. 제목입니다.</h4>
-    <h5>h5. 제목입니다.</h5>
-    <h6>h6. 제목입니다.</h6>
-</div>
-<pre class="prettyprint linenums">
-&lt;div class="ax-section">
-    &lt;h1>h1. 제목입니다.&lt;/h1>
-    &lt;h2>h2. 제목입니다.&lt;/h2>
-    &lt;h3>h3. 제목입니다.&lt;/h3>
-    &lt;h4>h4. 제목입니다.&lt;/h4>
-    &lt;h5>h5. 제목입니다.&lt;/h5>
-    &lt;h6>h6. 제목입니다.&lt;/h6>
-&lt;/div>
+
+	<h3>Tag</h3>
+	<div class="tag-result">
+		<button class="ax5-btn">AX5 ax5 에이액스5</button>
+		<a class="ax5-btn">AX5 ax5 에이액스5</a>
+	</div>
+
+	<pre class="prettyprint linenums">
+&lt;a class="ax5" href="#">AX5 ax5 에이액스5&lt;/a>
+&lt;div class="ax5">AX5 ax5 에이액스5&lt;/div>
 </pre>
-<h3>
-    H1~H6의 부가요소 들
-</h3>
-<div class="ax-section">
-    <h1>
-        h1. 제목입니다.
-        <small>
-            부연설명
-        </small>
-        <div class="caption">
-            캡션내용
-        </div>
-        <div class="caption right">
-            caption right
-        </div>
-    </h1>
-    <h2>
-        h2. 제목입니다.
-        <div class="caption right-top">
-            caption right-top
-        </div>
-    </h2>
-    <h2>
-        h2. 제목입니다.
-        <div class="caption center-bottom">
-            caption center-top
-        </div>
-    </h2>
-    <h3>
-        h3. 제목입니다.
-        <div class="caption left-top">
-            caption left-top
-        </div>
-    </h3>
-</div>
-<pre class="prettyprint linenums">
-&lt;div class="ax-section">
-    &lt;h1>
-        h1. 제목입니다.
-        &lt;small>
-            부연설명
-        &lt;/small>
-        &lt;div class="caption">
-            캡션내용
-        &lt;/div>
-        &lt;div class="caption right">
-            caption right
-        &lt;/div>
-    &lt;/h1>
-    &lt;h2>
-        h2. 제목입니다.
-        &lt;div class="caption right-top">
-            caption right-top
-        &lt;/div>
-    &lt;/h2>
-    &lt;h2>
-        h2. 제목입니다.
-        &lt;div class="caption center-bottom">
-            caption center-top
-        &lt;/div>
-    &lt;/h2>
-    &lt;h3>
-        h3. 제목입니다.
-        &lt;div class="caption left-top">
-            caption left-top
-        &lt;/div>
-    &lt;/h3>
-&lt;/div>
-</pre>
-</article>
-
-<article class="content">
-    <h2 class="menu">본문</h2>
-    
-</article>
-
-<article class="content">
-    <h2 class="menu">강조</h2>
+	
 
 </article>
 
-<article class="content">
-    <h2 class="menu">약어</h2>
-
-</article>
-
-<article class="content">
-    <h2 class="menu">주소</h2>
-
-</article>
-
-<article class="content">
-    <h2 class="menu">인용구</h2>
-
-</article>
-
-<article class="content">
-    <h2 class="menu">목록</h2>
-
-</article>
 
 <!-- split -->
 
@@ -172,22 +134,26 @@
         
         var util = ax5.util, dom = ax5.dom;
         var po = [], prev_tag;
-        po.push("<ul>");
         
         util.each(dom(".menu").elements, function() {
-            //console.log(this.innerHTML);
+
+	        if(this.tagName == "H1" && po.length > 0){
+		        if(prev_tag == "H2") po.push("</ul>");
+		        po.push("</ul>");
+	        }
+	        if(this.tagName == "H1") {
+		        
+		        po.push("<ul>");
+	        }
+
+	        if(this.tagName == "H2" && prev_tag == "H1") {
+		        po.push("<ul>");
+	        }
+	        
             dom.before(this, '<a name="'+this.innerHTML+'"></a>');
-            if(this.tagName == "H1") {
-                if (prev_tag == "H2") po.push("</ul>");
-            }
+
             po.push('<li><a href="#' + this.innerHTML + '">' + this.innerHTML + '</a></li>');
-             
-            if(this.tagName == "H1" && po.length > 0){
-                
-                po.push("<ul>");
-            }else{
-                
-            }
+
             prev_tag = this.tagName;
         });
         po.push("</ul>");
@@ -247,8 +213,8 @@
         window.addEventListener("load", updateSoon);
         window.addEventListener("hashchange", function() {
             setTimeout(function() {
-                var hash = document.location.hash, found = null, m;
-                var marks = document.getElementById("nav").getElementsByTagName("a");
+                //var hash = document.location.hash, found = null, m;
+                //var marks = document.getElementById("nav").getElementsByTagName("a");
                 
                 /*
                 for (var i = 0; i < marks.length; i++)

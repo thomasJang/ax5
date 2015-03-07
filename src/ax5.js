@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-02-21 
+ * 2015-03-07 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -2017,7 +2017,8 @@
 
 		// 엘리먼트 순서이동
 		function sibling(els, forward, times) {
-			var prop = (forward == "prev") ? "previousSibling" : "nextSibling", el = els[0];
+			var prop = (forward == "prev") ? "previousSibling" : "nextSibling", 
+				el = [].concat(els)[0];
 			times = (typeof times == "undefined" || times < 1) ? 1 : times;
 			do {
 				el = el[prop];
