@@ -583,14 +583,11 @@
         {
             label: "ax5.dom.after",
             fn   : function () {
-                var el = ax5.dom.get("#id-test");
-                var newEl = ax5.dom.create("div", {"class":"afterTestDiv","id":"afterTestDiv"});
-                ax5.dom.after(el, newEl);
-
+                var el = ax5.dom.get("#test-result");
                 var nextItem = ax5.dom.next(el);
                 return nextItem.id;
             },
-            r   : "afterTestDiv"
+            r   : "author"
         },
 
         {

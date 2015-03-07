@@ -1,0 +1,4 @@
+*.bak
+.idea/
+.sass-cache/
+mode_modules/

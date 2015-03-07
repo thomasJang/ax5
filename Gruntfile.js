@@ -42,18 +42,15 @@
 		},
 		watch: {
 			theme: {
-				files: ['src/less/*.less','src/less/**/*.less'],
-				tasks: ['less:theme']
+				files: ['src/scss/*.scss','src/scss/**/*.scss'],
+				tasks: ['compass:theme']
 			}
 		},
-		less: {
+		compass: {
 			theme: {
-				options: {
-					compress: false,
-					banner: "// <%= pkg.name %>-<%= pkg.version %>\n\n"
-				},
-				files: {
-					"src/css/jellyfish/ax5.css": "src/less/jellyfish/ax5.less"
+				options: {              // Target options
+					sassDir: 'src/scss',
+					cssDir: 'src/css'
 				}
 			}
 		}
@@ -63,11 +60,11 @@
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-contrib-less');
+	grunt.loadNpmTasks('grunt-contrib-compass');
 
 	grunt.registerTask('js-concat', ['concat']);
 	grunt.registerTask('js', ['concat','uglify']);
 	grunt.registerTask('css', ['cssmin']);
 
-	grunt.registerTask('theme-watch', ['less:theme','watch:theme']);
+	grunt.registerTask('theme-watch', ['compass:theme','watch:theme']);
 };
