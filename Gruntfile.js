@@ -50,7 +50,15 @@
 			theme: {
 				options: {              // Target options
 					sassDir: 'src/scss',
-					cssDir: 'src/css'
+					cssDir: 'src/css',
+					watch: true
+				}
+			},
+			sample_doc: {
+				options: {              // Target options
+					sassDir: 'samples/css',
+					cssDir: 'samples/css',
+					watch: true
 				}
 			}
 		}
@@ -66,5 +74,5 @@
 	grunt.registerTask('js', ['concat','uglify']);
 	grunt.registerTask('css', ['cssmin']);
 
-	grunt.registerTask('theme-watch', ['compass:theme','watch:theme']);
+	//grunt.registerTask('theme-watch', ['compass:theme','watch:theme']);
 };

@@ -1,6 +1,8 @@
+@import "compass/css3";
+
 html, body{
-  margin:0px;padding:10px;font-size: 14px;color:#444;
-  height:100%;line-height: 1.6em;
+	margin:0px;padding:10px;font-size: 14px;color:#444;
+	height:100%;line-height: 1.6em;
 }
 
 *{}
@@ -38,26 +40,28 @@ pre.prettyprint{
 	border-radius: 10px;
 	//background-color: #f3f3f3;
 }
-.nav-page{
+
+
+// ax5 documents layouts
+.sample-nav{
   position: fixed;
-  right:0px;top:0px;
-  background: #000;
+  left:0px;top:0px;
+  width:100%;
+  height:60px;
   color:#fff;
-  padding: 5px;
-  ul{
-    margin:0px;padding:0px;
-    li{
-      padding:0px;
-      list-style: none;
-      margin: 0px 5px;
-      a{color:#fff;text-decoration: none;}
-    }
+  a{
+	color:inherit;
   }
+  
+  @include opacity(0.4);
+  background: rgba(255,255,255,0.30);
+  box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.30);
 }
 .sample-doc-page{
   position: relative;
   width:970px;
   margin:0px auto;
+  padding: 60px 0px 0px 0px;
   .sample-doc-content{
     padding-left:220px;
     a[name]{
@@ -74,15 +78,12 @@ pre.prettyprint{
       }
       &.content{padding:50px 0px;}
     }
-    .script-result{
+    .script-result, .tag-result{
       border:1px solid #ccc;
       border-radius: 10px;
       padding: 10px;
       font-size: 1.2em;
     }
-	.tag-result{
-		.script-result();
-	}
     .ax-section{
       position: relative;
       border:1px solid #ccc;
@@ -93,7 +94,7 @@ pre.prettyprint{
   }
   .sample-doc-menu{
     position: fixed;
-    top: 0px;
+    top: 60px;
     height:100%;width:200px;
     box-sizing: border-box;
     padding:20px;

@@ -1,8 +1,6 @@
-</div>
-<!-- end div class="sample-doc-content"-->
-<div class="sample-doc-menu" id="sample-doc-menu">
-    
-</div>
+		<!-- end div class="nav-content"-->
+		<div class="app-nav-left" id="app-nav-left"></div>
+	</div>
 </div>
 <!-- end div class="sample-doc-page"-->
 <script type="text/javascript">
@@ -35,9 +33,24 @@
 	        prev_tag = this.tagName;
         });
         po.push("</ul>");
-        dom("#sample-doc-menu").html(po.join(''));
+        dom("#app-nav-left").html(po.join(''));
         
     })();
+
+    //window.addEventListener("scroll", updateSoon);
+    /*
+	ax5.dom(window).on("scroll", function(){
+		console.log("11");
+	});
+	*/
+    ax5.dom.scroll(function(){
+	    if(!window.app_visual) window.app_visual = ax5.dom.get("#app-visual");
+	    if(ax5.dom.scroll().top >= 220){
+		    ax5.dom.class_name(app_visual, "add", "pinned");
+	    }else{
+		    ax5.dom.class_name(app_visual, "remove", "pinned");
+	    }
+    });
 </script>
 </body>
-</html>
+</hml>

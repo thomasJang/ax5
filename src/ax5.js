@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-03-07 
+ * 2015-03-08 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -179,7 +179,7 @@
 	'use strict';
 
 	// root of function
-	var root = this, doc = document, win = window, fval = eval,
+	var root = this, win = window, doc = document, docElem = document.documentElement,
 	/** @namespace {Object} ax5 */
 		ax5 = {}, info, U, dom;
 
@@ -2355,6 +2355,28 @@
 		function resize(_fn) {
 			eBind(window, "resize", _fn);
 		}
+		/**
+		 * 브라우저 scroll 이벤트를 캐치하여 사용자 함수를 호출 하거나 스트롤 포지션을 리턴합니다.
+		 * @method ax5.dom.scroll
+		 * @param {Function} [_fn] - 캐치후 호출될 함수
+		 * @example
+		 * ```
+		 * ax5.dom.scroll(function(){
+		 * 	console.log( 1, ax5.dom.scroll().top );
+		 * });
+		 * ```
+		 */
+		function scroll(_fn) {
+			if(typeof _fn === "undefined"){
+				return {
+					top: docElem.scrollTop || doc.body.scrollTop,
+					left: docElem.scrollLeft || doc.body.scrollLeft
+				}
+			}else{
+				eBind(window, "scroll", _fn);
+				return false;
+			}
+		}
 
 		/**
 		 * CSS Selector를 이용하여 HTML Elements를 찾습니다.
@@ -3045,22 +3067,22 @@
 		 */
 		function offset(els) {
 			els = va_elem(els, "offset");
-			var el = els[0], docEl = doc.documentElement, box;
+			var el = els[0], box;
 			if (el.getBoundingClientRect) {
 				box = el.getBoundingClientRect();
 			}
 			return {
-				top : box.top + ( win.pageYOffset || docEl.scrollTop ) - ( docEl.clientTop || 0 ),
-				left: box.left + ( win.pageXOffset || docEl.scrollLeft ) - ( docEl.clientLeft || 0 )
+				top : box.top + ( win.pageYOffset || (docElem.scrollTop || doc.body.scrollTop) ) - ( docElem.clientTop || 0 ),
+				left: box.left + ( win.pageXOffset || (docElem.scrollLeft || doc.body.scrollLeft) ) - ( docElem.clientLeft || 0 )
 			}
 		}
 
 		function offset_parent(el) {
-			var offsetParent = el.offsetParent || doc.documentElement;
+			var offsetParent = el.offsetParent || docElem;
 			while (offsetParent && ( !node_name(offsetParent, "html") && curCSS(offsetParent, "position") === "static" )) {
 				offsetParent = offsetParent.offsetParent;
 			}
-			return offsetParent || doc.documentElement;
+			return offsetParent || docElem;
 		}
 
 		/**
@@ -3078,7 +3100,7 @@
 		 */
 		function position(els) {
 			els = va_elem(els, "offset");
-			var el = els[0], docEl = doc.documentElement, el_parent,
+			var el = els[0], el_parent,
 				pos = {top: 0, left: 0}, parentPos = {top: 0, left: 0};
 
 			if (css(el, "position") === "fixed") {
@@ -3242,6 +3264,7 @@
 
 		U.extend(ax5.dom, {
 			ready     : ready,
+			scroll    : scroll,
 			resize    : resize,
 			get       : get,
 			get_one   : get_one,
