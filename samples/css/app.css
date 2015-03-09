@@ -1,4 +1,4 @@
-/* line 3, app.scss */
+/* line 4, app.scss */
 html, body {
   margin: 0px;
   padding: 0px;
@@ -8,7 +8,7 @@ html, body {
   line-height: 1.6em;
 }
 
-/* line 9, app.scss */
+/* line 10, app.scss */
 h1,
 h2,
 h3,
@@ -19,38 +19,45 @@ h6 {
   color: #222;
 }
 
-/* line 18, app.scss */
+/* line 19, app.scss */
 article h1 {
   font-size: 2.5em;
 }
-/* line 21, app.scss */
+/* line 22, app.scss */
 article h2 {
   font-size: 1.8em;
 }
-/* line 24, app.scss */
+/* line 25, app.scss */
 article h3 {
   font-size: 1.5em;
 }
-/* line 27, app.scss */
+/* line 28, app.scss */
 article h4 {
   font-size: 1.2em;
 }
-/* line 30, app.scss */
+/* line 31, app.scss */
 article h5 {
   font-size: 1em;
 }
 
-/* line 38, app.scss */
+/* line 39, app.scss */
 div.block-end {
   height: 30px;
 }
 
-/* line 39, app.scss */
+/* line 40, app.scss */
 pre.prettyprint {
   border-radius: 10px;
 }
 
-/* line 49, app.scss */
+/* line 50, app.scss */
+.app-wrap {
+  position: relative;
+  width: 970px;
+  margin: 0px auto;
+}
+
+/* line 55, app.scss */
 .app-nav {
   z-index: 1000;
   position: fixed;
@@ -61,37 +68,85 @@ pre.prettyprint {
   height: 60px;
   color: #000;
 }
-/* line 58, app.scss */
+/* line 63, app.scss */
 .app-nav a {
   color: inherit;
 }
-/* line 61, app.scss */
+/* line 66, app.scss */
 .app-nav .box-bg {
   position: absolute;
   width: 100%;
   min-width: 970px;
   height: 100%;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
-  opacity: 0.4;
-  background: rgba(255, 255, 255, 0.3);
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+  opacity: 0.3;
+  background: rgba(255, 255, 255, 0.5);
+  -moz-box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.3);
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.3);
 }
-/* line 69, app.scss */
+/* line 75, app.scss */
 .app-nav .box-content {
   position: relative;
+  width: 970px;
+  margin: 0px auto;
 }
-/* line 71, app.scss */
+/* line 79, app.scss */
 .app-nav .box-content ul, .app-nav .box-content li {
   margin: 0px;
   padding: 0px;
 }
-/* line 72, app.scss */
+/* line 80, app.scss */
 .app-nav .box-content li {
   list-style: none;
   display: inline;
 }
+/* line 81, app.scss */
+.app-nav .box-content .logo {
+  display: block;
+  height: 60px;
+  width: 200px;
+  line-height: 60px;
+  text-align: center;
+  font-size: 20px;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+}
+/* line 89, app.scss */
+.app-nav .box-content .menu {
+  position: absolute;
+  left: 200px;
+  top: 0px;
+}
+/* line 91, app.scss */
+.app-nav .box-content .menu li {
+  display: block;
+  float: left;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  padding: 0px 20px;
+  font-size: 14px;
+  color: #fff;
+}
+/* line 97, app.scss */
+.app-nav .box-content .menu li a {
+  text-decoration: none;
+}
+/* line 98, app.scss */
+.app-nav .box-content .menu li.vline {
+  padding: 0px;
+  width: 1px;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwLjUiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255, 255, 255, 0.5)), color-stop(100%, rgba(255, 255, 255, 0)));
+  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+}
 
-/* line 75, app.scss */
+/* line 106, app.scss */
 .app-visual {
   z-index: 900;
   position: absolute;
@@ -100,6 +155,7 @@ pre.prettyprint {
   width: 100%;
   min-width: 970px;
   height: 280px;
+  color: #fff;
   /* Rectangle 6: */
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuMCIgeTE9IjAuNSIgeDI9IjEuMCIgeTI9IjAuNSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ViMTE2NSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZjNjIwZiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
   background-size: 100%;
@@ -108,46 +164,81 @@ pre.prettyprint {
   background-image: -webkit-linear-gradient(left, #eb1165, #fc620f);
   background-image: linear-gradient(to right, #eb1165, #fc620f);
 }
-/* line 83, app.scss */
+/* line 113, app.scss */
 .app-visual.pinned {
   position: fixed;
   top: -220px;
 }
+/* line 119, app.scss */
+.app-visual.scrolled .app-wrap {
+  -webkit-filter: blur(10px);
+  filter: blur(10px);
+}
+/* line 127, app.scss */
+.app-visual .visual {
+  position: absolute;
+  left: 50px;
+  top: 100px;
+  width: 150px;
+  height: 126px;
+  background: url(../images/ax5dom.png) no-repeat;
+  background-size: contain;
+}
+/* line 135, app.scss */
+.app-visual h1 {
+  color: #fff;
+  position: absolute;
+  left: 220px;
+  top: 120px;
+  font-size: 42px;
+}
+/* line 141, app.scss */
+.app-visual h3 {
+  color: #fff;
+  position: absolute;
+  left: 220px;
+  top: 170px;
+  font-size: 16px;
+}
 
-/* line 88, app.scss */
+/* line 148, app.scss */
 .app-page {
   position: relative;
   padding: 280px 0px 0px 0px;
 }
-/* line 91, app.scss */
+/* line 151, app.scss */
 .app-page .app-content {
   position: relative;
   width: 750px;
   margin: 0px auto;
   padding-left: 220px;
 }
-/* line 97, app.scss */
+/* line 157, app.scss */
 .app-page .app-content a[name] {
   display: block;
   height: 10px;
 }
-/* line 103, app.scss */
+/* line 162, app.scss */
+.app-page .app-content article h1[id], .app-page .app-content article h2[id] {
+  padding-top: 100px;
+}
+/* line 166, app.scss */
 .app-page .app-content article.cover h1 {
   font-size: 2.5em;
   text-align: center;
 }
-/* line 109, app.scss */
+/* line 171, app.scss */
 .app-page .app-content article.content {
-  padding: 50px 0px;
+  padding: 0px 0px 10px 0px;
 }
-/* line 111, app.scss */
+/* line 173, app.scss */
 .app-page .app-content .script-result, .app-page .app-content .tag-result {
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 10px;
   font-size: 1.2em;
 }
-/* line 117, app.scss */
+/* line 179, app.scss */
 .app-page .app-content .ax-section {
   position: relative;
   border: 1px solid #ccc;
@@ -155,57 +246,58 @@ pre.prettyprint {
   padding: 10px;
   font-size: 1.2em;
 }
-/* line 125, app.scss */
+/* line 187, app.scss */
 .app-page .app-nav-left {
   position: absolute;
   top: 0px;
   left: 0px;
-  height: 100%;
   width: 200px;
   box-sizing: border-box;
   padding: 20px;
   overflow: auto;
   text-align: right;
-  border-right: 1px solid #888;
+  /* Rectangle 10: */
+  background: #F1F1F1;
+  border-radius: 8px;
 }
-/* line 134, app.scss */
+/* line 200, app.scss */
 .app-page .app-nav-left a {
   display: block;
   line-height: 1.5em;
   text-decoration: none;
   color: #444;
 }
-/* line 140, app.scss */
+/* line 206, app.scss */
 .app-page .app-nav-left li {
   list-style: none;
   text-align: right;
 }
-/* line 144, app.scss */
+/* line 210, app.scss */
 .app-page .app-nav-left ul {
   margin: 0px;
   padding: 0px;
 }
-/* line 147, app.scss */
+/* line 213, app.scss */
 .app-page .app-nav-left ul li {
   padding-top: 10px;
   padding-right: 0px;
 }
-/* line 151, app.scss */
+/* line 217, app.scss */
 .app-page .app-nav-left ul li a {
   font-size: 1.2em;
   line-height: 2em;
   color: #000;
 }
-/* line 153, app.scss */
+/* line 219, app.scss */
 .app-page .app-nav-left ul ul {
   padding: 0px 0px 0px 0px;
 }
-/* line 155, app.scss */
+/* line 221, app.scss */
 .app-page .app-nav-left ul ul li {
   padding-top: 0px;
   padding-right: 0px;
 }
-/* line 159, app.scss */
+/* line 225, app.scss */
 .app-page .app-nav-left ul ul li a {
   font-size: 1em;
   line-height: 1.5em;

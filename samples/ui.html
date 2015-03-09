@@ -1,35 +1,49 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-03-07 
+ publish date : 2015-03-10 
 -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
 	
     <title>ax5</title>
-    <link rel="stylesheet" type="text/css" href="../plugin/prettify/github.css">
-    <link rel="stylesheet" type="text/css" href="css/sample-docs.css">
-    <link rel="stylesheet" type="text/css" href="../src/css/jellyfish/ax5.css">
-    
-    <script type="text/javascript" src="../plugin/prettify/prettify.js"></script>
-    <script type="text/javascript" src="../src/ax5-polyfill.js"></script>
-    <script type="text/javascript" src="../src/ax5-core.js"></script>
-    <script type="text/javascript" src="../src/ax5-xhr.js"></script>
-    <script type="text/javascript" src="../src/ax5-ui.js"></script>
 	
+	<link rel="stylesheet" type="text/css" href="../plugin/prettify/github.css">
+	<link rel="stylesheet" type="text/css" href="css/app.css">
+	<script type="text/javascript" src="../plugin/prettify/prettify.js"></script>
+	<script type="text/javascript" src="../src/ax5-polyfill.js"></script>
+	<script type="text/javascript" src="../src/ax5-core.js"></script>
+	<script type="text/javascript" src="../src/ax5-xhr.js"></script>
+	<script type="text/javascript" src="../src/ax5-ui.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../src/css/jellyfish/ax5.css">
+
 </head>
 <body>
-	<div class="sample-doc-page">
+<div class="app-nav">
+	<div class="box-bg"></div>
+	<div class="box-content">
+		<a href="#" class="logo">AX5</a>
+		<ul class="menu">
+			<li class="vline"></li>
+			<li><a href="index.html">ax5.core</a></li>
+			<li class="vline"></li>
+			<li><a href="ui.html">ax5.ui</a></li>
+			<li class="vline"></li>
+		</ul>
+	</div>
+</div>
+<div class="app-visual" id="app-visual">
+	<div class="app-wrap">
+		<div class="visual"></div>
+		<h1>AX5 Document</h1>
+		<h3>옥돔의 개요, 다운받고 사용하는 법, 기본 템플릿 예제를 만날 수 있습니다.</h3>
+	</div>
+</div>
 
-		<div class="sample-nav">
-			<ul>
-				<li><a href="index.html">ax5.core</a></li>
-				<li><a href="ui.html">ax5.ui</a></li>
-			</ul>
-		</div>
-		
-		<div class="sample-doc-content">
+<div class="app-page">
+	<div class="app-content app-wrap">
 
 <!-- split -->
 
@@ -115,116 +129,38 @@
 &lt;div class="ax5">AX5 ax5 에이액스5&lt;/div>
 </pre>
 	
+	
+	<h3>Situations</h3>
+	<div class="tag-result">
+		<button class="ax5-btn basic">AX5 ax5 에이액스5</button>
+		<button class="ax5-btn good">AX5 ax5 에이액스5</button>
+		<button class="ax5-btn info">AX5 ax5 에이액스5</button>
+		<button class="ax5-btn warning">AX5 ax5 에이액스5</button>
+		<button class="ax5-btn danger">AX5 ax5 에이액스5</button>
+		<button class="ax5-btn link">AX5 ax5 에이액스5</button>
+		<button class="ax5-btn special">AX5 ax5 에이액스5</button>
+	</div>
+
+	<pre class="prettyprint linenums">
+&lt;button class="ax5-btn basic">AX5 ax5 에이액스5&lt;/button>
+&lt;button class="ax5-btn good">AX5 ax5 에이액스5&lt;/button>
+&lt;button class="ax5-btn info">AX5 ax5 에이액스5&lt;/button>
+&lt;button class="ax5-btn warning">AX5 ax5 에이액스5&lt;/button>
+&lt;button class="ax5-btn danger">AX5 ax5 에이액스5&lt;/button>
+&lt;button class="ax5-btn link">AX5 ax5 에이액스5&lt;/button>
+&lt;button class="ax5-btn special">AX5 ax5 에이액스5&lt;/button>
+</pre>
 
 </article>
 
 
 <!-- split -->
 
-</div>
-<!--div class="sample-doc-content"-->
-<div class="sample-doc-menu" id="sample-doc-menu">
-    
-</div>
+		<!-- end div class="nav-content"-->
+		<div class="app-nav-left" id="app-nav-left"></div>
+	</div>
 </div>
 <!-- end div class="sample-doc-page"-->
-<script type="text/javascript">
-    (function(){
-        prettyPrint();
-        
-        var util = ax5.util, dom = ax5.dom;
-        var po = [], prev_tag;
-        
-        util.each(dom(".menu").elements, function() {
-
-	        if(this.tagName == "H1" && po.length > 0){
-		        if(prev_tag == "H2") po.push("</ul>");
-		        po.push("</ul>");
-	        }
-	        if(this.tagName == "H1") {
-		        
-		        po.push("<ul>");
-	        }
-
-	        if(this.tagName == "H2" && prev_tag == "H1") {
-		        po.push("<ul>");
-	        }
-	        
-            dom.before(this, '<a name="'+this.innerHTML+'"></a>');
-
-            po.push('<li><a href="#' + this.innerHTML + '">' + this.innerHTML + '</a></li>');
-
-            prev_tag = this.tagName;
-        });
-        po.push("</ul>");
-        dom("#sample-doc-menu").html(po.join(''));
-        
-    })();
-</script>
-<script>
-    // Kludge in HTML5 tag recognition in IE8
-    document.createElement("section");
-    document.createElement("article");
-
-    (function() {
-        if (!window.addEventListener) return;
-        var pending = false, prevVal = null;
-
-        function updateSoon() {
-            if (!pending) {
-                pending = true;
-                setTimeout(update, 250);
-            }
-        }
-
-        function update() {
-            pending = false;
-
-            /*
-            var marks = document.getElementById("nav").getElementsByTagName("a"), found;
-            for (var i = 0; i < marks.length; ++i) {
-                var mark = marks[i], m;
-                if (mark.getAttribute("data-default")) {
-                    if (found == null) found = i;
-                } else if (m = mark.href.match(/#(.*)/)) {
-                    var ref = document.getElementById(m[1]);
-                    if (ref && ref.getBoundingClientRect().top < 50)
-                        found = i;
-                }
-            }
-            if (found != null && found != prevVal) {
-                prevVal = found;
-                var lis = document.getElementById("nav").getElementsByTagName("li");
-                for (var i = 0; i < lis.length; ++i) lis[i].className = "";
-                for (var i = 0; i < marks.length; ++i) {
-                    if (found == i) {
-                        marks[i].className = "active";
-                        for (var n = marks[i]; n; n = n.parentNode)
-                            if (n.nodeName == "LI") n.className = "active";
-                    } else {
-                        marks[i].className = "";
-                    }
-                }
-            }
-            */
-        }
-
-        window.addEventListener("scroll", updateSoon);
-        window.addEventListener("load", updateSoon);
-        window.addEventListener("hashchange", function() {
-            setTimeout(function() {
-                //var hash = document.location.hash, found = null, m;
-                //var marks = document.getElementById("nav").getElementsByTagName("a");
-                
-                /*
-                for (var i = 0; i < marks.length; i++)
-                    if ((m = marks[i].href.match(/(#.*)/)) && m[1] == hash) { found = i; break; }
-                if (found != null) for (var i = 0; i < marks.length; i++)
-                    marks[i].className = i == found ? "active" : "";
-                */
-            }, 300);
-        });
-    })();
-</script>
+<script type="text/javascript" src="app.js"></script>
 </body>
 </html>

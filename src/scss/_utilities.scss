@@ -12,9 +12,18 @@
 //
 // Easily pump out default styles, as well as :hover, :focus, :active,
 // and disabled options for all buttons
+
 @mixin button-variant($color, $background, $border) {
+  
+  @if type-of($background) == "list" {
+
+  }
+  @else{
+	$background: ($background, $background);
+  }
+
+  @include background-image(linear-gradient(to bottom, nth($background,1), nth($background, 2)));
   color: $color;
-  background-color: $background;
   border-color: $border;
 
   &:hover,
@@ -22,32 +31,34 @@
   &.focus,
   &:active,
   &.active{
-    color: $color;
-    background-color: darken($background, 10%);
-    border-color: darken($border, 12%);
+	color: $color;
+	@include background-image( linear-gradient( to bottom, darken(nth($background,1), 10%), darken(nth($background, 2), 10%) ) );
+	border-color: darken($border, 12%);
   }
   &:active,
   &.active{
-    background-image: none;
+	background-image: none;
   }
   &.disabled,
   &[disabled],
   fieldset[disabled] & {
-    &,
-    &:hover,
-    &:focus,
-    &.focus,
-    &:active,
-    &.active {
-      background-color: $background;
-      border-color: $border;
-    }
+	&,
+	&:hover,
+	&:focus,
+	&.focus,
+	&:active,
+	&.active {
+	  @include background-image(linear-gradient(to bottom, nth($background,1), nth($background, 2)));
+	  border-color: $border;
+	}
   }
 
   .badge {
-    color: $background;
-    background-color: $color;
+	color: nth($background,1);
+	background-color: nth($background,1);
   }
+
+
 }
 // Button sizes
 @mixin button-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius) {

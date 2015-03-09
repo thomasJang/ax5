@@ -48,5 +48,40 @@
   }
 
   @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
-}
 
+  // situation
+  &.basic{
+	@include button-variant($btn-basic-color, $btn-basic-bg, $btn-basic-border);
+  }
+  &.good{
+	@include button-variant($btn-good-color, $btn-good-bg, $btn-good-border);
+  }
+  &.info{
+	@include button-variant($btn-info-color, $btn-info-bg, $btn-info-border);	
+  }
+  &.warning{
+	@include button-variant($btn-warning-color, $btn-warning-bg, $btn-warning-border);
+  }
+  &.danger{
+	@include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);
+  }
+  &.special{
+	@include button-variant($btn-special-color, $btn-special-bg, $btn-special-border);
+  }
+  &.link{
+	@include button-variant($btn-link-color, $btn-link-bg, $btn-link-border);
+  }
+
+  // size
+  &.lg {
+	// line-height: ensure even-numbered height of button next to large input
+	@include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $border-radius-large);
+  }
+  &.sm {
+	// line-height: ensure proper height of button next to small input
+	@include button-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $border-radius-small);
+  }
+  &.xs {
+	@include button-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $border-radius-small);
+  }
+}

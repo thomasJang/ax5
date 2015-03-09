@@ -1,3 +1,4 @@
+@import "compass/support";
 @import "compass/css3";
 
 html, body{
@@ -46,6 +47,11 @@ pre.prettyprint{
 $app-page-width: 970px;
 $app-nav-left: 200px;
 
+.app-wrap{
+  position: relative;
+  width: $app-page-width;
+  margin: 0px auto;
+}
 .app-nav{
   z-index: 1000;
   position: fixed;
@@ -53,8 +59,7 @@ $app-nav-left: 200px;
   width:100%;min-width:$app-page-width;
   height:60px;
   color:#000;
-  //background-image: linear-gradient(-90deg, #EB1165 0%, #FC620F 100%);
-  
+
   a{
 	color:inherit;
   }
@@ -62,14 +67,40 @@ $app-nav-left: 200px;
 	position: absolute;
 	width:100%;min-width:$app-page-width;
 	height:100%;
-	@include opacity(0.4);
-	background: rgba(255,255,255,0.30);
-	box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.30);
+	@include opacity(0.3);
+	background: rgba(255,255,255,0.50);
+	@include box-shadow(0px 2px 2px 0px rgba(0,0,0,0.30));
+	//@include filter(blur(5px));
   }
   .box-content{
 	position: relative;
+	width: $app-page-width;
+	margin:0px auto;
 	ul, li{margin:0px;padding:0px;}
 	li{list-style: none;display: inline;}
+	.logo{
+	  display: block;
+	  height:60px;width:200px;
+	  line-height:60px;text-align:center;
+	  font-size:20px;
+	  color:#fff;font-weight: bold;
+	  text-decoration:none;
+	}
+	.menu{
+	  position: absolute;left:200px;top:0px;
+	  li{
+		display: block;float:left;
+		height:60px;line-height:60px;text-align:center;
+		padding:0px 20px;
+		font-size:14px;
+		color:#fff;
+		a{text-decoration: none;}
+		&.vline{
+		  padding:0px;width:1px;
+		  @include background-image(linear-gradient(to bottom, rgba(255,255,255,0.5), rgba(255,255,255,0.0)));
+		}
+	  }
+	}
   }
 }
 .app-visual{
@@ -78,11 +109,40 @@ $app-nav-left: 200px;
   left:0px;top:0px;
   width:100%;min-width:$app-page-width;
   height:280px;
-  /* Rectangle 6: */
-  @include background-image(linear-gradient(to right, #EB1165, #FC620F));
+  color:#fff;
   &.pinned{
 	position:fixed;
 	top:-220px;
+  }
+
+  &.scrolled{
+	.app-wrap{
+	  @include filter(blur(10px));
+	}
+  }
+
+  /* Rectangle 6: */
+  @include background-image(linear-gradient(to right, #EB1165, #FC620F));
+
+  .visual{
+	position: absolute;
+	left:50px;top:100px;
+	width:150px;
+	height:126px;
+	background: url(../images/ax5dom.png) no-repeat;
+	background-size: contain;
+  }
+  h1{
+	color:#fff;
+	position: absolute;
+	left:220px;top:120px;
+	font-size: 42px;
+  }
+  h3{
+	color:#fff;
+	position: absolute;
+	left:220px;top:170px;
+	font-size: 16px;
   }
 }
 .app-page{
@@ -99,14 +159,16 @@ $app-nav-left: 200px;
       height: 10px;
     }
     article{
+	  h1[id],h2[id]{
+		padding-top:100px;
+	  }
       &.cover{
         h1{
           font-size: 2.5em;
           text-align: center;
         }
-
       }
-      &.content{padding:50px 0px;}
+      &.content{padding:0px 0px 10px 0px;}
     }
     .script-result, .tag-result{
       border:1px solid #ccc;
@@ -125,12 +187,16 @@ $app-nav-left: 200px;
   .app-nav-left{
     position: absolute;
     top: 0px; left:0px;
-    height:100%;width:200px;
+    width:200px;
     box-sizing: border-box;
     padding:20px;
     overflow: auto;
     text-align: right;
-    border-right:1px solid #888;
+
+	/* Rectangle 10: */
+	background: #F1F1F1;
+	border-radius: 8px;
+	
     a{
       display: block;
       line-height: 1.5em;

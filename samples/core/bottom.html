@@ -3,54 +3,6 @@
 	</div>
 </div>
 <!-- end div class="sample-doc-page"-->
-<script type="text/javascript">
-    (function(){
-        prettyPrint();
-        
-        var util = ax5.util, dom = ax5.dom;
-        var po = [], prev_tag;
-        po.push("<ul>");
-
-        util.each(dom("h1,h2").elements, function() {
-
-	        if(this.tagName == "H1" && po.length > 0){
-		        if(prev_tag == "H2") po.push("</ul>");
-		        po.push("</ul>");
-	        }
-	        if(this.tagName == "H1") {
-
-		        po.push("<ul>");
-	        }
-
-	        if(this.tagName == "H2" && prev_tag == "H1") {
-		        po.push("<ul>");
-	        }
-
-	        dom.before(this, '<a name="'+this.innerHTML+'"></a>');
-
-	        po.push('<li><a href="#' + this.innerHTML + '">' + this.innerHTML + '</a></li>');
-
-	        prev_tag = this.tagName;
-        });
-        po.push("</ul>");
-        dom("#app-nav-left").html(po.join(''));
-        
-    })();
-
-    //window.addEventListener("scroll", updateSoon);
-    /*
-	ax5.dom(window).on("scroll", function(){
-		console.log("11");
-	});
-	*/
-    ax5.dom.scroll(function(){
-	    if(!window.app_visual) window.app_visual = ax5.dom.get("#app-visual");
-	    if(ax5.dom.scroll().top >= 220){
-		    ax5.dom.class_name(app_visual, "add", "pinned");
-	    }else{
-		    ax5.dom.class_name(app_visual, "remove", "pinned");
-	    }
-    });
-</script>
+<script type="text/javascript" src="app.js"></script>
 </body>
 </hml>

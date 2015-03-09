@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-03-08 
+ publish date : 2015-03-09 
 -->
 <html lang="en">
 <head>
@@ -21,25 +21,34 @@
 <div class="app-nav">
 	<div class="box-bg"></div>
 	<div class="box-content">
-		<a href="#">AX5.core</a>
-		<ul>
+		<a href="#" class="logo">AX5</a>
+		<ul class="menu">
+			<li class="vline"></li>
 			<li><a href="index.html">ax5.core</a></li>
+			<li class="vline"></li>
 			<li><a href="ui.html">ax5.ui</a></li>
+			<li class="vline"></li>
 		</ul>
 	</div>
 </div>
-<div class="app-visual" id="app-visual"></div>
+<div class="app-visual" id="app-visual">
+	<div class="app-wrap">
+		<div class="visual"></div>
+		<h1>AX5 Document</h1>
+		<h3>옥돔의 개요, 다운받고 사용하는 법, 기본 템플릿 예제를 만날 수 있습니다.</h3>
+	</div>
+</div>
 
 <div class="app-page">
-	<div class="app-content">
+	<div class="app-content app-wrap">
 
 <!-- split -->
 
 <article class="cover">
-    <h1>Install</h1>
+    <h1 class="menu">Install</h1>
 </article>
 <article class="content">
-    <h2>ax5 시작하기</h2>
+    <h2 class="menu">ax5 시작하기</h2>
     <p>ax5라이브러리 파일을 html head안에 insert 합니다.</p>
 <pre class="prettyprint linenums">
 &lt;!DOCTYPE html>
@@ -102,13 +111,13 @@
 <!-- split -->
 
 <article class="cover">
-    <h1>ax5.util</h1>
+    <h1 class="menu">ax5.util</h1>
 </article>
 
 <!-- split -->
 
 <article class="content">
-    <h2>ax5.util.alert</h2>
+    <h2 class="menu">ax5.util.alert</h2>
 <pre class="prettyprint linenums">
 &lt;button data-button="ax5-util-alert-0">{a:1, b:2}&lt;/button>
 &lt;script>
@@ -130,7 +139,7 @@
 <!-- split -->
 
 <article class="content">
-    <h2>ax5.util.camel_case</h2>
+    <h2 class="menu">ax5.util.camel_case</h2>
 <pre class="prettyprint linenums">
 &lt;div id="ax5-util-camel-case" class="script-result">&lt;/div>
 &lt;script>
@@ -158,7 +167,7 @@
 </article>
 
 <article class="content">
-    <h2>ax5.util.snake_case</h2>
+    <h2 class="menu">ax5.util.snake_case</h2>
 <pre class="prettyprint linenums">
 &lt;div id="ax5-util-snake_case" class="script-result">&lt;/div>
 &lt;script>
@@ -188,7 +197,7 @@
 </article>
 
 <article class="content">
-    <h2>ax5.util.clone</h2>
+    <h2 class="menu">ax5.util.clone</h2>
     
 <pre class="prettyprint linenums">
 &lt;div id="ax5-util-clone" class="script-result">&lt;/div>
@@ -225,7 +234,7 @@
 </article>
 
 <article class="content">
-    <h2>ax5.util.each</h2>
+    <h2 class="menu">ax5.util.each</h2>
 
 <pre class="prettyprint linenums">
 &lt;div id="ax5-util-each" class="script-result">&lt;/div>
@@ -277,7 +286,7 @@
 </article>
 
 <article class="content">
-    <h2>ax5.util.filter</h2>
+    <h2 class="menu">ax5.util.filter</h2>
 <pre class="prettyprint linenums">
 &lt;div id="ax5-util-filter" class="script-result">&lt;/div>
 &lt;script>
@@ -328,7 +337,7 @@
 
 
 <article class="content">
-<h2>ax5.util.search</h2>
+	<h2 class="menu">ax5.util.search</h2>
 <pre class="prettyprint linenums">
 &lt;div id="ax5-util-search" class="script-result">&lt;/div>
 &lt;script>
@@ -389,7 +398,7 @@
 </article>
 
 <article class="content">
-    <h2>ax5.util.map</h2>
+    <h2 class="menu">ax5.util.map</h2>
 <pre class="prettyprint linenums">
 &lt;div id="ax5-util-map" class="script-result">&lt;/div>
 &lt;script>
@@ -423,7 +432,7 @@
 </article>
 
 <article class="content">
-    <h2>ax5.util.merge</h2>
+    <h2 class="menu">ax5.util.merge</h2>
 <pre class="prettyprint linenums">
 &lt;div id="ax5-util-merge" class="script-result">&lt;/div>
 &lt;script>
@@ -452,7 +461,7 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 </article>
 
 <article class="content">
-    <h2>ax5.util.reduce</h2>
+    <h2 class="menu">ax5.util.reduce</h2>
 <pre class="prettyprint linenums">
 &lt;div id="ax5-util-reduce" class="script-result">&lt;/div>
 &lt;script>
@@ -499,7 +508,7 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 </article>
 
 <article class="content">
-    <h2>ax5.util.reduce_right</h2>
+    <h2 class="menu">ax5.util.reduce_right</h2>
 <pre class="prettyprint linenums">
 &lt;div id="ax5-util-reduce_right" class="script-result">&lt;/div>
 &lt;script>
@@ -536,7 +545,7 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 <!-- split -->
 
 <article class="content">
-    <h2>ax5.util.extend</h2>
+    <h2 class="menu">ax5.util.extend</h2>
 <pre class="prettyprint linenums">
 
 </pre>
@@ -551,7 +560,7 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 </article>
 
 <article class="content">
-    <h2>ax5.util.extend_all</h2>
+    <h2 class="menu">ax5.util.extend_all</h2>
 <pre class="prettyprint linenums">
 
 </pre>
@@ -569,7 +578,7 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 <!-- split -->
 
 <article class="cover">
-    <h1>ax5.xhr</h1>
+    <h1 class="menu">ax5.xhr</h1>
 </article>
 <article class="content">
     <h3>일반적인 방법</h3>
@@ -684,54 +693,6 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 	</div>
 </div>
 <!-- end div class="sample-doc-page"-->
-<script type="text/javascript">
-    (function(){
-        prettyPrint();
-        
-        var util = ax5.util, dom = ax5.dom;
-        var po = [], prev_tag;
-        po.push("<ul>");
-
-        util.each(dom("h1,h2").elements, function() {
-
-	        if(this.tagName == "H1" && po.length > 0){
-		        if(prev_tag == "H2") po.push("</ul>");
-		        po.push("</ul>");
-	        }
-	        if(this.tagName == "H1") {
-
-		        po.push("<ul>");
-	        }
-
-	        if(this.tagName == "H2" && prev_tag == "H1") {
-		        po.push("<ul>");
-	        }
-
-	        dom.before(this, '<a name="'+this.innerHTML+'"></a>');
-
-	        po.push('<li><a href="#' + this.innerHTML + '">' + this.innerHTML + '</a></li>');
-
-	        prev_tag = this.tagName;
-        });
-        po.push("</ul>");
-        dom("#app-nav-left").html(po.join(''));
-        
-    })();
-
-    //window.addEventListener("scroll", updateSoon);
-    /*
-	ax5.dom(window).on("scroll", function(){
-		console.log("11");
-	});
-	*/
-    ax5.dom.scroll(function(){
-	    if(!window.app_visual) window.app_visual = ax5.dom.get("#app-visual");
-	    if(ax5.dom.scroll().top >= 220){
-		    ax5.dom.class_name(app_visual, "add", "pinned");
-	    }else{
-		    ax5.dom.class_name(app_visual, "remove", "pinned");
-	    }
-    });
-</script>
+<script type="text/javascript" src="app.js"></script>
 </body>
 </hml>
