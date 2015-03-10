@@ -43,6 +43,7 @@ pre.prettyprint{
 }
 
 
+
 // ax5 documents layouts
 $app-page-width: 970px;
 $app-nav-left: 200px;
@@ -226,5 +227,16 @@ $app-nav-left: 200px;
         }
       }
     }
+  }
+}
+
+@for $i from 1 through 10 {
+  .DH#{$i} {
+	line-height:0px;
+	height: #{$i}px;
+  }
+  .DH#{$i*10} {
+	line-height:0px;
+	height: #{$i*10}px;
   }
 }

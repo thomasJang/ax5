@@ -112,41 +112,71 @@ $caret-width-large:         5px;
 
 $btn-font-weight:                normal;
 
-$btn-default-color: #333;
-$btn-default-bg: (#fff, #ccc);
-$btn-default-border: #ccc;
+$btn-default-text-color:#6e7a85;
+$btn-default-text-shadow: 0px 1px 0px rgba(255,255,255,0.9);
+$btn-default-bg: (#fdfdfd, #e8e8e8); // 배경색들
+$btn-default-bg-image: "";
+$btn-default-border: 1px solid #b9babc;
+$btn-default-border-radius: (4px 4px, 4px 4px);
+$btn-default-drop-shadow: 0px 1px 0px 0px rgba(0,0,0,0.15);
 
+$btn-basic-text-color:#fff;
+$btn-basic-text-shadow: 0px -1px 0px rgba(0,0,0,0.9);
+$btn-basic-bg: ($theme-basic, darken($theme-basic, 10%)); // 배경색들
+$btn-basic-bg-image: "";
+$btn-basic-border: 1px solid darken($theme-basic, 20%);
+$btn-basic-border-radius: (4px 4px, 4px 4px);
+$btn-basic-drop-shadow: 0px 1px 0px 0px rgba(0,0,0,0.15);
 
-$btn-basic-color: #fff;
-$btn-basic-bg:                 ($theme-basic, darken($theme-basic, 10%));
-$btn-basic-border:             darken($theme-basic, 5%);
+$btn-good-text-color:#fff;
+$btn-good-text-shadow: 0px -1px 0px rgba(0,0,0,0.9);
+$btn-good-bg: ($theme-good, darken($theme-good, 10%)); // 배경색들
+$btn-good-bg-image: "";
+$btn-good-border: 1px solid darken($theme-good, 20%);
+$btn-good-border-radius: (4px 4px, 4px 4px);
+$btn-good-drop-shadow: 0px 1px 0px 0px rgba(0,0,0,0.15);
 
-$btn-good-color:              #fff;
-$btn-good-bg:                 $theme-good;
-$btn-good-border:             darken($btn-good-bg, 5%);
+$btn-info-text-color:#fff;
+$btn-info-text-shadow: 0px -1px 0px rgba(0,0,0,0.9);
+$btn-info-bg: ($theme-info, darken($theme-info, 10%)); // 배경색들
+$btn-info-bg-image: "";
+$btn-info-border: 1px solid darken($theme-info, 20%);
+$btn-info-border-radius: (4px 4px, 4px 4px);
+$btn-info-drop-shadow: 0px 1px 0px 0px rgba(0,0,0,0.15);
 
-$btn-info-color:                 #fff;
-$btn-info-bg:                    $theme-info;
-$btn-info-border:                darken($btn-info-bg, 5%);
+$btn-warning-text-color:#fff;
+$btn-warning-text-shadow: 0px -1px 0px rgba(0,0,0,0.9);
+$btn-warning-bg: ($theme-warning, darken($theme-warning, 10%)); // 배경색들
+$btn-warning-bg-image: "";
+$btn-warning-border: 1px solid darken($theme-warning, 20%);
+$btn-warning-border-radius: (4px 4px, 4px 4px);
+$btn-warning-drop-shadow: 0px 1px 0px 0px rgba(0,0,0,0.15);
 
-$btn-warning-color:              #fff;
-$btn-warning-bg:                 $theme-warning;
-$btn-warning-border:             darken($btn-warning-bg, 5%);
+$btn-danger-text-color:#fff;
+$btn-danger-text-shadow: 0px -1px 0px rgba(0,0,0,0.9);
+$btn-danger-bg: ($theme-danger, darken($theme-danger, 10%)); // 배경색들
+$btn-danger-bg-image: "";
+$btn-danger-border: 1px solid darken($theme-danger, 20%);
+$btn-danger-border-radius: (4px 4px, 4px 4px);
+$btn-danger-drop-shadow: 0px 1px 0px 0px rgba(0,0,0,0.15);
 
-$btn-danger-color:               #fff;
-$btn-danger-bg:                  $theme-danger;
-$btn-danger-border:              darken($btn-danger-bg, 5%);
+$btn-link-text-color: $text-color;
+$btn-link-text-shadow: none;
+$btn-link-bg: (transparent, transparent); // 배경색들
+$btn-link-bg-image: "";
+$btn-link-border: 1px solid darken($theme-link, 20%);
+$btn-link-border-radius: (4px 4px, 4px 4px);
+$btn-link-drop-shadow: none;
 
-$btn-link-color:               $theme-basic;
-$btn-link-bg:                  $theme-link;
-$btn-link-border:              darken($btn-link-bg, 5%);
-
-$btn-special-color:               #fff;
-$btn-special-bg:                  $theme-special;
-$btn-special-border:              darken($btn-special-bg, 5%);
+$btn-special-text-color:#fff;
+$btn-special-text-shadow: 0px -1px 0px rgba(0,0,0,0.9);
+$btn-special-bg: ($theme-special, darken($theme-special, 10%)); // 배경색들
+$btn-special-bg-image: "";
+$btn-special-border: 1px solid darken($theme-special, 20%);
+$btn-special-border-radius: (4px 4px, 4px 4px);
+$btn-special-drop-shadow: 0px 1px 0px 0px rgba(0,0,0,0.15);
 
 $btn-link-disabled-color:        $gray-light;
-
 
 //== Forms
 //

@@ -1,3 +1,13 @@
+// setup of link color on "hover"
+@mixin get-text-link($color) {
+  color: $color;
+  &:hover {
+	color: darken($color, 10%);
+  }
+}
+
+// mixins --------------------------------------------- end
+
 // ax5-text
 .align-left{ text-align: left; }
 .align-right{ text-align: right; }
