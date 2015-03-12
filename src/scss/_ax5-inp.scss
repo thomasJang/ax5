@@ -1,0 +1,47 @@
+// input Linear Gradient
+@mixin ax5-inp-gradient ($start: #ffffff, $stop: $start) {
+  background: $start;
+  @include background-image(linear-gradient(top, $start, $stop));
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#{$start}, endColorstr=#{$stop});
+}
+@mixin input-variant(){
+  
+  
+}
+@mixin input-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius) {
+  padding: $padding-vertical $padding-horizontal;
+  font-size: $font-size;
+  line-height: $line-height;
+
+  @if (type_of($border-radius) == "list") {
+	border-top-left-radius: nth($border-radius, 1);
+	border-top-right-radius: nth($border-radius, 2);
+	border-bottom-right-radius: nth($border-radius, 3);
+	border-bottom-left-radius: nth($border-radius, 4);
+  }
+  @else {
+	border-radius: $border-radius;
+  }
+}
+
+
+
+// mixins --------------------------------------------- end
+// ax5 input
+.ax5-inp {
+  @include ax5();
+  font-weight: $input-font-weight;
+  vertical-align: middle;
+  touch-action: manipulation;
+  white-space: nowrap;
+  box-sizing: border-box;
+
+  color: $input-default-text-color;
+  text-shadow: $input-default-text-shadow;
+  border: $input-default-border;
+
+  @if($input-default-bg-image == "") 	{ @include ax5-inp-gradient(nth($input-default-bg, 1), nth($input-default-bg, 2)); }
+  @else						{ @include background-image($input-default-bg-image); }
+  @include box-shadow($input-default-drop-shadow);
+  @include input-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, $input-border-radius-base);
+}

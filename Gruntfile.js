@@ -73,6 +73,7 @@
 	grunt.registerTask('js-concat', ['concat']);
 	grunt.registerTask('js', ['concat','uglify']);
 	grunt.registerTask('css', ['cssmin']);
-
-	//grunt.registerTask('theme-watch', ['compass:theme','watch:theme']);
+	
+	grunt.registerTask('sass-run', ['compass:theme']);
+	grunt.registerTask('sass-run-doc', ['compass:sample_doc']);
 };

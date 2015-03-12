@@ -9,12 +9,10 @@
 //
 // Easily pump out default styles, as well as :hover, :focus, :active,
 // and disabled options for all buttons
-
-@mixin button-variant($text-color, $text-shadow, $bg, $bg-image, $border, $drop-shadow) {
+@mixin button-variant($text-color, $text-shadow, $bg, $bg-image, $bg-hover, $border, $drop-shadow) {
   color: $text-color;
   text-shadow: $text-shadow;
   border: $border;
-  //@include border-radius($border-radius);
 
   @if($bg-image == "") 	{ @include ax5-btn-gradient(nth($bg, 1), nth($bg, 2)); }
   @else						{ @include background-image($bg-image); }
@@ -24,7 +22,7 @@
   &:focus,
   &.focus {
 	text-decoration: none;
-	background: nth($bg, 2);
+	background: $bg-hover;
   }
   &:active,
   &.active {
@@ -36,13 +34,11 @@
   &.disabled,
   &[disabled],
   fieldset[disabled] & {
-	cursor: $cursor-disabled;
+	cursor: not-allowed;
 	pointer-events: none; // Future-proof disabling of clicks
 	@include opacity(.65);
 	@include box-shadow(none);
   }
-
-  
   .badge {
 	color: nth($bg,1);
 	background-color: nth($bg,1);
@@ -53,7 +49,16 @@
   padding: $padding-vertical $padding-horizontal;
   font-size: $font-size;
   line-height: $line-height;
-  border-radius: $border-radius;
+
+  @if (type_of($border-radius) == "list") {
+	border-top-left-radius: nth($border-radius, 1);
+	border-top-right-radius: nth($border-radius, 2);
+	border-bottom-right-radius: nth($border-radius, 3);
+	border-bottom-left-radius: nth($border-radius, 4);
+  }
+  @else {
+	border-radius: $border-radius;
+  }
 }
 
 //@warn "Assuming #{$btn-bg} to be in pixels";
@@ -72,7 +77,7 @@
   color: $btn-default-text-color;
   text-shadow: $btn-default-text-shadow;
   border: $btn-default-border;
-  @include border-radius($btn-default-border-radius);
+  //@include border-radius($btn-default-border-radius);
   
   @if($btn-default-bg-image == "") 	{ @include ax5-btn-gradient(nth($btn-default-bg, 1), nth($btn-default-bg, 2)); }
   @else						{ @include background-image($btn-default-bg-image); }
@@ -93,7 +98,7 @@
   &:focus,
   &.focus {
 	text-decoration: none;
-	background: nth($btn-default-bg, 2);
+	background: $btn-default-bg-hover;
   }
 
   &:active,
@@ -106,7 +111,7 @@
   &.disabled,
   &[disabled],
   fieldset[disabled] & {
-	cursor: $cursor-disabled;
+	cursor: not-allowed;
 	pointer-events: none; // Future-proof disabling of clicks
 	@include opacity(.65);
 	@include box-shadow(none);
@@ -114,25 +119,32 @@
 
   // situation
   &.basic{
-	@include button-variant($btn-basic-text-color, $btn-basic-text-shadow, $btn-basic-bg, $btn-basic-bg-image, $btn-basic-border, $btn-basic-drop-shadow);
+	@include button-variant($btn-basic-text-color, $btn-basic-text-shadow, $btn-basic-bg, $btn-basic-bg-image, $btn-basic-bg-hover, $btn-basic-border, $btn-basic-drop-shadow);
   }
   &.good{
-	@include button-variant($btn-good-text-color, $btn-good-text-shadow, $btn-good-bg, $btn-good-bg-image, $btn-good-border, $btn-good-drop-shadow);
+	@include button-variant($btn-good-text-color, $btn-good-text-shadow, $btn-good-bg, $btn-good-bg-image, $btn-good-bg-hover, $btn-good-border, $btn-good-drop-shadow);
   }
   &.info{
-	@include button-variant($btn-info-text-color, $btn-info-text-shadow, $btn-info-bg, $btn-info-bg-image, $btn-info-border, $btn-info-drop-shadow);
+	@include button-variant($btn-info-text-color, $btn-info-text-shadow, $btn-info-bg, $btn-info-bg-image, $btn-info-bg-hover, $btn-info-border, $btn-info-drop-shadow);
   }
   &.warning{
-	@include button-variant($btn-warning-text-color, $btn-warning-text-shadow, $btn-warning-bg, $btn-warning-bg-image, $btn-warning-border, $btn-warning-drop-shadow);
+	@include button-variant($btn-warning-text-color, $btn-warning-text-shadow, $btn-warning-bg, $btn-warning-bg-image, $btn-warning-bg-hover, $btn-warning-border, $btn-warning-drop-shadow);
   }
   &.danger{
-	@include button-variant($btn-danger-text-color, $btn-danger-text-shadow, $btn-danger-bg, $btn-danger-bg-image, $btn-danger-border, $btn-danger-drop-shadow);
+	@include button-variant($btn-danger-text-color, $btn-danger-text-shadow, $btn-danger-bg, $btn-danger-bg-image, $btn-danger-bg-hover, $btn-danger-border, $btn-danger-drop-shadow);
   }
   &.link{
-	@include button-variant($btn-link-text-color, $btn-link-text-shadow, $btn-link-bg, $btn-link-bg-image, $btn-link-border, $btn-link-drop-shadow);
+	@include button-variant($btn-link-text-color, $btn-link-text-shadow, $btn-link-bg, $btn-link-bg-image, $btn-link-bg-hover, $btn-link-border, $btn-link-drop-shadow);
+	&:hover,
+	&:focus,
+	&.focus {
+	  text-decoration: none;
+	  color: $btn-link-bg-hover;
+	  background: nth($btn-link-bg, 1);
+	}
   }
   &.special{
-	@include button-variant($btn-special-text-color, $btn-special-text-shadow, $btn-special-bg, $btn-special-bg-image, $btn-special-border, $btn-special-drop-shadow);
+	@include button-variant($btn-special-text-color, $btn-special-text-shadow, $btn-special-bg, $btn-special-bg-image, $btn-special-bg-hover, $btn-special-border, $btn-special-drop-shadow);
   }
 
   // size
@@ -148,70 +160,3 @@
 	@include button-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $border-radius-small);
   }
 }
-
-
-/*
-.ax5-btn{
-
-  &:hover,
-  &:focus,
-  &.focus {
-    color: $btn-default-color;
-    text-decoration: none;
-  }
-
-  &:active,
-  &.active {
-    outline: 0;
-    background-image: none;
-    @include box-shadow(rgba(0,0,0,0.125) 0 3px 5px inset);
-  }
-
-  &.disabled,
-  &[disabled],
-  fieldset[disabled] & {
-    cursor: $cursor-disabled;
-    pointer-events: none; // Future-proof disabling of clicks
-    @include opacity(.65);
-    @include box-shadow(none);
-  }
-
-  @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
-
-  // situation
-  &.basic{
-	@include button-variant($btn-basic-color, $btn-basic-bg, $btn-basic-border);
-  }
-  &.good{
-	@include button-variant($btn-good-color, $btn-good-bg, $btn-good-border);
-  }
-  &.info{
-	@include button-variant($btn-info-color, $btn-info-bg, $btn-info-border);	
-  }
-  &.warning{
-	@include button-variant($btn-warning-color, $btn-warning-bg, $btn-warning-border);
-  }
-  &.danger{
-	@include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);
-  }
-  &.special{
-	@include button-variant($btn-special-color, $btn-special-bg, $btn-special-border);
-  }
-  &.link{
-	@include button-variant($btn-link-color, $btn-link-bg, $btn-link-border);
-  }
-
-  // size
-  &.lg {
-	// line-height: ensure even-numbered height of button next to large input
-	@include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $border-radius-large);
-  }
-  &.sm {
-	// line-height: ensure proper height of button next to small input
-	@include button-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $border-radius-small);
-  }
-  &.xs {
-	@include button-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $border-radius-small);
-  }
-}
-*/
