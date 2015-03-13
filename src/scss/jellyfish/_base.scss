@@ -222,9 +222,9 @@ $input-warning-color-hover: $theme-warning;
 $input-warning-border: 1px solid darken($theme-warning, 0%);
 $input-warning-drop-shadow: 0px 1px 3px 0px rgba(0,0,0,0.15) inset;
 
-$input-danger-text-color:darken($theme-danger, 20%);
+$input-danger-text-color: darken($theme-danger, 0%);
 $input-danger-text-shadow: none; //0px -1px 0px darken($theme-danger, 50%);
-$input-danger-bg: (lighten($theme-danger, 40%), lighten($theme-danger, 50%)); // 배경색들
+$input-danger-bg: (lighten($theme-danger, 50%), lighten($theme-danger, 50%)); // 배경색들
 $input-danger-bg-image: "";
 $input-danger-color-hover: $theme-danger;
 $input-danger-border: 1px solid darken($theme-danger, 0%);
