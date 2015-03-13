@@ -96,21 +96,7 @@ $border-radius-base:        (6px, 0px, 6px, 0px);
 $border-radius-large:       (8px, 0px, 8px, 0px);
 $border-radius-small:       (3px, 0px, 3px, 0px);
 
-//** Global color for active items (e.g., navs or dropdowns).
-$component-active-color:    #fff;
-//** Global background color for active items (e.g., navs or dropdowns).
-$component-active-bg:       $theme-basic;
-
-//** Width of the `border` for generating carets that indicator dropdowns.
-$caret-width-base:          4px;
-//** Carets increase slightly in size for larger components.
-$caret-width-large:         5px;
-
-
 //== Buttons
-//
-//## For each of Bootstrap's buttons, define text, background and border color.
-
 $btn-font-weight:                normal;
 
 $btn-default-text-color: #4A4A4A;
@@ -180,17 +166,11 @@ $btn-special-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
 $btn-link-disabled-color:        $gray-light;
 
 //== Input
-//
-//##
-
 $input-font-weight:                normal;
 $input-bg-disabled:              $gray-lighter;
 $input-border-radius-base:        (6px, 0px, 6px, 0px);
 $input-border-radius-large:       (8px, 8px, 8px, 8px);
 $input-border-radius-small:       (3px, 0px, 3px, 0px);
-
-//** Border color for inputs on focus
-$input-border-focus:             #66afe9;
 
 //** Placeholder text color
 $input-color-placeholder:        #999;
@@ -202,46 +182,58 @@ $input-height-large:             (ceil($font-size-large * $line-height-large) + 
 //** Small `.form-control` height
 $input-height-small:             (floor($font-size-small * $line-height-small) + ($padding-small-vertical * 2) + 2);
 
-// ** Disabled cursor for form controls and buttons.
-// $cursor-disabled:                not-allowed;
-
-// 
 $input-default-text-color: #4A4A4A;
 $input-default-text-shadow: 0px 1px 0px rgba(255,255,255, 0.5);
 $input-default-bg: (#ffffff, #FFFFFF); // 배경색들
 $input-default-bg-image: "";
-$input-default-bg-hover: #e8e8e8;
+$input-default-color-hover: #ccc;
 $input-default-border: 1px solid #B4B4B4;
 $input-default-drop-shadow: 0px 1px 3px 0px rgba(0,0,0,0.15) inset;
 
-$input-good-text-color:#fff;
+$input-basic-text-color: darken($theme-basic, 20%);
+$input-basic-text-shadow: none; //0px -1px 0px darken($theme-basic, 50%);
+$input-basic-bg: (lighten($theme-basic, 40%), lighten($theme-basic, 50%)); // 배경색들
+$input-basic-bg-image: "";
+$input-basic-color-hover: $theme-basic;
+$input-basic-border: 1px solid lighten($theme-basic, 10%);
+$input-basic-drop-shadow: 0px 1px 3px 0px rgba(0,0,0,0.15) inset;
+
+$input-good-text-color:darken($theme-good, 20%);
 $input-good-text-shadow: none; //0px -1px 0px darken($theme-good, 50%);
-$input-good-bg: (lighten($theme-good, 10%), $theme-good); // 배경색들
+$input-good-bg: (lighten($theme-good, 40%), lighten($theme-good, 50%)); // 배경색들
 $input-good-bg-image: "";
-$input-good-bg-hover: $theme-good;
+$input-good-color-hover: $theme-good;
 $input-good-border: 1px solid darken($theme-good, 10%);
-$input-good-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
+$input-good-drop-shadow: 0px 1px 3px 0px rgba(0,0,0,0.15) inset;
 
-$input-info-text-color:#fff;
+$input-info-text-color:darken($theme-info, 20%);
 $input-info-text-shadow: none; //0px -1px 0px rgba(0,0,0,0.9);
-$input-info-bg: (lighten($theme-info, 10%), $theme-info); // 배경색들
+$input-info-bg: (#fff, #fff); // 배경색들
 $input-info-bg-image: "";
-$input-info-bg-hover: $theme-info;
-$input-info-border: 1px solid darken($theme-info, 10%);
-$input-info-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
+$input-info-color-hover: $theme-info;
+$input-info-border: 1px solid darken($theme-info, 0%);
+$input-info-drop-shadow: 0px 1px 3px 0px rgba(0,0,0,0.15) inset;
 
-$input-warning-text-color:#fff;
+$input-warning-text-color:darken($theme-warning, 20%);
 $input-warning-text-shadow: none; //0px -1px 0px darken($theme-warning, 50%);
-$input-warning-bg: (lighten($theme-warning, 10%), $theme-warning); // 배경색들
+$input-warning-bg: (lighten($theme-warning, 40%), lighten($theme-warning, 50%)); // 배경색들
 $input-warning-bg-image: "";
-$input-warning-bg-hover: $theme-warning;
-$input-warning-border: 1px solid darken($theme-warning, 20%);
-$input-warning-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
+$input-warning-color-hover: $theme-warning;
+$input-warning-border: 1px solid darken($theme-warning, 0%);
+$input-warning-drop-shadow: 0px 1px 3px 0px rgba(0,0,0,0.15) inset;
 
-$input-danger-text-color:#fff;
+$input-danger-text-color:darken($theme-danger, 20%);
 $input-danger-text-shadow: none; //0px -1px 0px darken($theme-danger, 50%);
-$input-danger-bg: (lighten($theme-danger, 10%), $theme-danger); // 배경색들
+$input-danger-bg: (lighten($theme-danger, 40%), lighten($theme-danger, 50%)); // 배경색들
 $input-danger-bg-image: "";
-$input-danger-bg-hover: $theme-danger;
-$input-danger-border: 1px solid darken($theme-danger, 20%);
-$input-danger-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
+$input-danger-color-hover: $theme-danger;
+$input-danger-border: 1px solid darken($theme-danger, 0%);
+$input-danger-drop-shadow: 0px 1px 3px 0px rgba(0,0,0,0.15) inset;
+
+$input-special-text-color:darken($theme-special, 20%);
+$input-special-text-shadow: none; //0px -1px 0px darken($theme-special, 50%);
+$input-special-bg: (lighten($theme-special, 40%), lighten($theme-special, 50%)); // 배경색들
+$input-special-bg-image: "";
+$input-special-color-hover: $theme-special;
+$input-special-border: 1px solid darken($theme-special, 20%);
+$input-special-drop-shadow: 0px 1px 3px 0px rgba(0,0,0,0.15) inset;
