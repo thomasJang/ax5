@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<!-- 
+ ax5 - v0.0.1 
+ publish date : 2015-03-15 
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ax5</title>
+	
+    <link rel="stylesheet" type="text/css" href="../plugin/prettify/github.css">
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+	<link rel="stylesheet" type="text/css" href="../src/css/jellyfish/ax5.css">
+	<link rel="stylesheet" type="text/css" href="http://cdn.axisj.com/axicon/axicon.min.css">
+	
+    <script type="text/javascript" src="../plugin/prettify/prettify.js"></script>
+    <script type="text/javascript" src="../src/ax5-polyfill.js"></script>
+    <script type="text/javascript" src="../src/ax5-core.js"></script>
+    <script type="text/javascript" src="../src/ax5-xhr.js"></script>
+    <script type="text/javascript" src="../src/ax5-ui.js"></script>
+	
+	    
+</head>
+<body>
+
+<div class="app-nav">
+	<div class="box-bg"></div>
+	<div class="box-content">
+		<a href="#" class="logo">AX5</a>
+		<ul class="menu">
+			<li class="vline"></li>
+			<li><a href="index.html">AX5.dom</a></li>
+			<li class="vline"></li>
+			<li><a href="css.html">CSS</a></li>
+			<li class="vline"></li>
+			<li><a href="ui-class.html">UI Class</a></li>
+			<li class="vline"></li>
+			<li><a href="customize.html">Customize</a></li>
+			<li class="vline"></li>
+		</ul>
+	</div>
+</div>
+
+<!-- split -->
+
+<div class="app-visual" id="app-visual">
+	<div class="app-wrap">
+		<div class="visual"></div>
+		<h1>CSS</h1>
+		<h3>AX5 CSS 스타일링 가이드</h3>
+	</div>
+</div>
+
+<div class="app-page">
+	<div class="app-content app-wrap">
+
+<!-- split -->
+
+<article class="cover">
+    <h1 data-menu-item="ax5-text">Text</h1>
+</article>
+<article class="content">
+
+	<h3 data-menu-item="ax5-text-tag">Tag</h3>
+	<div class="tag-result">
+		<a class="ax5" href="#">AX5 ax5 에이액스5</a>
+		<div class="ax5">AX5 ax5 에이액스5</div>
+	</div>
+
+	<pre class="prettyprint linenums">
+&lt;a class="ax5" href="#">AX5 ax5 에이액스5&lt;/a>
+&lt;div class="ax5">AX5 ax5 에이액스5&lt;/div>
+</pre>
+	
+	<h3 data-menu-item="ax5-text-situations">Situations</h3>
+	<div class="tag-result">
+		<div class="ax5 mute">AX5 ax5 에이액스5</div>
+		<div class="ax5 basic">AX5 ax5 에이액스5</div>
+		<div class="ax5 good">AX5 ax5 에이액스5</div>
+		<div class="ax5 info">AX5 ax5 에이액스5</div>
+		<div class="ax5 warning">AX5 ax5 에이액스5</div>
+		<div class="ax5 danger">AX5 ax5 에이액스5</div>
+		<div class="ax5 special">AX5 ax5 에이액스5</div>
+	</div>
+
+	<pre class="prettyprint linenums">
+&lt;div class="ax5 mute">AX5 ax5 에이액스5&lt;/div>
+&lt;div class="ax5 basic">AX5 ax5 에이액스5&lt;/div>
+&lt;div class="ax5 good">AX5 ax5 에이액스5&lt;/div>
+&lt;div class="ax5 info">AX5 ax5 에이액스5&lt;/div>
+&lt;div class="ax5 warning">AX5 ax5 에이액스5&lt;/div>
+&lt;div class="ax5 danger">AX5 ax5 에이액스5&lt;/div>
+&lt;div class="ax5 special">AX5 ax5 에이액스5&lt;/div>
+</pre>
+	
+	<h3 data-menu-item="ax5-text-misc">Misc.</h3>
+	<div class="tag-result">
+		<div class="ax5 align-left special">ax5 align-left</div>
+		<div class="ax5 align-right">ax5 align-right</div>
+		<div class="ax5 align-center good">ax5 align-center good</div>
+		<div class="ax5 align-justify">ax5 align-justify</div>
+		<div class="ax5 nowrap">ax5 nowrap : AX5 ax5 에이액스5 AX5 ax5 에이액스5 AX5 ax5 에이액스5 AX5 ax5 에이액스5 AX5 ax5 에이액스5 AX5 ax5 에이액스5 AX5 ax5 에이액스5 AX5 ax5 에이액스5 </div>
+		<div class="ax5 lowercase info">ax5 lowercase : ABCDEFG AX5</div>
+		<div class="ax5 uppercase">ax5 uppercase : abcdefg ax5</div>
+		<div class="ax5 capitalize danger">ax5 capitalize : abcdefg ax5</div>
+	</div>
+
+	<pre class="prettyprint linenums">
+&lt;div class="ax5 align-left special">AX5 ax5 에이액스5&lt;/div>
+&lt;div class="ax5 align-right">AX5 ax5 에이액스5&lt;/div>
+&lt;div class="ax5 align-center good">AX5 ax5 에이액스5&lt;/div>
+&lt;div class="ax5 align-justify">AX5 ax5 에이액스5&lt;/div>
+&lt;div class="ax5 nowrap">AX5 ax5 에이액스5 AX5 ax5 에이액스5 AX5 ax5 에이액스5 AX5 ax5 에이액스5 AX5 ax5 에이액스5 AX5 ax5 에이액스5 AX5 ax5 에이액스5 AX5 ax5 에이액스5 &lt;/div>
+&lt;div class="ax5 lowercase">ABCDEFG AX5&lt;/div>
+&lt;div class="ax5 uppercase">abcdefg ax5&lt;/div>
+&lt;div class="ax5 capitalize">abcdefg ax5&lt;/div>
+</pre>
+
+</article>
+
+
+<!-- split -->
+
+
+<article class="cover">
+	<h1 data-menu-item="ax5-button">ax5.button</h1>
+</article>
+<article class="content">
+
+	<h3 data-menu-item="ax5-button-tag">Tag</h3>
+	<div class="tag-result">
+		<button class="ax5-btn">.ax5-btn</button>
+		<a class="ax5-btn uppercase">uppercase</a>
+		<a class="ax5-btn capitalize">capitalize</a>
+	</div>
+
+	<pre class="prettyprint linenums">
+&lt;button class="ax5-btn">.ax5-btn&lt;/button>
+&lt;a class="ax5-btn uppercase">uppercase&lt;/a>
+&lt;a class="ax5-btn capitalize">capitalize&lt;/a>
+</pre>
+	
+	
+	<h3 data-menu-item="ax5-button-situ">Situations</h3>
+	<div class="tag-result">
+		<button class="ax5-btn basic">basic</button>
+		<button class="ax5-btn basic">기본</button>
+		<button class="ax5-btn good">good</button>
+		<button class="ax5-btn good">좋음</button>
+		<button class="ax5-btn info">info</button>
+		<button class="ax5-btn info">정보</button>
+		<button class="ax5-btn warning">warning</button>
+		<button class="ax5-btn warning">주의</button>
+		<button class="ax5-btn danger">danger</button>
+		<button class="ax5-btn danger">경고</button>
+		<button class="ax5-btn link">link</button>
+		<button class="ax5-btn link">링크</button>
+		<button class="ax5-btn special">special</button>
+		<button class="ax5-btn special">특별한</button>
+	</div>
+
+	<pre class="prettyprint linenums">
+&lt;button class="ax5-btn basic">basic&lt;/button>
+&lt;button class="ax5-btn basic">기본&lt;/button>
+&lt;button class="ax5-btn good">good&lt;/button>
+&lt;button class="ax5-btn good">좋음&lt;/button>
+&lt;button class="ax5-btn info">info&lt;/button>
+&lt;button class="ax5-btn info">정보&lt;/button>
+&lt;button class="ax5-btn warning">warning&lt;/button>
+&lt;button class="ax5-btn warning">주의&lt;/button>
+&lt;button class="ax5-btn danger">danger&lt;/button>
+&lt;button class="ax5-btn danger">경고&lt;/button>
+&lt;button class="ax5-btn link">link&lt;/button>
+&lt;button class="ax5-btn link">링크&lt;/button>
+&lt;button class="ax5-btn special">special&lt;/button>
+&lt;button class="ax5-btn special">특별한&lt;/button>
+</pre>
+
+
+	<h3 data-menu-item="ax5-button-size">Size</h3>
+	<div class="tag-result">
+		<button class="ax5-btn basic lg">ax5-btn basic lg</button>
+		<button class="ax5-btn good">ax5-btn good</button>
+		<button class="ax5-btn info sm">ax5-btn info sm</button>
+		<button class="ax5-btn warning xs">ax5-btn warning xs</button>
+	</div>
+
+	<pre class="prettyprint linenums">
+&lt;button class="ax5-btn basic lg">ax5-btn basic lg&lt;/button>
+&lt;button class="ax5-btn good">ax5-btn good&lt;/button>
+&lt;button class="ax5-btn info sm">ax5-btn info sm&lt;/button>
+&lt;button class="ax5-btn warning xs">ax5-btn warning xs&lt;/button>
+</pre>
+</article>
+
+
+<!-- split -->
+
+
+<article class="cover">
+	<h1 data-menu-item="ax5-input">ax5.input</h1>
+</article>
+<article class="content">
+
+	<h3 data-menu-item="ax5-input-tag">Tag</h3>
+	<div class="tag-result">
+		<input type="text" name="" class="ax5-inp" placeholder="input your name" />
+		<button class="ax5-btn">OK</button>
+		<input type="text" name="" class="ax5-inp" placeholder="disabled" disabled="disabled" />
+		<input type="text" name="" class="ax5-inp" placeholder="readonly" readonly="readonly" />
+	</div>
+
+	<pre class="prettyprint linenums">
+&lt;input type="text" name="" class="ax5-inp" placeholder="input your name" />
+&lt;button class="ax5-btn">OK&lt;/button>
+&lt;input type="text" name="" class="ax5-inp" placeholder="disabled" disabled="disabled" />
+&lt;input type="text" name="" class="ax5-inp" placeholder="readonly" readonly="readonly" />
+</pre>
+	
+	
+	<h3 data-menu-item="ax5-input-situ">Situations</h3>
+	<div class="tag-result">
+		<input type="text" name="" class="ax5-inp basic" placeholder="ax5-inp basic" />
+		<input type="text" name="" class="ax5-inp good" placeholder="ax5-inp good" />
+		<input type="password" name="" class="ax5-inp info" placeholder="info" />
+		<input type="text" name="" class="ax5-inp warning" placeholder="warning" />
+		<input type="text" name="" class="ax5-inp danger" placeholder="danger" />
+		<input type="text" name="" class="ax5-inp special" placeholder="special" />
+	</div>
+
+	<pre class="prettyprint linenums">
+&lt;input type="text" name="" class="ax5-inp basic" placeholder="ax5-inp basic" />
+&lt;input type="text" name="" class="ax5-inp good" placeholder="ax5-inp good" />
+&lt;input type="text" name="" class="ax5-inp info" placeholder="info" />
+&lt;input type="text" name="" class="ax5-inp warning" placeholder="warning" />
+&lt;input type="text" name="" class="ax5-inp danger" placeholder="danger" />
+&lt;input type="text" name="" class="ax5-inp special" placeholder="special" />
+</pre>
+
+
+	<h3 data-menu-item="ax5-input-size">Size</h3>
+	<div class="tag-result">
+		<input type="text" name="" class="ax5-inp basic lg" placeholder="ax5-inp basic" />
+		<input type="text" name="" class="ax5-inp good" placeholder="ax5-inp good" />
+		<input type="text" name="" class="ax5-inp info sm" placeholder="info" />
+		<input type="text" name="" class="ax5-inp warning xs" placeholder="warning" />
+	</div>
+
+	<pre class="prettyprint linenums">
+&lt;button class="ax5-btn basic lg">ax5-btn basic lg&lt;/button>
+&lt;button class="ax5-btn good">ax5-btn good&lt;/button>
+&lt;button class="ax5-btn info sm">ax5-btn info sm&lt;/button>
+&lt;button class="ax5-btn warning xs">ax5-btn warning xs&lt;/button>
+</pre>
+	
+
+<article class="cover">
+	<h1 data-menu-item="ax5-input-group">ax5.Input Group</h1>
+</article>
+<article class="content">
+
+	<h3 data-menu-item="ax5-input-group-tag">Tag</h3>
+	<div class="tag-result">
+		<div class="ax5-inp-group">
+			<input type="text" name="" class="ax5-inp" placeholder="ax5-inp-group" />
+		</div>
+		
+		<div class="ax5-inp-group">
+			<div class="ax5-addon">$$</div>
+			<input type="text" name="" class="ax5-inp" placeholder="ax5-inp-group" />
+		</div>
+		
+		<div class="ax5-inp-group">
+			<div class="ax5-addon">@</div>
+			<input type="text" name="" class="ax5-inp" placeholder="ax5-inp-group" />
+			<div class="ax5-addon">%</div>
+		</div>
+		
+		<div class="DH10"></div>
+		
+		<div class="ax5-inp-group basic">
+			<div class="ax5-addon">$</div>
+			<input type="text" name="" class="ax5-inp" placeholder="ax5-inp-group basic" />
+			<div class="ax5-addon">PX</div>
+		</div>
+		
+		<div class="ax5-inp-group good">
+			<div class="ax5-addon">$</div>
+			<input type="text" name="" class="ax5-inp" placeholder="ax5-inp-group good" />
+			<div class="ax5-addon">PX</div>
+		</div>
+
+		<div class="ax5-inp-group info">
+			<div class="ax5-addon">$</div>
+			<input type="text" name="" class="ax5-inp" placeholder="ax5-inp-group info" />
+			<div class="ax5-addon">%</div>
+		</div>
+		
+		<div class="DH10"></div>
+		
+		<div class="ax5-inp-group warning">
+			<div class="ax5-addon">@</div>
+			<input type="text" name="" class="ax5-inp" placeholder="ax5-inp-group warning" />
+			<div class="ax5-addon">%</div>
+		</div>
+		
+		<div class="ax5-inp-group danger">
+			<div class="ax5-addon">@</div>
+			<input type="text" name="" class="ax5-inp" placeholder="ax5-inp-group danger" />
+			<div class="ax5-addon">%</div>
+		</div>
+		
+		<div class="ax5-inp-group special">
+			<div class="ax5-addon">@</div>
+			<input type="text" name="" class="ax5-inp" placeholder="ax5-inp-group special" />
+			<div class="ax5-addon">%</div>
+		</div>
+		
+		<div class="DH10"></div>
+		
+		<div class="ax5-inp-group lg">
+			<div class="ax5-addon">@</div>
+			<input type="text" name="" class="ax5-inp" placeholder="ax5-inp-group lg" />
+			<div class="ax5-addon">%</div>
+		</div>
+
+		<div class="ax5-inp-group sm">
+			<div class="ax5-addon">@</div>
+			<input type="text" name="" class="ax5-inp" placeholder="ax5-inp-group sm" />
+			<div class="ax5-addon">%</div>
+		</div>
+
+		<div class="ax5-inp-group xs">
+			<div class="ax5-addon">@</div>
+			<input type="text" name="" class="ax5-inp" placeholder="ax5-inp-group xs" />
+			<div class="ax5-addon">%</div>
+		</div>
+	</div>
+
+	<pre class="prettyprint linenums">
+&lt;div class="ax5-inp-group">
+	&lt;input type="text" name="" class="ax5-inp" placeholder="ax5-inp-group" />
+&lt;/div>
+
+&lt;div class="ax5-inp-group">
+	&lt;div class="ax5-addon">$$&lt;/div>
+	&lt;input type="text" name="" class="ax5-inp" placeholder="ax5-inp-group" />
+&lt;/div>
+
+&lt;div class="ax5-inp-group">
+	&lt;div class="ax5-addon">@&lt;/div>
+	&lt;input type="text" name="" class="ax5-inp" placeholder="ax5-inp-group" />
+	&lt;div class="ax5-addon">%&lt;/div>
+&lt;/div>
+
+&lt;div class="DH10">&lt;/div>
+
+&lt;div class="ax5-inp-group basic">
+	&lt;div class="ax5-addon">$&lt;/div>
+	&lt;input type="text" name="" class="ax5-inp" placeholder="ax5-inp-group basic" />
+	&lt;div class="ax5-addon">PX&lt;/div>
+&lt;/div>
+
+&lt;div class="ax5-inp-group good">
+	&lt;div class="ax5-addon">$&lt;/div>
+	&lt;input type="text" name="" class="ax5-inp" placeholder="ax5-inp-group good" />
+	&lt;div class="ax5-addon">PX&lt;/div>
+&lt;/div>
+
+&lt;div class="ax5-inp-group info">
+	&lt;div class="ax5-addon">$&lt;/div>
+	&lt;input type="text" name="" class="ax5-inp" placeholder="ax5-inp-group info" />
+	&lt;div class="ax5-addon">%&lt;/div>
+&lt;/div>
+
+&lt;div class="DH10">&lt;/div>
+
+&lt;div class="ax5-inp-group warning">
+	&lt;div class="ax5-addon">@&lt;/div>
+	&lt;input type="text" name="" class="ax5-inp" placeholder="ax5-inp-group warning" />
+	&lt;div class="ax5-addon">%&lt;/div>
+&lt;/div>
+
+&lt;div class="ax5-inp-group danger">
+	&lt;div class="ax5-addon">@&lt;/div>
+	&lt;input type="text" name="" class="ax5-inp" placeholder="ax5-inp-group danger" />
+	&lt;div class="ax5-addon">%&lt;/div>
+&lt;/div>
+
+&lt;div class="ax5-inp-group special">
+	&lt;div class="ax5-addon">@&lt;/div>
+	&lt;input type="text" name="" class="ax5-inp" placeholder="ax5-inp-group special" />
+	&lt;div class="ax5-addon">%&lt;/div>
+&lt;/div>
+
+&lt;div class="DH10">&lt;/div>
+
+&lt;div class="ax5-inp-group lg">
+	&lt;div class="ax5-addon">@&lt;/div>
+	&lt;input type="text" name="" class="ax5-inp" placeholder="ax5-inp-group lg" />
+	&lt;div class="ax5-addon">%&lt;/div>
+&lt;/div>
+
+&lt;div class="ax5-inp-group sm">
+	&lt;div class="ax5-addon">@&lt;/div>
+	&lt;input type="text" name="" class="ax5-inp" placeholder="ax5-inp-group sm" />
+	&lt;div class="ax5-addon">%&lt;/div>
+&lt;/div>
+
+&lt;div class="ax5-inp-group xs">
+	&lt;div class="ax5-addon">@&lt;/div>
+	&lt;input type="text" name="" class="ax5-inp" placeholder="ax5-inp-group xs" />
+	&lt;div class="ax5-addon">%&lt;/div>
+&lt;/div>
+</pre>
+	
+	<h3 data-menu-item="ax5-input-group-has">Situation</h3>
+	<div class="tag-result">
+		<div class="ax5-inp-group has-basic">
+			<div class="ax5-addon">@</div>
+			<input type="text" name="" class="ax5-inp" placeholder="ax5-inp" />
+			<div class="axicon"></div>
+		</div>
+		<div class="ax5-inp-group has-good">
+			<input type="text" name="" class="ax5-inp" placeholder="ax5-inp" />
+			<div class="axicon"></div>
+		</div>
+		<div class="ax5-inp-group has-info">
+			<div class="ax5-addon">$</div>
+			<input type="text" name="" class="ax5-inp" placeholder="ax5-inp" />
+			<div class="axicon"></div>
+		</div>
+		<div class="DH10"></div>
+		<div class="ax5-inp-group has-warning">
+			<input type="text" name="" class="ax5-inp" placeholder="ax5-inp" />
+			<div class="axicon"></div>
+		</div>
+		<div class="ax5-inp-group has-danger">
+			<div class="ax5-addon">
+				<i class="axi axi-twitter"></i>
+			</div>
+			<input type="text" name="" class="ax5-inp" placeholder="ax5-inp" />
+			<div class="axicon"></div>
+		</div>
+		<div class="ax5-inp-group has-special">
+			<input type="text" name="" class="ax5-inp" placeholder="ax5-inp" />
+			<div class="axicon"></div>
+		</div>
+	</div>
+
+	<pre class="prettyprint linenums">
+&lt;div class="ax5-inp-group has-basic">
+	&lt;div class="ax5-addon">@&lt;/div>
+	&lt;input type="text" name="" class="ax5-inp" placeholder="ax5-inp" />
+	&lt;div class="axicon">&lt;/div>
+&lt;/div>
+&lt;div class="ax5-inp-group has-good">
+	&lt;input type="text" name="" class="ax5-inp" placeholder="ax5-inp" />
+	&lt;div class="axicon">&lt;/div>
+&lt;/div>
+&lt;div class="ax5-inp-group has-info">
+	&lt;div class="ax5-addon">$&lt;/div>
+	&lt;input type="text" name="" class="ax5-inp" placeholder="ax5-inp" />
+	&lt;div class="axicon">&lt;/div>
+&lt;/div>
+&lt;div class="DH10">&lt;/div>
+&lt;div class="ax5-inp-group has-warning">
+	&lt;input type="text" name="" class="ax5-inp" placeholder="ax5-inp" />
+	&lt;div class="axicon">&lt;/div>
+&lt;/div>
+&lt;div class="ax5-inp-group has-danger">
+	&lt;div class="ax5-addon">
+		&lt;i class="axi axi-twitter">&lt;/i>
+	&lt;/div>
+	&lt;input type="text" name="" class="ax5-inp" placeholder="ax5-inp" />
+	&lt;div class="axicon">&lt;/div>
+&lt;/div>
+&lt;div class="ax5-inp-group has-special">
+	&lt;input type="text" name="" class="ax5-inp" placeholder="ax5-inp" />
+	&lt;div class="axicon">&lt;/div>
+&lt;/div>
+</pre>
+	
+</article>
+
+
+<!-- split -->
+
+		<!-- end div class="nav-content"-->
+		<div class="app-nav-left" id="app-nav-left"></div>
+	</div>
+</div>
+<!-- end div class="sample-doc-page"-->
+<script type="text/javascript" src="app.js"></script>
+</body>
+</hml>

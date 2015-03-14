@@ -192,7 +192,7 @@ $input-default-drop-shadow: 0px 1px 3px 0px rgba(0,0,0,0.15) inset;
 
 $input-basic-text-color: darken($theme-basic, 20%);
 $input-basic-text-shadow: none; //0px -1px 0px darken($theme-basic, 50%);
-$input-basic-bg: (lighten($theme-basic, 40%), lighten($theme-basic, 50%)); // 배경색들
+$input-basic-bg: (#ffffff, #FFFFFF); // 배경색들
 $input-basic-bg-image: "";
 $input-basic-color-hover: $theme-basic;
 $input-basic-border: 1px solid lighten($theme-basic, 10%);
@@ -200,7 +200,7 @@ $input-basic-drop-shadow: 0px 1px 3px 0px rgba(0,0,0,0.15) inset;
 
 $input-good-text-color:darken($theme-good, 20%);
 $input-good-text-shadow: none; //0px -1px 0px darken($theme-good, 50%);
-$input-good-bg: (lighten($theme-good, 40%), lighten($theme-good, 50%)); // 배경색들
+$input-good-bg: (#ffffff, #FFFFFF); // 배경색들
 $input-good-bg-image: "";
 $input-good-color-hover: $theme-good;
 $input-good-border: 1px solid darken($theme-good, 10%);
@@ -216,7 +216,7 @@ $input-info-drop-shadow: 0px 1px 3px 0px rgba(0,0,0,0.15) inset;
 
 $input-warning-text-color:darken($theme-warning, 20%);
 $input-warning-text-shadow: none; //0px -1px 0px darken($theme-warning, 50%);
-$input-warning-bg: (lighten($theme-warning, 40%), lighten($theme-warning, 50%)); // 배경색들
+$input-warning-bg: (#ffffff, #FFFFFF); // 배경색들
 $input-warning-bg-image: "";
 $input-warning-color-hover: $theme-warning;
 $input-warning-border: 1px solid darken($theme-warning, 0%);
@@ -224,7 +224,7 @@ $input-warning-drop-shadow: 0px 1px 3px 0px rgba(0,0,0,0.15) inset;
 
 $input-danger-text-color: darken($theme-danger, 0%);
 $input-danger-text-shadow: none; //0px -1px 0px darken($theme-danger, 50%);
-$input-danger-bg: (lighten($theme-danger, 50%), lighten($theme-danger, 50%)); // 배경색들
+$input-danger-bg: (#ffffff, #FFFFFF); // 배경색들
 $input-danger-bg-image: "";
 $input-danger-color-hover: $theme-danger;
 $input-danger-border: 1px solid darken($theme-danger, 0%);
@@ -232,7 +232,7 @@ $input-danger-drop-shadow: 0px 1px 3px 0px rgba(0,0,0,0.15) inset;
 
 $input-special-text-color:darken($theme-special, 20%);
 $input-special-text-shadow: none; //0px -1px 0px darken($theme-special, 50%);
-$input-special-bg: (lighten($theme-special, 40%), lighten($theme-special, 50%)); // 배경색들
+$input-special-bg: (#ffffff, #FFFFFF); // 배경색들
 $input-special-bg-image: "";
 $input-special-color-hover: $theme-special;
 $input-special-border: 1px solid darken($theme-special, 20%);

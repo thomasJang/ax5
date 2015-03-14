@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-03-11 
+ publish date : 2015-03-14 
 -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>ax5</title>
+	
     <link rel="stylesheet" type="text/css" href="../plugin/prettify/github.css">
     <link rel="stylesheet" type="text/css" href="css/app.css">
     <script type="text/javascript" src="../plugin/prettify/prettify.js"></script>
@@ -14,7 +15,8 @@
     <script type="text/javascript" src="../src/ax5-core.js"></script>
     <script type="text/javascript" src="../src/ax5-xhr.js"></script>
     <script type="text/javascript" src="../src/ax5-ui.js"></script>
-    
+	
+	<link rel="stylesheet" type="text/css" href="../src/css/jellyfish/ax5.css">    
 </head>
 <body>
 
@@ -24,13 +26,20 @@
 		<a href="#" class="logo">AX5</a>
 		<ul class="menu">
 			<li class="vline"></li>
-			<li><a href="index.html">ax5.core</a></li>
+			<li><a href="index.html">AX5.dom</a></li>
 			<li class="vline"></li>
-			<li><a href="ui.html">ax5.ui</a></li>
+			<li><a href="css.html">CSS</a></li>
+			<li class="vline"></li>
+			<li><a href="ui-class.html">UI Class</a></li>
+			<li class="vline"></li>
+			<li><a href="customize.html">Customize</a></li>
 			<li class="vline"></li>
 		</ul>
 	</div>
 </div>
+
+<!-- split -->
+
 <div class="app-visual" id="app-visual">
 	<div class="app-wrap">
 		<div class="visual"></div>
@@ -45,7 +54,7 @@
 <!-- split -->
 
 <article class="cover">
-    <h1 class="menu">Install</h1>
+    <h1 data-menu-item="ax5-install">Install</h1>
 </article>
 <article class="content">
     <h2 class="menu">ax5 시작하기</h2>
@@ -111,13 +120,13 @@
 <!-- split -->
 
 <article class="cover">
-    <h1 class="menu">ax5.util</h1>
+    <h1 data-menu-item="ax5-util">ax5.util</h1>
 </article>
 
 <!-- split -->
 
 <article class="content">
-    <h2 class="menu">ax5.util.alert</h2>
+    <h2 data-menu-item="ax5-util-alert">ax5.util.alert</h2>
 <pre class="prettyprint linenums">
 	
 &lt;button data-button="ax5-util-alert-0">{a:1, b:2}&lt;/button>
@@ -140,7 +149,7 @@
 <!-- split -->
 
 <article class="content">
-    <h2 class="menu">ax5.util.camel_case</h2>
+    <h2 data-menu-item="ax5-util-camel_case">ax5.util.camel_case</h2>
 <pre class="prettyprint linenums">
 &lt;div id="ax5-util-camel-case" class="script-result">&lt;/div>
 &lt;script>
@@ -168,7 +177,7 @@
 </article>
 
 <article class="content">
-    <h2 class="menu">ax5.util.snake_case</h2>
+    <h2 data-menu-item="ax5-util-snake_case">ax5.util.snake_case</h2>
 <pre class="prettyprint linenums">
 &lt;div id="ax5-util-snake_case" class="script-result">&lt;/div>
 &lt;script>
@@ -198,7 +207,7 @@
 </article>
 
 <article class="content">
-    <h2 class="menu">ax5.util.clone</h2>
+    <h2 data-menu-item="ax5-util-clone">ax5.util.clone</h2>
     
 <pre class="prettyprint linenums">
 &lt;div id="ax5-util-clone" class="script-result">&lt;/div>
@@ -235,7 +244,7 @@
 </article>
 
 <article class="content">
-    <h2 class="menu">ax5.util.each</h2>
+    <h2 data-menu-item="ax5-util-each">ax5.util.each</h2>
 
 <pre class="prettyprint linenums">
 &lt;div id="ax5-util-each" class="script-result">&lt;/div>
@@ -287,7 +296,7 @@
 </article>
 
 <article class="content">
-    <h2 class="menu">ax5.util.filter</h2>
+    <h2 data-menu-item="ax5-util-filter">ax5.util.filter</h2>
 <pre class="prettyprint linenums">
 &lt;div id="ax5-util-filter" class="script-result">&lt;/div>
 &lt;script>
@@ -338,7 +347,7 @@
 
 
 <article class="content">
-	<h2 class="menu">ax5.util.search</h2>
+	<h2 data-menu-item="ax5-util-search">ax5.util.search</h2>
 <pre class="prettyprint linenums">
 &lt;div id="ax5-util-search" class="script-result">&lt;/div>
 &lt;script>
@@ -399,7 +408,7 @@
 </article>
 
 <article class="content">
-    <h2 class="menu">ax5.util.map</h2>
+    <h2 data-menu-item="ax5-util-map">ax5.util.map</h2>
 <pre class="prettyprint linenums">
 &lt;div id="ax5-util-map" class="script-result">&lt;/div>
 &lt;script>
@@ -433,7 +442,7 @@
 </article>
 
 <article class="content">
-    <h2 class="menu">ax5.util.merge</h2>
+    <h2 data-menu-item="ax5-util-merge">ax5.util.merge</h2>
 <pre class="prettyprint linenums">
 &lt;div id="ax5-util-merge" class="script-result">&lt;/div>
 &lt;script>
@@ -462,7 +471,7 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 </article>
 
 <article class="content">
-    <h2 class="menu">ax5.util.reduce</h2>
+    <h2 data-menu-item="ax5-util-reduce">ax5.util.reduce</h2>
 <pre class="prettyprint linenums">
 &lt;div id="ax5-util-reduce" class="script-result">&lt;/div>
 &lt;script>
@@ -509,7 +518,7 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 </article>
 
 <article class="content">
-    <h2 class="menu">ax5.util.reduce_right</h2>
+    <h2 data-menu-item="ax5-util-reduce_right">ax5.util.reduce_right</h2>
 <pre class="prettyprint linenums">
 &lt;div id="ax5-util-reduce_right" class="script-result">&lt;/div>
 &lt;script>
@@ -546,7 +555,7 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 <!-- split -->
 
 <article class="content">
-    <h2 class="menu">ax5.util.extend</h2>
+    <h2 data-menu-item="ax5-util-extend">ax5.util.extend</h2>
 <pre class="prettyprint linenums">
 
 </pre>
@@ -561,7 +570,7 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 </article>
 
 <article class="content">
-    <h2 class="menu">ax5.util.extend_all</h2>
+    <h2 data-menu-item="ax5-util-extend_all">ax5.util.extend_all</h2>
 <pre class="prettyprint linenums">
 
 </pre>
@@ -579,7 +588,7 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 <!-- split -->
 
 <article class="cover">
-    <h1 class="menu">ax5.xhr</h1>
+    <h1 data-menu-item="ax5-xhr">ax5.xhr</h1>
 </article>
 <article class="content">
     <h3>일반적인 방법</h3>

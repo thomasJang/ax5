@@ -220,26 +220,30 @@ pre.prettyprint {
   height: 10px;
 }
 /* line 173, app.scss */
-.app-page .app-content article h1[id], .app-page .app-content article h2[id] {
-  padding-top: 100px;
+.app-page .app-content article h1 {
+  padding-top: 30px;
 }
-/* line 177, app.scss */
+/* line 176, app.scss */
+.app-page .app-content article h2, .app-page .app-content article h3 {
+  padding-top: 20px;
+}
+/* line 180, app.scss */
 .app-page .app-content article.cover h1 {
   font-size: 2.5em;
   text-align: center;
 }
-/* line 182, app.scss */
+/* line 185, app.scss */
 .app-page .app-content article.content {
   padding: 0px 0px 10px 0px;
 }
-/* line 184, app.scss */
+/* line 187, app.scss */
 .app-page .app-content .script-result, .app-page .app-content .tag-result {
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 10px;
   font-size: 1.2em;
 }
-/* line 190, app.scss */
+/* line 193, app.scss */
 .app-page .app-content .ax-section {
   position: relative;
   border: 1px solid #ccc;
@@ -247,7 +251,7 @@ pre.prettyprint {
   padding: 10px;
   font-size: 1.2em;
 }
-/* line 198, app.scss */
+/* line 201, app.scss */
 .app-page .app-nav-left {
   position: absolute;
   top: 0px;
@@ -256,170 +260,171 @@ pre.prettyprint {
   box-sizing: border-box;
   padding: 20px;
   overflow: auto;
-  text-align: right;
+  text-align: left;
   /* Rectangle 10: */
   background: #F1F1F1;
   border-radius: 8px;
 }
-/* line 211, app.scss */
+/* line 214, app.scss */
 .app-page .app-nav-left a {
   display: block;
   line-height: 1.5em;
   text-decoration: none;
   color: #444;
 }
-/* line 217, app.scss */
+/* line 220, app.scss */
 .app-page .app-nav-left li {
   list-style: none;
-  text-align: right;
+  text-align: left;
 }
-/* line 221, app.scss */
+/* line 224, app.scss */
 .app-page .app-nav-left ul {
   margin: 0px;
   padding: 0px;
 }
-/* line 224, app.scss */
+/* line 227, app.scss */
 .app-page .app-nav-left ul li {
   padding-top: 10px;
   padding-right: 0px;
 }
-/* line 228, app.scss */
+/* line 231, app.scss */
 .app-page .app-nav-left ul li a {
   font-size: 1.2em;
   line-height: 2em;
   color: #000;
 }
-/* line 230, app.scss */
+/* line 233, app.scss */
 .app-page .app-nav-left ul ul {
   padding: 0px 0px 0px 0px;
 }
-/* line 232, app.scss */
+/* line 235, app.scss */
 .app-page .app-nav-left ul ul li {
   padding-top: 0px;
   padding-right: 0px;
+  padding-left: 10px;
 }
-/* line 236, app.scss */
+/* line 240, app.scss */
 .app-page .app-nav-left ul ul li a {
   font-size: 1em;
   line-height: 1.5em;
   color: #444;
 }
 
-/* line 244, app.scss */
+/* line 248, app.scss */
 .DH1 {
   line-height: 0px;
   height: 1px;
 }
 
-/* line 248, app.scss */
+/* line 252, app.scss */
 .DH10 {
   line-height: 0px;
   height: 10px;
 }
 
-/* line 244, app.scss */
+/* line 248, app.scss */
 .DH2 {
   line-height: 0px;
   height: 2px;
 }
 
-/* line 248, app.scss */
+/* line 252, app.scss */
 .DH20 {
   line-height: 0px;
   height: 20px;
 }
 
-/* line 244, app.scss */
+/* line 248, app.scss */
 .DH3 {
   line-height: 0px;
   height: 3px;
 }
 
-/* line 248, app.scss */
+/* line 252, app.scss */
 .DH30 {
   line-height: 0px;
   height: 30px;
 }
 
-/* line 244, app.scss */
+/* line 248, app.scss */
 .DH4 {
   line-height: 0px;
   height: 4px;
 }
 
-/* line 248, app.scss */
+/* line 252, app.scss */
 .DH40 {
   line-height: 0px;
   height: 40px;
 }
 
-/* line 244, app.scss */
+/* line 248, app.scss */
 .DH5 {
   line-height: 0px;
   height: 5px;
 }
 
-/* line 248, app.scss */
+/* line 252, app.scss */
 .DH50 {
   line-height: 0px;
   height: 50px;
 }
 
-/* line 244, app.scss */
+/* line 248, app.scss */
 .DH6 {
   line-height: 0px;
   height: 6px;
 }
 
-/* line 248, app.scss */
+/* line 252, app.scss */
 .DH60 {
   line-height: 0px;
   height: 60px;
 }
 
-/* line 244, app.scss */
+/* line 248, app.scss */
 .DH7 {
   line-height: 0px;
   height: 7px;
 }
 
-/* line 248, app.scss */
+/* line 252, app.scss */
 .DH70 {
   line-height: 0px;
   height: 70px;
 }
 
-/* line 244, app.scss */
+/* line 248, app.scss */
 .DH8 {
   line-height: 0px;
   height: 8px;
 }
 
-/* line 248, app.scss */
+/* line 252, app.scss */
 .DH80 {
   line-height: 0px;
   height: 80px;
 }
 
-/* line 244, app.scss */
+/* line 248, app.scss */
 .DH9 {
   line-height: 0px;
   height: 9px;
 }
 
-/* line 248, app.scss */
+/* line 252, app.scss */
 .DH90 {
   line-height: 0px;
   height: 90px;
 }
 
-/* line 244, app.scss */
+/* line 248, app.scss */
 .DH10 {
   line-height: 0px;
   height: 10px;
 }
 
-/* line 248, app.scss */
+/* line 252, app.scss */
 .DH100 {
   line-height: 0px;
   height: 100px;

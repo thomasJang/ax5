@@ -1,0 +1,242 @@
+@mixin input-group-radius($border-radius) {
+  @if (type_of($border-radius) == "list") {
+	border-top-left-radius: nth($border-radius, 1);
+	border-top-right-radius: nth($border-radius, 2);
+	border-bottom-right-radius: nth($border-radius, 3);
+	border-bottom-left-radius: nth($border-radius, 4);
+  }
+  @else {
+	border-radius: $border-radius;
+  }
+}
+
+
+@mixin input-group-addon($text-color, $text-shadow, $border, $bg, $bg-image, $drop-shadow){
+  display: table-cell;
+  //display: inline-block;
+  font-weight: $btn-font-weight;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  white-space: nowrap;
+  box-sizing: border-box;
+
+  color: $text-color;
+  text-shadow: $text-shadow;
+  border: $border;
+  //@include border-radius($btn-default-border-radius);
+
+  @if($bg-image == "") 	{ @include ax5-btn-gradient(nth($bg, 1), nth($bg, 2)); }
+  @else						{ @include background-image($bg-image); }
+  @include box-shadow($drop-shadow);
+  @include input-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, $input-border-radius-base);
+  @include user-select(none);
+
+  &:first-child{
+
+  }
+  &:not(:first-child){
+	@include border-left-radius(0);
+	border-left:0px none;
+  }
+  &:last-child{
+
+  }
+  &:not(:last-child){
+	@include border-right-radius(0);
+	border-right:0px none;
+  }
+  &:not(:first-child):not(:last-child) {
+
+  }
+}
+
+
+@mixin input-group-has-axicon($text-color, $text-shadow, $bg, $bg-image, $color-hover, $border, $drop-shadow, $axicon-content){
+  .ax5-inp{
+	display: table-cell;
+	&:not(:last-child){
+	  @include input-group-radius($input-border-radius-base);
+	}
+	&:not(:first-child){
+	  @include border-left-radius(0);
+	  border-left:0px none;
+	}
+	@include input-variant($text-color, $text-shadow, $bg, $bg-image, $color-hover, $border, $drop-shadow);
+  }
+  .axicon{
+	position: absolute;
+	right:0px;top:0px;
+	color: $text-color;
+	font-size: $font-size-base * 1.2;
+	font-weight: $font-weight;
+	line-height: $line-height-computed;
+	padding: $padding-base-vertical $padding-base-horizontal;
+	font-family: axicon;
+	&:before{
+	  //content:'\f164';
+	  content: $axicon-content;
+	}
+  }
+}
+
+@mixin input-group-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius){
+  .ax5-addon {
+	padding: $padding-vertical $padding-horizontal;
+	font-size: $font-size;
+	line-height: $line-height;
+	overflow: hidden;
+	display: inline-block;
+  }
+  .ax5-inp {
+	padding: $padding-vertical $padding-horizontal;
+	font-size: $font-size;
+	line-height: $line-height;
+	@if (type_of($border-radius) == "list") {
+	  border-top-left-radius: nth($border-radius, 1);
+	  border-top-right-radius: nth($border-radius, 2);
+	  border-bottom-right-radius: nth($border-radius, 3);
+	  border-bottom-left-radius: nth($border-radius, 4);
+	}
+	@else {
+	  border-radius: $border-radius;
+	}
+	
+	&:not(:first-child){
+	  @include border-left-radius(0);
+	}
+	&:not(:last-child){
+	  @include border-right-radius(0);
+	}
+  }
+  .axicon {
+	padding: $padding-vertical $padding-horizontal;
+	font-size: $font-size;
+	line-height: $line-height;
+  }
+}
+// mixins --------------------------------------------- end
+
+// like table -- support IE8 +
+.ax5-inp-group {
+  position: relative;
+  display: inline-table;
+  border-collapse: separate;
+  border-spacing: 0px;
+  vertical-align: middle;
+
+  .ax5-addon{
+	@include input-group-addon($btn-default-text-color, $btn-default-text-shadow, $input-default-border, $btn-default-bg, $btn-default-bg-image, $btn-default-drop-shadow);
+  }
+  .ax5-inp{
+	display: table-cell;
+	margin: 0px;
+	&:not(:first-child){
+	  @include border-left-radius(0);
+	}
+	&:not(:last-child){
+	  @include border-right-radius(0);
+	}
+  }
+
+  // situation
+  &.basic{
+	.ax5-addon{
+	  @include input-group-addon($btn-basic-text-color, $btn-basic-text-shadow, $input-basic-border, $btn-basic-bg, $btn-basic-bg-image, $btn-basic-drop-shadow);
+	}
+	.ax5-inp {
+	  @include input-variant($input-basic-text-color, $input-basic-text-shadow, $input-basic-bg, $input-basic-bg-image, $input-basic-color-hover, $input-basic-border, $input-basic-drop-shadow);
+	}
+  }
+  &.good{
+	.ax5-addon{
+	  @include input-group-addon($btn-good-text-color, $btn-good-text-shadow, $input-good-border, $btn-good-bg, $btn-good-bg-image, $btn-good-drop-shadow);
+	}
+	.ax5-inp {
+	  @include input-variant($input-good-text-color, $input-good-text-shadow, $input-good-bg, $input-good-bg-image, $input-good-color-hover, $input-good-border, $input-good-drop-shadow);
+	}
+  }
+  &.info{
+	.ax5-addon{
+	  @include input-group-addon($btn-info-text-color, $btn-info-text-shadow, $input-info-border, $btn-info-bg, $btn-info-bg-image, $btn-info-drop-shadow);
+	}
+	.ax5-inp {
+	  @include input-variant($input-info-text-color, $input-info-text-shadow, $input-info-bg, $input-info-bg-image, $input-info-color-hover, $input-info-border, $input-info-drop-shadow);
+	}
+  }
+  &.warning{
+	.ax5-addon{
+	  @include input-group-addon($btn-warning-text-color, $btn-warning-text-shadow, $input-warning-border, $btn-warning-bg, $btn-warning-bg-image, $btn-warning-drop-shadow);
+	}
+	.ax5-inp {
+	  @include input-variant($input-warning-text-color, $input-warning-text-shadow, $input-warning-bg, $input-warning-bg-image, $input-warning-color-hover, $input-warning-border, $input-warning-drop-shadow);
+	}
+  }
+  &.danger{
+	.ax5-addon{
+	  @include input-group-addon($btn-danger-text-color, $btn-danger-text-shadow, $input-danger-border, $btn-danger-bg, $btn-danger-bg-image, $btn-danger-drop-shadow);
+	}
+	.ax5-inp {
+	  @include input-variant($input-danger-text-color, $input-danger-text-shadow, $input-danger-bg, $input-danger-bg-image, $input-danger-color-hover, $input-danger-border, $input-danger-drop-shadow);
+	}
+  }
+  &.special{
+	.ax5-addon{
+	  @include input-group-addon($btn-special-text-color, $btn-special-text-shadow, $input-special-border, $btn-special-bg, $btn-special-bg-image, $btn-special-drop-shadow);
+	}
+	.ax5-inp {
+	  @include input-variant($input-special-text-color, $input-special-text-shadow, $input-special-bg, $input-special-bg-image, $input-special-color-hover, $input-special-border, $input-special-drop-shadow);
+	}
+  }
+
+  // with axicon
+  &.has-basic{
+	.ax5-addon{
+	  @include input-group-addon($btn-basic-text-color, $btn-basic-text-shadow, $input-basic-border, $btn-basic-bg, $btn-basic-bg-image, $btn-basic-drop-shadow);
+	}
+	@include input-group-has-axicon($input-basic-text-color, $input-basic-text-shadow, $input-basic-bg, $input-basic-bg-image, $input-basic-color-hover, $input-basic-border, $input-basic-drop-shadow, '\f164');
+  }
+  &.has-good{
+	.ax5-addon{
+	  @include input-group-addon($btn-good-text-color, $btn-good-text-shadow, $input-good-border, $btn-good-bg, $btn-good-bg-image, $btn-good-drop-shadow);
+	}
+	@include input-group-has-axicon($input-good-text-color, $input-good-text-shadow, $input-good-bg, $input-good-bg-image, $input-good-color-hover, $input-good-border, $input-good-drop-shadow, '\f164');
+  }
+  &.has-info{
+	.ax5-addon{
+	  @include input-group-addon($btn-info-text-color, $btn-info-text-shadow, $input-info-border, $btn-info-bg, $btn-info-bg-image, $btn-info-drop-shadow);
+	}
+	@include input-group-has-axicon($input-info-text-color, $input-info-text-shadow, $input-info-bg, $input-info-bg-image, $input-info-color-hover, $input-info-border, $input-info-drop-shadow, '\e6c6');
+  }
+  &.has-warning{
+	.ax5-addon{
+	  @include input-group-addon($btn-warning-text-color, $btn-warning-text-shadow, $input-warning-border, $btn-warning-bg, $btn-warning-bg-image, $btn-warning-drop-shadow);
+	}
+	@include input-group-has-axicon($input-warning-text-color, $input-warning-text-shadow, $input-warning-bg, $input-warning-bg-image, $input-warning-color-hover, $input-warning-border, $input-warning-drop-shadow, '\e730');
+  }
+  &.has-danger{
+	.ax5-addon{
+	  @include input-group-addon($btn-danger-text-color, $btn-danger-text-shadow, $input-danger-border, $btn-danger-bg, $btn-danger-bg-image, $btn-danger-drop-shadow);
+	}
+	@include input-group-has-axicon($input-danger-text-color, $input-danger-text-shadow, $input-danger-bg, $input-danger-bg-image, $input-danger-color-hover, $input-danger-border, $input-danger-drop-shadow, '\e72f');
+  }
+  &.has-special{
+	.ax5-addon{
+	  @include input-group-addon($btn-special-text-color, $btn-special-text-shadow, $input-special-border, $btn-special-bg, $btn-special-bg-image, $btn-special-drop-shadow);
+	}
+	@include input-group-has-axicon($input-special-text-color, $input-special-text-shadow, $input-special-bg, $input-special-bg-image, $input-special-color-hover, $input-special-border, $input-special-drop-shadow, '\e60a');
+  }
+
+  // size
+  &.lg {
+	// line-height: ensure even-numbered height of button next to large input
+	@include input-group-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $border-radius-large);
+  }
+  &.sm {
+	// line-height: ensure proper height of button next to small input
+	@include input-group-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $border-radius-small);
+  }
+  &.xs {
+	@include input-group-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $border-radius-small);
+  }
+}

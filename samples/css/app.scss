@@ -170,8 +170,11 @@ $app-nav-left: 200px;
       height: 10px;
     }
     article{
-	  h1[id],h2[id]{
-		padding-top:100px;
+	  h1{
+		padding-top:30px;
+	  }
+	  h2,h3{
+		padding-top:20px;
 	  }
       &.cover{
         h1{
@@ -202,7 +205,7 @@ $app-nav-left: 200px;
     box-sizing: border-box;
     padding:20px;
     overflow: auto;
-    text-align: right;
+    text-align: left;
 
 	/* Rectangle 10: */
 	background: #F1F1F1;
@@ -216,7 +219,7 @@ $app-nav-left: 200px;
     }
     li{
       list-style: none;
-      text-align: right;
+      text-align: left;
     }
     ul{
       margin:0px;
@@ -233,6 +236,7 @@ $app-nav-left: 200px;
           //text-align: right;
           padding-top: 0px;
           padding-right: 0px;
+		  padding-left: 10px;
           a{font-size: 1em;line-height: 1.5em;color: #444;}
         }
       }

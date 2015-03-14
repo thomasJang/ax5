@@ -14,32 +14,34 @@
 			},
             core: {
 				src: [
-					'samples/core/head.html',
-                    'samples/core/install.html',
+					'samples/layout/head.html',
+					'samples/layout/visual-dom.html',
+					'samples/layout/install.html',
 					'samples/ax5/util/*.html',
 					'samples/ax5/dom/*.html',
 					'samples/ax5/xhr/*.html',
-					'samples/core/bottom.html'
+					'samples/layout/bottom.html'
 				],
 				dest: 'samples/index.html'
 			},
-            ui: {
+            css: {
                 src: [
-                    'samples/ui/head.html',
-                    'samples/ax5/ui/*.html',
-                    'samples/ui/bottom.html'
+                    'samples/layout/head.html',
+	                'samples/layout/visual-css.html',
+                    'samples/ax5/css/*.html',
+                    'samples/layout/bottom.html'
                 ],
-                dest: 'samples/ui.html'
+                dest: 'samples/css.html'
             }
 		},
 		watch: {
             core: {
-                files: ['samples/core/*.html', 'samples/ax5/util/*.html', 'samples/ax5/dom/*.html', 'samples/ax5/xhr/*.html'],
+                files: ['samples/ax5/util/*.html', 'samples/ax5/dom/*.html', 'samples/ax5/xhr/*.html'],
                 tasks: ['concat:core', 'replace:core']
             },
-            ui: {
-                files: ['samples/ui/*.html','samples/ax5/ui/*.html'],
-                tasks: ['concat:ui', 'replace:ui']
+            css: {
+                files: ['samples/ax5/css/*.html'],
+                tasks: ['concat:css', 'replace:css']
             }
 		},
         replace: {
@@ -61,8 +63,8 @@
                     }
                 }]
             },
-            ui: {
-                src: ['samples/ui.html'],
+            css: {
+                src: ['samples/css.html'],
                 overwrite: true,                 // overwrite matched source files
                 options: {
                     processTemplates: false
@@ -86,5 +88,5 @@
     grunt.loadNpmTasks('grunt-text-replace');
     
 	grunt.registerTask('ax5-core', ['concat:core','replace:core','watch:core']);
-    grunt.registerTask('ax5-ui', ['concat:ui','replace:ui','watch:ui']);
+    grunt.registerTask('ax5-css', ['concat:css','replace:css','watch:css']);
 };
