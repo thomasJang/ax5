@@ -10,7 +10,6 @@
   }
 }
 
-
 @mixin input-group-addon($text-color, $text-shadow, $border, $bg, $bg-image, $drop-shadow){
   display: table-cell;
   //display: inline-block;
@@ -24,12 +23,11 @@
   color: $text-color;
   text-shadow: $text-shadow;
   border: $border;
-  //@include border-radius($btn-default-border-radius);
-
+  
   @if($bg-image == "") 	{ @include ax5-btn-gradient(nth($bg, 1), nth($bg, 2)); }
   @else						{ @include background-image($bg-image); }
   @include box-shadow($drop-shadow);
-  @include input-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, $input-border-radius-base);
+  @include input-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, $input-border-radius-base, $input-height-base);
   @include user-select(none);
 
   &:first-child{
@@ -50,7 +48,6 @@
 
   }
 }
-
 
 @mixin input-group-has-axicon($text-color, $text-shadow, $bg, $bg-image, $color-hover, $border, $drop-shadow, $axicon-content){
   .ax5-inp{
@@ -80,11 +77,12 @@
   }
 }
 
-@mixin input-group-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius){
+@mixin input-group-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius, $height){
   .ax5-addon {
 	padding: $padding-vertical $padding-horizontal;
 	font-size: $font-size;
 	line-height: $line-height;
+	height: $height;
 	overflow: hidden;
 	display: inline-block;
   }
@@ -92,6 +90,7 @@
 	padding: $padding-vertical $padding-horizontal;
 	font-size: $font-size;
 	line-height: $line-height;
+	height: $height;
 	@if (type_of($border-radius) == "list") {
 	  border-top-left-radius: nth($border-radius, 1);
 	  border-top-right-radius: nth($border-radius, 2);
@@ -110,9 +109,11 @@
 	}
   }
   .axicon {
+	box-sizing: border-box;
 	padding: $padding-vertical $padding-horizontal;
 	font-size: $font-size;
 	line-height: $line-height;
+	height: $height;
   }
 }
 // mixins --------------------------------------------- end
@@ -230,13 +231,13 @@
   // size
   &.lg {
 	// line-height: ensure even-numbered height of button next to large input
-	@include input-group-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $border-radius-large);
+	@include input-group-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $border-radius-large, $input-height-large);
   }
   &.sm {
 	// line-height: ensure proper height of button next to small input
-	@include input-group-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $border-radius-small);
+	@include input-group-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $border-radius-small, $input-height-small);
   }
   &.xs {
-	@include input-group-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $border-radius-small);
+	@include input-group-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $border-radius-small, $input-height-xs);
   }
 }

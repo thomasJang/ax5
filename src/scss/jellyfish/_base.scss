@@ -181,6 +181,8 @@ $input-height-base:              ($line-height-computed + ($padding-base-vertica
 $input-height-large:             (ceil($font-size-large * $line-height-large) + ($padding-large-vertical * 2) + 2);
 //** Small `.form-control` height
 $input-height-small:             (floor($font-size-small * $line-height-small) + ($padding-small-vertical * 2) + 2);
+//** XSmall `.form-control` height
+$input-height-xs:             (floor($font-size-small * $line-height-small) + ($padding-xs-vertical * 2) + 2);
 
 $input-default-text-color: #4A4A4A;
 $input-default-text-shadow: 0px 1px 0px rgba(255,255,255, 0.5);

@@ -18,12 +18,15 @@
   @include form-control-focus($color-hover);
   @include placeholder($text-color);
 }
-@mixin input-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius) {
+
+@mixin input-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius, $height) {
   padding: $padding-vertical $padding-horizontal;
   font-size: $font-size;
   line-height: $line-height;
-
+  height: $height;
+  
   @if (type_of($border-radius) == "list") {
+	@include border-radius(nth($border-radius,1));
 	border-top-left-radius: nth($border-radius, 1);
 	border-top-right-radius: nth($border-radius, 2);
 	border-bottom-right-radius: nth($border-radius, 3);
@@ -33,8 +36,6 @@
 	border-radius: $border-radius;
   }
 }
-
-
 // mixins --------------------------------------------- end
 
 // ax5 input
@@ -60,7 +61,7 @@
   // Placeholder
   @include placeholder();
   
-  @include input-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, $input-border-radius-base);
+  @include input-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, $input-border-radius-base, $input-height-base);
 
   &[disabled], &[readonly]{
 	@include ax5-inp-gradient($input-bg-disabled, $input-bg-disabled);
@@ -91,13 +92,72 @@
   // size
   &.lg {
 	// line-height: ensure even-numbered height of button next to large input
-	@include input-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $border-radius-large);
+	@include input-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $border-radius-large, $input-height-large);
   }
   &.sm {
 	// line-height: ensure proper height of button next to small input
-	@include input-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $border-radius-small);
+	@include input-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $border-radius-small, $input-height-small);
   }
   &.xs {
-	@include input-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $border-radius-small);
+	@include input-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $border-radius-small, $input-height-xs);
+  }
+}
+
+
+@mixin select-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius, $height) {
+  padding: $padding-vertical $padding-horizontal;
+  font-size: $font-size;
+  line-height: $line-height;
+  height: $height;
+
+  @if (type_of($border-radius) == "list") {
+	//@include border-radius(nth($border-radius,1));
+	border-top-left-radius: nth($border-radius, 1);
+	border-top-right-radius: nth($border-radius, 2);
+	border-bottom-right-radius: nth($border-radius, 3);
+	border-bottom-left-radius: nth($border-radius, 4);
+  }
+  @else {
+	border-radius: $border-radius;
+  }
+}
+.ax5-select{
+  @include ax5();
+  font-weight: $input-font-weight;
+  vertical-align: middle;
+  //touch-action: manipulation;
+  white-space: nowrap;
+  box-sizing: border-box;
+  
+  color: $input-default-text-color;
+  text-shadow: $input-default-text-shadow;
+  border: $input-default-border;
+
+  @if($btn-default-bg-image == "") 	{ @include ax5-inp-gradient(nth($btn-default-bg, 1), nth($btn-default-bg, 2)); }
+  @else						{ @include background-image($btn-default-bg-image); }
+  @include box-shadow($btn-default-drop-shadow);
+
+  // Customize the `:focus` state to imitate native WebKit styles.
+  @include form-control-focus($input-default-color-hover);
+  
+  @include input-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, $input-border-radius-base, $input-height-base);
+
+  &[disabled], &[readonly]{
+	@include ax5-inp-gradient($input-bg-disabled, $input-bg-disabled);
+	@include box-shadow(none);
+	opacity: 1;
+  }
+
+  // size
+  &.lg {
+	// line-height: ensure even-numbered height of button next to large input
+	@include input-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $border-radius-large, $input-height-large);
+  }
+  &.sm {
+	// line-height: ensure proper height of button next to small input
+	@include input-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $border-radius-small, $input-height-small);
+  }
+  &.xs {
+	@include input-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $border-radius-small, $input-height-xs);
   }
 }
