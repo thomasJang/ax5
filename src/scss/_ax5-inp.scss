@@ -148,6 +148,26 @@
 	opacity: 1;
   }
 
+  // situation
+  &.basic{
+	@include input-variant($btn-basic-text-color, $btn-basic-text-shadow, $btn-basic-bg, $btn-basic-bg-image, $input-basic-color-hover, $btn-basic-border, $btn-basic-drop-shadow);
+  }
+  &.good{
+	@include input-variant($btn-good-text-color, $btn-good-text-shadow, $btn-good-bg, $btn-good-bg-image, $input-good-color-hover, $btn-good-border, $btn-good-drop-shadow);
+  }
+  &.info{
+	@include input-variant($btn-info-text-color, $btn-info-text-shadow, $btn-info-bg, $btn-info-bg-image, $input-info-color-hover, $btn-info-border, $btn-info-drop-shadow);
+  }
+  &.warning{
+	@include input-variant($btn-warning-text-color, $btn-warning-text-shadow, $btn-warning-bg, $btn-warning-bg-image, $input-warning-color-hover, $btn-warning-border, $btn-warning-drop-shadow);
+  }
+  &.danger{
+	@include input-variant($btn-danger-text-color, $btn-danger-text-shadow, $btn-danger-bg, $btn-danger-bg-image, $input-danger-color-hover, $btn-danger-border, $btn-danger-drop-shadow);
+  }
+  &.special{
+	@include input-variant($btn-special-text-color, $btn-special-text-shadow, $btn-special-bg, $btn-special-bg-image, $input-special-color-hover, $btn-special-border, $btn-special-drop-shadow);
+  }
+  
   // size
   &.lg {
 	// line-height: ensure even-numbered height of button next to large input
