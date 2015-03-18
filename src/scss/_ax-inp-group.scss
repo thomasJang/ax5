@@ -24,7 +24,7 @@
   text-shadow: $text-shadow;
   border: $border;
   
-  @if($bg-image == "") 	{ @include ax5-btn-gradient(nth($bg, 1), nth($bg, 2)); }
+  @if($bg-image == "") 	{ @include ax-btn-gradient(nth($bg, 1), nth($bg, 2)); }
   @else						{ @include background-image($bg-image); }
   @include box-shadow($drop-shadow);
   @include input-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, $input-border-radius-base, $input-height-base);
@@ -50,7 +50,7 @@
 }
 
 @mixin input-group-has-axicon($text-color, $text-shadow, $bg, $bg-image, $color-hover, $border, $drop-shadow, $axicon-content){
-  .ax5-inp{
+  .ax-inp{
 	display: table-cell;
 	&:not(:last-child){
 	  @include input-group-radius($input-border-radius-base);
@@ -78,7 +78,7 @@
 }
 
 @mixin input-group-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius, $height){
-  .ax5-addon {
+  .ax-addon {
 	padding: $padding-vertical $padding-horizontal;
 	font-size: $font-size;
 	line-height: $line-height;
@@ -86,7 +86,7 @@
 	overflow: hidden;
 	display: inline-block;
   }
-  .ax5-inp {
+  .ax-inp {
 	padding: $padding-vertical $padding-horizontal;
 	font-size: $font-size;
 	line-height: $line-height;
@@ -119,17 +119,17 @@
 // mixins --------------------------------------------- end
 
 // like table -- support IE8 +
-.ax5-inp-group {
+.ax-inp-group {
   position: relative;
   display: inline-table;
   border-collapse: separate;
   border-spacing: 0px;
   vertical-align: middle;
 
-  .ax5-addon{
+  .ax-addon{
 	@include input-group-addon($btn-default-text-color, $btn-default-text-shadow, $input-default-border, $btn-default-bg, $btn-default-bg-image, $btn-default-drop-shadow);
   }
-  .ax5-inp{
+  .ax-inp{
 	display: table-cell;
 	margin: 0px;
 	&:not(:first-child){
@@ -142,87 +142,87 @@
 
   // situation
   &.basic{
-	.ax5-addon{
+	.ax-addon{
 	  @include input-group-addon($btn-basic-text-color, $btn-basic-text-shadow, $input-basic-border, $btn-basic-bg, $btn-basic-bg-image, $btn-basic-drop-shadow);
 	}
-	.ax5-inp {
+	.ax-inp {
 	  @include input-variant($input-basic-text-color, $input-basic-text-shadow, $input-basic-bg, $input-basic-bg-image, $input-basic-color-hover, $input-basic-border, $input-basic-drop-shadow);
 	}
   }
   &.good{
-	.ax5-addon{
+	.ax-addon{
 	  @include input-group-addon($btn-good-text-color, $btn-good-text-shadow, $input-good-border, $btn-good-bg, $btn-good-bg-image, $btn-good-drop-shadow);
 	}
-	.ax5-inp {
+	.ax-inp {
 	  @include input-variant($input-good-text-color, $input-good-text-shadow, $input-good-bg, $input-good-bg-image, $input-good-color-hover, $input-good-border, $input-good-drop-shadow);
 	}
   }
   &.info{
-	.ax5-addon{
+	.ax-addon{
 	  @include input-group-addon($btn-info-text-color, $btn-info-text-shadow, $input-info-border, $btn-info-bg, $btn-info-bg-image, $btn-info-drop-shadow);
 	}
-	.ax5-inp {
+	.ax-inp {
 	  @include input-variant($input-info-text-color, $input-info-text-shadow, $input-info-bg, $input-info-bg-image, $input-info-color-hover, $input-info-border, $input-info-drop-shadow);
 	}
   }
   &.warning{
-	.ax5-addon{
+	.ax-addon{
 	  @include input-group-addon($btn-warning-text-color, $btn-warning-text-shadow, $input-warning-border, $btn-warning-bg, $btn-warning-bg-image, $btn-warning-drop-shadow);
 	}
-	.ax5-inp {
+	.ax-inp {
 	  @include input-variant($input-warning-text-color, $input-warning-text-shadow, $input-warning-bg, $input-warning-bg-image, $input-warning-color-hover, $input-warning-border, $input-warning-drop-shadow);
 	}
   }
   &.danger{
-	.ax5-addon{
+	.ax-addon{
 	  @include input-group-addon($btn-danger-text-color, $btn-danger-text-shadow, $input-danger-border, $btn-danger-bg, $btn-danger-bg-image, $btn-danger-drop-shadow);
 	}
-	.ax5-inp {
+	.ax-inp {
 	  @include input-variant($input-danger-text-color, $input-danger-text-shadow, $input-danger-bg, $input-danger-bg-image, $input-danger-color-hover, $input-danger-border, $input-danger-drop-shadow);
 	}
   }
   &.special{
-	.ax5-addon{
+	.ax-addon{
 	  @include input-group-addon($btn-special-text-color, $btn-special-text-shadow, $input-special-border, $btn-special-bg, $btn-special-bg-image, $btn-special-drop-shadow);
 	}
-	.ax5-inp {
+	.ax-inp {
 	  @include input-variant($input-special-text-color, $input-special-text-shadow, $input-special-bg, $input-special-bg-image, $input-special-color-hover, $input-special-border, $input-special-drop-shadow);
 	}
   }
 
   // with axicon
   &.has-basic{
-	.ax5-addon{
+	.ax-addon{
 	  @include input-group-addon($btn-basic-text-color, $btn-basic-text-shadow, $input-basic-border, $btn-basic-bg, $btn-basic-bg-image, $btn-basic-drop-shadow);
 	}
 	@include input-group-has-axicon($input-basic-text-color, $input-basic-text-shadow, $input-basic-bg, $input-basic-bg-image, $input-basic-color-hover, $input-basic-border, $input-basic-drop-shadow, '\f164');
   }
   &.has-good{
-	.ax5-addon{
+	.ax-addon{
 	  @include input-group-addon($btn-good-text-color, $btn-good-text-shadow, $input-good-border, $btn-good-bg, $btn-good-bg-image, $btn-good-drop-shadow);
 	}
 	@include input-group-has-axicon($input-good-text-color, $input-good-text-shadow, $input-good-bg, $input-good-bg-image, $input-good-color-hover, $input-good-border, $input-good-drop-shadow, '\f164');
   }
   &.has-info{
-	.ax5-addon{
+	.ax-addon{
 	  @include input-group-addon($btn-info-text-color, $btn-info-text-shadow, $input-info-border, $btn-info-bg, $btn-info-bg-image, $btn-info-drop-shadow);
 	}
 	@include input-group-has-axicon($input-info-text-color, $input-info-text-shadow, $input-info-bg, $input-info-bg-image, $input-info-color-hover, $input-info-border, $input-info-drop-shadow, '\e6c6');
   }
   &.has-warning{
-	.ax5-addon{
+	.ax-addon{
 	  @include input-group-addon($btn-warning-text-color, $btn-warning-text-shadow, $input-warning-border, $btn-warning-bg, $btn-warning-bg-image, $btn-warning-drop-shadow);
 	}
 	@include input-group-has-axicon($input-warning-text-color, $input-warning-text-shadow, $input-warning-bg, $input-warning-bg-image, $input-warning-color-hover, $input-warning-border, $input-warning-drop-shadow, '\e730');
   }
   &.has-danger{
-	.ax5-addon{
+	.ax-addon{
 	  @include input-group-addon($btn-danger-text-color, $btn-danger-text-shadow, $input-danger-border, $btn-danger-bg, $btn-danger-bg-image, $btn-danger-drop-shadow);
 	}
 	@include input-group-has-axicon($input-danger-text-color, $input-danger-text-shadow, $input-danger-bg, $input-danger-bg-image, $input-danger-color-hover, $input-danger-border, $input-danger-drop-shadow, '\e72f');
   }
   &.has-special{
-	.ax5-addon{
+	.ax-addon{
 	  @include input-group-addon($btn-special-text-color, $btn-special-text-shadow, $input-special-border, $btn-special-bg, $btn-special-bg-image, $btn-special-drop-shadow);
 	}
 	@include input-group-has-axicon($input-special-text-color, $input-special-text-shadow, $input-special-bg, $input-special-bg-image, $input-special-color-hover, $input-special-border, $input-special-drop-shadow, '\e60a');

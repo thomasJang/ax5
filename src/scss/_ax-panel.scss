@@ -1,0 +1,21 @@
+@mixin ax-panel(){
+  @include box-sizing($panel-box-model);
+}
+
+// mixins --------------------------------------------- end
+
+.ax-panel-scroll{
+  @include ax-panel();
+}
+.ax-panel-menu{
+  @include ax-panel();
+}
+.ax-panel-tab{
+  @include ax-panel();
+}
+.ax-panel-toolbar{
+  @include ax-panel();
+}
+.ax-panel-label{
+  @include ax-panel();
+}

@@ -30,15 +30,15 @@
 .special{@include get-text-link($theme-special);}
 
 // ax5-text
-@mixin ax5{
+@mixin ax{
   color: $text-color;
   font-size: $font-size-base;
   font-weight: $font-weight;
   font-family: $font-family-base;
   line-height: $line-height-computed;
 }
-.ax5{ @include ax5; }
-a.ax5{
+.ax{ @include ax; }
+a.ax{
   color:$link-color;
   text-decoration: $link-decoration;
   &:hover{
@@ -47,7 +47,7 @@ a.ax5{
   }
 }
 
-.ax5{
+.ax{
   // situation
   &.mute{color: $theme-muted;}
   &.basic{@include get-text-link($theme-basic);}

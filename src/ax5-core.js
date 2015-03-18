@@ -1958,12 +1958,14 @@
 
 		// 박스사이즈 구하기
 		function box_size(els, fn_nm, opts) {
-			var d = -1, tag_nm = "";
-			if (U.is_window(els)) {
-				return els.document.documentElement[U.camel_case("client-" + fn_nm)];
+			var d = -1, tag_nm = "",
+				el = [].concat(els)[0];
+			
+			if (U.is_window(el)) {
+				return el.document.documentElement[U.camel_case("client-" + fn_nm)];
 			}
 			else {
-				var el = els[0], _sbs = U.camel_case("scroll-" + fn_nm), _obs = U.camel_case("offset-" + fn_nm), _cbs = U.camel_case("client-" + fn_nm);
+				var _sbs = U.camel_case("scroll-" + fn_nm), _obs = U.camel_case("offset-" + fn_nm), _cbs = U.camel_case("client-" + fn_nm);
 				if (el) {
 					tag_nm = el.tagName.toLowerCase();
 					if (tag_nm == "html") {
@@ -2221,6 +2223,7 @@
 			if (query.toString() == "[object ax5.dom]") {
                 r_els = query.elements;
 			}
+			else if (U.is_window(query)) r_els.push(query);
 			else if (U.is_element(query)) r_els.push(query);
 			else if (U.is_array(query) || U.is_nodelist(query)) {
 				for (; i < l; i++)  if (U.is_element(query[i])) r_els.push(query[i]);

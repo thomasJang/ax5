@@ -1,0 +1,25 @@
+@mixin ax-panel-floating(){
+  @include ax-panel();
+  position: absolute;
+}
+
+// mixins --------------------------------------------- end
+
+.ax-floating-contenxt{
+  @include ax-panel-floating();
+}
+.ax-floating-modal{
+  @include ax-panel-floating();
+}
+.ax-floating-toast{
+  @include ax-panel-floating();
+}
+.ax-floating-dialog{
+  @include ax-panel-floating();
+}
+.ax-floating-progress{
+  @include ax-panel-floating();
+}
+.ax-floating-tooltip{
+  @include ax-panel-floating();
+}

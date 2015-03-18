@@ -23,8 +23,8 @@ Usage
 module.exports = function (grunt) {
     var path = require('path');
 
-    var DEMO_PATH = 'document'; // html 생성 폴더명 Gruntfile로부터 상대적위치
-    var DEMO_SAMPLE_PATH = '../axisj/'; // jsdoc을 추출할 위치 Gruntfile로부터 상대적위치
+    var DOCU_PATH = 'document'; // html 생성 폴더명 Gruntfile로부터 상대적위치
+    var SOURCE_PATH = '../axisj/'; // jsdoc을 추출할 위치 Gruntfile로부터 상대적위치
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'), // 이 파일안에 변수모음이 있다고 생각하시면 됩니다.
@@ -37,7 +37,7 @@ module.exports = function (grunt) {
             demo: {
                 options: {
                     port: 2016,
-                    base: DEMO_PATH,
+                    base: DOCU_PATH,
                     middleware: function (connect, options) {
                         return [
                             require('connect-livereload')(),
@@ -74,7 +74,7 @@ module.exports = function (grunt) {
         /* 도규먼트 생성 폴더를 지워줍니다. */
         clean: {
             demo: {
-                src: DEMO_PATH
+                src: DOCU_PATH
             }
         },
 
@@ -82,15 +82,15 @@ module.exports = function (grunt) {
         jsdoc: {
             demo: {
                 src: [
-	                DEMO_SAMPLE_PATH + 'lib/AXConfig.js',
-	                DEMO_SAMPLE_PATH + 'lib/AXUtil.js',
+	                SOURCE_PATH + 'lib/AXConfig.js',
+	                SOURCE_PATH + 'lib/AXUtil.js',
 
                     // You can add README.md file for index page at documentations.
                     'index.md'
                 ],
                 options: {
                     verbose: true,
-                    destination: DEMO_PATH,
+                    destination: DOCU_PATH,
                     configure: 'conf.json',
                     template: './',
                     'private': false
@@ -109,12 +109,12 @@ module.exports = function (grunt) {
         copy: {
             css: {
                 src: 'static/styles/axisjdoc.css',
-                dest: DEMO_PATH + '/styles/axisjdoc.css'
+                dest: DOCU_PATH + '/styles/axisjdoc.css'
             },
 
             js: {
                 src: 'static/scripts/main.js',
-                dest: DEMO_PATH + '/scripts/main.js'
+                dest: DOCU_PATH + '/scripts/main.js'
             }
         }
     });

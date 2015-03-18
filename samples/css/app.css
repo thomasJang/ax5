@@ -55,7 +55,7 @@ pre.prettyprint {
 .app-wrap {
   position: relative;
   width: 970px;
-  margin: 0px auto;
+  margin: 0px;
 }
 
 /* line 66, app.scss */
@@ -90,7 +90,7 @@ pre.prettyprint {
 .app-nav .box-content {
   position: relative;
   width: 970px;
-  margin: 0px auto;
+  margin: 0px;
 }
 /* line 90, app.scss */
 .app-nav .box-content ul, .app-nav .box-content li {
@@ -211,7 +211,7 @@ pre.prettyprint {
 .app-page .app-content {
   position: relative;
   width: 750px;
-  margin: 0px auto;
+  margin: 0px;
   padding-left: 220px;
 }
 /* line 168, app.scss */
@@ -254,177 +254,183 @@ pre.prettyprint {
 /* line 201, app.scss */
 .app-page .app-nav-left {
   position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 200px;
-  box-sizing: border-box;
-  padding: 20px;
-  overflow: auto;
-  text-align: left;
+  top: 290px;
+  left: 10px;
   /* Rectangle 10: */
   background: #F1F1F1;
   border-radius: 8px;
+  width: 200px;
+  margin: 0px auto 0px auto;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  overflow: auto;
+  text-align: left;
+  box-sizing: border-box;
 }
 /* line 214, app.scss */
+.app-page .app-nav-left.pinned {
+  position: fixed;
+  top: 70px;
+}
+/* line 219, app.scss */
 .app-page .app-nav-left a {
   display: block;
   line-height: 1.5em;
   text-decoration: none;
   color: #444;
 }
-/* line 220, app.scss */
+/* line 225, app.scss */
 .app-page .app-nav-left li {
   list-style: none;
   text-align: left;
 }
-/* line 224, app.scss */
+/* line 229, app.scss */
 .app-page .app-nav-left ul {
   margin: 0px;
   padding: 0px;
 }
-/* line 227, app.scss */
+/* line 232, app.scss */
 .app-page .app-nav-left ul li {
-  padding-top: 10px;
   padding-right: 0px;
 }
-/* line 231, app.scss */
+/* line 236, app.scss */
 .app-page .app-nav-left ul li a {
   font-size: 1.2em;
   line-height: 2em;
   color: #000;
 }
-/* line 233, app.scss */
+/* line 238, app.scss */
 .app-page .app-nav-left ul ul {
   padding: 0px 0px 0px 0px;
 }
-/* line 235, app.scss */
+/* line 240, app.scss */
 .app-page .app-nav-left ul ul li {
   padding-top: 0px;
   padding-right: 0px;
   padding-left: 10px;
 }
-/* line 240, app.scss */
+/* line 245, app.scss */
 .app-page .app-nav-left ul ul li a {
   font-size: 1em;
   line-height: 1.5em;
   color: #444;
 }
 
-/* line 248, app.scss */
+/* line 253, app.scss */
 .DH1 {
   line-height: 0px;
   height: 1px;
 }
 
-/* line 252, app.scss */
+/* line 257, app.scss */
 .DH10 {
   line-height: 0px;
   height: 10px;
 }
 
-/* line 248, app.scss */
+/* line 253, app.scss */
 .DH2 {
   line-height: 0px;
   height: 2px;
 }
 
-/* line 252, app.scss */
+/* line 257, app.scss */
 .DH20 {
   line-height: 0px;
   height: 20px;
 }
 
-/* line 248, app.scss */
+/* line 253, app.scss */
 .DH3 {
   line-height: 0px;
   height: 3px;
 }
 
-/* line 252, app.scss */
+/* line 257, app.scss */
 .DH30 {
   line-height: 0px;
   height: 30px;
 }
 
-/* line 248, app.scss */
+/* line 253, app.scss */
 .DH4 {
   line-height: 0px;
   height: 4px;
 }
 
-/* line 252, app.scss */
+/* line 257, app.scss */
 .DH40 {
   line-height: 0px;
   height: 40px;
 }
 
-/* line 248, app.scss */
+/* line 253, app.scss */
 .DH5 {
   line-height: 0px;
   height: 5px;
 }
 
-/* line 252, app.scss */
+/* line 257, app.scss */
 .DH50 {
   line-height: 0px;
   height: 50px;
 }
 
-/* line 248, app.scss */
+/* line 253, app.scss */
 .DH6 {
   line-height: 0px;
   height: 6px;
 }
 
-/* line 252, app.scss */
+/* line 257, app.scss */
 .DH60 {
   line-height: 0px;
   height: 60px;
 }
 
-/* line 248, app.scss */
+/* line 253, app.scss */
 .DH7 {
   line-height: 0px;
   height: 7px;
 }
 
-/* line 252, app.scss */
+/* line 257, app.scss */
 .DH70 {
   line-height: 0px;
   height: 70px;
 }
 
-/* line 248, app.scss */
+/* line 253, app.scss */
 .DH8 {
   line-height: 0px;
   height: 8px;
 }
 
-/* line 252, app.scss */
+/* line 257, app.scss */
 .DH80 {
   line-height: 0px;
   height: 80px;
 }
 
-/* line 248, app.scss */
+/* line 253, app.scss */
 .DH9 {
   line-height: 0px;
   height: 9px;
 }
 
-/* line 252, app.scss */
+/* line 257, app.scss */
 .DH90 {
   line-height: 0px;
   height: 90px;
 }
 
-/* line 248, app.scss */
+/* line 253, app.scss */
 .DH10 {
   line-height: 0px;
   height: 10px;
 }
 
-/* line 252, app.scss */
+/* line 257, app.scss */
 .DH100 {
   line-height: 0px;
   height: 100px;

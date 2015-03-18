@@ -1,5 +1,5 @@
 // input Linear Gradient
-@mixin ax5-inp-gradient ($start: #ffffff, $stop: $start) {
+@mixin ax-inp-gradient ($start: #ffffff, $stop: $start) {
   background: $start;
   @include background-image(linear-gradient(top, $start, $stop));
   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#{$start}, endColorstr=#{$stop});
@@ -10,7 +10,7 @@
   text-shadow: $text-shadow;
   border: $border;
   
-  @if($bg-image == "") 	{ @include ax5-inp-gradient(nth($bg, 1), nth($bg, 2)); }
+  @if($bg-image == "") 	{ @include ax-inp-gradient(nth($bg, 1), nth($bg, 2)); }
   @else						{ @include background-image($bg-image); }
   @include box-shadow($drop-shadow);
 
@@ -36,11 +36,30 @@
 	border-radius: $border-radius;
   }
 }
+
+@mixin select-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius, $height) {
+  padding: $padding-vertical $padding-horizontal;
+  font-size: $font-size;
+  line-height: $line-height;
+  height: $height;
+
+  @if (type_of($border-radius) == "list") {
+	//@include border-radius(nth($border-radius,1));
+	border-top-left-radius: nth($border-radius, 1);
+	border-top-right-radius: nth($border-radius, 2);
+	border-bottom-right-radius: nth($border-radius, 3);
+	border-bottom-left-radius: nth($border-radius, 4);
+  }
+  @else {
+	border-radius: $border-radius;
+  }
+}
+
 // mixins --------------------------------------------- end
 
-// ax5 input
-.ax5-inp {
-  @include ax5();
+// ax input
+.ax-inp {
+  @include ax();
   font-weight: $input-font-weight;
   vertical-align: middle;
   touch-action: manipulation;
@@ -51,7 +70,7 @@
   text-shadow: $input-default-text-shadow;
   border: $input-default-border;
 
-  @if($input-default-bg-image == "") 	{ @include ax5-inp-gradient(nth($input-default-bg, 1), nth($input-default-bg, 2)); }
+  @if($input-default-bg-image == "") 	{ @include ax-inp-gradient(nth($input-default-bg, 1), nth($input-default-bg, 2)); }
   @else						{ @include background-image($input-default-bg-image); }
   @include box-shadow($input-default-drop-shadow);
 
@@ -64,7 +83,7 @@
   @include input-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, $input-border-radius-base, $input-height-base);
 
   &[disabled], &[readonly]{
-	@include ax5-inp-gradient($input-bg-disabled, $input-bg-disabled);
+	@include ax-inp-gradient($input-bg-disabled, $input-bg-disabled);
 	@include box-shadow(none);
 	opacity: 1; // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655
   }
@@ -103,47 +122,29 @@
   }
 }
 
-
-@mixin select-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius, $height) {
-  padding: $padding-vertical $padding-horizontal;
-  font-size: $font-size;
-  line-height: $line-height;
-  height: $height;
-
-  @if (type_of($border-radius) == "list") {
-	//@include border-radius(nth($border-radius,1));
-	border-top-left-radius: nth($border-radius, 1);
-	border-top-right-radius: nth($border-radius, 2);
-	border-bottom-right-radius: nth($border-radius, 3);
-	border-bottom-left-radius: nth($border-radius, 4);
-  }
-  @else {
-	border-radius: $border-radius;
-  }
-}
-.ax5-select{
-  @include ax5();
+.ax-select{
+  @include ax();
   font-weight: $input-font-weight;
   vertical-align: middle;
   //touch-action: manipulation;
   white-space: nowrap;
   box-sizing: border-box;
-  
+
   color: $input-default-text-color;
   text-shadow: $input-default-text-shadow;
   border: $input-default-border;
 
-  @if($btn-default-bg-image == "") 	{ @include ax5-inp-gradient(nth($btn-default-bg, 1), nth($btn-default-bg, 2)); }
+  @if($btn-default-bg-image == "") 	{ @include ax-inp-gradient(nth($btn-default-bg, 1), nth($btn-default-bg, 2)); }
   @else						{ @include background-image($btn-default-bg-image); }
   @include box-shadow($btn-default-drop-shadow);
 
   // Customize the `:focus` state to imitate native WebKit styles.
   @include form-control-focus($input-default-color-hover);
-  
+
   @include input-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, $input-border-radius-base, $input-height-base);
 
   &[disabled], &[readonly]{
-	@include ax5-inp-gradient($input-bg-disabled, $input-bg-disabled);
+	@include ax-inp-gradient($input-bg-disabled, $input-bg-disabled);
 	@include box-shadow(none);
 	opacity: 1;
   }
@@ -167,7 +168,7 @@
   &.special{
 	@include input-variant($btn-special-text-color, $btn-special-text-shadow, $btn-special-bg, $btn-special-bg-image, $input-special-color-hover, $btn-special-border, $btn-special-drop-shadow);
   }
-  
+
   // size
   &.lg {
 	// line-height: ensure even-numbered height of button next to large input
@@ -179,5 +180,66 @@
   }
   &.xs {
 	@include input-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $border-radius-small, $input-height-xs);
+  }
+}
+
+.ax-textarea{
+  @include ax();
+  font-weight: $input-font-weight;
+  vertical-align: middle;
+  //touch-action: manipulation;
+  white-space: nowrap;
+  box-sizing: border-box;
+
+  color: $input-default-text-color;
+  text-shadow: $input-default-text-shadow;
+  border: $input-default-border;
+
+  @if($input-default-bg-image == "") 	{ @include ax-inp-gradient(nth($input-default-bg, 1), nth($input-default-bg, 2)); }
+  @else						{ @include background-image($input-default-bg-image); }
+  @include box-shadow($input-default-drop-shadow);
+
+  // Customize the `:focus` state to imitate native WebKit styles.
+  @include form-control-focus($input-default-color-hover);
+
+  @include input-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, $input-border-radius-base, auto);
+
+  &[disabled], &[readonly]{
+	@include ax-inp-gradient($input-bg-disabled, $input-bg-disabled);
+	@include box-shadow(none);
+	opacity: 1;
+  }
+
+  // situation
+  &.basic{
+	@include input-variant($input-basic-text-color, $input-basic-text-shadow, $input-basic-bg, $input-basic-bg-image, $input-basic-color-hover, $input-basic-border, $input-basic-drop-shadow);
+  }
+  &.good{
+	@include input-variant($input-good-text-color, $input-good-text-shadow, $input-good-bg, $input-good-bg-image, $input-good-color-hover, $input-good-border, $input-good-drop-shadow);
+  }
+  &.info{
+	@include input-variant($input-info-text-color, $input-info-text-shadow, $input-info-bg, $input-info-bg-image, $input-info-color-hover, $input-info-border, $input-info-drop-shadow);
+  }
+  &.warning{
+	@include input-variant($input-warning-text-color, $input-warning-text-shadow, $input-warning-bg, $input-warning-bg-image, $input-warning-color-hover, $input-warning-border, $input-warning-drop-shadow);
+  }
+  &.danger{
+	@include input-variant($input-danger-text-color, $input-danger-text-shadow, $input-danger-bg, $input-danger-bg-image, $input-danger-color-hover, $input-danger-border, $input-danger-drop-shadow);
+  }
+  &.special{
+	@include input-variant($input-special-text-color, $input-special-text-shadow, $input-special-bg, $input-special-bg-image, $input-special-color-hover, $input-special-border, $input-special-drop-shadow);
+  }
+
+  // size
+  &.lg {
+	// line-height: ensure even-numbered height of button next to large input
+	@include input-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $border-radius-large, auto);
+  }
+  &.sm {
+	// line-height: ensure proper height of button next to small input
+	@include input-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $border-radius-small, auto);
+  }
+  &.xs {
+	@include input-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $border-radius-small, auto);
   }
 }

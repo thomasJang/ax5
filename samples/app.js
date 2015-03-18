@@ -22,30 +22,40 @@
 		prev_tag = this.tagName;
 	});
 	po.push("</ul>");
-	dom("#app-nav-left").html(po.join(''));
+	dom("#app-nav-left").html('<div class="nav-block">' + po.join('') + '</div>');
 
 })();
 
 ax5.dom.scroll(function() {
 	if (!window.app_visual) window.app_visual = ax5.dom.get("#app-visual");
-	if (!window.app_nav_left) window.app_nav_left = ax5.dom.get("#app-nav-left")
+	if (!window.app_nav_left) window.app_nav_left = ax5.dom.get("#app-nav-left");
 	var stop = ax5.dom.scroll().top;
 	if(stop >= 220){
 		ax5.dom.class_name(app_visual, "add", "pinned")
 		ax5.dom.class_name(app_visual, "add", "scrolled");
-		//ax5.dom.class_name(app_nav_left, "add", "pinned");
-		ax5.dom.css(app_nav_left, {top:stop - 220});
+		ax5.dom.class_name(app_nav_left, "add", "pinned");
+		//ax5.dom.css(app_nav_left, {top:stop - 220});
 	}
-	else
-	if (stop < 60) {
-		ax5.dom.class_name(app_visual, "remove", "scrolled");
-		ax5.dom.class_name(app_visual, "remove", "pinned");
-		ax5.dom.css(app_nav_left, {top:0});
+	else{
+		ax5.dom.class_name(app_nav_left, "remove", "pinned");
+		if (stop < 60) {
+			ax5.dom.class_name(app_visual, "remove", "scrolled");
+			ax5.dom.class_name(app_visual, "remove", "pinned");
+			//ax5.dom.css(app_nav_left, {top:0});
+		}
+		else
+		{
+			ax5.dom.class_name(app_visual, "add", "scrolled");
+			ax5.dom.class_name(app_visual, "remove", "pinned");
+			//ax5.dom.css(app_nav_left, {top:0});
+		}
 	}
-	else
-	{
-		ax5.dom.class_name(app_visual, "add", "scrolled");
-		ax5.dom.class_name(app_visual, "remove", "pinned");
-		ax5.dom.css(app_nav_left, {top:0});
-	}
+});
+ax5.dom.ready(function(){
+	if (!window.app_visual) window.app_visual = ax5.dom.get("#app-visual");
+	if (!window.app_nav_left) window.app_nav_left = ax5.dom.get("#app-nav-left");
+	ax5.dom.css(app_nav_left, {"max-height":ax5.dom.height(window) - 80});
+});
+ax5.dom.resize(function(){
+	ax5.dom.css(app_nav_left, {"max-height":ax5.dom.height(window) - 80});
 });

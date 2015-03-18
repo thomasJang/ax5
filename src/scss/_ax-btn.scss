@@ -1,5 +1,5 @@
 // btn Linear Gradient
-@mixin ax5-btn-gradient ($start: #ffffff, $stop: $start) {
+@mixin ax-btn-gradient ($start: #ffffff, $stop: $start) {
   background: $start;
   @include background-image(linear-gradient(top, $start, $stop));
   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#{$start}, endColorstr=#{$stop});
@@ -14,7 +14,7 @@
   text-shadow: $text-shadow;
   border: $border;
 
-  @if($bg-image == "") 	{ @include ax5-btn-gradient(nth($bg, 1), nth($bg, 2)); }
+  @if($bg-image == "") 	{ @include ax-btn-gradient(nth($bg, 1), nth($bg, 2)); }
   @else						{ @include background-image($bg-image); }
   @include box-shadow($drop-shadow);
 
@@ -63,8 +63,8 @@
 
 //@warn "Assuming #{$btn-bg} to be in pixels";
 
-.ax5-btn {
-  @include ax5();
+.ax-btn {
+  @include ax();
   display: inline-block;
   font-weight: $btn-font-weight;
   text-align: center;
@@ -79,7 +79,7 @@
   border: $btn-default-border;
   //@include border-radius($btn-default-border-radius);
   
-  @if($btn-default-bg-image == "") 	{ @include ax5-btn-gradient(nth($btn-default-bg, 1), nth($btn-default-bg, 2)); }
+  @if($btn-default-bg-image == "") 	{ @include ax-btn-gradient(nth($btn-default-bg, 1), nth($btn-default-bg, 2)); }
   @else						{ @include background-image($btn-default-bg-image); }
   @include box-shadow($btn-default-drop-shadow);
   @include button-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, $border-radius-base);

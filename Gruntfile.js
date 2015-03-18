@@ -51,14 +51,20 @@
 				options: {              // Target options
 					sassDir: 'src/scss',
 					cssDir: 'src/css',
+					noLineComments: true,
+					outputStyle:'compact',
 					watch: true
+					//,spawn: false
 				}
 			},
 			sample_doc: {
 				options: {              // Target options
 					sassDir: 'samples/css',
 					cssDir: 'samples/css',
+					noLineComments: true,
+					outputStyle:'compact',
 					watch: true
+					//,spawn: false
 				}
 			}
 		}

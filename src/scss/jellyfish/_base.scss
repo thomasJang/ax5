@@ -1,5 +1,5 @@
 @import "compass/css3";
-@import "compass/utilities";
+//@import "compass/utilities";
 @import "../_utilities";
 
 // 변수선언 : variables
@@ -169,7 +169,7 @@ $btn-link-disabled-color:        $gray-light;
 $input-font-weight:                normal;
 $input-bg-disabled:              $gray-lighter;
 $input-border-radius-base:        (6px, 0px, 6px, 0px);
-$input-border-radius-large:       (8px, 8px, 8px, 8px);
+$input-border-radius-large:       (8px, 0px, 8px, 0px);
 $input-border-radius-small:       (3px, 0px, 3px, 0px);
 
 //** Placeholder text color
@@ -239,3 +239,6 @@ $input-special-bg-image: "";
 $input-special-color-hover: $theme-special;
 $input-special-border: 1px solid darken($theme-special, 20%);
 $input-special-drop-shadow: 0px 1px 3px 0px rgba(0,0,0,0.15) inset;
+
+//== Panel
+$panel-box-model: border-box;
