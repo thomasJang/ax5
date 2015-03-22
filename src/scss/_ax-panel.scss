@@ -1,5 +1,5 @@
 @mixin ax-panel(){
-  @include box-sizing($panel-box-model);
+  box-sizing : $panel-box-model;
 }
 
 // mixins --------------------------------------------- end

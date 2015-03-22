@@ -43,9 +43,34 @@
 		watch: {
 			theme: {
 				files: ['src/scss/*.scss','src/scss/**/*.scss'],
-				tasks: ['compass:theme']
+				tasks: ['sass:theme']
+			},
+			sample_doc: {
+				files: ['samples/css/*.scss'],
+				tasks: ['sass:sample_doc']
 			}
 		},
+		
+		sass: {
+			options: {
+				sassDir: 'src/scss',
+				cssDir: 'src/css',
+				noLineComments: true,
+				outputStyle:'nested',
+				spawn: false
+			},
+			theme: {
+				files: {
+					'src/css/jellyfish/ax5.css': 'src/scss/jellyfish/ax5.scss'
+				}
+			},
+			sample_doc: {
+				files: {
+					'samples/css/app.css': 'samples/css/app.scss'
+				}
+			}
+		},
+		
 		compass: {
 			theme: {
 				options: {              // Target options
@@ -53,8 +78,8 @@
 					cssDir: 'src/css',
 					noLineComments: true,
 					outputStyle:'compact',
-					watch: true
-					//,spawn: false
+					watch: true,
+					spawn: false
 				}
 			},
 			sample_doc: {
@@ -74,12 +99,13 @@
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-contrib-compass');
+	//grunt.loadNpmTasks('grunt-contrib-compass');
+	grunt.loadNpmTasks('grunt-sass');
 
 	grunt.registerTask('js-concat', ['concat']);
 	grunt.registerTask('js', ['concat','uglify']);
 	grunt.registerTask('css', ['cssmin']);
 	
-	grunt.registerTask('sass-run', ['compass:theme']);
-	grunt.registerTask('sass-run-doc', ['compass:sample_doc']);
+	grunt.registerTask('sass-run', ['sass:theme','watch:theme']);
+	grunt.registerTask('sass-run-doc', ['sass:sample_doc','watch:sample_doc']);
 };

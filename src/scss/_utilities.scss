@@ -26,3 +26,49 @@
   &:-ms-input-placeholder { color: $color; } // Internet Explorer 10+
   &::-webkit-input-placeholder  { color: $color; } // Safari and Chrome
 }
+
+@mixin prefixer($property, $value, $prefixes) {
+  @each $prefix in $prefixes {
+	@if $prefix == webkit {
+	  @if $prefix-for-webkit {
+		-webkit-#{$property}: $value;
+	  }
+	} @else if $prefix == moz {
+	  @if $prefix-for-mozilla {
+		-moz-#{$property}: $value;
+	  }
+	} @else if $prefix == ms {
+	  @if $prefix-for-microsoft {
+		-ms-#{$property}: $value;
+	  }
+	} @else if $prefix == o {
+	  @if $prefix-for-opera {
+		-o-#{$property}: $value;
+	  }
+	} @else if $prefix == spec {
+	  @if $prefix-for-spec {
+		#{$property}: $value;
+	  }
+	} @else  {
+	  @warn "Unrecognized prefix: #{$prefix}";
+	}
+  }
+}
+
+@mixin box-shadow ($shadows...) {
+  @include prefixer(box-shadow, $shadows, spec);
+}
+
+@mixin background-size ($lengths...) {
+  @include prefixer(background-size, $lengths, spec);
+}
+
+@mixin opacity($opacity){
+  @if $opacity == 1 {
+	filter: unquote("progid:DXImageTransform.Microsoft.Alpha(enabled=false)");
+  }
+  @else {
+	filter: unquote("progid:DXImageTransform.Microsoft.Alpha(Opacity=#{round($opacity * 100)})");
+  }
+  opacity: $opacity;
+}

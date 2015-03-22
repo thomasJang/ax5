@@ -26,7 +26,7 @@
   height: $height;
   
   @if (type_of($border-radius) == "list") {
-	@include border-radius(nth($border-radius,1));
+	border-radius: nth($border-radius,1);
 	border-top-left-radius: nth($border-radius, 1);
 	border-top-right-radius: nth($border-radius, 2);
 	border-bottom-right-radius: nth($border-radius, 3);
@@ -56,6 +56,7 @@
 }
 
 // mixins --------------------------------------------- end
+
 
 // ax input
 .ax-inp {
