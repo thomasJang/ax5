@@ -72,3 +72,51 @@
   }
   opacity: $opacity;
 }
+
+@mixin ax-border-radius($border-radius, $direction:""){
+	@if (type_of($border-radius) == "list") {
+		@if($direction == ""){
+			border-top-left-radius: nth($border-radius, 1);
+			border-top-right-radius: nth($border-radius, 2);
+			border-bottom-right-radius: nth($border-radius, 3);
+			border-bottom-left-radius: nth($border-radius, 4);
+		}
+		@else if($direction == "top") {
+			border-top-left-radius: nth($border-radius, 1);
+			border-top-right-radius: nth($border-radius, 2);
+		}
+		@else if($direction == "bottom") {
+			border-bottom-right-radius: nth($border-radius, 3);
+			border-bottom-left-radius: nth($border-radius, 4);
+		}
+		@else if($direction == "left") {
+			border-top-left-radius: nth($border-radius, 1);
+			border-bottom-left-radius: nth($border-radius, 4);
+		}
+		@else if($direction == "right") {
+			border-top-right-radius: nth($border-radius, 2);
+			border-bottom-right-radius: nth($border-radius, 3);
+		}
+	}
+	@else {
+		@if($direction == "") {
+			border-radius: $border-radius;
+		}
+		@else if($direction == "top") {
+			border-top-left-radius: $border-radius;
+			border-top-right-radius: $border-radius;
+		}
+		@else if($direction == "bottom") {
+			border-bottom-left-radius: $border-radius;
+			border-bottom-right-radius: $border-radius;
+		}
+		@else if($direction == "left") {
+			border-top-left-radius: $border-radius;
+			border-bottom-left-radius: $border-radius;
+		}
+		@else if($direction == "right") {
+			border-top-right-radius: $border-radius;
+			border-bottom-right-radius: $border-radius;
+		}
+	}
+}

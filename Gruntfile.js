@@ -50,7 +50,6 @@
 				tasks: ['sass:sample_doc']
 			}
 		},
-		
 		sass: {
 			options: {
 				sassDir: 'src/scss',
@@ -69,29 +68,6 @@
 					'samples/css/app.css': 'samples/css/app.scss'
 				}
 			}
-		},
-		
-		compass: {
-			theme: {
-				options: {              // Target options
-					sassDir: 'src/scss',
-					cssDir: 'src/css',
-					noLineComments: true,
-					outputStyle:'compact',
-					watch: true,
-					spawn: false
-				}
-			},
-			sample_doc: {
-				options: {              // Target options
-					sassDir: 'samples/css',
-					cssDir: 'samples/css',
-					noLineComments: true,
-					outputStyle:'compact',
-					watch: true
-					//,spawn: false
-				}
-			}
 		}
 	});
 	//grunt.loadTasks('tasks');
@@ -99,12 +75,11 @@
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-	//grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-sass');
 
-	grunt.registerTask('js-concat', ['concat']);
+	//grunt.registerTask('js-concat', ['concat']);
 	grunt.registerTask('js', ['concat','uglify']);
-	grunt.registerTask('css', ['cssmin']);
+	//grunt.registerTask('css', ['cssmin']);
 	
 	grunt.registerTask('sass-run', ['sass:theme','watch:theme']);
 	grunt.registerTask('sass-run-doc', ['sass:sample_doc','watch:sample_doc']);

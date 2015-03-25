@@ -1,21 +1,61 @@
+//
 @mixin ax-panel(){
-  box-sizing : $panel-box-model;
+	@include ax();
+	box-sizing : $panel-box-model;
+	background-color: $panel-bg;
+	border: 1px solid transparent;
+	
+	@include ax-border-radius($panel-border-radius);
+	@include box-shadow(0 1px 1px rgba(0,0,0,.05));
+
+	.ax-panel-heading{
+		padding: $panel-heading-padding;
+		border-bottom: 1px solid transparent;
+		//background: $panel-default-heading-bg;
+		@include ax-border-radius($panel-border-radius, "top");
+		.badge {
+			color: $heading-bg-color;
+			background-color: $heading-text-color;
+		}
+	}
+	.ax-panel-body{
+		padding: $panel-body-padding;
+	}
+	.ax-panel-foot{
+		padding: $panel-footer-padding;
+		@include ax-border-radius($panel-border-radius, "bottom");
+	}
+}
+
+@mixin panel-variant($border, $heading-text-color, $heading-bg-color, $heading-border) {
+	color: $panel-default-text;
+	border: $panel-default-border;
+	.ax-panel-heading{
+		background: $panel-default-heading-bg;
+	}
+	.ax-panel-foot{
+		background: $panel-default-heading-bg;
+	}
 }
 
 // mixins --------------------------------------------- end
+.ax-panel{
+	@include ax-panel();
+	@include panel-variant($panel-default-border, $panel-default-text, $panel-default-heading-bg, $panel-default-border);
+}
 
-.ax-panel-scroll{
-  @include ax-panel();
+.ax-scroll{
+	@include ax-panel();
 }
-.ax-panel-menu{
-  @include ax-panel();
+.ax-menu{
+	@include ax-panel();
 }
-.ax-panel-tab{
-  @include ax-panel();
+.ax-tab {
+	@include ax-panel();
 }
-.ax-panel-toolbar{
-  @include ax-panel();
+.ax-toolbar {
+	@include ax-panel();
 }
-.ax-panel-label{
-  @include ax-panel();
+.ax-label {
+	@include ax-panel();
 }

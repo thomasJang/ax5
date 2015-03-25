@@ -41,24 +41,15 @@
   }
   .badge {
 	color: nth($bg,1);
-	background-color: nth($bg,1);
+	background-color: $text-color;
   }
 }
 // Button sizes
 @mixin button-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius) {
-  padding: $padding-vertical $padding-horizontal;
-  font-size: $font-size;
-  line-height: $line-height;
-
-  @if (type_of($border-radius) == "list") {
-	border-top-left-radius: nth($border-radius, 1);
-	border-top-right-radius: nth($border-radius, 2);
-	border-bottom-right-radius: nth($border-radius, 3);
-	border-bottom-left-radius: nth($border-radius, 4);
-  }
-  @else {
-	border-radius: $border-radius;
-  }
+	padding: $padding-vertical $padding-horizontal;
+	font-size: $font-size;
+	line-height: $line-height;
+	@include ax-border-radius($border-radius);
 }
 
 //@warn "Assuming #{$btn-bg} to be in pixels";
