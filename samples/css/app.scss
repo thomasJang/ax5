@@ -1,5 +1,5 @@
-@import "compass/support";
-@import "compass/css3";
+@import "../../src/scss/bourbon/bourbon";
+@import "../../src/scss/utilities";
 
 $font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-family-serif:       Georgia, "Times New Roman", Times, serif;
@@ -7,7 +7,13 @@ $font-family-serif:       Georgia, "Times New Roman", Times, serif;
 $font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
 $font-family-base:        $font-family-sans-serif;
 
-
+$theme-basic: #32B4DC; // #337ab7;
+$theme-good:  #78B43C;
+$theme-info:  #002A4F;
+$theme-warning: #E66E3C;
+$theme-danger: darken($theme-warning, 20%);
+$theme-link: #fff;
+$theme-special: #bc4cd0;
 
 html, body{
   margin:0px;padding:0px;
@@ -163,7 +169,7 @@ $app-visual-height: 280px;
 	position: relative;
 	width: ($app-page-width - $app-nav-left - 20);
 	margin:0px;
-    padding-left: ($app-nav-left + 20);
+    padding-left: ($app-nav-left + 40);
 
     a[name]{
       display: block;
@@ -179,7 +185,9 @@ $app-visual-height: 280px;
       &.cover{
         h1{
           font-size: 2.5em;
-          text-align: center;
+          line-height: 1.8em;
+          border-bottom: 1px solid #eee;
+          //text-align: center;
         }
       }
       &.content{padding:0px 0px 10px 0px;}
@@ -196,6 +204,61 @@ $app-visual-height: 280px;
       border-radius: 10px;
       padding: 10px;
       font-size: 1.2em;
+    }
+    .lead{
+      font-size: 1.3em;
+      line-height: 1.5em;
+      font-weight: 200;
+    }
+    .callout{
+      padding: 20px;
+      margin: 20px 0;
+      border: 1px solid #eee;
+      border-left-width: 5px;
+      border-radius: 3px;
+      h4{
+        color:#000;
+        margin-top: 0;
+        margin-bottom: 5px;
+      }
+      p{
+        color:#333;
+        margin:0 0 10px;
+        &:last-child{
+          margin-bottom: 0;
+        }
+      }
+      &.basic{
+        border-left-color: $theme-basic;
+        h4{color:$theme-basic;}
+      }
+      &.good{
+        border-left-color: $theme-good;
+        h4{color:$theme-good;}
+      }
+      &.info{
+        border-left-color: $theme-info;
+        h4{color:$theme-info;}
+      }
+      &.warning{
+        border-left-color: $theme-warning;
+        h4{color:$theme-warning;}
+      }
+      &.danger{
+        border-left-color: $theme-danger;
+        h4{color:$theme-danger;}
+      }
+      &.special{
+        border-left-color: $theme-special;
+        h4{color:$theme-special;}
+      }
+    }
+    code{
+      padding: 2px 4px;
+      font-size: 90%;
+      color: #c7254e;
+      background-color: #f9f2f4;
+      border-radius: 4px;
     }
   }
   .app-nav-left{

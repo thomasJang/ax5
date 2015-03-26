@@ -73,50 +73,50 @@
   opacity: $opacity;
 }
 
-@mixin ax-border-radius($border-radius, $direction:""){
+@mixin ax-border-radius($border-radius, $direction:"", $adjust:0){
 	@if (type_of($border-radius) == "list") {
 		@if($direction == ""){
-			border-top-left-radius: nth($border-radius, 1);
-			border-top-right-radius: nth($border-radius, 2);
-			border-bottom-right-radius: nth($border-radius, 3);
-			border-bottom-left-radius: nth($border-radius, 4);
+			border-top-left-radius: nth($border-radius, 1)+$adjust;
+			border-top-right-radius: nth($border-radius, 2)+$adjust;
+			border-bottom-right-radius: nth($border-radius, 3)+$adjust;
+			border-bottom-left-radius: nth($border-radius, 4)+$adjust;
 		}
 		@else if($direction == "top") {
-			border-top-left-radius: nth($border-radius, 1);
-			border-top-right-radius: nth($border-radius, 2);
+			border-top-left-radius: nth($border-radius, 1)+$adjust;
+			border-top-right-radius: nth($border-radius, 2)+$adjust;
 		}
 		@else if($direction == "bottom") {
-			border-bottom-right-radius: nth($border-radius, 3);
-			border-bottom-left-radius: nth($border-radius, 4);
+			border-bottom-right-radius: nth($border-radius, 3)+$adjust;
+			border-bottom-left-radius: nth($border-radius, 4)+$adjust;
 		}
 		@else if($direction == "left") {
-			border-top-left-radius: nth($border-radius, 1);
-			border-bottom-left-radius: nth($border-radius, 4);
+			border-top-left-radius: nth($border-radius, 1)+$adjust;
+			border-bottom-left-radius: nth($border-radius, 4)+$adjust;
 		}
 		@else if($direction == "right") {
-			border-top-right-radius: nth($border-radius, 2);
-			border-bottom-right-radius: nth($border-radius, 3);
+			border-top-right-radius: nth($border-radius, 2)+$adjust;
+			border-bottom-right-radius: nth($border-radius, 3)+$adjust;
 		}
 	}
 	@else {
 		@if($direction == "") {
-			border-radius: $border-radius;
+			border-radius: $border-radius+$adjust;
 		}
 		@else if($direction == "top") {
-			border-top-left-radius: $border-radius;
-			border-top-right-radius: $border-radius;
+			border-top-left-radius: $border-radius+$adjust;
+			border-top-right-radius: $border-radius+$adjust;
 		}
 		@else if($direction == "bottom") {
-			border-bottom-left-radius: $border-radius;
-			border-bottom-right-radius: $border-radius;
+			border-bottom-left-radius: $border-radius+$adjust;
+			border-bottom-right-radius: $border-radius+$adjust;
 		}
 		@else if($direction == "left") {
-			border-top-left-radius: $border-radius;
-			border-bottom-left-radius: $border-radius;
+			border-top-left-radius: $border-radius+$adjust;
+			border-bottom-left-radius: $border-radius+$adjust;
 		}
 		@else if($direction == "right") {
-			border-top-right-radius: $border-radius;
-			border-bottom-right-radius: $border-radius;
+			border-top-right-radius: $border-radius+$adjust;
+			border-bottom-right-radius: $border-radius+$adjust;
 		}
 	}
 }

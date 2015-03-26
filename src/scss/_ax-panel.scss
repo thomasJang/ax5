@@ -9,13 +9,16 @@
 	@include box-shadow(0 1px 1px rgba(0,0,0,.05));
 
 	.ax-panel-heading{
+		font-size: 1.5em;
+		font-weight: 600;
 		padding: $panel-heading-padding;
 		border-bottom: 1px solid transparent;
 		//background: $panel-default-heading-bg;
-		@include ax-border-radius($panel-border-radius, "top");
+		@include ax-border-radius($panel-border-radius, "top", -1);
 		.badge {
-			color: $heading-bg-color;
-			background-color: $heading-text-color;
+			font-size: 0.8em;
+			color: $panel-default-heading-bg;
+			background-color: $panel-default-text;
 		}
 	}
 	.ax-panel-body{
@@ -23,18 +26,26 @@
 	}
 	.ax-panel-foot{
 		padding: $panel-footer-padding;
-		@include ax-border-radius($panel-border-radius, "bottom");
+		@include ax-border-radius($panel-border-radius, "bottom", -1);
 	}
 }
 
-@mixin panel-variant($border, $heading-text-color, $heading-bg-color, $heading-border) {
-	color: $panel-default-text;
-	border: $panel-default-border;
+@mixin panel-variant($border, $text-color, $heading-bg-color, $heading-border) {
+	border: $border;
 	.ax-panel-heading{
-		background: $panel-default-heading-bg;
+		color: $text-color;
+		background: $heading-bg-color;
+		.badge {
+			color: $heading-bg-color;
+			background-color: $text-color;
+		}
+	}
+	.ax-panel-body{
+
 	}
 	.ax-panel-foot{
-		background: $panel-default-heading-bg;
+		color: $text-color;
+		background: $heading-bg-color;
 	}
 }
 
@@ -42,6 +53,25 @@
 .ax-panel{
 	@include ax-panel();
 	@include panel-variant($panel-default-border, $panel-default-text, $panel-default-heading-bg, $panel-default-border);
+	
+	&.basic{
+		@include panel-variant($panel-basic-border, $panel-basic-text, $panel-basic-heading-bg, $panel-basic-border);
+	}
+	&.good{
+		@include panel-variant($panel-good-border, $panel-good-text, $panel-good-heading-bg, $panel-good-border);
+	}
+	&.info{
+		@include panel-variant($panel-info-border, $panel-info-text, $panel-info-heading-bg, $panel-info-border);
+	}
+	&.warning{
+		@include panel-variant($panel-warning-border, $panel-warning-text, $panel-warning-heading-bg, $panel-warning-border);
+	}
+	&.danger{
+		@include panel-variant($panel-danger-border, $panel-danger-text, $panel-danger-heading-bg, $panel-danger-border);
+	}
+	&.special{
+		@include panel-variant($panel-special-border, $panel-special-text, $panel-special-heading-bg, $panel-special-border);
+	}
 }
 
 .ax-scroll{

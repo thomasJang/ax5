@@ -21,13 +21,6 @@
 .capitalize{ text-transform: capitalize; }
 
 // situation
-.mute{color: $theme-muted;}
-.basic{@include get-text-link($theme-basic);}
-.good{@include get-text-link($theme-good);}
-.info{@include get-text-link($theme-info);}
-.warning{@include get-text-link($theme-warning);}
-.danger{@include get-text-link($theme-danger);}
-.special{@include get-text-link($theme-special);}
 
 // ax5-text
 @mixin ax{
@@ -45,6 +38,13 @@ a.ax{
     color:$link-hover-color;
     text-decoration: $link-hover-decoration;
   }
+  &.mute{color: $theme-muted;}
+  &.basic{@include get-text-link($theme-basic);}
+  &.good{@include get-text-link($theme-good);}
+  &.info{@include get-text-link($theme-info);}
+  &.warning{@include get-text-link($theme-warning);}
+  &.danger{@include get-text-link($theme-danger);}
+  &.special{@include get-text-link($theme-special);}
 }
 
 .ax{

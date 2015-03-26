@@ -1,4 +1,3 @@
-/* line 12, app.scss */
 html, body {
   margin: 0px;
   padding: 0px;
@@ -6,59 +5,34 @@ html, body {
   font-size: 14px;
   color: #444;
   height: 100%;
-  line-height: 1.6em;
-}
+  line-height: 1.6em; }
 
-/* line 20, app.scss */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   margin: 0.5em auto;
-  color: #222;
-}
+  color: #222; }
 
-/* line 29, app.scss */
 article h1 {
-  font-size: 2.5em;
-}
-/* line 32, app.scss */
+  font-size: 2.5em; }
 article h2 {
-  font-size: 1.8em;
-}
-/* line 35, app.scss */
+  font-size: 1.8em; }
 article h3 {
-  font-size: 1.5em;
-}
-/* line 38, app.scss */
+  font-size: 1.5em; }
 article h4 {
-  font-size: 1.2em;
-}
-/* line 41, app.scss */
+  font-size: 1.2em; }
 article h5 {
-  font-size: 1em;
-}
+  font-size: 1em; }
 
-/* line 49, app.scss */
 div.block-end {
-  height: 30px;
-}
+  height: 30px; }
 
-/* line 50, app.scss */
 pre.prettyprint {
-  border-radius: 10px;
-}
+  border-radius: 10px; }
 
-/* line 61, app.scss */
 .app-wrap {
   position: relative;
   width: 970px;
-  margin: 0px;
-}
+  margin: 0px; }
 
-/* line 66, app.scss */
 .app-nav {
   z-index: 1000;
   position: fixed;
@@ -67,87 +41,59 @@ pre.prettyprint {
   width: 100%;
   min-width: 970px;
   height: 60px;
-  color: #000;
-}
-/* line 74, app.scss */
-.app-nav a {
-  color: inherit;
-}
-/* line 77, app.scss */
-.app-nav .box-bg {
-  position: absolute;
-  width: 100%;
-  min-width: 970px;
-  height: 100%;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
-  opacity: 0.3;
-  background: rgba(255, 255, 255, 0.5);
-  -moz-box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.3);
-}
-/* line 86, app.scss */
-.app-nav .box-content {
-  position: relative;
-  width: 970px;
-  margin: 0px;
-}
-/* line 90, app.scss */
-.app-nav .box-content ul, .app-nav .box-content li {
-  margin: 0px;
-  padding: 0px;
-}
-/* line 91, app.scss */
-.app-nav .box-content li {
-  list-style: none;
-  display: inline;
-}
-/* line 92, app.scss */
-.app-nav .box-content .logo {
-  display: block;
-  height: 60px;
-  width: 200px;
-  line-height: 60px;
-  text-align: center;
-  font-size: 20px;
-  color: #fff;
-  font-weight: bold;
-  text-decoration: none;
-}
-/* line 100, app.scss */
-.app-nav .box-content .menu {
-  position: absolute;
-  left: 200px;
-  top: 0px;
-}
-/* line 102, app.scss */
-.app-nav .box-content .menu li {
-  display: block;
-  float: left;
-  height: 60px;
-  line-height: 60px;
-  text-align: center;
-  padding: 0px 20px;
-  font-size: 14px;
-  color: #fff;
-}
-/* line 108, app.scss */
-.app-nav .box-content .menu li a {
-  text-decoration: none;
-}
-/* line 109, app.scss */
-.app-nav .box-content .menu li.vline {
-  padding: 0px;
-  width: 1px;
-  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwLjUiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
-  background-size: 100%;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255, 255, 255, 0.5)), color-stop(100%, rgba(255, 255, 255, 0)));
-  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
-  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
-}
+  color: #000; }
+  .app-nav a {
+    color: inherit; }
+  .app-nav .box-bg {
+    position: absolute;
+    width: 100%;
+    min-width: 970px;
+    height: 100%;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+    opacity: 0.3;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.3); }
+  .app-nav .box-content {
+    position: relative;
+    width: 970px;
+    margin: 0px; }
+    .app-nav .box-content ul, .app-nav .box-content li {
+      margin: 0px;
+      padding: 0px; }
+    .app-nav .box-content li {
+      list-style: none;
+      display: inline; }
+    .app-nav .box-content .logo {
+      display: block;
+      height: 60px;
+      width: 200px;
+      line-height: 60px;
+      text-align: center;
+      font-size: 20px;
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none; }
+    .app-nav .box-content .menu {
+      position: absolute;
+      left: 200px;
+      top: 0px; }
+      .app-nav .box-content .menu li {
+        display: block;
+        float: left;
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+        padding: 0px 20px;
+        font-size: 14px;
+        color: #fff; }
+        .app-nav .box-content .menu li a {
+          text-decoration: none; }
+        .app-nav .box-content .menu li.vline {
+          padding: 0px;
+          width: 1px;
+          background-image: -webkit-linear-gradient( top , rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+          background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)); }
 
-/* line 117, app.scss */
 .app-visual {
   z-index: 900;
   position: absolute;
@@ -158,280 +104,237 @@ pre.prettyprint {
   height: 280px;
   color: #fff;
   /* Rectangle 6: */
-  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuMCIgeTE9IjAuNSIgeDI9IjEuMCIgeTI9IjAuNSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ViMTE2NSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZjNjIwZiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
-  background-size: 100%;
-  background-image: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #eb1165), color-stop(100%, #fc620f));
-  background-image: -moz-linear-gradient(left, #eb1165, #fc620f);
-  background-image: -webkit-linear-gradient(left, #eb1165, #fc620f);
-  background-image: linear-gradient(to right, #eb1165, #fc620f);
-}
-/* line 124, app.scss */
-.app-visual.pinned {
-  position: fixed;
-  top: -220px;
-}
-/* line 130, app.scss */
-.app-visual.scrolled .app-wrap {
-  -webkit-filter: blur(10px);
-  filter: blur(10px);
-}
-/* line 138, app.scss */
-.app-visual .visual {
-  position: absolute;
-  left: 50px;
-  top: 100px;
-  width: 150px;
-  height: 126px;
-  background: url(../images/ax5dom.png) no-repeat;
-  background-size: contain;
-}
-/* line 146, app.scss */
-.app-visual h1 {
-  color: #fff;
-  position: absolute;
-  left: 220px;
-  top: 120px;
-  font-size: 42px;
-}
-/* line 152, app.scss */
-.app-visual h3 {
-  color: #fff;
-  position: absolute;
-  left: 220px;
-  top: 170px;
-  font-size: 16px;
-}
+  background-image: -webkit-linear-gradient( left , #EB1165, #FC620F);
+  background-image: linear-gradient(to right, #EB1165, #FC620F); }
+  .app-visual.pinned {
+    position: fixed;
+    top: -220px; }
+  .app-visual.scrolled .app-wrap {
+    -webkit-filter: blur(10px);
+    filter: blur(10px); }
+  .app-visual .visual {
+    position: absolute;
+    left: 50px;
+    top: 100px;
+    width: 150px;
+    height: 126px;
+    background: url(../images/ax5dom.png) no-repeat;
+    background-size: contain; }
+  .app-visual h1 {
+    color: #fff;
+    position: absolute;
+    left: 220px;
+    top: 120px;
+    font-size: 42px; }
+  .app-visual h3 {
+    color: #fff;
+    position: absolute;
+    left: 220px;
+    top: 170px;
+    font-size: 16px; }
 
-/* line 159, app.scss */
 .app-page {
   position: relative;
-  padding: 280px 0px 0px 0px;
-}
-/* line 162, app.scss */
-.app-page .app-content {
-  position: relative;
-  width: 750px;
-  margin: 0px;
-  padding-left: 220px;
-}
-/* line 168, app.scss */
-.app-page .app-content a[name] {
-  display: block;
-  height: 10px;
-}
-/* line 173, app.scss */
-.app-page .app-content article h1 {
-  padding-top: 30px;
-}
-/* line 176, app.scss */
-.app-page .app-content article h2, .app-page .app-content article h3 {
-  padding-top: 20px;
-}
-/* line 180, app.scss */
-.app-page .app-content article.cover h1 {
-  font-size: 2.5em;
-  text-align: center;
-}
-/* line 185, app.scss */
-.app-page .app-content article.content {
-  padding: 0px 0px 10px 0px;
-}
-/* line 187, app.scss */
-.app-page .app-content .script-result, .app-page .app-content .tag-result {
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 10px;
-  font-size: 1.2em;
-}
-/* line 193, app.scss */
-.app-page .app-content .ax-section {
-  position: relative;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 10px;
-  font-size: 1.2em;
-}
-/* line 201, app.scss */
-.app-page .app-nav-left {
-  position: absolute;
-  top: 290px;
-  left: 10px;
-  /* Rectangle 10: */
-  background: #F1F1F1;
-  border-radius: 8px;
-  width: 200px;
-  margin: 0px auto 0px auto;
-  padding: 10px 20px;
-  box-sizing: border-box;
-  overflow: auto;
-  text-align: left;
-  box-sizing: border-box;
-}
-/* line 214, app.scss */
-.app-page .app-nav-left.pinned {
-  position: fixed;
-  top: 70px;
-}
-/* line 219, app.scss */
-.app-page .app-nav-left a {
-  display: block;
-  line-height: 1.5em;
-  text-decoration: none;
-  color: #444;
-}
-/* line 225, app.scss */
-.app-page .app-nav-left li {
-  list-style: none;
-  text-align: left;
-}
-/* line 229, app.scss */
-.app-page .app-nav-left ul {
-  margin: 0px;
-  padding: 0px;
-}
-/* line 232, app.scss */
-.app-page .app-nav-left ul li {
-  padding-right: 0px;
-}
-/* line 236, app.scss */
-.app-page .app-nav-left ul li a {
-  font-size: 1.2em;
-  line-height: 2em;
-  color: #000;
-}
-/* line 238, app.scss */
-.app-page .app-nav-left ul ul {
-  padding: 0px 0px 0px 0px;
-}
-/* line 240, app.scss */
-.app-page .app-nav-left ul ul li {
-  padding-top: 0px;
-  padding-right: 0px;
-  padding-left: 10px;
-}
-/* line 245, app.scss */
-.app-page .app-nav-left ul ul li a {
-  font-size: 1em;
-  line-height: 1.5em;
-  color: #444;
-}
+  padding: 280px 0px 0px 0px; }
+  .app-page .app-content {
+    position: relative;
+    width: 750px;
+    margin: 0px;
+    padding-left: 240px; }
+    .app-page .app-content a[name] {
+      display: block;
+      height: 10px; }
+    .app-page .app-content article h1 {
+      padding-top: 30px; }
+    .app-page .app-content article h2, .app-page .app-content article h3 {
+      padding-top: 20px; }
+    .app-page .app-content article.cover h1 {
+      font-size: 2.5em;
+      line-height: 1.8em;
+      border-bottom: 1px solid #eee; }
+    .app-page .app-content article.content {
+      padding: 0px 0px 10px 0px; }
+    .app-page .app-content .script-result, .app-page .app-content .tag-result {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 1.2em; }
+    .app-page .app-content .ax-section {
+      position: relative;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 1.2em; }
+    .app-page .app-content .lead {
+      font-size: 1.3em;
+      line-height: 1.5em;
+      font-weight: 200; }
+    .app-page .app-content .callout {
+      padding: 20px;
+      margin: 20px 0;
+      border: 1px solid #eee;
+      border-left-width: 5px;
+      border-radius: 3px; }
+      .app-page .app-content .callout h4 {
+        color: #000;
+        margin-top: 0;
+        margin-bottom: 5px; }
+      .app-page .app-content .callout p {
+        color: #333;
+        margin: 0 0 10px; }
+        .app-page .app-content .callout p:last-child {
+          margin-bottom: 0; }
+      .app-page .app-content .callout.basic {
+        border-left-color: #32B4DC; }
+        .app-page .app-content .callout.basic h4 {
+          color: #32B4DC; }
+      .app-page .app-content .callout.good {
+        border-left-color: #78B43C; }
+        .app-page .app-content .callout.good h4 {
+          color: #78B43C; }
+      .app-page .app-content .callout.info {
+        border-left-color: #002A4F; }
+        .app-page .app-content .callout.info h4 {
+          color: #002A4F; }
+      .app-page .app-content .callout.warning {
+        border-left-color: #E66E3C; }
+        .app-page .app-content .callout.warning h4 {
+          color: #E66E3C; }
+      .app-page .app-content .callout.danger {
+        border-left-color: #a74015; }
+        .app-page .app-content .callout.danger h4 {
+          color: #a74015; }
+      .app-page .app-content .callout.special {
+        border-left-color: #bc4cd0; }
+        .app-page .app-content .callout.special h4 {
+          color: #bc4cd0; }
+    .app-page .app-content code {
+      padding: 2px 4px;
+      font-size: 90%;
+      color: #c7254e;
+      background-color: #f9f2f4;
+      border-radius: 4px; }
+  .app-page .app-nav-left {
+    position: absolute;
+    top: 290px;
+    left: 10px;
+    /* Rectangle 10: */
+    background: #F1F1F1;
+    border-radius: 8px;
+    width: 200px;
+    margin: 0px auto 0px auto;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    overflow: auto;
+    text-align: left;
+    box-sizing: border-box; }
+    .app-page .app-nav-left.pinned {
+      position: fixed;
+      top: 70px; }
+    .app-page .app-nav-left a {
+      display: block;
+      line-height: 1.5em;
+      text-decoration: none;
+      color: #444; }
+    .app-page .app-nav-left li {
+      list-style: none;
+      text-align: left; }
+    .app-page .app-nav-left ul {
+      margin: 0px;
+      padding: 0px; }
+      .app-page .app-nav-left ul li {
+        padding-right: 0px; }
+        .app-page .app-nav-left ul li a {
+          font-size: 1.2em;
+          line-height: 2em;
+          color: #000; }
+      .app-page .app-nav-left ul ul {
+        padding: 0px 0px 0px 0px; }
+        .app-page .app-nav-left ul ul li {
+          padding-top: 0px;
+          padding-right: 0px;
+          padding-left: 10px; }
+          .app-page .app-nav-left ul ul li a {
+            font-size: 1em;
+            line-height: 1.5em;
+            color: #444; }
 
-/* line 253, app.scss */
 .DH1 {
   line-height: 0px;
-  height: 1px;
-}
+  height: 1px; }
 
-/* line 257, app.scss */
 .DH10 {
   line-height: 0px;
-  height: 10px;
-}
+  height: 10px; }
 
-/* line 253, app.scss */
 .DH2 {
   line-height: 0px;
-  height: 2px;
-}
+  height: 2px; }
 
-/* line 257, app.scss */
 .DH20 {
   line-height: 0px;
-  height: 20px;
-}
+  height: 20px; }
 
-/* line 253, app.scss */
 .DH3 {
   line-height: 0px;
-  height: 3px;
-}
+  height: 3px; }
 
-/* line 257, app.scss */
 .DH30 {
   line-height: 0px;
-  height: 30px;
-}
+  height: 30px; }
 
-/* line 253, app.scss */
 .DH4 {
   line-height: 0px;
-  height: 4px;
-}
+  height: 4px; }
 
-/* line 257, app.scss */
 .DH40 {
   line-height: 0px;
-  height: 40px;
-}
+  height: 40px; }
 
-/* line 253, app.scss */
 .DH5 {
   line-height: 0px;
-  height: 5px;
-}
+  height: 5px; }
 
-/* line 257, app.scss */
 .DH50 {
   line-height: 0px;
-  height: 50px;
-}
+  height: 50px; }
 
-/* line 253, app.scss */
 .DH6 {
   line-height: 0px;
-  height: 6px;
-}
+  height: 6px; }
 
-/* line 257, app.scss */
 .DH60 {
   line-height: 0px;
-  height: 60px;
-}
+  height: 60px; }
 
-/* line 253, app.scss */
 .DH7 {
   line-height: 0px;
-  height: 7px;
-}
+  height: 7px; }
 
-/* line 257, app.scss */
 .DH70 {
   line-height: 0px;
-  height: 70px;
-}
+  height: 70px; }
 
-/* line 253, app.scss */
 .DH8 {
   line-height: 0px;
-  height: 8px;
-}
+  height: 8px; }
 
-/* line 257, app.scss */
 .DH80 {
   line-height: 0px;
-  height: 80px;
-}
+  height: 80px; }
 
-/* line 253, app.scss */
 .DH9 {
   line-height: 0px;
-  height: 9px;
-}
+  height: 9px; }
 
-/* line 257, app.scss */
 .DH90 {
   line-height: 0px;
-  height: 90px;
-}
+  height: 90px; }
 
-/* line 253, app.scss */
 .DH10 {
   line-height: 0px;
-  height: 10px;
-}
+  height: 10px; }
 
-/* line 257, app.scss */
 .DH100 {
   line-height: 0px;
-  height: 100px;
-}
+  height: 100px; }
