@@ -176,10 +176,10 @@ $app-visual-height: 280px;
       height: 10px;
     }
     article{
-	  h1{
+	  h1[data-menu-item]{
 		padding-top:30px;
 	  }
-	  h2,h3{
+	  h2[data-menu-item],h3[data-menu-item]{
 		padding-top:20px;
 	  }
       &.cover{

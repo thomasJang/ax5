@@ -144,9 +144,9 @@ pre.prettyprint {
     .app-page .app-content a[name] {
       display: block;
       height: 10px; }
-    .app-page .app-content article h1 {
+    .app-page .app-content article h1[data-menu-item] {
       padding-top: 30px; }
-    .app-page .app-content article h2, .app-page .app-content article h3 {
+    .app-page .app-content article h2[data-menu-item], .app-page .app-content article h3[data-menu-item] {
       padding-top: 20px; }
     .app-page .app-content article.cover h1 {
       font-size: 2.5em;

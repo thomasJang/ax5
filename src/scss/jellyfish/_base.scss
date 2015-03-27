@@ -278,6 +278,27 @@ $panel-special-text:          $white;
 $panel-special-border:        1px solid $theme-special;
 $panel-special-heading-bg:    $theme-special;
 
+//== Scroll
+$scrollbar-track-bg: $gray-lighter;
+$scrollbar-track-border: 1px solid $gray-light;
+$scrollbar-track-thickness: 14px;
+$scrollbar-track-radius: 7px;
+
+$scrollbar-bg: $gray-light;
+$scrollbar-border: 1px solid $gray-lighter;
+$scrollbar-thickness: 12px;
+$scrollbar-radius: 6px;
+
+$scrollbar-second-track-bg: $gray-lighter;
+$scrollbar-second-track-border: 0px none;
+$scrollbar-second-track-thickness: 10px;
+$scrollbar-second-track-radius: 1px;
+
+$scrollbar-second-bg: $theme-basic;
+$scrollbar-second-border: 0px none;
+$scrollbar-second-thickness: 10px;
+$scrollbar-second-radius: 0px;
+
 
 //== Badges
 $badge-color:                 #fff;
