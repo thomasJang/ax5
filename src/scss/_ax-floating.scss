@@ -1,3 +1,6 @@
+@mixin ax-floating() {
+  position: absolute;
+}
 @mixin ax-panel-floating(){
   @include ax-panel();
   position: absolute;
@@ -5,6 +8,7 @@
 
 // mixins --------------------------------------------- end
 
+/*
 .ax-floating-contenxt{
   @include ax-panel-floating();
 }
@@ -22,4 +26,52 @@
 }
 .ax-floating-tooltip{
   @include ax-panel-floating();
+}
+*/
+
+@include keyframes(ax-masking) {
+  from {
+    @include transform(scale(1.0));
+  }
+  to {
+    @include transform(scale(1.2));
+  }
+}
+.ax-masking{
+  -webkit-filter: blur(5px);
+  position: fixed;
+  @include transform(scale(1.2));
+  @include animation(ax-masking 0.3s ease-in-out);
+}
+.ax-mask{
+  z-index: $mask-z-index;
+  position:fixed;
+  left:0px;top:0px;
+  width:100%;height:100%;
+  .ax-mask-bg{
+    z-index: 1;
+    position:absolute;
+    left:0px;top:0px;width:100%;height:100%;
+    background: $mask-bg;
+    //background: url("../mask.gif");
+    @include opacity($mask-bg-opacity);
+
+    //-webkit-filter: blur(3px);
+  }
+  .ax-mask-content{
+    z-index: 2;
+    position:absolute;
+    left:0px;top:0px;width:100%;height:100%;
+    display: table;
+    vertical-align: middle;
+    text-align: center;
+    color: $mask-text-color;
+    text-shadow: $mask-text-shadow;
+    *{color: inherit;}
+    div{
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+    }
+  }
 }

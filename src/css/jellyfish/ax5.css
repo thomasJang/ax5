@@ -164,15 +164,35 @@ a.ax {
   user-select: none; }
   .ax-btn:focus, .ax-btn.focus, .ax-btn:active:focus, .ax-btn:active.focus, .ax-btn.active:focus, .ax-btn.active.focus {
     outline: thin dotted;
-    outline: 5px auto -webkit-focus-ring-color;
-    outline-offset: -2px; }
-  .ax-btn:hover, .ax-btn:focus, .ax-btn.focus {
-    text-decoration: none;
-    background: #e8e8e8; }
+    outline: 0; }
   .ax-btn:active, .ax-btn.active {
     outline: 0;
     background-image: none;
     box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset; }
+  .ax-btn:hover, .ax-btn:focus, .ax-btn.focus {
+    text-decoration: none;
+    color: #4A4A4A;
+    text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
+    border: 1px solid #B4B4B4;
+    background: #F0F0F0;
+    background-image: -webkit-linear-gradient(top, #F0F0F0, #F0F0F0);
+    background-image: linear-gradient(to bottom, #F0F0F0, #F0F0F0);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F0F0F0, endColorstr=#F0F0F0);
+    box-shadow: none; }
+    .ax-btn:hover .badge, .ax-btn:focus .badge, .ax-btn.focus .badge {
+      text-shadow: none;
+      color: #F0F0F0;
+      background-color: #4A4A4A; }
+  .ax-btn:active, .ax-btn.active {
+    outline: 0;
+    background-image: none;
+    box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset; }
+  .ax-btn.disabled, .ax-btn[disabled], fieldset[disabled] .ax-btn {
+    cursor: not-allowed;
+    pointer-events: none;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
+    opacity: 0.65;
+    box-shadow: none; }
   .ax-btn.disabled, .ax-btn[disabled], fieldset[disabled] .ax-btn {
     cursor: not-allowed;
     pointer-events: none;
@@ -188,9 +208,24 @@ a.ax {
     background-image: linear-gradient(to bottom, #5ec4e3, #32B4DC);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#5ec4e3, endColorstr=#32B4DC);
     box-shadow: none; }
+    .ax-btn.basic .badge {
+      text-shadow: none;
+      color: #5ec4e3;
+      background-color: #fff; }
     .ax-btn.basic:hover, .ax-btn.basic:focus, .ax-btn.basic.focus {
       text-decoration: none;
-      background: #32B4DC; }
+      color: #fff;
+      text-shadow: none;
+      border: 1px solid #2097bb;
+      background: #32B4DC;
+      background-image: -webkit-linear-gradient(top, #32B4DC, #32B4DC);
+      background-image: linear-gradient(to bottom, #32B4DC, #32B4DC);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#32B4DC, endColorstr=#32B4DC);
+      box-shadow: none; }
+      .ax-btn.basic:hover .badge, .ax-btn.basic:focus .badge, .ax-btn.basic.focus .badge {
+        text-shadow: none;
+        color: #32B4DC;
+        background-color: #fff; }
     .ax-btn.basic:active, .ax-btn.basic.active {
       outline: 0;
       background-image: none;
@@ -201,9 +236,6 @@ a.ax {
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
       opacity: 0.65;
       box-shadow: none; }
-    .ax-btn.basic .badge {
-      color: #5ec4e3;
-      background-color: #fff; }
   .ax-btn.good {
     color: #fff;
     text-shadow: none;
@@ -213,9 +245,24 @@ a.ax {
     background-image: linear-gradient(to bottom, #92c85b, #78B43C);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#92c85b, endColorstr=#78B43C);
     box-shadow: none; }
+    .ax-btn.good .badge {
+      text-shadow: none;
+      color: #92c85b;
+      background-color: #fff; }
     .ax-btn.good:hover, .ax-btn.good:focus, .ax-btn.good.focus {
       text-decoration: none;
-      background: #78B43C; }
+      color: #fff;
+      text-shadow: none;
+      border: 1px solid #5f8e2f;
+      background: #78B43C;
+      background-image: -webkit-linear-gradient(top, #78B43C, #78B43C);
+      background-image: linear-gradient(to bottom, #78B43C, #78B43C);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#78B43C, endColorstr=#78B43C);
+      box-shadow: none; }
+      .ax-btn.good:hover .badge, .ax-btn.good:focus .badge, .ax-btn.good.focus .badge {
+        text-shadow: none;
+        color: #78B43C;
+        background-color: #fff; }
     .ax-btn.good:active, .ax-btn.good.active {
       outline: 0;
       background-image: none;
@@ -226,9 +273,6 @@ a.ax {
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
       opacity: 0.65;
       box-shadow: none; }
-    .ax-btn.good .badge {
-      color: #92c85b;
-      background-color: #fff; }
   .ax-btn.info {
     color: #fff;
     text-shadow: none;
@@ -238,9 +282,24 @@ a.ax {
     background-image: linear-gradient(to bottom, #004582, #002A4F);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#004582, endColorstr=#002A4F);
     box-shadow: none; }
+    .ax-btn.info .badge {
+      text-shadow: none;
+      color: #004582;
+      background-color: #fff; }
     .ax-btn.info:hover, .ax-btn.info:focus, .ax-btn.info.focus {
       text-decoration: none;
-      background: #002A4F; }
+      color: #fff;
+      text-shadow: none;
+      border: 1px solid #000f1c;
+      background: #002A4F;
+      background-image: -webkit-linear-gradient(top, #002A4F, #002A4F);
+      background-image: linear-gradient(to bottom, #002A4F, #002A4F);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#002A4F, endColorstr=#002A4F);
+      box-shadow: none; }
+      .ax-btn.info:hover .badge, .ax-btn.info:focus .badge, .ax-btn.info.focus .badge {
+        text-shadow: none;
+        color: #002A4F;
+        background-color: #fff; }
     .ax-btn.info:active, .ax-btn.info.active {
       outline: 0;
       background-image: none;
@@ -251,9 +310,6 @@ a.ax {
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
       opacity: 0.65;
       box-shadow: none; }
-    .ax-btn.info .badge {
-      color: #004582;
-      background-color: #fff; }
   .ax-btn.warning {
     color: #fff;
     text-shadow: none;
@@ -263,9 +319,24 @@ a.ax {
     background-image: linear-gradient(to bottom, #ec9069, #E66E3C);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ec9069, endColorstr=#E66E3C);
     box-shadow: none; }
+    .ax-btn.warning .badge {
+      text-shadow: none;
+      color: #ec9069;
+      background-color: #fff; }
     .ax-btn.warning:hover, .ax-btn.warning:focus, .ax-btn.warning.focus {
       text-decoration: none;
-      background: #E66E3C; }
+      color: #fff;
+      text-shadow: none;
+      border: 1px solid #a74015;
+      background: #E66E3C;
+      background-image: -webkit-linear-gradient(top, #E66E3C, #E66E3C);
+      background-image: linear-gradient(to bottom, #E66E3C, #E66E3C);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#E66E3C, endColorstr=#E66E3C);
+      box-shadow: none; }
+      .ax-btn.warning:hover .badge, .ax-btn.warning:focus .badge, .ax-btn.warning.focus .badge {
+        text-shadow: none;
+        color: #E66E3C;
+        background-color: #fff; }
     .ax-btn.warning:active, .ax-btn.warning.active {
       outline: 0;
       background-image: none;
@@ -276,9 +347,6 @@ a.ax {
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
       opacity: 0.65;
       box-shadow: none; }
-    .ax-btn.warning .badge {
-      color: #ec9069;
-      background-color: #fff; }
   .ax-btn.danger {
     color: #fff;
     text-shadow: none;
@@ -288,9 +356,24 @@ a.ax {
     background-image: linear-gradient(to bottom, #d4511b, #a74015);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#d4511b, endColorstr=#a74015);
     box-shadow: none; }
+    .ax-btn.danger .badge {
+      text-shadow: none;
+      color: #d4511b;
+      background-color: #fff; }
     .ax-btn.danger:hover, .ax-btn.danger:focus, .ax-btn.danger.focus {
       text-decoration: none;
-      background: #a74015; }
+      color: #fff;
+      text-shadow: none;
+      border: 1px solid #4c1d0a;
+      background: #a74015;
+      background-image: -webkit-linear-gradient(top, #a74015, #a74015);
+      background-image: linear-gradient(to bottom, #a74015, #a74015);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#a74015, endColorstr=#a74015);
+      box-shadow: none; }
+      .ax-btn.danger:hover .badge, .ax-btn.danger:focus .badge, .ax-btn.danger.focus .badge {
+        text-shadow: none;
+        color: #a74015;
+        background-color: #fff; }
     .ax-btn.danger:active, .ax-btn.danger.active {
       outline: 0;
       background-image: none;
@@ -301,9 +384,6 @@ a.ax {
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
       opacity: 0.65;
       box-shadow: none; }
-    .ax-btn.danger .badge {
-      color: #d4511b;
-      background-color: #fff; }
   .ax-btn.link {
     color: #333333;
     text-shadow: none;
@@ -313,9 +393,24 @@ a.ax {
     background-image: linear-gradient(to bottom, #fff, #fff);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#fff, endColorstr=#fff);
     box-shadow: none; }
+    .ax-btn.link .badge {
+      text-shadow: none;
+      color: #fff;
+      background-color: #333333; }
     .ax-btn.link:hover, .ax-btn.link:focus, .ax-btn.link.focus {
       text-decoration: none;
-      background: #32B4DC; }
+      color: #333333;
+      text-shadow: none;
+      border: 1px solid #fff;
+      background: #fff;
+      background-image: -webkit-linear-gradient(top, #fff, #fff);
+      background-image: linear-gradient(to bottom, #fff, #fff);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#fff, endColorstr=#fff);
+      box-shadow: none; }
+      .ax-btn.link:hover .badge, .ax-btn.link:focus .badge, .ax-btn.link.focus .badge {
+        text-shadow: none;
+        color: #fff;
+        background-color: #333333; }
     .ax-btn.link:active, .ax-btn.link.active {
       outline: 0;
       background-image: none;
@@ -326,13 +421,6 @@ a.ax {
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
       opacity: 0.65;
       box-shadow: none; }
-    .ax-btn.link .badge {
-      color: #fff;
-      background-color: #333333; }
-    .ax-btn.link:hover, .ax-btn.link:focus, .ax-btn.link.focus {
-      text-decoration: none;
-      color: #32B4DC;
-      background: #fff; }
   .ax-btn.special {
     color: #fff;
     text-shadow: none;
@@ -342,9 +430,24 @@ a.ax {
     background-image: linear-gradient(to bottom, #a430b9, #bc4cd0);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#a430b9, endColorstr=#bc4cd0);
     box-shadow: none; }
+    .ax-btn.special .badge {
+      text-shadow: none;
+      color: #a430b9;
+      background-color: #fff; }
     .ax-btn.special:hover, .ax-btn.special:focus, .ax-btn.special.focus {
       text-decoration: none;
-      background: #bc4cd0; }
+      color: #fff;
+      text-shadow: none;
+      border: 1px solid #802690;
+      background: #bc4cd0;
+      background-image: -webkit-linear-gradient(top, #bc4cd0, #bc4cd0);
+      background-image: linear-gradient(to bottom, #bc4cd0, #bc4cd0);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#bc4cd0, endColorstr=#bc4cd0);
+      box-shadow: none; }
+      .ax-btn.special:hover .badge, .ax-btn.special:focus .badge, .ax-btn.special.focus .badge {
+        text-shadow: none;
+        color: #bc4cd0;
+        background-color: #fff; }
     .ax-btn.special:active, .ax-btn.special.active {
       outline: 0;
       background-image: none;
@@ -355,9 +458,6 @@ a.ax {
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
       opacity: 0.65;
       box-shadow: none; }
-    .ax-btn.special .badge {
-      color: #a430b9;
-      background-color: #fff; }
   .ax-btn.lg {
     padding: 5px 10px;
     font-size: 15px;
@@ -2158,98 +2258,99 @@ a.ax {
   border-bottom-left-radius: 0px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); }
 
-.ax-floating-contenxt {
-  color: #333333;
-  font-size: 12px;
-  font-weight: 400;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 17px;
-  box-sizing: border-box;
-  background-color: #fff;
-  border: 1px solid transparent;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 6px;
-  border-bottom-left-radius: 0px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-  position: absolute; }
+/*
+.ax-floating-contenxt{
+  @include ax-panel-floating();
+}
+.ax-floating-modal{
+  @include ax-panel-floating();
+}
+.ax-floating-toast{
+  @include ax-panel-floating();
+}
+.ax-floating-dialog{
+  @include ax-panel-floating();
+}
+.ax-floating-progress{
+  @include ax-panel-floating();
+}
+.ax-floating-tooltip{
+  @include ax-panel-floating();
+}
+*/
+@-webkit-keyframes ax-masking {
+  from {
+    -webkit-transform: scale(1); }
 
-.ax-floating-modal {
-  color: #333333;
-  font-size: 12px;
-  font-weight: 400;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 17px;
-  box-sizing: border-box;
-  background-color: #fff;
-  border: 1px solid transparent;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 6px;
-  border-bottom-left-radius: 0px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-  position: absolute; }
+  to {
+    -webkit-transform: scale(1.2); } }
 
-.ax-floating-toast {
-  color: #333333;
-  font-size: 12px;
-  font-weight: 400;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 17px;
-  box-sizing: border-box;
-  background-color: #fff;
-  border: 1px solid transparent;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 6px;
-  border-bottom-left-radius: 0px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-  position: absolute; }
+@-moz-keyframes ax-masking {
+  from {
+    -moz-transform: scale(1); }
 
-.ax-floating-dialog {
-  color: #333333;
-  font-size: 12px;
-  font-weight: 400;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 17px;
-  box-sizing: border-box;
-  background-color: #fff;
-  border: 1px solid transparent;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 6px;
-  border-bottom-left-radius: 0px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-  position: absolute; }
+  to {
+    -moz-transform: scale(1.2); } }
 
-.ax-floating-progress {
-  color: #333333;
-  font-size: 12px;
-  font-weight: 400;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 17px;
-  box-sizing: border-box;
-  background-color: #fff;
-  border: 1px solid transparent;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 6px;
-  border-bottom-left-radius: 0px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-  position: absolute; }
+@keyframes ax-masking {
+  from {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1); }
 
-.ax-floating-tooltip {
-  color: #333333;
-  font-size: 12px;
-  font-weight: 400;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 17px;
-  box-sizing: border-box;
-  background-color: #fff;
-  border: 1px solid transparent;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 6px;
-  border-bottom-left-radius: 0px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-  position: absolute; }
+  to {
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2); } }
+
+.ax-masking {
+  -webkit-filter: blur(5px);
+  position: fixed;
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
+  transform: scale(1.2);
+  -webkit-animation: ax-masking 0.3s ease-in-out;
+  -moz-animation: ax-masking 0.3s ease-in-out;
+  animation: ax-masking 0.3s ease-in-out; }
+
+.ax-mask {
+  z-index: 1000;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%; }
+  .ax-mask .ax-mask-bg {
+    z-index: 1;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background: #333333;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+    opacity: 0.6; }
+  .ax-mask .ax-mask-content {
+    z-index: 2;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    display: table;
+    vertical-align: middle;
+    text-align: center;
+    color: #eeeeee;
+    text-shadow: 0px 1px 0px #000; }
+    .ax-mask .ax-mask-content * {
+      color: inherit; }
+    .ax-mask .ax-mask-content div {
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center; }

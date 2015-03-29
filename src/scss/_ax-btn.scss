@@ -9,7 +9,7 @@
 //
 // Easily pump out default styles, as well as :hover, :focus, :active,
 // and disabled options for all buttons
-@mixin button-variant($text-color, $text-shadow, $bg, $bg-image, $bg-hover, $border, $drop-shadow) {
+@mixin button-variant($text-color, $text-shadow, $bg, $bg-image, $border, $drop-shadow) {
   color: $text-color;
   text-shadow: $text-shadow;
   border: $border;
@@ -18,30 +18,46 @@
   @else						{ @include background-image($bg-image); }
   @include box-shadow($drop-shadow);
 
+  .badge {
+    text-shadow: none;
+	color: nth($bg,1);
+	background-color: $text-color;
+  }
+}
+
+@mixin button-hover-variant($text-color, $text-shadow, $bg, $bg-image, $border, $drop-shadow) {
   &:hover,
   &:focus,
   &.focus {
-	text-decoration: none;
-	background: $bg-hover;
+    text-decoration: none;
+    color: $text-color;
+    text-shadow: $text-shadow;
+    border: $border;
+    @if($bg-image == "") 	{ @include ax-btn-gradient(nth($bg, 1), nth($bg, 2)); }
+    @else						{ @include background-image($bg-image); }
+    @include box-shadow($drop-shadow);
+
+    .badge {
+      text-shadow: none;
+      color: nth($bg,1);
+      background-color: $text-color;
+    }
   }
+
   &:active,
   &.active {
-	outline: 0;
-	background-image: none;
-	@include box-shadow(rgba(0,0,0,0.125) 0 3px 5px inset);
+    outline: 0;
+    background-image: none;
+    @include box-shadow(rgba(0,0,0,0.125) 0 3px 5px inset);
   }
 
   &.disabled,
   &[disabled],
   fieldset[disabled] & {
-	cursor: not-allowed;
-	pointer-events: none; // Future-proof disabling of clicks
-	@include opacity(.65);
-	@include box-shadow(none);
-  }
-  .badge {
-	color: nth($bg,1);
-	background-color: $text-color;
+    cursor: not-allowed;
+    pointer-events: none; // Future-proof disabling of clicks
+    @include opacity(.65);
+    @include box-shadow(none);
   }
 }
 // Button sizes
@@ -84,13 +100,7 @@
 	  @include tab-focus();
 	}
   }
-  
-  &:hover,
-  &:focus,
-  &.focus {
-	text-decoration: none;
-	background: $btn-default-bg-hover;
-  }
+
 
   &:active,
   &.active {
@@ -98,6 +108,8 @@
 	background-image: none;
 	@include box-shadow(rgba(0,0,0,0.125) 0 3px 5px inset);
   }
+
+  @include button-hover-variant($btn-default-hover-text-color, $btn-default-hover-text-shadow, $btn-default-hover-bg, $btn-default-hover-bg-image, $btn-default-hover-border, $btn-default-hover-drop-shadow);
 
   &.disabled,
   &[disabled],
@@ -110,32 +122,33 @@
 
   // situation
   &.basic{
-	@include button-variant($btn-basic-text-color, $btn-basic-text-shadow, $btn-basic-bg, $btn-basic-bg-image, $btn-basic-bg-hover, $btn-basic-border, $btn-basic-drop-shadow);
+	@include button-variant($btn-basic-text-color, $btn-basic-text-shadow, $btn-basic-bg, $btn-basic-bg-image, $btn-basic-border, $btn-basic-drop-shadow);
+    @include button-hover-variant($btn-basic-hover-text-color, $btn-basic-hover-text-shadow, $btn-basic-hover-bg, $btn-basic-hover-bg-image, $btn-basic-hover-border, $btn-basic-hover-drop-shadow);
   }
+
   &.good{
-	@include button-variant($btn-good-text-color, $btn-good-text-shadow, $btn-good-bg, $btn-good-bg-image, $btn-good-bg-hover, $btn-good-border, $btn-good-drop-shadow);
+    @include button-variant($btn-good-text-color, $btn-good-text-shadow, $btn-good-bg, $btn-good-bg-image, $btn-good-border, $btn-good-drop-shadow);
+    @include button-hover-variant($btn-good-hover-text-color, $btn-good-hover-text-shadow, $btn-good-hover-bg, $btn-good-hover-bg-image, $btn-good-hover-border, $btn-good-hover-drop-shadow);
   }
   &.info{
-	@include button-variant($btn-info-text-color, $btn-info-text-shadow, $btn-info-bg, $btn-info-bg-image, $btn-info-bg-hover, $btn-info-border, $btn-info-drop-shadow);
+    @include button-variant($btn-info-text-color, $btn-info-text-shadow, $btn-info-bg, $btn-info-bg-image, $btn-info-border, $btn-info-drop-shadow);
+    @include button-hover-variant($btn-info-hover-text-color, $btn-info-hover-text-shadow, $btn-info-hover-bg, $btn-info-hover-bg-image, $btn-info-hover-border, $btn-info-hover-drop-shadow);
   }
   &.warning{
-	@include button-variant($btn-warning-text-color, $btn-warning-text-shadow, $btn-warning-bg, $btn-warning-bg-image, $btn-warning-bg-hover, $btn-warning-border, $btn-warning-drop-shadow);
+    @include button-variant($btn-warning-text-color, $btn-warning-text-shadow, $btn-warning-bg, $btn-warning-bg-image, $btn-warning-border, $btn-warning-drop-shadow);
+    @include button-hover-variant($btn-warning-hover-text-color, $btn-warning-hover-text-shadow, $btn-warning-hover-bg, $btn-warning-hover-bg-image, $btn-warning-hover-border, $btn-warning-hover-drop-shadow);
   }
   &.danger{
-	@include button-variant($btn-danger-text-color, $btn-danger-text-shadow, $btn-danger-bg, $btn-danger-bg-image, $btn-danger-bg-hover, $btn-danger-border, $btn-danger-drop-shadow);
+    @include button-variant($btn-danger-text-color, $btn-danger-text-shadow, $btn-danger-bg, $btn-danger-bg-image, $btn-danger-border, $btn-danger-drop-shadow);
+    @include button-hover-variant($btn-danger-hover-text-color, $btn-danger-hover-text-shadow, $btn-danger-hover-bg, $btn-danger-hover-bg-image, $btn-danger-hover-border, $btn-danger-hover-drop-shadow);
   }
   &.link{
-	@include button-variant($btn-link-text-color, $btn-link-text-shadow, $btn-link-bg, $btn-link-bg-image, $btn-link-bg-hover, $btn-link-border, $btn-link-drop-shadow);
-	&:hover,
-	&:focus,
-	&.focus {
-	  text-decoration: none;
-	  color: $btn-link-bg-hover;
-	  background: nth($btn-link-bg, 1);
-	}
+    @include button-variant($btn-link-text-color, $btn-link-text-shadow, $btn-link-bg, $btn-link-bg-image, $btn-link-border, $btn-link-drop-shadow);
+    @include button-hover-variant($btn-link-hover-text-color, $btn-link-hover-text-shadow, $btn-link-hover-bg, $btn-link-hover-bg-image, $btn-link-hover-border, $btn-link-hover-drop-shadow);
   }
   &.special{
-	@include button-variant($btn-special-text-color, $btn-special-text-shadow, $btn-special-bg, $btn-special-bg-image, $btn-special-bg-hover, $btn-special-border, $btn-special-drop-shadow);
+    @include button-variant($btn-special-text-color, $btn-special-text-shadow, $btn-special-bg, $btn-special-bg-image, $btn-special-border, $btn-special-drop-shadow);
+    @include button-hover-variant($btn-special-hover-text-color, $btn-special-hover-text-shadow, $btn-special-hover-bg, $btn-special-hover-bg-image, $btn-special-hover-border, $btn-special-hover-drop-shadow);
   }
 
   // size
