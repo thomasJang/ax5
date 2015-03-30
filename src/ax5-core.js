@@ -907,7 +907,7 @@
 			var
 				head = doc.head || doc.getElementsByTagName("head")[0],
 				readyRegExp = info.is_browser && navigator.platform === 'PLAYSTATION 3' ? /^complete$/ : /^(complete|loaded)$/,
-				loadCount = mods.length, loadErrors = [], onloadTimer, onerrorTimer, returned = false,
+				loadCount = mods.length, loadErrors = [], loaded_src = {}, onloadTimer, onerrorTimer, returned = false,
 				scripts = dom.get("script[src]"), styles = dom.get("style[href]"),
 				onload = function () {
 					if (loadCount < 1 && loadErrors.length == 0 && !returned) {
@@ -944,12 +944,12 @@
 				} else {
 
 					plugin = (type === "js") ?
-						dom.create("script", {type: "text/javascript", src: plugin_src}) :
+						dom.create("script", {type: "text/javascript", src: plugin_src, "data-src": plugin_src}) :
 						dom.create("link", {rel: "stylesheet", type: "text/css", href: plugin_src});
 
-					plug_load = function (e) {
+					plug_load = function (e, plugin_src) {
 						if (e.type === 'load' || (readyRegExp.test((e.currentTarget || e.srcElement).readyState))) {
-							loadCount--;
+							if(!loaded_src[plugin_src]) loadCount--;
 							if (onloadTimer) clearTimeout(onloadTimer);
 							onloadTimer = setTimeout(onload, 1);
 						}
@@ -966,8 +966,15 @@
 					ax5.xhr({
 						url : plugin_src, contentType: "",
 						res : function (response, status) {
+							var time_id;
 							head.appendChild(plugin);
-							plug_load({type: "load"});
+							plugin.onload = function(e) {
+								plug_load(e, plugin_src);
+								if(time_id) clearTimeout(time_id);
+							};
+							time_id = setTimeout(function(){
+								plug_load({type: "load"}, plugin_src);
+							}, 500);
 						},
 						error : function () {
 							plug_err(this);

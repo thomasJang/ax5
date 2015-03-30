@@ -32,6 +32,15 @@
                     'samples/layout/bottom.html'
                 ],
                 dest: 'samples/css.html'
+            },
+            ui_class: {
+                src: [
+                    'samples/layout/head.html',
+                    'samples/layout/visual-ui.html',
+                    'samples/ax5/ui/*.html',
+                    'samples/layout/bottom.html'
+                ],
+                dest: 'samples/ui-class.html'
             }
 		},
 		watch: {
@@ -42,6 +51,10 @@
             css: {
                 files: ['samples/ax5/css/*.html'],
                 tasks: ['concat:css', 'replace:css']
+            },
+            ui_class: {
+                files: ['samples/ax5/ui/*.html'],
+                tasks: ['concat:ui_class', 'replace:ui_class']
             }
 		},
         replace: {
@@ -80,6 +93,24 @@
                         return '<pre class="prettyprint linenums">'+ regexMatches.join('').replace(/</g, "&lt;") +'</pre>';
                     }
                 }]
+            },
+            ui_class: {
+                src: ['samples/ui-class.html'],
+                overwrite: true,                 // overwrite matched source files
+                options: {
+                    processTemplates: false
+                },
+                replacements: [{
+                    from: /<pre[^>]*>([^<]*(?:(?!<\/?pre)<[^<]*)*)<\/pre\s*>/gi,
+                    to: function (matchedWord, index, fullText, regexMatches) {
+
+                        // matchedWord:  "world"
+                        // index:  6
+                        // fullText:  "Hello world"
+                        // regexMatches:  ["ld"]
+                        return '<pre class="prettyprint linenums">'+ regexMatches.join('').replace(/</g, "&lt;") +'</pre>';
+                    }
+                }]
             }
         }
 	});
@@ -89,4 +120,5 @@
     
 	grunt.registerTask('ax5-core', ['concat:core','replace:core','watch:core']);
     grunt.registerTask('ax5-css', ['concat:css','replace:css','watch:css']);
+    grunt.registerTask('ax5-ui-class', ['concat:ui_class','replace:ui_class','watch:ui_class']);
 };

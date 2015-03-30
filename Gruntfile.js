@@ -28,16 +28,36 @@
 				dest: 'src/ax5.js'
 			}
 		},
+		copy: {
+			js: {
+				files: [
+					{expand: true, cwd: 'src/ui-classes/', src: ['**/*.js'], dest: 'pub/ui/'}
+				]
+			},
+			css: {
+				files: [
+					{expand: true, cwd: 'src/css/', src: ['**/*.min.css'], dest: 'pub/css/'}
+				]
+			}
+		},
 		uglify: {
 			options: {
 				mangle: false,
 				preserveComments: false
 			},
-			my_target: {
+			core: {
 				files: {
-					'pub/<%= pkg.name %>-<%= pkg.version %>.min.js': ['src/ax5.js'],
 					'pub/<%= pkg.name %>.min.js': ['src/ax5.js']
 				}
+			},
+			ui: {
+				files: [{
+					expand: true,
+					cwd: 'pub/ui',
+					src: ['*.js','!*.min.js'],
+					dest: 'pub/ui',
+					ext: '.min.js'
+				}]
 			}
 		},
 		watch: {
@@ -48,6 +68,10 @@
 			sample_doc: {
 				files: ['samples/css/*.scss'],
 				tasks: ['sass:sample_doc']
+			},
+			lib: {
+				files: ['src/**/*.js','!src/**/*.min.js'],
+				tasks: ['pub-js']
 			}
 		},
 		sass: {
@@ -68,6 +92,17 @@
 					'samples/css/app.css': 'samples/css/app.scss'
 				}
 			}
+		},
+		cssmin: {
+			options: {
+				banner: '/*! \n<%= pkg.name %> - v<%= pkg.version %> - ' +
+				'<%= grunt.template.today("yyyy-mm-dd") %> \n*/\n'
+			},
+			target: {
+				files: [{
+					expand: true, cwd: 'src/css/jellyfish', src: ['*.css', '!*.min.css'], dest: 'src/css/jellyfish', ext: '.min.css'
+				}]
+			}
 		}
 	});
 	//grunt.loadTasks('tasks');
@@ -75,11 +110,11 @@
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-sass');
 
-	//grunt.registerTask('js-concat', ['concat']);
-	grunt.registerTask('js', ['concat','uglify']);
-	//grunt.registerTask('css', ['cssmin']);
+	grunt.registerTask('pub-js', ['concat','uglify:core','copy:js','uglify:ui','watch:lib']);
+	grunt.registerTask('pub-css', ['cssmin','copy:css']);
 	
 	grunt.registerTask('sass-run', ['sass:theme','watch:theme']);
 	grunt.registerTask('sass-run-doc', ['sass:sample_doc','watch:sample_doc']);

@@ -2283,14 +2283,14 @@ a.ax {
     -webkit-transform: scale(1); }
 
   to {
-    -webkit-transform: scale(1.2); } }
+    -webkit-transform: scale(0.96); } }
 
 @-moz-keyframes ax-masking {
   from {
     -moz-transform: scale(1); }
 
   to {
-    -moz-transform: scale(1.2); } }
+    -moz-transform: scale(0.96); } }
 
 @keyframes ax-masking {
   from {
@@ -2301,23 +2301,49 @@ a.ax {
     transform: scale(1); }
 
   to {
-    -webkit-transform: scale(1.2);
-    -moz-transform: scale(1.2);
-    -ms-transform: scale(1.2);
-    -o-transform: scale(1.2);
-    transform: scale(1.2); } }
+    -webkit-transform: scale(0.96);
+    -moz-transform: scale(0.96);
+    -ms-transform: scale(0.96);
+    -o-transform: scale(0.96);
+    transform: scale(0.96); } }
+
+@-webkit-keyframes ax-mask {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0; }
+
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+    opacity: 0.6; } }
+
+@-moz-keyframes ax-mask {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0; }
+
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+    opacity: 0.6; } }
+
+@keyframes ax-mask {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0; }
+
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+    opacity: 0.6; } }
 
 .ax-masking {
-  -webkit-filter: blur(5px);
-  position: fixed;
-  -webkit-transform: scale(1.2);
-  -moz-transform: scale(1.2);
-  -ms-transform: scale(1.2);
-  -o-transform: scale(1.2);
-  transform: scale(1.2);
-  -webkit-animation: ax-masking 0.3s ease-in-out;
-  -moz-animation: ax-masking 0.3s ease-in-out;
-  animation: ax-masking 0.3s ease-in-out; }
+  -webkit-filter: blur(3px);
+  -webkit-transform: scale(0.96);
+  -moz-transform: scale(0.96);
+  -ms-transform: scale(0.96);
+  -o-transform: scale(0.96);
+  transform: scale(0.96);
+  -webkit-animation: ax-masking 0.2s ease-in-out;
+  -moz-animation: ax-masking 0.2s ease-in-out;
+  animation: ax-masking 0.2s ease-in-out; }
 
 .ax-mask {
   z-index: 1000;
@@ -2335,7 +2361,10 @@ a.ax {
     height: 100%;
     background: #333333;
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
-    opacity: 0.6; }
+    opacity: 0.6;
+    -webkit-animation: ax-mask 0.2s ease-in-out;
+    -moz-animation: ax-mask 0.2s ease-in-out;
+    animation: ax-mask 0.2s ease-in-out; }
   .ax-mask .ax-mask-content {
     z-index: 2;
     position: absolute;

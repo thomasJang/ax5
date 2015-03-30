@@ -3,6 +3,7 @@
  * @namespace ax5.ui
  */
 ax5.ui = (function () {
+	var U = ax5.util;
 	/**
 	 * @class ax5.ui.ax_ui
 	 * @classdesc ax5 ui class 코어 클래스 모든 클래스의 공통 함수를 가지고 있습니다.
@@ -45,6 +46,6 @@ ax5.ui = (function () {
 	}
 
 	return {
-		ax_ui: ax_ui
+		root: ax_ui
 	}
 })();

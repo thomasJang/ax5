@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-03-08 
+ * 2015-03-30 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -1083,7 +1083,7 @@
 			var
 				head = doc.head || doc.getElementsByTagName("head")[0],
 				readyRegExp = info.is_browser && navigator.platform === 'PLAYSTATION 3' ? /^complete$/ : /^(complete|loaded)$/,
-				loadCount = mods.length, loadErrors = [], onloadTimer, onerrorTimer, returned = false,
+				loadCount = mods.length, loadErrors = [], loaded_src = {}, onloadTimer, onerrorTimer, returned = false,
 				scripts = dom.get("script[src]"), styles = dom.get("style[href]"),
 				onload = function () {
 					if (loadCount < 1 && loadErrors.length == 0 && !returned) {
@@ -1120,12 +1120,12 @@
 				} else {
 
 					plugin = (type === "js") ?
-						dom.create("script", {type: "text/javascript", src: plugin_src}) :
+						dom.create("script", {type: "text/javascript", src: plugin_src, "data-src": plugin_src}) :
 						dom.create("link", {rel: "stylesheet", type: "text/css", href: plugin_src});
 
-					plug_load = function (e) {
+					plug_load = function (e, plugin_src) {
 						if (e.type === 'load' || (readyRegExp.test((e.currentTarget || e.srcElement).readyState))) {
-							loadCount--;
+							if(!loaded_src[plugin_src]) loadCount--;
 							if (onloadTimer) clearTimeout(onloadTimer);
 							onloadTimer = setTimeout(onload, 1);
 						}
@@ -1142,8 +1142,15 @@
 					ax5.xhr({
 						url : plugin_src, contentType: "",
 						res : function (response, status) {
+							var time_id;
 							head.appendChild(plugin);
-							plug_load({type: "load"});
+							plugin.onload = function(e) {
+								plug_load(e, plugin_src);
+								if(time_id) clearTimeout(time_id);
+							};
+							time_id = setTimeout(function(){
+								plug_load({type: "load"}, plugin_src);
+							}, 500);
 						},
 						error : function () {
 							plug_err(this);
@@ -2134,12 +2141,14 @@
 
 		// 박스사이즈 구하기
 		function box_size(els, fn_nm, opts) {
-			var d = -1, tag_nm = "";
-			if (U.is_window(els)) {
-				return els.document.documentElement[U.camel_case("client-" + fn_nm)];
+			var d = -1, tag_nm = "",
+				el = [].concat(els)[0];
+			
+			if (U.is_window(el)) {
+				return el.document.documentElement[U.camel_case("client-" + fn_nm)];
 			}
 			else {
-				var el = els[0], _sbs = U.camel_case("scroll-" + fn_nm), _obs = U.camel_case("offset-" + fn_nm), _cbs = U.camel_case("client-" + fn_nm);
+				var _sbs = U.camel_case("scroll-" + fn_nm), _obs = U.camel_case("offset-" + fn_nm), _cbs = U.camel_case("client-" + fn_nm);
 				if (el) {
 					tag_nm = el.tagName.toLowerCase();
 					if (tag_nm == "html") {
@@ -2397,6 +2406,7 @@
 			if (query.toString() == "[object ax5.dom]") {
                 r_els = query.elements;
 			}
+			else if (U.is_window(query)) r_els.push(query);
 			else if (U.is_element(query)) r_els.push(query);
 			else if (U.is_array(query) || U.is_nodelist(query)) {
 				for (; i < l; i++)  if (U.is_element(query[i])) r_els.push(query[i]);
@@ -3582,6 +3592,7 @@ ax5.xhr = (function (){
 })();
 
 ax5.ui = (function () {
+	var U = ax5.util;
 	/**
 	 * @class ax5.ui.ax_ui
 	 * @classdesc ax5 ui class 코어 클래스 모든 클래스의 공통 함수를 가지고 있습니다.
@@ -3624,6 +3635,6 @@ ax5.ui = (function () {
 	}
 
 	return {
-		ax_ui: ax_ui
+		root: ax_ui
 	}
 })();
