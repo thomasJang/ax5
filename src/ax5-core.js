@@ -2448,6 +2448,7 @@
 			els = va_elem(els, "on");
 			for (var i = 0; i < els.length; i++) {
 				var __fn, _d = els[i];
+				if(!_d) break;
 				if (!_d.e_hd) _d.e_hd = {};
 				if (typeof _d.e_hd[typ] === "undefined") {
 					__fn = _d.e_hd[typ] = _fn;
@@ -2536,7 +2537,7 @@
 		 * 타겟엘리먼트의 부모 엘리멘트 트리에서 원하는 조건의 엘리먼트를 얻습니다.
 		 * @method ax5.dom.parent
 		 * @param {Element} elements - target element
-		 * @param {Object} cond - 원하는 element를 찾을 조건
+		 * @param {Object|Function} cond - 원하는 element를 찾을 조건
 		 * @returns {Element}
 		 * @example
 		 * ```
@@ -2549,6 +2550,21 @@
 		 * console.log(
 		 * 	ax5.dom.parent(e.target, {tagname:"a", clazz:"ax-menu-handel", "data-custom-attr":"attr_value"})
 		 * );
+		 * // cond 함수로 처리하기
+		 * ax5.dom.on(fnObj.layout.client_main, "click.app_expand", function(e){
+		 * 	var target = ax5.dom.parent(e.target, function(target){
+		 * 		if(ax5.dom.class_name(target, "aside")){
+		 * 			return true;
+		 * 		}
+		 * 		else if(ax5.dom.class_name(target, "client-main")){
+		 * 			return true;
+		 * 		}
+		 * 	});
+		 * 	//client-aside
+		 * 	if(target.id !== "client-aside"){
+		 * 		fnObj.layout.expand_menu();
+		 * 	}
+		 * });
 		 * ```
 		 */
 		function parent(els, cond) {
@@ -2557,28 +2573,32 @@
 			if (_target) {
 				while ((function () {
 					var result = true;
-					for (var k in cond) {
-						if (k === "tagname") {
-							if (_target.tagName.toLocaleLowerCase() != cond[k]) {
-								result = false;
-								break;
-							}
-						}
-						else if (k === "clazz" || k === "class_name") {
-							var klasss = _target.className.split(re_class_name_split);
-							var hasClass = false;
-							for (var a = 0; a < klasss.length; a++) {
-								if (klasss[a] == cond[k]) {
-									hasClass = true;
+					if(U.is_function(cond)){
+						result = cond(_target);
+					}
+					else
+					if(U.is_function(cond)) {
+						for (var k in cond) {
+							if (k === "tagname") {
+								if (_target.tagName.toLocaleLowerCase() != cond[k]) {
+									result = false;
 									break;
 								}
-							}
-							result = hasClass;
-						}
-						else { // 그외 속성값들.
-							if (_target.getAttribute(k) != cond[k]) {
-								result = false;
-								break;
+							} else if (k === "clazz" || k === "class_name") {
+								var klasss = _target.className.split(re_class_name_split);
+								var hasClass = false;
+								for (var a = 0; a < klasss.length; a++) {
+									if (klasss[a] == cond[k]) {
+										hasClass = true;
+										break;
+									}
+								}
+								result = hasClass;
+							} else { // 그외 속성값들.
+								if (_target.getAttribute(k) != cond[k]) {
+									result = false;
+									break;
+								}
 							}
 						}
 					}

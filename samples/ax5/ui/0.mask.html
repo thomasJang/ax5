@@ -91,47 +91,47 @@
 })(window);
 </pre>
 
+</article>
+
 <script type="text/javascript">
-(function(root){
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.min.js"], function(){
+	(function(root){
+		ax5.info.base_url = "../pub/";
+		ax5.util.require(["ui/mask.min.js"], function(){
 
-		root.app_mask = new ax5.ui.mask();
-		app_mask.set_config({
-			mask_target: document.body,
-			content: "<h1>ready</h1>",
-			onchange: function(){
+			root.app_mask = new ax5.ui.mask();
+			app_mask.set_config({
+				mask_target: document.body,
+				content: "<h1>ready</h1>",
+				onchange: function(){
 
+				}
+			});
+
+			root.app_mask_open = function() {
+				app_mask.open({
+					mask_target: ax5.dom.get("#mask-target"),
+					content: "<h1>Loading..</h1>",
+					onchange: function () {
+
+					}
+				});
+			};
+			root.app_mask_close = function(){
+				app_mask.close();
+			};
+
+			root.app_body_mask_open = function(){
+				app_mask.open({
+					content:"<h2>2초후 마스크가 제거 됩니다.</h2>",
+					onchange: function () {
+						console.log(this);
+					}
+				});
+				setTimeout(function(){
+					app_mask.close();
+				}, 2000);
 			}
 		});
-
-		root.app_mask_open = function() {
-			app_mask.open({
-				mask_target: ax5.dom.get("#mask-target"),
-				content: "<h1>Loading..</h1>",
-				onchange: function () {
-
-				}
-			});
-		};
-		root.app_mask_close = function(){
-			app_mask.close();
-		};
-
-		root.app_body_mask_open = function(){
-			app_mask.open({
-				content:"<h2>2초후 마스크가 제거 됩니다.</h2>",
-				onchange: function () {
-					console.log(this);
-				}
-			});
-			setTimeout(function(){
-				app_mask.close();
-			}, 2000);
-		}
-	});
-})(window);
+	})(window);
 
 </script>
-
-</article>

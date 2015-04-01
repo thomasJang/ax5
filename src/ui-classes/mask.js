@@ -26,7 +26,7 @@
 
 		this.open = function(config){
 			if(this.status === "on") this.close();
-			if(config.content) this.set_body(config.content);
+			if(config && config.content) this.set_body(config.content);
 			self.mask_config = {};
 			U.extend(self.mask_config, this.config, true);
 			U.extend(self.mask_config, config, true);
