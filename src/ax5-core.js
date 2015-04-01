@@ -2568,7 +2568,7 @@
 		 * ```
 		 */
 		function parent(els, cond) {
-			els = va_elem(els, "child");
+			els = va_elem(els, "parent");
 			var _target = els[0];
 			if (_target) {
 				while ((function () {
@@ -2577,7 +2577,7 @@
 						result = cond(_target);
 					}
 					else
-					if(U.is_function(cond)) {
+					if(U.is_object(cond)) {
 						for (var k in cond) {
 							if (k === "tagname") {
 								if (_target.tagName.toLocaleLowerCase() != cond[k]) {
@@ -2595,7 +2595,12 @@
 								}
 								result = hasClass;
 							} else { // 그외 속성값들.
-								if (_target.getAttribute(k) != cond[k]) {
+								if(_target.getAttribute) {
+									if (_target.getAttribute(k) != cond[k]) {
+										result = false;
+										break;
+									}
+								}else{
 									result = false;
 									break;
 								}
