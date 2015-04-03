@@ -948,7 +948,7 @@
 						dom.create("link", {rel: "stylesheet", type: "text/css", href: plugin_src});
 
 					plug_load = function (e, plugin_src) {
-						if (e.type === 'load' || (readyRegExp.test((e.currentTarget || e.srcElement).readyState))) {
+						if (e && ( e.type === 'load' || readyRegExp.test((e.currentTarget || e.srcElement).readyState) )){
 							if(!loaded_src[plugin_src]) loadCount--;
 							if (onloadTimer) clearTimeout(onloadTimer);
 							onloadTimer = setTimeout(onload, 1);
@@ -1791,7 +1791,22 @@
 				this.data = function (command, O) {
 					var rs = dom.data(this.elements, command, O);
 					return (rs === this.elements) ? this : rs;
-				}
+				};
+				/**
+				 * 엘리먼트의 자식을 모두 지워줍니다. 내용을 깨긋히 비워 냅니다.
+				 * @method ax5.dom0.empty
+				 * @returns {ax5.dom0}
+				 * @example
+				 * ```
+				 * var axd = ax5.dom, axu = ax5.util, res = "";
+				 *
+				 * axd("#id").empty();
+				 * ```
+				 */
+				this.empty = function (){
+					dom.empty(this.elements);
+					return this;
+				};
 			}
 
 			return ax;
@@ -1805,6 +1820,7 @@
 		//if("내장함수 시작") {
 		// 이벤트 바인딩
 		function eBind(elem, type, eventHandle) {
+			if(!U.is_string(type)) console.error("type=" + type);
 			type = U.left(type, ".");
 			if (elem.addEventListener) {
 				elem.addEventListener(type, eventHandle, false);
@@ -2008,7 +2024,7 @@
 
 		// createFragment
 		function create_fragment(elems) {
-			var safe = safe_fragment, tmp, nodes = [], tag, wrap, tbody,
+			var safe = safe_fragment.appendChild( doc.createElement("div")), tmp, nodes = [], tag, wrap, tbody,
                 elem, i = 0, l = elems.length, j;
             // safe = doc.createDocumentFragment();
 
@@ -2069,6 +2085,7 @@
 
 						// Remember the top-level container for proper cleanup
 						tmp = safe.lastChild;
+						//tmp = safe.firstChild;
                         safe.removeChild(tmp);
                         tmp = null;
 					}
@@ -2077,9 +2094,9 @@
 
 			i = 0;
 			while ((elem = nodes[i++])) {
-				//console.log(elem);
 				safe.appendChild(elem);
 			}
+			//console.log(safe.innerHTML);
 			return safe;
 		}
 		
@@ -2096,15 +2113,15 @@
 						eUnBind(el, hd, el.e_hd[hd][ehi]);
 				}
 			}
-			delete el["e_hd"];
-			delete el["ax5_data"];
+			if(el["e_hd"]) delete el["e_hd"];
+			if(el["ax5_data"]) delete el["ax5_data"];
 			// todo : attributes 걸리는 것이 없지만 혹시나 모를 데이터를 위해.
-			for(var a in el.attributes){
-				if(typeof el.attributes[a] === "object"){
-					//console.log(el.attributes[a]);
-					el.attributes[a] = null
+			if(ax5.info.browser.name !== "ie" && ax5.info.browser.version > 7){
+				for(var a in el.attributes) {
+					if (typeof el.attributes[a] === "object") el.attributes[a] = null;
 				}
 			}
+
 			// 자식들도 확인 합니다.
 			if(el.hasChildNodes()){
 				c_el = el.childNodes, ci = 0, cl = c_el.length;
@@ -2227,23 +2244,23 @@
 		function get(query, sub_query) {
 			var els, r_els = [], p_els;
 			var i = 0, l = query.length;
-			if (query.toString() == "[object ax5.dom]") {
+			if (query.toString() === "[object ax5.dom]") {
                 r_els = query.elements;
 			}
 			else if (U.is_window(query)) r_els.push(query);
 			else if (U.is_element(query)) r_els.push(query);
 			else if (U.is_array(query) || U.is_nodelist(query)) {
-				for (; i < l; i++)  if (U.is_element(query[i])) r_els.push(query[i]);
+				for (i=0; i < l; i++)  if (U.is_element(query[i])) r_els.push(query[i]);
 			}
 			else if (U.is_string(query) && query.substr(0, 1) === "#") r_els.push(doc.getElementById(query.substr(1)));
 			else {
                 els = doc.querySelectorAll(query), l = els.length;
-				for (; i < l; i++) r_els.push(els[i]);
+				for (i=0; i < l; i++) r_els.push(els[i]);
 			}
-			if (typeof sub_query != "undefined") {
+			if (typeof sub_query !== "undefined") {
 				p_els = (info.browser.name == "ie" && info.browser.version < 8) ? doc : r_els[0];
                 r_els = [], els = p_els.querySelectorAll(sub_query), l = els.length;
-				for (; i < l; i++) r_els.push(els[i]);
+				for (i=0; i < l; i++) r_els.push(els[i]);
 			}
 			return r_els;
 		}
@@ -2802,6 +2819,7 @@
 		 * ```
 		 */
 		function append(els, val) {
+			// todo : 빈 노드에 append 할때 빈 div 태그 생성됨.
 			return manipulate("append", els, val);
 		}
 
@@ -2867,25 +2885,40 @@
 		function manipulate(act, els, val) {
 			els = va_elem(els, act);
 			var flag, i = 0, l = els.length,
-				el = [].concat(val), cf = create_fragment, els = els;
+				el = [].concat(val), cf = create_fragment, els = els, _el;
 
 			if (act === "append") {
 				for (; i < l; i++) {
-					els[i].appendChild(cf(el));
+					_el = cf(el);
+					while(_el.firstChild){
+						els[i].appendChild(_el.firstChild);
+					}
 				}
 			}
 			else if (act == "prepend") {
 				for (; i < l; i++) {
-					els[i].insertBefore(cf(el), els[i].firstChild);
+					_el = cf(el);
+					while(_el.firstChild) {
+						els[i].insertBefore(_el.firstChild, els[i].firstChild);
+					}
 				}
 			}
 			else if (act == "before") {
 				for (; i < l; i++) {
-					els[i].parentNode.insertBefore(cf(el), els[i]);
+					_el = cf(el);
+					while(_el.firstChild){
+						els[i].parentNode.insertBefore(_el.firstChild, els[i]);
+					}
 				}
 			}
 			else if (act == "after") {
-				els[i].parentNode.insertBefore(cf(el), els[i].nextSibling);
+				for (; i < l; i++) {
+					_el = cf(el);
+					while(_el.firstChild){
+						els[i].parentNode.insertBefore(_el.firstChild, els[i].nextSibling);
+					}
+				}
+				//els[i].parentNode.insertBefore(cf(el), els[i].nextSibling);
 			}
 			return els;
 		}
