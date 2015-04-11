@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-04-04 
+ * 2015-04-12 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -285,27 +285,22 @@
 		 * ```
 		 */
 		var browser = (function () {
-			var ua = navigator.userAgent.toLowerCase();
-			var mobile = (ua.search(/mobile/g) != -1);
+			var ua = navigator.userAgent.toLowerCase(), mobile = (ua.search(/mobile/g) != -1),
+				browserName, match, browser, browserVersion;
+
 			if (ua.search(/iphone/g) != -1) {
 				return { name: "iphone", version: 0, mobile: true }
 			} else if (ua.search(/ipad/g) != -1) {
 				return { name: "ipad", version: 0, mobile: true }
 			} else if (ua.search(/android/g) != -1) {
-				var match = /(android)[ \/]([\w.]+)/.exec(ua) || [];
-				var browserVersion = (match[2] || "0");
+				match = /(android)[ \/]([\w.]+)/.exec(ua) || [];
+				browserVersion = (match[2] || "0");
 				return { name: "android", version: browserVersion, mobile: mobile }
 			} else {
-				var browserName = "";
-				var match = /(opr)[ \/]([\w.]+)/.exec(ua) ||
-					/(chrome)[ \/]([\w.]+)/.exec(ua) ||
-					/(webkit)[ \/]([\w.]+)/.exec(ua) ||
-					/(msie) ([\w.]+)/.exec(ua) ||
-					ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) ||
-					[];
-
-				var browser = (match[1] || "");
-				var browserVersion = (match[2] || "0");
+				browserName = "";
+				match = /(opr)[ \/]([\w.]+)/.exec(ua) || /(chrome)[ \/]([\w.]+)/.exec(ua) || /(webkit)[ \/]([\w.]+)/.exec(ua) || /(msie) ([\w.]+)/.exec(ua) || ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) || [];
+				browser = (match[1] || "");
+				browserVersion = (match[2] || "0");
 
 				if (browser == "msie") browser = "ie";
 				return {
@@ -314,6 +309,7 @@
 					mobile: mobile
 				}
 			}
+			ua = null, mobile = null, browserName = null, match = null, browser = null, browserVersion = null;
 		})();
 		/**
 		 * 브라우저 여부
@@ -346,8 +342,8 @@
 		 * }
 		 * ```
 		 */
-		function url_util() {
-			var url = {
+		function url_util(url, urls) {
+			url = {
 				href: win.location.href,
 				param: win.location.search,
 				referrer: doc.referrer,
@@ -365,7 +361,7 @@
 			return url;
 		}
 
-		var info = {
+		return {
 			version: version,
 			base_url: base_url,
 			event_keys: event_keys,
@@ -374,8 +370,6 @@
 			wheel_enm: wheel_enm,
 			url_util: url_util
 		};
-
-		return info;
 	})();
 
 
@@ -2533,27 +2527,41 @@
 		 * ax5.dom.class_name(ax5.dom.get("#abcd"), "toggle", "class-text");
 		 * ```
 		 */
+
+		// todo : class_name 여러개의 class 인자 동시 처리 지원
 		function class_name(els, command, O) {
 			var cns;
 			els = va_elem(els, "clazz");
 			if (command === "add" || command === "remove" || command === "toggle") {
+				O = [].concat(O);
 				for (var di = 0; di < els.length; di++) {
-                    cns = els[di]["className"].split(re_class_name_split);
+					cns = els[di]["className"];
+					if(cns !== "") cns = cns.split(re_class_name_split);
+					else cns = [];
 					if (command === "add") {
-						if (U.search(cns, function () {
-								return O.trim() == this;
-							}) == -1) cns.push(O.trim());
+						O.forEach(function(O){
+							if (U.search(cns, function () {
+									return O.trim() == this;
+								}) == -1) cns.push(O.trim());
+						});
 					} else if (command === "remove") {
-                        cns = U.filter(cns, function () {
-							return O.trim() != this;
+						O.forEach(function(O) {
+							cns = U.filter(cns, function () {
+								return O.trim() != this;
+							});
 						});
 					} else if (command === "toggle") {
-						var class_count = cns.length;
-                        cns = U.filter(cns, function () {
-							return O.trim() != this;
+						O.forEach(function(O) {
+							var class_count = cns.length;
+							cns = U.filter(cns, function () {
+								return O.trim() != this;
+							});
+							if (class_count === cns.length) cns.push(O.trim());
 						});
-						if (class_count === cns.length) cns.push(O.trim());
 					}
+
+
+
 					els[di]["className"] = cns.join(" ");
 				}
 				return els;
@@ -2671,17 +2679,18 @@
 			els = va_elem(els, "off");
 			for (var i = 0; i < els.length; i++) {
 				var _d = els[i];
-				if (U.is_array(_d.e_hd[typ])) {
-					var _na = [];
-					for (var i = 0; i < _d.e_hd[typ].length; i++) {
-						if (_d.e_hd[typ][i] == _fn || typeof _fn === "undefined") eUnBind(_d, typ, _d.e_hd[typ][i]);
-						else _na.push(_d.e_hd[typ][i]);
-					}
-					_d.e_hd[typ] = _na;
-				} else {
-					if (_d.e_hd[typ] == _fn || typeof _fn === "undefined") {
-						eUnBind(_d, typ, _d.e_hd[typ]);
-						delete _d.e_hd[typ]; // 함수 제거
+				if(_d.e_hd) {
+					if (U.is_array(_d.e_hd[typ])) {
+						var _na = [];
+						for (var i = 0; i < _d.e_hd[typ].length; i++) {
+							if (_d.e_hd[typ][i] == _fn || typeof _fn === "undefined") eUnBind(_d, typ, _d.e_hd[typ][i]); else _na.push(_d.e_hd[typ][i]);
+						}
+						_d.e_hd[typ] = _na;
+					} else {
+						if (_d.e_hd[typ] == _fn || typeof _fn === "undefined") {
+							eUnBind(_d, typ, _d.e_hd[typ]);
+							delete _d.e_hd[typ]; // 함수 제거
+						}
 					}
 				}
 			}
@@ -2778,15 +2787,20 @@
 									break;
 								}
 							} else if (k === "clazz" || k === "class_name") {
-								var klasss = _target.className.split(re_class_name_split);
-								var hasClass = false;
-								for (var a = 0; a < klasss.length; a++) {
-									if (klasss[a] == cond[k]) {
-										hasClass = true;
-										break;
+								if("className" in _target) {
+									var klasss = _target.className.split(re_class_name_split);
+									var hasClass = false;
+									for (var a = 0; a < klasss.length; a++) {
+										if (klasss[a] == cond[k]) {
+											hasClass = true;
+											break;
+										}
 									}
+									result = hasClass;
+								}else{
+									result = false;
+									break;
 								}
-								result = hasClass;
 							} else { // 그외 속성값들.
 								if(_target.getAttribute) {
 									if (_target.getAttribute(k) != cond[k]) {

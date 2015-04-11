@@ -138,8 +138,8 @@ $app-visual-height: 280px;
 	}
   }
 
-  /* Rectangle 6: */
-  @include background-image(linear-gradient(to right, #EB1165, #FC620F));
+  background: #358CAE;
+  @include background-image(linear-gradient(to right, #358CAE, #309C80));
 
   .visual{
 	position: absolute;
@@ -263,27 +263,30 @@ $app-visual-height: 280px;
   }
   .app-nav-left{
     position: absolute;
-    top: $app-visual-height + 10; left:10px;
+    top: $app-visual-height; left:0px;
 	/* Rectangle 10: */
-	background: #F1F1F1;
-	border-radius: 8px;
+	background: #eee;
+    //border-right: 1px solid #24696D;
+	//border-radius: 8px;
+
 	width:200px;
 	margin:0px auto 0px auto;
-	padding:10px 20px;
+	padding:10px 0px;
 	box-sizing: border-box;
 	overflow: auto;
 	text-align: left;
 	box-sizing: border-box;
+
 	&.pinned{
 	  position:fixed;
-	  top:70px;
+	  top:60px;
 	}
 
     a{
       display: block;
       line-height: 1.5em;
       text-decoration: none;
-      color: #444;
+      color: #999EA0;
     }
     li{
       list-style: none;
@@ -292,20 +295,40 @@ $app-visual-height: 280px;
     ul{
       margin:0px;
       padding: 0px;
-      li{
-        //text-align: center;
-        //padding-top: 10px;
-        padding-right: 0px;
-        a{font-size: 1.2em;line-height: 2em;color: #000;}
+      color: #999EA0;
+      &:hover, &.open{
+        border-right:2px solid #309C80;
+        color: #777b7d;
+        ul{
+          display: block;
+        }
       }
+
+      li{
+        padding:0px 15px;
+        a{
+          display: block;
+          font-size: 1.2em;line-height: 35px;color:inherit;
+        }
+
+        &:hover, &.open{
+          background: #358CAE;
+          color:#fff;
+        }
+      }
+
       ul{
         padding: 0px 0px 0px 0px;
+        &:hover{
+          border-right:0px none;
+        }
+        display: none;
         li{
-          //text-align: right;
-          padding-top: 0px;
-          padding-right: 0px;
-		  padding-left: 10px;
-          a{font-size: 1em;line-height: 1.5em;color: #444;}
+          padding-left:30px;
+          a{
+            display: block;
+            font-size: 1em;line-height: 28px;
+          }
         }
       }
     }

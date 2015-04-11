@@ -103,9 +103,9 @@ pre.prettyprint {
   min-width: 970px;
   height: 280px;
   color: #fff;
-  /* Rectangle 6: */
-  background-image: -webkit-linear-gradient( left , #EB1165, #FC620F);
-  background-image: linear-gradient(to right, #EB1165, #FC620F); }
+  background: #358CAE;
+  background-image: -webkit-linear-gradient( left , #358CAE, #309C80);
+  background-image: linear-gradient(to right, #358CAE, #309C80); }
   .app-visual.pinned {
     position: fixed;
     top: -220px; }
@@ -216,48 +216,58 @@ pre.prettyprint {
       border-radius: 4px; }
   .app-page .app-nav-left {
     position: absolute;
-    top: 290px;
-    left: 10px;
+    top: 280px;
+    left: 0px;
     /* Rectangle 10: */
-    background: #F1F1F1;
-    border-radius: 8px;
+    background: #eee;
     width: 200px;
     margin: 0px auto 0px auto;
-    padding: 10px 20px;
+    padding: 10px 0px;
     box-sizing: border-box;
     overflow: auto;
     text-align: left;
     box-sizing: border-box; }
     .app-page .app-nav-left.pinned {
       position: fixed;
-      top: 70px; }
+      top: 60px; }
     .app-page .app-nav-left a {
       display: block;
       line-height: 1.5em;
       text-decoration: none;
-      color: #444; }
+      color: #999EA0; }
     .app-page .app-nav-left li {
       list-style: none;
       text-align: left; }
     .app-page .app-nav-left ul {
       margin: 0px;
-      padding: 0px; }
+      padding: 0px;
+      color: #999EA0; }
+      .app-page .app-nav-left ul:hover, .app-page .app-nav-left ul.open {
+        border-right: 2px solid #309C80;
+        color: #777b7d; }
+        .app-page .app-nav-left ul:hover ul, .app-page .app-nav-left ul.open ul {
+          display: block; }
       .app-page .app-nav-left ul li {
-        padding-right: 0px; }
+        padding: 0px 15px; }
         .app-page .app-nav-left ul li a {
+          display: block;
           font-size: 1.2em;
-          line-height: 2em;
-          color: #000; }
+          line-height: 35px;
+          color: inherit; }
+        .app-page .app-nav-left ul li:hover, .app-page .app-nav-left ul li.open {
+          background: #358CAE;
+          color: #fff; }
       .app-page .app-nav-left ul ul {
-        padding: 0px 0px 0px 0px; }
+        padding: 0px 0px 0px 0px;
+        display: none; }
+        .app-page .app-nav-left ul ul:hover {
+          border-right: 0px none; }
         .app-page .app-nav-left ul ul li {
-          padding-top: 0px;
-          padding-right: 0px;
-          padding-left: 10px; }
+          padding-left: 30px; }
           .app-page .app-nav-left ul ul li a {
+            display: block;
             font-size: 1em;
-            line-height: 1.5em;
-            color: #444; }
+            line-height: 28px; }
 
 .DH1 {
   line-height: 0px;

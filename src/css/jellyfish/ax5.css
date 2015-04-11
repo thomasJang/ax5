@@ -2341,6 +2341,11 @@ a.ax {
   -ms-transform: scale(0.96);
   -o-transform: scale(0.96);
   transform: scale(0.96);
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
   -webkit-animation: ax-masking 0.2s ease-in-out;
   -moz-animation: ax-masking 0.2s ease-in-out;
   animation: ax-masking 0.2s ease-in-out; }
@@ -2362,6 +2367,11 @@ a.ax {
     background: #333333;
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
     opacity: 0.6;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
     -webkit-animation: ax-mask 0.2s ease-in-out;
     -moz-animation: ax-mask 0.2s ease-in-out;
     animation: ax-mask 0.2s ease-in-out; }

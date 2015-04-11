@@ -48,7 +48,8 @@
 .ax-masking{
   -webkit-filter: blur(3px);
   //position: fixed;
-  @include transform(scale(0.96));
+  @include transform(scale(0.96) );
+  @include transform(translateZ(0));
   @include animation(ax-masking 0.2s ease-in-out);
 }
 .ax-mask{
@@ -62,6 +63,7 @@
     left:0px;top:0px;width:100%;height:100%;
     background: $mask-bg;
     @include opacity($mask-bg-opacity);
+    @include transform(translateZ(0));
     @include animation(ax-mask 0.2s ease-in-out);
   }
   .ax-mask-content{
