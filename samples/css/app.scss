@@ -265,7 +265,7 @@ $app-visual-height: 280px;
     position: absolute;
     top: $app-visual-height; left:0px;
 	/* Rectangle 10: */
-	background: #eee;
+	//background: #eee;
     //border-right: 1px solid #24696D;
 	//border-radius: 8px;
 
@@ -293,22 +293,27 @@ $app-visual-height: 280px;
       text-align: left;
     }
     ul{
+      @include transition(all 0.1s ease-in);
       margin:0px;
       padding: 0px;
       color: #999EA0;
       &:hover, &.open{
         border-right:2px solid #309C80;
         color: #777b7d;
+      }
+      &.open{
         ul{
           display: block;
         }
       }
 
       li{
+        @include transition(all 0.1s ease-in);
         padding:0px 15px;
         a{
+          @include transition(all 0.1s ease-in);
           display: block;
-          font-size: 1.2em;line-height: 35px;color:inherit;
+          font-size: 1.2em;line-height: 40px;color:inherit;
         }
 
         &:hover, &.open{
@@ -327,7 +332,7 @@ $app-visual-height: 280px;
           padding-left:30px;
           a{
             display: block;
-            font-size: 1em;line-height: 28px;
+            font-size: 1em;line-height: 30px;
           }
         }
       }

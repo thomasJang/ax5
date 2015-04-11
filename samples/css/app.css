@@ -219,7 +219,6 @@ pre.prettyprint {
     top: 280px;
     left: 0px;
     /* Rectangle 10: */
-    background: #eee;
     width: 200px;
     margin: 0px auto 0px auto;
     padding: 10px 0px;
@@ -239,20 +238,29 @@ pre.prettyprint {
       list-style: none;
       text-align: left; }
     .app-page .app-nav-left ul {
+      -webkit-transition: all 0.1s ease-in;
+      -moz-transition: all 0.1s ease-in;
+      transition: all 0.1s ease-in;
       margin: 0px;
       padding: 0px;
       color: #999EA0; }
       .app-page .app-nav-left ul:hover, .app-page .app-nav-left ul.open {
         border-right: 2px solid #309C80;
         color: #777b7d; }
-        .app-page .app-nav-left ul:hover ul, .app-page .app-nav-left ul.open ul {
-          display: block; }
+      .app-page .app-nav-left ul.open ul {
+        display: block; }
       .app-page .app-nav-left ul li {
+        -webkit-transition: all 0.1s ease-in;
+        -moz-transition: all 0.1s ease-in;
+        transition: all 0.1s ease-in;
         padding: 0px 15px; }
         .app-page .app-nav-left ul li a {
+          -webkit-transition: all 0.1s ease-in;
+          -moz-transition: all 0.1s ease-in;
+          transition: all 0.1s ease-in;
           display: block;
           font-size: 1.2em;
-          line-height: 35px;
+          line-height: 40px;
           color: inherit; }
         .app-page .app-nav-left ul li:hover, .app-page .app-nav-left ul li.open {
           background: #358CAE;
@@ -267,7 +275,7 @@ pre.prettyprint {
           .app-page .app-nav-left ul ul li a {
             display: block;
             font-size: 1em;
-            line-height: 28px; }
+            line-height: 30px; }
 
 .DH1 {
   line-height: 0px;
