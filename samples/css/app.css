@@ -3,13 +3,13 @@ html, body {
   padding: 0px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
-  color: #444;
+  color: #555555;
   height: 100%;
   line-height: 1.6em; }
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0.5em auto;
-  color: #222; }
+  color: #555555; }
 
 article h1 {
   font-size: 2.5em; }
@@ -26,7 +26,8 @@ div.block-end {
   height: 30px; }
 
 pre.prettyprint {
-  border-radius: 10px; }
+  border-radius: 10px;
+  margin: 20px 0; }
 
 .app-wrap {
   position: relative;
@@ -155,10 +156,12 @@ pre.prettyprint {
     .app-page .app-content article.content {
       padding: 0px 0px 10px 0px; }
     .app-page .app-content .script-result, .app-page .app-content .tag-result {
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 10px;
-      font-size: 1.2em; }
+      /* Rectangle 14: */
+      background: #F2F2F2;
+      border-radius: 8px;
+      font-family: "consolas", "courier new";
+      padding: 10px 15px;
+      font-size: 1em; }
     .app-page .app-content .ax-section {
       position: relative;
       border: 1px solid #ccc;
@@ -245,7 +248,7 @@ pre.prettyprint {
       padding: 0px;
       color: #999EA0; }
       .app-page .app-nav-left ul:hover, .app-page .app-nav-left ul.open {
-        border-right: 2px solid #309C80;
+        border-right: 1px solid #f3f3f3;
         color: #777b7d; }
       .app-page .app-nav-left ul.open ul {
         display: block; }

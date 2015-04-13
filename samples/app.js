@@ -40,22 +40,33 @@ ax5.dom.ready(function(){
 		}
 
 		var selected_menu_list_index = -1;
+		var window_height = dom(window).height();
 		return {
 			menu_list: menu_list,
 			set_menu_height: function(){
+				window_height = dom(window).height();
 				dom.css(app_nav_left, {"height":ax5.dom.height(window) - 60});
 			},
 			menu_taping: function(){
 				var s_top = ax5.dom.scroll().top;
 				for(var i= 0,l=menu_list.length;i<l;i++){
-					if(menu_list[i].top > s_top){
+					if( menu_list[i].top > s_top){
+						var _i = i;
+						if(i > 0) {
+							if(Math.abs(menu_list[i - 1].top - s_top) < Math.abs(menu_list[i].top - s_top - 60)){ // 메뉴 높이 제거
+								_i = i-1;
+							}else{
+								_i = i;
+							}
+						}
+
 						if(selected_menu_list_index > -1) {
 							menu_list[selected_menu_list_index].el.class_name("remove", "open");
 							menu_list[selected_menu_list_index].el.parent({tagname:"ul", clazz:"H1"}).class_name("remove", "open");
 						}
-						menu_list[i].el.class_name("add", "open");
-						menu_list[i].el.parent({tagname:"ul", clazz:"H1"}).class_name("add", "open");
-						selected_menu_list_index = i;
+						menu_list[_i].el.class_name("add", "open");
+						menu_list[_i].el.parent({tagname:"ul", clazz:"H1"}).class_name("add", "open");
+						selected_menu_list_index = _i;
 						break;
 					}
 				}

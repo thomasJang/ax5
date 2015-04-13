@@ -1,64 +1,6 @@
-<article class="content">
-    <h2 data-menu-item="ax5-util-camel_case">ax5.util.camel_case</h2>
-<pre>
-<div id="ax5-util-camel-case" class="script-result"></div>
-<script>
-    (function(){
-        var po = [];
-        po.push(ax5.util.camel_case("inner-width"));
-        po.push(ax5.util.camel_case("camelCase"));
-        po.push(ax5.util.camel_case("a_bc"));
-        ax5.dom("#ax5-util-camel-case").html(po.join('<br/>'));
-    })();
-</script>
-</pre>
-
-<h4>Result</h4>
-<div id="ax5-util-camel-case" class="script-result"></div>
-<script>
-(function(){
-    var po = [];
-    po.push(ax5.util.camel_case("inner-width"));
-    po.push(ax5.util.camel_case("camelCase"));
-    po.push(ax5.util.camel_case("a_bc"));
-    ax5.dom("#ax5-util-camel-case").html(po.join('<br/>'));
-})();
-</script>
-</article>
-
-<article class="content">
-    <h2 data-menu-item="ax5-util-snake_case">ax5.util.snake_case</h2>
-<pre>
-<div id="ax5-util-snake_case" class="script-result"></div>
-<script>
-    (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-snake_case");
-        var po = [];
-        po.push(util.snake_case("inner-width"));
-        po.push(util.snake_case("camelCase"));
-        po.push(util.snake_case("a_bc"));
-        el.html(po.join('<br/>'));
-    })();
-</script>
-</pre>
-
-<h4>Result</h4>
-<div id="ax5-util-snake_case" class="script-result"></div>
-<script>
-    (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-snake_case");
-        var po = [];
-        po.push(util.snake_case("inner-width"));
-        po.push(util.snake_case("camelCase"));
-        po.push(util.snake_case("a_bc"));
-        el.html(po.join('<br/>'));
-    })();
-</script>
-</article>
-
-<article class="content">
+<article class="content"> <!-- clone -->
     <h2 data-menu-item="ax5-util-clone">ax5.util.clone</h2>
-    
+
 <pre>
 <div id="ax5-util-clone" class="script-result"></div>
 <script>
@@ -81,7 +23,7 @@
         var a = {a:1};
         var b = a;
         var el = ax5.dom("#ax5-util-clone");
-        
+
         el.append("(a == b) => " + (a == b) + "<br/>");
         b = ax5.util.clone(a);
         el.append("(a == b) => " + (a == b));
@@ -93,7 +35,7 @@
 </p>
 </article>
 
-<article class="content">
+<article class="content"> <!-- each -->
     <h2 data-menu-item="ax5-util-each">ax5.util.each</h2>
 
 <pre>
@@ -145,21 +87,21 @@
 </p>
 </article>
 
-<article class="content">
+<article class="content"> <!-- filter -->
     <h2 data-menu-item="ax5-util-filter">ax5.util.filter</h2>
 <pre>
 <div id="ax5-util-filter" class="script-result"></div>
 <script>
     (function(){
         var util = ax5.util, result, el = ax5.dom("#ax5-util-filter");
-        
+
         var aarray = [5,4,3,2,1];
         result = util.filter( aarray, function(){
             return this % 2;
         });
         el.append( result.join(",") );
         el.append( "<hr/>" );
-        
+
         var list = [
             {isdel:1, name:"ax5-1"},{name:"ax5-2"},{isdel:1, name:"ax5-3"},{name:"ax5-4"},{name:"ax5-5"}
         ];
@@ -176,14 +118,14 @@
 <script>
     (function(){
         var util = ax5.util, result, el = ax5.dom("#ax5-util-filter");
-        
+
         var aarray = [5,4,3,2,1];
         result = util.filter( aarray, function(){
             return this % 2;
         });
         el.append( result.join(",") );
         el.append( "<hr/>" );
-        
+
         var list = [
             {isdel:1, name:"ax5-1"},{name:"ax5-2"},{isdel:1, name:"ax5-3"},{name:"ax5-4"},{name:"ax5-5"}
         ];
@@ -233,7 +175,7 @@
     var util = ax5.util, el = ax5.dom("#ax5-util-search");
     var a = ["A","X","5"];
     var idx = util.search(a, function(){
-       return this == "X"; 
+       return this == "X";
     });
     el.append(a[idx]);
     el.append(" / ");
@@ -242,7 +184,7 @@
                 return idx == 2;
             })
         ]);
-    
+
     var b = {a:"AX5-0", x:"AX5-1", 5:"AX5-2"};
     el.append(" / ");
     el.append(b[
@@ -256,6 +198,9 @@
     search는 배열을 대상으로 할 때와 오브젝트를 대상으로 할 때 결과가 다르다. Array의 경우에는 Array의 인덱스가 리턴되고 Object의 경우에는 Object의 키가 리턴된다.
 </p>
 </article>
+
+
+
 
 <article class="content">
     <h2 data-menu-item="ax5-util-map">ax5.util.map</h2>
@@ -320,6 +265,9 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 </p>
 </article>
 
+
+
+
 <article class="content">
     <h2 data-menu-item="ax5-util-reduce">ax5.util.reduce</h2>
 <pre>
@@ -367,6 +315,9 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 </p>
 </article>
 
+
+
+
 <article class="content">
     <h2 data-menu-item="ax5-util-reduce_right">ax5.util.reduce_right</h2>
 <pre>
@@ -400,4 +351,71 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 <p>
     reduce의 역순입니다. reduce_right는 Object타입을 지원하지 않습니다.
 </p>
+</article>
+
+
+
+
+<article class="content">
+    <h2 data-menu-item="ax5-util-extend">ax5.util.extend</h2>
+<pre>
+
+</pre>
+
+    <h4>Result</h4>
+    <div id="ax5-util-extend" class="script-result"></div>
+    <script>
+        (function(){
+            var util = ax5.util, el = ax5.dom("#ax5-util-extend");
+        })();
+    </script>
+</article>
+
+<article class="content">
+    <h2 data-menu-item="ax5-util-extend_all">ax5.util.extend_all</h2>
+<pre>
+
+</pre>
+
+    <h4>Result</h4>
+    <div id="ax5-util-extend_all" class="script-result"></div>
+    <script>
+        (function(){
+            var util = ax5.util, el = ax5.dom("#ax5-util-extend_all");
+        })();
+    </script>
+</article>
+
+
+
+
+<article class="content">
+    <h2 data-menu-item="ax5-util-first">ax5.util.first</h2>
+<pre>
+
+</pre>
+
+    <h4>Result</h4>
+    <div id="ax5-util-first" class="script-result"></div>
+    <script>
+        (function(){
+            var util = ax5.util, el = ax5.dom("#ax5-util-first");
+
+        })();
+    </script>
+</article>
+
+<article class="content">
+    <h2 data-menu-item="ax5-util-last">ax5.util.last</h2>
+<pre>
+
+</pre>
+
+    <h4>Result</h4>
+    <div id="ax5-util-last" class="script-result"></div>
+    <script>
+        (function(){
+            var util = ax5.util, el = ax5.dom("#ax5-util-last");
+        })();
+    </script>
 </article>

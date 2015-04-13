@@ -18,7 +18,7 @@ $theme-special: #bc4cd0;
 html, body{
   margin:0px;padding:0px;
   font-family: $font-family-base;
-  font-size: 14px;color:#444;
+  font-size: 14px;color:#555555;
   height:100%;line-height: 1.6em;
 }
 
@@ -29,7 +29,7 @@ h3,
 h4,
 h5,
 h6
-{margin: 0.5em auto;color:#222;}
+{margin: 0.5em auto;color:#555555;}
 
 article {
 	h1 {
@@ -55,6 +55,7 @@ li{}
 div.block-end{height:30px;}
 pre.prettyprint{
 	border-radius: 10px;
+    margin: 20px 0;
 	//background-color: #f3f3f3;
 }
 
@@ -193,10 +194,12 @@ $app-visual-height: 280px;
       &.content{padding:0px 0px 10px 0px;}
     }
     .script-result, .tag-result{
-      border:1px solid #ccc;
-      border-radius: 10px;
-      padding: 10px;
-      font-size: 1.2em;
+      /* Rectangle 14: */
+      background: #F2F2F2;
+      border-radius: 8px;
+      font-family: "consolas", "courier new";
+      padding: 10px 15px;
+      font-size: 1em;
     }
     .ax-section{
       position: relative;
@@ -266,7 +269,7 @@ $app-visual-height: 280px;
     top: $app-visual-height; left:0px;
 	/* Rectangle 10: */
 	//background: #eee;
-    //border-right: 1px solid #24696D;
+    //border-right: 1px solid #f3f3f3;
 	//border-radius: 8px;
 
 	width:200px;
@@ -298,7 +301,7 @@ $app-visual-height: 280px;
       padding: 0px;
       color: #999EA0;
       &:hover, &.open{
-        border-right:2px solid #309C80;
+        border-right:1px solid #f3f3f3;
         color: #777b7d;
       }
       &.open{

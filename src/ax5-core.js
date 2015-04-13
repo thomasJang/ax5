@@ -469,7 +469,6 @@
 			return results;
 		}
 
-
 		/**
 		 * Object를 JSONString 으로 반환합니다.
 		 * @method ax5.util.to_json
