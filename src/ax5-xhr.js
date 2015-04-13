@@ -50,21 +50,24 @@ ax5.xhr = (function (){
 				} catch(e) {}
 				
 				//  authorization headers. The default is false.
-				http.withCredentials = cfg.withCredentials;
+				if("withCredentials" in http) http.withCredentials = cfg.withCredentials;
+				// todo : withCredentials 이 지원되지 않는 브라우저 일 때 대처법 필요
 
 				// 응답
 				http.onreadystatechange = function () {
 					if (http.readyState == 4) {
                         if(time_id == -1) return;
                         clearTimeout(time_id), time_id = -1;
-						that = {
-							response_url: http.responseURL,
-							status      : http.status,
-							result      : http.statusText,
-							state       : http.readyState,
-							data        : http.responseText,
-							type        : http.responseType
-						};
+						that = {};
+						that.response_url= ("responseURL" in http) ? http.responseURL : "";
+						that.status      = ("status" in http) ? http.status : "";
+						that.result      = http.statusText;
+						that.state       = http.readyState;
+						that.type        = http.responseType;
+						try {
+							that.data = ("responseText" in http) ? http.responseText : "";
+						}catch(e){}
+
 						if (http.status == 200) {
 							if (cfg.response) cfg.response.call(that, that.data, that.status, http);
 							else console.log(http);
@@ -86,7 +89,8 @@ ax5.xhr = (function (){
                 ontimeout = function(){
                     if(time_id == -1) return;
                     if(http.readyState !== 4) http.abort();
-                    time_id = -1, http.onreadystatechange = null;
+                    time_id = -1;
+	                //http.onreadystatechange = null;
                     
                     that = {error:"timeout"};
                     if (cfg.error) {

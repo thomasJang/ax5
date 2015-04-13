@@ -1,0 +1,147 @@
+//
+@mixin ax-panel() {
+	@include ax();
+	box-sizing: $panel-box-model;
+	background-color: $panel-bg;
+	border: 1px solid transparent;
+
+	@include ax-border-radius($panel-border-radius);
+	@include box-shadow(0 1px 1px rgba(0, 0, 0, .05));
+}
+
+@mixin ax-panel-section() {
+	.ax-panel-heading{
+		font-size: 1.5em;
+		font-weight: 600;
+		padding: $panel-heading-padding;
+		border-bottom: 1px solid transparent;
+		//background: $panel-default-heading-bg;
+		@include ax-border-radius($panel-border-radius, "top", -1);
+		.badge {
+			font-size: 0.8em;
+			color: $panel-default-heading-bg;
+			background-color: $panel-default-text;
+		}
+	}
+	.ax-panel-body{
+		padding: $panel-body-padding;
+	}
+	.ax-panel-foot{
+		padding: $panel-footer-padding;
+		@include ax-border-radius($panel-border-radius, "bottom", -1);
+	}
+}
+
+@mixin panel-variant($border, $text-color, $heading-bg-color, $heading-border) {
+	border: $border;
+	.ax-panel-heading{
+		color: $text-color;
+		background: $heading-bg-color;
+		.badge {
+			color: $heading-bg-color;
+			background-color: $text-color;
+		}
+	}
+	.ax-panel-body{
+
+	}
+	.ax-panel-foot{
+		color: $text-color;
+		background: $heading-bg-color;
+	}
+}
+
+@mixin scroll-variant($track-bg, $track-border, $track-thickness, $track-radius, $bg, $border, $thickness, $radius){
+	.ax-scroll-body{
+		position: relative;
+	}
+
+	.ax-scrollbar-track{
+		position: absolute;
+		box-sizing: border-box;
+		background: $track-bg;
+		border: $track-border;
+		@include ax-border-radius($track-radius);
+		.ax-scrollbar{
+			box-sizing: border-box;
+			background: $bg;
+			border: $border;
+			@include ax-border-radius($radius);
+			position: absolute;
+		}
+
+		&.vertical{
+			top:0px;
+			right:0px;
+			width: $track-thickness;
+			height: 100%;
+			.ax-scrollbar {
+				width: $thickness;
+				height: $thickness * 5;
+			}
+		}
+		&.horizontal{
+			bottom:0px;
+			left:0px;
+			width: 100%;
+			height: $track-thickness;
+			.ax-scrollbar {
+				height: $thickness;
+				width: $thickness * 5;
+			}
+		}
+	}
+}
+
+// mixins --------------------------------------------- end
+.ax-panel{
+	@include ax-panel();
+	@include ax-panel-section();
+	@include panel-variant($panel-default-border, $panel-default-text, $panel-default-heading-bg, $panel-default-border);
+	
+	&.basic{
+		@include panel-variant($panel-basic-border, $panel-basic-text, $panel-basic-heading-bg, $panel-basic-border);
+	}
+	&.good{
+		@include panel-variant($panel-good-border, $panel-good-text, $panel-good-heading-bg, $panel-good-border);
+	}
+	&.info{
+		@include panel-variant($panel-info-border, $panel-info-text, $panel-info-heading-bg, $panel-info-border);
+	}
+	&.warning{
+		@include panel-variant($panel-warning-border, $panel-warning-text, $panel-warning-heading-bg, $panel-warning-border);
+	}
+	&.danger{
+		@include panel-variant($panel-danger-border, $panel-danger-text, $panel-danger-heading-bg, $panel-danger-border);
+	}
+	&.special{
+		@include panel-variant($panel-special-border, $panel-special-text, $panel-special-heading-bg, $panel-special-border);
+	}
+}
+
+.ax-scroll{
+	@include ax-panel();
+	@include ax-border-radius(0);
+	@include box-shadow(none);
+
+	position: relative;
+	overflow: hidden;
+
+	@include scroll-variant($scrollbar-track-bg, $scrollbar-track-border, $scrollbar-track-thickness, $scrollbar-track-radius, $scrollbar-bg, $scrollbar-border, $scrollbar-thickness, $scrollbar-radius);
+
+	&.second{
+		@include scroll-variant($scrollbar-second-track-bg, $scrollbar-second-track-border, $scrollbar-second-track-thickness, $scrollbar-second-track-radius, $scrollbar-second-bg, $scrollbar-second-border, $scrollbar-second-thickness, $scrollbar-second-radius);
+	}
+}
+.ax-menu{
+	@include ax-panel();
+}
+.ax-tab {
+	@include ax-panel();
+}
+.ax-toolbar {
+	@include ax-panel();
+}
+.ax-label {
+	@include ax-panel();
+}

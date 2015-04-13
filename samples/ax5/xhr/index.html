@@ -1,5 +1,5 @@
 <article class="cover">
-    <h1>ax5.xhr</h1>
+    <h1 data-menu-item="ax5-xhr">ax5.xhr</h1>
 </article>
 <article class="content">
     <h3>일반적인 방법</h3>
@@ -68,41 +68,3 @@
      });
     </pre>
 </article>
-<script type="text/javascript">
-    ax5.xhr({
-        method: "POST",
-        url   : "ax5/xhr/data.php",
-        param : "str=1234",
-        res   : function (response, status) {
-            console.log("success");
-            console.log(this);
-        },
-        error : function () {
-            console.log("error");
-            console.log(this);
-        }
-    });
-
-    var xhr_queue = [];
-     xhr_queue.push({
-        method: "POST",
-        url   : "../samples/ax5/xhr/data.php",
-        param : "str=1234",
-        res   : function (response, status) {
-            console.log(response);
-        }
-     });
-     xhr_queue.push({
-        method: "POST",
-        url   : "../samples/ax5/xhr/data.php",
-        param : "str=1234",
-        res   : function (response, status) {
-            console.log(response);
-        }
-     });
-
-     ax5.xhr(xhr_queue, function() {
-        console.log("큐 완료");
-     });
-
-</script>

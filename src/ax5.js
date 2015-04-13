@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-03-07 
+ * 2015-04-12 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -179,7 +179,7 @@
 	'use strict';
 
 	// root of function
-	var root = this, doc = document, win = window, fval = eval,
+	var root = this, win = window, doc = document, docElem = document.documentElement,
 	/** @namespace {Object} ax5 */
 		ax5 = {}, info, U, dom;
 
@@ -285,27 +285,22 @@
 		 * ```
 		 */
 		var browser = (function () {
-			var ua = navigator.userAgent.toLowerCase();
-			var mobile = (ua.search(/mobile/g) != -1);
+			var ua = navigator.userAgent.toLowerCase(), mobile = (ua.search(/mobile/g) != -1),
+				browserName, match, browser, browserVersion;
+
 			if (ua.search(/iphone/g) != -1) {
 				return { name: "iphone", version: 0, mobile: true }
 			} else if (ua.search(/ipad/g) != -1) {
 				return { name: "ipad", version: 0, mobile: true }
 			} else if (ua.search(/android/g) != -1) {
-				var match = /(android)[ \/]([\w.]+)/.exec(ua) || [];
-				var browserVersion = (match[2] || "0");
+				match = /(android)[ \/]([\w.]+)/.exec(ua) || [];
+				browserVersion = (match[2] || "0");
 				return { name: "android", version: browserVersion, mobile: mobile }
 			} else {
-				var browserName = "";
-				var match = /(opr)[ \/]([\w.]+)/.exec(ua) ||
-					/(chrome)[ \/]([\w.]+)/.exec(ua) ||
-					/(webkit)[ \/]([\w.]+)/.exec(ua) ||
-					/(msie) ([\w.]+)/.exec(ua) ||
-					ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) ||
-					[];
-
-				var browser = (match[1] || "");
-				var browserVersion = (match[2] || "0");
+				browserName = "";
+				match = /(opr)[ \/]([\w.]+)/.exec(ua) || /(chrome)[ \/]([\w.]+)/.exec(ua) || /(webkit)[ \/]([\w.]+)/.exec(ua) || /(msie) ([\w.]+)/.exec(ua) || ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) || [];
+				browser = (match[1] || "");
+				browserVersion = (match[2] || "0");
 
 				if (browser == "msie") browser = "ie";
 				return {
@@ -314,6 +309,7 @@
 					mobile: mobile
 				}
 			}
+			ua = null, mobile = null, browserName = null, match = null, browser = null, browserVersion = null;
 		})();
 		/**
 		 * 브라우저 여부
@@ -346,8 +342,8 @@
 		 * }
 		 * ```
 		 */
-		function url_util() {
-			var url = {
+		function url_util(url, urls) {
+			url = {
 				href: win.location.href,
 				param: win.location.search,
 				referrer: doc.referrer,
@@ -365,7 +361,7 @@
 			return url;
 		}
 
-		var info = {
+		return {
 			version: version,
 			base_url: base_url,
 			event_keys: event_keys,
@@ -374,8 +370,6 @@
 			wheel_enm: wheel_enm,
 			url_util: url_util
 		};
-
-		return info;
 	})();
 
 
@@ -1083,7 +1077,7 @@
 			var
 				head = doc.head || doc.getElementsByTagName("head")[0],
 				readyRegExp = info.is_browser && navigator.platform === 'PLAYSTATION 3' ? /^complete$/ : /^(complete|loaded)$/,
-				loadCount = mods.length, loadErrors = [], onloadTimer, onerrorTimer, returned = false,
+				loadCount = mods.length, loadErrors = [], loaded_src = {}, onloadTimer, onerrorTimer, returned = false,
 				scripts = dom.get("script[src]"), styles = dom.get("style[href]"),
 				onload = function () {
 					if (loadCount < 1 && loadErrors.length == 0 && !returned) {
@@ -1120,12 +1114,12 @@
 				} else {
 
 					plugin = (type === "js") ?
-						dom.create("script", {type: "text/javascript", src: plugin_src}) :
+						dom.create("script", {type: "text/javascript", src: plugin_src, "data-src": plugin_src}) :
 						dom.create("link", {rel: "stylesheet", type: "text/css", href: plugin_src});
 
-					plug_load = function (e) {
-						if (e.type === 'load' || (readyRegExp.test((e.currentTarget || e.srcElement).readyState))) {
-							loadCount--;
+					plug_load = function (e, plugin_src) {
+						if (e && ( e.type === 'load' || readyRegExp.test((e.currentTarget || e.srcElement).readyState) )){
+							if(!loaded_src[plugin_src]) loadCount--;
 							if (onloadTimer) clearTimeout(onloadTimer);
 							onloadTimer = setTimeout(onload, 1);
 						}
@@ -1142,8 +1136,15 @@
 					ax5.xhr({
 						url : plugin_src, contentType: "",
 						res : function (response, status) {
+							var time_id;
 							head.appendChild(plugin);
-							plug_load({type: "load"});
+							plugin.onload = function(e) {
+								plug_load(e, plugin_src);
+								if(time_id) clearTimeout(time_id);
+							};
+							time_id = setTimeout(function(){
+								plug_load({type: "load"}, plugin_src);
+							}, 500);
 						},
 						error : function () {
 							plug_err(this);
@@ -1960,7 +1961,22 @@
 				this.data = function (command, O) {
 					var rs = dom.data(this.elements, command, O);
 					return (rs === this.elements) ? this : rs;
-				}
+				};
+				/**
+				 * 엘리먼트의 자식을 모두 지워줍니다. 내용을 깨긋히 비워 냅니다.
+				 * @method ax5.dom0.empty
+				 * @returns {ax5.dom0}
+				 * @example
+				 * ```
+				 * var axd = ax5.dom, axu = ax5.util, res = "";
+				 *
+				 * axd("#id").empty();
+				 * ```
+				 */
+				this.empty = function (){
+					dom.empty(this.elements);
+					return this;
+				};
 			}
 
 			return ax;
@@ -1974,6 +1990,7 @@
 		//if("내장함수 시작") {
 		// 이벤트 바인딩
 		function eBind(elem, type, eventHandle) {
+			if(!U.is_string(type)) console.error("type=" + type);
 			type = U.left(type, ".");
 			if (elem.addEventListener) {
 				elem.addEventListener(type, eventHandle, false);
@@ -2134,12 +2151,14 @@
 
 		// 박스사이즈 구하기
 		function box_size(els, fn_nm, opts) {
-			var d = -1, tag_nm = "";
-			if (U.is_window(els)) {
-				return els.document.documentElement[U.camel_case("client-" + fn_nm)];
+			var d = -1, tag_nm = "",
+				el = [].concat(els)[0];
+			
+			if (U.is_window(el)) {
+				return el.document.documentElement[U.camel_case("client-" + fn_nm)];
 			}
 			else {
-				var el = els[0], _sbs = U.camel_case("scroll-" + fn_nm), _obs = U.camel_case("offset-" + fn_nm), _cbs = U.camel_case("client-" + fn_nm);
+				var _sbs = U.camel_case("scroll-" + fn_nm), _obs = U.camel_case("offset-" + fn_nm), _cbs = U.camel_case("client-" + fn_nm);
 				if (el) {
 					tag_nm = el.tagName.toLowerCase();
 					if (tag_nm == "html") {
@@ -2175,7 +2194,7 @@
 
 		// createFragment
 		function create_fragment(elems) {
-			var safe = safe_fragment, tmp, nodes = [], tag, wrap, tbody,
+			var safe = safe_fragment.appendChild( doc.createElement("div")), tmp, nodes = [], tag, wrap, tbody,
                 elem, i = 0, l = elems.length, j;
             // safe = doc.createDocumentFragment();
 
@@ -2236,6 +2255,7 @@
 
 						// Remember the top-level container for proper cleanup
 						tmp = safe.lastChild;
+						//tmp = safe.firstChild;
                         safe.removeChild(tmp);
                         tmp = null;
 					}
@@ -2244,9 +2264,9 @@
 
 			i = 0;
 			while ((elem = nodes[i++])) {
-				//console.log(elem);
 				safe.appendChild(elem);
 			}
+			//console.log(safe.innerHTML);
 			return safe;
 		}
 		
@@ -2263,15 +2283,15 @@
 						eUnBind(el, hd, el.e_hd[hd][ehi]);
 				}
 			}
-			delete el["e_hd"];
-			delete el["ax5_data"];
+			if(el["e_hd"]) delete el["e_hd"];
+			if(el["ax5_data"]) delete el["ax5_data"];
 			// todo : attributes 걸리는 것이 없지만 혹시나 모를 데이터를 위해.
-			for(var a in el.attributes){
-				if(typeof el.attributes[a] === "object"){
-					//console.log(el.attributes[a]);
-					el.attributes[a] = null
+			if(ax5.info.browser.name !== "ie" && ax5.info.browser.version > 7){
+				for(var a in el.attributes) {
+					if (typeof el.attributes[a] === "object") el.attributes[a] = null;
 				}
 			}
+
 			// 자식들도 확인 합니다.
 			if(el.hasChildNodes()){
 				c_el = el.childNodes, ci = 0, cl = c_el.length;
@@ -2355,6 +2375,28 @@
 		function resize(_fn) {
 			eBind(window, "resize", _fn);
 		}
+		/**
+		 * 브라우저 scroll 이벤트를 캐치하여 사용자 함수를 호출 하거나 스트롤 포지션을 리턴합니다.
+		 * @method ax5.dom.scroll
+		 * @param {Function} [_fn] - 캐치후 호출될 함수
+		 * @example
+		 * ```
+		 * ax5.dom.scroll(function(){
+		 * 	console.log( 1, ax5.dom.scroll().top );
+		 * });
+		 * ```
+		 */
+		function scroll(_fn) {
+			if(typeof _fn === "undefined"){
+				return {
+					top: docElem.scrollTop || doc.body.scrollTop,
+					left: docElem.scrollLeft || doc.body.scrollLeft
+				}
+			}else{
+				eBind(window, "scroll", _fn);
+				return false;
+			}
+		}
 
 		/**
 		 * CSS Selector를 이용하여 HTML Elements를 찾습니다.
@@ -2372,22 +2414,23 @@
 		function get(query, sub_query) {
 			var els, r_els = [], p_els;
 			var i = 0, l = query.length;
-			if (query.toString() == "[object ax5.dom]") {
+			if (query.toString() === "[object ax5.dom]") {
                 r_els = query.elements;
 			}
+			else if (U.is_window(query)) r_els.push(query);
 			else if (U.is_element(query)) r_els.push(query);
 			else if (U.is_array(query) || U.is_nodelist(query)) {
-				for (; i < l; i++)  if (U.is_element(query[i])) r_els.push(query[i]);
+				for (i=0; i < l; i++)  if (U.is_element(query[i])) r_els.push(query[i]);
 			}
 			else if (U.is_string(query) && query.substr(0, 1) === "#") r_els.push(doc.getElementById(query.substr(1)));
 			else {
                 els = doc.querySelectorAll(query), l = els.length;
-				for (; i < l; i++) r_els.push(els[i]);
+				for (i=0; i < l; i++) r_els.push(els[i]);
 			}
-			if (typeof sub_query != "undefined") {
+			if (typeof sub_query !== "undefined") {
 				p_els = (info.browser.name == "ie" && info.browser.version < 8) ? doc : r_els[0];
                 r_els = [], els = p_els.querySelectorAll(sub_query), l = els.length;
-				for (; i < l; i++) r_els.push(els[i]);
+				for (i=0; i < l; i++) r_els.push(els[i]);
 			}
 			return r_els;
 		}
@@ -2484,27 +2527,41 @@
 		 * ax5.dom.class_name(ax5.dom.get("#abcd"), "toggle", "class-text");
 		 * ```
 		 */
+
+		// todo : class_name 여러개의 class 인자 동시 처리 지원
 		function class_name(els, command, O) {
 			var cns;
 			els = va_elem(els, "clazz");
 			if (command === "add" || command === "remove" || command === "toggle") {
+				O = [].concat(O);
 				for (var di = 0; di < els.length; di++) {
-                    cns = els[di]["className"].split(re_class_name_split);
+					cns = els[di]["className"];
+					if(cns !== "") cns = cns.split(re_class_name_split);
+					else cns = [];
 					if (command === "add") {
-						if (U.search(cns, function () {
-								return O.trim() == this;
-							}) == -1) cns.push(O.trim());
+						O.forEach(function(O){
+							if (U.search(cns, function () {
+									return O.trim() == this;
+								}) == -1) cns.push(O.trim());
+						});
 					} else if (command === "remove") {
-                        cns = U.filter(cns, function () {
-							return O.trim() != this;
+						O.forEach(function(O) {
+							cns = U.filter(cns, function () {
+								return O.trim() != this;
+							});
 						});
 					} else if (command === "toggle") {
-						var class_count = cns.length;
-                        cns = U.filter(cns, function () {
-							return O.trim() != this;
+						O.forEach(function(O) {
+							var class_count = cns.length;
+							cns = U.filter(cns, function () {
+								return O.trim() != this;
+							});
+							if (class_count === cns.length) cns.push(O.trim());
 						});
-						if (class_count === cns.length) cns.push(O.trim());
 					}
+
+
+
 					els[di]["className"] = cns.join(" ");
 				}
 				return els;
@@ -2592,6 +2649,7 @@
 			els = va_elem(els, "on");
 			for (var i = 0; i < els.length; i++) {
 				var __fn, _d = els[i];
+				if(!_d) break;
 				if (!_d.e_hd) _d.e_hd = {};
 				if (typeof _d.e_hd[typ] === "undefined") {
 					__fn = _d.e_hd[typ] = _fn;
@@ -2621,17 +2679,18 @@
 			els = va_elem(els, "off");
 			for (var i = 0; i < els.length; i++) {
 				var _d = els[i];
-				if (U.is_array(_d.e_hd[typ])) {
-					var _na = [];
-					for (var i = 0; i < _d.e_hd[typ].length; i++) {
-						if (_d.e_hd[typ][i] == _fn || typeof _fn === "undefined") eUnBind(_d, typ, _d.e_hd[typ][i]);
-						else _na.push(_d.e_hd[typ][i]);
-					}
-					_d.e_hd[typ] = _na;
-				} else {
-					if (_d.e_hd[typ] == _fn || typeof _fn === "undefined") {
-						eUnBind(_d, typ, _d.e_hd[typ]);
-						delete _d.e_hd[typ]; // 함수 제거
+				if(_d.e_hd) {
+					if (U.is_array(_d.e_hd[typ])) {
+						var _na = [];
+						for (var i = 0; i < _d.e_hd[typ].length; i++) {
+							if (_d.e_hd[typ][i] == _fn || typeof _fn === "undefined") eUnBind(_d, typ, _d.e_hd[typ][i]); else _na.push(_d.e_hd[typ][i]);
+						}
+						_d.e_hd[typ] = _na;
+					} else {
+						if (_d.e_hd[typ] == _fn || typeof _fn === "undefined") {
+							eUnBind(_d, typ, _d.e_hd[typ]);
+							delete _d.e_hd[typ]; // 함수 제거
+						}
 					}
 				}
 			}
@@ -2680,7 +2739,7 @@
 		 * 타겟엘리먼트의 부모 엘리멘트 트리에서 원하는 조건의 엘리먼트를 얻습니다.
 		 * @method ax5.dom.parent
 		 * @param {Element} elements - target element
-		 * @param {Object} cond - 원하는 element를 찾을 조건
+		 * @param {Object|Function} cond - 원하는 element를 찾을 조건
 		 * @returns {Element}
 		 * @example
 		 * ```
@@ -2693,36 +2752,65 @@
 		 * console.log(
 		 * 	ax5.dom.parent(e.target, {tagname:"a", clazz:"ax-menu-handel", "data-custom-attr":"attr_value"})
 		 * );
+		 * // cond 함수로 처리하기
+		 * ax5.dom.on(fnObj.layout.client_main, "click.app_expand", function(e){
+		 * 	var target = ax5.dom.parent(e.target, function(target){
+		 * 		if(ax5.dom.class_name(target, "aside")){
+		 * 			return true;
+		 * 		}
+		 * 		else if(ax5.dom.class_name(target, "client-main")){
+		 * 			return true;
+		 * 		}
+		 * 	});
+		 * 	//client-aside
+		 * 	if(target.id !== "client-aside"){
+		 * 		fnObj.layout.expand_menu();
+		 * 	}
+		 * });
 		 * ```
 		 */
 		function parent(els, cond) {
-			els = va_elem(els, "child");
+			els = va_elem(els, "parent");
 			var _target = els[0];
 			if (_target) {
 				while ((function () {
 					var result = true;
-					for (var k in cond) {
-						if (k === "tagname") {
-							if (_target.tagName.toLocaleLowerCase() != cond[k]) {
-								result = false;
-								break;
-							}
-						}
-						else if (k === "clazz" || k === "class_name") {
-							var klasss = _target.className.split(re_class_name_split);
-							var hasClass = false;
-							for (var a = 0; a < klasss.length; a++) {
-								if (klasss[a] == cond[k]) {
-									hasClass = true;
+					if(U.is_function(cond)){
+						result = cond(_target);
+					}
+					else
+					if(U.is_object(cond)) {
+						for (var k in cond) {
+							if (k === "tagname") {
+								if (_target.tagName.toLocaleLowerCase() != cond[k]) {
+									result = false;
 									break;
 								}
-							}
-							result = hasClass;
-						}
-						else { // 그외 속성값들.
-							if (_target.getAttribute(k) != cond[k]) {
-								result = false;
-								break;
+							} else if (k === "clazz" || k === "class_name") {
+								if("className" in _target) {
+									var klasss = _target.className.split(re_class_name_split);
+									var hasClass = false;
+									for (var a = 0; a < klasss.length; a++) {
+										if (klasss[a] == cond[k]) {
+											hasClass = true;
+											break;
+										}
+									}
+									result = hasClass;
+								}else{
+									result = false;
+									break;
+								}
+							} else { // 그외 속성값들.
+								if(_target.getAttribute) {
+									if (_target.getAttribute(k) != cond[k]) {
+										result = false;
+										break;
+									}
+								}else{
+									result = false;
+									break;
+								}
 							}
 						}
 					}
@@ -2921,6 +3009,7 @@
 		 * ```
 		 */
 		function append(els, val) {
+			// todo : 빈 노드에 append 할때 빈 div 태그 생성됨.
 			return manipulate("append", els, val);
 		}
 
@@ -2986,25 +3075,40 @@
 		function manipulate(act, els, val) {
 			els = va_elem(els, act);
 			var flag, i = 0, l = els.length,
-				el = [].concat(val), cf = create_fragment, els = els;
+				el = [].concat(val), cf = create_fragment, els = els, _el;
 
 			if (act === "append") {
 				for (; i < l; i++) {
-					els[i].appendChild(cf(el));
+					_el = cf(el);
+					while(_el.firstChild){
+						els[i].appendChild(_el.firstChild);
+					}
 				}
 			}
 			else if (act == "prepend") {
 				for (; i < l; i++) {
-					els[i].insertBefore(cf(el), els[i].firstChild);
+					_el = cf(el);
+					while(_el.firstChild) {
+						els[i].insertBefore(_el.firstChild, els[i].firstChild);
+					}
 				}
 			}
 			else if (act == "before") {
 				for (; i < l; i++) {
-					els[i].parentNode.insertBefore(cf(el), els[i]);
+					_el = cf(el);
+					while(_el.firstChild){
+						els[i].parentNode.insertBefore(_el.firstChild, els[i]);
+					}
 				}
 			}
 			else if (act == "after") {
-				els[i].parentNode.insertBefore(cf(el), els[i].nextSibling);
+				for (; i < l; i++) {
+					_el = cf(el);
+					while(_el.firstChild){
+						els[i].parentNode.insertBefore(_el.firstChild, els[i].nextSibling);
+					}
+				}
+				//els[i].parentNode.insertBefore(cf(el), els[i].nextSibling);
 			}
 			return els;
 		}
@@ -3045,22 +3149,22 @@
 		 */
 		function offset(els) {
 			els = va_elem(els, "offset");
-			var el = els[0], docEl = doc.documentElement, box;
+			var el = els[0], box;
 			if (el.getBoundingClientRect) {
 				box = el.getBoundingClientRect();
 			}
 			return {
-				top : box.top + ( win.pageYOffset || docEl.scrollTop ) - ( docEl.clientTop || 0 ),
-				left: box.left + ( win.pageXOffset || docEl.scrollLeft ) - ( docEl.clientLeft || 0 )
+				top : box.top + ( win.pageYOffset || (docElem.scrollTop || doc.body.scrollTop) ) - ( docElem.clientTop || 0 ),
+				left: box.left + ( win.pageXOffset || (docElem.scrollLeft || doc.body.scrollLeft) ) - ( docElem.clientLeft || 0 )
 			}
 		}
 
 		function offset_parent(el) {
-			var offsetParent = el.offsetParent || doc.documentElement;
+			var offsetParent = el.offsetParent || docElem;
 			while (offsetParent && ( !node_name(offsetParent, "html") && curCSS(offsetParent, "position") === "static" )) {
 				offsetParent = offsetParent.offsetParent;
 			}
-			return offsetParent || doc.documentElement;
+			return offsetParent || docElem;
 		}
 
 		/**
@@ -3078,7 +3182,7 @@
 		 */
 		function position(els) {
 			els = va_elem(els, "offset");
-			var el = els[0], docEl = doc.documentElement, el_parent,
+			var el = els[0], el_parent,
 				pos = {top: 0, left: 0}, parentPos = {top: 0, left: 0};
 
 			if (css(el, "position") === "fixed") {
@@ -3242,6 +3346,7 @@
 
 		U.extend(ax5.dom, {
 			ready     : ready,
+			scroll    : scroll,
 			resize    : resize,
 			get       : get,
 			get_one   : get_one,
@@ -3335,21 +3440,24 @@ ax5.xhr = (function (){
 				} catch(e) {}
 				
 				//  authorization headers. The default is false.
-				http.withCredentials = cfg.withCredentials;
+				if("withCredentials" in http) http.withCredentials = cfg.withCredentials;
+				// todo : withCredentials 이 지원되지 않는 브라우저 일 때 대처법 필요
 
 				// 응답
 				http.onreadystatechange = function () {
 					if (http.readyState == 4) {
                         if(time_id == -1) return;
                         clearTimeout(time_id), time_id = -1;
-						that = {
-							response_url: http.responseURL,
-							status      : http.status,
-							result      : http.statusText,
-							state       : http.readyState,
-							data        : http.responseText,
-							type        : http.responseType
-						};
+						that = {};
+						that.response_url= ("responseURL" in http) ? http.responseURL : "";
+						that.status      = ("status" in http) ? http.status : "";
+						that.result      = http.statusText;
+						that.state       = http.readyState;
+						that.type        = http.responseType;
+						try {
+							that.data = ("responseText" in http) ? http.responseText : "";
+						}catch(e){}
+
 						if (http.status == 200) {
 							if (cfg.response) cfg.response.call(that, that.data, that.status, http);
 							else console.log(http);
@@ -3371,7 +3479,8 @@ ax5.xhr = (function (){
                 ontimeout = function(){
                     if(time_id == -1) return;
                     if(http.readyState !== 4) http.abort();
-                    time_id = -1, http.onreadystatechange = null;
+                    time_id = -1;
+	                //http.onreadystatechange = null;
                     
                     that = {error:"timeout"};
                     if (cfg.error) {
@@ -3559,6 +3668,7 @@ ax5.xhr = (function (){
 })();
 
 ax5.ui = (function () {
+	var U = ax5.util;
 	/**
 	 * @class ax5.ui.ax_ui
 	 * @classdesc ax5 ui class 코어 클래스 모든 클래스의 공통 함수를 가지고 있습니다.
@@ -3601,6 +3711,6 @@ ax5.ui = (function () {
 	}
 
 	return {
-		ax_ui: ax_ui
+		root: ax_ui
 	}
 })();

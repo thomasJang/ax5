@@ -1,0 +1,167 @@
+// btn Linear Gradient
+@mixin ax-btn-gradient ($start: #ffffff, $stop: $start) {
+  background: $start;
+  @include background-image(linear-gradient(top, $start, $stop));
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#{$start}, endColorstr=#{$stop});
+}
+
+// Button variants
+//
+// Easily pump out default styles, as well as :hover, :focus, :active,
+// and disabled options for all buttons
+@mixin button-variant($text-color, $text-shadow, $bg, $bg-image, $border, $drop-shadow) {
+  color: $text-color;
+  text-shadow: $text-shadow;
+  border: $border;
+
+  @if($bg-image == "") 	{ @include ax-btn-gradient(nth($bg, 1), nth($bg, 2)); }
+  @else						{ @include background-image($bg-image); }
+  @include box-shadow($drop-shadow);
+
+  .badge {
+    text-shadow: none;
+	color: nth($bg,1);
+	background-color: $text-color;
+  }
+}
+
+@mixin button-hover-variant($text-color, $text-shadow, $bg, $bg-image, $border, $drop-shadow) {
+  &:hover,
+  &:focus,
+  &.focus {
+    text-decoration: none;
+    color: $text-color;
+    text-shadow: $text-shadow;
+    border: $border;
+    @if($bg-image == "") 	{ @include ax-btn-gradient(nth($bg, 1), nth($bg, 2)); }
+    @else						{ @include background-image($bg-image); }
+    @include box-shadow($drop-shadow);
+
+    .badge {
+      text-shadow: none;
+      color: nth($bg,1);
+      background-color: $text-color;
+    }
+  }
+
+  &:active,
+  &.active {
+    outline: 0;
+    background-image: none;
+    @include box-shadow(rgba(0,0,0,0.125) 0 3px 5px inset);
+  }
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    cursor: not-allowed;
+    pointer-events: none; // Future-proof disabling of clicks
+    @include opacity(.65);
+    @include box-shadow(none);
+  }
+}
+// Button sizes
+@mixin button-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius) {
+	padding: $padding-vertical $padding-horizontal;
+	font-size: $font-size;
+	line-height: $line-height;
+	@include ax-border-radius($border-radius);
+}
+
+//@warn "Assuming #{$btn-bg} to be in pixels";
+
+.ax-btn {
+  @include ax();
+  display: inline-block;
+  font-weight: $btn-font-weight;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  white-space: nowrap;
+  box-sizing: border-box;
+  
+  color: $btn-default-text-color;
+  text-shadow: $btn-default-text-shadow;
+  border: $btn-default-border;
+  //@include border-radius($btn-default-border-radius);
+  
+  @if($btn-default-bg-image == "") 	{ @include ax-btn-gradient(nth($btn-default-bg, 1), nth($btn-default-bg, 2)); }
+  @else						{ @include background-image($btn-default-bg-image); }
+  @include box-shadow($btn-default-drop-shadow);
+  @include button-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, $border-radius-base);
+  @include user-select(none);
+
+  &,
+  &:active,
+  &.active {
+	&:focus,
+	&.focus {
+	  @include tab-focus();
+	}
+  }
+
+
+  &:active,
+  &.active {
+	outline: 0;
+	background-image: none;
+	@include box-shadow(rgba(0,0,0,0.125) 0 3px 5px inset);
+  }
+
+  @include button-hover-variant($btn-default-hover-text-color, $btn-default-hover-text-shadow, $btn-default-hover-bg, $btn-default-hover-bg-image, $btn-default-hover-border, $btn-default-hover-drop-shadow);
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+	cursor: not-allowed;
+	pointer-events: none; // Future-proof disabling of clicks
+	@include opacity(.65);
+	@include box-shadow(none);
+  }
+
+  // situation
+  &.basic{
+	@include button-variant($btn-basic-text-color, $btn-basic-text-shadow, $btn-basic-bg, $btn-basic-bg-image, $btn-basic-border, $btn-basic-drop-shadow);
+    @include button-hover-variant($btn-basic-hover-text-color, $btn-basic-hover-text-shadow, $btn-basic-hover-bg, $btn-basic-hover-bg-image, $btn-basic-hover-border, $btn-basic-hover-drop-shadow);
+  }
+
+  &.good{
+    @include button-variant($btn-good-text-color, $btn-good-text-shadow, $btn-good-bg, $btn-good-bg-image, $btn-good-border, $btn-good-drop-shadow);
+    @include button-hover-variant($btn-good-hover-text-color, $btn-good-hover-text-shadow, $btn-good-hover-bg, $btn-good-hover-bg-image, $btn-good-hover-border, $btn-good-hover-drop-shadow);
+  }
+  &.info{
+    @include button-variant($btn-info-text-color, $btn-info-text-shadow, $btn-info-bg, $btn-info-bg-image, $btn-info-border, $btn-info-drop-shadow);
+    @include button-hover-variant($btn-info-hover-text-color, $btn-info-hover-text-shadow, $btn-info-hover-bg, $btn-info-hover-bg-image, $btn-info-hover-border, $btn-info-hover-drop-shadow);
+  }
+  &.warning{
+    @include button-variant($btn-warning-text-color, $btn-warning-text-shadow, $btn-warning-bg, $btn-warning-bg-image, $btn-warning-border, $btn-warning-drop-shadow);
+    @include button-hover-variant($btn-warning-hover-text-color, $btn-warning-hover-text-shadow, $btn-warning-hover-bg, $btn-warning-hover-bg-image, $btn-warning-hover-border, $btn-warning-hover-drop-shadow);
+  }
+  &.danger{
+    @include button-variant($btn-danger-text-color, $btn-danger-text-shadow, $btn-danger-bg, $btn-danger-bg-image, $btn-danger-border, $btn-danger-drop-shadow);
+    @include button-hover-variant($btn-danger-hover-text-color, $btn-danger-hover-text-shadow, $btn-danger-hover-bg, $btn-danger-hover-bg-image, $btn-danger-hover-border, $btn-danger-hover-drop-shadow);
+  }
+  &.link{
+    @include button-variant($btn-link-text-color, $btn-link-text-shadow, $btn-link-bg, $btn-link-bg-image, $btn-link-border, $btn-link-drop-shadow);
+    @include button-hover-variant($btn-link-hover-text-color, $btn-link-hover-text-shadow, $btn-link-hover-bg, $btn-link-hover-bg-image, $btn-link-hover-border, $btn-link-hover-drop-shadow);
+  }
+  &.special{
+    @include button-variant($btn-special-text-color, $btn-special-text-shadow, $btn-special-bg, $btn-special-bg-image, $btn-special-border, $btn-special-drop-shadow);
+    @include button-hover-variant($btn-special-hover-text-color, $btn-special-hover-text-shadow, $btn-special-hover-bg, $btn-special-hover-bg-image, $btn-special-hover-border, $btn-special-hover-drop-shadow);
+  }
+
+  // size
+  &.lg {
+	// line-height: ensure even-numbered height of button next to large input
+	@include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $border-radius-large);
+  }
+  &.sm {
+	// line-height: ensure proper height of button next to small input
+	@include button-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $border-radius-small);
+  }
+  &.xs {
+	@include button-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $border-radius-small);
+  }
+}
+// 버튼 체크

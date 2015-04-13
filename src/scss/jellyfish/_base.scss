@@ -1,6 +1,5 @@
-@import "compass/css3";
-@import "compass/utilities";
-@import "../_utilities";
+@import "../bourbon/bourbon";
+@import "../utilities";
 
 // 변수선언 : variables
 // ---------------------------------------------------------------------
@@ -16,11 +15,11 @@ $gray-lighter:           lighten($gray-base, 93.5%); // #eee
 $white: #fff;
 $black: #000;
 
-$theme-basic: darken(#428bca, 6.5%); // #337ab7;
-$theme-good:  #5cb85c;
-$theme-info:  #5bc0de;
-$theme-warning: #f0ad4e;
-$theme-danger: #d9534f;
+$theme-basic: #32B4DC; // #337ab7;
+$theme-good:  #78B43C;
+$theme-info:  #002A4F;
+$theme-warning: #E66E3C;
+$theme-danger: darken($theme-warning, 20%);
 $theme-link: #fff;
 $theme-special: #bc4cd0;
 $theme-muted: $gray-light;
@@ -48,7 +47,7 @@ $font-family-serif:       Georgia, "Times New Roman", Times, serif;
 $font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
 $font-family-base:        $font-family-sans-serif;
 
-$font-size-base:          13px;
+$font-size-base:          12px;
 $font-size-large:         ceil(($font-size-base * 1.25)); // ~18px
 $font-size-small:         ceil(($font-size-base * 0.85)); // ~12px
 $font-weight:	400;
@@ -76,11 +75,11 @@ $headings-color:          inherit;
 //
 //## Define common padding and border radius sizes and more. Values based on 14px text and 1.428 line-height (~20px to start).
 
-$padding-base-vertical:     3px;
-$padding-base-horizontal:   6px;
+$padding-base-vertical:     4px;
+$padding-base-horizontal:   7px;
 
 $padding-large-vertical:    5px;
-$padding-large-horizontal:  7px;
+$padding-large-horizontal:  10px;
 
 $padding-small-vertical:    2px;
 $padding-small-horizontal:  5px;
@@ -91,87 +90,125 @@ $padding-xs-horizontal:     5px;
 $line-height-large:         1.3333333; // extra decimals for Win 8.1 Chrome
 $line-height-small:         1.5;
 
-$border-radius-base:        4px;
-$border-radius-large:       6px;
-$border-radius-small:       3px;
-
-//** Global color for active items (e.g., navs or dropdowns).
-$component-active-color:    #fff;
-//** Global background color for active items (e.g., navs or dropdowns).
-$component-active-bg:       $theme-basic;
-
-//** Width of the `border` for generating carets that indicator dropdowns.
-$caret-width-base:          4px;
-//** Carets increase slightly in size for larger components.
-$caret-width-large:         5px;
-
+$border-radius-base:        (6px, 0px, 6px, 0px);
+$border-radius-large:       (8px, 0px, 8px, 0px);
+$border-radius-small:       (3px, 0px, 3px, 0px);
 
 //== Buttons
-//
-//## For each of Bootstrap's buttons, define text, background and border color.
-
 $btn-font-weight:                normal;
 
-$btn-default-color:              #333;
-$btn-default-bg:                 #fff;
-$btn-default-border:             #ccc;
+$btn-default-text-color: #4A4A4A;
+$btn-default-text-shadow: 0px 1px 0px rgba(255,255,255, 0.5);
+$btn-default-bg: (#FFFFFF, #F0F0F0); // 배경색들
+$btn-default-bg-image: "";
+$btn-default-border: 1px solid #B4B4B4;
+$btn-default-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
+	$btn-default-hover-text-color: #4A4A4A;
+	$btn-default-hover-text-shadow: 0px 1px 0px rgba(255,255,255, 0.5);
+	$btn-default-hover-bg:  (#F0F0F0, #F0F0F0); // 배경색들
+	$btn-default-hover-bg-image: "";
+	$btn-default-hover-border: 1px solid #B4B4B4;
+	$btn-default-hover-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
 
-$btn-primary-color:              #fff;
-$btn-primary-bg:                 $theme-basic;
-$btn-primary-border:             darken($btn-primary-bg, 5%);
+$btn-basic-text-color: #fff;
+$btn-basic-text-shadow: none; //0px -1px 0px darken($theme-basic, 50%);
+$btn-basic-bg: (lighten($theme-basic, 10%), $theme-basic); // 배경색들
+$btn-basic-bg-image: "";
+$btn-basic-border: 1px solid darken($theme-basic, 10%);
+$btn-basic-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
+	$btn-basic-hover-text-color: #fff;
+	$btn-basic-hover-text-shadow: none; //0px -1px 0px darken($theme-basic, 50%);
+	$btn-basic-hover-bg: ($theme-basic, $theme-basic);
+	$btn-basic-hover-bg-image: "";
+	$btn-basic-hover-border: 1px solid darken($theme-basic, 10%);
+	$btn-basic-hover-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
 
-$btn-success-color:              #fff;
-$btn-success-bg:                 $theme-good;
-$btn-success-border:             darken($btn-success-bg, 5%);
+$btn-good-text-color:#fff;
+$btn-good-text-shadow: none; //0px -1px 0px darken($theme-good, 50%);
+$btn-good-bg: (lighten($theme-good, 10%), $theme-good); // 배경색들
+$btn-good-bg-image: "";
+$btn-good-border: 1px solid darken($theme-good, 10%);
+$btn-good-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
+	$btn-good-hover-text-color:#fff;
+	$btn-good-hover-text-shadow: none; //0px -1px 0px darken($theme-good, 50%);
+	$btn-good-hover-bg: ($theme-good, $theme-good);
+	$btn-good-hover-bg-image: "";
+	$btn-good-hover-border: 1px solid darken($theme-good, 10%);
+	$btn-good-hover-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
 
-$btn-info-color:                 #fff;
-$btn-info-bg:                    $theme-info;
-$btn-info-border:                darken($btn-info-bg, 5%);
+$btn-info-text-color:#fff;
+$btn-info-text-shadow: none; //0px -1px 0px rgba(0,0,0,0.9);
+$btn-info-bg: (lighten($theme-info, 10%), $theme-info); // 배경색들
+$btn-info-bg-image: "";
+$btn-info-border: 1px solid darken($theme-info, 10%);
+$btn-info-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
+	$btn-info-hover-text-color:#fff;
+	$btn-info-hover-text-shadow: none; //0px -1px 0px rgba(0,0,0,0.9);
+	$btn-info-hover-bg: ($theme-info, $theme-info);
+	$btn-info-hover-bg-image: "";
+	$btn-info-hover-border: 1px solid darken($theme-info, 10%);
+	$btn-info-hover-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
 
-$btn-warning-color:              #fff;
-$btn-warning-bg:                 $theme-warning;
-$btn-warning-border:             darken($btn-warning-bg, 5%);
+$btn-warning-text-color:#fff;
+$btn-warning-text-shadow: none; //0px -1px 0px darken($theme-warning, 50%);
+$btn-warning-bg: (lighten($theme-warning, 10%), $theme-warning); // 배경색들
+$btn-warning-bg-image: "";
+$btn-warning-border: 1px solid darken($theme-warning, 20%);
+$btn-warning-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
+	$btn-warning-hover-text-color:#fff;
+	$btn-warning-hover-text-shadow: none; //0px -1px 0px darken($theme-warning, 50%);
+	$btn-warning-hover-bg: ($theme-warning, $theme-warning);
+	$btn-warning-hover-bg-image: "";
+	$btn-warning-hover-border: 1px solid darken($theme-warning, 20%);
+	$btn-warning-hover-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
 
-$btn-danger-color:               #fff;
-$btn-danger-bg:                  $theme-danger;
-$btn-danger-border:              darken($btn-danger-bg, 5%);
+$btn-danger-text-color:#fff;
+$btn-danger-text-shadow: none; //0px -1px 0px darken($theme-danger, 50%);
+$btn-danger-bg: (lighten($theme-danger, 10%), $theme-danger); // 배경색들
+$btn-danger-bg-image: "";
+$btn-danger-border: 1px solid darken($theme-danger, 20%);
+$btn-danger-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
+	$btn-danger-hover-text-color:#fff;
+	$btn-danger-hover-text-shadow: none; //0px -1px 0px darken($theme-danger, 50%);
+	$btn-danger-hover-bg: ($theme-danger, $theme-danger);
+	$btn-danger-hover-bg-image: "";
+	$btn-danger-hover-border: 1px solid darken($theme-danger, 20%);
+	$btn-danger-hover-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
 
-$btn-link-color:               $theme-basic;
-$btn-link-bg:                  $theme-link;
-$btn-link-border:              darken($btn-link-bg, 5%);
+$btn-link-text-color: $text-color;
+$btn-link-text-shadow: none;
+$btn-link-bg: (#fff, #fff); // 배경색들
+$btn-link-bg-image: "";
+$btn-link-border: 1px solid #fff;
+$btn-link-drop-shadow: none;
+	$btn-link-hover-text-color: $text-color;
+	$btn-link-hover-text-shadow: none;
+	$btn-link-hover-bg: (#fff, #fff);
+	$btn-link-hover-bg-image: "";
+	$btn-link-hover-border: 1px solid #fff;
+	$btn-link-hover-drop-shadow: none;
 
-$btn-special-color:               #fff;
-$btn-special-bg:                  $theme-special;
-$btn-special-border:              darken($btn-special-bg, 5%);
+$btn-special-text-color:#fff;
+$btn-special-text-shadow: none; //0px -1px 0px darken($theme-special, 50%);
+$btn-special-bg: (darken($theme-special, 10%), $theme-special); // 배경색들
+$btn-special-bg-image: "";
+$btn-special-border: 1px solid darken($theme-special, 20%);
+$btn-special-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
+	$btn-special-hover-text-color:#fff;
+	$btn-special-hover-text-shadow: none; //0px -1px 0px darken($theme-special, 50%);
+	$btn-special-hover-bg: ($theme-special, $theme-special);
+	$btn-special-hover-bg-image: "";
+	$btn-special-hover-border: 1px solid darken($theme-special, 20%);
+	$btn-special-hover-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
 
 $btn-link-disabled-color:        $gray-light;
 
-
-//== Forms
-//
-//##
-
-//** `<input>` background color
-$input-bg:                       #fff;
-//** `<input disabled>` background color
+//== Input
+$input-font-weight:                normal;
 $input-bg-disabled:              $gray-lighter;
-
-//** Text color for `<input>`s
-$input-color:                    $gray;
-//** `<input>` border color
-$input-border:                   #ccc;
-
-// TODO: Rename `$input-border-radius` to `$input-border-radius-base` in v4
-//** Default `.form-control` border radius
-// This has no effect on `<select>`s in some browsers, due to the limited stylability of `<select>`s in CSS.
-$input-border-radius:            $border-radius-base;
-//** Large `.form-control` border radius
-$input-border-radius-large:      $border-radius-large;
-//** Small `.form-control` border radius
-$input-border-radius-small:      $border-radius-small;
-
-//** Border color for inputs on focus
-$input-border-focus:             #66afe9;
+$input-border-radius-base:        (6px, 0px, 6px, 0px);
+$input-border-radius-large:       (8px, 0px, 8px, 0px);
+$input-border-radius-small:       (3px, 0px, 3px, 0px);
 
 //** Placeholder text color
 $input-color-placeholder:        #999;
@@ -182,11 +219,146 @@ $input-height-base:              ($line-height-computed + ($padding-base-vertica
 $input-height-large:             (ceil($font-size-large * $line-height-large) + ($padding-large-vertical * 2) + 2);
 //** Small `.form-control` height
 $input-height-small:             (floor($font-size-small * $line-height-small) + ($padding-small-vertical * 2) + 2);
+//** XSmall `.form-control` height
+$input-height-xs:             (floor($font-size-small * $line-height-small) + ($padding-xs-vertical * 2) + 2);
 
-//** Background color for textual input addons
-$input-group-addon-bg:           $gray-lighter;
-//** Border color for textual input addons
-$input-group-addon-border-color: $input-border;
+$input-default-text-color: #4A4A4A;
+$input-default-text-shadow: 0px 1px 0px rgba(255,255,255, 0.5);
+$input-default-bg: (#ffffff, #FFFFFF); // 배경색들
+$input-default-bg-image: "";
+$input-default-color-hover: #ccc;
+$input-default-border: 1px solid #B4B4B4;
+$input-default-drop-shadow: 0px 1px 3px 0px rgba(0,0,0,0.15) inset;
 
-//** Disabled cursor for form controls and buttons.
-$cursor-disabled:                not-allowed;
+$input-basic-text-color: darken($theme-basic, 20%);
+$input-basic-text-shadow: none; //0px -1px 0px darken($theme-basic, 50%);
+$input-basic-bg: (#ffffff, #FFFFFF); // 배경색들
+$input-basic-bg-image: "";
+$input-basic-color-hover: $theme-basic;
+$input-basic-border: 1px solid lighten($theme-basic, 10%);
+$input-basic-drop-shadow: 0px 1px 3px 0px rgba(0,0,0,0.15) inset;
+
+$input-good-text-color:darken($theme-good, 20%);
+$input-good-text-shadow: none; //0px -1px 0px darken($theme-good, 50%);
+$input-good-bg: (#ffffff, #FFFFFF); // 배경색들
+$input-good-bg-image: "";
+$input-good-color-hover: $theme-good;
+$input-good-border: 1px solid darken($theme-good, 10%);
+$input-good-drop-shadow: 0px 1px 3px 0px rgba(0,0,0,0.15) inset;
+
+$input-info-text-color:darken($theme-info, 20%);
+$input-info-text-shadow: none; //0px -1px 0px rgba(0,0,0,0.9);
+$input-info-bg: (#fff, #fff); // 배경색들
+$input-info-bg-image: "";
+$input-info-color-hover: $theme-info;
+$input-info-border: 1px solid darken($theme-info, 0%);
+$input-info-drop-shadow: 0px 1px 3px 0px rgba(0,0,0,0.15) inset;
+
+$input-warning-text-color:darken($theme-warning, 20%);
+$input-warning-text-shadow: none; //0px -1px 0px darken($theme-warning, 50%);
+$input-warning-bg: (#ffffff, #FFFFFF); // 배경색들
+$input-warning-bg-image: "";
+$input-warning-color-hover: $theme-warning;
+$input-warning-border: 1px solid darken($theme-warning, 0%);
+$input-warning-drop-shadow: 0px 1px 3px 0px rgba(0,0,0,0.15) inset;
+
+$input-danger-text-color: darken($theme-danger, 0%);
+$input-danger-text-shadow: none; //0px -1px 0px darken($theme-danger, 50%);
+$input-danger-bg: (#ffffff, #FFFFFF); // 배경색들
+$input-danger-bg-image: "";
+$input-danger-color-hover: $theme-danger;
+$input-danger-border: 1px solid darken($theme-danger, 0%);
+$input-danger-drop-shadow: 0px 1px 3px 0px rgba(0,0,0,0.15) inset;
+
+$input-special-text-color:darken($theme-special, 20%);
+$input-special-text-shadow: none; //0px -1px 0px darken($theme-special, 50%);
+$input-special-bg: (#ffffff, #FFFFFF); // 배경색들
+$input-special-bg-image: "";
+$input-special-color-hover: $theme-special;
+$input-special-border: 1px solid darken($theme-special, 20%);
+$input-special-drop-shadow: 0px 1px 3px 0px rgba(0,0,0,0.15) inset;
+
+//== Panels
+$panel-box-model: border-box;
+$panel-bg:                    #fff;
+$panel-body-padding:          12px;
+$panel-heading-padding:       10px 12px;
+$panel-footer-padding:        $panel-heading-padding;
+$panel-border-radius:         $border-radius-base;
+
+//** Border color for elements within panels
+$panel-inner-border:          1px solid #ddd;
+$panel-footer-bg:             #f5f5f5;
+
+$panel-default-text:          $gray-dark;
+$panel-default-border:        1px solid #ddd;
+$panel-default-heading-bg:    #f5f5f5;
+
+$panel-basic-text:          $white;
+$panel-basic-border:        1px solid $theme-basic;
+$panel-basic-heading-bg:    $theme-basic;
+
+$panel-good-text:          $white;
+$panel-good-border:        1px solid $theme-good;
+$panel-good-heading-bg:    $theme-good;
+
+$panel-info-text:          $white;
+$panel-info-border:        1px solid $theme-info;
+$panel-info-heading-bg:    $theme-info;
+
+$panel-warning-text:          $white;
+$panel-warning-border:        1px solid $theme-warning;
+$panel-warning-heading-bg:    $theme-warning;
+
+$panel-danger-text:          $white;
+$panel-danger-border:        1px solid $theme-danger;
+$panel-danger-heading-bg:    $theme-danger;
+
+$panel-special-text:          $white;
+$panel-special-border:        1px solid $theme-special;
+$panel-special-heading-bg:    $theme-special;
+
+//== Scroll
+$scrollbar-track-bg: $gray-lighter;
+$scrollbar-track-border: 1px solid $gray-light;
+$scrollbar-track-thickness: 14px;
+$scrollbar-track-radius: 7px;
+
+$scrollbar-bg: $gray-light;
+$scrollbar-border: 1px solid $gray-lighter;
+$scrollbar-thickness: 12px;
+$scrollbar-radius: 6px;
+
+$scrollbar-second-track-bg: $gray-lighter;
+$scrollbar-second-track-border: 0px none;
+$scrollbar-second-track-thickness: 10px;
+$scrollbar-second-track-radius: 1px;
+
+$scrollbar-second-bg: $theme-basic;
+$scrollbar-second-border: 0px none;
+$scrollbar-second-thickness: 10px;
+$scrollbar-second-radius: 0px;
+
+
+//== Badges
+$badge-color:                 #fff;
+//** Linked badge text color on hover
+$badge-link-hover-color:      #fff;
+$badge-bg:                    $gray-light;
+
+//** Badge text color in active nav link
+$badge-active-color:          $link-color;
+//** Badge background color in active nav link
+$badge-active-bg:             #fff;
+
+$badge-font-weight:           bold;
+$badge-line-height:           1;
+$badge-border-radius:         10px;
+
+
+//== Mask
+$mask-z-index: 1000;
+$mask-bg: $gray-dark;
+$mask-bg-opacity: 0.6;
+$mask-text-color: $gray-lighter;
+$mask-text-shadow: 0px 1px 0px $black;

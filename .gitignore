@@ -1,4 +1,4 @@
 *.bak
 .idea/
 .sass-cache/
-mode_modules/
+node_modules/

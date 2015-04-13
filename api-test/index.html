@@ -2,6 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
     <link rel="stylesheet" type="text/css" href="http://cdn.axisj.com/axicon/axicon.min.css" />
     <script type="text/javascript" src="../src/ax5-polyfill.js"></script>
     <script type="text/javascript" src="../src/ax5-core.js"></script>
@@ -840,7 +841,7 @@
         {
             label:"ax5.dom.parent",
             fn: function(){
-                var tg = ax5.dom.get_one("#progress-bar");
+                var tg = ax5.dom.get("#progress-bar");
                 var cond = {
                     tagname: "div",
                     class_name: "progress"
@@ -916,9 +917,11 @@
 
                 var b = ax5.info.browser;
                 if (b.name === 'ie'){
-                    var evt = document.createEvent('UIEvent');
-                    evt.initEvent("resize", true, true);
-                    window.dispatchEvent(evt);
+                    if(document.createEvent) {
+                        var evt = document.createEvent('UIEvent');
+                        evt.initEvent("resize", true, true);
+                        window.dispatchEvent(evt);
+                    }
                 }else{
                     window.dispatchEvent(new Event('resize'));
                 }

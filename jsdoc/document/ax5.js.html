@@ -156,6 +156,8 @@
             
                 <li data-name="ax5.dom.resize"><a href="ax5.dom.html#resize">resize</a></li>
             
+                <li data-name="ax5.dom.scroll"><a href="ax5.dom.html#scroll">scroll</a></li>
+            
                 <li data-name="ax5.dom.width"><a href="ax5.dom.html#width">width</a></li>
             
             </ul>
@@ -433,7 +435,7 @@
         <article>
             <pre class="prettyprint source linenums"><code>/*
  * ax5 - v0.0.1 
- * 2015-02-21 
+ * 2015-04-01 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -612,7 +614,7 @@
 	'use strict';
 
 	// root of function
-	var root = this, doc = document, win = window, fval = eval,
+	var root = this, win = window, doc = document, docElem = document.documentElement,
 	/** @namespace {Object} ax5 */
 		ax5 = {}, info, U, dom;
 
@@ -1516,7 +1518,7 @@
 			var
 				head = doc.head || doc.getElementsByTagName("head")[0],
 				readyRegExp = info.is_browser && navigator.platform === 'PLAYSTATION 3' ? /^complete$/ : /^(complete|loaded)$/,
-				loadCount = mods.length, loadErrors = [], onloadTimer, onerrorTimer, returned = false,
+				loadCount = mods.length, loadErrors = [], loaded_src = {}, onloadTimer, onerrorTimer, returned = false,
 				scripts = dom.get("script[src]"), styles = dom.get("style[href]"),
 				onload = function () {
 					if (loadCount &lt; 1 && loadErrors.length == 0 && !returned) {
@@ -1553,12 +1555,12 @@
 				} else {
 
 					plugin = (type === "js") ?
-						dom.create("script", {type: "text/javascript", src: plugin_src}) :
+						dom.create("script", {type: "text/javascript", src: plugin_src, "data-src": plugin_src}) :
 						dom.create("link", {rel: "stylesheet", type: "text/css", href: plugin_src});
 
-					plug_load = function (e) {
+					plug_load = function (e, plugin_src) {
 						if (e.type === 'load' || (readyRegExp.test((e.currentTarget || e.srcElement).readyState))) {
-							loadCount--;
+							if(!loaded_src[plugin_src]) loadCount--;
 							if (onloadTimer) clearTimeout(onloadTimer);
 							onloadTimer = setTimeout(onload, 1);
 						}
@@ -1575,8 +1577,15 @@
 					ax5.xhr({
 						url : plugin_src, contentType: "",
 						res : function (response, status) {
+							var time_id;
 							head.appendChild(plugin);
-							plug_load({type: "load"});
+							plugin.onload = function(e) {
+								plug_load(e, plugin_src);
+								if(time_id) clearTimeout(time_id);
+							};
+							time_id = setTimeout(function(){
+								plug_load({type: "load"}, plugin_src);
+							}, 500);
 						},
 						error : function () {
 							plug_err(this);
@@ -2450,7 +2459,8 @@
 
 		// 엘리먼트 순서이동
 		function sibling(els, forward, times) {
-			var prop = (forward == "prev") ? "previousSibling" : "nextSibling", el = els[0];
+			var prop = (forward == "prev") ? "previousSibling" : "nextSibling", 
+				el = [].concat(els)[0];
 			times = (typeof times == "undefined" || times &lt; 1) ? 1 : times;
 			do {
 				el = el[prop];
@@ -2566,12 +2576,14 @@
 
 		// 박스사이즈 구하기
 		function box_size(els, fn_nm, opts) {
-			var d = -1, tag_nm = "";
-			if (U.is_window(els)) {
-				return els.document.documentElement[U.camel_case("client-" + fn_nm)];
+			var d = -1, tag_nm = "",
+				el = [].concat(els)[0];
+			
+			if (U.is_window(el)) {
+				return el.document.documentElement[U.camel_case("client-" + fn_nm)];
 			}
 			else {
-				var el = els[0], _sbs = U.camel_case("scroll-" + fn_nm), _obs = U.camel_case("offset-" + fn_nm), _cbs = U.camel_case("client-" + fn_nm);
+				var _sbs = U.camel_case("scroll-" + fn_nm), _obs = U.camel_case("offset-" + fn_nm), _cbs = U.camel_case("client-" + fn_nm);
 				if (el) {
 					tag_nm = el.tagName.toLowerCase();
 					if (tag_nm == "html") {
@@ -2787,6 +2799,28 @@
 		function resize(_fn) {
 			eBind(window, "resize", _fn);
 		}
+		/**
+		 * 브라우저 scroll 이벤트를 캐치하여 사용자 함수를 호출 하거나 스트롤 포지션을 리턴합니다.
+		 * @method ax5.dom.scroll
+		 * @param {Function} [_fn] - 캐치후 호출될 함수
+		 * @example
+		 * ```
+		 * ax5.dom.scroll(function(){
+		 * 	console.log( 1, ax5.dom.scroll().top );
+		 * });
+		 * ```
+		 */
+		function scroll(_fn) {
+			if(typeof _fn === "undefined"){
+				return {
+					top: docElem.scrollTop || doc.body.scrollTop,
+					left: docElem.scrollLeft || doc.body.scrollLeft
+				}
+			}else{
+				eBind(window, "scroll", _fn);
+				return false;
+			}
+		}
 
 		/**
 		 * CSS Selector를 이용하여 HTML Elements를 찾습니다.
@@ -2807,6 +2841,7 @@
 			if (query.toString() == "[object ax5.dom]") {
                 r_els = query.elements;
 			}
+			else if (U.is_window(query)) r_els.push(query);
 			else if (U.is_element(query)) r_els.push(query);
 			else if (U.is_array(query) || U.is_nodelist(query)) {
 				for (; i &lt; l; i++)  if (U.is_element(query[i])) r_els.push(query[i]);
@@ -3024,6 +3059,7 @@
 			els = va_elem(els, "on");
 			for (var i = 0; i &lt; els.length; i++) {
 				var __fn, _d = els[i];
+				if(!_d) break;
 				if (!_d.e_hd) _d.e_hd = {};
 				if (typeof _d.e_hd[typ] === "undefined") {
 					__fn = _d.e_hd[typ] = _fn;
@@ -3112,7 +3148,7 @@
 		 * 타겟엘리먼트의 부모 엘리멘트 트리에서 원하는 조건의 엘리먼트를 얻습니다.
 		 * @method ax5.dom.parent
 		 * @param {Element} elements - target element
-		 * @param {Object} cond - 원하는 element를 찾을 조건
+		 * @param {Object|Function} cond - 원하는 element를 찾을 조건
 		 * @returns {Element}
 		 * @example
 		 * ```
@@ -3125,6 +3161,21 @@
 		 * console.log(
 		 * 	ax5.dom.parent(e.target, {tagname:"a", clazz:"ax-menu-handel", "data-custom-attr":"attr_value"})
 		 * );
+		 * // cond 함수로 처리하기
+		 * ax5.dom.on(fnObj.layout.client_main, "click.app_expand", function(e){
+		 * 	var target = ax5.dom.parent(e.target, function(target){
+		 * 		if(ax5.dom.class_name(target, "aside")){
+		 * 			return true;
+		 * 		}
+		 * 		else if(ax5.dom.class_name(target, "client-main")){
+		 * 			return true;
+		 * 		}
+		 * 	});
+		 * 	//client-aside
+		 * 	if(target.id !== "client-aside"){
+		 * 		fnObj.layout.expand_menu();
+		 * 	}
+		 * });
 		 * ```
 		 */
 		function parent(els, cond) {
@@ -3133,28 +3184,32 @@
 			if (_target) {
 				while ((function () {
 					var result = true;
-					for (var k in cond) {
-						if (k === "tagname") {
-							if (_target.tagName.toLocaleLowerCase() != cond[k]) {
-								result = false;
-								break;
-							}
-						}
-						else if (k === "clazz" || k === "class_name") {
-							var klasss = _target.className.split(re_class_name_split);
-							var hasClass = false;
-							for (var a = 0; a &lt; klasss.length; a++) {
-								if (klasss[a] == cond[k]) {
-									hasClass = true;
+					if(U.is_function(cond)){
+						result = cond(_target);
+					}
+					else
+					if(U.is_function(cond)) {
+						for (var k in cond) {
+							if (k === "tagname") {
+								if (_target.tagName.toLocaleLowerCase() != cond[k]) {
+									result = false;
 									break;
 								}
-							}
-							result = hasClass;
-						}
-						else { // 그외 속성값들.
-							if (_target.getAttribute(k) != cond[k]) {
-								result = false;
-								break;
+							} else if (k === "clazz" || k === "class_name") {
+								var klasss = _target.className.split(re_class_name_split);
+								var hasClass = false;
+								for (var a = 0; a &lt; klasss.length; a++) {
+									if (klasss[a] == cond[k]) {
+										hasClass = true;
+										break;
+									}
+								}
+								result = hasClass;
+							} else { // 그외 속성값들.
+								if (_target.getAttribute(k) != cond[k]) {
+									result = false;
+									break;
+								}
 							}
 						}
 					}
@@ -3477,22 +3532,22 @@
 		 */
 		function offset(els) {
 			els = va_elem(els, "offset");
-			var el = els[0], docEl = doc.documentElement, box;
+			var el = els[0], box;
 			if (el.getBoundingClientRect) {
 				box = el.getBoundingClientRect();
 			}
 			return {
-				top : box.top + ( win.pageYOffset || docEl.scrollTop ) - ( docEl.clientTop || 0 ),
-				left: box.left + ( win.pageXOffset || docEl.scrollLeft ) - ( docEl.clientLeft || 0 )
+				top : box.top + ( win.pageYOffset || (docElem.scrollTop || doc.body.scrollTop) ) - ( docElem.clientTop || 0 ),
+				left: box.left + ( win.pageXOffset || (docElem.scrollLeft || doc.body.scrollLeft) ) - ( docElem.clientLeft || 0 )
 			}
 		}
 
 		function offset_parent(el) {
-			var offsetParent = el.offsetParent || doc.documentElement;
+			var offsetParent = el.offsetParent || docElem;
 			while (offsetParent && ( !node_name(offsetParent, "html") && curCSS(offsetParent, "position") === "static" )) {
 				offsetParent = offsetParent.offsetParent;
 			}
-			return offsetParent || doc.documentElement;
+			return offsetParent || docElem;
 		}
 
 		/**
@@ -3510,7 +3565,7 @@
 		 */
 		function position(els) {
 			els = va_elem(els, "offset");
-			var el = els[0], docEl = doc.documentElement, el_parent,
+			var el = els[0], el_parent,
 				pos = {top: 0, left: 0}, parentPos = {top: 0, left: 0};
 
 			if (css(el, "position") === "fixed") {
@@ -3674,6 +3729,7 @@
 
 		U.extend(ax5.dom, {
 			ready     : ready,
+			scroll    : scroll,
 			resize    : resize,
 			get       : get,
 			get_one   : get_one,
@@ -3991,6 +4047,7 @@ ax5.xhr = (function (){
 })();
 
 ax5.ui = (function () {
+	var U = ax5.util;
 	/**
 	 * @class ax5.ui.ax_ui
 	 * @classdesc ax5 ui class 코어 클래스 모든 클래스의 공통 함수를 가지고 있습니다.
@@ -4033,7 +4090,7 @@ ax5.ui = (function () {
 	}
 
 	return {
-		ax_ui: ax_ui
+		root: ax_ui
 	}
 })();</code></pre>
         </article>
@@ -4046,7 +4103,7 @@ ax5.ui = (function () {
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Wed Mar 04 2015 00:05:13 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Wed Apr 01 2015 17:26:37 GMT+0900 (KST)
         </footer>
     </div>
 </div>

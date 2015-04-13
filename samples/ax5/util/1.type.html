@@ -1,0 +1,90 @@
+<article class="content"> <!-- type -->
+    <h2 data-menu-item="ax5-util-get-type">ax5.util.get_type</h2>
+    <div class="callout">
+        <h4>get_type이 지원하는 자료형</h4>
+        <p>
+            number, string, array, object, element, nodelist, function, undefined, fragment를 지원합니다.<br/>
+            <code>ax5.dom.get("#ax5-util-get-type")</code>를 했을 때. nodelist가 아닌 array가 반환되는데. 이는 ax5내부에서 nodelist를 array로 변환하여 관리하고 있기 때문이다.
+        </p>
+    </div>
+<pre>
+<div id="ax5-util-get-type" class="script-result"></div>
+<script>
+    (function(){
+        var util = ax5.util, result, el = ax5.dom("#ax5-util-get-type");
+
+        el.append( "1 = " + util.get_type(1) + "<br/>" );
+        el.append( "'1' = " + util.get_type("1") + "<br/>" );
+        el.append( "[0,1,2] = " + util.get_type([0,1,2]) + "<br/>" );
+        el.append( "{a:1} = " + util.get_type({a:1}) + "<br/>" );
+        el.append( 'ax5.dom.get("#ax5-util-get-type")[0] = '
+        + util.get_type( ax5.dom.get("#ax5-util-get-type")[0] ) + "<br/>" );
+        el.append( 'document.querySelectorAll(".content") = '
+        + util.get_type( document.querySelectorAll(".content") ) + "<br/>" );
+        el.append( 'function(){} = ' + util.get_type( function(){} ) + "<br/>" );
+
+        var ___a;
+        el.append( 'var ___a; ___a = ' + util.get_type( ___a ) + "<br/>" );
+        el.append( 'document.createDocumentFragment() = '
+        + util.get_type( document.createDocumentFragment() ) + "<br/>" );
+    })();
+</script>
+</pre>
+
+    <h4>Result</h4>
+    <div id="ax5-util-get-type" class="script-result"></div>
+    <script>
+        (function(){
+            var util = ax5.util, result, el = ax5.dom("#ax5-util-get-type");
+
+            el.append( "1 = " + util.get_type(1) + "<br/>" );
+            el.append( "'1' = " + util.get_type("1") + "<br/>" );
+            el.append( "[0,1,2] = " + util.get_type([0,1,2]) + "<br/>" );
+            el.append( "{a:1} = " + util.get_type({a:1}) + "<br/>" );
+            el.append( 'ax5.dom.get("#ax5-util-get-type")[0] = ' + util.get_type( ax5.dom.get("#ax5-util-get-type")[0] ) + "<br/>" );
+            el.append( 'document.querySelectorAll(".content") = ' + util.get_type( document.querySelectorAll(".content") ) + "<br/>" );
+            el.append( 'function(){} = ' + util.get_type( function(){} ) + "<br/>" );
+            var ___a;
+            el.append( 'var ___a; ___a = ' + util.get_type( ___a ) + "<br/>" );
+            el.append( 'document.createDocumentFragment() = ' + util.get_type( document.createDocumentFragment() ) + "<br/>" );
+        })();
+    </script>
+</article>
+
+
+
+<article class="content"> <!-- type -->
+    <h2 data-menu-item="ax5-util-is-type">ax5.util.is_[type]</h2>
+    <p>argument타입에 따라 다양한 기능을 구현하거나 또는 보다 유연한 타입의 함수 개발을 위해서는 변수 자료형에 대한 타입체크가 필수 이다. ax5에서는 다음의 타입에 대해 is_메소드를 지원한다.</p>
+<pre>
+    // 오브젝트가 window인지 체크 합니다.
+    ax5.util.is_window( window );
+
+    // 오브젝트가 element인지 체크 합니다.
+    ax5.util.is_element( ax5.dom.get("#ax5-util-is-type")[0] );
+
+    // 오브젝트가 Object인지 체크 합니다.
+    ax5.util.is_object();
+
+    // 오브젝트가 Array인지 체크 합니다.
+    ax5.util.is_array();
+
+    // 오브젝트가 Functon인지 체크 합니다.
+    ax5.util.is_function();
+
+    // 오브젝트가 String인지 체크 합니다.
+    ax5.util.is_string();
+
+    // 오브젝트가 Number인지 체크 합니다.
+    ax5.util.is_number();
+
+    // 오브젝트가 nodeList인지 체크 합니다.
+    ax5.util.is_nodelist( document.querySelectorAll(".content") );
+
+    // 오브젝트가 undefined인지 체크 합니다.
+    ax5.util.is_undefined();
+
+    // 오브젝트가 undefined|''|null 인지 체크 합니다.
+    ax5.util.is_nothing();
+</pre>
+</article>
