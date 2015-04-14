@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-04-14 
+ publish date : 2015-04-15 
 -->
 <html lang="en">
 <head>
@@ -1327,7 +1327,13 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 <article class="content">
 	<h2 data-menu-item="ax5-dom-get">ax5.dom.get</h2>
 	<p>
-		
+		CSS셀렉터가 복잡하고 다양한 버전의 <code>Selecting Elements</code>를 지원하는 것을 중요하다.
+		하지만 그 보다 중요한것은 속도이다. 복잡한 형태의 <code>CSS Query</code>문을 처리 하기위해 많은 리소스를 사용하는 것은 바람직하지 않다.
+		ax5의 dom Selecting은 프로그래머가 보다 빠르게 <code>Selecting Elements</code>를 할 수 있는 제한적인 형태의 <code>CSS Query</code>
+		사용을 지향한다.
+	</p>
+	<p>
+		가급적 하나의 조건으로 Query하여 프로그램 하도록 유도하고 불가피하게 하나의 조건으로 쿼리 하지 못한다면 sub_query하여 Selecting 할 수 있도록 한다.
 	</p>
 <pre class="prettyprint linenums">
 &lt;div id="ax5-dom-get" class="script-result">
@@ -1408,6 +1414,156 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 	el.append( po.join(',') );
 	el.append( '<br/>' );
 })();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-css">ax5.dom.css</h2>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="ax5-dom-css" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-css");
+		var po = [];
+
+		el.append( po.join('') );
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="ax5-dom-css" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-css");
+		var po = [];
+
+		el.append( po.join('') );
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-attr">ax5.dom.attr</h2>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="ax5-dom-attr" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-attr");
+		var po = [];
+
+		el.append( po.join('') );
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="ax5-dom-attr" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-attr");
+		var po = [];
+
+		el.append( po.join('') );
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-class_name">ax5.dom.class_name</h2>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="ax5-dom-class_name" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-class_name");
+		var po = [];
+
+		el.append( po.join('') );
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="ax5-dom-class_name" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-class_name");
+		var po = [];
+
+		el.append( po.join('') );
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-width">ax5.dom.width</h2>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="ax5-dom-width" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-width");
+		var po = [];
+
+		el.append( po.join('') );
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="ax5-dom-width" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-width");
+		var po = [];
+
+		el.append( po.join('') );
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-height">ax5.dom.height</h2>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="ax5-dom-height" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-height");
+		var po = [];
+
+		el.append( po.join('') );
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="ax5-dom-height" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-height");
+		var po = [];
+
+		el.append( po.join('') );
+	})();
 </script>
 
 </article>
