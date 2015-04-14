@@ -16,17 +16,6 @@
 </script>
 </pre>
 
-    <h4>Result</h4>
-    <div id="ax5-util-left" class="script-result"></div>
-    <script>
-        (function(){
-            var util = ax5.util;
-            var po = [];
-            po.push( util.left("abcd.efd", 3) );
-            po.push( util.left("abcd.efd", ".") );
-            ax5.dom("#ax5-util-left").html(po.join('<br/>'));
-        })();
-    </script>
 </article>
 
 
@@ -49,17 +38,6 @@
 </script>
 </pre>
 
-    <h4>Result</h4>
-    <div id="ax5-util-right" class="script-result"></div>
-    <script>
-        (function(){
-            var util = ax5.util;
-            var po = [];
-            po.push( util.right("abcd.efd", 3) );
-            po.push( util.right("abcd.efd", ".") );
-            ax5.dom("#ax5-util-right").html(po.join('<br/>'));
-        })();
-    </script>
 </article>
 
 
@@ -79,17 +57,6 @@
 </script>
 </pre>
 
-    <h4>Result</h4>
-    <div id="ax5-util-camel-case" class="script-result"></div>
-    <script>
-        (function(){
-            var po = [];
-            po.push(ax5.util.camel_case("inner-width"));
-            po.push(ax5.util.camel_case("camelCase"));
-            po.push(ax5.util.camel_case("a_bc"));
-            ax5.dom("#ax5-util-camel-case").html(po.join('<br/>'));
-        })();
-    </script>
 </article>
 
 
@@ -111,16 +78,4 @@
 </script>
 </pre>
 
-    <h4>Result</h4>
-    <div id="ax5-util-snake_case" class="script-result"></div>
-    <script>
-        (function(){
-            var util = ax5.util, el = ax5.dom("#ax5-util-snake_case");
-            var po = [];
-            po.push(util.snake_case("inner-width"));
-            po.push(util.snake_case("camelCase"));
-            po.push(util.snake_case("a_bc"));
-            el.html(po.join('<br/>'));
-        })();
-    </script>
 </article>

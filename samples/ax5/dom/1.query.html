@@ -1,0 +1,47 @@
+<article class="content">
+	<h2 data-menu-item="ax5-dom-get">ax5.dom.get</h2>
+	<p>
+
+	</p>
+<pre>
+<div id="ax5-dom-get" class="script-result">
+	<form>
+		<input type="text" class="ax-inp" />
+		<button class="ax-btn">OK</button>
+	</form>
+</div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-get");
+		var po = [];
+		el.append( '<br/>' );
+		ax5.dom.get("a").forEach(function(item){
+			po.push( "" + item.tagName + " href=" + ax5.dom.attr(item, "href") );
+		});
+		el.append( po.join(',') );
+		el.append( '<br/>' );
+
+		po = [];
+		ax5.dom.get(".visual").forEach(function(item){
+			po.push( "" + item.tagName  + " class=" + ax5.dom.attr(item, "class") );
+		});
+		el.append( po.join(',') );
+		el.append( '<br/>' );
+
+		po = [];
+		el.find("[type=text]").elements.forEach(function(item){
+			po.push( "" + item.tagName  + " class=" + ax5.dom.attr(item, "class") );
+		});
+		el.append( po.join(',') );
+		el.append( '<br/>' );
+
+		po = [];
+		ax5.dom.get("#ax5-dom-get", ".ax-btn").forEach(function(item){
+			po.push( "" + item.tagName  + " class=" + ax5.dom.attr(item, "class") );
+		});
+		el.append( po.join(',') );
+		el.append( '<br/>' );
+	})();
+</script>
+</pre>
+</article>

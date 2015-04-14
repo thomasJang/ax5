@@ -68,11 +68,17 @@
                     from: /<pre[^>]*>([^<]*(?:(?!<\/?pre)<[^<]*)*)<\/pre\s*>/gi,
                     to: function (matchedWord, index, fullText, regexMatches) {
 
+                        //var pre_body = regexMatches.join('');
+                        if(regexMatches.join('').substr(0, 9) == "$noscript"){
+                            return '<pre class="prettyprint linenums">'+ regexMatches.join('').replace(/\$noscript\$/g, "").replace(/</g, "&lt;") +'</pre>';
+                        }else{
+                            return '<pre class="prettyprint linenums">'+ regexMatches.join('').replace(/</g, "&lt;") +'</pre>' + '<h4>Result</h4>' + regexMatches.join('');
+                        }
+
                         // matchedWord:  "world"
                         // index:  6
                         // fullText:  "Hello world"
                         // regexMatches:  ["ld"]
-                        return '<pre class="prettyprint linenums">'+ regexMatches.join('').replace(/</g, "&lt;") +'</pre>';
                     }
                 }]
             },

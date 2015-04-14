@@ -843,22 +843,28 @@
 		 * @param {String} cname - 쿠키이름
 		 * @param {String} cvalue - 쿠키값
 		 * @param {Number} [exdays] - 쿠키 유지일수
+		 * @param {Object} [opts] - path, domain 설정 옵션
 		 * @example
 		 * ```js
 		 * ax5.util.set_cookie("jslib", "AX5");
 		 * ax5.util.set_cookie("jslib", "AX5", 3);
+		 * ax5.util.set_cookie("jslib", "AX5", 3, {path:"/", domain:".axisj.com"});
 		 * ```
 		 */
-		function set_cookie(cname, cvalue, exdays) {
-			doc.cookie = cname + "=" + escape(cvalue) + "; path=/;" + (function () {
-				if (typeof exdays != "undefined") {
-					var d = new Date();
-					d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-					return "expires=" + d.toUTCString();
-				} else {
-					return "";
-				}
-			})();
+		function set_cookie(cn, cv, exdays, opts) {
+			var expire;
+			if (typeof exdays === "number") {
+				expire = new Date();
+				expire.setDate(expire.getDate() + exdays);
+			}
+			opts = opts || {};
+			return (doc.cookie = [
+				escape(cn), '=', escape(cv),
+				expire      ? "; expires=" + expire.toUTCString() : "", // use expires attribute, max-age is not supported by IE
+				opts.path    ? "; path=" + opts.path : "",
+				opts.domain  ? "; domain=" + opts.domain : "",
+				opts.secure  ? "; secure" : ""
+			].join(""));
 		}
 		/**
 		 * 쿠키를 가져옵니다.

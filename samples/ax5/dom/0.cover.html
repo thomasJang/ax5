@@ -1,4 +1,32 @@
 <article class="cover">
     <h1 data-menu-item="ax5-dom">ax5.dom</h1>
+
+
+    <p>
+        ax5.dom은 jQuery방식의 dom select와 네이티브 방식의 select를 혼용하여 사용 할 수 있게 설계되었다.
+        예를 들어 <code>ax5.dom("#id")</code>로 엘리먼트 select를 해둔 상태에서 ax5.dom에 준비된 다양한 method들을 사용하다가
+        <code>for</code>구문 안에서 element를 다룰 때에는 <code>ax5.dom.css(element, {width:100});</code>처럼 select를 다시 하시 않고 좀더 가볍고 직접적인 방법으로
+        원하는 기능을 사용하는 것이다.
+    </p>
+
+    <div class="callout good">
+        <h4>ax5.dom() <span class="ax info">vs</span> ax5.dom.get()</h4>
+        <ul>
+            <li>
+                ax5.dom("#id").elements[0] === ax5.dom.get("#id")[0]
+            </li>
+            <li>
+                ax5.dom("#ax5-dom-get").width( ); === ax5.dom.width( ax5.dom.get("#ax5-dom-get") );
+            </li>
+            <li>
+                ax5.dom("#ax5-dom-get").attr("id"); === ax5.dom.attr( ax5.dom.get("#ax5-dom-get"), "id" );
+            </li>
+        </ul>
+    </div>
+
+
+    <p>
+        얼핏 보면 <code>ax5.dom.</code>을 사용하는 것은 대단히 불편해 보인다. 하지만 프로그램의 성능을 위해서는 element select횟수를 최대한 줄이고 캐시된 element를 이용하여 코딩하려는 노력이 필요하다.
+    </p>
 </article>
 
