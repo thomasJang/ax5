@@ -280,6 +280,10 @@ $app-visual-height: 280px;
 	text-align: left;
 	box-sizing: border-box;
 
+    .nav-block{
+      position:relative;
+    }
+
 	&.pinned{
 	  position:fixed;
 	  top:60px;

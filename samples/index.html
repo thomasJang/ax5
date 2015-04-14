@@ -1289,8 +1289,8 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 <!-- split -->
 
 <article class="cover">
-    <h1 data-menu-item="ax5-dom">ax5.dom</h1>
 
+    <h1 data-menu-item="ax5-dom">ax5.dom</h1>
 
     <p>
         ax5.dom은 jQuery방식의 dom select와 네이티브 방식의 select를 혼용하여 사용 할 수 있게 설계되었다.
@@ -1314,10 +1314,10 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
         </ul>
     </div>
 
-
     <p>
         얼핏 보면 <code>ax5.dom.</code>을 사용하는 것은 대단히 불편해 보인다. 하지만 프로그램의 성능을 위해서는 element select횟수를 최대한 줄이고 캐시된 element를 이용하여 코딩하려는 노력이 필요하다.
     </p>
+
 </article>
 
 
@@ -1327,7 +1327,7 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 <article class="content">
 	<h2 data-menu-item="ax5-dom-get">ax5.dom.get</h2>
 	<p>
-
+		
 	</p>
 <pre class="prettyprint linenums">
 &lt;div id="ax5-dom-get" class="script-result">
@@ -1337,37 +1337,37 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 	&lt;/form>
 &lt;/div>
 &lt;script>
-	(function(){
-		var util = ax5.util, el = ax5.dom("#ax5-dom-get");
-		var po = [];
-		el.append( '&lt;br/>' );
-		ax5.dom.get("a").forEach(function(item){
-			po.push( "" + item.tagName + " href=" + ax5.dom.attr(item, "href") );
-		});
-		el.append( po.join(',') );
-		el.append( '&lt;br/>' );
+(function(){
+	var util = ax5.util, el = ax5.dom("#ax5-dom-get");
+	var po = [];
+	el.append( '&lt;br/>' );
+	ax5.dom.get("a").forEach(function(item){
+		po.push( "" + item.tagName + " href=" + ax5.dom.attr(item, "href") );
+	});
+	el.append( po.join(',') );
+	el.append( '&lt;br/>' );
 
-		po = [];
-		ax5.dom.get(".visual").forEach(function(item){
-			po.push( "" + item.tagName  + " class=" + ax5.dom.attr(item, "class") );
-		});
-		el.append( po.join(',') );
-		el.append( '&lt;br/>' );
+	po = [];
+	ax5.dom.get(".visual").forEach(function(item){
+		po.push( "" + item.tagName  + " class=" + ax5.dom.attr(item, "class") );
+	});
+	el.append( po.join(',') );
+	el.append( '&lt;br/>' );
 
-		po = [];
-		el.find("[type=text]").elements.forEach(function(item){
-			po.push( "" + item.tagName  + " class=" + ax5.dom.attr(item, "class") );
-		});
-		el.append( po.join(',') );
-		el.append( '&lt;br/>' );
+	po = [];
+	el.find("[type=text]").elements.forEach(function(item){
+		po.push( "" + item.tagName  + " class=" + ax5.dom.attr(item, "class") );
+	});
+	el.append( po.join(',') );
+	el.append( '&lt;br/>' );
 
-		po = [];
-		ax5.dom.get("#ax5-dom-get", ".ax-btn").forEach(function(item){
-			po.push( "" + item.tagName  + " class=" + ax5.dom.attr(item, "class") );
-		});
-		el.append( po.join(',') );
-		el.append( '&lt;br/>' );
-	})();
+	po = [];
+	ax5.dom.get("#ax5-dom-get", ".ax-btn").forEach(function(item){
+		po.push( "" + item.tagName  + " class=" + ax5.dom.attr(item, "class") );
+	});
+	el.append( po.join(',') );
+	el.append( '&lt;br/>' );
+})();
 &lt;/script>
 </pre><h4>Result</h4>
 <div id="ax5-dom-get" class="script-result">
@@ -1377,37 +1377,37 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 	</form>
 </div>
 <script>
-	(function(){
-		var util = ax5.util, el = ax5.dom("#ax5-dom-get");
-		var po = [];
-		el.append( '<br/>' );
-		ax5.dom.get("a").forEach(function(item){
-			po.push( "" + item.tagName + " href=" + ax5.dom.attr(item, "href") );
-		});
-		el.append( po.join(',') );
-		el.append( '<br/>' );
+(function(){
+	var util = ax5.util, el = ax5.dom("#ax5-dom-get");
+	var po = [];
+	el.append( '<br/>' );
+	ax5.dom.get("a").forEach(function(item){
+		po.push( "" + item.tagName + " href=" + ax5.dom.attr(item, "href") );
+	});
+	el.append( po.join(',') );
+	el.append( '<br/>' );
 
-		po = [];
-		ax5.dom.get(".visual").forEach(function(item){
-			po.push( "" + item.tagName  + " class=" + ax5.dom.attr(item, "class") );
-		});
-		el.append( po.join(',') );
-		el.append( '<br/>' );
+	po = [];
+	ax5.dom.get(".visual").forEach(function(item){
+		po.push( "" + item.tagName  + " class=" + ax5.dom.attr(item, "class") );
+	});
+	el.append( po.join(',') );
+	el.append( '<br/>' );
 
-		po = [];
-		el.find("[type=text]").elements.forEach(function(item){
-			po.push( "" + item.tagName  + " class=" + ax5.dom.attr(item, "class") );
-		});
-		el.append( po.join(',') );
-		el.append( '<br/>' );
+	po = [];
+	el.find("[type=text]").elements.forEach(function(item){
+		po.push( "" + item.tagName  + " class=" + ax5.dom.attr(item, "class") );
+	});
+	el.append( po.join(',') );
+	el.append( '<br/>' );
 
-		po = [];
-		ax5.dom.get("#ax5-dom-get", ".ax-btn").forEach(function(item){
-			po.push( "" + item.tagName  + " class=" + ax5.dom.attr(item, "class") );
-		});
-		el.append( po.join(',') );
-		el.append( '<br/>' );
-	})();
+	po = [];
+	ax5.dom.get("#ax5-dom-get", ".ax-btn").forEach(function(item){
+		po.push( "" + item.tagName  + " class=" + ax5.dom.attr(item, "class") );
+	});
+	el.append( po.join(',') );
+	el.append( '<br/>' );
+})();
 </script>
 
 </article>

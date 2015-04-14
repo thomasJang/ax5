@@ -229,6 +229,8 @@ pre.prettyprint {
     overflow: auto;
     text-align: left;
     box-sizing: border-box; }
+    .app-page .app-nav-left .nav-block {
+      position: relative; }
     .app-page .app-nav-left.pinned {
       position: fixed;
       top: 60px; }

@@ -49,6 +49,8 @@ ax5.dom.ready(function(){
 			},
 			menu_taping: function(){
 				var s_top = ax5.dom.scroll().top;
+
+				//app_nav_left
 				for(var i= 0,l=menu_list.length;i<l;i++){
 					if( menu_list[i].top > s_top){
 						var _i = i;
@@ -66,6 +68,17 @@ ax5.dom.ready(function(){
 						}
 						menu_list[_i].el.class_name("add", "open");
 						menu_list[_i].el.parent({tagname:"ul", clazz:"H1"}).class_name("add", "open");
+
+						var nav_height = ax5.dom.height(app_nav_left[0]),
+							nav_sc_top = app_nav_left[0].scrollTop,
+							el_top = menu_list[_i].el.position().top + 40;
+						if(nav_height + nav_sc_top < el_top){
+							app_nav_left[0].scrollTop = el_top - nav_height;
+						}
+						else if(nav_sc_top > el_top - 40){
+							app_nav_left[0].scrollTop = el_top - 40;
+						}
+
 						selected_menu_list_index = _i;
 						break;
 					}
