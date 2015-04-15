@@ -41,7 +41,7 @@
 
     
     <script>
-    var config = {"monospaceLinks":true,"cleverLinks":true,"default":{"outputSourceFiles":true},"applicationName":"ax5.io","git_liblink":"https://github.com/tom-axisj/ax5/tree/master/src/","disqus":"","googleAnalytics":"","openGraph":{"title":"ax5.io","type":"JSDOC API","image":"http://dev.axisj.com/ui/AXJ.png","site_name":"new html5 javascript framework","url":"http://newdoc.axisj.com"},"meta":{"title":"ax5 API","description":"자바스크립트 UI Library ax5 JSDOC API서비스 입니다.","keyword":"AXISJ, JSDOC, API"}};
+    var config = {"monospaceLinks":true,"cleverLinks":true,"default":{"outputSourceFiles":true},"applicationName":"ax5.io","git_liblink":"https://github.com/axisj-com/ax5/tree/dev/src/","disqus":"","googleAnalytics":"","openGraph":{"title":"ax5.io","type":"JSDOC API","image":"http://dev.axisj.com/ui/AXJ.png","site_name":"new html5 javascript framework","url":"http://newdoc.axisj.com"},"meta":{"title":"ax5 API","description":"자바스크립트 UI Library ax5 JSDOC API서비스 입니다.","keyword":"AXISJ, JSDOC, API"}};
     </script>
     
 
@@ -206,6 +206,8 @@
                 <li data-name="ax5.dom0.css"><a href="ax5.dom0.html#css">css</a></li>
             
                 <li data-name="ax5.dom0.data"><a href="ax5.dom0.html#data">data</a></li>
+            
+                <li data-name="ax5.dom0.empty"><a href="ax5.dom0.html#empty">empty</a></li>
             
                 <li data-name="ax5.dom0.find"><a href="ax5.dom0.html#find">find</a></li>
             
@@ -435,7 +437,7 @@
         <article>
             <pre class="prettyprint source linenums"><code>/*
  * ax5 - v0.0.1 
- * 2015-04-01 
+ * 2015-04-14 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -720,27 +722,22 @@
 		 * ```
 		 */
 		var browser = (function () {
-			var ua = navigator.userAgent.toLowerCase();
-			var mobile = (ua.search(/mobile/g) != -1);
+			var ua = navigator.userAgent.toLowerCase(), mobile = (ua.search(/mobile/g) != -1),
+				browserName, match, browser, browserVersion;
+
 			if (ua.search(/iphone/g) != -1) {
 				return { name: "iphone", version: 0, mobile: true }
 			} else if (ua.search(/ipad/g) != -1) {
 				return { name: "ipad", version: 0, mobile: true }
 			} else if (ua.search(/android/g) != -1) {
-				var match = /(android)[ \/]([\w.]+)/.exec(ua) || [];
-				var browserVersion = (match[2] || "0");
+				match = /(android)[ \/]([\w.]+)/.exec(ua) || [];
+				browserVersion = (match[2] || "0");
 				return { name: "android", version: browserVersion, mobile: mobile }
 			} else {
-				var browserName = "";
-				var match = /(opr)[ \/]([\w.]+)/.exec(ua) ||
-					/(chrome)[ \/]([\w.]+)/.exec(ua) ||
-					/(webkit)[ \/]([\w.]+)/.exec(ua) ||
-					/(msie) ([\w.]+)/.exec(ua) ||
-					ua.indexOf("compatible") &lt; 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) ||
-					[];
-
-				var browser = (match[1] || "");
-				var browserVersion = (match[2] || "0");
+				browserName = "";
+				match = /(opr)[ \/]([\w.]+)/.exec(ua) || /(chrome)[ \/]([\w.]+)/.exec(ua) || /(webkit)[ \/]([\w.]+)/.exec(ua) || /(msie) ([\w.]+)/.exec(ua) || ua.indexOf("compatible") &lt; 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) || [];
+				browser = (match[1] || "");
+				browserVersion = (match[2] || "0");
 
 				if (browser == "msie") browser = "ie";
 				return {
@@ -749,6 +746,7 @@
 					mobile: mobile
 				}
 			}
+			ua = null, mobile = null, browserName = null, match = null, browser = null, browserVersion = null;
 		})();
 		/**
 		 * 브라우저 여부
@@ -781,8 +779,8 @@
 		 * }
 		 * ```
 		 */
-		function url_util() {
-			var url = {
+		function url_util(url, urls) {
+			url = {
 				href: win.location.href,
 				param: win.location.search,
 				referrer: doc.referrer,
@@ -800,7 +798,7 @@
 			return url;
 		}
 
-		var info = {
+		return {
 			version: version,
 			base_url: base_url,
 			event_keys: event_keys,
@@ -809,8 +807,6 @@
 			wheel_enm: wheel_enm,
 			url_util: url_util
 		};
-
-		return info;
 	})();
 
 
@@ -1085,7 +1081,6 @@
 			}
 			return results;
 		}
-
 
 		/**
 		 * Object를 JSONString 으로 반환합니다.
@@ -1461,22 +1456,28 @@
 		 * @param {String} cname - 쿠키이름
 		 * @param {String} cvalue - 쿠키값
 		 * @param {Number} [exdays] - 쿠키 유지일수
+		 * @param {Object} [opts] - path, domain 설정 옵션
 		 * @example
 		 * ```js
 		 * ax5.util.set_cookie("jslib", "AX5");
 		 * ax5.util.set_cookie("jslib", "AX5", 3);
+		 * ax5.util.set_cookie("jslib", "AX5", 3, {path:"/", domain:".axisj.com"});
 		 * ```
 		 */
-		function set_cookie(cname, cvalue, exdays) {
-			doc.cookie = cname + "=" + escape(cvalue) + "; path=/;" + (function () {
-				if (typeof exdays != "undefined") {
-					var d = new Date();
-					d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-					return "expires=" + d.toUTCString();
-				} else {
-					return "";
-				}
-			})();
+		function set_cookie(cn, cv, exdays, opts) {
+			var expire;
+			if (typeof exdays === "number") {
+				expire = new Date();
+				expire.setDate(expire.getDate() + exdays);
+			}
+			opts = opts || {};
+			return (doc.cookie = [
+				escape(cn), '=', escape(cv),
+				expire      ? "; expires=" + expire.toUTCString() : "", // use expires attribute, max-age is not supported by IE
+				opts.path    ? "; path=" + opts.path : "",
+				opts.domain  ? "; domain=" + opts.domain : "",
+				opts.secure  ? "; secure" : ""
+			].join(""));
 		}
 		/**
 		 * 쿠키를 가져옵니다.
@@ -1559,7 +1560,7 @@
 						dom.create("link", {rel: "stylesheet", type: "text/css", href: plugin_src});
 
 					plug_load = function (e, plugin_src) {
-						if (e.type === 'load' || (readyRegExp.test((e.currentTarget || e.srcElement).readyState))) {
+						if (e && ( e.type === 'load' || readyRegExp.test((e.currentTarget || e.srcElement).readyState) )){
 							if(!loaded_src[plugin_src]) loadCount--;
 							if (onloadTimer) clearTimeout(onloadTimer);
 							onloadTimer = setTimeout(onload, 1);
@@ -2402,7 +2403,22 @@
 				this.data = function (command, O) {
 					var rs = dom.data(this.elements, command, O);
 					return (rs === this.elements) ? this : rs;
-				}
+				};
+				/**
+				 * 엘리먼트의 자식을 모두 지워줍니다. 내용을 깨긋히 비워 냅니다.
+				 * @method ax5.dom0.empty
+				 * @returns {ax5.dom0}
+				 * @example
+				 * ```
+				 * var axd = ax5.dom, axu = ax5.util, res = "";
+				 *
+				 * axd("#id").empty();
+				 * ```
+				 */
+				this.empty = function (){
+					dom.empty(this.elements);
+					return this;
+				};
 			}
 
 			return ax;
@@ -2416,6 +2432,7 @@
 		//if("내장함수 시작") {
 		// 이벤트 바인딩
 		function eBind(elem, type, eventHandle) {
+			if(!U.is_string(type)) console.error("type=" + type);
 			type = U.left(type, ".");
 			if (elem.addEventListener) {
 				elem.addEventListener(type, eventHandle, false);
@@ -2619,7 +2636,7 @@
 
 		// createFragment
 		function create_fragment(elems) {
-			var safe = safe_fragment, tmp, nodes = [], tag, wrap, tbody,
+			var safe = safe_fragment.appendChild( doc.createElement("div")), tmp, nodes = [], tag, wrap, tbody,
                 elem, i = 0, l = elems.length, j;
             // safe = doc.createDocumentFragment();
 
@@ -2680,6 +2697,7 @@
 
 						// Remember the top-level container for proper cleanup
 						tmp = safe.lastChild;
+						//tmp = safe.firstChild;
                         safe.removeChild(tmp);
                         tmp = null;
 					}
@@ -2688,9 +2706,9 @@
 
 			i = 0;
 			while ((elem = nodes[i++])) {
-				//console.log(elem);
 				safe.appendChild(elem);
 			}
+			//console.log(safe.innerHTML);
 			return safe;
 		}
 		
@@ -2707,15 +2725,15 @@
 						eUnBind(el, hd, el.e_hd[hd][ehi]);
 				}
 			}
-			delete el["e_hd"];
-			delete el["ax5_data"];
+			if(el["e_hd"]) delete el["e_hd"];
+			if(el["ax5_data"]) delete el["ax5_data"];
 			// todo : attributes 걸리는 것이 없지만 혹시나 모를 데이터를 위해.
-			for(var a in el.attributes){
-				if(typeof el.attributes[a] === "object"){
-					//console.log(el.attributes[a]);
-					el.attributes[a] = null
+			if(ax5.info.browser.name !== "ie" && ax5.info.browser.version > 7){
+				for(var a in el.attributes) {
+					if (typeof el.attributes[a] === "object") el.attributes[a] = null;
 				}
 			}
+
 			// 자식들도 확인 합니다.
 			if(el.hasChildNodes()){
 				c_el = el.childNodes, ci = 0, cl = c_el.length;
@@ -2838,23 +2856,23 @@
 		function get(query, sub_query) {
 			var els, r_els = [], p_els;
 			var i = 0, l = query.length;
-			if (query.toString() == "[object ax5.dom]") {
+			if (query.toString() === "[object ax5.dom]") {
                 r_els = query.elements;
 			}
 			else if (U.is_window(query)) r_els.push(query);
 			else if (U.is_element(query)) r_els.push(query);
 			else if (U.is_array(query) || U.is_nodelist(query)) {
-				for (; i &lt; l; i++)  if (U.is_element(query[i])) r_els.push(query[i]);
+				for (i=0; i &lt; l; i++)  if (U.is_element(query[i])) r_els.push(query[i]);
 			}
 			else if (U.is_string(query) && query.substr(0, 1) === "#") r_els.push(doc.getElementById(query.substr(1)));
 			else {
                 els = doc.querySelectorAll(query), l = els.length;
-				for (; i &lt; l; i++) r_els.push(els[i]);
+				for (i=0; i &lt; l; i++) r_els.push(els[i]);
 			}
-			if (typeof sub_query != "undefined") {
+			if (typeof sub_query !== "undefined") {
 				p_els = (info.browser.name == "ie" && info.browser.version &lt; 8) ? doc : r_els[0];
                 r_els = [], els = p_els.querySelectorAll(sub_query), l = els.length;
-				for (; i &lt; l; i++) r_els.push(els[i]);
+				for (i=0; i &lt; l; i++) r_els.push(els[i]);
 			}
 			return r_els;
 		}
@@ -2951,27 +2969,41 @@
 		 * ax5.dom.class_name(ax5.dom.get("#abcd"), "toggle", "class-text");
 		 * ```
 		 */
+
+		// todo : class_name 여러개의 class 인자 동시 처리 지원
 		function class_name(els, command, O) {
 			var cns;
 			els = va_elem(els, "clazz");
 			if (command === "add" || command === "remove" || command === "toggle") {
+				O = [].concat(O);
 				for (var di = 0; di &lt; els.length; di++) {
-                    cns = els[di]["className"].split(re_class_name_split);
+					cns = els[di]["className"];
+					if(cns !== "") cns = cns.split(re_class_name_split);
+					else cns = [];
 					if (command === "add") {
-						if (U.search(cns, function () {
-								return O.trim() == this;
-							}) == -1) cns.push(O.trim());
+						O.forEach(function(O){
+							if (U.search(cns, function () {
+									return O.trim() == this;
+								}) == -1) cns.push(O.trim());
+						});
 					} else if (command === "remove") {
-                        cns = U.filter(cns, function () {
-							return O.trim() != this;
+						O.forEach(function(O) {
+							cns = U.filter(cns, function () {
+								return O.trim() != this;
+							});
 						});
 					} else if (command === "toggle") {
-						var class_count = cns.length;
-                        cns = U.filter(cns, function () {
-							return O.trim() != this;
+						O.forEach(function(O) {
+							var class_count = cns.length;
+							cns = U.filter(cns, function () {
+								return O.trim() != this;
+							});
+							if (class_count === cns.length) cns.push(O.trim());
 						});
-						if (class_count === cns.length) cns.push(O.trim());
 					}
+
+
+
 					els[di]["className"] = cns.join(" ");
 				}
 				return els;
@@ -3089,17 +3121,18 @@
 			els = va_elem(els, "off");
 			for (var i = 0; i &lt; els.length; i++) {
 				var _d = els[i];
-				if (U.is_array(_d.e_hd[typ])) {
-					var _na = [];
-					for (var i = 0; i &lt; _d.e_hd[typ].length; i++) {
-						if (_d.e_hd[typ][i] == _fn || typeof _fn === "undefined") eUnBind(_d, typ, _d.e_hd[typ][i]);
-						else _na.push(_d.e_hd[typ][i]);
-					}
-					_d.e_hd[typ] = _na;
-				} else {
-					if (_d.e_hd[typ] == _fn || typeof _fn === "undefined") {
-						eUnBind(_d, typ, _d.e_hd[typ]);
-						delete _d.e_hd[typ]; // 함수 제거
+				if(_d.e_hd) {
+					if (U.is_array(_d.e_hd[typ])) {
+						var _na = [];
+						for (var i = 0; i &lt; _d.e_hd[typ].length; i++) {
+							if (_d.e_hd[typ][i] == _fn || typeof _fn === "undefined") eUnBind(_d, typ, _d.e_hd[typ][i]); else _na.push(_d.e_hd[typ][i]);
+						}
+						_d.e_hd[typ] = _na;
+					} else {
+						if (_d.e_hd[typ] == _fn || typeof _fn === "undefined") {
+							eUnBind(_d, typ, _d.e_hd[typ]);
+							delete _d.e_hd[typ]; // 함수 제거
+						}
 					}
 				}
 			}
@@ -3179,7 +3212,7 @@
 		 * ```
 		 */
 		function parent(els, cond) {
-			els = va_elem(els, "child");
+			els = va_elem(els, "parent");
 			var _target = els[0];
 			if (_target) {
 				while ((function () {
@@ -3188,7 +3221,7 @@
 						result = cond(_target);
 					}
 					else
-					if(U.is_function(cond)) {
+					if(U.is_object(cond)) {
 						for (var k in cond) {
 							if (k === "tagname") {
 								if (_target.tagName.toLocaleLowerCase() != cond[k]) {
@@ -3196,17 +3229,27 @@
 									break;
 								}
 							} else if (k === "clazz" || k === "class_name") {
-								var klasss = _target.className.split(re_class_name_split);
-								var hasClass = false;
-								for (var a = 0; a &lt; klasss.length; a++) {
-									if (klasss[a] == cond[k]) {
-										hasClass = true;
+								if("className" in _target) {
+									var klasss = _target.className.split(re_class_name_split);
+									var hasClass = false;
+									for (var a = 0; a &lt; klasss.length; a++) {
+										if (klasss[a] == cond[k]) {
+											hasClass = true;
+											break;
+										}
+									}
+									result = hasClass;
+								}else{
+									result = false;
+									break;
+								}
+							} else { // 그외 속성값들.
+								if(_target.getAttribute) {
+									if (_target.getAttribute(k) != cond[k]) {
+										result = false;
 										break;
 									}
-								}
-								result = hasClass;
-							} else { // 그외 속성값들.
-								if (_target.getAttribute(k) != cond[k]) {
+								}else{
 									result = false;
 									break;
 								}
@@ -3408,6 +3451,7 @@
 		 * ```
 		 */
 		function append(els, val) {
+			// todo : 빈 노드에 append 할때 빈 div 태그 생성됨.
 			return manipulate("append", els, val);
 		}
 
@@ -3473,25 +3517,40 @@
 		function manipulate(act, els, val) {
 			els = va_elem(els, act);
 			var flag, i = 0, l = els.length,
-				el = [].concat(val), cf = create_fragment, els = els;
+				el = [].concat(val), cf = create_fragment, els = els, _el;
 
 			if (act === "append") {
 				for (; i &lt; l; i++) {
-					els[i].appendChild(cf(el));
+					_el = cf(el);
+					while(_el.firstChild){
+						els[i].appendChild(_el.firstChild);
+					}
 				}
 			}
 			else if (act == "prepend") {
 				for (; i &lt; l; i++) {
-					els[i].insertBefore(cf(el), els[i].firstChild);
+					_el = cf(el);
+					while(_el.firstChild) {
+						els[i].insertBefore(_el.firstChild, els[i].firstChild);
+					}
 				}
 			}
 			else if (act == "before") {
 				for (; i &lt; l; i++) {
-					els[i].parentNode.insertBefore(cf(el), els[i]);
+					_el = cf(el);
+					while(_el.firstChild){
+						els[i].parentNode.insertBefore(_el.firstChild, els[i]);
+					}
 				}
 			}
 			else if (act == "after") {
-				els[i].parentNode.insertBefore(cf(el), els[i].nextSibling);
+				for (; i &lt; l; i++) {
+					_el = cf(el);
+					while(_el.firstChild){
+						els[i].parentNode.insertBefore(_el.firstChild, els[i].nextSibling);
+					}
+				}
+				//els[i].parentNode.insertBefore(cf(el), els[i].nextSibling);
 			}
 			return els;
 		}
@@ -3823,21 +3882,24 @@ ax5.xhr = (function (){
 				} catch(e) {}
 				
 				//  authorization headers. The default is false.
-				http.withCredentials = cfg.withCredentials;
+				if("withCredentials" in http) http.withCredentials = cfg.withCredentials;
+				// todo : withCredentials 이 지원되지 않는 브라우저 일 때 대처법 필요
 
 				// 응답
 				http.onreadystatechange = function () {
 					if (http.readyState == 4) {
                         if(time_id == -1) return;
                         clearTimeout(time_id), time_id = -1;
-						that = {
-							response_url: http.responseURL,
-							status      : http.status,
-							result      : http.statusText,
-							state       : http.readyState,
-							data        : http.responseText,
-							type        : http.responseType
-						};
+						that = {};
+						that.response_url= ("responseURL" in http) ? http.responseURL : "";
+						that.status      = ("status" in http) ? http.status : "";
+						that.result      = http.statusText;
+						that.state       = http.readyState;
+						that.type        = http.responseType;
+						try {
+							that.data = ("responseText" in http) ? http.responseText : "";
+						}catch(e){}
+
 						if (http.status == 200) {
 							if (cfg.response) cfg.response.call(that, that.data, that.status, http);
 							else console.log(http);
@@ -3859,7 +3921,8 @@ ax5.xhr = (function (){
                 ontimeout = function(){
                     if(time_id == -1) return;
                     if(http.readyState !== 4) http.abort();
-                    time_id = -1, http.onreadystatechange = null;
+                    time_id = -1;
+	                //http.onreadystatechange = null;
                     
                     that = {error:"timeout"};
                     if (cfg.error) {
@@ -4103,7 +4166,7 @@ ax5.ui = (function () {
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Wed Apr 01 2015 17:26:37 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Wed Apr 15 2015 01:08:14 GMT+0900 (KST)
         </footer>
     </div>
 </div>

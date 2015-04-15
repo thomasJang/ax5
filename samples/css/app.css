@@ -145,6 +145,8 @@ pre.prettyprint {
     .app-page .app-content a[name] {
       display: block;
       height: 10px; }
+    .app-page .app-content label[data-menu-item] {
+      display: none; }
     .app-page .app-content article h1[data-menu-item] {
       padding-top: 30px; }
     .app-page .app-content article h2[data-menu-item], .app-page .app-content article h3[data-menu-item] {
@@ -270,6 +272,13 @@ pre.prettyprint {
         .app-page .app-nav-left ul li:hover, .app-page .app-nav-left ul li.open {
           background: #358CAE;
           color: #fff; }
+        .app-page .app-nav-left ul li.menu-label {
+          font-size: 11px;
+          background: #eee;
+          text-align: center; }
+          .app-page .app-nav-left ul li.menu-label:hover, .app-page .app-nav-left ul li.menu-label.open {
+            background: none;
+            color: inherit; }
       .app-page .app-nav-left ul ul {
         padding: 0px 0px 0px 0px;
         display: none; }

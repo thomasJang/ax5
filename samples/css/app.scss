@@ -176,6 +176,7 @@ $app-visual-height: 280px;
       display: block;
       height: 10px;
     }
+    label[data-menu-item]{display: none;}
     article{
 	  h1[data-menu-item]{
 		padding-top:30px;
@@ -183,6 +184,7 @@ $app-visual-height: 280px;
 	  h2[data-menu-item],h3[data-menu-item]{
 		padding-top:20px;
 	  }
+
       &.cover{
         h1{
           font-size: 2.5em;
@@ -326,6 +328,17 @@ $app-visual-height: 280px;
         &:hover, &.open{
           background: #358CAE;
           color:#fff;
+        }
+        &.menu-label{
+          //padding:0px;
+          font-size:11px;
+          //color:#ffffff;
+          background: #eee;
+          text-align: center;
+          &:hover, &.open{
+            background: none;
+            color:inherit;
+          }
         }
       }
 

@@ -228,6 +228,8 @@
 
 <!-- split -->
 
+<label data-menu-item="label">Object</label>
+
 <article class="content"> <!-- clone -->
     <h2 data-menu-item="ax5-util-clone">ax5.util.clone</h2>
 
@@ -814,6 +816,8 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 
 <!-- split -->
 
+<label data-menu-item="label">String</label>
+
 <article class="content">
     <h2 data-menu-item="ax5-util-left">ax5.util.left</h2>
     <p>
@@ -944,6 +948,8 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 
 <!-- split -->
 
+<label data-menu-item="label">Number</label>
+
 <article class="content">
 	<h2 data-menu-item="ax5-util-number">ax5.util.number</h2>
 	<p>
@@ -1005,6 +1011,8 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 </article>
 
 <!-- split -->
+
+<label data-menu-item="label">Misc</label>
 
 <article class="content">
 	<h2 data-menu-item="ax5-util-param">ax5.util.param</h2>
@@ -1418,34 +1426,72 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 
 </article>
 
+<!-- split -->
 
-
+<label data-menu-item="label">Attributes</label>
 <article class="content">
 	<h2 data-menu-item="ax5-dom-css">ax5.dom.css</h2>
 	<p>
-
+		ax5.dom(이하 '옥돔')은 getter와 setter를 하나의 메소드로 처리한다라는 원칙을 가지고 제작되었다.
+		그 시작으로 DOM CSS 조작 메소드인 <code>.css()</code>를 보자면 다음과 같다.
 	</p>
 <pre class="prettyprint linenums">
-&lt;div id="ax5-dom-css" class="script-result">&lt;/div>
+&lt;div id="ax5-dom-css" class="script-result">
+	&lt;div class="target-div">&lt;/div>
+&lt;/div>
 &lt;script>
 	(function(){
 		var util = ax5.util, el = ax5.dom("#ax5-dom-css");
 		var po = [];
 
-		el.append( po.join('') );
+		// 인자값을 문자열로 했을 땐 get
+		po.push( 'el.css("width") => ' + el.css("width") );
+
+		var target_div = el.find(".target-div");
+
+		// 인자값을 Object로 했을 땐 set
+		target_div.css({height:50, background:"#ccc", margin:"10px", "text-align":"center", "line-height":50, border:"2px solid #000", "border-radius":10});
+		po.push( 'target_div.css("height") => ' + target_div.css("height") );
+		target_div.html("height: 50px;");
+
+		el.append( po.join('&lt;br/>') );
 	})();
 &lt;/script>
 </pre><h4>Result</h4>
-<div id="ax5-dom-css" class="script-result"></div>
+<div id="ax5-dom-css" class="script-result">
+	<div class="target-div"></div>
+</div>
 <script>
 	(function(){
 		var util = ax5.util, el = ax5.dom("#ax5-dom-css");
 		var po = [];
 
-		el.append( po.join('') );
+		// 인자값을 문자열로 했을 땐 get
+		po.push( 'el.css("width") => ' + el.css("width") );
+
+		var target_div = el.find(".target-div");
+
+		// 인자값을 Object로 했을 땐 set
+		target_div.css({height:50, background:"#ccc", margin:"10px", "text-align":"center", "line-height":50, border:"2px solid #000", "border-radius":10});
+		po.push( 'target_div.css("height") => ' + target_div.css("height") );
+		target_div.html("height: 50px;");
+
+		el.append( po.join('<br/>') );
 	})();
 </script>
 
+
+	<div class="callout basic">
+		<h4>CSS 지원범위</h4>
+		<p>
+			ax5와 jQuery의 CSS 비교
+			<a href="/api-test/css.html" target="_blank">/api-test/css.html</a>
+		</p>
+	</div>
+	<p>
+		이러고 보니 jQuery랑 별반 다를 것도 없다. 하지만 jQuery 디테일에 비교하면 아직 터무니 없다.
+		옥돔을 너무 맹신하진 말자. 믿지말고 의심하고 코드를 이해해야 한다. 옥돔의 모든 코드는 언제나 오픈되어 있고 자세히 설명해주고 있다.
+	</p>
 </article>
 
 
@@ -1453,26 +1499,37 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 <article class="content">
 	<h2 data-menu-item="ax5-dom-attr">ax5.dom.attr</h2>
 	<p>
-
+		옥돔의 attr메소드를 이용하면 모든 attribute를 읽고 쓸 수 있는데. <code>class</code>는 처리 할 수 없다.
+		그 이유는 옥돔의 잘못은 아니다. 브라우저가 안된다고 하니까. 안되는 것 뿐이다.
 	</p>
 <pre class="prettyprint linenums">
-&lt;div id="ax5-dom-attr" class="script-result">&lt;/div>
+&lt;div id="ax5-dom-attr" class="script-result">
+	&lt;div class="target-div">&lt;/div>
+&lt;/div>
 &lt;script>
 	(function(){
 		var util = ax5.util, el = ax5.dom("#ax5-dom-attr");
 		var po = [];
-
-		el.append( po.join('') );
+		var target_div = el.find(".target-div");
+		target_div.attr({"data-attr-0":0, "data-attr-1":1, "data-attr-2":2});
+		po.push( el.html().replace(/&lt;/g,'&lt;') );
+		po.push( 'target_div.attr("data-attr-1") = ' + target_div.attr("data-attr-1") );
+		el.append( po.join('&lt;br/>') );
 	})();
 &lt;/script>
 </pre><h4>Result</h4>
-<div id="ax5-dom-attr" class="script-result"></div>
+<div id="ax5-dom-attr" class="script-result">
+	<div class="target-div"></div>
+</div>
 <script>
 	(function(){
 		var util = ax5.util, el = ax5.dom("#ax5-dom-attr");
 		var po = [];
-
-		el.append( po.join('') );
+		var target_div = el.find(".target-div");
+		target_div.attr({"data-attr-0":0, "data-attr-1":1, "data-attr-2":2});
+		po.push( el.html().replace(/</g,'&lt;') );
+		po.push( 'target_div.attr("data-attr-1") = ' + target_div.attr("data-attr-1") );
+		el.append( po.join('<br/>') );
 	})();
 </script>
 
@@ -1486,21 +1543,27 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 
 	</p>
 <pre class="prettyprint linenums">
-&lt;div id="ax5-dom-class_name" class="script-result">&lt;/div>
+&lt;div id="ax5-dom-class_name" class="script-result">
+	&lt;div class="target-div">&lt;/div>
+&lt;/div>
 &lt;script>
 	(function(){
 		var util = ax5.util, el = ax5.dom("#ax5-dom-class_name");
 		var po = [];
+		var target_div = el.find(".target-div");
 
 		el.append( po.join('') );
 	})();
 &lt;/script>
 </pre><h4>Result</h4>
-<div id="ax5-dom-class_name" class="script-result"></div>
+<div id="ax5-dom-class_name" class="script-result">
+	<div class="target-div"></div>
+</div>
 <script>
 	(function(){
 		var util = ax5.util, el = ax5.dom("#ax5-dom-class_name");
 		var po = [];
+		var target_div = el.find(".target-div");
 
 		el.append( po.join('') );
 	})();

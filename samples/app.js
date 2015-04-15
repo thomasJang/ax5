@@ -11,6 +11,7 @@ ax5.dom.ready(function(){
 
 		for(var i= 0,l=menu_items.elements.length;i<l;i++){
 			el = menu_items.elements[i];
+
 			if(el.tagName == "H1" && po.length > 0){
 				if(prev_tag == "H2" || prev_tag == "H3") po.push("</ul>");
 				po.push('</ul>');
@@ -21,16 +22,19 @@ ax5.dom.ready(function(){
 			if((el.tagName == "H2" || el.tagName == "H3") && prev_tag == "H1") {
 				po.push('<ul class="H2">');
 			}
+			if(el.tagName == "LABEL") {
+				po.push('<li class="menu-label">' + el.innerHTML + '</li>');
+			}else{
+				el_name = dom.attr(el, "data-menu-item");
 
-			el_name = dom.attr(el, "data-menu-item");
-
-			menu_list.push({
-				id: el_name,
-				top: dom.offset(el).top
-			});
-			dom.before(el, '<div style="position:relative;left:0px;top:-75px;" id="'+ el_name +'"></div>');
-			po.push('<li id="menu-'+ el_name +'"><a href="#' + el_name + '">' + el.innerHTML + '</a></li>');
-			prev_tag = el.tagName;
+				menu_list.push({
+					id: el_name,
+					top: dom.offset(el).top
+				});
+				dom.before(el, '<div style="position:relative;left:0px;top:-75px;" id="'+ el_name +'"></div>');
+				po.push('<li id="menu-'+ el_name +'"><a href="#' + el_name + '">' + el.innerHTML + '</a></li>');
+				prev_tag = el.tagName;
+			}
 		}
 		po.push("</ul>");
 		dom("#app-nav-left").html('<div class="nav-block">' + po.join('') + '</div>');
