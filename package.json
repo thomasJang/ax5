@@ -2,9 +2,32 @@
   "name": "ax5",
   "version": "0.0.1",
   "devDependencies": {
-	  "grunt": "~0.4.5",
-	  "grunt-contrib-jshint": "~0.10.0",
-	  "grunt-contrib-nodeunit": "~0.3.3",
-	  "grunt-contrib-uglify": "~0.4.0"
-  }
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-copy": "^0.8.0",
+    "grunt-contrib-cssmin": "^0.12.2",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-nodeunit": "^0.3.3",
+    "grunt-contrib-uglify": "^0.4.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-sass": "^0.18.1",
+    "grunt-text-replace": "^0.4.0"
+  },
+  "description": "new javascript UI Library\r - [ax5](http://ax5.io)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/axisj-com/ax5.git"
+  },
+  "keywords": [
+    "ax5",
+    "axisj",
+    "javascript"
+  ],
+  "author": "tom-axisj",
+  "license": "The MIT License (MIT)",
+  "bugs": {
+    "url": "https://github.com/axisj-com/ax5/issues"
+  },
+  "homepage": "https://github.com/axisj-com/ax5"
 }

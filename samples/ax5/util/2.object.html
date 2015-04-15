@@ -79,29 +79,6 @@
     })();
 </script>
 </pre>
-
-<h4>Result</h4>
-<div id="ax5-util-filter" class="script-result"></div>
-<script>
-    (function(){
-        var util = ax5.util, result, el = ax5.dom("#ax5-util-filter");
-
-        var aarray = [5,4,3,2,1];
-        result = util.filter( aarray, function(){
-            return this % 2;
-        });
-        el.append( result.join(",") );
-        el.append( "<hr/>" );
-
-        var list = [
-            {isdel:1, name:"ax5-1"},{name:"ax5-2"},{isdel:1, name:"ax5-3"},{name:"ax5-4"},{name:"ax5-5"}
-        ];
-        result = util.filter( list, function(){
-            return (this.isdel != 1);
-        });
-        el.append( JSON.stringify(result) );
-    })();
-</script>
 </article>
 
 
@@ -134,33 +111,6 @@
     })();
 </script>
 </pre>
-
-<h4>Result</h4>
-<div id="ax5-util-search" class="script-result"></div>
-<script>
-(function(){
-    var util = ax5.util, el = ax5.dom("#ax5-util-search");
-    var a = ["A","X","5"];
-    var idx = util.search(a, function(){
-       return this == "X";
-    });
-    el.append(a[idx]);
-    el.append(" / ");
-    el.append(a[
-            util.search(a, function(idx){
-                return idx == 2;
-            })
-        ]);
-
-    var b = {a:"AX5-0", x:"AX5-1", 5:"AX5-2"};
-    el.append(" / ");
-    el.append(b[
-            util.search(b, function(k, v){
-                return k == "x";
-            })
-        ]);
-})();
-</script>
 <p>
     search는 배열을 대상으로 할 때와 오브젝트를 대상으로 할 때 결과가 다르다. Array의 경우에는 Array의 인덱스가 리턴되고 Object의 경우에는 Object의 키가 리턴된다.
 </p>
