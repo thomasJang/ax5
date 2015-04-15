@@ -60,6 +60,11 @@
 		var po = [];
 		var target_div = el.find(".target-div");
 		target_div.attr({"data-attr-0":0, "data-attr-1":1, "data-attr-2":2});
+
+		target_div.attr({"data-attr-2":null}); // attribute 제거
+		//다음의 방법으로 해도 같은 결과를 얻을 수 있다.
+		//ax5.dom.attr(target_div.elements[0], {"data-attr-2":null});
+
 		po.push( el.html().replace(/</g,'&lt;') );
 		po.push( 'target_div.attr("data-attr-1") = ' + target_div.attr("data-attr-1") );
 		el.append( po.join('<br/>') );
@@ -73,20 +78,40 @@
 <article class="content">
 	<h2 data-menu-item="ax5-dom-class_name">ax5.dom.class_name</h2>
 	<p>
-
+		jQuery방식으로 개발한다면 <code>addClass, removeClass, toggleClass</code>가 익숙하다. 필자도 옥돔의 방식으로 개발하면 가끔 헤깔린다.
+		그렇지만 api도 원칙에 입각해서 만들어 져야 한다. 옥돔의 원칙은 하나의 메소드로 여러가지 일을 하는 것이다. <br/>
+		다른 메소드들과 다르게 첫번째 인자로 <code>add,remove,toggle,has</code>명령어를 넣어야 한다. 명령어를 생략하면 <code>has</code>로 처리한다.
+		class_name이 다른 다른 메소들과 다른 이유는 key, value 형식의 조건이 아니기 때문이다. (사실 만들면서 짜증이 났던 부분이다.)
 	</p>
 <pre>
 <div id="ax5-dom-class_name" class="script-result">
 	<div class="target-div"></div>
 </div>
 <script>
-	(function(){
-		var util = ax5.util, el = ax5.dom("#ax5-dom-class_name");
-		var po = [];
-		var target_div = el.find(".target-div");
+(function(){
+	var util = ax5.util, el = ax5.dom("#ax5-dom-class_name");
+	var po = [];
+	var target_div = el.find(".target-div");
 
-		el.append( po.join('') );
-	})();
+	// 한개의 class 삽입
+	target_div.class_name("add", "c");
+	po.push( el.html().replace(/</g,'&lt;') );
+
+	// 여러개의 class 삽입
+	ax5.dom.class_name(target_div, "add", ["a","b"]);
+	// 이런식으로도 할 수 있다는건 이제 모두 잘 아는 사실이다. 모르겟다면 위로 스크롤 해보자
+	po.push( el.html().replace(/</g,'&lt;') );
+
+	// toggle
+	target_div.class_name("toggle", "a");
+	po.push( el.html().replace(/</g,'&lt;') );
+
+	// 제거
+	target_div.class_name("remove", "c");
+	po.push( el.html().replace(/</g,'&lt;') );
+
+	el.append( po.join('<br/>') );
+})();
 </script>
 </pre>
 </article>
