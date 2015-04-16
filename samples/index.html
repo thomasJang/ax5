@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-04-15 
+ publish date : 2015-04-16 
 -->
 <html lang="en">
 <head>
@@ -132,6 +132,7 @@
 
 <!-- split -->
 
+<label data-menu-item="label"><span>Type</span></label>
 <article class="content"> <!-- type -->
     <h2 data-menu-item="ax5-util-get-type">ax5.util.get_type</h2>
     <div class="callout">
@@ -228,7 +229,7 @@
 
 <!-- split -->
 
-<label data-menu-item="label">Object</label>
+<label data-menu-item="label"><span>Object</span></label>
 
 <article class="content"> <!-- clone -->
     <h2 data-menu-item="ax5-util-clone">ax5.util.clone</h2>
@@ -766,7 +767,7 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 
 <!-- split -->
 
-<label data-menu-item="label">String</label>
+<label data-menu-item="label"><span>String</span></label>
 
 <article class="content">
     <h2 data-menu-item="ax5-util-left">ax5.util.left</h2>
@@ -898,7 +899,7 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 
 <!-- split -->
 
-<label data-menu-item="label">Number</label>
+<label data-menu-item="label"><span>Number</span></label>
 
 <article class="content">
 	<h2 data-menu-item="ax5-util-number">ax5.util.number</h2>
@@ -962,7 +963,7 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 
 <!-- split -->
 
-<label data-menu-item="label">Misc</label>
+<label data-menu-item="label"><span>Misc</span></label>
 
 <article class="content">
 	<h2 data-menu-item="ax5-util-param">ax5.util.param</h2>
@@ -1283,6 +1284,7 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 
 <!-- split -->
 
+<label data-menu-item="label"><span>Get</span></label>
 <article class="content">
 	<h2 data-menu-item="ax5-dom-get">ax5.dom.get</h2>
 	<p>
@@ -1379,7 +1381,7 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 
 <!-- split -->
 
-<label data-menu-item="label">Attributes</label>
+<label data-menu-item="label"><span>Attributes</span></label>
 <article class="content">
 	<h2 data-menu-item="ax5-dom-css">ax5.dom.css</h2>
 	<p>
@@ -1405,6 +1407,8 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 		po.push( 'target_div.css("height") => ' + target_div.css("height") );
 		target_div.html("height: 50px;");
 
+		// 한번에 여러개의 속성 가져오기
+		po.push( util.to_json( target_div.css(["width","height","border"]) ) );
 		el.append( po.join('&lt;br/>') );
 	})();
 &lt;/script>
@@ -1427,6 +1431,8 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 		po.push( 'target_div.css("height") => ' + target_div.css("height") );
 		target_div.html("height: 50px;");
 
+		// 한번에 여러개의 속성 가져오기
+		po.push( util.to_json( target_div.css(["width","height","border"]) ) );
 		el.append( po.join('<br/>') );
 	})();
 </script>
@@ -1522,7 +1528,7 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 
 	// 여러개의 class 삽입
 	ax5.dom.class_name(target_div, "add", ["a","b"]);
-	// 이런식으로도 할 수 있다는건 이제 모두 잘 아는 사실이다. 모르겟다면 위로 스크롤 해보자
+	// 이런식으로도 할 수 있다는건 이제 모두 잘 아는 사실이다. 모르겠다면 위로 스크롤 해보자
 	po.push( el.html().replace(/&lt;/g,'&lt;') );
 
 	// toggle
@@ -1552,7 +1558,7 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 
 	// 여러개의 class 삽입
 	ax5.dom.class_name(target_div, "add", ["a","b"]);
-	// 이런식으로도 할 수 있다는건 이제 모두 잘 아는 사실이다. 모르겟다면 위로 스크롤 해보자
+	// 이런식으로도 할 수 있다는건 이제 모두 잘 아는 사실이다. 모르겠다면 위로 스크롤 해보자
 	po.push( el.html().replace(/</g,'&lt;') );
 
 	// toggle
@@ -1569,13 +1575,11 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 
 </article>
 
+<!-- split -->
 
-
+<label data-menu-item="label"><span>Box Model</span></label>
 <article class="content">
 	<h2 data-menu-item="ax5-dom-width">ax5.dom.width</h2>
-	<p>
-
-	</p>
 <pre class="prettyprint linenums">
 &lt;div id="ax5-dom-width" class="script-result">&lt;/div>
 &lt;script>
@@ -1583,7 +1587,9 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 		var util = ax5.util, el = ax5.dom("#ax5-dom-width");
 		var po = [];
 
-		el.append( po.join('') );
+		po.push( el.width() );
+		po.push( ax5.dom.width(el) );
+		el.append( po.join('&lt;br/>') );
 	})();
 &lt;/script>
 </pre><h4>Result</h4>
@@ -1593,7 +1599,9 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 		var util = ax5.util, el = ax5.dom("#ax5-dom-width");
 		var po = [];
 
-		el.append( po.join('') );
+		po.push( el.width() );
+		po.push( ax5.dom.width(el) );
+		el.append( po.join('<br/>') );
 	})();
 </script>
 
@@ -1613,7 +1621,9 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 		var util = ax5.util, el = ax5.dom("#ax5-dom-height");
 		var po = [];
 
-		el.append( po.join('') );
+		el.append( el.height()+'&lt;br/>' ); // 한줄이 추가되면
+		el.append( ax5.dom.height(el)+'&lt;br/>' ); // 높이가
+		el.append( el.height()+'&lt;br/>' ); // 증가한다.
 	})();
 &lt;/script>
 </pre><h4>Result</h4>
@@ -1623,11 +1633,122 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 		var util = ax5.util, el = ax5.dom("#ax5-dom-height");
 		var po = [];
 
-		el.append( po.join('') );
+		el.append( el.height()+'<br/>' ); // 한줄이 추가되면
+		el.append( ax5.dom.height(el)+'<br/>' ); // 높이가
+		el.append( el.height()+'<br/>' ); // 증가한다.
 	})();
 </script>
 
 </article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-offset">ax5.dom.offset</h2>
+	<p>
+		타겟 엘리먼트가 어디에 어떤 상황으로 있던 페이지 내에서의 절대위치를 반환한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="ax5-dom-offset" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-offset");
+		var po = [];
+
+		po.push( util.to_json( el.offset() ) );
+		el.append(po.join('&lt;br/>'));
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="ax5-dom-offset" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-offset");
+		var po = [];
+
+		po.push( util.to_json( el.offset() ) );
+		el.append(po.join('<br/>'));
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-position">ax5.dom.position</h2>
+	<p>
+		타겟 엘리먼트가 속한 부모엘리먼트로 부터의 위치를 반환한다.
+		타겟 엘리먼트에 <code>margin</code>이 있으면 옥돔이 잘못 했다. 라고 생각할 수 있다. 그렇지 않다 <code>margin</code>도 box model 안에 포함된다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="ax5-dom-position" class="script-result" style="position:relative;">
+	&lt;div class="target-div" style="height:20px;border:1px solid #000;">&lt;/div>
+&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-position");
+		var po = [];
+
+		po.push( util.to_json( el.find(".target-div").position() ) );
+		el.append(po.join('&lt;br/>'));
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="ax5-dom-position" class="script-result" style="position:relative;">
+	<div class="target-div" style="height:20px;border:1px solid #000;"></div>
+</div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-position");
+		var po = [];
+
+		po.push( util.to_json( el.find(".target-div").position() ) );
+		el.append(po.join('<br/>'));
+	})();
+</script>
+
+</article>
+
+<!-- split -->
+
+<label data-menu-item="label"><span>Manipulate</span></label>
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-append">ax5.dom.append</h2>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="ax5-dom-append" class="script-result" style="position:relative;">
+	&lt;div class="target-div">&lt;/div>
+&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-append");
+		var po = [];
+
+		el.append(po.join('&lt;br/>'));
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="ax5-dom-append" class="script-result" style="position:relative;">
+	<div class="target-div"></div>
+</div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-append");
+		var po = [];
+
+		el.append(po.join('<br/>'));
+	})();
+</script>
+
+</article>
+
+<!-- split -->
+
+
 
 <!-- split -->
 

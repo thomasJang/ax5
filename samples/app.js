@@ -23,7 +23,9 @@ ax5.dom.ready(function(){
 				po.push('<ul class="H2">');
 			}
 			if(el.tagName == "LABEL") {
+				if(prev_tag == "H1") po.push('<ul class="H2">');
 				po.push('<li class="menu-label">' + el.innerHTML + '</li>');
+				prev_tag = el.tagName;
 			}else{
 				el_name = dom.attr(el, "data-menu-item");
 
@@ -45,15 +47,29 @@ ax5.dom.ready(function(){
 
 		var selected_menu_list_index = -1;
 		var window_height = dom(window).height();
+		var nav_left_on = false;
+
+		dom.on(app_nav_left, "mouseover", function(){
+			nav_left_on = true;
+		});
+		dom.on(app_nav_left, "mouseout", function(){
+			nav_left_on = false;
+		});
+		dom.on(app_nav_left, "click", function(){
+			setTimeout(function() {
+				app.menu_taping(true);
+			}, 100);
+		});
+
 		return {
 			menu_list: menu_list,
 			set_menu_height: function(){
 				window_height = dom(window).height();
 				dom.css(app_nav_left, {"height":ax5.dom.height(window) - 60});
 			},
-			menu_taping: function(){
+			menu_taping: function(opt){
+				if(typeof opt === "undefined" && nav_left_on) return false;
 				var s_top = ax5.dom.scroll().top;
-
 				//app_nav_left
 				for(var i= 0,l=menu_list.length;i<l;i++){
 					if( menu_list[i].top > s_top){
@@ -121,5 +137,4 @@ ax5.dom.scroll(function() {
 	app.timeout = setTimeout(function(){
 		app.menu_taping();
 	}, 1);
-
 });

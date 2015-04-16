@@ -330,14 +330,28 @@ $app-visual-height: 280px;
           color:#fff;
         }
         &.menu-label{
-          //padding:0px;
-          font-size:11px;
+          position: relative;
+          font-size: 1px;
+          line-height: 1px;
+          height:1px;
+          //overflow: hidden;
           //color:#ffffff;
           background: #eee;
-          text-align: center;
+          text-align: right;
+          //margin-bottom: 5px;
           &:hover, &.open{
             background: none;
             color:inherit;
+          }
+          span{
+            display: block;
+            position: absolute;
+            right:0px;top:0px;
+            font-size:11px;
+            line-height: 15px;
+            text-align: center;
+            padding:0px 5px;
+            background: #eee;
           }
         }
       }

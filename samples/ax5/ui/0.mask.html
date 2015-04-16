@@ -32,10 +32,11 @@
 	<div class="callout info">
 		<h4>마스크 컨셉</h4>
 		<p>
-			마스크는 크게 두가지 방법으로 쓰이는 것을 고려 하여 제작하였다. 첫째는 특정 엘리먼트에 마스크가 입혀지는 경우. 둘째는 웹브라우저 문서 전체에 마스크가 입혀지는 이다.
-			<code>mask_target</code>값으로 조절 할 수 있는데 <code>document.body</code>나 <code>ax5.dom.get("#mask-target")</code>을 부여하여 다른게 사용 할 수 있는데. <code>document.getElementById</code>를 이용하여도 무관하다.
-			<br>
-			엘리먼트에 마스크가 입혀지는 경우 대상 엘리먼트에 <code>.ax-masking</code>클래스가 추가되면서 blur효과가 입혀지는데. 바디에 적용하는 경우에도 <code>onchange</code> 함수에서 <code>this.type</code>으로 예외처리 하여 원하는 대상에 <code>.ax-masking</code> 클래스를 부여하거나 해제할 수 있다.
+			마스크는 두가지 방법으로 사용할 수 있게 제작하였다.
+			첫째는 특정 엘리먼트에 마스크가 입혀지는 경우.
+			둘째는 웹브라우저내 문서 전체에 마스크가 입혀지는 것이다.<br>
+			<code>mask_target</code>값으로 방식을 달리 할수 있다. <code>document.body</code>이나 <code>ax5.dom.get("#mask-target")</code>을 <code>mask_target</code>에 할당 할 수 있고. <code>document.getElementById</code>를 이용하여도 무관하다.
+			엘리먼트에 마스크가 입혀지는 경우 대상 엘리먼트에 <code>.ax-masking</code>클래스가 추가되면서 blur효과가 추가된다. 바디에 적용하는 경우에도 <code>onchange</code> 함수에서 <code>this.type</code>으로 예외처리 하여 원하는 대상에 <code>.ax-masking</code> 클래스를 추가/해제할 수 있다.
 		</p>
 	</div>
 
@@ -133,5 +134,4 @@
 			}
 		});
 	})(window);
-
 </script>

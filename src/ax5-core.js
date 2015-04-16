@@ -653,7 +653,7 @@
 		 * 인자의 타입을 반환합니다.
 		 * @method ax5.util.get_type
 		 * @param {Object|Array|String|Number|Element|Etc} O
-		 * @returns {String} element|object|array|function|string|number|undefined|nodelist
+		 * @returns {String} window|element|object|array|function|string|number|undefined|nodelist
 		 * @example
 		 * ```js
 		 * var axf = ax5.util;
@@ -665,7 +665,10 @@
 		 */
 		function get_type(O) {
 			var typeName;
-			if (!!(O && O.nodeType == 1)) {
+			if(O != null && O == O.window){
+				typeName = "window";
+			}
+			else if (!!(O && O.nodeType == 1)) {
 				typeName = "element";
 			}
 			else if (!!(O && O.nodeType == 11)) {
@@ -1844,17 +1847,13 @@
 
 		// 엘리먼트 인자 체크
 		function va_elem(elem, fn_name) {
-			if (U.is_array(elem) && U.is_element(elem[0])) {
-				return elem;
-			}
-			else if (U.is_element(elem)) return [elem];
-			else if (elem && elem.nodeType === 9) {
-				return [elem.documentElement];
-			}
-			else if (elem && elem.toString() == "[object ax5.dom]") {
-				return elem.elements;
-			}
-			else if (!U.is_array(elem) && !U.is_nodelist(elem)) {
+			var type = U.get_type(elem);
+			if (type === "window") return elem;
+			else if (type === "array" && U.is_element(elem[0])) return elem;
+			else if (type === "element") return [elem];
+			else if (elem && elem.nodeType === 9) return [elem.documentElement];
+			else if (elem && elem.toString() == "[object ax5.dom]") return elem.elements;
+			else if (type !== "array" && type !== "nodelist") {
 				console.error("ax5.dom." + fn_name + " : elements parameter incorrect");
 				return [];
 			}
@@ -1913,7 +1912,8 @@
                 if(num) ret = parseFloat(ret) || 0;
                 return ret;
             }
-        }else{
+        }
+        else{
             curCSS = function(elem, name, num) {
                 var width, minWidth, maxWidth, computed, ret, style, left, rs, rsLeft;
 
@@ -2689,6 +2689,7 @@
 		 * ```
 		 */
 		function prev(els, times) {
+			els = va_elem(els, "prev");
 			return sibling(els, "prev", times);
 		}
 
@@ -2725,6 +2726,7 @@
 		 * ```
 		 */
 		function next(els, times) {
+			els = va_elem(els, "next");
 			return sibling(els, "next", times);
 		}
 
@@ -2740,6 +2742,7 @@
 		 * ```
 		 */
 		function width(els) {
+			els = va_elem(els, "width");
 			return box_size(els, "width");
 		}
 
@@ -2755,6 +2758,7 @@
 		 * ```
 		 */
 		function height(els) {
+			els = va_elem(els, "height");
 			return box_size(els, "height");
 		}
 

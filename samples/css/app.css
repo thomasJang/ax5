@@ -273,12 +273,25 @@ pre.prettyprint {
           background: #358CAE;
           color: #fff; }
         .app-page .app-nav-left ul li.menu-label {
-          font-size: 11px;
+          position: relative;
+          font-size: 1px;
+          line-height: 1px;
+          height: 1px;
           background: #eee;
-          text-align: center; }
+          text-align: right; }
           .app-page .app-nav-left ul li.menu-label:hover, .app-page .app-nav-left ul li.menu-label.open {
             background: none;
             color: inherit; }
+          .app-page .app-nav-left ul li.menu-label span {
+            display: block;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            font-size: 11px;
+            line-height: 15px;
+            text-align: center;
+            padding: 0px 5px;
+            background: #eee; }
       .app-page .app-nav-left ul ul {
         padding: 0px 0px 0px 0px;
         display: none; }

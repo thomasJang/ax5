@@ -1,4 +1,4 @@
-<label data-menu-item="label">Attributes</label>
+<label data-menu-item="label"><span>Attributes</span></label>
 <article class="content">
 	<h2 data-menu-item="ax5-dom-css">ax5.dom.css</h2>
 	<p>
@@ -24,6 +24,8 @@
 		po.push( 'target_div.css("height") => ' + target_div.css("height") );
 		target_div.html("height: 50px;");
 
+		// 한번에 여러개의 속성 가져오기
+		po.push( util.to_json( target_div.css(["width","height","border"]) ) );
 		el.append( po.join('<br/>') );
 	})();
 </script>
@@ -99,7 +101,7 @@
 
 	// 여러개의 class 삽입
 	ax5.dom.class_name(target_div, "add", ["a","b"]);
-	// 이런식으로도 할 수 있다는건 이제 모두 잘 아는 사실이다. 모르겟다면 위로 스크롤 해보자
+	// 이런식으로도 할 수 있다는건 이제 모두 잘 아는 사실이다. 모르겠다면 위로 스크롤 해보자
 	po.push( el.html().replace(/</g,'&lt;') );
 
 	// toggle
@@ -112,46 +114,6 @@
 
 	el.append( po.join('<br/>') );
 })();
-</script>
-</pre>
-</article>
-
-
-
-<article class="content">
-	<h2 data-menu-item="ax5-dom-width">ax5.dom.width</h2>
-	<p>
-
-	</p>
-<pre>
-<div id="ax5-dom-width" class="script-result"></div>
-<script>
-	(function(){
-		var util = ax5.util, el = ax5.dom("#ax5-dom-width");
-		var po = [];
-
-		el.append( po.join('') );
-	})();
-</script>
-</pre>
-</article>
-
-
-
-<article class="content">
-	<h2 data-menu-item="ax5-dom-height">ax5.dom.height</h2>
-	<p>
-
-	</p>
-<pre>
-<div id="ax5-dom-height" class="script-result"></div>
-<script>
-	(function(){
-		var util = ax5.util, el = ax5.dom("#ax5-dom-height");
-		var po = [];
-
-		el.append( po.join('') );
-	})();
 </script>
 </pre>
 </article>
