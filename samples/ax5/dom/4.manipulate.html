@@ -101,3 +101,48 @@
 </script>
 </pre>
 </article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-remove">ax5.dom.remove</h2>
+	<p>
+		타겟 엘리먼트를 제거한다.
+	</p>
+<pre>
+<div id="ax5-dom-remove" class="script-result">
+	~~~~
+	<div class="remove-target">****</div>
+	~~~~
+</div>
+<script>
+	(function(){
+		var el = ax5.dom("#ax5-dom-remove");
+		el.find(".remove-target").remove();
+	})();
+</script>
+</pre>
+</article>
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-data">ax5.dom.data</h2>
+	<p>
+		타겟 엘리먼트에 개발자 취향대로 데이터를 추가 할 수 있다.
+		엘리먼트에 데이터(변수)를 할당하게 되면 스코프도 관리가 편리하고 엘리먼트가 지워질 때 데이터도 함께 소멸 되기 때문에
+		가끔씩 유용하다.
+	</p>
+<pre>
+<div id="ax5-dom-data" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-data");
+		el.data({ax:"5"});
+		el.append(" el.data['ax'] =  " + el.data("ax"));
+		el.append("<br/>");
+		el.data("remove", "ax");
+		el.append(" el.data['ax'] =  " + el.data("ax"));
+	})();
+</script>
+</pre>
+</article>

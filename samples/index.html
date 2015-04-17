@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-04-17 
+ publish date : 2015-04-18 
 -->
 <html lang="en">
 <head>
@@ -1710,6 +1710,38 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 
 </article>
 
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-box_model">ax5.dom.box_model</h2>
+	<p>
+		box model에 관련된 값만 모아서 한번에 호출 할 수 있다. 왜!? 만들었을까 박스모델을 한번에 호출해서 쓸일이 있을거야..
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="ax5-dom-box_model" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-box_model");
+		var po = [];
+		po.push( util.to_json(el.box_model()) );
+		po.push( util.to_json(el.box_model("width")) );
+		el.append( po.join('&lt;hr/>') );
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="ax5-dom-box_model" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-box_model");
+		var po = [];
+		po.push( util.to_json(el.box_model()) );
+		po.push( util.to_json(el.box_model("width")) );
+		el.append( po.join('<hr/>') );
+	})();
+</script>
+
+</article>
+
 <!-- split -->
 
 <label data-menu-item="label"><span>Manipulate</span></label>
@@ -1864,6 +1896,75 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 		var util = ax5.util, el = ax5.dom("#ax5-dom-html");
 
 		el.html("HTML<u>태그</u>를 추가합니다.");
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-remove">ax5.dom.remove</h2>
+	<p>
+		타겟 엘리먼트를 제거한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="ax5-dom-remove" class="script-result">
+	~~~~
+	&lt;div class="remove-target">****&lt;/div>
+	~~~~
+&lt;/div>
+&lt;script>
+	(function(){
+		var el = ax5.dom("#ax5-dom-remove");
+		el.find(".remove-target").remove();
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="ax5-dom-remove" class="script-result">
+	~~~~
+	<div class="remove-target">****</div>
+	~~~~
+</div>
+<script>
+	(function(){
+		var el = ax5.dom("#ax5-dom-remove");
+		el.find(".remove-target").remove();
+	})();
+</script>
+
+</article>
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-data">ax5.dom.data</h2>
+	<p>
+		타겟 엘리먼트에 개발자 취향대로 데이터를 추가 할 수 있다.
+		엘리먼트에 데이터(변수)를 할당하게 되면 스코프도 관리가 편리하고 엘리먼트가 지워질 때 데이터도 함께 소멸 되기 때문에
+		가끔씩 유용하다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="ax5-dom-data" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-data");
+		el.data({ax:"5"});
+		el.append(" el.data['ax'] =  " + el.data("ax"));
+		el.append("&lt;br/>");
+		el.data("remove", "ax");
+		el.append(" el.data['ax'] =  " + el.data("ax"));
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="ax5-dom-data" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-data");
+		el.data({ax:"5"});
+		el.append(" el.data['ax'] =  " + el.data("ax"));
+		el.append("<br/>");
+		el.data("remove", "ax");
+		el.append(" el.data['ax'] =  " + el.data("ax"));
 	})();
 </script>
 
@@ -2090,7 +2191,7 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 	el.child().elements.forEach(function(element){
 		po.push( ax5.dom.html(element) );
 	});
-	el.append(po.join('&lt;br/>'));
+	el.append(po.join(','));
 })();
 &lt;/script>
 </pre><h4>Result</h4>
@@ -2107,7 +2208,7 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 	el.child().elements.forEach(function(element){
 		po.push( ax5.dom.html(element) );
 	});
-	el.append(po.join('<br/>'));
+	el.append(po.join(','));
 })();
 </script>
 
@@ -2115,10 +2216,192 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 
 <!-- split -->
 
+<label data-menu-item="label"><span>Event</span></label>
 
+<article class="content">
+	<h2 data-menu-item="ax5-dom-on">ax5.dom.on</h2>
+	<p>
+		타겟 엘리먼트에 원하는 이벤트타입의 이벤트를 바인딩한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="ax5-dom-on" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var el = ax5.dom("#ax5-dom-on");
+		var fn_a = function(e){
+			alert("fn_a : " + e.type);
+		};
+		var fn_b = function(e){
+			alert("fn_b : " + e.type);
+		};
+
+		el.append("클릭하세요")
+		.on("click", function(e){
+			alert(e.type);
+		});
+		el.on("click", fn_a);
+		el.on("click.fn_b", fn_b); // 이벤트 타입에 핸들지정 off 할 때 핸들이 할당된 이벤트만 제거 할 수 있다.
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="ax5-dom-on" class="script-result"></div>
+<script>
+	(function(){
+		var el = ax5.dom("#ax5-dom-on");
+		var fn_a = function(e){
+			alert("fn_a : " + e.type);
+		};
+		var fn_b = function(e){
+			alert("fn_b : " + e.type);
+		};
+
+		el.append("클릭하세요")
+		.on("click", function(e){
+			alert(e.type);
+		});
+		el.on("click", fn_a);
+		el.on("click.fn_b", fn_b); // 이벤트 타입에 핸들지정 off 할 때 핸들이 할당된 이벤트만 제거 할 수 있다.
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-off">ax5.dom.off</h2>
+	<p>
+		타겟 엘리먼트에 원하는 이벤트타입의 이벤트를 언바인딩한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="ax5-dom-off" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var el = ax5.dom("#ax5-dom-off");
+		var fn_a = function(e){
+			alert("fn_a : " + e.type);
+		};
+		var fn_b = function(e){
+			alert("fn_b : " + e.type);
+		};
+
+		el.append("클릭하세요")
+				.on("click", function(e){
+					alert(e.type);
+				});
+		// 위에서 정의한 이벤트는 제거 된다.
+		el.off("click");
+		el.on("click.fn_b", fn_b);
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="ax5-dom-off" class="script-result"></div>
+<script>
+	(function(){
+		var el = ax5.dom("#ax5-dom-off");
+		var fn_a = function(e){
+			alert("fn_a : " + e.type);
+		};
+		var fn_b = function(e){
+			alert("fn_b : " + e.type);
+		};
+
+		el.append("클릭하세요")
+				.on("click", function(e){
+					alert(e.type);
+				});
+		// 위에서 정의한 이벤트는 제거 된다.
+		el.off("click");
+		el.on("click.fn_b", fn_b);
+	})();
+</script>
+
+</article>
 
 <!-- split -->
 
+<label data-menu-item="label"><span>Browser</span></label>
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-ready">ax5.dom.ready</h2>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="ax5-dom-ready" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var el = ax5.dom("#ax5-dom-ready");
+		ax5.dom.ready(function(){
+			el.append("i'm ready");
+		});
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="ax5-dom-ready" class="script-result"></div>
+<script>
+	(function(){
+		var el = ax5.dom("#ax5-dom-ready");
+		ax5.dom.ready(function(){
+			el.append("i'm ready");
+		});
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-resize">ax5.dom.resize</h2>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="ax5-dom-resize" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var el = ax5.dom("#ax5-dom-resize");
+
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="ax5-dom-resize" class="script-result"></div>
+<script>
+	(function(){
+		var el = ax5.dom("#ax5-dom-resize");
+
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-scroll">ax5.dom.scroll</h2>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="ax5-dom-scroll" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var el = ax5.dom("#ax5-dom-scroll");
+
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="ax5-dom-scroll" class="script-result"></div>
+<script>
+	(function(){
+		var el = ax5.dom("#ax5-dom-scroll");
+
+	})();
+</script>
+
+</article>
 
 
 <!-- split -->

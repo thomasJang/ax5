@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-04-17 
+ * 2015-04-18 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -1912,7 +1912,6 @@
 				/**
 				 * 엘리먼트의 box model 속성을 반환합니다.
 				 * @method ax5.dom0.box_model
-				 * @param {Elements|Element} elements
 				 * @param {String} [cond] - 원하는 박스 속성
 				 * @returns {Object}
 				 * @example
@@ -1935,8 +1934,8 @@
 				 * // 각각의 박스모델 속성을 지정하여 호출 할 수 있습니다. borderWidth, border-width 중 하나의 방법으로 사용 가능합니다.
 				 * ```
 				 */
-				this.box_model = function () {
-					return dom.box_model(this.elements);
+				this.box_model = function (cond) {
+					return dom.box_model(this.elements, cond);
 				};
 				/**
 				 * 엘리먼트에 data를 속성을 추가하거나 반환합니다.
@@ -2321,6 +2320,7 @@
 		 * }, 1000);
 		 * ```
 		 */
+		// todo : 다중 ready 연결 가능 하도록 수정 ~~!!
 		function ready(_fn) {
 			if (ax5.dom.is_ready || ax5.dom.is_reading) return;
 			ax5.dom.is_reading = true;
