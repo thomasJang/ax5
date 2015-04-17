@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-04-16 
+ publish date : 2015-04-17 
 -->
 <html lang="en">
 <head>
@@ -1717,34 +1717,405 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 <article class="content">
 	<h2 data-menu-item="ax5-dom-append">ax5.dom.append</h2>
 	<p>
-
+		타겟에 마지막 자식으로 <code>HTML Tag</code>나 <code>Element</code>를 추가한다.
 	</p>
 <pre class="prettyprint linenums">
-&lt;div id="ax5-dom-append" class="script-result" style="position:relative;">
-	&lt;div class="target-div">&lt;/div>
-&lt;/div>
+&lt;div id="ax5-dom-append" class="script-result">&lt;/div>
 &lt;script>
 	(function(){
 		var util = ax5.util, el = ax5.dom("#ax5-dom-append");
-		var po = [];
 
+		el.append("&lt;div>div&lt;/div>");
+		el.append("ABCD 가나다라");
+		el.append("----");
+		// 맨위에 삽입된 div를 맨 아래로 삽입
+		el.append( el.find("div").elements[0] );
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="ax5-dom-append" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-append");
+
+		el.append("<div>div</div>");
+		el.append("ABCD 가나다라");
+		el.append("----");
+		// 맨위에 삽입된 div를 맨 아래로 삽입
+		el.append( el.find("div").elements[0] );
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-prepend">ax5.dom.prepend</h2>
+	<p>
+		타겟의 첫번째 자식으로 <code>HTML Tag</code>나 <code>Element</code>를 추가한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="ax5-dom-prepend" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-prepend");
+
+		el.prepend("&lt;div>div&lt;/div>");
+		el.prepend("ABCD 가나다라");
+		el.prepend("----");
+		// 맨아래 삽입된 div를 맨 위로 삽입
+		el.prepend( el.find("div").elements[0] );
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="ax5-dom-prepend" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-prepend");
+
+		el.prepend("<div>div</div>");
+		el.prepend("ABCD 가나다라");
+		el.prepend("----");
+		// 맨아래 삽입된 div를 맨 위로 삽입
+		el.prepend( el.find("div").elements[0] );
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-before">ax5.dom.before</h2>
+	<p>
+		타겟의 앞으로 <code>HTML Tag</code>나 <code>Element</code>를 추가한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="ax5-dom-before" class="script-result">
+	&lt;div class="target-div">target&lt;/div>
+&lt;/div>
+&lt;script>
+	(function(){
+		ax5.dom("#ax5-dom-before").find(".target-div").before("before");
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="ax5-dom-before" class="script-result">
+	<div class="target-div">target</div>
+</div>
+<script>
+	(function(){
+		ax5.dom("#ax5-dom-before").find(".target-div").before("before");
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-after">ax5.dom.after</h2>
+	<p>
+		타겟의 뒤로 <code>HTML Tag</code>나 <code>Element</code>를 추가한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="ax5-dom-after" class="script-result">
+	&lt;div class="target-div">target&lt;/div>
+&lt;/div>
+&lt;script>
+	(function(){
+		ax5.dom("#ax5-dom-after").find(".target-div").after("after");
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="ax5-dom-after" class="script-result">
+	<div class="target-div">target</div>
+</div>
+<script>
+	(function(){
+		ax5.dom("#ax5-dom-after").find(".target-div").after("after");
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-html">ax5.dom.html</h2>
+	<p>
+		타겟의 <code>innerHTML</code>를 바꾸어 준다. 내부에서는 타겟안에 들어있는 내용물, 즉 엘리먼트를 지우고
+		그 다음으로 새로운 tag를 채우게 되는데 엘리먼트를 지울 때는 연결된 이벤트까지 지워준다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="ax5-dom-html" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-html");
+
+		el.html("HTML&lt;u>태그&lt;/u>를 추가합니다.");
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="ax5-dom-html" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-html");
+
+		el.html("HTML<u>태그</u>를 추가합니다.");
+	})();
+</script>
+
+</article>
+
+<!-- split -->
+
+<label data-menu-item="label"><span>Travel</span></label>
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-prev">ax5.dom.prev</h2>
+	<p>
+		타겟 엘리먼트의 앞에 위치한 엘리먼트를 반환한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="ax5-dom-prev" class="script-result" style="position:relative;">
+	&lt;div>prev&lt;/div>
+	&lt;div class="target-div">&lt;/div>
+	&lt;div>next&lt;/div>
+&lt;/div>
+&lt;script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#ax5-dom-prev");
+	var po = [];
+	po.push( "prev = '" + el.find(".target-div").prev().html() + "'" );
+	el.append(po.join('&lt;br/>'));
+})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="ax5-dom-prev" class="script-result" style="position:relative;">
+	<div>prev</div>
+	<div class="target-div"></div>
+	<div>next</div>
+</div>
+<script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#ax5-dom-prev");
+	var po = [];
+	po.push( "prev = '" + el.find(".target-div").prev().html() + "'" );
+	el.append(po.join('<br/>'));
+})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-next">ax5.dom.next</h2>
+	<p>
+		타겟 엘리먼트의 다음에 위치한 엘리먼트를 반환한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="ax5-dom-next" class="script-result" style="position:relative;">
+	&lt;div>prev&lt;/div>
+	&lt;div class="target-div">&lt;/div>
+	&lt;div>next&lt;/div>	&lt;div class="target-div">&lt;/div>
+&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-next");
+		var po = [];
+		po.push( "next = '" + el.find(".target-div").next().html() + "'" );
 		el.append(po.join('&lt;br/>'));
 	})();
 &lt;/script>
 </pre><h4>Result</h4>
-<div id="ax5-dom-append" class="script-result" style="position:relative;">
+<div id="ax5-dom-next" class="script-result" style="position:relative;">
+	<div>prev</div>
 	<div class="target-div"></div>
+	<div>next</div>	<div class="target-div"></div>
 </div>
 <script>
 	(function(){
-		var util = ax5.util, el = ax5.dom("#ax5-dom-append");
+		var util = ax5.util, el = ax5.dom("#ax5-dom-next");
 		var po = [];
-
+		po.push( "next = '" + el.find(".target-div").next().html() + "'" );
 		el.append(po.join('<br/>'));
 	})();
 </script>
 
 </article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-parent">ax5.dom.parent</h2>
+	<p>
+		메소드 이름처럼 부모 엘리먼트를 원하는 조건으로 찾아서 반환해 준다.
+		주의 할 점은 조건에 부합하는 부모들을 구해주지 않는 다는 점이다. 조건에 매치되는 하나의 부모를 반환한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="ax5-dom-parent" class="script-result" style="position:relative;">
+	&lt;div data-domparent-value="1">
+		&lt;div data-domparent-value="2">
+			&lt;div data-domparent-value="3">클릭하세요.&lt;/div>
+		&lt;/div>
+	&lt;/div>
+&lt;/div>
+&lt;script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#ax5-dom-parent");
+	var po = [];
+
+	po.push( "3의 부모 : " +
+		el.find('[data-domparent-value="3"]')
+		  .parent().attr("data-domparent-value")
+	);
+	po.push( "3의 부모의 부모 : " +
+		el.find('[data-domparent-value="3"]')
+		  .parent().parent().attr("data-domparent-value")
+	);
+	po.push( "3의 부모의 부모의 부모 : " +
+		el.find('[data-domparent-value="3"]')
+		  .parent().parent().parent().attr("data-domparent-value")
+	);
+	po.push( "data-domparent-value = 1 인 부모 : " +
+		el.find('[data-domparent-value="3"]')
+		  .parent({tagname:"div","data-domparent-value":"1"}).attr("data-domparent-value")
+	);
+
+	// 함수로 판단하는 방법
+	var _fn = function(el){
+		return (ax5.dom.attr(el, "data-domparent-value") == "2");
+	};
+	po.push( "data-domparent-value = 2 인 부모 : " +
+		el.find('[data-domparent-value="3"]')
+		  .parent(_fn).attr("data-domparent-value")
+	);
+	el.append(po.join('&lt;br/>'));
+
+
+	// 이벤트로 연결하는 방법
+	el.on("click", function(e){
+		var target = ax5.dom.parent(e.target, {tagname:"div","data-domparent-value":"1"});
+		if(target){
+			alert( ax5.dom.attr(target, "data-domparent-value") );
+			// 1이 출력된다.
+		}
+	});
+})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="ax5-dom-parent" class="script-result" style="position:relative;">
+	<div data-domparent-value="1">
+		<div data-domparent-value="2">
+			<div data-domparent-value="3">클릭하세요.</div>
+		</div>
+	</div>
+</div>
+<script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#ax5-dom-parent");
+	var po = [];
+
+	po.push( "3의 부모 : " +
+		el.find('[data-domparent-value="3"]')
+		  .parent().attr("data-domparent-value")
+	);
+	po.push( "3의 부모의 부모 : " +
+		el.find('[data-domparent-value="3"]')
+		  .parent().parent().attr("data-domparent-value")
+	);
+	po.push( "3의 부모의 부모의 부모 : " +
+		el.find('[data-domparent-value="3"]')
+		  .parent().parent().parent().attr("data-domparent-value")
+	);
+	po.push( "data-domparent-value = 1 인 부모 : " +
+		el.find('[data-domparent-value="3"]')
+		  .parent({tagname:"div","data-domparent-value":"1"}).attr("data-domparent-value")
+	);
+
+	// 함수로 판단하는 방법
+	var _fn = function(el){
+		return (ax5.dom.attr(el, "data-domparent-value") == "2");
+	};
+	po.push( "data-domparent-value = 2 인 부모 : " +
+		el.find('[data-domparent-value="3"]')
+		  .parent(_fn).attr("data-domparent-value")
+	);
+	el.append(po.join('<br/>'));
+
+
+	// 이벤트로 연결하는 방법
+	el.on("click", function(e){
+		var target = ax5.dom.parent(e.target, {tagname:"div","data-domparent-value":"1"});
+		if(target){
+			alert( ax5.dom.attr(target, "data-domparent-value") );
+			// 1이 출력된다.
+		}
+	});
+})();
+</script>
+
+
+	<div class="callout basic">
+		<h4>parent 메소드의 제작의도</h4>
+		<p>
+			옥돔에서 <code>parent</code> 메소드의 역할은 이벤트에서 원하는 조건의 엘리먼트를 찾기위해 개발되었다.
+			타겟 엘리먼트의 부모를 구하는 작업을 단순하게 수행 시킬 수도 있지만. 만일 이 메소드를 이용하여 타겟의 모든 부모를 구하려 한다면 직접 while 문을 이용해서 개발하길 권장한다.
+			옥돔의 <code>parent</code>를 이용해서 모든 부모를 구하려고 시도한다면 속도가 느려질 것이다.
+		</p>
+	</div>
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-child">ax5.dom.child</h2>
+	<p>
+		타겟 엘리먼트의 직계자식들을 반환한다. 자식의 자식은 반환하지 않는 다는 뜻이다. 물론 남의 자식도 구해주진 못한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="ax5-dom-child" class="script-result" style="position:relative;">
+	&lt;div class="target-div">1&lt;/div>
+	&lt;div class="target-div">2&lt;/div>
+	&lt;div class="target-div">3&lt;/div>
+	&lt;div class="target-div">4&lt;/div>
+&lt;/div>
+&lt;script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#ax5-dom-child");
+	var po = [];
+	el.child().elements.forEach(function(element){
+		po.push( ax5.dom.html(element) );
+	});
+	el.append(po.join('&lt;br/>'));
+})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="ax5-dom-child" class="script-result" style="position:relative;">
+	<div class="target-div">1</div>
+	<div class="target-div">2</div>
+	<div class="target-div">3</div>
+	<div class="target-div">4</div>
+</div>
+<script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#ax5-dom-child");
+	var po = [];
+	el.child().elements.forEach(function(element){
+		po.push( ax5.dom.html(element) );
+	});
+	el.append(po.join('<br/>'));
+})();
+</script>
+
+</article>
+
+<!-- split -->
+
+
 
 <!-- split -->
 

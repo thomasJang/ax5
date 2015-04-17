@@ -3,18 +3,100 @@
 <article class="content">
 	<h2 data-menu-item="ax5-dom-append">ax5.dom.append</h2>
 	<p>
-
+		타겟에 마지막 자식으로 <code>HTML Tag</code>나 <code>Element</code>를 추가한다.
 	</p>
 <pre>
-<div id="ax5-dom-append" class="script-result" style="position:relative;">
-	<div class="target-div"></div>
-</div>
+<div id="ax5-dom-append" class="script-result"></div>
 <script>
 	(function(){
 		var util = ax5.util, el = ax5.dom("#ax5-dom-append");
-		var po = [];
 
-		el.append(po.join('<br/>'));
+		el.append("<div>div</div>");
+		el.append("ABCD 가나다라");
+		el.append("----");
+		// 맨위에 삽입된 div를 맨 아래로 삽입
+		el.append( el.find("div").elements[0] );
+	})();
+</script>
+</pre>
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-prepend">ax5.dom.prepend</h2>
+	<p>
+		타겟의 첫번째 자식으로 <code>HTML Tag</code>나 <code>Element</code>를 추가한다.
+	</p>
+<pre>
+<div id="ax5-dom-prepend" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-prepend");
+
+		el.prepend("<div>div</div>");
+		el.prepend("ABCD 가나다라");
+		el.prepend("----");
+		// 맨아래 삽입된 div를 맨 위로 삽입
+		el.prepend( el.find("div").elements[0] );
+	})();
+</script>
+</pre>
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-before">ax5.dom.before</h2>
+	<p>
+		타겟의 앞으로 <code>HTML Tag</code>나 <code>Element</code>를 추가한다.
+	</p>
+<pre>
+<div id="ax5-dom-before" class="script-result">
+	<div class="target-div">target</div>
+</div>
+<script>
+	(function(){
+		ax5.dom("#ax5-dom-before").find(".target-div").before("before");
+	})();
+</script>
+</pre>
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-after">ax5.dom.after</h2>
+	<p>
+		타겟의 뒤로 <code>HTML Tag</code>나 <code>Element</code>를 추가한다.
+	</p>
+<pre>
+<div id="ax5-dom-after" class="script-result">
+	<div class="target-div">target</div>
+</div>
+<script>
+	(function(){
+		ax5.dom("#ax5-dom-after").find(".target-div").after("after");
+	})();
+</script>
+</pre>
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-html">ax5.dom.html</h2>
+	<p>
+		타겟의 <code>innerHTML</code>를 바꾸어 준다. 내부에서는 타겟안에 들어있는 내용물, 즉 엘리먼트를 지우고
+		그 다음으로 새로운 tag를 채우게 되는데 엘리먼트를 지울 때는 연결된 이벤트까지 지워준다.
+	</p>
+<pre>
+<div id="ax5-dom-html" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#ax5-dom-html");
+
+		el.html("HTML<u>태그</u>를 추가합니다.");
 	})();
 </script>
 </pre>

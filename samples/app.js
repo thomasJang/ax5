@@ -133,8 +133,10 @@ ax5.dom.scroll(function() {
 			ax5.dom.class_name(app_visual, "remove", "pinned");
 		}
 	}
-	if(app.timeout) clearTimeout(app.timeout);
-	app.timeout = setTimeout(function(){
-		app.menu_taping();
-	}, 1);
+	if(!ax5.info.browser.mobile) {
+		if (app.timeout) clearTimeout(app.timeout);
+		app.timeout = setTimeout(function () {
+			app.menu_taping();
+		}, 1);
+	}
 });

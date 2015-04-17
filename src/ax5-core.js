@@ -2604,6 +2604,10 @@
 			if (_target) {
 				while ((function () {
 					var result = true;
+					if(typeof cond === "undefined"){
+						_target = (_target.parentNode) ? _target.parentNode : false;
+					}
+					else
 					if(U.is_function(cond)){
 						result = cond(_target);
 					}

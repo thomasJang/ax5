@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-04-16 
+ * 2015-04-17 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -2780,6 +2780,10 @@
 			if (_target) {
 				while ((function () {
 					var result = true;
+					if(typeof cond === "undefined"){
+						_target = (_target.parentNode) ? _target.parentNode : false;
+					}
+					else
 					if(U.is_function(cond)){
 						result = cond(_target);
 					}
