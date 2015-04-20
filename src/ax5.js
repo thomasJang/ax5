@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-04-18 
+ * 2015-04-20 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -2320,12 +2320,9 @@
 		 * }, 1000);
 		 * ```
 		 */
-		// todo : 다중 ready 연결 가능 하도록 수정 ~~!!
 		function ready(_fn) {
-			if (ax5.dom.is_ready || ax5.dom.is_reading) return;
-			ax5.dom.is_reading = true;
 			promise(function () {
-				if (ax5.dom.is_ready) return;
+				if (ax5.dom.is_ready) return _fn();
 				ax5.dom.is_ready = true;
 				_fn();
 			});
@@ -2334,34 +2331,39 @@
 		function promise(_fn) {
 			if (doc.readyState === "complete") {
 				setTimeout(_fn);
-			} else if (doc.addEventListener) {
-				doc.addEventListener("DOMContentLoaded", _fn, false);
-				win.addEventListener("load", _fn, false);
 			} else {
-				doc.attachEvent("onreadystatechange", _fn);
-				win.attachEvent("onload", _fn);
+				var _timer, __fn = function(){
+					if(_timer) clearTimeout(_timer);
+					_timer = setTimeout(_fn);
+				};
+				if (doc.addEventListener) {
+					doc.addEventListener("DOMContentLoaded", __fn, false);
+					win.addEventListener("load", __fn, false);
+				} else {
+					doc.attachEvent("onreadystatechange", __fn);
+					win.attachEvent("onload", __fn);
+					// If IE and not a frame
+					var top = false;
+					try {
+						top = win.frameElement == null && doc.documentElement;
+					} catch (e) {
+					}
 
-				// If IE and not a frame
-				var top = false;
-				try {
-					top = win.frameElement == null && doc.documentElement;
-				} catch (e) {
-				}
-
-				if (top && top.doScroll) {
-					(function doScrollCheck() {
-						if (!ax5.dom.is_ready) {
-							try {
-								// Use the trick by Diego Perini
-								// http://javascript.nwbox.com/IEContentLoaded/
-								top.doScroll("left");
-							} catch (e) {
-								return setTimeout(doScrollCheck, 50);
+					if (top && top.doScroll) {
+						(function doScrollCheck() {
+							if (!ax5.dom.is_ready) {
+								try {
+									// Use the trick by Diego Perini
+									// http://javascript.nwbox.com/IEContentLoaded/
+									top.doScroll("left");
+								} catch (e) {
+									return setTimeout(doScrollCheck, 50);
+								}
+								// and execute any waiting functions
+								__fn();
 							}
-							// and execute any waiting functions
-							_fn();
-						}
-					})();
+						})();
+					}
 				}
 			}
 		}
@@ -2378,7 +2380,9 @@
 		 * ```
 		 */
 		function resize(_fn) {
-			eBind(window, "resize", _fn);
+			ready(function() {
+				eBind(window, "resize", _fn);
+			});
 		}
 		/**
 		 * 브라우저 scroll 이벤트를 캐치하여 사용자 함수를 호출 하거나 스트롤 포지션을 리턴합니다.
@@ -2392,13 +2396,16 @@
 		 * ```
 		 */
 		function scroll(_fn) {
+
 			if(typeof _fn === "undefined"){
 				return {
 					top: docElem.scrollTop || doc.body.scrollTop,
 					left: docElem.scrollLeft || doc.body.scrollLeft
 				}
 			}else{
-				eBind(window, "scroll", _fn);
+				ready(function(){
+					eBind(window, "scroll", _fn);
+				});
 				return false;
 			}
 		}

@@ -90,9 +90,9 @@ $padding-xs-horizontal:     5px;
 $line-height-large:         1.3333333; // extra decimals for Win 8.1 Chrome
 $line-height-small:         1.5;
 
-$border-radius-base:        (6px, 0px, 6px, 0px);
-$border-radius-large:       (8px, 0px, 8px, 0px);
-$border-radius-small:       (3px, 0px, 3px, 0px);
+$border-radius-base:        (6px, 6px, 6px, 6px);
+$border-radius-large:       (8px, 8px, 8px, 8px);
+$border-radius-small:       (3px, 3px, 3px, 3px);
 
 //== Buttons
 $btn-font-weight:                normal;
@@ -206,9 +206,9 @@ $btn-link-disabled-color:        $gray-light;
 //== Input
 $input-font-weight:                normal;
 $input-bg-disabled:              $gray-lighter;
-$input-border-radius-base:        (6px, 0px, 6px, 0px);
-$input-border-radius-large:       (8px, 0px, 8px, 0px);
-$input-border-radius-small:       (3px, 0px, 3px, 0px);
+$input-border-radius-base:        (6px, 6px, 6px, 6px);
+$input-border-radius-large:       (8px, 8px, 8px, 8px);
+$input-border-radius-small:       (3px, 3px, 3px, 3px);
 
 //** Placeholder text color
 $input-color-placeholder:        #999;

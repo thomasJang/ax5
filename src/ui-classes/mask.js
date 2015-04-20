@@ -25,6 +25,7 @@
 		};
 
 		this.open = function(config){
+			// todo : z-index 옵션으로 지정가능 하도록 변경
 			if(this.status === "on") this.close();
 			if(config && config.content) this.set_body(config.content);
 			self.mask_config = {};

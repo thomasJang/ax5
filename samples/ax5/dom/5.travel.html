@@ -6,14 +6,14 @@
 		타겟 엘리먼트의 앞에 위치한 엘리먼트를 반환한다.
 	</p>
 <pre>
-<div id="ax5-dom-prev" class="script-result" style="position:relative;">
+<div id="div-ax5-dom-prev" class="script-result" style="position:relative;">
 	<div>prev</div>
 	<div class="target-div"></div>
 	<div>next</div>
 </div>
 <script>
 (function(){
-	var util = ax5.util, el = ax5.dom("#ax5-dom-prev");
+	var util = ax5.util, el = ax5.dom("#div-ax5-dom-prev");
 	var po = [];
 	po.push( "prev = '" + el.find(".target-div").prev().html() + "'" );
 	el.append(po.join('<br/>'));
@@ -30,18 +30,18 @@
 		타겟 엘리먼트의 다음에 위치한 엘리먼트를 반환한다.
 	</p>
 <pre>
-<div id="ax5-dom-next" class="script-result" style="position:relative;">
+<div id="div-ax5-dom-next" class="script-result" style="position:relative;">
 	<div>prev</div>
 	<div class="target-div"></div>
 	<div>next</div>	<div class="target-div"></div>
 </div>
 <script>
-	(function(){
-		var util = ax5.util, el = ax5.dom("#ax5-dom-next");
-		var po = [];
-		po.push( "next = '" + el.find(".target-div").next().html() + "'" );
-		el.append(po.join('<br/>'));
-	})();
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-dom-next");
+	var po = [];
+	po.push( "next = '" + el.find(".target-div").next().html() + "'" );
+	el.append(po.join('<br/>'));
+})();
 </script>
 </pre>
 </article>
@@ -55,7 +55,7 @@
 		주의 할 점은 조건에 부합하는 부모들을 구해주지 않는 다는 점이다. 조건에 매치되는 하나의 부모를 반환한다.
 	</p>
 <pre>
-<div id="ax5-dom-parent" class="script-result" style="position:relative;">
+<div id="div-ax5-dom-parent" class="script-result" style="position:relative;">
 	<div data-domparent-value="1">
 		<div data-domparent-value="2">
 			<div data-domparent-value="3">클릭하세요.</div>
@@ -64,7 +64,7 @@
 </div>
 <script>
 (function(){
-	var util = ax5.util, el = ax5.dom("#ax5-dom-parent");
+	var util = ax5.util, el = ax5.dom("#div-ax5-dom-parent");
 	var po = [];
 
 	po.push( "3의 부모 : " +
@@ -125,7 +125,7 @@
 		타겟 엘리먼트의 직계자식들을 반환한다. 자식의 자식은 반환하지 않는 다는 뜻이다. 물론 남의 자식도 구해주진 못한다.
 	</p>
 <pre>
-<div id="ax5-dom-child" class="script-result" style="position:relative;">
+<div id="div-ax5-dom-child" class="script-result" style="position:relative;">
 	<div class="target-div">1</div>
 	<div class="target-div">2</div>
 	<div class="target-div">3</div>
@@ -133,7 +133,7 @@
 </div>
 <script>
 (function(){
-	var util = ax5.util, el = ax5.dom("#ax5-dom-child");
+	var util = ax5.util, el = ax5.dom("#div-ax5-dom-child");
 	var po = [];
 	el.child().elements.forEach(function(element){
 		po.push( ax5.dom.html(element) );

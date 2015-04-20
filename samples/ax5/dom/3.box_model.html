@@ -2,10 +2,10 @@
 <article class="content">
 	<h2 data-menu-item="ax5-dom-width">ax5.dom.width</h2>
 <pre>
-<div id="ax5-dom-width" class="script-result"></div>
+<div id="div-ax5-dom-width" class="script-result"></div>
 <script>
 	(function(){
-		var util = ax5.util, el = ax5.dom("#ax5-dom-width");
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-width");
 		var po = [];
 
 		po.push( el.width() );
@@ -24,10 +24,10 @@
 
 	</p>
 <pre>
-<div id="ax5-dom-height" class="script-result"></div>
+<div id="div-ax5-dom-height" class="script-result"></div>
 <script>
 	(function(){
-		var util = ax5.util, el = ax5.dom("#ax5-dom-height");
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-height");
 		var po = [];
 
 		el.append( el.height()+'<br/>' ); // 한줄이 추가되면
@@ -46,10 +46,10 @@
 		타겟 엘리먼트가 어디에 어떤 상황으로 있던 페이지 내에서의 절대위치를 반환한다.
 	</p>
 <pre>
-<div id="ax5-dom-offset" class="script-result"></div>
+<div id="div-ax5-dom-offset" class="script-result"></div>
 <script>
 	(function(){
-		var util = ax5.util, el = ax5.dom("#ax5-dom-offset");
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-offset");
 		var po = [];
 
 		po.push( util.to_json( el.offset() ) );
@@ -68,12 +68,12 @@
 		타겟 엘리먼트에 <code>margin</code>이 있으면 옥돔이 잘못 했다. 라고 생각할 수 있다. 그렇지 않다 <code>margin</code>도 box model 안에 포함된다.
 	</p>
 <pre>
-<div id="ax5-dom-position" class="script-result" style="position:relative;">
+<div id="div-ax5-dom-position" class="script-result" style="position:relative;">
 	<div class="target-div" style="height:20px;border:1px solid #000;"></div>
 </div>
 <script>
 	(function(){
-		var util = ax5.util, el = ax5.dom("#ax5-dom-position");
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-position");
 		var po = [];
 
 		po.push( util.to_json( el.find(".target-div").position() ) );
@@ -91,10 +91,10 @@
 		box model에 관련된 값만 모아서 한번에 호출 할 수 있다. 왜!? 만들었을까 박스모델을 한번에 호출해서 쓸일이 있을거야..
 	</p>
 <pre>
-<div id="ax5-dom-box_model" class="script-result"></div>
+<div id="div-ax5-dom-box_model" class="script-result"></div>
 <script>
 	(function(){
-		var util = ax5.util, el = ax5.dom("#ax5-dom-box_model");
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-box_model");
 		var po = [];
 		po.push( util.to_json(el.box_model()) );
 		po.push( util.to_json(el.box_model("width")) );

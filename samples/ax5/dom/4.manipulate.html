@@ -6,10 +6,10 @@
 		타겟에 마지막 자식으로 <code>HTML Tag</code>나 <code>Element</code>를 추가한다.
 	</p>
 <pre>
-<div id="ax5-dom-append" class="script-result"></div>
+<div id="div-ax5-dom-append" class="script-result"></div>
 <script>
 	(function(){
-		var util = ax5.util, el = ax5.dom("#ax5-dom-append");
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-append");
 
 		el.append("<div>div</div>");
 		el.append("ABCD 가나다라");
@@ -29,10 +29,10 @@
 		타겟의 첫번째 자식으로 <code>HTML Tag</code>나 <code>Element</code>를 추가한다.
 	</p>
 <pre>
-<div id="ax5-dom-prepend" class="script-result"></div>
+<div id="div-ax5-dom-prepend" class="script-result"></div>
 <script>
 	(function(){
-		var util = ax5.util, el = ax5.dom("#ax5-dom-prepend");
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-prepend");
 
 		el.prepend("<div>div</div>");
 		el.prepend("ABCD 가나다라");
@@ -52,12 +52,12 @@
 		타겟의 앞으로 <code>HTML Tag</code>나 <code>Element</code>를 추가한다.
 	</p>
 <pre>
-<div id="ax5-dom-before" class="script-result">
+<div id="div-ax5-dom-before" class="script-result">
 	<div class="target-div">target</div>
 </div>
 <script>
 	(function(){
-		ax5.dom("#ax5-dom-before").find(".target-div").before("before");
+		ax5.dom("#div-ax5-dom-before").find(".target-div").before("before");
 	})();
 </script>
 </pre>
@@ -71,12 +71,12 @@
 		타겟의 뒤로 <code>HTML Tag</code>나 <code>Element</code>를 추가한다.
 	</p>
 <pre>
-<div id="ax5-dom-after" class="script-result">
+<div id="div-ax5-dom-after" class="script-result">
 	<div class="target-div">target</div>
 </div>
 <script>
 	(function(){
-		ax5.dom("#ax5-dom-after").find(".target-div").after("after");
+		ax5.dom("#div-ax5-dom-after").find(".target-div").after("after");
 	})();
 </script>
 </pre>
@@ -91,10 +91,10 @@
 		그 다음으로 새로운 tag를 채우게 되는데 엘리먼트를 지울 때는 연결된 이벤트까지 지워준다.
 	</p>
 <pre>
-<div id="ax5-dom-html" class="script-result"></div>
+<div id="div-ax5-dom-html" class="script-result"></div>
 <script>
 	(function(){
-		var util = ax5.util, el = ax5.dom("#ax5-dom-html");
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-html");
 
 		el.html("HTML<u>태그</u>를 추가합니다.");
 	})();
@@ -110,14 +110,14 @@
 		타겟 엘리먼트를 제거한다.
 	</p>
 <pre>
-<div id="ax5-dom-remove" class="script-result">
+<div id="div-ax5-dom-remove" class="script-result">
 	~~~~
 	<div class="remove-target">****</div>
 	~~~~
 </div>
 <script>
 	(function(){
-		var el = ax5.dom("#ax5-dom-remove");
+		var el = ax5.dom("#div-ax5-dom-remove");
 		el.find(".remove-target").remove();
 	})();
 </script>
@@ -133,10 +133,10 @@
 		가끔씩 유용하다.
 	</p>
 <pre>
-<div id="ax5-dom-data" class="script-result"></div>
+<div id="div-ax5-dom-data" class="script-result"></div>
 <script>
 	(function(){
-		var util = ax5.util, el = ax5.dom("#ax5-dom-data");
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-data");
 		el.data({ax:"5"});
 		el.append(" el.data['ax'] =  " + el.data("ax"));
 		el.append("<br/>");

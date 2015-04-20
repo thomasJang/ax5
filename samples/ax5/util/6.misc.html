@@ -7,10 +7,10 @@
 		이런 상황에서 파라미터 값에 대해 항상 동일한 검증을 요구하는 상황에 놓이게 된다.
 	</p>
 <pre>
-<div id="ax5-util-param" class="script-result"></div>
+<div id="div-ax5-util-param" class="script-result"></div>
 <script>
 	(function(){
-		var util = ax5.util, el = ax5.dom("#ax5-util-param");
+		var util = ax5.util, el = ax5.dom("#div-ax5-util-param");
 		var po = [];
 
 		// 오브젝트로 param
@@ -36,10 +36,10 @@
 		key값을 따옴표로 감싸지 않으면 대게의 json parser는 에러는 뱉어내게 된다. 물론 대부분의 상황에서 규칙을 지켜야 겠지만. 귀찬을 때가 있다. 또는 function을 부여 한다던지.
 	</p>
 <pre>
-<div id="ax5-util-parse_json" class="script-result"></div>
+<div id="div-ax5-util-parse_json" class="script-result"></div>
 <script>
 (function(){
-	var util = ax5.util, el = ax5.dom("#ax5-util-parse_json");
+	var util = ax5.util, el = ax5.dom("#div-ax5-util-parse_json");
 	var po = [];
 
 	po.push( util.to_json( util.parse_json("[{'a':'99'},'2','3']")[0] ) );
@@ -63,10 +63,10 @@
 		모든 Object를 JSONString으로 바꾸어 버린다.
 	</p>
 <pre>
-<div id="ax5-util-to_json" class="script-result"></div>
+<div id="div-ax5-util-to_json" class="script-result"></div>
 <script>
 (function(){
-	var util = ax5.util, el = ax5.dom("#ax5-util-to_json");
+	var util = ax5.util, el = ax5.dom("#div-ax5-util-to_json");
 	var po = [];
 
 	po.push( util.to_json(1) );
@@ -89,10 +89,10 @@
 <article class="content">
 	<h2 data-menu-item="ax5-util-get_cookie">ax5.util.get_cookie</h2>
 <pre>
-<div id="ax5-util-get_cookie" class="script-result"></div>
+<div id="div-ax5-util-get_cookie" class="script-result"></div>
 <script>
 	(function(){
-		var util = ax5.util, el = ax5.dom("#ax5-util-get_cookie");
+		var util = ax5.util, el = ax5.dom("#div-ax5-util-get_cookie");
 		var po = [];
 
 		util.set_cookie("ax5-cookie", "abcde");
@@ -110,10 +110,10 @@
 <article class="content">
 	<h2 data-menu-item="ax5-util-set_cookie">ax5.util.set_cookie</h2>
 <pre>
-<div id="ax5-util-set_cookie" class="script-result"></div>
+<div id="div-ax5-util-set_cookie" class="script-result"></div>
 <script>
 	(function(){
-		var util = ax5.util, el = ax5.dom("#ax5-util-set_cookie");
+		var util = ax5.util, el = ax5.dom("#div-ax5-util-set_cookie");
 		var po = [];
 
 		util.set_cookie("ax5-cookie", "abcde");
@@ -134,10 +134,10 @@
 		디버깅 중에 변수를 alert해 본다던지, 서버에서 리턴된 값을 alert한다던지 하는 상황에서 오브젝트 타입에 따라 처리하는 것 보다. <code>편하다 정말</code>
 	</p>
 <pre>
-<div id="ax5-util-alert" class="script-result"></div>
+<div id="div-ax5-util-alert" class="script-result"></div>
 <script>
 (function(){
-	var util = ax5.util, el = ax5.dom("#ax5-util-alert");
+	var util = ax5.util, el = ax5.dom("#div-ax5-util-alert");
 	var po = [];
 	po.push('<button class="ax-btn" onclick="ax5.util.alert({a:1,b:2});">alert</button>');
 	el.append( po.join('') );
@@ -156,10 +156,10 @@
 		<code>to_array</code>를 이용하면 유사배열을 배열로 convert하기 때문에 편하다.
 	</p>
 <pre>
-<div id="ax5-util-to_array" class="script-result"></div>
+<div id="div-ax5-util-to_array" class="script-result"></div>
 <script>
 (function(){
-	var util = ax5.util, el = ax5.dom("#ax5-util-to_array");
+	var util = ax5.util, el = ax5.dom("#div-ax5-util-to_array");
 	var po = [];
 
 	function something(){

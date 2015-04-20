@@ -16,7 +16,13 @@
 </body>
 <script type="text/javascript">
 
-    console.log( ax5.dom("#test").parent().parent().elements[0] );
+    ax5.dom.ready(function(){
+       console.log(1);
+    });
+
+    ax5.dom.ready(function(){
+        console.log(2);
+    });
 
 </script>
 </html>

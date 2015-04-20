@@ -6,12 +6,12 @@
 		그 시작으로 DOM CSS 조작 메소드인 <code>.css()</code>를 보자면 다음과 같다.
 	</p>
 <pre>
-<div id="ax5-dom-css" class="script-result">
+<div id="div-ax5-dom-css" class="script-result">
 	<div class="target-div"></div>
 </div>
 <script>
 	(function(){
-		var util = ax5.util, el = ax5.dom("#ax5-dom-css");
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-css");
 		var po = [];
 
 		// 인자값을 문자열로 했을 땐 get
@@ -53,12 +53,12 @@
 		그 이유는 옥돔의 잘못은 아니다. 브라우저가 안된다고 하니까. 안되는 것 뿐이다.
 	</p>
 <pre>
-<div id="ax5-dom-attr" class="script-result">
+<div id="div-ax5-dom-attr" class="script-result">
 	<div class="target-div"></div>
 </div>
 <script>
 	(function(){
-		var util = ax5.util, el = ax5.dom("#ax5-dom-attr");
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-attr");
 		var po = [];
 		var target_div = el.find(".target-div");
 		target_div.attr({"data-attr-0":0, "data-attr-1":1, "data-attr-2":2});
@@ -86,12 +86,12 @@
 		class_name이 다른 다른 메소들과 다른 이유는 key, value 형식의 조건이 아니기 때문이다. (사실 만들면서 짜증이 났던 부분이다.)
 	</p>
 <pre>
-<div id="ax5-dom-class_name" class="script-result">
+<div id="div-ax5-dom-class_name" class="script-result">
 	<div class="target-div"></div>
 </div>
 <script>
 (function(){
-	var util = ax5.util, el = ax5.dom("#ax5-dom-class_name");
+	var util = ax5.util, el = ax5.dom("#div-ax5-dom-class_name");
 	var po = [];
 	var target_div = el.find(".target-div");
 

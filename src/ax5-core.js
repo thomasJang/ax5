@@ -2204,7 +2204,9 @@
 		 * ```
 		 */
 		function resize(_fn) {
-			eBind(window, "resize", _fn);
+			ready(function() {
+				eBind(window, "resize", _fn);
+			});
 		}
 		/**
 		 * 브라우저 scroll 이벤트를 캐치하여 사용자 함수를 호출 하거나 스트롤 포지션을 리턴합니다.
@@ -2218,13 +2220,16 @@
 		 * ```
 		 */
 		function scroll(_fn) {
+
 			if(typeof _fn === "undefined"){
 				return {
 					top: docElem.scrollTop || doc.body.scrollTop,
 					left: docElem.scrollLeft || doc.body.scrollLeft
 				}
 			}else{
-				eBind(window, "scroll", _fn);
+				ready(function(){
+					eBind(window, "scroll", _fn);
+				});
 				return false;
 			}
 		}

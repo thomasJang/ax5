@@ -4,12 +4,12 @@
     <h2 data-menu-item="ax5-util-clone">ax5.util.clone</h2>
 
 <pre>
-<div id="ax5-util-clone" class="script-result"></div>
+<div id="div-ax5-util-clone" class="script-result"></div>
 <script>
     (function(){
         var a = {a:1};
         var b = a;
-        var el = ax5.dom("#ax5-util-clone");
+        var el = ax5.dom("#div-ax5-util-clone");
 
         el.append("(a == b) => " + (a == b) + "<br/>");
         b = ax5.util.clone(a);
@@ -28,13 +28,13 @@
     <h2 data-menu-item="ax5-util-each">ax5.util.each</h2>
 
 <pre>
-<div id="ax5-util-each" class="script-result"></div>
+<div id="div-ax5-util-each" class="script-result"></div>
 <script>
     (function(){
         var util = ax5.util;
         var a = {a:"axisj", b:"ax5"};
         var b = [9,8,5,4,3,1];
-        var el = ax5.dom("#ax5-util-each");
+        var el = ax5.dom("#div-ax5-util-each");
 
         var po = [];
         po.push("* a");
@@ -57,10 +57,10 @@
 <article class="content"> <!-- filter -->
     <h2 data-menu-item="ax5-util-filter">ax5.util.filter</h2>
 <pre>
-<div id="ax5-util-filter" class="script-result"></div>
+<div id="div-ax5-util-filter" class="script-result"></div>
 <script>
     (function(){
-        var util = ax5.util, result, el = ax5.dom("#ax5-util-filter");
+        var util = ax5.util, result, el = ax5.dom("#div-ax5-util-filter");
 
         var aarray = [5,4,3,2,1];
         result = util.filter( aarray, function(){
@@ -85,10 +85,10 @@
 <article class="content">
 	<h2 data-menu-item="ax5-util-search">ax5.util.search</h2>
 <pre>
-<div id="ax5-util-search" class="script-result"></div>
+<div id="div-ax5-util-search" class="script-result"></div>
 <script>
     (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-search");
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-search");
         var a = ["A","X","5"];
         var idx = util.search(a, function(){
             return this == "X";
@@ -122,10 +122,10 @@
 <article class="content">
     <h2 data-menu-item="ax5-util-map">ax5.util.map</h2>
 <pre>
-<div id="ax5-util-map" class="script-result"></div>
+<div id="div-ax5-util-map" class="script-result"></div>
 <script>
     (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-map");
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-map");
         var a = [1,2,3,4,5];
         a = util.map(a, function(){
             return {id:this};
@@ -144,10 +144,10 @@
 <article class="content">
     <h2 data-menu-item="ax5-util-merge">ax5.util.merge</h2>
 <pre>
-<div id="ax5-util-merge" class="script-result"></div>
+<div id="div-ax5-util-merge" class="script-result"></div>
 <script>
     (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-merge");
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-merge");
         var a = [1,2,3], b = [7,8,9];
         a = util.merge(a, b);
         el.append( util.to_json(a) );
@@ -166,10 +166,10 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 <article class="content">
     <h2 data-menu-item="ax5-util-reduce">ax5.util.reduce</h2>
 <pre>
-<div id="ax5-util-reduce" class="script-result"></div>
+<div id="div-ax5-util-reduce" class="script-result"></div>
 <script>
     (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-reduce");
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-reduce");
         var aarray = [5,4,3,2,1], result;
         result = util.reduce( aarray, function(p, n){
             return p * n;
@@ -197,10 +197,10 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 <article class="content">
     <h2 data-menu-item="ax5-util-reduce_right">ax5.util.reduce_right</h2>
 <pre>
-<div id="ax5-util-reduce_right" class="script-result"></div>
+<div id="div-ax5-util-reduce_right" class="script-result"></div>
 <script>
     (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-reduce_right");
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-reduce_right");
         var aarray = [5,4,3,2,1], result;
         result = util.reduce_right( aarray, function(p, n){
             return p - n;
@@ -226,10 +226,10 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
         예제에서와 같이 <code>obj1.b</code>의 경우 값이 치환되는 현상이 있는데. 하위 키까지 오브젝트를 덮어쓰기 하려면 <code>extend_all</code>을 사용한다.
     </p>
 <pre>
-<div id="ax5-util-extend" class="script-result"></div>
+<div id="div-ax5-util-extend" class="script-result"></div>
 <script>
     (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-extend");
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-extend");
         var po = [];
 
         var obj1 = {a:1, b:{a:1}};
@@ -253,10 +253,10 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
         <code>extend</code>로는 처리 할수 없는 오브젝트안에 오브젝트 덮어쓰기를 지원한다.
     </p>
 <pre>
-<div id="ax5-util-extend_all" class="script-result"></div>
+<div id="div-ax5-util-extend_all" class="script-result"></div>
 <script>
     (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-extend_all");
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-extend_all");
         var po = [];
 
         var obj1 = {a:1, b:{a:1}};
@@ -283,10 +283,10 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
         Array 또는 Object의 첫번째 인자를 반환 합니다. 하지만 Array의 경우에는 first함수를 사용하는 것 보다 <code>Array[0]</code>를 사용하는 것이 더 빠르다.
     </p>
 <pre>
-<div id="ax5-util-first" class="script-result"></div>
+<div id="div-ax5-util-first" class="script-result"></div>
 <script>
     (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-first");
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-first");
         var po = [];
 
         var _arr = ["ax5","axisj"];
@@ -310,10 +310,10 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
         Object에 대해서는 굉장히 귀찮을 코딩을 줄여주어 꽤 효과적이다.
     </p>
 <pre>
-<div id="ax5-util-last" class="script-result"></div>
+<div id="div-ax5-util-last" class="script-result"></div>
 <script>
     (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-last");
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-last");
         var po = [];
 
         var _arr = ["ax5","axisj"];
