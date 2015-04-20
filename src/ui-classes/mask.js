@@ -1,4 +1,5 @@
 (function(root, ax_super) {
+
 	var U = ax5.util, axd = ax5.dom;
 
 	var ax_class = function () {
