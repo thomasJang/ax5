@@ -2144,12 +2144,9 @@
 		 * }, 1000);
 		 * ```
 		 */
-		// todo : 다중 ready 연결 가능 하도록 수정 ~~!!
 		function ready(_fn) {
-			if (ax5.dom.is_ready || ax5.dom.is_reading) return;
-			ax5.dom.is_reading = true;
 			promise(function () {
-				if (ax5.dom.is_ready) return;
+				if (ax5.dom.is_ready) return _fn();
 				ax5.dom.is_ready = true;
 				_fn();
 			});
@@ -2158,34 +2155,39 @@
 		function promise(_fn) {
 			if (doc.readyState === "complete") {
 				setTimeout(_fn);
-			} else if (doc.addEventListener) {
-				doc.addEventListener("DOMContentLoaded", _fn, false);
-				win.addEventListener("load", _fn, false);
 			} else {
-				doc.attachEvent("onreadystatechange", _fn);
-				win.attachEvent("onload", _fn);
+				var _timer, __fn = function(){
+					if(_timer) clearTimeout(_timer);
+					_timer = setTimeout(_fn);
+				};
+				if (doc.addEventListener) {
+					doc.addEventListener("DOMContentLoaded", __fn, false);
+					win.addEventListener("load", __fn, false);
+				} else {
+					doc.attachEvent("onreadystatechange", __fn);
+					win.attachEvent("onload", __fn);
+					// If IE and not a frame
+					var top = false;
+					try {
+						top = win.frameElement == null && doc.documentElement;
+					} catch (e) {
+					}
 
-				// If IE and not a frame
-				var top = false;
-				try {
-					top = win.frameElement == null && doc.documentElement;
-				} catch (e) {
-				}
-
-				if (top && top.doScroll) {
-					(function doScrollCheck() {
-						if (!ax5.dom.is_ready) {
-							try {
-								// Use the trick by Diego Perini
-								// http://javascript.nwbox.com/IEContentLoaded/
-								top.doScroll("left");
-							} catch (e) {
-								return setTimeout(doScrollCheck, 50);
+					if (top && top.doScroll) {
+						(function doScrollCheck() {
+							if (!ax5.dom.is_ready) {
+								try {
+									// Use the trick by Diego Perini
+									// http://javascript.nwbox.com/IEContentLoaded/
+									top.doScroll("left");
+								} catch (e) {
+									return setTimeout(doScrollCheck, 50);
+								}
+								// and execute any waiting functions
+								__fn();
 							}
-							// and execute any waiting functions
-							_fn();
-						}
-					})();
+						})();
+					}
 				}
 			}
 		}
