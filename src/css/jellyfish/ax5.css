@@ -2011,6 +2011,31 @@ a.ax {
     line-height: 1.5;
     height: 20px; }
 
+.ax-item-group {
+  padding: 0px; }
+  .ax-item-group .ax-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid #ddd; }
+    .ax-item-group .ax-item:first-child {
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+      border-bottom-left-radius: 6px;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0; }
+    .ax-item-group .ax-item:last-child {
+      margin-bottom: 0;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+      border-bottom-left-radius: 6px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0; }
+
 .ax-panel {
   color: #333333;
   font-size: 12px;

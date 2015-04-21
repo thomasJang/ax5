@@ -1,7 +1,7 @@
 ax5.dom.ready(function(){
 	if (!window.app_visual) window.app_visual = ax5.dom.get("#app-visual");
 	if (!window.app_nav_left) window.app_nav_left = ax5.dom.get("#app-nav-left");
-
+	//if(window.app) return;
 	window.app = (function(){
 		prettyPrint();
 

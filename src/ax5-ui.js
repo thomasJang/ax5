@@ -2,32 +2,34 @@
  * Refer to this by {@link ax5}.
  * @namespace ax5.ui
  */
+
+/**
+ * @class ax5.ui.root
+ * @classdesc ax5 ui class 코어 클래스 모든 클래스의 공통 함수를 가지고 있습니다.
+ * @version v0.0.1
+ * @author tom@axisj.com
+ * @logs
+ * 2014-12-12 tom : 시작
+ * @example
+ * ```
+ * var myui = new ax5.ui.root();
+ * ```
+ */
 ax5.ui = (function () {
 	var U = ax5.util;
-	/**
-	 * @class ax5.ui.ax_ui
-	 * @classdesc ax5 ui class 코어 클래스 모든 클래스의 공통 함수를 가지고 있습니다.
-	 * @version v0.0.1
-	 * @author tom@axisj.com
-	 * @logs
-	 * 2014-12-12 tom : 시작
-	 * @example
-	 * ```
-	 * var myui = new ax5.ui.ax_ui();
-	 * ```
-	 */
+
 	function ax_ui() {
 		this.config = {};
-		this.name = "ax_ui";
+		this.name = "root";
 		/**
 		 * 클래스의 속성 정의 메소드 속성 확장후에 내부에 init 함수를 호출합니다.
-		 * @method ax5.ui.ax_ui.set_config
+		 * @method ax5.ui.root.set_config
 		 * @param {Object} config - 클래스 속성값
 		 * @param {Boolean} [call_init=true] - init 함수 호출 여부
 		 * @returns {ax5.ui.ax_ui}
 		 * @example
 		 * ```
-		 * var myui = new ax5.ui.ax_ui();
+		 * var myui = new ax5.ui.root();
 		 * myui.set_config({
 		 * 	id:"abcd"
 		 * });

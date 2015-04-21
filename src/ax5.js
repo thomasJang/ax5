@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-04-20 
+ * 2015-04-21 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -2321,9 +2321,10 @@
 		 * ```
 		 */
 		function ready(_fn) {
+			var is_ready = false;
 			promise(function () {
-				if (ax5.dom.is_ready) return _fn();
-				ax5.dom.is_ready = true;
+				if (is_ready) return;
+				is_ready = ax5.dom.is_ready = true;
 				_fn();
 			});
 		}
@@ -2332,16 +2333,12 @@
 			if (doc.readyState === "complete") {
 				setTimeout(_fn);
 			} else {
-				var _timer, __fn = function(){
-					if(_timer) clearTimeout(_timer);
-					_timer = setTimeout(_fn);
-				};
 				if (doc.addEventListener) {
-					doc.addEventListener("DOMContentLoaded", __fn, false);
-					win.addEventListener("load", __fn, false);
+					doc.addEventListener("DOMContentLoaded", _fn, false);
+					win.addEventListener("load", _fn, false);
 				} else {
-					doc.attachEvent("onreadystatechange", __fn);
-					win.attachEvent("onload", __fn);
+					doc.attachEvent("onreadystatechange", _fn);
+					win.attachEvent("onload", _fn);
 					// If IE and not a frame
 					var top = false;
 					try {
@@ -2360,7 +2357,7 @@
 									return setTimeout(doScrollCheck, 50);
 								}
 								// and execute any waiting functions
-								__fn();
+								_fn();
 							}
 						})();
 					}
@@ -3687,32 +3684,33 @@ ax5.xhr = (function (){
 	});
 })();
 
+/**
+ * @class ax5.ui.root
+ * @classdesc ax5 ui class 코어 클래스 모든 클래스의 공통 함수를 가지고 있습니다.
+ * @version v0.0.1
+ * @author tom@axisj.com
+ * @logs
+ * 2014-12-12 tom : 시작
+ * @example
+ * ```
+ * var myui = new ax5.ui.root();
+ * ```
+ */
 ax5.ui = (function () {
 	var U = ax5.util;
-	/**
-	 * @class ax5.ui.ax_ui
-	 * @classdesc ax5 ui class 코어 클래스 모든 클래스의 공통 함수를 가지고 있습니다.
-	 * @version v0.0.1
-	 * @author tom@axisj.com
-	 * @logs
-	 * 2014-12-12 tom : 시작
-	 * @example
-	 * ```
-	 * var myui = new ax5.ui.ax_ui();
-	 * ```
-	 */
+
 	function ax_ui() {
 		this.config = {};
-		this.name = "ax_ui";
+		this.name = "root";
 		/**
 		 * 클래스의 속성 정의 메소드 속성 확장후에 내부에 init 함수를 호출합니다.
-		 * @method ax5.ui.ax_ui.set_config
+		 * @method ax5.ui.root.set_config
 		 * @param {Object} config - 클래스 속성값
 		 * @param {Boolean} [call_init=true] - init 함수 호출 여부
 		 * @returns {ax5.ui.ax_ui}
 		 * @example
 		 * ```
-		 * var myui = new ax5.ui.ax_ui();
+		 * var myui = new ax5.ui.root();
 		 * myui.set_config({
 		 * 	id:"abcd"
 		 * });

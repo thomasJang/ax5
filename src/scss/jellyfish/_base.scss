@@ -93,6 +93,15 @@ $line-height-small:         1.5;
 $border-radius-base:        (6px, 6px, 6px, 6px);
 $border-radius-large:       (8px, 8px, 8px, 8px);
 $border-radius-small:       (3px, 3px, 3px, 3px);
+//** Global color for active items (e.g., navs or dropdowns).
+$component-active-color:    #fff;
+//** Global background color for active items (e.g., navs or dropdowns).
+$component-active-bg:       $theme-basic;
+
+//** Width of the `border` for generating carets that indicator dropdowns.
+$caret-width-base:          4px;
+//** Carets increase slightly in size for larger components.
+$caret-width-large:         5px;
 
 //== Buttons
 $btn-font-weight:                normal;
@@ -277,6 +286,42 @@ $input-special-bg-image: "";
 $input-special-color-hover: $theme-special;
 $input-special-border: 1px solid darken($theme-special, 20%);
 $input-special-drop-shadow: 0px 1px 3px 0px rgba(0,0,0,0.15) inset;
+
+
+//== Item group
+//
+//##
+
+//** Background color on `.list-group-item`
+$item-group-bg:                 #fff;
+//** `.list-group-item` border color
+$item-group-border:             #ddd;
+//** List group border radius
+$item-group-border-radius:      $border-radius-base;
+
+//** Background color of single list items on hover
+$item-group-hover-bg:           #f5f5f5;
+//** Text color of active list items
+$item-group-active-color:       $component-active-color;
+//** Background color of active list items
+$item-group-active-bg:          $component-active-bg;
+//** Border color of active list elements
+$item-group-active-border:      $item-group-active-bg;
+//** Text color for content within active list items
+$item-group-active-text-color:  lighten($item-group-active-bg, 40%);
+
+//** Text color of disabled list items
+$item-group-disabled-color:      $gray-light;
+//** Background color of disabled list items
+$item-group-disabled-bg:         $gray-lighter;
+//** Text color for content within disabled list items
+$item-group-disabled-text-color: $item-group-disabled-color;
+
+$item-group-link-color:         #555;
+$item-group-link-hover-color:   $item-group-link-color;
+$item-group-link-heading-color: #333;
+
+
 
 //== Panels
 $panel-box-model: border-box;

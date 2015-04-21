@@ -48,7 +48,7 @@
     
 </head>
 <body>
-<div id="wrap" class="clearfix ax5.xhr">
+<div id="wrap" class="clearfix mask.js">
     
 <div class="navigation">
     <h3 class="applicationName"><a href="index.html"><i class="axi axi-axisj"></i> ax5.io</a></h3>
@@ -455,379 +455,177 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="ax5.xhr.html">Namespace: xhr</h1>
+        <h1 class="page-title" data-filename="mask.js.html">Source: ui-classes/mask.js</h1>
         
 
 
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @class ax5.ui.mask
+ * @classdesc
+ * @version v0.0.1
+ * @author tom@axisj.com
+ * @logs
+ * 2014-04-01 tom : 시작
+ * @example
+ * ```
+ * var my_mask = new ax5.ui.mask();
+ * ```
+ */
 
-<section>
-    
-<header>
-    <h2>
-        <span class="ancestors"><a href="ax5.html">ax5</a>.</span>
-    
-    xhr
-    </h2>
-    
-</header>  
+(function(root, ax_super) {
 
-<article>
-    <div class="container-overview">
-    
-    
-    
-        
-            <div class="description"><p>Refer to this by <a href="ax5.html"><code>ax5</code></a>. <br/>
-ax5.xhr({Object}[, {Function}]); 으로 사용하는 함수입니다. XHR요청을 개별또는 큐단위로 처리 합니다.</p></div>
-        
-        
-        
-<dl class="details">
-    
-        
-    
-    
-    
+	var U = ax5.util, axd = ax5.dom;
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
+	var ax_class = function () {
+		var self = this;
+		if (ax_super) ax_super.call(this); // 부모호출
+		this.config = {
+			mask_target: axd.get(document.body)[0]
+		};
+		this.mask_content = '&lt;h1>AX5 Mask&lt;/h1>';
+		this.status = "off";
 
-        
-        
-            <h3>Example</h3>
-            
+		/**
+		 * Preferences of Mask UI
+		 * @method ax5.ui.mask.set_config
+		 * @param {Object} config - 클래스 속성값
+		 * @returns {ax5.ui.mask}
+		 * @example
+		 * ```
+		 * setConfig({
+		 *      mask_target : {Element|AX5 nodelist}, // 마스크 처리할 대상
+		 *      content : {String}, // 마스크안에 들어가는 내용물
+		 *      onchange: function(){} // 마스크 상태변경 시 호출되는 함수 this.type으로 예외처리 가능
+		 * }
+		 * ```
+		 */
+		//== class body start
+		this.init = function(){
+			// after set_config();
+			if(this.config.content) this.set_body(this.config.content);
+		};
 
-    
-    <pre class="prettyprint linenums"><code>// request 옵션정의
-config = {
-    header         : {
-        //setRequestHeader 로 추가하게될 헤드 속성
-        'content-type' : {String} [&quot;application/x-www-form-urlencoded; charset=UTF-8&quot;] - request 되는 문서의 content Type,
-        'accept'       : {String} [&quot;*＼*&quot;] - 서버에 응답받기 희망하는 문서 타입,
-    },
-    method         : {String} [&quot;GET&quot;],
-    url            : {String} [&quot;&quot;],
-    param          : {String|Object} [&quot;&quot;] - 파라미터 형식이나 오브젝트 형식 모두 지원합니다.,
-    async          : {Boolean} [true] - 비동기 요청 여부,
-    username       : {String} [&quot;&quot;] - XMLHttpRequest 스펙에 정의된 open() 옶션 사용 안해봐서 잘 모름,
-    password       : {String} [&quot;&quot;] - XMLHttpRequest 스펙에 정의된 open() 옶션 사용 안해봐서 잘 모름,
-    withCredentials: {Boolean} [false] - 자격증명을 사용하게 할지 여부,
-    crossDomain    : {Boolean} [false] - 크로스 도메인 허용 여부 : header 속성이 약간 바뀝니다.,
-    timeout        : 0
-}
+		this.set_body = function(content){
+			this.mask_content = content;
+		};
 
-ax5.xhr({
-   method: &quot;POST&quot;,
-   url   : &quot;data.php&quot;,
-   param : &quot;str=1234&quot;,
-   res   : function (response, status) {
-       console.log(&quot;success&quot;);
-       console.log(this);
-   },
-   error : function () {
-       console.log(&quot;error&quot;);
-       console.log(this);
-   }
-});
+		this.get_body = function(){
+			return this.mask_content;
+		};
 
-// req 또는 request 둘다 사용 가능합니다.
-ax5.xhr({
-   url   : &quot;data.php&quot;,
-   param : &quot;str=1234&quot;,
-   res   : function (response, status) {
-       // status 값이 200 인지 판단 가능
-       console.log(this);
-   }
-});
-// 위와 같이 필요한 옵션만 정의 해서 사용 가능합니다.
+		/**
+		 * open mask
+		 * @method ax5.ui.mask.open
+		 * @param {Object} config
+		 * @returns {ax5.ui.mask}
+		 * @example
+		 * ```js
+		 * my_mask.open({
+		 *     mask_target: document.body,
+		 *     content: "&lt;h1>Loading..&lt;/h1>",
+		 *     onchange: function () {
+		 *
+		 *     }
+		 * });
+		 *
+		 * my_mask.open({
+		 *     mask_target: ax5.dom.get("#mask-target"),
+		 *     content: "&lt;h1>Loading..&lt;/h1>",
+		 *     onchange: function () {
+		 *
+		 *     }
+		 * });
+		 * ```
+		 */
+		this.open = function(config){
+			// todo : z-index 옵션으로 지정가능 하도록 변경
+			if(this.status === "on") this.close();
+			if(config && config.content) this.set_body(config.content);
+			self.mask_config = {};
+			U.extend(self.mask_config, this.config, true);
+			U.extend(self.mask_config, config, true);
 
-// 요청을 큐로 만들어 순차적으로 작동하게 하고 종료 시점을 컨트롤 할 수 있습니다.
-var xhr_queue = [];
-xhr_queue.push({
-   method: &quot;POST&quot;,
-   url   : &quot;../samples/ax5/xhr/data.php&quot;,
-   param : &quot;str=1234&quot;,
-   res   : function (response, status) {
-       console.log(response);
-   }
-});
-xhr_queue.push({
-   method: &quot;POST&quot;,
-   url   : &quot;../samples/ax5/xhr/data.php&quot;,
-   param : &quot;str=1234&quot;,
-   res   : function (response, status) {
-       console.log(response);
-   }
-});
+			var cfg = self.mask_config,
+				mask_target = axd.get(cfg.mask_target)[0],
+				po = [], css, mask_id = 'ax-mask-'+ ax5.get_guid(), _mask, css = {},
+				that = {};
 
-ax5.xhr(xhr_queue, function() {
-   console.log(&quot;큐 완료&quot;)
-});</code></pre>
-    
+			po.push('&lt;div class="ax-mask" id="'+ mask_id +'">');
+				po.push('&lt;div class="ax-mask-bg">&lt;/div>');
+				po.push('&lt;div class="ax-mask-content">');
+					po.push('&lt;div class="ax-mask-body">');
+						po.push(self.get_body());
+					po.push('&lt;/div>');
+				po.push('&lt;/div>');
+			po.push('&lt;/div>');
 
-        
-    
-    </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        <h3 class="subsection-title">Members</h3>
-        
-        <dl>
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="options"><span class="type-signature static">static</span>ax5.xhr.options<span class="type-signature type type">type</span> </h4>
-    </div>
-    
-    
-</dt>
-<dd>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
+			if(mask_target == document.body){
+				axd.append(mask_target, po.join(''));
+			}else{
+				axd.append(document.body, po.join(''));
+				var box_model = axd.box_model(mask_target);
+				css = {
+					position:"absolute",
+					left: box_model.offset.left,
+					top: box_model.offset.top,
+				    width: box_model.width,
+					height: box_model.height
+				};
+				axd.class_name(mask_target, "add", "ax-masking");
+			}
+			this._mask = _mask = axd.get("#"+mask_id);
+			this.mask_target = mask_target;
+			this.status = "on";
+			axd.css(_mask, css);
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
+			if(cfg.onchange) {
+				that = {
+					type: "open"
+				};
+				cfg.onchange.call(that, that);
+			}
+			return this;
+		};
 
-    
-    
-        <h5>Example</h5>
-        
-
-    
-    <pre class="prettyprint linenums"><code>ax5.xhr.options = {
-    header         : {
-        //setRequestHeader 로 추가하게될 헤드 속성
-        'content-type' : {String} [&quot;application/x-www-form-urlencoded; charset=UTF-8&quot;] - request 되는 문서의 content Type,
-        'accept'       : {String} [&quot;*＼*&quot;] - 서버에 응답받기 희망하는 문서 타입,
-    },
-    method         : {String} [&quot;GET&quot;],
-    url            : {String} [&quot;&quot;],
-    param          : {String|Object} [&quot;&quot;] - 파라미터 형식이나 오브젝트 형식 모두 지원합니다.,
-    async          : {Boolean} [true] - 비동기 요청 여부,
-    username       : {String} [&quot;&quot;] - XMLHttpRequest 스펙에 정의된 open() 옶션 사용 안해봐서 잘 모름,
-    password       : {String} [&quot;&quot;] - XMLHttpRequest 스펙에 정의된 open() 옶션 사용 안해봐서 잘 모름,
-    withCredentials: {Boolean} [false] - 자격증명을 사용하게 할지 여부,
-    crossDomain    : {Boolean} [false] - 크로스 도메인 허용 여부 : header 속성이 약간 바뀝니다.,
-    timeout        : 0
-}</code></pre>
-    
-
-    
-</dd>
-
-        </dl>
-    
-    
-    
-        <h3 class="subsection-title">Methods</h3>
-        
-        <dl>
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="config">
-            
-            <span class="type-signature static">static</span>ax5.xhr.config<span class="signature">(opts)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Object}</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L3627" target="_blank">
-            ax5.js,
-            line 3627</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>ax5.xhr 통신 기본 값을 설정합니다.</p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>opts</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
+		/**
+		 * close mask
+		 * @method ax5.ui.mask.close
+		 * @returns {ax5.ui.mask}
+		 * @example
+		 * ```
+		 * my_mask.close();
+		 * ```
+		 */
+		this.close = function(){
+			var cfg = this.mask_config;
+			axd.remove(this._mask);
+			axd.class_name(this.mask_target, "remove", "ax-masking");
+			if(cfg.onchange) {
+				that = {
+					type: "close"
+				};
+				cfg.onchange.call(that, that);
+			}
+			return this;
+		};
+		//== class body end
+	};
 
 
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                <p>XHR 요청옵션 기본 값</p></td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
+	//== ui class 공통 처리 구문
+	if (U.is_function(ax_super)) ax_class.prototype = new ax_super(); // 상속
+	root.mask = ax_class; // ax5.ui에 연결
+	if (typeof define === "function" && define.amd) {
+		define("_ax5_ui_mask", [], function () { return ax_class; }); // for requireJS
+	}
+	//== ui class 공통 처리 구문
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-
-
-    
-    
-    
-        <h5>Example</h5>
-        
-
-    
-    <pre class="prettyprint linenums"><code>ax5.xhr.config({
-    header      : {
-        'accept'      : &quot;*.*&quot;,
-        'content-type': &quot;application/x-www-form-urlencoded; charset=UTF-8&quot;
-    },
-    method         : &quot;GET&quot;,
-    url            : &quot;&quot;,
-    param          : &quot;&quot;,
-    async          : true,
-    username       : &quot;&quot;,
-    password       : &quot;&quot;,
-    withCredentials: false,
-    crossDomain    : false,
-    timeout        : 0
-});
-
-ax5.xhr.config({
-    header      : {
-        'accept' : &quot;*.html&quot;
-    }
-});
-// ax5.xhr 요청 기본값 설정</code></pre>
-    
-
-    
-</dd>
-
-        </dl>
-    
-    
-    
-    
-    
-</article>
-
-</section>  
+})(ax5.ui, ax5.ui.root);</code></pre>
+        </article>
+    </section>
 
 
 
@@ -836,7 +634,7 @@ ax5.xhr.config({
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Tue Apr 21 2015 15:17:10 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Tue Apr 21 2015 15:17:09 GMT+0900 (KST)
         </footer>
     </div>
 </div>

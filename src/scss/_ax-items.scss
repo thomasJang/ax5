@@ -1,0 +1,27 @@
+
+
+// mixins --------------------------------------------- end
+
+.ax-item-group{
+	padding: 0px;
+	.ax-item{
+		position: relative;
+		display: block;
+		padding: 10px 15px;
+		// Place the border on the list items and negative margin up for better styling
+		margin-bottom: -1px;
+		background-color: $item-group-bg;
+		border: 1px solid $item-group-border;
+
+		// Round the first and last items
+		&:first-child {
+			@include ax-border-radius($item-group-border-radius);
+			@include border-bottom-radius(0);
+		}
+		&:last-child {
+			margin-bottom: 0;
+			@include ax-border-radius($item-group-border-radius);
+			@include border-top-radius(0);
+		}
+	}
+}

@@ -2145,9 +2145,10 @@
 		 * ```
 		 */
 		function ready(_fn) {
+			var is_ready = false;
 			promise(function () {
-				if (ax5.dom.is_ready) return _fn();
-				ax5.dom.is_ready = true;
+				if (is_ready) return;
+				is_ready = ax5.dom.is_ready = true;
 				_fn();
 			});
 		}
@@ -2156,16 +2157,12 @@
 			if (doc.readyState === "complete") {
 				setTimeout(_fn);
 			} else {
-				var _timer, __fn = function(){
-					if(_timer) clearTimeout(_timer);
-					_timer = setTimeout(_fn);
-				};
 				if (doc.addEventListener) {
-					doc.addEventListener("DOMContentLoaded", __fn, false);
-					win.addEventListener("load", __fn, false);
+					doc.addEventListener("DOMContentLoaded", _fn, false);
+					win.addEventListener("load", _fn, false);
 				} else {
-					doc.attachEvent("onreadystatechange", __fn);
-					win.attachEvent("onload", __fn);
+					doc.attachEvent("onreadystatechange", _fn);
+					win.attachEvent("onload", _fn);
 					// If IE and not a frame
 					var top = false;
 					try {
@@ -2184,7 +2181,7 @@
 									return setTimeout(doScrollCheck, 50);
 								}
 								// and execute any waiting functions
-								__fn();
+								_fn();
 							}
 						})();
 					}
