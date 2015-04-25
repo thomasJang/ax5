@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .align-left {
   text-align: left; }
 
@@ -26,10 +27,10 @@
 
 .ax {
   color: #333333;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 17px; }
+  line-height: 18px; }
 
 a.ax {
   color: #32B4DC;
@@ -95,7 +96,7 @@ a.ax {
   display: inline-block;
   min-width: 10px;
   padding: 3px 5px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: bold;
   color: #fff;
   line-height: 1;
@@ -119,22 +120,22 @@ a.ax {
     color: #fff;
     text-decoration: none;
     cursor: pointer; }
-  .list-group-item.active > .badge, .nav-pills > .active > a > .badge {
+  .ax-item.active > .badge, .nav-pills > .active > a > .badge {
     color: #32B4DC;
     background-color: #fff; }
-  .list-group-item > .badge {
+  .ax-item > .badge {
     float: right; }
-  .list-group-item > .badge + .badge {
+  .ax-item > .badge + .badge {
     margin-right: 5px; }
   .nav-pills > li > a > .badge {
     margin-left: 3px; }
 
 .ax-btn {
   color: #333333;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 17px;
+  line-height: 18px;
   display: inline-block;
   font-weight: normal;
   text-align: center;
@@ -152,7 +153,7 @@ a.ax {
   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#F0F0F0);
   box-shadow: none;
   padding: 4px 7px;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.428571429;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
@@ -460,7 +461,7 @@ a.ax {
       box-shadow: none; }
   .ax-btn.lg {
     padding: 5px 10px;
-    font-size: 15px;
+    font-size: 17px;
     line-height: 1.3333333;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -468,7 +469,7 @@ a.ax {
     border-bottom-left-radius: 8px; }
   .ax-btn.sm {
     padding: 2px 5px;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.5;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -476,7 +477,7 @@ a.ax {
     border-bottom-left-radius: 3px; }
   .ax-btn.xs {
     padding: 1px 5px;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.5;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -485,10 +486,10 @@ a.ax {
 
 .ax-inp {
   color: #333333;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 17px;
+  line-height: 18px;
   font-weight: normal;
   vertical-align: middle;
   touch-action: manipulation;
@@ -503,9 +504,9 @@ a.ax {
   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#FFFFFF);
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15) inset;
   padding: 4px 7px;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.428571429;
-  height: 27px;
+  height: 28px;
   border-radius: 6px;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
@@ -651,9 +652,9 @@ a.ax {
       color: #802690; }
   .ax-inp.lg {
     padding: 5px 10px;
-    font-size: 15px;
+    font-size: 17px;
     line-height: 1.3333333;
-    height: 32px;
+    height: 35px;
     border-radius: 8px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -661,9 +662,9 @@ a.ax {
     border-bottom-left-radius: 8px; }
   .ax-inp.sm {
     padding: 2px 5px;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.5;
-    height: 22px;
+    height: 24px;
     border-radius: 3px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -671,9 +672,9 @@ a.ax {
     border-bottom-left-radius: 3px; }
   .ax-inp.xs {
     padding: 1px 5px;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.5;
-    height: 20px;
+    height: 22px;
     border-radius: 3px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -682,10 +683,10 @@ a.ax {
 
 .ax-select {
   color: #333333;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 17px;
+  line-height: 18px;
   font-weight: normal;
   vertical-align: middle;
   white-space: nowrap;
@@ -699,9 +700,9 @@ a.ax {
   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#F0F0F0);
   box-shadow: none;
   padding: 4px 7px;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.428571429;
-  height: 27px;
+  height: 28px;
   border-radius: 6px;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
@@ -840,9 +841,9 @@ a.ax {
       color: #fff; }
   .ax-select.lg {
     padding: 5px 10px;
-    font-size: 15px;
+    font-size: 17px;
     line-height: 1.3333333;
-    height: 32px;
+    height: 35px;
     border-radius: 8px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -850,9 +851,9 @@ a.ax {
     border-bottom-left-radius: 8px; }
   .ax-select.sm {
     padding: 2px 5px;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.5;
-    height: 22px;
+    height: 24px;
     border-radius: 3px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -860,9 +861,9 @@ a.ax {
     border-bottom-left-radius: 3px; }
   .ax-select.xs {
     padding: 1px 5px;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.5;
-    height: 20px;
+    height: 22px;
     border-radius: 3px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -871,10 +872,10 @@ a.ax {
 
 .ax-textarea {
   color: #333333;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 17px;
+  line-height: 18px;
   font-weight: normal;
   vertical-align: middle;
   white-space: nowrap;
@@ -888,7 +889,7 @@ a.ax {
   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#FFFFFF);
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15) inset;
   padding: 4px 7px;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.428571429;
   height: auto;
   border-radius: 6px;
@@ -1029,7 +1030,7 @@ a.ax {
       color: #802690; }
   .ax-textarea.lg {
     padding: 5px 10px;
-    font-size: 15px;
+    font-size: 17px;
     line-height: 1.3333333;
     height: auto;
     border-radius: 8px;
@@ -1039,7 +1040,7 @@ a.ax {
     border-bottom-left-radius: 8px; }
   .ax-textarea.sm {
     padding: 2px 5px;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.5;
     height: auto;
     border-radius: 3px;
@@ -1049,7 +1050,7 @@ a.ax {
     border-bottom-left-radius: 3px; }
   .ax-textarea.xs {
     padding: 1px 5px;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.5;
     height: auto;
     border-radius: 3px;
@@ -1081,9 +1082,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#F0F0F0);
     box-shadow: none;
     padding: 4px 7px;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.428571429;
-    height: 27px;
+    height: 28px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1127,9 +1128,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#5ec4e3, endColorstr=#32B4DC);
     box-shadow: none;
     padding: 4px 7px;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.428571429;
-    height: 27px;
+    height: 28px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1184,9 +1185,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#92c85b, endColorstr=#78B43C);
     box-shadow: none;
     padding: 4px 7px;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.428571429;
-    height: 27px;
+    height: 28px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1241,9 +1242,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#004582, endColorstr=#002A4F);
     box-shadow: none;
     padding: 4px 7px;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.428571429;
-    height: 27px;
+    height: 28px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1298,9 +1299,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ec9069, endColorstr=#E66E3C);
     box-shadow: none;
     padding: 4px 7px;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.428571429;
-    height: 27px;
+    height: 28px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1355,9 +1356,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#d4511b, endColorstr=#a74015);
     box-shadow: none;
     padding: 4px 7px;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.428571429;
-    height: 27px;
+    height: 28px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1412,9 +1413,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#a430b9, endColorstr=#bc4cd0);
     box-shadow: none;
     padding: 4px 7px;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.428571429;
-    height: 27px;
+    height: 28px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1469,9 +1470,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#5ec4e3, endColorstr=#32B4DC);
     box-shadow: none;
     padding: 4px 7px;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.428571429;
-    height: 27px;
+    height: 28px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1524,9 +1525,9 @@ a.ax {
     right: 0px;
     top: 0px;
     color: #187490;
-    font-size: 14.4px;
+    font-size: 15.6px;
     font-weight: 400;
-    line-height: 17px;
+    line-height: 18px;
     padding: 4px 7px;
     font-family: axicon; }
     .ax-inp-group.has-basic .axicon:before {
@@ -1548,9 +1549,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#92c85b, endColorstr=#78B43C);
     box-shadow: none;
     padding: 4px 7px;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.428571429;
-    height: 27px;
+    height: 28px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1603,9 +1604,9 @@ a.ax {
     right: 0px;
     top: 0px;
     color: #456822;
-    font-size: 14.4px;
+    font-size: 15.6px;
     font-weight: 400;
-    line-height: 17px;
+    line-height: 18px;
     padding: 4px 7px;
     font-family: axicon; }
     .ax-inp-group.has-good .axicon:before {
@@ -1627,9 +1628,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#004582, endColorstr=#002A4F);
     box-shadow: none;
     padding: 4px 7px;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.428571429;
-    height: 27px;
+    height: 28px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1682,9 +1683,9 @@ a.ax {
     right: 0px;
     top: 0px;
     color: black;
-    font-size: 14.4px;
+    font-size: 15.6px;
     font-weight: 400;
-    line-height: 17px;
+    line-height: 18px;
     padding: 4px 7px;
     font-family: axicon; }
     .ax-inp-group.has-info .axicon:before {
@@ -1706,9 +1707,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ec9069, endColorstr=#E66E3C);
     box-shadow: none;
     padding: 4px 7px;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.428571429;
-    height: 27px;
+    height: 28px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1761,9 +1762,9 @@ a.ax {
     right: 0px;
     top: 0px;
     color: #a74015;
-    font-size: 14.4px;
+    font-size: 15.6px;
     font-weight: 400;
-    line-height: 17px;
+    line-height: 18px;
     padding: 4px 7px;
     font-family: axicon; }
     .ax-inp-group.has-warning .axicon:before {
@@ -1785,9 +1786,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#d4511b, endColorstr=#a74015);
     box-shadow: none;
     padding: 4px 7px;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.428571429;
-    height: 27px;
+    height: 28px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1840,9 +1841,9 @@ a.ax {
     right: 0px;
     top: 0px;
     color: #a74015;
-    font-size: 14.4px;
+    font-size: 15.6px;
     font-weight: 400;
-    line-height: 17px;
+    line-height: 18px;
     padding: 4px 7px;
     font-family: axicon; }
     .ax-inp-group.has-danger .axicon:before {
@@ -1864,9 +1865,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#a430b9, endColorstr=#bc4cd0);
     box-shadow: none;
     padding: 4px 7px;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.428571429;
-    height: 27px;
+    height: 28px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1919,25 +1920,25 @@ a.ax {
     right: 0px;
     top: 0px;
     color: #802690;
-    font-size: 14.4px;
+    font-size: 15.6px;
     font-weight: 400;
-    line-height: 17px;
+    line-height: 18px;
     padding: 4px 7px;
     font-family: axicon; }
     .ax-inp-group.has-special .axicon:before {
       content: '\e60a'; }
   .ax-inp-group.lg .ax-addon {
     padding: 5px 10px;
-    font-size: 15px;
+    font-size: 17px;
     line-height: 1.3333333;
-    height: 32px;
+    height: 35px;
     overflow: hidden;
     display: inline-block; }
   .ax-inp-group.lg .ax-inp {
     padding: 5px 10px;
-    font-size: 15px;
+    font-size: 17px;
     line-height: 1.3333333;
-    height: 32px;
+    height: 35px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
@@ -1951,21 +1952,21 @@ a.ax {
   .ax-inp-group.lg .axicon {
     box-sizing: border-box;
     padding: 5px 10px;
-    font-size: 15px;
+    font-size: 17px;
     line-height: 1.3333333;
-    height: 32px; }
+    height: 35px; }
   .ax-inp-group.sm .ax-addon {
     padding: 2px 5px;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.5;
-    height: 22px;
+    height: 24px;
     overflow: hidden;
     display: inline-block; }
   .ax-inp-group.sm .ax-inp {
     padding: 2px 5px;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.5;
-    height: 22px;
+    height: 24px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
@@ -1979,21 +1980,21 @@ a.ax {
   .ax-inp-group.sm .axicon {
     box-sizing: border-box;
     padding: 2px 5px;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.5;
-    height: 22px; }
+    height: 24px; }
   .ax-inp-group.xs .ax-addon {
     padding: 1px 5px;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.5;
-    height: 20px;
+    height: 22px;
     overflow: hidden;
     display: inline-block; }
   .ax-inp-group.xs .ax-inp {
     padding: 1px 5px;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.5;
-    height: 20px;
+    height: 22px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
@@ -2007,13 +2008,18 @@ a.ax {
   .ax-inp-group.xs .axicon {
     box-sizing: border-box;
     padding: 1px 5px;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.5;
-    height: 20px; }
+    height: 22px; }
 
 .ax-item-group {
   padding: 0px; }
   .ax-item-group .ax-item {
+    color: #333333;
+    font-size: 13px;
+    font-weight: 400;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 18px;
     position: relative;
     display: block;
     padding: 10px 15px;
@@ -2022,26 +2028,46 @@ a.ax {
     border: 1px solid #ddd; }
     .ax-item-group .ax-item:first-child {
       border-top-left-radius: 6px;
-      border-top-right-radius: 6px;
-      border-bottom-right-radius: 6px;
-      border-bottom-left-radius: 6px;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0; }
+      border-top-right-radius: 6px; }
     .ax-item-group .ax-item:last-child {
       margin-bottom: 0;
-      border-top-left-radius: 6px;
-      border-top-right-radius: 6px;
       border-bottom-right-radius: 6px;
-      border-bottom-left-radius: 6px;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0; }
+      border-bottom-left-radius: 6px; }
+  .ax-item-group a.ax-item {
+    color: #555;
+    /* item안에 타이틀과 내용을 추가할 때 필요
+		.ax-item-heading {
+			color: $list-group-link-heading-color;
+		}
+		*/ }
+    .ax-item-group a.ax-item:hover, .ax-item-group a.ax-item:focus {
+      text-decoration: none;
+      color: #555;
+      background-color: #f5f5f5; }
+  .ax-item-group .ax-item.disabled, .ax-item-group .ax-item.disabled:hover, .ax-item-group .ax-item.disabled:focus {
+    background-color: #eeeeee;
+    color: #777777;
+    cursor: not-allowed; }
+    .ax-item-group .ax-item.disabled .ax-item-heading, .ax-item-group .ax-item.disabled:hover .ax-item-heading, .ax-item-group .ax-item.disabled:focus .ax-item-heading {
+      color: inherit; }
+    .ax-item-group .ax-item.disabled .ax-item-text, .ax-item-group .ax-item.disabled:hover .ax-item-text, .ax-item-group .ax-item.disabled:focus .ax-item-text {
+      color: #777777; }
+  .ax-item-group .ax-item.active, .ax-item-group .ax-item.active:hover, .ax-item-group .ax-item.active:focus {
+    z-index: 2;
+    color: #fff;
+    background-color: #32B4DC;
+    border-color: #32B4DC; }
+    .ax-item-group .ax-item.active .list-group-item-heading, .ax-item-group .ax-item.active .list-group-item-heading > small, .ax-item-group .ax-item.active .list-group-item-heading > .small, .ax-item-group .ax-item.active:hover .list-group-item-heading, .ax-item-group .ax-item.active:hover .list-group-item-heading > small, .ax-item-group .ax-item.active:hover .list-group-item-heading > .small, .ax-item-group .ax-item.active:focus .list-group-item-heading, .ax-item-group .ax-item.active:focus .list-group-item-heading > small, .ax-item-group .ax-item.active:focus .list-group-item-heading > .small {
+      color: inherit; }
+    .ax-item-group .ax-item.active .list-group-item-text, .ax-item-group .ax-item.active:hover .list-group-item-text, .ax-item-group .ax-item.active:focus .list-group-item-text {
+      color: #e0f4fa; }
 
 .ax-panel {
   color: #333333;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 17px;
+  line-height: 18px;
   box-sizing: border-box;
   background-color: #fff;
   border: 1px solid transparent;
@@ -2146,10 +2172,10 @@ a.ax {
 
 .ax-scroll {
   color: #333333;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 17px;
+  line-height: 18px;
   box-sizing: border-box;
   background-color: #fff;
   border: 1px solid transparent;
@@ -2225,10 +2251,10 @@ a.ax {
 
 .ax-menu {
   color: #333333;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 17px;
+  line-height: 18px;
   box-sizing: border-box;
   background-color: #fff;
   border: 1px solid transparent;
@@ -2240,10 +2266,10 @@ a.ax {
 
 .ax-tab {
   color: #333333;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 17px;
+  line-height: 18px;
   box-sizing: border-box;
   background-color: #fff;
   border: 1px solid transparent;
@@ -2255,10 +2281,10 @@ a.ax {
 
 .ax-toolbar {
   color: #333333;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 17px;
+  line-height: 18px;
   box-sizing: border-box;
   background-color: #fff;
   border: 1px solid transparent;
@@ -2270,10 +2296,10 @@ a.ax {
 
 .ax-label {
   color: #333333;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 17px;
+  line-height: 18px;
   box-sizing: border-box;
   background-color: #fff;
   border: 1px solid transparent;

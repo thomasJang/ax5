@@ -27,7 +27,10 @@ div.block-end {
 
 pre.prettyprint {
   border-radius: 10px;
-  margin: 20px 0; }
+  margin: 20px 0;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4; }
 
 .app-wrap {
   position: relative;

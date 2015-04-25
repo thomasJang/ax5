@@ -1,14 +1,101 @@
 <article class="cover">
 	<h1 data-menu-item="ax-item-group">ax.item-group</h1>
 </article>
+
+
+
 <article class="content">
-
-	<h3 data-menu-item="ax-item-group-tag">Tag</h3>
-
+	<h3 data-menu-item="ax-item-group-basic">Basic</h3>
+	<p>
+		<code>UL</code>태그에 <code>.ax-item-group</code>을 적용하면 자식아이템중 <code>li.ax-item</code>인 엘리먼트들에게 목록 아이템 스타일이 적용된다.
+	</p>
 <pre>
-<ul>
-	<li>item A</li>
+<!-- item-group -->
+<ul class="ax-item-group">
+	<li class="ax-item">item A</li>
+	<li class="ax-item">item B</li>
+	<li class="ax-item">item C</li>
 </ul>
+
+<!-- item-group with A -->
+<ul class="ax-item-group">
+	<a class="ax-item active">Active item</a>
+	<a class="ax-item disabled">Disabled item</a>
+	<a class="ax-item">item B</a>
+	<a class="ax-item">item C</a>
+</ul>
+
 </pre>
 
+	<p>목록아이템은 다양한 UI로 확장이 되게 되는데, 그중에 흔하게 쓰이는 것은 목록아이템을 링크하는 것이라 말할 수 있다.</p>
+
+</article>
+
+
+
+<article class="content">
+	<h3 data-menu-item="ax-item-group-badge">Badges</h3>
+	<p>
+		예쁘게 뱃지를 달아보자 <code>Bootstrap</code>에서와 같이.. 솔직히 이런건 대놓고 베낀다. 작업을 하면서도 고민된다. 이거 나라도 편하게 써야 할텐데.
+	</p>
+<pre>
+<!-- item-group -->
+<ul class="ax-item-group" style="width:300px;">
+	<li class="ax-item uppercase">axisj</li>
+	<li class="ax-item">
+		item B
+		<span class="badge">5</span>
+	</li>
+	<li class="ax-item">
+		item C
+		<span class="badge">5</span>
+	</li>
+</ul>
+</pre>
+</article>
+
+
+
+<article class="content">
+	<h3 data-menu-item="ax-item-group-colored">Colored</h3>
+	<p>
+
+	</p>
+<pre>
+<!-- item-group -->
+<ul class="ax-item-group" style="width:300px;">
+	<li class="ax-item">axisj</li>
+	<li class="ax-item">
+		item B
+		<span class="badge">5</span>
+	</li>
+	<li class="ax-item">
+		item C
+		<span class="badge">5</span>
+	</li>
+</ul>
+</pre>
+</article>
+
+
+
+<article class="content">
+	<h3 data-menu-item="ax-item-group-custom">Custom</h3>
+	<p>
+
+	</p>
+<pre>
+<!-- item-group -->
+<ul class="ax-item-group" style="width:300px;">
+	<li class="ax-item">axisj</li>
+	<li class="ax-item">
+		item B
+		<span class="badge">5</span>
+	</li>
+	<li class="ax-item">
+		item C
+		<span class="badge">5</span>
+	</li>
+</ul>
+</pre>
 </article>
