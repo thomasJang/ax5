@@ -322,6 +322,20 @@ $item-group-link-hover-color:   $item-group-link-color;
 $item-group-link-heading-color: #333;
 
 
+//** Situation
+$item-group-good-bg: lighten($theme-good, 30%);
+$item-group-good-border: #555;
+$item-group-info-bg: lighten($theme-info, 20%);
+$item-group-info-border: #fff;
+$item-group-warning-bg: lighten($theme-warning, 20%);
+$item-group-warning-border: #555;
+$item-group-danger-bg: lighten($theme-danger, 20%);
+$item-group-danger-border: #fff;
+$item-group-link-bg: lighten($theme-link, 50%);
+$item-group-link-border: #555;
+$item-group-special-bg: lighten($theme-special, 10%);
+$item-group-special-border: #fff;
+
 //== Panels
 $panel-box-model: border-box;
 $panel-bg:                    #fff;

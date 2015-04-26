@@ -1,26 +1,32 @@
-@mixin list-group-item-variant($background, $color) {
-
-	color: $color;
-	background-color: $background;
-
-	&a {
-		color: $color;
-
-		.list-group-item-heading {
-			color: inherit;
-		}
-
-		&:hover,
-		&:focus {
+@mixin item-variant($name, $base-color, $background, $color) {
+	.ax-item {
+		&.#{$name} {
 			color: $color;
-			background-color: darken($background, 5%);
+			background-color: $background;
+			border-color: $background;
 		}
-		&.active,
-		&.active:hover,
-		&.active:focus {
-			color: #fff;
-			background-color: $color;
-			border-color: $color;
+	}
+
+	a.ax-item {
+		&.#{$name} {
+			color: $color;
+
+			.list-group-item-heading {
+				color: inherit;
+			}
+
+			&:hover,
+			&:focus {
+				color: #fff;
+				background-color: $base-color;
+			}
+			&.active,
+			&.active:hover,
+			&.active:focus {
+				color: #fff;
+				background-color: $base-color;
+				border-color: $base-color;
+			}
 		}
 	}
 }
@@ -104,4 +110,18 @@
 			}
 		}
 	}
+
+	// situation
+	// -- good
+	@include item-variant(good, $theme-good, $item-group-good-bg, $item-group-good-border);
+	// -- info
+	@include item-variant(info, $theme-info, $item-group-info-bg, $item-group-info-border);
+	// -- warning
+	@include item-variant(warning, $theme-warning, $item-group-warning-bg, $item-group-warning-border);
+	// -- danger
+	@include item-variant(danger, $theme-danger, $item-group-danger-bg, $item-group-danger-border);
+	// -- link
+	@include item-variant(link, $theme-link, $item-group-link-bg, $item-group-link-border);
+	// -- special
+	@include item-variant(special, $theme-special, $item-group-special-bg, $item-group-special-border);
 }
