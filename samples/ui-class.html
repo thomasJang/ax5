@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-04-21 
+ publish date : 2015-04-29 
 -->
 <html lang="en">
 <head>
@@ -14,12 +14,8 @@
 	<link rel="stylesheet" type="text/css" href="http://cdn.axisj.com/axicon/axicon.min.css">
 	
     <script type="text/javascript" src="../plugin/prettify/prettify.js"></script>
-    <script type="text/javascript" src="../src/ax5-polyfill.js"></script>
-    <script type="text/javascript" src="../src/ax5-core.js"></script>
-    <script type="text/javascript" src="../src/ax5-xhr.js"></script>
-    <script type="text/javascript" src="../src/ax5-ui.js"></script>
-	
-	    
+    <script type="text/javascript" src="../src/ax5.js"></script>
+
 </head>
 <body>
 
@@ -97,7 +93,7 @@ ax5.info.base_url = "../pub/";
 ax5.util.require(["ui/mask.min.js"], function(){
 	window.app_mask = new ax5.ui.mask();
 	app_mask.set_config({
-		mask_target: document.body, // 미리 선언했지만
+		target: document.body, // 미리 선언했지만
 		content: "&lt;h1>ready&lt;/h1>",
 		onchange: function(){
 
@@ -107,7 +103,7 @@ ax5.util.require(["ui/mask.min.js"], function(){
 	window.app_mask_open = function() {
 		app_mask.open({
 			// 변경가능하다.
-			mask_target: ax5.dom.get("#mask-target"),
+			target: ax5.dom.get("#mask-target"),
 			content: "&lt;h1>Loading..&lt;/h1>",
 			onchange: function () {
 
@@ -137,7 +133,7 @@ ax5.info.base_url = "../pub/";
 ax5.util.require(["ui/mask.min.js"], function(){
 	window.app_mask = new ax5.ui.mask();
 	app_mask.set_config({
-		mask_target: document.body, // 미리 선언했지만
+		target: document.body, // 미리 선언했지만
 		content: "<h1>ready</h1>",
 		onchange: function(){
 
@@ -147,7 +143,7 @@ ax5.util.require(["ui/mask.min.js"], function(){
 	window.app_mask_open = function() {
 		app_mask.open({
 			// 변경가능하다.
-			mask_target: ax5.dom.get("#mask-target"),
+			target: ax5.dom.get("#mask-target"),
 			content: "<h1>Loading..</h1>",
 			onchange: function () {
 
@@ -191,7 +187,7 @@ ax5.util.require(["ui/mask.min.js"], function(){
 
 	window.app_body_mask = new ax5.ui.mask();
 	app_body_mask.set_config({
-		mask_target: document.body,
+		target: document.body,
 		content: "&lt;h1>ready&lt;/h1>",
 		onchange: function(){
 
@@ -222,7 +218,7 @@ ax5.util.require(["ui/mask.min.js"], function(){
 
 	window.app_body_mask = new ax5.ui.mask();
 	app_body_mask.set_config({
-		mask_target: document.body,
+		target: document.body,
 		content: "<h1>ready</h1>",
 		onchange: function(){
 
@@ -262,25 +258,51 @@ ax5.util.require(["ui/mask.min.js"], function(){
 
 
 <article class="content">
-	<h3 data-menu-item="ax-ui-menu-default">Default menu</h3>
+	<h3 data-menu-item="ax-ui-menu-basic" class="Capitalize">basic</h3>
 
 <pre class="prettyprint linenums">
 &lt;div class="tag-result">
-
+	&lt;div id="ui-menu-target-basic">&lt;/div>
 &lt;/div>
 &lt;script type="text/javascript">
 ax5.info.base_url = "../pub/";
 ax5.util.require(["ui/menu.js"], function(){
 
+	var my_menu = new ax5.ui.menu(1,2,3);
+	my_menu.set_config({
+		target: ax5.dom.get("#ui-menu-target-basic"),
+		keys: {value:"id"},
+		menu: [
+			{id:"1", text:"메뉴 A"},
+			{id:"2", text:"메뉴 B"}
+		],
+		onclick: function(){
+
+		}
+	});
+
 });
 &lt;/script>
 </pre><h4>Result</h4>
 <div class="tag-result">
-
+	<div id="ui-menu-target-basic"></div>
 </div>
 <script type="text/javascript">
 ax5.info.base_url = "../pub/";
 ax5.util.require(["ui/menu.js"], function(){
+
+	var my_menu = new ax5.ui.menu(1,2,3);
+	my_menu.set_config({
+		target: ax5.dom.get("#ui-menu-target-basic"),
+		keys: {value:"id"},
+		menu: [
+			{id:"1", text:"메뉴 A"},
+			{id:"2", text:"메뉴 B"}
+		],
+		onclick: function(){
+
+		}
+	});
 
 });
 </script>

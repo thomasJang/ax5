@@ -37,7 +37,7 @@ ax5.info.base_url = "../pub/";
 ax5.util.require(["ui/mask.min.js"], function(){
 	window.app_mask = new ax5.ui.mask();
 	app_mask.set_config({
-		mask_target: document.body, // 미리 선언했지만
+		target: document.body, // 미리 선언했지만
 		content: "<h1>ready</h1>",
 		onchange: function(){
 
@@ -47,7 +47,7 @@ ax5.util.require(["ui/mask.min.js"], function(){
 	window.app_mask_open = function() {
 		app_mask.open({
 			// 변경가능하다.
-			mask_target: ax5.dom.get("#mask-target"),
+			target: ax5.dom.get("#mask-target"),
 			content: "<h1>Loading..</h1>",
 			onchange: function () {
 
@@ -91,7 +91,7 @@ ax5.util.require(["ui/mask.min.js"], function(){
 
 	window.app_body_mask = new ax5.ui.mask();
 	app_body_mask.set_config({
-		mask_target: document.body,
+		target: document.body,
 		content: "<h1>ready</h1>",
 		onchange: function(){
 

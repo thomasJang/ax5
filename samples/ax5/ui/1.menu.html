@@ -8,15 +8,28 @@
 
 
 <article class="content">
-	<h3 data-menu-item="ax-ui-menu-default">Default menu</h3>
+	<h3 data-menu-item="ax-ui-menu-basic" class="Capitalize">basic</h3>
 
 <pre>
 <div class="tag-result">
-
+	<div id="ui-menu-target-basic"></div>
 </div>
 <script type="text/javascript">
 ax5.info.base_url = "../pub/";
 ax5.util.require(["ui/menu.js"], function(){
+
+	var my_menu = new ax5.ui.menu(1,2,3);
+	my_menu.set_config({
+		target: ax5.dom.get("#ui-menu-target-basic"),
+		keys: {value:"id"},
+		menu: [
+			{id:"1", text:"메뉴 A"},
+			{id:"2", text:"메뉴 B"}
+		],
+		onclick: function(){
+
+		}
+	});
 
 });
 </script>

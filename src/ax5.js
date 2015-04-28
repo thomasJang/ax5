@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-04-21 
+ * 2015-04-29 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -255,7 +255,24 @@
 		 * @member {String} ax5.info.version
 		 */
 		var version = "0.0.1";
+		/**
+		 * ax5 library path
+		 * @member {String} ax5.info.base_url
+		 */
 		var base_url = "";
+		/**
+		 * ax5 에러 출력메세지 사용자 재 정의
+		 * @member {Object} ax5.info.onerror
+		 * @examples
+		 * ```
+		 * ax5.info.onerror = function(){
+		 *  console.log(arguments);
+		 * }
+		 * ```
+		 */
+		var onerror = function(){
+			console.error(ax5.util.to_array(arguments).join(":"));
+		};
 
 		/**
 		 * event keyCodes
@@ -284,9 +301,8 @@
 		 * //Object {name: "chrome", version: "39.0.2171.71", mobile: false}
 		 * ```
 		 */
-		var browser = (function () {
-			var ua = navigator.userAgent.toLowerCase(), mobile = (ua.search(/mobile/g) != -1),
-				browserName, match, browser, browserVersion;
+		var browser = (function (ua, mobile, browserName, match, browser, browserVersion) {
+			ua = navigator.userAgent.toLowerCase(), mobile = (ua.search(/mobile/g) != -1), browserName, match, browser, browserVersion;
 
 			if (ua.search(/iphone/g) != -1) {
 				return { name: "iphone", version: 0, mobile: true }
@@ -364,6 +380,7 @@
 		return {
 			version: version,
 			base_url: base_url,
+			onerror: onerror,
 			event_keys: event_keys,
 			browser: browser,
 			is_browser: is_browser,
@@ -1016,6 +1033,7 @@
 				return undefined;
 			}
 		}
+
 		/**
 		 * 쿠키를 설정합니다.
 		 * @method ax5.util.set_cookie
@@ -1045,6 +1063,7 @@
 				opts.secure  ? "; secure" : ""
 			].join(""));
 		}
+
 		/**
 		 * 쿠키를 가져옵니다.
 		 * @method ax5.util.get_cookie
@@ -1293,13 +1312,13 @@
 		 * ```
 		 */
 		function number(str, cond) {
-			var result, pair = ('' + str).split(re_dot), isMinus = (parseFloat(pair[0]) < 0 || pair[0] == "-0"), returnValue = 0.0;
+			var result, pair = ('' + str).split(re_dot), isMinus = (Number(pair[0]) < 0 || pair[0] == "-0"), returnValue = 0.0;
 			pair[0] = pair[0].replace(re_int, "");
 			if (pair[1]) {
 				pair[1] = pair[1].replace(re_not_num, "");
-				returnValue = parseFloat(pair[0] + "." + pair[1]) || 0;
+				returnValue = Number(pair[0] + "." + pair[1]) || 0;
 			} else {
-				returnValue = parseFloat(pair[0]) || 0;
+				returnValue = Number(pair[0]) || 0;
 			}
 			result = (isMinus) ? -returnValue : returnValue;
 
@@ -1328,11 +1347,11 @@
 					})(result);
 				}
 				else if (k == "abs") {
-					result = Math.abs(parseFloat(result));
+					result = Math.abs(Number(result));
 				}
 				else if (k == "byte") {
 					result = (function (val) {
-						val = parseFloat(result);
+						val = Number(result);
 						var n_unit = "KB";
 						var myByte = val / 1024;
 						if (myByte / 1024 > 1) {
@@ -1440,8 +1459,12 @@
 			return encodeURIComponent(s);
 		}
 
-		function decode() {
+		function decode(s) {
 			return decodeURIComponent(s);
+		}
+
+		function error(){
+			ax5.info.onerror.apply(this, arguments);
 		}
 
 		return {
@@ -1480,7 +1503,8 @@
             number      : number,
             to_array    : to_array,
             merge       : merge,
-            param       : param
+            param       : param,
+			error       : error
 		}
 	})();
 
@@ -3696,12 +3720,15 @@ ax5.xhr = (function (){
  * var myui = new ax5.ui.root();
  * ```
  */
-ax5.ui = (function () {
-	var U = ax5.util;
+ax5.ui = (function (core) {
 
 	function ax_ui() {
-		this.config = {};
-		this.name = "root";
+		// 클래스 인스턴스 초기화
+		this.main = (function(){
+			this.config = {};
+			this.name = "root";
+		}).apply(this, arguments);
+
 		/**
 		 * 클래스의 속성 정의 메소드 속성 확장후에 내부에 init 함수를 호출합니다.
 		 * @method ax5.ui.root.set_config
@@ -3717,7 +3744,7 @@ ax5.ui = (function () {
 		 * ```
 		 */
 		this.set_config = function (cfg, call_init) {
-			U.extend(this.config, cfg, true);
+			core.util.extend_all(this.config, cfg, true);
 			if (typeof call_init == "undefined" || call_init === true) {
 				this.init();
 			}
@@ -3731,4 +3758,4 @@ ax5.ui = (function () {
 	return {
 		root: ax_ui
 	}
-})();
+})(ax5);

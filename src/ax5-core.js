@@ -79,7 +79,24 @@
 		 * @member {String} ax5.info.version
 		 */
 		var version = "0.0.1";
+		/**
+		 * ax5 library path
+		 * @member {String} ax5.info.base_url
+		 */
 		var base_url = "";
+		/**
+		 * ax5 에러 출력메세지 사용자 재 정의
+		 * @member {Object} ax5.info.onerror
+		 * @examples
+		 * ```
+		 * ax5.info.onerror = function(){
+		 *  console.log(arguments);
+		 * }
+		 * ```
+		 */
+		var onerror = function(){
+			console.error(ax5.util.to_array(arguments).join(":"));
+		};
 
 		/**
 		 * event keyCodes
@@ -108,9 +125,8 @@
 		 * //Object {name: "chrome", version: "39.0.2171.71", mobile: false}
 		 * ```
 		 */
-		var browser = (function () {
-			var ua = navigator.userAgent.toLowerCase(), mobile = (ua.search(/mobile/g) != -1),
-				browserName, match, browser, browserVersion;
+		var browser = (function (ua, mobile, browserName, match, browser, browserVersion) {
+			ua = navigator.userAgent.toLowerCase(), mobile = (ua.search(/mobile/g) != -1), browserName, match, browser, browserVersion;
 
 			if (ua.search(/iphone/g) != -1) {
 				return { name: "iphone", version: 0, mobile: true }
@@ -188,6 +204,7 @@
 		return {
 			version: version,
 			base_url: base_url,
+			onerror: onerror,
 			event_keys: event_keys,
 			browser: browser,
 			is_browser: is_browser,
@@ -840,6 +857,7 @@
 				return undefined;
 			}
 		}
+
 		/**
 		 * 쿠키를 설정합니다.
 		 * @method ax5.util.set_cookie
@@ -869,6 +887,7 @@
 				opts.secure  ? "; secure" : ""
 			].join(""));
 		}
+
 		/**
 		 * 쿠키를 가져옵니다.
 		 * @method ax5.util.get_cookie
@@ -1117,13 +1136,13 @@
 		 * ```
 		 */
 		function number(str, cond) {
-			var result, pair = ('' + str).split(re_dot), isMinus = (parseFloat(pair[0]) < 0 || pair[0] == "-0"), returnValue = 0.0;
+			var result, pair = ('' + str).split(re_dot), isMinus = (Number(pair[0]) < 0 || pair[0] == "-0"), returnValue = 0.0;
 			pair[0] = pair[0].replace(re_int, "");
 			if (pair[1]) {
 				pair[1] = pair[1].replace(re_not_num, "");
-				returnValue = parseFloat(pair[0] + "." + pair[1]) || 0;
+				returnValue = Number(pair[0] + "." + pair[1]) || 0;
 			} else {
-				returnValue = parseFloat(pair[0]) || 0;
+				returnValue = Number(pair[0]) || 0;
 			}
 			result = (isMinus) ? -returnValue : returnValue;
 
@@ -1152,11 +1171,11 @@
 					})(result);
 				}
 				else if (k == "abs") {
-					result = Math.abs(parseFloat(result));
+					result = Math.abs(Number(result));
 				}
 				else if (k == "byte") {
 					result = (function (val) {
-						val = parseFloat(result);
+						val = Number(result);
 						var n_unit = "KB";
 						var myByte = val / 1024;
 						if (myByte / 1024 > 1) {
@@ -1264,8 +1283,12 @@
 			return encodeURIComponent(s);
 		}
 
-		function decode() {
+		function decode(s) {
 			return decodeURIComponent(s);
+		}
+
+		function error(){
+			ax5.info.onerror.apply(this, arguments);
 		}
 
 		return {
@@ -1304,7 +1327,8 @@
             number      : number,
             to_array    : to_array,
             merge       : merge,
-            param       : param
+            param       : param,
+			error       : error
 		}
 	})();
 

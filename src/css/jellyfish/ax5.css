@@ -1,4 +1,3 @@
-@charset "UTF-8";
 .align-left {
   text-align: left; }
 
@@ -2034,12 +2033,7 @@ a.ax {
       border-bottom-right-radius: 6px;
       border-bottom-left-radius: 6px; }
   .ax-item-group a.ax-item {
-    color: #555;
-    /* item안에 타이틀과 내용을 추가할 때 필요
-		.ax-item-heading {
-			color: $list-group-link-heading-color;
-		}
-		*/ }
+    color: #555; }
     .ax-item-group a.ax-item:hover, .ax-item-group a.ax-item:focus {
       text-decoration: none;
       color: #555;
@@ -2048,109 +2042,107 @@ a.ax {
     background-color: #eeeeee;
     color: #777777;
     cursor: not-allowed; }
-    .ax-item-group .ax-item.disabled .ax-item-heading, .ax-item-group .ax-item.disabled:hover .ax-item-heading, .ax-item-group .ax-item.disabled:focus .ax-item-heading {
-      color: inherit; }
-    .ax-item-group .ax-item.disabled .ax-item-text, .ax-item-group .ax-item.disabled:hover .ax-item-text, .ax-item-group .ax-item.disabled:focus .ax-item-text {
-      color: #777777; }
   .ax-item-group .ax-item.active, .ax-item-group .ax-item.active:hover, .ax-item-group .ax-item.active:focus {
     z-index: 2;
     color: #fff;
     background-color: #32B4DC;
     border-color: #32B4DC; }
-    .ax-item-group .ax-item.active .list-group-item-heading, .ax-item-group .ax-item.active .list-group-item-heading > small, .ax-item-group .ax-item.active .list-group-item-heading > .small, .ax-item-group .ax-item.active:hover .list-group-item-heading, .ax-item-group .ax-item.active:hover .list-group-item-heading > small, .ax-item-group .ax-item.active:hover .list-group-item-heading > .small, .ax-item-group .ax-item.active:focus .list-group-item-heading, .ax-item-group .ax-item.active:focus .list-group-item-heading > small, .ax-item-group .ax-item.active:focus .list-group-item-heading > .small {
-      color: inherit; }
-    .ax-item-group .ax-item.active .list-group-item-text, .ax-item-group .ax-item.active:hover .list-group-item-text, .ax-item-group .ax-item.active:focus .list-group-item-text {
-      color: #e0f4fa; }
   .ax-item-group .ax-item.good {
     color: #555;
     background-color: #c5e2a7;
-    border-color: #c5e2a7; }
+    border-color: #92c85b; }
   .ax-item-group a.ax-item.good {
     color: #555; }
     .ax-item-group a.ax-item.good .list-group-item-heading {
       color: inherit; }
     .ax-item-group a.ax-item.good:hover, .ax-item-group a.ax-item.good:focus {
       color: #fff;
-      background-color: #78B43C; }
+      background-color: #78B43C;
+      border-color: #456822; }
     .ax-item-group a.ax-item.good.active, .ax-item-group a.ax-item.good.active:hover, .ax-item-group a.ax-item.good.active:focus {
       color: #fff;
       background-color: #78B43C;
-      border-color: #78B43C; }
+      border-color: #456822; }
   .ax-item-group .ax-item.info {
     color: #fff;
     background-color: #0060b5;
-    border-color: #0060b5; }
+    border-color: #002a4f; }
   .ax-item-group a.ax-item.info {
     color: #fff; }
     .ax-item-group a.ax-item.info .list-group-item-heading {
       color: inherit; }
     .ax-item-group a.ax-item.info:hover, .ax-item-group a.ax-item.info:focus {
       color: #fff;
-      background-color: #002A4F; }
+      background-color: #002A4F;
+      border-color: black; }
     .ax-item-group a.ax-item.info.active, .ax-item-group a.ax-item.info.active:hover, .ax-item-group a.ax-item.info.active:focus {
       color: #fff;
       background-color: #002A4F;
-      border-color: #002A4F; }
+      border-color: black; }
   .ax-item-group .ax-item.warning {
     color: #555;
     background-color: #f2b196;
-    border-color: #f2b196; }
+    border-color: #e66e3c; }
   .ax-item-group a.ax-item.warning {
     color: #555; }
     .ax-item-group a.ax-item.warning .list-group-item-heading {
       color: inherit; }
     .ax-item-group a.ax-item.warning:hover, .ax-item-group a.ax-item.warning:focus {
       color: #fff;
-      background-color: #E66E3C; }
+      background-color: #E66E3C;
+      border-color: #a74015; }
     .ax-item-group a.ax-item.warning.active, .ax-item-group a.ax-item.warning.active:hover, .ax-item-group a.ax-item.warning.active:focus {
       color: #fff;
       background-color: #E66E3C;
-      border-color: #E66E3C; }
+      border-color: #a74015; }
   .ax-item-group .ax-item.danger {
     color: #fff;
     background-color: #e66e3c;
-    border-color: #e66e3c; }
+    border-color: #a74015; }
   .ax-item-group a.ax-item.danger {
     color: #fff; }
     .ax-item-group a.ax-item.danger .list-group-item-heading {
       color: inherit; }
     .ax-item-group a.ax-item.danger:hover, .ax-item-group a.ax-item.danger:focus {
       color: #fff;
-      background-color: #a74015; }
+      background-color: #a74015;
+      border-color: #4c1d0a; }
     .ax-item-group a.ax-item.danger.active, .ax-item-group a.ax-item.danger.active:hover, .ax-item-group a.ax-item.danger.active:focus {
       color: #fff;
       background-color: #a74015;
-      border-color: #a74015; }
+      border-color: #4c1d0a; }
   .ax-item-group .ax-item.link {
     color: #555;
     background-color: white;
-    border-color: white; }
+    border-color: #cccccc; }
   .ax-item-group a.ax-item.link {
     color: #555; }
     .ax-item-group a.ax-item.link .list-group-item-heading {
       color: inherit; }
     .ax-item-group a.ax-item.link:hover, .ax-item-group a.ax-item.link:focus {
       color: #fff;
-      background-color: #fff; }
+      background-color: #fff;
+      border-color: #cccccc; }
     .ax-item-group a.ax-item.link.active, .ax-item-group a.ax-item.link.active:hover, .ax-item-group a.ax-item.link.active:focus {
       color: #fff;
       background-color: #fff;
-      border-color: #fff; }
+      border-color: #cccccc; }
   .ax-item-group .ax-item.special {
     color: #fff;
     background-color: #cb74db;
-    border-color: #cb74db; }
+    border-color: #a430b9; }
   .ax-item-group a.ax-item.special {
     color: #fff; }
     .ax-item-group a.ax-item.special .list-group-item-heading {
       color: inherit; }
     .ax-item-group a.ax-item.special:hover, .ax-item-group a.ax-item.special:focus {
       color: #fff;
-      background-color: #bc4cd0; }
+      background-color: #bc4cd0;
+      border-color: #802690; }
     .ax-item-group a.ax-item.special.active, .ax-item-group a.ax-item.special.active:hover, .ax-item-group a.ax-item.special.active:focus {
       color: #fff;
       background-color: #bc4cd0;
-      border-color: #bc4cd0; }
+      border-color: #802690; }
 
 .ax-panel {
   color: #333333;

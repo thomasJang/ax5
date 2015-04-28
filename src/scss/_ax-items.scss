@@ -3,14 +3,13 @@
 		&.#{$name} {
 			color: $color;
 			background-color: $background;
-			border-color: $background;
+			border-color: darken($background, 20%);
 		}
 	}
 
 	a.ax-item {
 		&.#{$name} {
 			color: $color;
-
 			.list-group-item-heading {
 				color: inherit;
 			}
@@ -19,13 +18,14 @@
 			&:focus {
 				color: #fff;
 				background-color: $base-color;
+				border-color: darken($base-color, 20%);
 			}
 			&.active,
 			&.active:hover,
 			&.active:focus {
 				color: #fff;
 				background-color: $base-color;
-				border-color: $base-color;
+				border-color: darken($base-color, 20%);
 			}
 		}
 	}
@@ -55,14 +55,12 @@
 			@include ax-border-radius($item-group-border-radius, "bottom");
 			//@include border-top-radius(0);
 		}
+
+
 	}
 	a.ax-item{
 		color: $item-group-link-color;
-		/* item안에 타이틀과 내용을 추가할 때 필요
-		.ax-item-heading {
-			color: $list-group-link-heading-color;
-		}
-		*/
+
 		// Hover state
 		&:hover,
 		&:focus {
@@ -80,14 +78,6 @@
 			background-color: $item-group-disabled-bg;
 			color: $item-group-disabled-color;
 			cursor: not-allowed;
-
-			// Force color to inherit for custom content
-			.ax-item-heading {
-				color: inherit;
-			}
-			.ax-item-text {
-				color: $item-group-disabled-text-color;
-			}
 		}
 
 		// Active class on item itself, not parent
@@ -98,16 +88,6 @@
 			color: $item-group-active-color;
 			background-color: $item-group-active-bg;
 			border-color: $item-group-active-border;
-
-			// Force color to inherit for custom content
-			.list-group-item-heading,
-			.list-group-item-heading > small,
-			.list-group-item-heading > .small {
-				color: inherit;
-			}
-			.list-group-item-text {
-				color: $item-group-active-text-color;
-			}
 		}
 	}
 

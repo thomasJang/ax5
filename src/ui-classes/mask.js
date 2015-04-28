@@ -17,12 +17,17 @@
 
 	var ax_class = function () {
 		var self = this;
-		if (ax_super) ax_super.call(this); // 부모호출
-		this.config = {
-			mask_target: axd.get(document.body)[0]
-		};
-		this.mask_content = '<h1>AX5 Mask</h1>';
-		this.status = "off";
+
+		// 클래스 생성자
+		this.main = (function(){
+			if (ax_super) ax_super.call(this); // 부모호출
+			this.config = {
+				target: axd.get(document.body)[0]
+			};
+			this.mask_content = '<h1>AX5 Mask</h1>';
+			this.status = "off";
+
+		}).apply(this, arguments);
 
 		/**
 		 * Preferences of Mask UI
@@ -31,8 +36,8 @@
 		 * @returns {ax5.ui.mask}
 		 * @example
 		 * ```
-		 * setConfig({
-		 *      mask_target : {Element|AX5 nodelist}, // 마스크 처리할 대상
+		 * set_config({
+		 *      target : {Element|AX5 nodelist}, // 마스크 처리할 대상
 		 *      content : {String}, // 마스크안에 들어가는 내용물
 		 *      onchange: function(){} // 마스크 상태변경 시 호출되는 함수 this.type으로 예외처리 가능
 		 * }
@@ -60,7 +65,7 @@
 		 * @example
 		 * ```js
 		 * my_mask.open({
-		 *     mask_target: document.body,
+		 *     target: document.body,
 		 *     content: "<h1>Loading..</h1>",
 		 *     onchange: function () {
 		 *
@@ -68,7 +73,7 @@
 		 * });
 		 *
 		 * my_mask.open({
-		 *     mask_target: ax5.dom.get("#mask-target"),
+		 *     target: ax5.dom.get("#mask-target"),
 		 *     content: "<h1>Loading..</h1>",
 		 *     onchange: function () {
 		 *
@@ -85,7 +90,7 @@
 			U.extend(self.mask_config, config, true);
 
 			var cfg = self.mask_config,
-				mask_target = axd.get(cfg.mask_target)[0],
+				target = axd.get(cfg.target)[0],
 				po = [], css, mask_id = 'ax-mask-'+ ax5.get_guid(), _mask, css = {},
 				that = {};
 
@@ -98,11 +103,11 @@
 				po.push('</div>');
 			po.push('</div>');
 
-			if(mask_target == document.body){
-				axd.append(mask_target, po.join(''));
+			if(target == document.body){
+				axd.append(target, po.join(''));
 			}else{
 				axd.append(document.body, po.join(''));
-				var box_model = axd.box_model(mask_target);
+				var box_model = axd.box_model(target);
 				css = {
 					position:"absolute",
 					left: box_model.offset.left,
@@ -110,10 +115,10 @@
 				    width: box_model.width,
 					height: box_model.height
 				};
-				axd.class_name(mask_target, "add", "ax-masking");
+				axd.class_name(target, "add", "ax-masking");
 			}
 			this._mask = _mask = axd.get("#"+mask_id);
-			this.mask_target = mask_target;
+			this.target = target;
 			this.status = "on";
 			axd.css(_mask, css);
 
@@ -138,7 +143,7 @@
 		this.close = function(){
 			var cfg = this.mask_config;
 			axd.remove(this._mask);
-			axd.class_name(this.mask_target, "remove", "ax-masking");
+			axd.class_name(this.target, "remove", "ax-masking");
 			if(cfg.onchange) {
 				that = {
 					type: "close"

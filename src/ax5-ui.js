@@ -15,12 +15,15 @@
  * var myui = new ax5.ui.root();
  * ```
  */
-ax5.ui = (function () {
-	var U = ax5.util;
+ax5.ui = (function (core) {
 
 	function ax_ui() {
-		this.config = {};
-		this.name = "root";
+		// 클래스 인스턴스 초기화
+		this.main = (function(){
+			this.config = {};
+			this.name = "root";
+		}).apply(this, arguments);
+
 		/**
 		 * 클래스의 속성 정의 메소드 속성 확장후에 내부에 init 함수를 호출합니다.
 		 * @method ax5.ui.root.set_config
@@ -36,7 +39,7 @@ ax5.ui = (function () {
 		 * ```
 		 */
 		this.set_config = function (cfg, call_init) {
-			U.extend(this.config, cfg, true);
+			core.util.extend_all(this.config, cfg, true);
 			if (typeof call_init == "undefined" || call_init === true) {
 				this.init();
 			}
@@ -50,4 +53,4 @@ ax5.ui = (function () {
 	return {
 		root: ax_ui
 	}
-})();
+})(ax5);
