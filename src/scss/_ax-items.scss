@@ -55,11 +55,10 @@
 			@include ax-border-radius($item-group-border-radius, "bottom");
 			//@include border-top-radius(0);
 		}
-
-
 	}
 	a.ax-item{
 		color: $item-group-link-color;
+		cursor: pointer;
 
 		// Hover state
 		&:hover,

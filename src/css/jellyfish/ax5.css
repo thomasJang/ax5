@@ -2033,7 +2033,8 @@ a.ax {
       border-bottom-right-radius: 6px;
       border-bottom-left-radius: 6px; }
   .ax-item-group a.ax-item {
-    color: #555; }
+    color: #555;
+    cursor: pointer; }
     .ax-item-group a.ax-item:hover, .ax-item-group a.ax-item:focus {
       text-decoration: none;
       color: #555;

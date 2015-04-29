@@ -25,7 +25,8 @@
 					value:"value",
 					text:"text",
 					shortcut:"shortcut",
-					data:"data"
+					data:"data",
+					menu:"menu"
 				}
 			};
 
@@ -45,11 +46,12 @@
 		 *          value: {String} ['value'] 메뉴의 값
 		 *          text: {String} ['text'] 메뉴의 텍스트 라벨
 		 *          shotcut: {String} ['shotcut'] 메뉴의 단축키
-		 *          data: {String} ['data']
+		 *          data: {String} ['data'],
+		 *          menu: {String} ['menu'] 메뉴키 - 자식아이템도 이 키 값으로 인식한다.
 		 *      },
 		 *      menu : {Array} menu item
 		 *      onclick: {Function} [onclick] - 메뉴 아이템 클릭이벤트 처리자
-		 * }
+		 * });
 		 * ```
 		 */
 			//== class body start
@@ -66,11 +68,36 @@
 		this.print_list = function(){
 			var cfg = this.config, po = [];
 			po.push('<ul class="ax-item-group">');
-			for(var i= 0,l=cfg.menu.length;i<l;i++){
-				po.push('<a class="ax-item">' + cfg.menu[i][cfg.keys.text] + '</a>');
+			for(var i= 0,l=cfg[cfg.keys.menu].length;i<l;i++){
+				po.push('<a class="ax-item" data-menu-item="'+ i +'">');
+					po.push(cfg[cfg.keys.menu][i][cfg.keys.text]);
+
+				po.push('</a>');
 			}
 			po.push('</ul>');
-			cfg.target.append( po.join('') );
+			cfg.target.html( po.join('') );
+			cfg.target.find('[data-menu-item]').on("click", (function(e){
+				this.onclick(e||window.event);
+			}).bind(this));
+		};
+
+		this.onclick = function(e, target, index){
+			target = axd.parent(e.target, function(target){
+				if(ax5.dom.attr(target, "data-menu-item")){
+					return true;
+				}
+			});
+			if(target){
+				index = axd.attr(target, "data-menu-item");
+				if(this.config.onclick){
+					this.config.onclick.call({
+						menu: this.config[cfg.keys.menu],
+						item: this.config[cfg.keys.menu][index],
+						target: cfg.target.elements[0],
+						item_target: target
+					});
+				}
+			}
 		};
 	};
 	//== UI Class

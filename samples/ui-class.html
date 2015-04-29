@@ -274,10 +274,12 @@ ax5.util.require(["ui/menu.js"], function(){
 		keys: {value:"id"},
 		menu: [
 			{id:"1", text:"메뉴 A"},
-			{id:"2", text:"메뉴 B"}
+			{id:"2", text:"메뉴 B"},
+			{id:"3", text:"메뉴 C"}
 		],
 		onclick: function(){
-
+			console.log(this);
+			// Object {menu: Array[3], item: Object, target: div#ui-menu-target-basic, item_target: a.ax-item}
 		}
 	});
 
@@ -297,14 +299,75 @@ ax5.util.require(["ui/menu.js"], function(){
 		keys: {value:"id"},
 		menu: [
 			{id:"1", text:"메뉴 A"},
-			{id:"2", text:"메뉴 B"}
+			{id:"2", text:"메뉴 B"},
+			{id:"3", text:"메뉴 C"}
 		],
 		onclick: function(){
-
+			console.log(this);
+			// Object {menu: Array[3], item: Object, target: div#ui-menu-target-basic, item_target: a.ax-item}
 		}
 	});
 
 });
+</script>
+
+
+</article>
+
+
+
+<article class="content">
+	<h3 data-menu-item="ax-ui-menu-tree" class="Capitalize">tree</h3>
+
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+	&lt;div id="ui-menu-target-tree">&lt;/div>
+&lt;/div>
+&lt;script type="text/javascript">
+	ax5.info.base_url = "../pub/";
+	ax5.util.require(["ui/menu.js"], function(){
+
+		var my_menu = new ax5.ui.menu(1,2,3);
+		my_menu.set_config({
+			target: ax5.dom.get("#ui-menu-target-tree"),
+			keys: {value:"id"},
+			menu: [
+				{id:"1", text:"메뉴 A"},
+				{id:"2", text:"메뉴 B"},
+				{id:"3", text:"메뉴 C"}
+			],
+			onclick: function(){
+				console.log(this);
+				// Object {menu: Array[3], item: Object, target: div#ui-menu-target-basic, item_target: a.ax-item}
+			}
+		});
+
+	});
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result">
+	<div id="ui-menu-target-tree"></div>
+</div>
+<script type="text/javascript">
+	ax5.info.base_url = "../pub/";
+	ax5.util.require(["ui/menu.js"], function(){
+
+		var my_menu = new ax5.ui.menu(1,2,3);
+		my_menu.set_config({
+			target: ax5.dom.get("#ui-menu-target-tree"),
+			keys: {value:"id"},
+			menu: [
+				{id:"1", text:"메뉴 A"},
+				{id:"2", text:"메뉴 B"},
+				{id:"3", text:"메뉴 C"}
+			],
+			onclick: function(){
+				console.log(this);
+				// Object {menu: Array[3], item: Object, target: div#ui-menu-target-basic, item_target: a.ax-item}
+			}
+		});
+
+	});
 </script>
 
 
