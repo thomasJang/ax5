@@ -252,11 +252,15 @@
             
             <span class="subtitle">Members</span>
             
+                <li data-name="ax5.info.base_url"><a href="ax5.info.html#base_url">base_url</a></li>
+            
                 <li data-name="ax5.info.browser"><a href="ax5.info.html#browser">browser</a></li>
             
                 <li data-name="ax5.info.event_keys"><a href="ax5.info.html#event_keys">event_keys</a></li>
             
                 <li data-name="ax5.info.is_browser"><a href="ax5.info.html#is_browser">is_browser</a></li>
+            
+                <li data-name="ax5.info.onerror"><a href="ax5.info.html#onerror">onerror</a></li>
             
                 <li data-name="ax5.info.version"><a href="ax5.info.html#version">version</a></li>
             
@@ -402,29 +406,6 @@
             </ul>
         </li>
     
-        <li class="item" data-name="ax5.ui.ax_ui">
-            <span class="title">
-                <a href="ax5.ui.ax_ui.html">ax5.ui.ax_ui</a>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            <span class="subtitle">Methods</span>
-            
-                <li data-name="ax5.ui.ax_ui.set_config"><a href="ax5.ui.ax_ui.html#set_config">set_config</a></li>
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
         <li class="item" data-name="ax5.ui.mask">
             <span class="title">
                 <a href="ax5.ui.mask.html">ax5.ui.mask</a>
@@ -452,6 +433,52 @@
             </ul>
         </li>
     
+        <li class="item" data-name="ax5.ui.menu">
+            <span class="title">
+                <a href="ax5.ui.menu.html">ax5.ui.menu</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="ax5.ui.menu.set_config"><a href="ax5.ui.menu.html#set_config">set_config</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="ax5.ui.root">
+            <span class="title">
+                <a href="ax5.ui.root.html">ax5.ui.root</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="ax5.ui.root.set_config"><a href="ax5.ui.root.html#set_config">set_config</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
     </ul>
 </div>
     <div class="main">
@@ -464,7 +491,7 @@
         <article>
             <pre class="prettyprint source linenums"><code>/*
  * ax5 - v0.0.1 
- * 2015-04-20 
+ * 2015-04-29 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -719,7 +746,24 @@
 		 * @member {String} ax5.info.version
 		 */
 		var version = "0.0.1";
+		/**
+		 * ax5 library path
+		 * @member {String} ax5.info.base_url
+		 */
 		var base_url = "";
+		/**
+		 * ax5 에러 출력메세지 사용자 재 정의
+		 * @member {Object} ax5.info.onerror
+		 * @examples
+		 * ```
+		 * ax5.info.onerror = function(){
+		 *  console.log(arguments);
+		 * }
+		 * ```
+		 */
+		var onerror = function(){
+			console.error(ax5.util.to_array(arguments).join(":"));
+		};
 
 		/**
 		 * event keyCodes
@@ -748,9 +792,8 @@
 		 * //Object {name: "chrome", version: "39.0.2171.71", mobile: false}
 		 * ```
 		 */
-		var browser = (function () {
-			var ua = navigator.userAgent.toLowerCase(), mobile = (ua.search(/mobile/g) != -1),
-				browserName, match, browser, browserVersion;
+		var browser = (function (ua, mobile, browserName, match, browser, browserVersion) {
+			ua = navigator.userAgent.toLowerCase(), mobile = (ua.search(/mobile/g) != -1), browserName, match, browser, browserVersion;
 
 			if (ua.search(/iphone/g) != -1) {
 				return { name: "iphone", version: 0, mobile: true }
@@ -828,6 +871,7 @@
 		return {
 			version: version,
 			base_url: base_url,
+			onerror: onerror,
 			event_keys: event_keys,
 			browser: browser,
 			is_browser: is_browser,
@@ -1480,6 +1524,7 @@
 				return undefined;
 			}
 		}
+
 		/**
 		 * 쿠키를 설정합니다.
 		 * @method ax5.util.set_cookie
@@ -1509,6 +1554,7 @@
 				opts.secure  ? "; secure" : ""
 			].join(""));
 		}
+
 		/**
 		 * 쿠키를 가져옵니다.
 		 * @method ax5.util.get_cookie
@@ -1757,13 +1803,13 @@
 		 * ```
 		 */
 		function number(str, cond) {
-			var result, pair = ('' + str).split(re_dot), isMinus = (parseFloat(pair[0]) &lt; 0 || pair[0] == "-0"), returnValue = 0.0;
+			var result, pair = ('' + str).split(re_dot), isMinus = (Number(pair[0]) &lt; 0 || pair[0] == "-0"), returnValue = 0.0;
 			pair[0] = pair[0].replace(re_int, "");
 			if (pair[1]) {
 				pair[1] = pair[1].replace(re_not_num, "");
-				returnValue = parseFloat(pair[0] + "." + pair[1]) || 0;
+				returnValue = Number(pair[0] + "." + pair[1]) || 0;
 			} else {
-				returnValue = parseFloat(pair[0]) || 0;
+				returnValue = Number(pair[0]) || 0;
 			}
 			result = (isMinus) ? -returnValue : returnValue;
 
@@ -1792,11 +1838,11 @@
 					})(result);
 				}
 				else if (k == "abs") {
-					result = Math.abs(parseFloat(result));
+					result = Math.abs(Number(result));
 				}
 				else if (k == "byte") {
 					result = (function (val) {
-						val = parseFloat(result);
+						val = Number(result);
 						var n_unit = "KB";
 						var myByte = val / 1024;
 						if (myByte / 1024 > 1) {
@@ -1904,8 +1950,12 @@
 			return encodeURIComponent(s);
 		}
 
-		function decode() {
+		function decode(s) {
 			return decodeURIComponent(s);
+		}
+
+		function error(){
+			ax5.info.onerror.apply(this, arguments);
 		}
 
 		return {
@@ -1944,7 +1994,8 @@
             number      : number,
             to_array    : to_array,
             merge       : merge,
-            param       : param
+            param       : param,
+			error       : error
 		}
 	})();
 
@@ -2785,9 +2836,10 @@
 		 * ```
 		 */
 		function ready(_fn) {
+			var is_ready = false;
 			promise(function () {
-				if (ax5.dom.is_ready) return _fn();
-				ax5.dom.is_ready = true;
+				if (is_ready) return;
+				is_ready = ax5.dom.is_ready = true;
 				_fn();
 			});
 		}
@@ -2796,16 +2848,12 @@
 			if (doc.readyState === "complete") {
 				setTimeout(_fn);
 			} else {
-				var _timer, __fn = function(){
-					if(_timer) clearTimeout(_timer);
-					_timer = setTimeout(_fn);
-				};
 				if (doc.addEventListener) {
-					doc.addEventListener("DOMContentLoaded", __fn, false);
-					win.addEventListener("load", __fn, false);
+					doc.addEventListener("DOMContentLoaded", _fn, false);
+					win.addEventListener("load", _fn, false);
 				} else {
-					doc.attachEvent("onreadystatechange", __fn);
-					win.attachEvent("onload", __fn);
+					doc.attachEvent("onreadystatechange", _fn);
+					win.attachEvent("onload", _fn);
 					// If IE and not a frame
 					var top = false;
 					try {
@@ -2824,7 +2872,7 @@
 									return setTimeout(doScrollCheck, 50);
 								}
 								// and execute any waiting functions
-								__fn();
+								_fn();
 							}
 						})();
 					}
@@ -4151,39 +4199,43 @@ ax5.xhr = (function (){
 	});
 })();
 
-ax5.ui = (function () {
-	var U = ax5.util;
-	/**
-	 * @class ax5.ui.ax_ui
-	 * @classdesc ax5 ui class 코어 클래스 모든 클래스의 공통 함수를 가지고 있습니다.
-	 * @version v0.0.1
-	 * @author tom@axisj.com
-	 * @logs
-	 * 2014-12-12 tom : 시작
-	 * @example
-	 * ```
-	 * var myui = new ax5.ui.ax_ui();
-	 * ```
-	 */
+/**
+ * @class ax5.ui.root
+ * @classdesc ax5 ui class 코어 클래스 모든 클래스의 공통 함수를 가지고 있습니다.
+ * @version v0.0.1
+ * @author tom@axisj.com
+ * @logs
+ * 2014-12-12 tom : 시작
+ * @example
+ * ```
+ * var myui = new ax5.ui.root();
+ * ```
+ */
+ax5.ui = (function (core) {
+
 	function ax_ui() {
-		this.config = {};
-		this.name = "ax_ui";
+		// 클래스 인스턴스 초기화
+		this.main = (function(){
+			this.config = {};
+			this.name = "root";
+		}).apply(this, arguments);
+
 		/**
 		 * 클래스의 속성 정의 메소드 속성 확장후에 내부에 init 함수를 호출합니다.
-		 * @method ax5.ui.ax_ui.set_config
+		 * @method ax5.ui.root.set_config
 		 * @param {Object} config - 클래스 속성값
 		 * @param {Boolean} [call_init=true] - init 함수 호출 여부
 		 * @returns {ax5.ui.ax_ui}
 		 * @example
 		 * ```
-		 * var myui = new ax5.ui.ax_ui();
+		 * var myui = new ax5.ui.root();
 		 * myui.set_config({
 		 * 	id:"abcd"
 		 * });
 		 * ```
 		 */
 		this.set_config = function (cfg, call_init) {
-			U.extend(this.config, cfg, true);
+			core.util.extend_all(this.config, cfg, true);
 			if (typeof call_init == "undefined" || call_init === true) {
 				this.init();
 			}
@@ -4197,7 +4249,7 @@ ax5.ui = (function () {
 	return {
 		root: ax_ui
 	}
-})();</code></pre>
+})(ax5);</code></pre>
         </article>
     </section>
 
@@ -4208,7 +4260,7 @@ ax5.ui = (function () {
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Tue Apr 21 2015 15:17:09 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sat May 09 2015 01:12:48 GMT+0900 (KST)
         </footer>
     </div>
 </div>

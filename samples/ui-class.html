@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-04-29 
+ publish date : 2015-05-09 
 -->
 <html lang="en">
 <head>
@@ -258,7 +258,7 @@ ax5.util.require(["ui/mask.min.js"], function(){
 
 
 <article class="content">
-	<h3 data-menu-item="ax-ui-menu-basic" class="Capitalize">basic</h3>
+	<h3 data-menu-item="ax-ui-menu-basic" class="capitalize">basic</h3>
 
 <pre class="prettyprint linenums">
 &lt;div class="tag-result">
@@ -271,7 +271,9 @@ ax5.util.require(["ui/menu.js"], function(){
 	var my_menu = new ax5.ui.menu(1,2,3);
 	my_menu.set_config({
 		target: ax5.dom.get("#ui-menu-target-basic"),
-		keys: {value:"id"},
+		keys: {
+			value:"id"
+		},
 		menu: [
 			{id:"1", text:"메뉴 A"},
 			{id:"2", text:"메뉴 B"},
@@ -296,7 +298,9 @@ ax5.util.require(["ui/menu.js"], function(){
 	var my_menu = new ax5.ui.menu(1,2,3);
 	my_menu.set_config({
 		target: ax5.dom.get("#ui-menu-target-basic"),
-		keys: {value:"id"},
+		keys: {
+			value:"id"
+		},
 		menu: [
 			{id:"1", text:"메뉴 A"},
 			{id:"2", text:"메뉴 B"},
@@ -317,7 +321,7 @@ ax5.util.require(["ui/menu.js"], function(){
 
 
 <article class="content">
-	<h3 data-menu-item="ax-ui-menu-tree" class="Capitalize">tree</h3>
+	<h3 data-menu-item="ax-ui-menu-tree" class="capitalize">tree</h3>
 
 <pre class="prettyprint linenums">
 &lt;div class="tag-result">
@@ -330,15 +334,26 @@ ax5.util.require(["ui/menu.js"], function(){
 		var my_menu = new ax5.ui.menu(1,2,3);
 		my_menu.set_config({
 			target: ax5.dom.get("#ui-menu-target-tree"),
-			keys: {value:"id"},
+			keys: {
+				value:"id",
+// 선언하지 않으면 'value' 이 외에도 text, shortcut, data 등을 재 정의 할 수 있다 다음줄에 menu 와 함께
+				menu:"menu"
+			},
+			type: "default", // default | pop
 			menu: [
-				{id:"1", text:"메뉴 A"},
+				{
+					id:"1", text:"메뉴 A",
+					menu: [
+						{id:"1-1", text:"메뉴 A의 A"},
+						{id:"1-2", text:"메뉴 A의 B"},
+						{id:"1-3", text:"메뉴 A의 C"}
+					]
+				},
 				{id:"2", text:"메뉴 B"},
 				{id:"3", text:"메뉴 C"}
 			],
 			onclick: function(){
-				console.log(this);
-				// Object {menu: Array[3], item: Object, target: div#ui-menu-target-basic, item_target: a.ax-item}
+
 			}
 		});
 
@@ -355,15 +370,26 @@ ax5.util.require(["ui/menu.js"], function(){
 		var my_menu = new ax5.ui.menu(1,2,3);
 		my_menu.set_config({
 			target: ax5.dom.get("#ui-menu-target-tree"),
-			keys: {value:"id"},
+			keys: {
+				value:"id",
+// 선언하지 않으면 'value' 이 외에도 text, shortcut, data 등을 재 정의 할 수 있다 다음줄에 menu 와 함께
+				menu:"menu"
+			},
+			type: "default", // default | pop
 			menu: [
-				{id:"1", text:"메뉴 A"},
+				{
+					id:"1", text:"메뉴 A",
+					menu: [
+						{id:"1-1", text:"메뉴 A의 A"},
+						{id:"1-2", text:"메뉴 A의 B"},
+						{id:"1-3", text:"메뉴 A의 C"}
+					]
+				},
 				{id:"2", text:"메뉴 B"},
 				{id:"3", text:"메뉴 C"}
 			],
 			onclick: function(){
-				console.log(this);
-				// Object {menu: Array[3], item: Object, target: div#ui-menu-target-basic, item_target: a.ax-item}
+
 			}
 		});
 

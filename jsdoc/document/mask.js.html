@@ -252,11 +252,15 @@
             
             <span class="subtitle">Members</span>
             
+                <li data-name="ax5.info.base_url"><a href="ax5.info.html#base_url">base_url</a></li>
+            
                 <li data-name="ax5.info.browser"><a href="ax5.info.html#browser">browser</a></li>
             
                 <li data-name="ax5.info.event_keys"><a href="ax5.info.html#event_keys">event_keys</a></li>
             
                 <li data-name="ax5.info.is_browser"><a href="ax5.info.html#is_browser">is_browser</a></li>
+            
+                <li data-name="ax5.info.onerror"><a href="ax5.info.html#onerror">onerror</a></li>
             
                 <li data-name="ax5.info.version"><a href="ax5.info.html#version">version</a></li>
             
@@ -402,29 +406,6 @@
             </ul>
         </li>
     
-        <li class="item" data-name="ax5.ui.ax_ui">
-            <span class="title">
-                <a href="ax5.ui.ax_ui.html">ax5.ui.ax_ui</a>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            <span class="subtitle">Methods</span>
-            
-                <li data-name="ax5.ui.ax_ui.set_config"><a href="ax5.ui.ax_ui.html#set_config">set_config</a></li>
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
         <li class="item" data-name="ax5.ui.mask">
             <span class="title">
                 <a href="ax5.ui.mask.html">ax5.ui.mask</a>
@@ -445,6 +426,52 @@
                 <li data-name="ax5.ui.mask.open"><a href="ax5.ui.mask.html#open">open</a></li>
             
                 <li data-name="ax5.ui.mask.set_config"><a href="ax5.ui.mask.html#set_config">set_config</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="ax5.ui.menu">
+            <span class="title">
+                <a href="ax5.ui.menu.html">ax5.ui.menu</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="ax5.ui.menu.set_config"><a href="ax5.ui.menu.html#set_config">set_config</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="ax5.ui.root">
+            <span class="title">
+                <a href="ax5.ui.root.html">ax5.ui.root</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="ax5.ui.root.set_config"><a href="ax5.ui.root.html#set_config">set_config</a></li>
             
             </ul>
             <ul class="events itemMembers">
@@ -481,12 +508,17 @@
 
 	var ax_class = function () {
 		var self = this;
-		if (ax_super) ax_super.call(this); // 부모호출
-		this.config = {
-			mask_target: axd.get(document.body)[0]
-		};
-		this.mask_content = '&lt;h1>AX5 Mask&lt;/h1>';
-		this.status = "off";
+
+		// 클래스 생성자
+		this.main = (function(){
+			if (ax_super) ax_super.call(this); // 부모호출
+			this.config = {
+				target: axd.get(document.body)[0]
+			};
+			this.mask_content = '&lt;h1>AX5 Mask&lt;/h1>';
+			this.status = "off";
+
+		}).apply(this, arguments);
 
 		/**
 		 * Preferences of Mask UI
@@ -495,8 +527,8 @@
 		 * @returns {ax5.ui.mask}
 		 * @example
 		 * ```
-		 * setConfig({
-		 *      mask_target : {Element|AX5 nodelist}, // 마스크 처리할 대상
+		 * set_config({
+		 *      target : {Element|AX5 nodelist}, // 마스크 처리할 대상
 		 *      content : {String}, // 마스크안에 들어가는 내용물
 		 *      onchange: function(){} // 마스크 상태변경 시 호출되는 함수 this.type으로 예외처리 가능
 		 * }
@@ -524,7 +556,7 @@
 		 * @example
 		 * ```js
 		 * my_mask.open({
-		 *     mask_target: document.body,
+		 *     target: document.body,
 		 *     content: "&lt;h1>Loading..&lt;/h1>",
 		 *     onchange: function () {
 		 *
@@ -532,7 +564,7 @@
 		 * });
 		 *
 		 * my_mask.open({
-		 *     mask_target: ax5.dom.get("#mask-target"),
+		 *     target: ax5.dom.get("#mask-target"),
 		 *     content: "&lt;h1>Loading..&lt;/h1>",
 		 *     onchange: function () {
 		 *
@@ -549,7 +581,7 @@
 			U.extend(self.mask_config, config, true);
 
 			var cfg = self.mask_config,
-				mask_target = axd.get(cfg.mask_target)[0],
+				target = axd.get(cfg.target)[0],
 				po = [], css, mask_id = 'ax-mask-'+ ax5.get_guid(), _mask, css = {},
 				that = {};
 
@@ -562,11 +594,11 @@
 				po.push('&lt;/div>');
 			po.push('&lt;/div>');
 
-			if(mask_target == document.body){
-				axd.append(mask_target, po.join(''));
+			if(target == document.body){
+				axd.append(target, po.join(''));
 			}else{
 				axd.append(document.body, po.join(''));
-				var box_model = axd.box_model(mask_target);
+				var box_model = axd.box_model(target);
 				css = {
 					position:"absolute",
 					left: box_model.offset.left,
@@ -574,10 +606,10 @@
 				    width: box_model.width,
 					height: box_model.height
 				};
-				axd.class_name(mask_target, "add", "ax-masking");
+				axd.class_name(target, "add", "ax-masking");
 			}
 			this._mask = _mask = axd.get("#"+mask_id);
-			this.mask_target = mask_target;
+			this.target = target;
 			this.status = "on";
 			axd.css(_mask, css);
 
@@ -602,7 +634,7 @@
 		this.close = function(){
 			var cfg = this.mask_config;
 			axd.remove(this._mask);
-			axd.class_name(this.mask_target, "remove", "ax-masking");
+			axd.class_name(this.target, "remove", "ax-masking");
 			if(cfg.onchange) {
 				that = {
 					type: "close"
@@ -634,7 +666,7 @@
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Tue Apr 21 2015 15:17:09 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sat May 09 2015 01:12:48 GMT+0900 (KST)
         </footer>
     </div>
 </div>

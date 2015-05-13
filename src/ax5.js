@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-04-29 
+ * 2015-05-13 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -38,7 +38,7 @@
 				if (hdeb) {
 					for (i = 0; i < del; i++) if (hwp.call(obj, de[i])) r.push(de[i]);
 				}
-				return result;
+				return r;
 			};
 		}());
 	}

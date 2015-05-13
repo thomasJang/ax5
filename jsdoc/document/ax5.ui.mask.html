@@ -252,11 +252,15 @@
             
             <span class="subtitle">Members</span>
             
+                <li data-name="ax5.info.base_url"><a href="ax5.info.html#base_url">base_url</a></li>
+            
                 <li data-name="ax5.info.browser"><a href="ax5.info.html#browser">browser</a></li>
             
                 <li data-name="ax5.info.event_keys"><a href="ax5.info.html#event_keys">event_keys</a></li>
             
                 <li data-name="ax5.info.is_browser"><a href="ax5.info.html#is_browser">is_browser</a></li>
+            
+                <li data-name="ax5.info.onerror"><a href="ax5.info.html#onerror">onerror</a></li>
             
                 <li data-name="ax5.info.version"><a href="ax5.info.html#version">version</a></li>
             
@@ -402,29 +406,6 @@
             </ul>
         </li>
     
-        <li class="item" data-name="ax5.ui.ax_ui">
-            <span class="title">
-                <a href="ax5.ui.ax_ui.html">ax5.ui.ax_ui</a>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            <span class="subtitle">Methods</span>
-            
-                <li data-name="ax5.ui.ax_ui.set_config"><a href="ax5.ui.ax_ui.html#set_config">set_config</a></li>
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
         <li class="item" data-name="ax5.ui.mask">
             <span class="title">
                 <a href="ax5.ui.mask.html">ax5.ui.mask</a>
@@ -445,6 +426,52 @@
                 <li data-name="ax5.ui.mask.open"><a href="ax5.ui.mask.html#open">open</a></li>
             
                 <li data-name="ax5.ui.mask.set_config"><a href="ax5.ui.mask.html#set_config">set_config</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="ax5.ui.menu">
+            <span class="title">
+                <a href="ax5.ui.menu.html">ax5.ui.menu</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="ax5.ui.menu.set_config"><a href="ax5.ui.menu.html#set_config">set_config</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="ax5.ui.root">
+            <span class="title">
+                <a href="ax5.ui.root.html">ax5.ui.root</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="ax5.ui.root.set_config"><a href="ax5.ui.root.html#set_config">set_config</a></li>
             
             </ul>
             <ul class="events itemMembers">
@@ -591,9 +618,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ui-classes/mask.js#L129" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ui-classes/mask.js#L134" target="_blank">
             ui-classes/mask.js,
-            line 129</a>
+            line 134</a>
         </div>
         
     </div>
@@ -678,9 +705,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ui-classes/mask.js#L55" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ui-classes/mask.js#L60" target="_blank">
             ui-classes/mask.js,
-            line 55</a>
+            line 60</a>
         </div>
         
     </div>
@@ -793,7 +820,7 @@
 
     
     <pre class="prettyprint linenums"><code class="lang-js">my_mask.open({
-    mask_target: document.body,
+    target: document.body,
     content: &quot;&lt;h1&gt;Loading..&lt;/h1&gt;&quot;,
     onchange: function () {
 
@@ -801,7 +828,7 @@
 });
 
 my_mask.open({
-    mask_target: ax5.dom.get(&quot;#mask-target&quot;),
+    target: ax5.dom.get(&quot;#mask-target&quot;),
     content: &quot;&lt;h1&gt;Loading..&lt;/h1&gt;&quot;,
     onchange: function () {
 
@@ -824,9 +851,9 @@ my_mask.open({
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ui-classes/mask.js#L27" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ui-classes/mask.js#L32" target="_blank">
             ui-classes/mask.js,
-            line 27</a>
+            line 32</a>
         </div>
         
     </div>
@@ -938,8 +965,8 @@ my_mask.open({
         
 
     
-    <pre class="prettyprint linenums"><code>setConfig({
-     mask_target : {Element|AX5 nodelist}, // 마스크 처리할 대상
+    <pre class="prettyprint linenums"><code>set_config({
+     target : {Element|AX5 nodelist}, // 마스크 처리할 대상
      content : {String}, // 마스크안에 들어가는 내용물
      onchange: function(){} // 마스크 상태변경 시 호출되는 함수 this.type으로 예외처리 가능
 }</code></pre>
@@ -965,7 +992,7 @@ my_mask.open({
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Tue Apr 21 2015 15:17:10 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sat May 09 2015 01:12:48 GMT+0900 (KST)
         </footer>
     </div>
 </div>
