@@ -66,29 +66,41 @@
 		};
 
 		this.print_list = function(){
-			var cfg = this.config, po = [];
+			var cfg = this.config, po = [],
+				get_child_menu_html = function(menu){
+
+				};
+
+
+
+
 			po.push('<ul class="ax-item-group">');
 			for(var i= 0,l=cfg[cfg.keys.menu].length;i<l;i++){
-				po.push('<a class="ax-item" data-menu-item="'+ i +'">');
+				po.push('<a class="ax-item" data-menu-item-index="'+ i +'">');
 					po.push(cfg[cfg.keys.menu][i][cfg.keys.text]);
-
 				po.push('</a>');
+				if(cfg[cfg.keys.menu][i][cfg.keys.menu] && cfg[cfg.keys.menu][i][cfg.keys.menu].length > 0){
+
+				}
 			}
 			po.push('</ul>');
+
+
+
 			cfg.target.html( po.join('') );
-			cfg.target.find('[data-menu-item]').on("click", (function(e){
+			cfg.target.find('[data-menu-item-index]').on("click", (function(e){
 				this.onclick(e||window.event);
 			}).bind(this));
 		};
 
 		this.onclick = function(e, target, index){
 			target = axd.parent(e.target, function(target){
-				if(ax5.dom.attr(target, "data-menu-item")){
+				if(ax5.dom.attr(target, "data-menu-item-index")){
 					return true;
 				}
 			});
 			if(target){
-				index = axd.attr(target, "data-menu-item");
+				index = axd.attr(target, "data-menu-item-index");
 				if(this.config.onclick){
 					this.config.onclick.call({
 						menu: this.config[cfg.keys.menu],
