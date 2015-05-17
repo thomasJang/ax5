@@ -1,60 +1,237 @@
+/*
+ * ax5 - v0.0.1 
+ * 2015-05-17 
+ * www.axisj.com Javascript UI Library
+ * 
+ * Copyright 2013, 2015 AXISJ.com and other contributors 
+ * Released under the MIT license 
+ * www.axisj.com/ax5/license 
+ */
+
+// 필수 Ployfill 확장 구문
+(function(){
+    'use strict';
+    
+	var root = this,
+        re_trim = /^\s*|\s*$/g;
+
+	// From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
+	if (!Object.keys) {
+		Object.keys = (function() {
+			var hwp = Object.prototype.hasOwnProperty,
+                hdeb = !({ toString: null }).propertyIsEnumerable('toString'),
+				de = [
+					'toString',
+					'toLocaleString',
+					'valueOf',
+					'hasOwnProperty',
+					'isPrototypeOf',
+					'propertyIsEnumerable',
+					'constructor'
+				],
+				del = de.length;
+
+			return function(obj) {
+				if (typeof obj !== 'object' && (typeof obj !== 'function' || obj === null)) throw new TypeError('type err');
+				var r = [], prop, i;
+				for (prop in obj) if (hwp.call(obj, prop)) r.push(prop);
+				if (hdeb) {
+					for (i = 0; i < del; i++) if (hwp.call(obj, de[i])) r.push(de[i]);
+				}
+				return r;
+			};
+		}());
+	}
+
+	// ES5 15.4.4.18 Array.prototype.forEach ( callbackfn [ , thisArg ] )
+	// From https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/forEach
+	if (!Array.prototype.forEach) {
+		Array.prototype.forEach = function (fun /*, thisp */) {
+			if (this === void 0 || this === null) { throw TypeError(); }
+			var t = Object(this);
+			var len = t.length >>> 0;
+			if (typeof fun !== "function") { throw TypeError(); }
+			var thisp = arguments[1], i;
+			for (i = 0; i < len; i++) {
+				if (i in t) {
+					fun.call(thisp, t[i], i, t);
+				}
+			}
+		};
+	}
+
+	// ES5 15.3.4.5 Function.prototype.bind ( thisArg [, arg1 [, arg2, ... ]] )
+	// https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/bind
+	if (!Function.prototype.bind) {
+		Function.prototype.bind = function (o) {
+			if (typeof this !== 'function') { throw TypeError("function"); }
+			var slice = [].slice,
+				args = slice.call(arguments, 1),
+				self = this,
+				bound = function () {
+					return self.apply(this instanceof nop ? this : o,
+						args.concat(slice.call(arguments)));
+				};
+
+			function nop() {}
+			nop.prototype = self.prototype;
+			bound.prototype = new nop();
+			return bound;
+		};
+	}
+
+	/*global document */
+	/**
+	 * define document.querySelector & document.querySelectorAll for IE7
+	 *
+	 * A not very fast but small hack. The approach is taken from
+	 * http://weblogs.asp.net/bleroy/archive/2009/08/31/queryselectorall-on-old-ie-versions-something-that-doesn-t-work.aspx
+	 *
+	 */
+	(function () {
+		if (document.querySelectorAll || document.querySelector) {
+			return;
+		}
+		if(!document.createStyleSheet) return;
+		var style = document.createStyleSheet(),
+			select = function (selector, maxCount) {
+				var
+					all = document.all,
+					l = all.length,
+					i,
+					resultSet = [];
+
+				style.addRule(selector, "foo:bar");
+				for (i = 0; i < l; i += 1) {
+					if (all[i].currentStyle.foo === "bar") {
+						resultSet.push(all[i]);
+						if (resultSet.length > maxCount) {
+							break;
+						}
+					}
+				}
+				style.removeRule(0);
+				return resultSet;
+			};
+
+		document.querySelectorAll = function (selector) {
+			return select(selector, Infinity);
+		};
+		document.querySelector = function (selector) {
+			return select(selector, 1)[0] || null;
+		};
+	}());
+
+	if (!String.prototype.trim) {
+		(function() {
+			String.prototype.trim = function() {
+				return this.replace(re_trim, '');
+			};
+		})();
+	}
+
+	if (!window.JSON) {
+		window.JSON = {
+			parse: function (sJSON) { return (new Function('', 'return ' + sJSON))(); },
+			stringify:(function(){
+				var r = /["]/g, f;
+				return f = function(vContent){
+					var result, i, j;
+					switch( result = typeof vContent ){
+					case'string':return '"' + vContent.replace( r, '\\"' ) + '"';
+					case'number':case'boolean':return vContent.toString();
+					case'undefined':return 'undefined';
+					case'function':return '""';
+					case'object':
+						if(!vContent) return 'null';
+						result = '';
+						if(vContent.splice){
+							for(i = 0, j = vContent.length ; i < j ; i++) result += ',' + f(vContent[i]);
+							return '[' + result.substr(1) + ']';
+						}else{
+							for(i in vContent) if(vContent.hasOwnProperty(i) && vContent[i] !== undefined && typeof vContent[i] != 'function') result += ',"'+i+'":' + f(vContent[i]);
+							return '{' + result.substr(1) + '}';
+						}
+					}
+				};
+			})()
+		};
+	}
+
+	// Console-polyfill. MIT license. https://github.com/paulmillr/console-polyfill
+	// Make it safe to do console.log() always.
+	(function(con) {
+		var prop, method;
+		var empty = {};
+		var dummy = function() {};
+		var properties = 'memory'.split(',');
+		var methods = ('assert,clear,count,debug,dir,dirxml,error,exception,group,' +
+		'groupCollapsed,groupEnd,info,log,markTimeline,profile,profiles,profileEnd,' +
+		'show,table,time,timeEnd,timeline,timelineEnd,timeStamp,trace,warn').split(',');
+		while (prop = properties.pop()) con[prop] = con[prop] || empty;
+		while (method = methods.pop()) con[method] = con[method] || dummy;
+	})(root.console = root.console || {}); // Using `this` for web workers.
+
+}.call(this));
+
 // ax5 선언
 (function() {
 	'use strict';
 
 	// root of function
-	var root = this, doc = document, win = window, fval = eval,
+	var root = this, win = window, doc = document, docElem = document.documentElement,
 	/** @namespace {Object} ax5 */
 		ax5 = {}, info, U, dom;
 
-	// jquery 1.10.2 from http://jquery.com -- start
-	var nodeNames = "abbr|article|aside|audio|bdi|canvas|data|datalist|details|figcaption|figure|footer|header|hgroup|mark|meter|nav|output|progress|section|summary|time|video",
-		core_pnum = /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source,
-		rnoshimcache = new RegExp("<(?:" + nodeNames + ")[\\s/>]", "i"),
-		rleadingWhitespace = /^\s+/,
-		rxhtmlTag = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/gi,
-		rtagName = /<([\w:]+)/,
-		rtbody = /<tbody/i,
-		rhtml = /<|&#?\w+;/,
-		rnoInnerhtml = /<(?:script|style|link)/i,
-		rmargin = /^margin/,
-		rnumsplit = new RegExp( "^(" + core_pnum + ")(.*)$", "i" ),
-		rnumnonpx = new RegExp( "^(" + core_pnum + ")(?!px)[a-z%]+$", "i" ),
-		rposition = /^(top|right|bottom|left)$/,
-
-		// We have to close these tags to support XHTML (#13200)
-		wrapMap = {
-			option: [ 1, "<select multiple='multiple'>", "</select>" ],
-			legend: [ 1, "<fieldset>", "</fieldset>" ],
-			area: [ 1, "<map>", "</map>" ],
-			param: [ 1, "<object>", "</object>" ],
-			thead: [ 1, "<table>", "</table>" ],
-			tr: [ 2, "<table><tbody>", "</tbody></table>" ],
-			col: [ 2, "<table><tbody></tbody><colgroup>", "</colgroup></table>" ],
-			td: [ 3, "<table><tbody><tr>", "</tr></tbody></table>" ]
-		},
-		safeFragment = createSafeFragment( ),
-		fragmentDiv = safeFragment.appendChild( doc.createElement("div")),
-		core_strundefined = typeof undefined;
-
-		function createSafeFragment( ) {
-			var list = nodeNames.split( "|" ),
-				safeFrag = doc.createDocumentFragment();
-			if ( safeFrag.createElement ) {
-				while ( list.length ) {
-					safeFrag.createElement(
-						list.pop()
-					);
-				}
-			}
-			return safeFrag;
-		}
-	// jquery 1.10.2 from http://jquery.com -- end
-	
-
-
-
-
+    var node_names = "abbr|article|aside|audio|bdi|canvas|data|datalist|details|figcaption|figure|footer|header|hgroup|mark|meter|nav|output|progress|section|summary|time|video",
+        re_tag = /<([\w:]+)/,
+        re_single_tags = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/gi,
+        re_html = /<|&#?\w+;/,
+        re_noInnerhtml = /<(?:script|style|link)/i,
+        core_pnum = /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source,
+        re_margin = /^margin/,
+        re_numsplit = new RegExp( "^(" + core_pnum + ")(.*)$", "i" ),
+        re_numnonpx = new RegExp( "^(" + core_pnum + ")(?!px)[a-z%]+$", "i" ),
+        re_position = /^(top|right|bottom|left)$/,
+        re_is_json = /^(["'](\\.|[^"\\\n\r])*?["']|[,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t])+?$/,
+        re_ms = /^-ms-/,
+        re_snake_case = /[\-_]([\da-z])/gi,
+        re_camel_case = /([A-Z])/g,
+        re_dot = /\./,
+        re_int = /[-|+]?[\D]/gi,
+        re_not_num = /\D/gi,
+        re_money_split = new RegExp('([0-9])([0-9][0-9][0-9][,.])'),
+        re_amp = /&/g,
+        re_eq = /=/,
+        re_class_name_split = /[ ]+/g,
+        body = doc.createElement('body'),
+        safe_fragment = (function(){
+            var list = node_names.split( "|" ),
+                safeFrag = doc.createDocumentFragment();
+            if ( safeFrag.createElement ) {
+                while ( list.length ) {
+                    safeFrag.createElement(
+                        list.pop()
+                    );
+                }
+            }
+            return safeFrag;
+        })(),
+        fragment_div = safe_fragment.appendChild( doc.createElement("div")),
+        tag_map = {
+            option: [ 1, "<select multiple='multiple'>", "</select>" ],
+            legend: [ 1, "<fieldset>", "</fieldset>" ],
+            area: [ 1, "<map>", "</map>" ],
+            param: [ 1, "<object>", "</object>" ],
+            thead: [ 1, "<table>", "</table>" ],
+            tr: [ 2, "<table><tbody>", "</tbody></table>" ],
+            col: [ 2, "<table><tbody></tbody><colgroup>", "</colgroup></table>" ],
+            td: [ 3, "<table><tbody><tr>", "</tr></tbody></table>" ]
+        },
+        tag_not_support_innerhtml = {
+            col:1, colGroup:1, frameSet:1, html:1, head:1, style:1, table:1,
+            tBody:1, tFoot:1, tHead:1, title:1, tr:1
+        };
 
 	/**
 	 * guid
@@ -78,7 +255,24 @@
 		 * @member {String} ax5.info.version
 		 */
 		var version = "0.0.1";
+		/**
+		 * ax5 library path
+		 * @member {String} ax5.info.base_url
+		 */
 		var base_url = "";
+		/**
+		 * ax5 에러 출력메세지 사용자 재 정의
+		 * @member {Object} ax5.info.onerror
+		 * @examples
+		 * ```
+		 * ax5.info.onerror = function(){
+		 *  console.log(arguments);
+		 * }
+		 * ```
+		 */
+		var onerror = function(){
+			console.error(ax5.util.to_array(arguments).join(":"));
+		};
 
 		/**
 		 * event keyCodes
@@ -107,28 +301,22 @@
 		 * //Object {name: "chrome", version: "39.0.2171.71", mobile: false}
 		 * ```
 		 */
-		var browser = (function () {
-			var ua = navigator.userAgent.toLowerCase();
-			var mobile = (ua.search(/mobile/g) != -1);
+		var browser = (function (ua, mobile, browserName, match, browser, browserVersion) {
+			ua = navigator.userAgent.toLowerCase(), mobile = (ua.search(/mobile/g) != -1), browserName, match, browser, browserVersion;
+
 			if (ua.search(/iphone/g) != -1) {
 				return { name: "iphone", version: 0, mobile: true }
 			} else if (ua.search(/ipad/g) != -1) {
 				return { name: "ipad", version: 0, mobile: true }
 			} else if (ua.search(/android/g) != -1) {
-				var match = /(android)[ \/]([\w.]+)/.exec(ua) || [];
-				var browserVersion = (match[2] || "0");
+				match = /(android)[ \/]([\w.]+)/.exec(ua) || [];
+				browserVersion = (match[2] || "0");
 				return { name: "android", version: browserVersion, mobile: mobile }
 			} else {
-				var browserName = "";
-				var match = /(opr)[ \/]([\w.]+)/.exec(ua) ||
-					/(chrome)[ \/]([\w.]+)/.exec(ua) ||
-					/(webkit)[ \/]([\w.]+)/.exec(ua) ||
-					/(msie) ([\w.]+)/.exec(ua) ||
-					ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) ||
-					[];
-
-				var browser = (match[1] || "");
-				var browserVersion = (match[2] || "0");
+				browserName = "";
+				match = /(opr)[ \/]([\w.]+)/.exec(ua) || /(chrome)[ \/]([\w.]+)/.exec(ua) || /(webkit)[ \/]([\w.]+)/.exec(ua) || /(msie) ([\w.]+)/.exec(ua) || ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) || [];
+				browser = (match[1] || "");
+				browserVersion = (match[2] || "0");
 
 				if (browser == "msie") browser = "ie";
 				return {
@@ -137,6 +325,7 @@
 					mobile: mobile
 				}
 			}
+			ua = null, mobile = null, browserName = null, match = null, browser = null, browserVersion = null;
 		})();
 		/**
 		 * 브라우저 여부
@@ -169,8 +358,8 @@
 		 * }
 		 * ```
 		 */
-		function url_util() {
-			var url = {
+		function url_util(url, urls) {
+			url = {
 				href: win.location.href,
 				param: win.location.search,
 				referrer: doc.referrer,
@@ -188,309 +377,16 @@
 			return url;
 		}
 
-		// jquery 1.10.2 jQuery.support from http://jquery.com -- start
-		/**
-		 * 브라우저 API 지원여부
-		 * @member {Object} ax5.info.support
-		 * @example
-		 * ```json
-		 * //ax5.info.support Object JSON
-		 * {
-		 *	 appendChecked: true,
-		 *	 boxModel: true,
-		 *	 changeBubbles: true,
-		 *	 checkClone: undefined,
-		 *	 checkOn: true, // Make sure that if no value is specified for a checkbox, that it defaults to "on". (WebKit defaults to "" instead)
-		 *	 cssFloat: true, // Verify style float existence (IE uses styleFloat instead of cssFloat)
-		 *	 deleteExpando: true,
-		 *	 focusinBubbles: false,
-		 *	 getSetAttribute: true, // Test setAttribute on camelCase class. If it works, we need attrFixes when doing get/setAttribute (ie6/7)
-		 *	 hrefNormalized: true, // Make sure that URLs aren't manipulated
-		 *	 htmlSerialize: true, // Make sure that link elements get serialized correctly by innerHTML
-		 *	 inlineBlockNeedsLayout: false,
-		 *	 leadingWhitespace: true, // IE strips leading whitespace when .innerHTML is used
-		 *	 noCloneChecked: true,
-		 *	 noCloneEvent: true,
-		 *	 opacity: true, // Make sure that element opacity exists
-		 *	 optDisabled: true,
-		 *	 optSelected: true,
-		 *	 radioValue: true,
-		 *	 reliableHiddenOffsets: true,
-		 *	 reliableMarginRight: true,
-		 *	 shrinkWrapBlocks: false,
-		 *	 style: true, // Get the style information from getAttribute
-		 *	 submitBubbles: true,
-		 *	 tbody: true
-		 * }
-		 * ```
-		 */
-		var support = (function(){
-
-			var div = document.createElement( "div" ),
-				documentElement = document.documentElement,
-				all,
-				a,
-				select,
-				opt,
-				input,
-				marginDiv,
-				support,
-				fragment,
-				body,
-				testElementParent,
-				testElement,
-				testElementStyle,
-				tds,
-				events,
-				eventName,
-				i,
-				isSupported;
-
-			// Preliminary tests
-			div.setAttribute("className", "t");
-			div.innerHTML = "   <link/><table></table><a href='/a' style='top:1px;float:left;opacity:.55;'>a</a><input type='checkbox'/>";
-
-			all = div.getElementsByTagName( "*" );
-			a = div.getElementsByTagName( "a" )[ 0 ];
-
-			// Can't get basic test support
-			if ( !all || !all.length || !a ) {
-				return {};
-			}
-
-			// First batch of supports tests
-			select = document.createElement( "select" );
-			opt = select.appendChild( document.createElement("option") );
-			input = div.getElementsByTagName( "input" )[ 0 ];
-
-			support = {
-				// IE strips leading whitespace when .innerHTML is used
-				leadingWhitespace: ( div.firstChild.nodeType === 3 ),
-
-				// Make sure that tbody elements aren't automatically inserted
-				// IE will insert them into empty tables
-				tbody: !div.getElementsByTagName( "tbody" ).length,
-
-				// Make sure that link elements get serialized correctly by innerHTML
-				// This requires a wrapper element in IE
-				htmlSerialize: !!div.getElementsByTagName( "link" ).length,
-
-				// Get the style information from getAttribute
-				// (IE uses .cssText instead)
-				style: /top/.test( a.getAttribute("style") ),
-
-				// Make sure that URLs aren't manipulated
-				// (IE normalizes it by default)
-				hrefNormalized: ( a.getAttribute( "href" ) === "/a" ),
-
-				// Make sure that element opacity exists
-				// (IE uses filter instead)
-				// Use a regex to work around a WebKit issue. See #5145
-				opacity: /^0.55$/.test( a.style.opacity ),
-
-				// Verify style float existence
-				// (IE uses styleFloat instead of cssFloat)
-				cssFloat: !!a.style.cssFloat,
-
-				// Make sure that if no value is specified for a checkbox
-				// that it defaults to "on".
-				// (WebKit defaults to "" instead)
-				checkOn: ( input.value === "on" ),
-
-				// Make sure that a selected-by-default option has a working selected property.
-				// (WebKit defaults to false instead of true, IE too, if it's in an optgroup)
-				optSelected: opt.selected,
-
-				// Test setAttribute on camelCase class. If it works, we need attrFixes when doing get/setAttribute (ie6/7)
-				getSetAttribute: div.className !== "t",
-
-				// Will be defined later
-				submitBubbles: true,
-				changeBubbles: true,
-				focusinBubbles: false,
-				deleteExpando: true,
-				noCloneEvent: true,
-				inlineBlockNeedsLayout: false,
-				shrinkWrapBlocks: false,
-				reliableMarginRight: true
-			};
-
-
-			// IE6-8 can't serialize link, script, style, or any html5 (NoScope) tags,
-			// unless wrapped in a div with non-breaking characters in front of it.
-			wrapMap._default = support.htmlSerialize ? [ 0, "", "" ] : [ 1, "X<div>", "</div>"  ];
-
-			// Make sure checked status is properly cloned
-			input.checked = true;
-			support.noCloneChecked = input.cloneNode( true ).checked;
-
-			// Make sure that the options inside disabled selects aren't marked as disabled
-			// (WebKit marks them as disabled)
-			select.disabled = true;
-			support.optDisabled = !opt.disabled;
-
-			// Test to see if it's possible to delete an expando from an element
-			// Fails in Internet Explorer
-			try {
-				delete div.test;
-			} catch( e ) {
-				support.deleteExpando = false;
-			}
-
-			if ( !div.addEventListener && div.attachEvent && div.fireEvent ) {
-				div.attachEvent( "onclick", function() {
-					// Cloning a node shouldn't copy over any
-					// bound event handlers (IE does this)
-					support.noCloneEvent = false;
-				});
-				div.cloneNode( true ).fireEvent( "onclick" );
-			}
-
-			// Check if a radio maintains it's value
-			// after being appended to the DOM
-			input = document.createElement("input");
-			input.value = "t";
-			input.setAttribute("type", "radio");
-			support.radioValue = input.value === "t";
-
-			input.setAttribute("checked", "checked");
-			div.appendChild( input );
-			fragment = document.createDocumentFragment();
-			fragment.appendChild( div.firstChild );
-
-			// WebKit doesn't clone checked state correctly in fragments
-			support.checkClone = fragment.cloneNode( true ).cloneNode( true ).lastChild.checked;
-
-			div.innerHTML = "";
-
-			// Figure out if the W3C box model works as expected
-			div.style.width = div.style.paddingLeft = "1px";
-
-			body = document.getElementsByTagName( "body" )[ 0 ];
-			// We use our own, invisible, body unless the body is already present
-			// in which case we use a div (#9239)
-			testElement = document.createElement( body ? "div" : "body" );
-			testElementStyle = {
-				visibility: "hidden",
-				width: 0,
-				height: 0,
-				border: 0,
-				margin: 0
-			};
-			if ( body ) {
-				testElementStyle.position = "absolute";
-				testElementStyle.left = -1000;
-				testElementStyle.top = -1000;
-			}
-			for ( i in testElementStyle ) {
-				testElement.style[ i ] = testElementStyle[ i ];
-			}
-			testElement.appendChild( div );
-			testElementParent = body || documentElement;
-			testElementParent.insertBefore( testElement, testElementParent.firstChild );
-
-			// Check if a disconnected checkbox will retain its checked
-			// value of true after appended to the DOM (IE6/7)
-			support.appendChecked = input.checked;
-
-			support.boxModel = div.offsetWidth === 2;
-
-			if ( "zoom" in div.style ) {
-				// Check if natively block-level elements act like inline-block
-				// elements when setting their display to 'inline' and giving
-				// them layout
-				// (IE < 8 does this)
-				div.style.display = "inline";
-				div.style.zoom = 1;
-				support.inlineBlockNeedsLayout = ( div.offsetWidth === 2 );
-
-				// Check if elements with layout shrink-wrap their children
-				// (IE 6 does this)
-				div.style.display = "";
-				div.innerHTML = "<div style='width:4px;'></div>";
-				support.shrinkWrapBlocks = ( div.offsetWidth !== 2 );
-			}
-
-			div.innerHTML = "<table><tr><td style='padding:0;border:0;display:none'></td><td>t</td></tr></table>";
-			tds = div.getElementsByTagName( "td" );
-
-			// Check if table cells still have offsetWidth/Height when they are set
-			// to display:none and there are still other visible table cells in a
-			// table row; if so, offsetWidth/Height are not reliable for use when
-			// determining if an element has been hidden directly using
-			// display:none (it is still safe to use offsets if a parent element is
-			// hidden; don safety goggles and see bug #4512 for more information).
-			// (only IE 8 fails this test)
-			isSupported = ( tds[ 0 ].offsetHeight === 0 );
-
-			tds[ 0 ].style.display = "";
-			tds[ 1 ].style.display = "none";
-
-			// Check if empty table cells still have offsetWidth/Height
-			// (IE < 8 fail this test)
-			support.reliableHiddenOffsets = isSupported && ( tds[ 0 ].offsetHeight === 0 );
-			div.innerHTML = "";
-
-			// Check if div with explicit width and no margin-right incorrectly
-			// gets computed margin-right based on width of container. For more
-			// info see bug #3333
-			// Fails in WebKit before Feb 2011 nightlies
-			// WebKit Bug 13343 - getComputedStyle returns wrong value for margin-right
-			if ( document.defaultView && document.defaultView.getComputedStyle ) {
-				marginDiv = document.createElement( "div" );
-				marginDiv.style.width = "0";
-				marginDiv.style.marginRight = "0";
-				div.appendChild( marginDiv );
-				support.reliableMarginRight =
-					( parseInt( ( document.defaultView.getComputedStyle( marginDiv, null ) || { marginRight: 0 } ).marginRight, 10 ) || 0 ) === 0;
-			}
-
-			// Remove the body element we added
-			testElement.innerHTML = "";
-			testElementParent.removeChild( testElement );
-
-			// Technique from Juriy Zaytsev
-			// http://thinkweb2.com/projects/prototype/detecting-event-support-without-browser-sniffing/
-			// We only care about the case where non-standard event systems
-			// are used, namely in IE. Short-circuiting here helps us to
-			// avoid an eval call (in setAttribute) which can cause CSP
-			// to go haywire. See: https://developer.mozilla.org/en/Security/CSP
-			if ( div.attachEvent ) {
-				for( i in {
-					submit: 1,
-					change: 1,
-					focusin: 1
-				} ) {
-					eventName = "on" + i;
-					isSupported = ( eventName in div );
-					if ( !isSupported ) {
-						div.setAttribute( eventName, "return;" );
-						isSupported = ( typeof div[ eventName ] === "function" );
-					}
-					support[ i + "Bubbles" ] = isSupported;
-				}
-			}
-
-			// Null connected elements to avoid leaks in IE
-			testElement = fragment = select = opt = body = marginDiv = div = input = null;
-
-			return support;
-
-		})();
-		// jquery 1.10.2 jQuery.support from http://jquery.com -- start
-
-		var info = {
+		return {
 			version: version,
 			base_url: base_url,
+			onerror: onerror,
 			event_keys: event_keys,
 			browser: browser,
 			is_browser: is_browser,
 			wheel_enm: wheel_enm,
-			url_util: url_util,
-			support: support
+			url_util: url_util
 		};
-
-		return info;
 	})();
 
 
@@ -767,19 +663,6 @@
 		}
 
 		/**
-		 * 에러를 발생시킵니다.
-		 * @method ax5.util.error
-		 * @param {String} msg
-		 * @example
-		 * ```js
-		 * ax5.util.error( "에러가 발생되었습니다." );
-		 * ```
-		 */
-		function error(msg) {
-			throw new Error(msg);
-		}
-
-		/**
 		 * Object를 JSONString 으로 반환합니다.
 		 * @method ax5.util.to_json
 		 * @param {Object|Array} O
@@ -830,6 +713,42 @@
 			}
 			return json_string;
 		}
+
+        /**
+         * 관용의 JSON Parser
+         * @method ax5.util.parse_json
+         * @param {String} JSONString
+         * @param {Boolean} [force] - 강제 적용 여부 (json 문자열 검사를 무시하고 오브젝트 변환을 시도합니다.)
+         * @returns {Object}
+         * @example
+         * ```
+         * console.log(ax5.util.parse_json('{"a":1}'));
+         * // Object {a: 1} 
+         * console.log(ax5.util.parse_json("{'a':1, 'b':'b'}"));
+         * // Object {a: 1, b: "b"}
+         * console.log(ax5.util.parse_json("{'a':1, 'b':function(){return 1;}}", true));
+         * // Object {a: 1, b: function}
+         * console.log(ax5.util.parse_json("{a:1}"));
+         * // Object {a: 1}
+         * console.log(ax5.util.parse_json("[1,2,3]"));
+         * // [1, 2, 3]
+         * console.log(ax5.util.parse_json("['1','2','3']"));
+         * // ["1", "2", "3"]
+         * console.log(ax5.util.parse_json("[{'a':'99'},'2','3']"));
+         * // [Object, "2", "3"]
+         * ```
+         */
+        function parse_json(str, force){
+            if( force || (re_is_json).test(str) ){
+                try {
+                    return (new Function('', 'return ' + str))();
+                }catch(e){
+                    return {error:500, msg:'syntax error'};
+                }
+            }else {
+                return {error:500, msg:'syntax error'};
+            }
+        }
 		
 		/**
 		 * 타겟 오브젝트의 키를 대상 오브젝트의 키만큼 확장합니다.
@@ -927,7 +846,7 @@
 		 * 인자의 타입을 반환합니다.
 		 * @method ax5.util.get_type
 		 * @param {Object|Array|String|Number|Element|Etc} O
-		 * @returns {String} element|object|array|function|string|number|undefined|nodelist
+		 * @returns {String} window|element|object|array|function|string|number|undefined|nodelist
 		 * @example
 		 * ```js
 		 * var axf = ax5.util;
@@ -939,7 +858,10 @@
 		 */
 		function get_type(O) {
 			var typeName;
-			if (!!(O && O.nodeType == 1)) {
+			if(O != null && O == O.window){
+				typeName = "window";
+			}
+			else if (!!(O && O.nodeType == 1)) {
 				typeName = "element";
 			}
 			else if (!!(O && O.nodeType == 11)) {
@@ -1111,29 +1033,37 @@
 				return undefined;
 			}
 		}
+
 		/**
 		 * 쿠키를 설정합니다.
 		 * @method ax5.util.set_cookie
 		 * @param {String} cname - 쿠키이름
 		 * @param {String} cvalue - 쿠키값
 		 * @param {Number} [exdays] - 쿠키 유지일수
+		 * @param {Object} [opts] - path, domain 설정 옵션
 		 * @example
 		 * ```js
 		 * ax5.util.set_cookie("jslib", "AX5");
 		 * ax5.util.set_cookie("jslib", "AX5", 3);
+		 * ax5.util.set_cookie("jslib", "AX5", 3, {path:"/", domain:".axisj.com"});
 		 * ```
 		 */
-		function set_cookie(cname, cvalue, exdays) {
-			doc.cookie = cname + "=" + escape(cvalue) + "; path=/;" + (function () {
-				if (typeof exdays != "undefined") {
-					var d = new Date();
-					d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-					return "expires=" + d.toUTCString();
-				} else {
-					return "";
-				}
-			})();
+		function set_cookie(cn, cv, exdays, opts) {
+			var expire;
+			if (typeof exdays === "number") {
+				expire = new Date();
+				expire.setDate(expire.getDate() + exdays);
+			}
+			opts = opts || {};
+			return (doc.cookie = [
+				escape(cn), '=', escape(cv),
+				expire      ? "; expires=" + expire.toUTCString() : "", // use expires attribute, max-age is not supported by IE
+				opts.path    ? "; path=" + opts.path : "",
+				opts.domain  ? "; domain=" + opts.domain : "",
+				opts.secure  ? "; secure" : ""
+			].join(""));
 		}
+
 		/**
 		 * 쿠키를 가져옵니다.
 		 * @method ax5.util.get_cookie
@@ -1174,7 +1104,7 @@
 			var
 				head = doc.head || doc.getElementsByTagName("head")[0],
 				readyRegExp = info.is_browser && navigator.platform === 'PLAYSTATION 3' ? /^complete$/ : /^(complete|loaded)$/,
-				loadCount = mods.length, loadErrors = [], onloadTimer, onerrorTimer, returned = false,
+				loadCount = mods.length, loadErrors = [], loaded_src = {}, onloadTimer, onerrorTimer, returned = false,
 				scripts = dom.get("script[src]"), styles = dom.get("style[href]"),
 				onload = function () {
 					if (loadCount < 1 && loadErrors.length == 0 && !returned) {
@@ -1211,12 +1141,12 @@
 				} else {
 
 					plugin = (type === "js") ?
-						dom.create("script", {type: "text/javascript", src: plugin_src}) :
+						dom.create("script", {type: "text/javascript", src: plugin_src, "data-src": plugin_src}) :
 						dom.create("link", {rel: "stylesheet", type: "text/css", href: plugin_src});
 
-					plug_load = function (e) {
-						if (e.type === 'load' || (readyRegExp.test((e.currentTarget || e.srcElement).readyState))) {
-							loadCount--;
+					plug_load = function (e, plugin_src) {
+						if (e && ( e.type === 'load' || readyRegExp.test((e.currentTarget || e.srcElement).readyState) )){
+							if(!loaded_src[plugin_src]) loadCount--;
 							if (onloadTimer) clearTimeout(onloadTimer);
 							onloadTimer = setTimeout(onload, 1);
 						}
@@ -1233,8 +1163,15 @@
 					ax5.xhr({
 						url : plugin_src, contentType: "",
 						res : function (response, status) {
+							var time_id;
 							head.appendChild(plugin);
-							plug_load({type: "load"});
+							plugin.onload = function(e) {
+								plug_load(e, plugin_src);
+								if(time_id) clearTimeout(time_id);
+							};
+							time_id = setTimeout(function(){
+								plug_load({type: "load"}, plugin_src);
+							}, 500);
 						},
 						error : function () {
 							plug_err(this);
@@ -1322,7 +1259,7 @@
 		 * ```
 		 */
 		function camel_case(str) {
-			return str.replace(/^-ms-/, "ms-").replace(/[\-_]([\da-z])/gi, function (all, letter) {
+			return str.replace(re_ms, "ms-").replace(re_snake_case, function (all, letter) {
 				return letter.toUpperCase();
 			});
 		}
@@ -1341,7 +1278,7 @@
 		 * ```
 		 */
 		function snake_case(str) {
-			return camel_case(str).replace(/([A-Z])/g, function (all, letter) {
+			return camel_case(str).replace(re_camel_case, function (all, letter) {
 				return "-" + letter.toLowerCase();
 			});
 		}
@@ -1375,13 +1312,13 @@
 		 * ```
 		 */
 		function number(str, cond) {
-			var result, pair = ('' + str).split(/\./), isMinus = (parseFloat(pair[0]) < 0 || pair[0] == "-0"), returnValue = 0.0;
-			pair[0] = pair[0].replace(/[-|+]?[\D]/gi, "");
+			var result, pair = ('' + str).split(re_dot), isMinus = (Number(pair[0]) < 0 || pair[0] == "-0"), returnValue = 0.0;
+			pair[0] = pair[0].replace(re_int, "");
 			if (pair[1]) {
-				pair[1] = pair[1].replace(/\D/gi, "");
-				returnValue = parseFloat(pair[0] + "." + pair[1]) || 0;
+				pair[1] = pair[1].replace(re_not_num, "");
+				returnValue = Number(pair[0] + "." + pair[1]) || 0;
 			} else {
-				returnValue = parseFloat(pair[0]) || 0;
+				returnValue = Number(pair[0]) || 0;
 			}
 			result = (isMinus) ? -returnValue : returnValue;
 
@@ -1396,12 +1333,11 @@
 							return "";
 						}
 						else {
-							var rxSplit = new RegExp('([0-9])([0-9][0-9][0-9][,.])');
 							var arrNumber = txtNumber.split('.');
 							arrNumber[0] += '.';
 							do {
-								arrNumber[0] = arrNumber[0].replace(rxSplit, '$1,$2');
-							} while (rxSplit.test(arrNumber[0]));
+								arrNumber[0] = arrNumber[0].replace(re_money_split, '$1,$2');
+							} while (re_money_split.test(arrNumber[0]));
 							if (arrNumber.length > 1) {
 								return arrNumber.join('');
 							} else {
@@ -1411,11 +1347,11 @@
 					})(result);
 				}
 				else if (k == "abs") {
-					result = Math.abs(parseFloat(result));
+					result = Math.abs(Number(result));
 				}
 				else if (k == "byte") {
 					result = (function (val) {
-						val = parseFloat(result);
+						val = Number(result);
 						var n_unit = "KB";
 						var myByte = val / 1024;
 						if (myByte / 1024 > 1) {
@@ -1503,8 +1439,8 @@
 			else
 			if ( (is_string(O) && typeof cond !== "undefined" && cond == "object") || (is_string(O) && typeof cond === "undefined") ){
 				p = {};
-				each(O.split(/&/g), function () {
-					var item = this.split(/=/);
+				each(O.split(re_amp), function () {
+					var item = this.split(re_eq);
 					p[item[0]] = item[1];
 				});
 				return p;
@@ -1523,47 +1459,52 @@
 			return encodeURIComponent(s);
 		}
 
-		function decode() {
+		function decode(s) {
 			return decodeURIComponent(s);
 		}
 
+		function error(){
+			ax5.info.onerror.apply(this, arguments);
+		}
+
 		return {
-			alert       : alert,
-			each        : each,
-			map         : map,
-			search      : search,
-			reduce      : reduce,
-			reduce_right: reduce_right,
-			filter      : filter,
-			error       : error,
-			to_json     : to_json,
-			extend      : extend,
-			extend_all  : extend_all,
-			clone       : clone,
-			first       : first,
-			last        : last,
-			left        : left,
-			right       : right,
-			get_type    : get_type,
-			is_window   : is_window,
-			is_element  : is_element,
-			is_object   : is_object,
-			is_array    : is_array,
-			is_function : is_function,
-			is_string   : is_string,
-			is_number   : is_number,
-			is_nodelist : is_nodelist,
-			is_undefined: is_undefined,
-			is_nothing  : is_nothing,
-			set_cookie  : set_cookie,
-			get_cookie  : get_cookie,
-			require     : require,
-			camel_case  : camel_case,
-			snake_case  : snake_case,
-			number      : number,
-			to_array    : to_array,
-			merge       : merge,
-			param       : param
+            alert       : alert,
+            each        : each,
+            map         : map,
+            search      : search,
+            reduce      : reduce,
+            reduce_right: reduce_right,
+            filter      : filter,
+            to_json     : to_json,
+            parse_json  : parse_json,
+            extend      : extend,
+            extend_all  : extend_all,
+            clone       : clone,
+            first       : first,
+            last        : last,
+            left        : left,
+            right       : right,
+            get_type    : get_type,
+            is_window   : is_window,
+            is_element  : is_element,
+            is_object   : is_object,
+            is_array    : is_array,
+            is_function : is_function,
+            is_string   : is_string,
+            is_number   : is_number,
+            is_nodelist : is_nodelist,
+            is_undefined: is_undefined,
+            is_nothing  : is_nothing,
+            set_cookie  : set_cookie,
+            get_cookie  : get_cookie,
+            require     : require,
+            camel_case  : camel_case,
+            snake_case  : snake_case,
+            number      : number,
+            to_array    : to_array,
+            merge       : merge,
+            param       : param,
+			error       : error
 		}
 	})();
 
@@ -1738,7 +1679,7 @@
 				 * 형제 엘리먼트중에 다음에 위치한 엘리먼트를 반환합니다.
 				 * @method ax5.dom0.next
 				 * @param {Number} [times=0] - 횟수
-				 * @returns {ax5.dom0} ax5.dom0
+				 * @returns {axdom} ax5.dom0
 				 * @example
 				 * ```
 				 * <div>
@@ -1995,7 +1936,6 @@
 				/**
 				 * 엘리먼트의 box model 속성을 반환합니다.
 				 * @method ax5.dom0.box_model
-				 * @param {Elements|Element} elements
 				 * @param {String} [cond] - 원하는 박스 속성
 				 * @returns {Object}
 				 * @example
@@ -2018,8 +1958,8 @@
 				 * // 각각의 박스모델 속성을 지정하여 호출 할 수 있습니다. borderWidth, border-width 중 하나의 방법으로 사용 가능합니다.
 				 * ```
 				 */
-				this.box_model = function () {
-					return dom.box_model(this.elements);
+				this.box_model = function (cond) {
+					return dom.box_model(this.elements, cond);
 				};
 				/**
 				 * 엘리먼트에 data를 속성을 추가하거나 반환합니다.
@@ -2052,7 +1992,22 @@
 				this.data = function (command, O) {
 					var rs = dom.data(this.elements, command, O);
 					return (rs === this.elements) ? this : rs;
-				}
+				};
+				/**
+				 * 엘리먼트의 자식을 모두 지워줍니다. 내용을 깨긋히 비워 냅니다.
+				 * @method ax5.dom0.empty
+				 * @returns {ax5.dom0}
+				 * @example
+				 * ```
+				 * var axd = ax5.dom, axu = ax5.util, res = "";
+				 *
+				 * axd("#id").empty();
+				 * ```
+				 */
+				this.empty = function (){
+					dom.empty(this.elements);
+					return this;
+				};
 			}
 
 			return ax;
@@ -2062,9 +2017,11 @@
 
 	// dom functions
 	(function () {
+        var curCSS;
 		//if("내장함수 시작") {
 		// 이벤트 바인딩
-		function eventBind(elem, type, eventHandle) {
+		function eBind(elem, type, eventHandle) {
+			if(!U.is_string(type)) console.error("type=" + type);
 			type = U.left(type, ".");
 			if (elem.addEventListener) {
 				elem.addEventListener(type, eventHandle, false);
@@ -2074,7 +2031,7 @@
 		}
 
 		// 이벤트 언바인딩
-		function eventUnBind(elem, type, eventHandle) {
+		function eUnBind(elem, type, eventHandle) {
 			type = U.left(type, ".");
 			if (elem.removeEventListener) {
 				if (eventHandle) elem.removeEventListener(type, eventHandle);
@@ -2089,17 +2046,13 @@
 
 		// 엘리먼트 인자 체크
 		function va_elem(elem, fn_name) {
-			if (U.is_array(elem) && U.is_element(elem[0])) {
-				return elem;
-			}
-			else if (U.is_element(elem)) return [elem];
-			else if (elem && elem.nodeType === 9) {
-				return [elem.documentElement];
-			}
-			else if (elem && elem.toString() == "[object ax5.dom]") {
-				return elem.elements;
-			}
-			else if (!U.is_array(elem) && !U.is_nodelist(elem)) {
+			var type = U.get_type(elem);
+			if (type === "window") return elem;
+			else if (type === "array" && U.is_element(elem[0])) return elem;
+			else if (type === "element") return [elem];
+			else if (elem && elem.nodeType === 9) return [elem.documentElement];
+			else if (elem && elem.toString() == "[object ax5.dom]") return elem.elements;
+			else if (type !== "array" && type !== "nodelist") {
 				console.error("ax5.dom." + fn_name + " : elements parameter incorrect");
 				return [];
 			}
@@ -2107,9 +2060,9 @@
 		}
 
 		// 엘리먼트 순서이동
-		function sibling(elements, forward, times) {
-			elements = va_elem(elements, forward);
-			var prop = (forward == "prev") ? "previousSibling" : "nextSibling", el = elements[0];
+		function sibling(els, forward, times) {
+			var prop = (forward == "prev") ? "previousSibling" : "nextSibling", 
+				el = [].concat(els)[0];
 			times = (typeof times == "undefined" || times < 1) ? 1 : times;
 			do {
 				el = el[prop];
@@ -2124,92 +2077,90 @@
 			return el;
 		}
 
+        if ( window.getComputedStyle ) {
+            curCSS = function (elem, name, num) {
+                var width, minWidth, maxWidth, computed, ret, style, left, rs, rsLeft;
 
-// jQuery 1.10.2 이 소스를 참고하여 getStyles와 curCSS를 작성하였습니다.
-		function getStyles(elem) {
-			if ( window.getComputedStyle ) {
-				return window.getComputedStyle(elem, null);
-			} else {
-				//if (document.documentElement.currentStyle) {
-				return elem.currentStyle;
-			}
-		}
+                computed = window.getComputedStyle(elem, null),
+                ret = computed ? computed.getPropertyValue(name) || computed[name] : undefined,
+                style = elem.style;
 
-		function curCSS(elem, name, num) {
-			var width, minWidth, maxWidth, computed, ret, style, left, rs, rsLeft;
+                if ( computed ) {
 
-			if ( window.getComputedStyle ) {
-				computed = getStyles(elem),
-					ret = computed ? computed.getPropertyValue(name) || computed[name] : undefined,
-					style = elem.style;
+                    // A tribute to the "awesome hack by Dean Edwards"
+                    // Chrome < 17 and Safari 5.0 uses "computed value" instead of "used value" for margin-right
+                    // Safari 5.1.7 (at least) returns percentage for a larger set of values, but width seems to be reliably pixels
+                    // this is against the CSSOM draft spec: http://dev.w3.org/csswg/cssom/#resolved-values
+                    if ( re_numnonpx.test( ret ) && re_margin.test( name ) ) {
+                        // Remember the original values
+                        width = style.width;
+                        minWidth = style.minWidth;
+                        maxWidth = style.maxWidth;
 
-				if ( computed ) {
+                        // Put in the new values to get a computed value out
+                        style.minWidth = style.maxWidth = style.width = ret;
+                        ret = computed.width;
 
-					// A tribute to the "awesome hack by Dean Edwards"
-					// Chrome < 17 and Safari 5.0 uses "computed value" instead of "used value" for margin-right
-					// Safari 5.1.7 (at least) returns percentage for a larger set of values, but width seems to be reliably pixels
-					// this is against the CSSOM draft spec: http://dev.w3.org/csswg/cssom/#resolved-values
-					if ( rnumnonpx.test( ret ) && rmargin.test( name ) ) {
-						// Remember the original values
-						width = style.width;
-						minWidth = style.minWidth;
-						maxWidth = style.maxWidth;
+                        // Revert the changed values
+                        style.width = width;
+                        style.minWidth = minWidth;
+                        style.maxWidth = maxWidth;
+                    }
+                }
 
-						// Put in the new values to get a computed value out
-						style.minWidth = style.maxWidth = style.width = ret;
-						ret = computed.width;
+                if(num) ret = parseFloat(ret) || 0;
+                return ret;
+            }
+        }
+        else{
+            curCSS = function(elem, name, num) {
+                var width, minWidth, maxWidth, computed, ret, style, left, rs, rsLeft;
 
-						// Revert the changed values
-						style.width = width;
-						style.minWidth = minWidth;
-						style.maxWidth = maxWidth;
-					}
-				}
+                computed = elem.currentStyle,
+                ret = computed ? computed[ name ] : undefined,
+                style = elem.style;
 
-			} else {
-				//if (document.documentElement.currentStyle) {
-				computed = getStyles( elem ),
-					ret = computed ? computed[ name ] : undefined,
-					style = elem.style;
+                // Avoid setting ret to empty string here
+                // so we don't default to auto
+                if ( ret == null && style && style[ name ] ) {
+                    ret = style[ name ];
+                }
 
-				// Avoid setting ret to empty string here
-				// so we don't default to auto
-				if ( ret == null && style && style[ name ] ) {
-					ret = style[ name ];
-				}
+                // From the awesome hack by Dean Edwards
+                // http://erik.eae.net/archives/2007/07/27/18.54.15/#comment-102291
 
-				// From the awesome hack by Dean Edwards
-				// http://erik.eae.net/archives/2007/07/27/18.54.15/#comment-102291
+                // If we're not dealing with a regular pixel number
+                // but a number that has a weird ending, we need to convert it to pixels
+                // but not position css attributes, as those are proportional to the parent element instead
+                // and we can't measure the parent instead because it might trigger a "stacking dolls" problem
+                if ( re_numnonpx.test( ret ) && !re_position.test( name ) ) {
 
-				// If we're not dealing with a regular pixel number
-				// but a number that has a weird ending, we need to convert it to pixels
-				// but not position css attributes, as those are proportional to the parent element instead
-				// and we can't measure the parent instead because it might trigger a "stacking dolls" problem
-				if ( rnumnonpx.test( ret ) && !rposition.test( name ) ) {
+                    // Remember the original values
+                    left = style.left;
+                    rs = elem.runtimeStyle;
+                    rsLeft = rs && rs.left;
 
-					// Remember the original values
-					left = style.left;
-					rs = elem.runtimeStyle;
-					rsLeft = rs && rs.left;
+                    // Put in the new values to get a computed value out
+                    if ( rsLeft ) {
+                        rs.left = elem.currentStyle.left;
+                    }
+                    style.left = name === "fontSize" ? "1em" : ret;
+                    ret = style.pixelLeft + "px";
 
-					// Put in the new values to get a computed value out
-					if ( rsLeft ) {
-						rs.left = elem.currentStyle.left;
-					}
-					style.left = name === "fontSize" ? "1em" : ret;
-					ret = style.pixelLeft + "px";
+                    // Revert the changed values
+                    style.left = left;
+                    if ( rsLeft ) {
+                        rs.left = rsLeft;
+                    }
+                }
+                ret = ret === "" ? "auto" : ret;
 
-					// Revert the changed values
-					style.left = left;
-					if ( rsLeft ) {
-						rs.left = rsLeft;
-					}
-				}
-				ret = ret === "" ? "auto" : ret;
-			}
-			if(num) ret = parseFloat(ret) || 0;
-			return ret;
-		}
+                if(num) ret = parseFloat(ret) || 0;
+                return ret;
+            }
+        }
+        // jQuery 1.10.2 소스를 참고하여 curCSS를 재작성하였습니다.
+
 
 		// 엘리먼트 스타일 값 가져오기
 		function style(el, key, fn_nm) {
@@ -2227,14 +2178,15 @@
 		}
 
 		// 박스사이즈 구하기
-		function box_size(elements, fn_nm, opts) {
-			var d = -1, tag_nm = "";
-			if (U.is_window(elements)) {
-				return elements.document.documentElement[U.camel_case("client-" + fn_nm)];
+		function box_size(els, fn_nm, opts) {
+			var d = -1, tag_nm = "",
+				el = [].concat(els)[0];
+			
+			if (U.is_window(el)) {
+				return el.document.documentElement[U.camel_case("client-" + fn_nm)];
 			}
 			else {
-				elements = va_elem(elements, fn_nm);
-				var el = elements[0], _sbs = U.camel_case("scroll-" + fn_nm), _obs = U.camel_case("offset-" + fn_nm), _cbs = U.camel_case("client-" + fn_nm);
+				var _sbs = U.camel_case("scroll-" + fn_nm), _obs = U.camel_case("offset-" + fn_nm), _cbs = U.camel_case("client-" + fn_nm);
 				if (el) {
 					tag_nm = el.tagName.toLowerCase();
 					if (tag_nm == "html") {
@@ -2270,8 +2222,9 @@
 
 		// createFragment
 		function create_fragment(elems) {
-			var safe = createSafeFragment(), tmp, nodes = [], tag, wrap, tbody;
-			var elem, i = 0, l = elems.length, j;
+			var safe = safe_fragment.appendChild( doc.createElement("div")), tmp, nodes = [], tag, wrap, tbody,
+                elem, i = 0, l = elems.length, j;
+            // safe = doc.createDocumentFragment();
 
 			for (; i < l; i++) {
 				elem = elems[i];
@@ -2282,16 +2235,16 @@
 					else if (U.get_type(elem) == "element") {
 						nodes.push(elem);
 					}
-					else if (!rhtml.test(elem)) {
+					else if (!re_html.test(elem)) {
 						nodes.push(doc.createTextNode(elem));
 						//safe.appendChild(doc.createTextNode(elem));
 					}
 					else {
 						tmp = safe.appendChild(doc.createElement("div"));
 						// Deserialize a standard representation
-						tag = ( rtagName.exec(elem) || ["", ""] )[1].toLowerCase();
-						wrap = wrapMap[tag] || wrapMap._default;
-						tmp.innerHTML = wrap[1] + elem.replace(rxhtmlTag, "<$1></$2>") + wrap[2];
+						tag = ( re_tag.exec(elem) || ["", ""] )[1].toLowerCase();
+						wrap = tag_map[tag] || [ 0, "", "" ];
+						tmp.innerHTML = wrap[1] + elem.replace(re_single_tags, "<$1></$2>") + wrap[2];
 
 						// Descend through wrappers to the right content
 						j = wrap[0];
@@ -2299,30 +2252,25 @@
 							tmp = tmp.lastChild;
 						}
 
-						// Manually add leading whitespace removed by IE
-						if (!info.support.leadingWhitespace && rleadingWhitespace.test(elem)) {
-							nodes.push(doc.createTextNode(rleadingWhitespace.exec(elem)[0]));
-						}
+                        /* ax5 에겐 필요없는 구문이 될 듯.
+                        if (!info.support.tbody) {
+                            // String was a <table>, *may* have spurious <tbody>
+                            elem = tag === "table" && !rtbody.test(elem) ?
+                                tmp.firstChild :
 
-						// Remove IE's autoinserted <tbody> from table fragments
-						if (!info.support.tbody) {
-							// String was a <table>, *may* have spurious <tbody>
-							elem = tag === "table" && !rtbody.test(elem) ?
-								tmp.firstChild :
+                                // String was a bare <thead> or <tfoot>
+                                wrap[1] === "<table>" && !rtbody.test(elem) ?
+                                    tmp :
+                                    0;
 
-								// String was a bare <thead> or <tfoot>
-								wrap[1] === "<table>" && !rtbody.test(elem) ?
-									tmp :
-									0;
-
-							j = elem && elem.childNodes.length;
-							while (j--) {
-								if (node_name((tbody = elem.childNodes[j]), "tbody") && !tbody.childNodes.length) {
-									elem.removeChild(tbody);
-								}
-							}
-						}
-
+                            j = elem && elem.childNodes.length;
+                            while (j--) {
+                                if (node_name((tbody = elem.childNodes[j]), "tbody") && !tbody.childNodes.length) {
+                                    elem.removeChild(tbody);
+                                }
+                            }
+                        }
+                        */
 						U.merge(nodes, tmp.childNodes);
 
 						// Fix #12392 for WebKit and IE > 9
@@ -2335,53 +2283,20 @@
 
 						// Remember the top-level container for proper cleanup
 						tmp = safe.lastChild;
+						//tmp = safe.firstChild;
+                        safe.removeChild(tmp);
+                        tmp = null;
 					}
 				}
 			}
 
-			// Fix #11356: Clear elements from fragment
-			if (tmp) {
-				safe.removeChild(tmp);
-			}
-
-			/*
-			 // Reset defaultChecked for any radios and checkboxes
-			 // about to be appended to the DOM in IE 6/7 (#8060)
-			 if (!info.support.appendChecked) {
-			 //jQuery.grep( getAll( nodes, "input" ), fixDefaultChecked );
-			 }
-			 */
-
-
 			i = 0;
 			while ((elem = nodes[i++])) {
-				//console.log(elem);
 				safe.appendChild(elem);
 			}
-
-
-			tmp = null;
-
+			//console.log(safe.innerHTML);
 			return safe;
 		}
-
-		// getAll 특정 tag인 모든 엘리먼트 불러오기
-		/*
-		 function getAll(context, tag) {
-		 var elems, elem, i = 0,
-		 found = typeof context.getElementsByTagName !== core_strundefined ? context.getElementsByTagName(tag || "*") : typeof context.querySelectorAll !== core_strundefined ? context.querySelectorAll(tag || "*") : undefined;
-		 if (!found) {
-		 for (found = [], elems = context.childNodes || context; (elem = elems[i]) != null; i++) {
-		 if (!tag || jQuery.nodeName(elem, tag)) {
-		 found.push(elem);
-		 } else {
-		 U.merge(found, getAll(elem, tag));
-		 }
-		 }
-		 }
-		 return tag === undefined || tag && node_name(context, tag) ? U.merge([context], found) : found;
-		 }
-		 */
 		
 		// 엘리먼트와 자식 엘리먼트의 이벤트와 데이터를 모두 지워줍니다.
 		function clear_element_data(el){
@@ -2390,21 +2305,21 @@
 			
 			for(var hd in el.e_hd){
 				if(typeof el.e_hd[hd] === "function"){
-					eventUnBind(el, hd, el.e_hd[hd]);
+					eUnBind(el, hd, el.e_hd[hd]);
 				}else{
 					for(var ehi=0;ehi<el.e_hd[hd].length;ehi++)
-						eventUnBind(el, hd, el.e_hd[hd][ehi]);
+						eUnBind(el, hd, el.e_hd[hd][ehi]);
 				}
 			}
-			delete el["e_hd"];
-			delete el["ax5_data"];
+			if(el["e_hd"]) delete el["e_hd"];
+			if(el["ax5_data"]) delete el["ax5_data"];
 			// todo : attributes 걸리는 것이 없지만 혹시나 모를 데이터를 위해.
-			for(var a in el.attributes){
-				if(typeof el.attributes[a] === "object"){
-					//console.log(el.attributes[a]);
-					el.attributes[a] = null
+			if(ax5.info.browser.name !== "ie" && ax5.info.browser.version > 7){
+				for(var a in el.attributes) {
+					if (typeof el.attributes[a] === "object") el.attributes[a] = null;
 				}
 			}
+
 			// 자식들도 확인 합니다.
 			if(el.hasChildNodes()){
 				c_el = el.childNodes, ci = 0, cl = c_el.length;
@@ -2413,7 +2328,7 @@
 			}
 		}
 		
-		// jQuery.ready.promise jquery 1.10.2
+		// jQuery.ready.promise jquery 1.10.2 를 참고하여 재 작성 했습니다.
 		/**
 		 * document 로드 완료를 체크 합니다.
 		 * @method ax5.dom.ready
@@ -2430,11 +2345,10 @@
 		 * ```
 		 */
 		function ready(_fn) {
-			if (ax5.dom.is_ready || ax5.dom.is_reading) return;
-			ax5.dom.is_reading = true;
+			var is_ready = false;
 			promise(function () {
-				if (ax5.dom.is_ready) return;
-				ax5.dom.is_ready = true;
+				if (is_ready) return;
+				is_ready = ax5.dom.is_ready = true;
 				_fn();
 			});
 		}
@@ -2442,34 +2356,35 @@
 		function promise(_fn) {
 			if (doc.readyState === "complete") {
 				setTimeout(_fn);
-			} else if (doc.addEventListener) {
-				doc.addEventListener("DOMContentLoaded", _fn, false);
-				win.addEventListener("load", _fn, false);
 			} else {
-				doc.attachEvent("onreadystatechange", _fn);
-				win.attachEvent("onload", _fn);
+				if (doc.addEventListener) {
+					doc.addEventListener("DOMContentLoaded", _fn, false);
+					win.addEventListener("load", _fn, false);
+				} else {
+					doc.attachEvent("onreadystatechange", _fn);
+					win.attachEvent("onload", _fn);
+					// If IE and not a frame
+					var top = false;
+					try {
+						top = win.frameElement == null && doc.documentElement;
+					} catch (e) {
+					}
 
-				// If IE and not a frame
-				var top = false;
-				try {
-					top = win.frameElement == null && doc.documentElement;
-				} catch (e) {
-				}
-
-				if (top && top.doScroll) {
-					(function doScrollCheck() {
-						if (!ax5.dom.is_ready) {
-							try {
-								// Use the trick by Diego Perini
-								// http://javascript.nwbox.com/IEContentLoaded/
-								top.doScroll("left");
-							} catch (e) {
-								return setTimeout(doScrollCheck, 50);
+					if (top && top.doScroll) {
+						(function doScrollCheck() {
+							if (!ax5.dom.is_ready) {
+								try {
+									// Use the trick by Diego Perini
+									// http://javascript.nwbox.com/IEContentLoaded/
+									top.doScroll("left");
+								} catch (e) {
+									return setTimeout(doScrollCheck, 50);
+								}
+								// and execute any waiting functions
+								_fn();
 							}
-							// and execute any waiting functions
-							_fn();
-						}
-					})();
+						})();
+					}
 				}
 			}
 		}
@@ -2486,7 +2401,34 @@
 		 * ```
 		 */
 		function resize(_fn) {
-			eventBind(window, "resize", _fn);
+			ready(function() {
+				eBind(window, "resize", _fn);
+			});
+		}
+		/**
+		 * 브라우저 scroll 이벤트를 캐치하여 사용자 함수를 호출 하거나 스트롤 포지션을 리턴합니다.
+		 * @method ax5.dom.scroll
+		 * @param {Function} [_fn] - 캐치후 호출될 함수
+		 * @example
+		 * ```
+		 * ax5.dom.scroll(function(){
+		 * 	console.log( 1, ax5.dom.scroll().top );
+		 * });
+		 * ```
+		 */
+		function scroll(_fn) {
+
+			if(typeof _fn === "undefined"){
+				return {
+					top: docElem.scrollTop || doc.body.scrollTop,
+					left: docElem.scrollLeft || doc.body.scrollLeft
+				}
+			}else{
+				ready(function(){
+					eBind(window, "scroll", _fn);
+				});
+				return false;
+			}
 		}
 
 		/**
@@ -2503,38 +2445,27 @@
 		 * ```
 		 */
 		function get(query, sub_query) {
-			var elements, return_elements = [], parent_element;
+			var els, r_els = [], p_els;
 			var i = 0, l = query.length;
-			if (query.toString() == "[object ax5.dom]") {
-				return_elements = query.elements;
+			if (query.toString() === "[object ax5.dom]") {
+                r_els = query.elements;
 			}
-			else if (U.is_element(query)) {
-				return_elements.push(query);
-			}
+			else if (U.is_window(query)) r_els.push(query);
+			else if (U.is_element(query)) r_els.push(query);
 			else if (U.is_array(query) || U.is_nodelist(query)) {
-				for (; i < l; i++) {
-					if (U.is_element(query[i])) return_elements.push(query[i]);
-				}
+				for (i=0; i < l; i++)  if (U.is_element(query[i])) r_els.push(query[i]);
 			}
-			else if (U.is_string(query) && query.substr(0, 1) === "#") {
-				return_elements.push(doc.getElementById(query.substr(1)));
-			}
+			else if (U.is_string(query) && query.substr(0, 1) === "#") r_els.push(doc.getElementById(query.substr(1)));
 			else {
-				elements = doc.querySelectorAll(query), l = elements.length;
-				for (; i < l; i++) {
-					return_elements.push(elements[i]);
-				}
+                els = doc.querySelectorAll(query), l = els.length;
+				for (i=0; i < l; i++) r_els.push(els[i]);
 			}
-
-			if (typeof sub_query != "undefined") {
-				parent_element = (info.browser.name == "ie" && info.browser.version < 8) ? doc : return_elements[0];
-				return_elements = [];
-				elements = parent_element.querySelectorAll(sub_query), l = elements.length;
-				for (; i < l; i++) {
-					return_elements.push(elements[i]);
-				}
+			if (typeof sub_query !== "undefined") {
+				p_els = (info.browser.name == "ie" && info.browser.version < 8) ? doc : r_els[0];
+                r_els = [], els = p_els.querySelectorAll(sub_query), l = els.length;
+				for (i=0; i < l; i++) r_els.push(els[i]);
 			}
-			return return_elements;
+			return r_els;
 		}
 
 		/**
@@ -2580,8 +2511,7 @@
 			for (var k in attr) {
 				element.setAttribute(k, attr[k]);
 			}
-			if
-			(val) element.appendChild(create_fragment([].concat(val)));
+			if(val) element.appendChild(create_fragment([].concat(val)));
 			return element;
 		}
 
@@ -2597,20 +2527,20 @@
 		 * ax5.dom.css(ax5.dom.get("#abcd"), {"width":100});
 		 * ```
 		 */
-		function css(elements, O) {
-			elements = va_elem(elements, "css");
+		function css(els, O) {
+			els = va_elem(els, "css");
 			if (U.is_string(O) || U.is_array(O)) {
-				return style(elements[0], O, "css");
+				return style(els[0], O, "css");
 			}
 			else {
-				var i = 0, l = elements.length, k, matchs;
+				var i = 0, l = els.length, k, matchs;
 				for (; i < l; i++) {
 					for (k in O) {
-						elements[i].style[U.camel_case(k)] = (matchs = rnumsplit.exec(O[k])) ? Math.max(0, matchs[1]) + ( matchs[2] || "px" ) : O[k];
+						els[i].style[U.camel_case(k)] = (matchs = re_numsplit.exec(O[k])) ? Math.max(0, matchs[1]) + ( matchs[2] || "px" ) : O[k];
 					}
 				}
 			}
-			return elements;
+			return els;
 		}
 		// todo : opacity 컨트롤 테스트
 
@@ -2630,46 +2560,57 @@
 		 * ax5.dom.class_name(ax5.dom.get("#abcd"), "toggle", "class-text");
 		 * ```
 		 */
-		function class_name(elements, command, O) {
-			var classNames;
-			elements = va_elem(elements, "clazz");
+
+		// todo : class_name 여러개의 class 인자 동시 처리 지원
+		function class_name(els, command, O) {
+			var cns;
+			els = va_elem(els, "clazz");
 			if (command === "add" || command === "remove" || command === "toggle") {
-				for (var di = 0; di < elements.length; di++) {
-					classNames = elements[di]["className"].split(/[ ]+/g);
+				O = [].concat(O);
+				for (var di = 0; di < els.length; di++) {
+					cns = els[di]["className"];
+					if(cns !== "") cns = cns.split(re_class_name_split);
+					else cns = [];
 					if (command === "add") {
-						if (U.search(classNames, function () {
-								return O.trim() == this;
-							}) == -1) {
-							classNames.push(O.trim());
-						}
+						O.forEach(function(O){
+							if (U.search(cns, function () {
+									return O.trim() == this;
+								}) == -1) cns.push(O.trim());
+						});
 					} else if (command === "remove") {
-						classNames = U.filter(classNames, function () {
-							return O.trim() != this;
+						O.forEach(function(O) {
+							cns = U.filter(cns, function () {
+								return O.trim() != this;
+							});
 						});
 					} else if (command === "toggle") {
-						var class_count = classNames.length;
-						classNames = U.filter(classNames, function () {
-							return O.trim() != this;
+						O.forEach(function(O) {
+							var class_count = cns.length;
+							cns = U.filter(cns, function () {
+								return O.trim() != this;
+							});
+							if (class_count === cns.length) cns.push(O.trim());
 						});
-						if (class_count === classNames.length) classNames.push(O.trim());
 					}
-					elements[di]["className"] = classNames.join(" ");
+
+
+
+					els[di]["className"] = cns.join(" ");
 				}
-				return elements;
+				return els;
 			}
 			else { // has
 				if (typeof O === "undefined") O = command;
-				classNames = elements[0]["className"].trim().split(/ /g);
-				//if(U.is_string(classNames)) classNames = [classNames];
+                cns = els[0]["className"].trim().split(re_class_name_split);
 				if (U.is_string(O)) { // hasClass
 					// get Class Name
-					return (U.search(classNames, function () {
+					return (U.search(cns, function () {
 						return this.trim() === O
 					}) > -1);
 				} else {
 					console.error("set_class argument error");
 				}
-				return elements;
+				return els;
 			}
 		}
 
@@ -2687,24 +2628,24 @@
 		 * ax5.dom.attr(ax5.dom.get("[data-ax-grid=A]"), {"data-next":null}); // remove attribute
 		 * ```
 		 */
-		function attr(elements, O) {
-			elements = va_elem(elements, "attr");
-			var i = 0, l = elements.length, k;
+		function attr(els, O) {
+			els = va_elem(els, "attr");
+			var i = 0, l = els.length, k;
 			if (U.is_object(O)) {
 				for (; i < l; i++) {
 					for (k in O){
 						if(O[k] == null){
-							elements[i].removeAttribute(k);
+							els[i].removeAttribute(k);
 						}else{
-							elements[i].setAttribute(k, O[k]);
+							els[i].setAttribute(k, O[k]);
 						}
 					}
 				}
 			}
 			else if (U.is_string(O)) {
-				return elements[0].getAttribute(O);
+				return els[0].getAttribute(O);
 			}
-			return elements;
+			return els;
 		}
 
 		/**
@@ -2737,10 +2678,11 @@
 		 * ax5.dom.on(mydom, "click.fnc", window.fnc);
 		 * ```
 		 */
-		function on(elements, typ, _fn) {
-			elements = va_elem(elements, "on");
-			for (var i = 0; i < elements.length; i++) {
-				var __fn, _d = elements[i];
+		function on(els, typ, _fn) {
+			els = va_elem(els, "on");
+			for (var i = 0; i < els.length; i++) {
+				var __fn, _d = els[i];
+				if(!_d) break;
 				if (!_d.e_hd) _d.e_hd = {};
 				if (typeof _d.e_hd[typ] === "undefined") {
 					__fn = _d.e_hd[typ] = _fn;
@@ -2749,7 +2691,7 @@
 					_d.e_hd[typ].push(_fn);
 					__fn = _d.e_hd[typ][_d.e_hd[typ].length - 1];
 				}
-				eventBind(_d, typ, __fn);
+				eBind(_d, typ, __fn);
 			}
 		}
 
@@ -2766,21 +2708,22 @@
 		 * ax5.dom.off(mydom, "click.fnb");
 		 * ```
 		 */
-		function off(elements, typ, _fn) {
-			elements = va_elem(elements, "off");
-			for (var i = 0; i < elements.length; i++) {
-				var _d = elements[i];
-				if (U.is_array(_d.e_hd[typ])) {
-					var _na = [];
-					for (var i = 0; i < _d.e_hd[typ].length; i++) {
-						if (_d.e_hd[typ][i] == _fn || typeof _fn === "undefined") eventUnBind(_d, typ, _d.e_hd[typ][i]);
-						else _na.push(_d.e_hd[typ][i]);
-					}
-					_d.e_hd[typ] = _na;
-				} else {
-					if (_d.e_hd[typ] == _fn || typeof _fn === "undefined") {
-						eventUnBind(_d, typ, _d.e_hd[typ]);
-						delete _d.e_hd[typ]; // 함수 제거
+		function off(els, typ, _fn) {
+			els = va_elem(els, "off");
+			for (var i = 0; i < els.length; i++) {
+				var _d = els[i];
+				if(_d.e_hd) {
+					if (U.is_array(_d.e_hd[typ])) {
+						var _na = [];
+						for (var i = 0; i < _d.e_hd[typ].length; i++) {
+							if (_d.e_hd[typ][i] == _fn || typeof _fn === "undefined") eUnBind(_d, typ, _d.e_hd[typ][i]); else _na.push(_d.e_hd[typ][i]);
+						}
+						_d.e_hd[typ] = _na;
+					} else {
+						if (_d.e_hd[typ] == _fn || typeof _fn === "undefined") {
+							eUnBind(_d, typ, _d.e_hd[typ]);
+							delete _d.e_hd[typ]; // 함수 제거
+						}
 					}
 				}
 			}
@@ -2813,13 +2756,13 @@
 		 * </script>
 		 * ```
 		 */
-		function child(elements) {
-			elements = va_elem(elements, "child");
+		function child(els) {
+			els = va_elem(els, "child");
 			var return_elems = [], i = 0, l;
-			if (elements[0]) {
-				l = elements[0].children.length;
+			if (els[0]) {
+				l = els[0].children.length;
 				for (; i < l; i++) {
-					return_elems.push(elements[0].children[i]);
+					return_elems.push(els[0].children[i]);
 				}
 			}
 			return return_elems;
@@ -2829,7 +2772,7 @@
 		 * 타겟엘리먼트의 부모 엘리멘트 트리에서 원하는 조건의 엘리먼트를 얻습니다.
 		 * @method ax5.dom.parent
 		 * @param {Element} elements - target element
-		 * @param {Object} cond - 원하는 element를 찾을 조건
+		 * @param {Object|Function} cond - 원하는 element를 찾을 조건
 		 * @returns {Element}
 		 * @example
 		 * ```
@@ -2842,36 +2785,69 @@
 		 * console.log(
 		 * 	ax5.dom.parent(e.target, {tagname:"a", clazz:"ax-menu-handel", "data-custom-attr":"attr_value"})
 		 * );
+		 * // cond 함수로 처리하기
+		 * ax5.dom.on(fnObj.layout.client_main, "click.app_expand", function(e){
+		 * 	var target = ax5.dom.parent(e.target, function(target){
+		 * 		if(ax5.dom.class_name(target, "aside")){
+		 * 			return true;
+		 * 		}
+		 * 		else if(ax5.dom.class_name(target, "client-main")){
+		 * 			return true;
+		 * 		}
+		 * 	});
+		 * 	//client-aside
+		 * 	if(target.id !== "client-aside"){
+		 * 		fnObj.layout.expand_menu();
+		 * 	}
+		 * });
 		 * ```
 		 */
-		function parent(elements, cond) {
-			elements = va_elem(elements, "child");
-			var _target = elements[0];
+		function parent(els, cond) {
+			els = va_elem(els, "parent");
+			var _target = els[0];
 			if (_target) {
 				while ((function () {
 					var result = true;
-					for (var k in cond) {
-						if (k === "tagname") {
-							if (_target.tagName.toLocaleLowerCase() != cond[k]) {
-								result = false;
-								break;
-							}
-						}
-						else if (k === "clazz" || k === "class_name") {
-							var klasss = _target.className.split(/[ ]+/g);
-							var hasClass = false;
-							for (var a = 0; a < klasss.length; a++) {
-								if (klasss[a] == cond[k]) {
-									hasClass = true;
+					if(typeof cond === "undefined"){
+						_target = (_target.parentNode) ? _target.parentNode : false;
+					}
+					else
+					if(U.is_function(cond)){
+						result = cond(_target);
+					}
+					else
+					if(U.is_object(cond)) {
+						for (var k in cond) {
+							if (k === "tagname") {
+								if (_target.tagName.toLocaleLowerCase() != cond[k]) {
+									result = false;
 									break;
 								}
-							}
-							result = hasClass;
-						}
-						else { // 그외 속성값들.
-							if (_target.getAttribute(k) != cond[k]) {
-								result = false;
-								break;
+							} else if (k === "clazz" || k === "class_name") {
+								if("className" in _target) {
+									var klasss = _target.className.split(re_class_name_split);
+									var hasClass = false;
+									for (var a = 0; a < klasss.length; a++) {
+										if (klasss[a] == cond[k]) {
+											hasClass = true;
+											break;
+										}
+									}
+									result = hasClass;
+								}else{
+									result = false;
+									break;
+								}
+							} else { // 그외 속성값들.
+								if(_target.getAttribute) {
+									if (_target.getAttribute(k) != cond[k]) {
+										result = false;
+										break;
+									}
+								}else{
+									result = false;
+									break;
+								}
 							}
 						}
 					}
@@ -2920,8 +2896,9 @@
 		 * </script>
 		 * ```
 		 */
-		function prev(elements, times) {
-			return sibling(elements, "prev", times);
+		function prev(els, times) {
+			els = va_elem(els, "prev");
+			return sibling(els, "prev", times);
 		}
 
 		/**
@@ -2956,8 +2933,9 @@
 		 * </script>
 		 * ```
 		 */
-		function next(elements, times) {
-			return sibling(elements, "next", times);
+		function next(els, times) {
+			els = va_elem(els, "next");
+			return sibling(els, "next", times);
 		}
 
 		/**
@@ -2971,8 +2949,9 @@
 		 * ax5.dom.width(el);
 		 * ```
 		 */
-		function width(elements) {
-			return box_size(elements, "width");
+		function width(els) {
+			els = va_elem(els, "width");
+			return box_size(els, "width");
 		}
 
 		/**
@@ -2986,8 +2965,9 @@
 		 * ax5.dom.height(el);
 		 * ```
 		 */
-		function height(elements) {
-			return box_size(elements, "height");
+		function height(els) {
+			els = va_elem(els, "height");
+			return box_size(els, "height");
 		}
 
 		/**
@@ -3001,11 +2981,11 @@
 		 * ax5.dom.empty(el);
 		 * ```
 		 */
-		function empty(elements) {
-			elements = va_elem(elements, "empty");
-			var i = 0, l = elements.length, el;
+		function empty(els) {
+			els = va_elem(els, "empty");
+			var i = 0, l = els.length, el;
 			for (; i < l; i++) {
-				el = elements[i];
+				el = els[i];
 				while (el.firstChild) {
 					clear_element_data(el.firstChild);
 					el.removeChild(el.firstChild);
@@ -3014,7 +2994,7 @@
 					el.options.length = 0;
 				}
 			}
-			return elements;
+			return els;
 		}
 
 		/**
@@ -3030,28 +3010,28 @@
 		 * ax5.dom.html(el, "<a href='#1234'>링크");
 		 * ```
 		 */
-		function html(elements, val) {
-			elements = va_elem(elements, "html");
+		function html(els, val) {
+			els = va_elem(els, "html");
+            var tag, wrap;
 			if (typeof val == "undefined") {
-				return elements[0].innerHTML;
+				return els[0].innerHTML;
 			} else {
-				if (
-					U.is_string(val) && !rnoInnerhtml.test(val) &&
-					(info.support.leadingWhitespace || !rleadingWhitespace.test(val))
-				) {
-					val = val.replace(rxhtmlTag, "<$1></$2>");
-					var i = 0, l = elements.length;
-					try {
-						for (; i < l; i++) {
-							elements[i].innerHTML = val;
-						}
-					} catch (e) {
-					}
+                tag = ( re_tag.exec(val) || ["", ""] )[1].toLowerCase();
+				if (U.is_string(val) && !re_noInnerhtml.test(val)) {
+                    if(tag_not_support_innerhtml[tag]){
+                        append(empty(els), val);
+                    }else{
+                        val = val.replace(re_single_tags, "<$1></$2>");
+                        var i = 0, l = els.length;
+                        for (; i < l; i++) {
+                            if("innerHTML" in els[i]) els[i].innerHTML = val;
+                        }                        
+                    }
 				}
 				else if (U.is_element(val) || U.is_nodelist(val)) {
-					append(empty(elements), val);
+					append(empty(els), val);
 				}
-				return elements;
+				return els;
 			}
 		}
 
@@ -3069,14 +3049,15 @@
 		 * ax5.dom.append(ax5.dom.get("[data-list-item='2']"), ax5.dom.get("#move-item"));
 		 * ```
 		 */
-		function append(elements, val) {
-			return manipulate("append", elements, val);
+		function append(els, val) {
+			// todo : 빈 노드에 append 할때 빈 div 태그 생성됨.
+			return manipulate("append", els, val);
 		}
 
 		/**
 		 * 엘리먼트에 자식노드를 추가 합니다. (추가되는 위치는 맨 처음 입니다.)
 		 * @method ax5.dom.prepend
-		 * @param {Elements|Element} elements
+		 * @param {els|Element} elements
 		 * @param {String|Element} val
 		 * @returns {Elements|Element}
 		 * @example
@@ -3087,8 +3068,8 @@
 		 * ax5.dom.prepend(ax5.dom.get("[data-list-item='2']"), ax5.dom.get("#move-item"));
 		 * ```
 		 */
-		function prepend(elements, val) {
-			return manipulate("prepend", elements, val);
+		function prepend(els, val) {
+			return manipulate("prepend", els, val);
 		}
 
 		/**
@@ -3103,8 +3084,8 @@
 		 * ax5.dom.before(el, "before");
 		 * ```
 		 */
-		function before(elements, val) {
-			return manipulate("before", elements, val);
+		function before(els, val) {
+			return manipulate("before", els, val);
 		}
 
 		/**
@@ -3119,8 +3100,8 @@
 		 * ax5.dom.after(el, "after");
 		 * ```
 		 */
-		function after(elements, val) {
-			return manipulate("after", elements, val);
+		function after(els, val) {
+			return manipulate("after", els, val);
 		}
 
 		/**
@@ -3132,28 +3113,43 @@
 		 * @param {String} val - 추가하려는 html tag 또는 문자열
 		 * @returns {Elements|Element}
 		 */
-		function manipulate(act, elements, val) {
-			elements = va_elem(elements, act);
-			var flag, i = 0, l = elements.length,
-				el = [].concat(val), cf = create_fragment, els = elements;
+		function manipulate(act, els, val) {
+			els = va_elem(els, act);
+			var flag, i = 0, l = els.length,
+				el = [].concat(val), cf = create_fragment, els = els, _el;
 
 			if (act === "append") {
 				for (; i < l; i++) {
-					els[i].appendChild(cf(el));
+					_el = cf(el);
+					while(_el.firstChild){
+						els[i].appendChild(_el.firstChild);
+					}
 				}
 			}
 			else if (act == "prepend") {
 				for (; i < l; i++) {
-					els[i].insertBefore(cf(el), els[i].firstChild);
+					_el = cf(el);
+					while(_el.firstChild) {
+						els[i].insertBefore(_el.firstChild, els[i].firstChild);
+					}
 				}
 			}
 			else if (act == "before") {
 				for (; i < l; i++) {
-					els[i].parentNode.insertBefore(cf(el), els[i]);
+					_el = cf(el);
+					while(_el.firstChild){
+						els[i].parentNode.insertBefore(_el.firstChild, els[i]);
+					}
 				}
 			}
 			else if (act == "after") {
-				els[i].parentNode.insertBefore(cf(el), els[i].nextSibling);
+				for (; i < l; i++) {
+					_el = cf(el);
+					while(_el.firstChild){
+						els[i].parentNode.insertBefore(_el.firstChild, els[i].nextSibling);
+					}
+				}
+				//els[i].parentNode.insertBefore(cf(el), els[i].nextSibling);
 			}
 			return els;
 		}
@@ -3168,13 +3164,13 @@
 		 * ax5.dom.remove(el);
 		 * ```
 		 */
-		function remove(elements, val) {
-			elements = va_elem(elements, "remove");
-			var i = 0, l = elements.length;
+		function remove(els, val) {
+			els = va_elem(els, "remove");
+			var i = 0, l = els.length;
 			for (; i < l; i++) {
-				if (elements[i].parentNode) {
-					clear_element_data(elements[i]);
-					elements[i].parentNode.removeChild(elements[i]);
+				if (els[i].parentNode) {
+					clear_element_data(els[i]);
+					els[i].parentNode.removeChild(els[i]);
 				}
 			}
 		}
@@ -3192,24 +3188,24 @@
 		 * // {"top": 8, "left": 8}
 		 * ```
 		 */
-		function offset(elements) {
-			elements = va_elem(elements, "offset");
-			var el = elements[0], docEl = doc.documentElement, box;
+		function offset(els) {
+			els = va_elem(els, "offset");
+			var el = els[0], box;
 			if (el.getBoundingClientRect) {
 				box = el.getBoundingClientRect();
 			}
 			return {
-				top : box.top + ( win.pageYOffset || docEl.scrollTop ) - ( docEl.clientTop || 0 ),
-				left: box.left + ( win.pageXOffset || docEl.scrollLeft ) - ( docEl.clientLeft || 0 )
+				top : box.top + ( win.pageYOffset || (docElem.scrollTop || doc.body.scrollTop) ) - ( docElem.clientTop || 0 ),
+				left: box.left + ( win.pageXOffset || (docElem.scrollLeft || doc.body.scrollLeft) ) - ( docElem.clientLeft || 0 )
 			}
 		}
 
 		function offset_parent(el) {
-			var offsetParent = el.offsetParent || doc.documentElement;
+			var offsetParent = el.offsetParent || docElem;
 			while (offsetParent && ( !node_name(offsetParent, "html") && curCSS(offsetParent, "position") === "static" )) {
 				offsetParent = offsetParent.offsetParent;
 			}
-			return offsetParent || doc.documentElement;
+			return offsetParent || docElem;
 		}
 
 		/**
@@ -3225,9 +3221,9 @@
 		 * // {"top": 8, "left": 8}
 		 * ```
 		 */
-		function position(elements) {
-			elements = va_elem(elements, "offset");
-			var el = elements[0], docEl = doc.documentElement, el_parent,
+		function position(els) {
+			els = va_elem(els, "offset");
+			var el = els[0], el_parent,
 				pos = {top: 0, left: 0}, parentPos = {top: 0, left: 0};
 
 			if (css(el, "position") === "fixed") {
@@ -3276,9 +3272,9 @@
 		 * // 각각의 박스모델 속성을 지정하여 호출 할 수 있습니다. borderWidth, border-width 중 하나의 방법으로 사용 가능합니다.
 		 * ```
 		 */
-		function box_model(elements, cond) {
-			elements = va_elem(elements, "box_model");
-			var el = elements[0],
+		function box_model(els, cond) {
+			els = va_elem(els, "box_model");
+			var el = els[0],
 				model = {};
 			if (cond) cond = U.camel_case(cond);
 			if (typeof cond === "undefined" || cond == "offset") {
@@ -3349,48 +3345,49 @@
 		 * axd.data(el, "remove"); // remove all
 		 * ```
 		 */
-		function data(elements, command, O) {
-			//console.log(elements, command, O);
-			elements = va_elem(elements, "data");
-			var i = 0, l = elements.length, k;
+		function data(els, command, O) {
+			//console.log(els, command, O);
+			els = va_elem(els, "data");
+			var i = 0, l = els.length, k;
 			if (command === "set" || (typeof O === "undefined" && U.is_object(command))) {
 				if (typeof O === "undefined") O = command;
 				for (; i < l; i++) {
 					for (k in O) {
-						if (typeof elements[i].ax5_data === "undefined") elements[i].ax5_data = {};
-						elements[i].ax5_data[k] = O[k];
+						if (typeof els[i].ax5_data === "undefined") els[i].ax5_data = {};
+						els[i].ax5_data[k] = O[k];
 					}
 				}
 			}
 			else if (command !== "remove" && (command === "get" || command === "read" || (typeof O === "undefined" && U.is_string(command)))) {
 				if (typeof O === "undefined") O = command;
-				if (!U.is_string(O)) return elements;
-				return (typeof elements[0].ax5_data[O] === "undefined") ? "" : elements[0].ax5_data[O];
+				if (!U.is_string(O)) return els;
+				return (typeof els[0].ax5_data[O] === "undefined") ? "" : els[0].ax5_data[O];
 			}
 			else if (command === "remove") {
 				if (typeof O === "undefined") {
 					for (; i < l; i++) {
-						elements[i].ax5_data = {};
+						els[i].ax5_data = {};
 					}
 				}
 				else if (U.is_string(O)) {
 					for (; i < l; i++) {
-						delete elements[i].ax5_data[O];
+						delete els[i].ax5_data[O];
 					}
 				}
 				else {
 					for (; i < l; i++) {
 						each(O, function () {
-							delete elements[i].ax5_data[this];
+							delete els[i].ax5_data[this];
 						});
 					}
 				}
 			}
-			return elements;
+			return els;
 		}
 
 		U.extend(ax5.dom, {
 			ready     : ready,
+			scroll    : scroll,
 			resize    : resize,
 			get       : get,
 			get_one   : get_one,
@@ -3431,3 +3428,334 @@
 	}
 
 }).call(this);
+
+ax5.xhr = (function (){
+	var U = ax5.util, getXHR;
+
+	try{
+		new ActiveXObject("Msxml2.XMLHTTP");
+		getXHR = function(){return new ActiveXObject("Msxml2.XMLHTTP");}
+	}catch(e){
+		try{
+			new ActiveXObject("Microsoft.XMLHTTP");
+			getXHR = function(){return new ActiveXObject("Microsoft.XMLHTTP");}
+		}catch(e){
+			getXHR = "XMLHttpRequest" in window ? function(){return new XMLHttpRequest();} : function(){};
+		}
+	}
+	
+	function request(queue, onend){
+		var cfg = queue.pop(), http, that, i,
+            time_id, ontimeout;
+		
+		if (typeof cfg === "undefined") {
+			onend();
+		}
+		else
+		{
+			cfg = U.extend_all(cfg, ax5.xhr.options);
+			if (cfg.url != "") {
+				http = getXHR();
+				// 파라미터 값 문자열로 맞춤 : 오브젝트이면 문자열로 치환합니다.
+				cfg.param = U.param(cfg.param, "param");
+				// method : GET이면 url 뒤에 ? 파라미터 연결
+				if(cfg.method.toUpperCase() == "GET" && cfg.param != "") {
+					cfg.url = (cfg.url.search(/\?/) != -1) ? cfg.url + "&" + cfg.param : cfg.url + "?" + cfg.param;
+				}
+
+				if (!cfg.response)  cfg.response = cfg.res; // 함수이름 확장
+				// xhr.open
+				if (cfg.username)   http.open(cfg.method, cfg.url, cfg.async, cfg.username, cfg.password);
+				else                http.open(cfg.method, cfg.url, cfg.async);
+
+				// header 셋팅
+				if(cfg.method.toUpperCase() == "GET"){
+					// GET이면 head 무시
+					cfg.header.accept = "*/*", cfg.header['content-type'] = "text/plain";
+				}
+				
+				try {
+					for ( i in cfg.header ) {
+						http.setRequestHeader( i, cfg.header[i] );
+					}
+				} catch(e) {}
+				
+				//  authorization headers. The default is false.
+				if("withCredentials" in http) http.withCredentials = cfg.withCredentials;
+				// todo : withCredentials 이 지원되지 않는 브라우저 일 때 대처법 필요
+
+				// 응답
+				http.onreadystatechange = function () {
+					if (http.readyState == 4) {
+                        if(time_id == -1) return;
+                        clearTimeout(time_id), time_id = -1;
+						that = {};
+						that.response_url= ("responseURL" in http) ? http.responseURL : "";
+						that.status      = ("status" in http) ? http.status : "";
+						that.result      = http.statusText;
+						that.state       = http.readyState;
+						that.type        = http.responseType;
+						try {
+							that.data = ("responseText" in http) ? http.responseText : "";
+						}catch(e){}
+
+						if (http.status == 200) {
+							if (cfg.response) cfg.response.call(that, that.data, that.status, http);
+							else console.log(http);
+						}
+						else
+						if (http.status != 0)
+						{
+							that.error = that.result; // 에러키 추가
+							if (cfg.error) {
+								cfg.error.call(that, that);
+							} else {
+								if (cfg.response) cfg.response.call(that, that.data, that.status, http);
+								else console.log(http);
+							}
+						}
+						request(queue, onend);
+					}
+				};
+                ontimeout = function(){
+                    if(time_id == -1) return;
+                    if(http.readyState !== 4) http.abort();
+                    time_id = -1;
+	                //http.onreadystatechange = null;
+                    
+                    that = {error:"timeout"};
+                    if (cfg.error) {
+                        cfg.error.call(that, that);
+                    } else {
+                        if (cfg.response) cfg.response.call(that, that, that.data, that.status, http);
+                        else console.log(http);
+                    }
+                };
+                if( "ontimeout" in http ) http.timeout = cfg.timeout, http.ontimeout = ontimeout;
+                else time_id = setTimeout( ontimeout, cfg.timeout);
+
+				// 데이터 전송
+				http.send(cfg.param);
+			}
+			
+		}
+	}
+	
+	// todo : CORS지원 / 예외사항 처리
+	/**
+	 * Refer to this by {@link ax5}. <br/>
+	 * ax5.xhr({Object}[, {Function}]); 으로 사용하는 함수입니다. XHR요청을 개별또는 큐단위로 처리 합니다.
+	 * @namespace ax5.xhr
+	 * @param {Object} opts
+	 * @param {Function} [onend] - xhr전송이 완료되면 호출되는 콜백함수
+	 * @example
+	 * ```
+	 * // request 옵션정의
+	 * config = {
+	 * 	header         : {
+	 * 		//setRequestHeader 로 추가하게될 헤드 속성
+	 * 		'content-type' : {String} ["application/x-www-form-urlencoded; charset=UTF-8"] - request 되는 문서의 content Type,
+	 * 		'accept'       : {String} ["*＼*"] - 서버에 응답받기 희망하는 문서 타입,
+	 * 	},
+	 * 	method         : {String} ["GET"],
+	 * 	url            : {String} [""],
+	 * 	param          : {String|Object} [""] - 파라미터 형식이나 오브젝트 형식 모두 지원합니다.,
+	 * 	async          : {Boolean} [true] - 비동기 요청 여부,
+	 * 	username       : {String} [""] - XMLHttpRequest 스펙에 정의된 open() 옶션 사용 안해봐서 잘 모름,
+	 * 	password       : {String} [""] - XMLHttpRequest 스펙에 정의된 open() 옶션 사용 안해봐서 잘 모름,
+	 * 	withCredentials: {Boolean} [false] - 자격증명을 사용하게 할지 여부,
+	 * 	crossDomain    : {Boolean} [false] - 크로스 도메인 허용 여부 : header 속성이 약간 바뀝니다.,
+	 * 	timeout        : 0
+	 * }
+	 * 
+	 * ax5.xhr({
+	 *    method: "POST",
+	 *    url   : "data.php",
+	 *    param : "str=1234",
+	 *    res   : function (response, status) {
+	 *        console.log("success");
+	 *        console.log(this);
+	 *    },
+	 *    error : function () {
+	 *        console.log("error");
+	 *        console.log(this);
+	 *    }
+	 * });
+	 * 
+	 * // req 또는 request 둘다 사용 가능합니다.
+	 * ax5.xhr({
+	 *    url   : "data.php",
+	 *    param : "str=1234",
+	 *    res   : function (response, status) {
+	 *        // status 값이 200 인지 판단 가능
+	 *        console.log(this);
+	 *    }
+	 * });
+	 * // 위와 같이 필요한 옵션만 정의 해서 사용 가능합니다.
+	 * 
+	 * // 요청을 큐로 만들어 순차적으로 작동하게 하고 종료 시점을 컨트롤 할 수 있습니다.
+	 * var xhr_queue = [];
+	 * xhr_queue.push({
+	 *    method: "POST",
+	 *    url   : "../samples/ax5/xhr/data.php",
+	 *    param : "str=1234",
+	 *    res   : function (response, status) {
+	 *        console.log(response);
+	 *    }
+	 * });
+	 * xhr_queue.push({
+	 *    method: "POST",
+	 *    url   : "../samples/ax5/xhr/data.php",
+	 *    param : "str=1234",
+	 *    res   : function (response, status) {
+	 *        console.log(response);
+	 *    }
+	 * });
+	 * 
+	 * ax5.xhr(xhr_queue, function() {
+	 *    console.log("큐 완료")
+	 * });
+	 * ```
+	 */
+	return function(opts, onend){
+		var queue = [].concat(opts);
+		request(queue, function(){
+			if(onend) onend();
+		});
+	}
+})();
+
+(function () {
+	var U = ax5.util, 
+		options = {
+			header      : {
+				'accept'      : "*/*",
+				'content-type': "application/x-www-form-urlencoded; charset=UTF-8"
+			},
+			method         : "GET",
+			url            : "",
+			param          : "",
+			async          : true,
+			username       : "",
+			password       : "",
+			withCredentials: false,
+			crossDomain    : false,
+			timeout        : 0
+		};
+		
+/**
+ * @member {type} ax5.xhr.options
+ * @example
+ * ```
+ * ax5.xhr.options = {
+ * 	header         : {
+ * 		//setRequestHeader 로 추가하게될 헤드 속성
+ * 		'content-type' : {String} ["application/x-www-form-urlencoded; charset=UTF-8"] - request 되는 문서의 content Type,
+ * 		'accept'       : {String} ["*＼*"] - 서버에 응답받기 희망하는 문서 타입,
+ * 	},
+ * 	method         : {String} ["GET"],
+ * 	url            : {String} [""],
+ * 	param          : {String|Object} [""] - 파라미터 형식이나 오브젝트 형식 모두 지원합니다.,
+ * 	async          : {Boolean} [true] - 비동기 요청 여부,
+ * 	username       : {String} [""] - XMLHttpRequest 스펙에 정의된 open() 옶션 사용 안해봐서 잘 모름,
+ * 	password       : {String} [""] - XMLHttpRequest 스펙에 정의된 open() 옶션 사용 안해봐서 잘 모름,
+ * 	withCredentials: {Boolean} [false] - 자격증명을 사용하게 할지 여부,
+ * 	crossDomain    : {Boolean} [false] - 크로스 도메인 허용 여부 : header 속성이 약간 바뀝니다.,
+ * 	timeout        : 0
+ * } 
+ * ```
+ */
+
+/**
+ * ax5.xhr 통신 기본 값을 설정합니다.
+ * @method ax5.xhr.config
+ * @param {Object} opts - XHR 요청옵션 기본 값
+ * @returns {Object} opts
+ * @example
+ * ```
+ * ax5.xhr.config({
+ *	header      : {
+ *		'accept'      : "*.*",
+ *		'content-type': "application/x-www-form-urlencoded; charset=UTF-8"
+ *	},
+ *	method         : "GET",
+ *	url            : "",
+ *	param          : "",
+ *	async          : true,
+ *	username       : "",
+ *	password       : "",
+ *	withCredentials: false,
+ *	crossDomain    : false,
+ *	timeout        : 0
+ * });
+ *
+ * ax5.xhr.config({
+ *	header      : {
+ *		'accept' : "*.html"
+ *	}
+ * });
+ * // ax5.xhr 요청 기본값 설정
+ * ```
+ */
+	function config(opts){
+		U.extend_all(options, opts, true);
+		return options;
+	}
+
+	ax5.util.extend(ax5.xhr, {
+		options: options,
+		config : config
+	});
+})();
+
+/**
+ * @class ax5.ui.root
+ * @classdesc ax5 ui class 코어 클래스 모든 클래스의 공통 함수를 가지고 있습니다.
+ * @version v0.0.1
+ * @author tom@axisj.com
+ * @logs
+ * 2014-12-12 tom : 시작
+ * @example
+ * ```
+ * var myui = new ax5.ui.root();
+ * ```
+ */
+ax5.ui = (function (core) {
+
+	function ax_ui() {
+		// 클래스 인스턴스 초기화
+		this.main = (function(){
+			this.config = {};
+			this.name = "root";
+		}).apply(this, arguments);
+
+		/**
+		 * 클래스의 속성 정의 메소드 속성 확장후에 내부에 init 함수를 호출합니다.
+		 * @method ax5.ui.root.set_config
+		 * @param {Object} config - 클래스 속성값
+		 * @param {Boolean} [call_init=true] - init 함수 호출 여부
+		 * @returns {ax5.ui.ax_ui}
+		 * @example
+		 * ```
+		 * var myui = new ax5.ui.root();
+		 * myui.set_config({
+		 * 	id:"abcd"
+		 * });
+		 * ```
+		 */
+		this.set_config = function (cfg, call_init) {
+			core.util.extend_all(this.config, cfg, true);
+			if (typeof call_init == "undefined" || call_init === true) {
+				this.init();
+			}
+			return this;
+		};
+		this.init = function () {
+			console.log(this.config);
+		};
+	}
+
+	return {
+		root: ax_ui
+	}
+})(ax5);

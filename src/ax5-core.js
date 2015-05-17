@@ -79,7 +79,24 @@
 		 * @member {String} ax5.info.version
 		 */
 		var version = "0.0.1";
+		/**
+		 * ax5 library path
+		 * @member {String} ax5.info.base_url
+		 */
 		var base_url = "";
+		/**
+		 * ax5 에러 출력메세지 사용자 재 정의
+		 * @member {Object} ax5.info.onerror
+		 * @examples
+		 * ```
+		 * ax5.info.onerror = function(){
+		 *  console.log(arguments);
+		 * }
+		 * ```
+		 */
+		var onerror = function(){
+			console.error(ax5.util.to_array(arguments).join(":"));
+		};
 
 		/**
 		 * event keyCodes
@@ -108,9 +125,8 @@
 		 * //Object {name: "chrome", version: "39.0.2171.71", mobile: false}
 		 * ```
 		 */
-		var browser = (function () {
-			var ua = navigator.userAgent.toLowerCase(), mobile = (ua.search(/mobile/g) != -1),
-				browserName, match, browser, browserVersion;
+		var browser = (function (ua, mobile, browserName, match, browser, browserVersion) {
+			ua = navigator.userAgent.toLowerCase(), mobile = (ua.search(/mobile/g) != -1), browserName, match, browser, browserVersion;
 
 			if (ua.search(/iphone/g) != -1) {
 				return { name: "iphone", version: 0, mobile: true }
@@ -188,6 +204,7 @@
 		return {
 			version: version,
 			base_url: base_url,
+			onerror: onerror,
 			event_keys: event_keys,
 			browser: browser,
 			is_browser: is_browser,
@@ -653,7 +670,7 @@
 		 * 인자의 타입을 반환합니다.
 		 * @method ax5.util.get_type
 		 * @param {Object|Array|String|Number|Element|Etc} O
-		 * @returns {String} element|object|array|function|string|number|undefined|nodelist
+		 * @returns {String} window|element|object|array|function|string|number|undefined|nodelist
 		 * @example
 		 * ```js
 		 * var axf = ax5.util;
@@ -665,7 +682,10 @@
 		 */
 		function get_type(O) {
 			var typeName;
-			if (!!(O && O.nodeType == 1)) {
+			if(O != null && O == O.window){
+				typeName = "window";
+			}
+			else if (!!(O && O.nodeType == 1)) {
 				typeName = "element";
 			}
 			else if (!!(O && O.nodeType == 11)) {
@@ -837,29 +857,37 @@
 				return undefined;
 			}
 		}
+
 		/**
 		 * 쿠키를 설정합니다.
 		 * @method ax5.util.set_cookie
 		 * @param {String} cname - 쿠키이름
 		 * @param {String} cvalue - 쿠키값
 		 * @param {Number} [exdays] - 쿠키 유지일수
+		 * @param {Object} [opts] - path, domain 설정 옵션
 		 * @example
 		 * ```js
 		 * ax5.util.set_cookie("jslib", "AX5");
 		 * ax5.util.set_cookie("jslib", "AX5", 3);
+		 * ax5.util.set_cookie("jslib", "AX5", 3, {path:"/", domain:".axisj.com"});
 		 * ```
 		 */
-		function set_cookie(cname, cvalue, exdays) {
-			doc.cookie = cname + "=" + escape(cvalue) + "; path=/;" + (function () {
-				if (typeof exdays != "undefined") {
-					var d = new Date();
-					d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-					return "expires=" + d.toUTCString();
-				} else {
-					return "";
-				}
-			})();
+		function set_cookie(cn, cv, exdays, opts) {
+			var expire;
+			if (typeof exdays === "number") {
+				expire = new Date();
+				expire.setDate(expire.getDate() + exdays);
+			}
+			opts = opts || {};
+			return (doc.cookie = [
+				escape(cn), '=', escape(cv),
+				expire      ? "; expires=" + expire.toUTCString() : "", // use expires attribute, max-age is not supported by IE
+				opts.path    ? "; path=" + opts.path : "",
+				opts.domain  ? "; domain=" + opts.domain : "",
+				opts.secure  ? "; secure" : ""
+			].join(""));
 		}
+
 		/**
 		 * 쿠키를 가져옵니다.
 		 * @method ax5.util.get_cookie
@@ -1108,13 +1136,13 @@
 		 * ```
 		 */
 		function number(str, cond) {
-			var result, pair = ('' + str).split(re_dot), isMinus = (parseFloat(pair[0]) < 0 || pair[0] == "-0"), returnValue = 0.0;
+			var result, pair = ('' + str).split(re_dot), isMinus = (Number(pair[0]) < 0 || pair[0] == "-0"), returnValue = 0.0;
 			pair[0] = pair[0].replace(re_int, "");
 			if (pair[1]) {
 				pair[1] = pair[1].replace(re_not_num, "");
-				returnValue = parseFloat(pair[0] + "." + pair[1]) || 0;
+				returnValue = Number(pair[0] + "." + pair[1]) || 0;
 			} else {
-				returnValue = parseFloat(pair[0]) || 0;
+				returnValue = Number(pair[0]) || 0;
 			}
 			result = (isMinus) ? -returnValue : returnValue;
 
@@ -1143,11 +1171,11 @@
 					})(result);
 				}
 				else if (k == "abs") {
-					result = Math.abs(parseFloat(result));
+					result = Math.abs(Number(result));
 				}
 				else if (k == "byte") {
 					result = (function (val) {
-						val = parseFloat(result);
+						val = Number(result);
 						var n_unit = "KB";
 						var myByte = val / 1024;
 						if (myByte / 1024 > 1) {
@@ -1255,8 +1283,12 @@
 			return encodeURIComponent(s);
 		}
 
-		function decode() {
+		function decode(s) {
 			return decodeURIComponent(s);
+		}
+
+		function error(){
+			ax5.info.onerror.apply(this, arguments);
 		}
 
 		return {
@@ -1295,7 +1327,8 @@
             number      : number,
             to_array    : to_array,
             merge       : merge,
-            param       : param
+            param       : param,
+			error       : error
 		}
 	})();
 
@@ -1727,7 +1760,6 @@
 				/**
 				 * 엘리먼트의 box model 속성을 반환합니다.
 				 * @method ax5.dom0.box_model
-				 * @param {Elements|Element} elements
 				 * @param {String} [cond] - 원하는 박스 속성
 				 * @returns {Object}
 				 * @example
@@ -1750,8 +1782,8 @@
 				 * // 각각의 박스모델 속성을 지정하여 호출 할 수 있습니다. borderWidth, border-width 중 하나의 방법으로 사용 가능합니다.
 				 * ```
 				 */
-				this.box_model = function () {
-					return dom.box_model(this.elements);
+				this.box_model = function (cond) {
+					return dom.box_model(this.elements, cond);
 				};
 				/**
 				 * 엘리먼트에 data를 속성을 추가하거나 반환합니다.
@@ -1838,17 +1870,13 @@
 
 		// 엘리먼트 인자 체크
 		function va_elem(elem, fn_name) {
-			if (U.is_array(elem) && U.is_element(elem[0])) {
-				return elem;
-			}
-			else if (U.is_element(elem)) return [elem];
-			else if (elem && elem.nodeType === 9) {
-				return [elem.documentElement];
-			}
-			else if (elem && elem.toString() == "[object ax5.dom]") {
-				return elem.elements;
-			}
-			else if (!U.is_array(elem) && !U.is_nodelist(elem)) {
+			var type = U.get_type(elem);
+			if (type === "window") return elem;
+			else if (type === "array" && U.is_element(elem[0])) return elem;
+			else if (type === "element") return [elem];
+			else if (elem && elem.nodeType === 9) return [elem.documentElement];
+			else if (elem && elem.toString() == "[object ax5.dom]") return elem.elements;
+			else if (type !== "array" && type !== "nodelist") {
 				console.error("ax5.dom." + fn_name + " : elements parameter incorrect");
 				return [];
 			}
@@ -1907,7 +1935,8 @@
                 if(num) ret = parseFloat(ret) || 0;
                 return ret;
             }
-        }else{
+        }
+        else{
             curCSS = function(elem, name, num) {
                 var width, minWidth, maxWidth, computed, ret, style, left, rs, rsLeft;
 
@@ -2140,11 +2169,10 @@
 		 * ```
 		 */
 		function ready(_fn) {
-			if (ax5.dom.is_ready || ax5.dom.is_reading) return;
-			ax5.dom.is_reading = true;
+			var is_ready = false;
 			promise(function () {
-				if (ax5.dom.is_ready) return;
-				ax5.dom.is_ready = true;
+				if (is_ready) return;
+				is_ready = ax5.dom.is_ready = true;
 				_fn();
 			});
 		}
@@ -2152,34 +2180,35 @@
 		function promise(_fn) {
 			if (doc.readyState === "complete") {
 				setTimeout(_fn);
-			} else if (doc.addEventListener) {
-				doc.addEventListener("DOMContentLoaded", _fn, false);
-				win.addEventListener("load", _fn, false);
 			} else {
-				doc.attachEvent("onreadystatechange", _fn);
-				win.attachEvent("onload", _fn);
+				if (doc.addEventListener) {
+					doc.addEventListener("DOMContentLoaded", _fn, false);
+					win.addEventListener("load", _fn, false);
+				} else {
+					doc.attachEvent("onreadystatechange", _fn);
+					win.attachEvent("onload", _fn);
+					// If IE and not a frame
+					var top = false;
+					try {
+						top = win.frameElement == null && doc.documentElement;
+					} catch (e) {
+					}
 
-				// If IE and not a frame
-				var top = false;
-				try {
-					top = win.frameElement == null && doc.documentElement;
-				} catch (e) {
-				}
-
-				if (top && top.doScroll) {
-					(function doScrollCheck() {
-						if (!ax5.dom.is_ready) {
-							try {
-								// Use the trick by Diego Perini
-								// http://javascript.nwbox.com/IEContentLoaded/
-								top.doScroll("left");
-							} catch (e) {
-								return setTimeout(doScrollCheck, 50);
+					if (top && top.doScroll) {
+						(function doScrollCheck() {
+							if (!ax5.dom.is_ready) {
+								try {
+									// Use the trick by Diego Perini
+									// http://javascript.nwbox.com/IEContentLoaded/
+									top.doScroll("left");
+								} catch (e) {
+									return setTimeout(doScrollCheck, 50);
+								}
+								// and execute any waiting functions
+								_fn();
 							}
-							// and execute any waiting functions
-							_fn();
-						}
-					})();
+						})();
+					}
 				}
 			}
 		}
@@ -2196,7 +2225,9 @@
 		 * ```
 		 */
 		function resize(_fn) {
-			eBind(window, "resize", _fn);
+			ready(function() {
+				eBind(window, "resize", _fn);
+			});
 		}
 		/**
 		 * 브라우저 scroll 이벤트를 캐치하여 사용자 함수를 호출 하거나 스트롤 포지션을 리턴합니다.
@@ -2210,13 +2241,16 @@
 		 * ```
 		 */
 		function scroll(_fn) {
+
 			if(typeof _fn === "undefined"){
 				return {
 					top: docElem.scrollTop || doc.body.scrollTop,
 					left: docElem.scrollLeft || doc.body.scrollLeft
 				}
 			}else{
-				eBind(window, "scroll", _fn);
+				ready(function(){
+					eBind(window, "scroll", _fn);
+				});
 				return false;
 			}
 		}
@@ -2598,6 +2632,10 @@
 			if (_target) {
 				while ((function () {
 					var result = true;
+					if(typeof cond === "undefined"){
+						_target = (_target.parentNode) ? _target.parentNode : false;
+					}
+					else
 					if(U.is_function(cond)){
 						result = cond(_target);
 					}
@@ -2683,6 +2721,7 @@
 		 * ```
 		 */
 		function prev(els, times) {
+			els = va_elem(els, "prev");
 			return sibling(els, "prev", times);
 		}
 
@@ -2719,6 +2758,7 @@
 		 * ```
 		 */
 		function next(els, times) {
+			els = va_elem(els, "next");
 			return sibling(els, "next", times);
 		}
 
@@ -2734,6 +2774,7 @@
 		 * ```
 		 */
 		function width(els) {
+			els = va_elem(els, "width");
 			return box_size(els, "width");
 		}
 
@@ -2749,6 +2790,7 @@
 		 * ```
 		 */
 		function height(els) {
+			els = va_elem(els, "height");
 			return box_size(els, "height");
 		}
 

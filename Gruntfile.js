@@ -28,18 +28,7 @@
 				dest: 'src/ax5.js'
 			}
 		},
-		copy: {
-			js: {
-				files: [
-					{expand: true, cwd: 'src/ui-classes/', src: ['**/*.js'], dest: 'pub/ui/'}
-				]
-			},
-			css: {
-				files: [
-					{expand: true, cwd: 'src/css/', src: ['**/*.min.css'], dest: 'pub/css/'}
-				]
-			}
-		},
+
 		uglify: {
 			options: {
 				mangle: false,
@@ -58,6 +47,19 @@
 					dest: 'pub/ui',
 					ext: '.min.js'
 				}]
+			}
+		},
+		copy: {
+			js: {
+				files: [
+					{expand: true, cwd: 'src/ui-classes/', src: ['**/*.js'], dest: 'pub/ui/'},
+					{expand: true, cwd: 'src/', src: ['ax5.js'], dest: 'pub/'}
+				]
+			},
+			css: {
+				files: [
+					{expand: true, cwd: 'src/css/', src: ['**/*.min.css'], dest: 'pub/css/'}
+				]
 			}
 		},
 		watch: {
@@ -116,6 +118,6 @@
 	grunt.registerTask('pub-js', ['concat','uglify:core','copy:js','uglify:ui','watch:lib']);
 	grunt.registerTask('pub-css', ['cssmin','copy:css']);
 	
-	grunt.registerTask('sass-run', ['sass:theme','watch:theme']);
-	grunt.registerTask('sass-run-doc', ['sass:sample_doc','watch:sample_doc']);
+	grunt.registerTask('sass-make-theme', ['sass:theme','watch:theme']);
+	grunt.registerTask('sass-make-doc', ['sass:sample_doc','watch:sample_doc']);
 };

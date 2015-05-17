@@ -1,35 +1,87 @@
+<label data-menu-item="label"><span>Misc</span></label>
+
 <article class="content">
 	<h2 data-menu-item="ax5-util-param">ax5.util.param</h2>
+	<p>
+		프로그램을 짜다보면 파라미터값이 Object가 될 수도 String이 될 수도 있는데.
+		이런 상황에서 파라미터 값에 대해 항상 동일한 검증을 요구하는 상황에 놓이게 된다.
+	</p>
 <pre>
+<div id="div-ax5-util-param" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-util-param");
+		var po = [];
 
+		// 오브젝트로 param
+		po.push( util.param({a:1,b:'123\'"2&'}, "param") );
+		// param이면 그대로
+		po.push( util.param("a=1&b=12'\"32", "param") );
+		// 옵션이 없으면 OBject로
+		po.push( util.to_json(util.param("a=1&b=1232")) );
+
+		el.append( po.join('<br/>') );
+	})();
+</script>
 </pre>
 
-	<h4>Result</h4>
-	<div id="ax5-util-param" class="script-result"></div>
-	<script>
-		(function(){
-			var util = ax5.util, el = ax5.dom("#ax5-util-param");
-
-		})();
-	</script>
 </article>
 
 
 
 <article class="content">
 	<h2 data-menu-item="ax5-util-parse_json">ax5.util.parse_json</h2>
+	<p>
+		json은 이제 xml을 밀어내고 범용 데이터 포멧의 표준이 되었다. 그런데 json데이터의 형식은 몇가지 규칙이 있는데. <code>"key":"value"</code>의 형식을 유지해야 한다는 점이다.
+		key값을 따옴표로 감싸지 않으면 대게의 json parser는 에러는 뱉어내게 된다. 물론 대부분의 상황에서 규칙을 지켜야 겠지만. 귀찬을 때가 있다. 또는 function을 부여 한다던지.
+	</p>
 <pre>
+<div id="div-ax5-util-parse_json" class="script-result"></div>
+<script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-util-parse_json");
+	var po = [];
 
+	po.push( util.to_json( util.parse_json("[{'a':'99'},'2','3']")[0] ) );
+	// ax5 parse_json은 json 구문에 대해 관대 합니다.
+	po.push( util.parse_json("{a:1}").a );
+	// 옵션 : 강제 적용 여부 (json 문자열 검사를 무시하고 오브젝트 변환을 시도합니다.)
+	po.push( util.to_json( util.parse_json("{'a':1, 'b':function(){return 1;}}", false) ) );
+	po.push( util.to_json( util.parse_json("{'a':1, 'b':function(){return 1;}}", true) ) );
+
+	el.append( po.join('<br/>') );
+})();
+</script>
 </pre>
 
-	<h4>Result</h4>
-	<div id="ax5-util-parse_json" class="script-result"></div>
-	<script>
-		(function(){
-			var util = ax5.util, el = ax5.dom("#ax5-util-parse_json");
+</article>
 
-		})();
-	</script>
+
+<article class="content">
+	<h2 data-menu-item="ax5-util-to_json">ax5.util.to_json</h2>
+	<p>
+		모든 Object를 JSONString으로 바꾸어 버린다.
+	</p>
+<pre>
+<div id="div-ax5-util-to_json" class="script-result"></div>
+<script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-util-to_json");
+	var po = [];
+
+	po.push( util.to_json(1) );
+	po.push( util.to_json("A") );
+	po.push( util.to_json([1,2,3,'A']) );
+	po.push( util.to_json({a:'a',x:'x'}) );
+	po.push( util.to_json([1, {a:'a',x:'x'}]) );
+	po.push( util.to_json({a:'a', x:'x', list:[1,2,3]}) );
+	po.push( util.to_json(function(){}) );
+
+	el.append( po.join('<br/>') );
+})();
+</script>
+</pre>
+
 </article>
 
 
@@ -37,17 +89,20 @@
 <article class="content">
 	<h2 data-menu-item="ax5-util-get_cookie">ax5.util.get_cookie</h2>
 <pre>
+<div id="div-ax5-util-get_cookie" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-util-get_cookie");
+		var po = [];
 
+		util.set_cookie("ax5-cookie", "abcde");
+		util.set_cookie("ax5-cookie-path", "abcde", 2, {path:"/"});
+		po.push( util.get_cookie("ax5-cookie") );
+		po.push( util.get_cookie("ax5-cookie-path") );
+		el.append( po.join('<br/>') );
+	})();
+</script>
 </pre>
-
-	<h4>Result</h4>
-	<div id="ax5-util-get_cookie" class="script-result"></div>
-	<script>
-		(function(){
-			var util = ax5.util, el = ax5.dom("#ax5-util-get_cookie");
-
-		})();
-	</script>
 </article>
 
 
@@ -55,35 +110,40 @@
 <article class="content">
 	<h2 data-menu-item="ax5-util-set_cookie">ax5.util.set_cookie</h2>
 <pre>
+<div id="div-ax5-util-set_cookie" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-util-set_cookie");
+		var po = [];
 
+		util.set_cookie("ax5-cookie", "abcde");
+		util.set_cookie("ax5-cookie-path", "abcde", 2, {path:"/"});
+		po.push( util.get_cookie("ax5-cookie") );
+		po.push( util.get_cookie("ax5-cookie-path") );
+		el.append( po.join('<br/>') );
+	})();
+</script>
 </pre>
-
-	<h4>Result</h4>
-	<div id="ax5-util-set_cookie" class="script-result"></div>
-	<script>
-		(function(){
-			var util = ax5.util, el = ax5.dom("#ax5-util-set_cookie");
-
-		})();
-	</script>
 </article>
 
 
 
 <article class="content">
 	<h2 data-menu-item="ax5-util-alert">ax5.util.alert</h2>
+	<p>
+		디버깅 중에 변수를 alert해 본다던지, 서버에서 리턴된 값을 alert한다던지 하는 상황에서 오브젝트 타입에 따라 처리하는 것 보다. <code>편하다 정말</code>
+	</p>
 <pre>
-
+<div id="div-ax5-util-alert" class="script-result"></div>
+<script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-util-alert");
+	var po = [];
+	po.push('<button class="ax-btn" onclick="ax5.util.alert({a:1,b:2});">alert</button>');
+	el.append( po.join('') );
+})();
+</script>
 </pre>
-
-	<h4>Result</h4>
-	<div id="ax5-util-alert" class="script-result"></div>
-	<script>
-		(function(){
-			var util = ax5.util, el = ax5.dom("#ax5-util-alert");
-
-		})();
-	</script>
 </article>
 
 
@@ -91,35 +151,25 @@
 
 <article class="content">
 	<h2 data-menu-item="ax5-util-to_array">ax5.util.to_array</h2>
+	<p>
+		<code>nodelist</code>, <code>arguments</code>와 같은 유사배열의 경우 length와 같은 속성을 가지고 있지만 Array.prototype에 정의된 함수는 사용 할수 없다.
+		<code>to_array</code>를 이용하면 유사배열을 배열로 convert하기 때문에 편하다.
+	</p>
 <pre>
+<div id="div-ax5-util-to_array" class="script-result"></div>
+<script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-util-to_array");
+	var po = [];
 
+	function something(){
+		var arr = util.to_array(arguments);
+		po.push( util.to_json(arr) );
+	}
+	something("A","X","I","S","J");
+
+	el.append( po.join('<br/>') );
+})();
+</script>
 </pre>
-
-	<h4>Result</h4>
-	<div id="ax5-util-to_array" class="script-result"></div>
-	<script>
-		(function(){
-			var util = ax5.util, el = ax5.dom("#ax5-util-to_array");
-
-		})();
-	</script>
-</article>
-
-
-
-
-<article class="content">
-	<h2 data-menu-item="ax5-util-to_json">ax5.util.to_json</h2>
-<pre>
-
-</pre>
-
-	<h4>Result</h4>
-	<div id="ax5-util-to_json" class="script-result"></div>
-	<script>
-		(function(){
-			var util = ax5.util, el = ax5.dom("#ax5-util-to_json");
-
-		})();
-	</script>
 </article>

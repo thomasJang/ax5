@@ -1,3 +1,5 @@
+<label data-menu-item="label"><span>Number</span></label>
+
 <article class="content">
 	<h2 data-menu-item="ax5-util-number">ax5.util.number</h2>
 	<p>
@@ -5,10 +7,10 @@
 		<code>ax5.util</code>로는 <code>ax5.util.number(num, {round:1, money:true});</code>로 한번에 처리 할 수 있다.
 	</p>
 <pre>
-<div id="ax5-util-number" class="script-result"></div>
+<div id="div-ax5-util-number" class="script-result"></div>
 <script>
 	(function(){
-		var util = ax5.util, el = ax5.dom("#ax5-util-number");
+		var util = ax5.util, el = ax5.dom("#div-ax5-util-number");
 
 		var po = [];
 		po.push('round(1) : ' + ax5.util.number(123456789.678, {round:1}) );
@@ -31,20 +33,4 @@
 </script>
 </pre>
 
-	<h4>Result</h4>
-	<div id="ax5-util-number" class="script-result"></div>
-	<script>
-		(function(){
-			var util = ax5.util, el = ax5.dom("#ax5-util-number");
-
-			var po = [];
-			po.push('round(1) : ' + ax5.util.number(123456789.678, {round:1}) );
-			po.push('round(1) money() : ' + ax5.util.number(123456789.678, {round:1, money:true}) );
-			po.push('round(2) byte() : ' + ax5.util.number(123456789.678, {round:2, byte:true}) );
-			po.push('abs() round(2) money() : ' + ax5.util.number(-123456789.678, {abs:true, round:2, money:true}) );
-			po.push('abs() round(2) money() : ' + ax5.util.number("A-1234~~56789.8~888PX", {abs:true, round:2, money:true}) );
-			el.append( po.join('<br/>') );
-
-		})();
-	</script>
 </article>

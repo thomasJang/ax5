@@ -41,6 +41,7 @@ module.exports = function (grunt) {
             demo: {
                 src: [
 	                SOURCE_PATH + '/ax5.js',
+                    SOURCE_PATH + '/ui-classes/*.js',
                     // You can add README.md file for index page at documentations.
                     'index.md'
                 ],

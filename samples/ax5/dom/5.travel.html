@@ -1,0 +1,145 @@
+<label data-menu-item="label"><span>Travel</span></label>
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-prev">ax5.dom.prev</h2>
+	<p>
+		타겟 엘리먼트의 앞에 위치한 엘리먼트를 반환한다.
+	</p>
+<pre>
+<div id="div-ax5-dom-prev" class="script-result" style="position:relative;">
+	<div>prev</div>
+	<div class="target-div"></div>
+	<div>next</div>
+</div>
+<script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-dom-prev");
+	var po = [];
+	po.push( "prev = '" + el.find(".target-div").prev().html() + "'" );
+	el.append(po.join('<br/>'));
+})();
+</script>
+</pre>
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-next">ax5.dom.next</h2>
+	<p>
+		타겟 엘리먼트의 다음에 위치한 엘리먼트를 반환한다.
+	</p>
+<pre>
+<div id="div-ax5-dom-next" class="script-result" style="position:relative;">
+	<div>prev</div>
+	<div class="target-div"></div>
+	<div>next</div>	<div class="target-div"></div>
+</div>
+<script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-dom-next");
+	var po = [];
+	po.push( "next = '" + el.find(".target-div").next().html() + "'" );
+	el.append(po.join('<br/>'));
+})();
+</script>
+</pre>
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-parent">ax5.dom.parent</h2>
+	<p>
+		메소드 이름처럼 부모 엘리먼트를 원하는 조건으로 찾아서 반환해 준다.
+		주의 할 점은 조건에 부합하는 부모들을 구해주지 않는 다는 점이다. 조건에 매치되는 하나의 부모를 반환한다.
+	</p>
+<pre>
+<div id="div-ax5-dom-parent" class="script-result" style="position:relative;">
+	<div data-domparent-value="1">
+		<div data-domparent-value="2">
+			<div data-domparent-value="3">클릭하세요.</div>
+		</div>
+	</div>
+</div>
+<script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-dom-parent");
+	var po = [];
+
+	po.push( "3의 부모 : " +
+		el.find('[data-domparent-value="3"]')
+		  .parent().attr("data-domparent-value")
+	);
+	po.push( "3의 부모의 부모 : " +
+		el.find('[data-domparent-value="3"]')
+		  .parent().parent().attr("data-domparent-value")
+	);
+	po.push( "3의 부모의 부모의 부모 : " +
+		el.find('[data-domparent-value="3"]')
+		  .parent().parent().parent().attr("data-domparent-value")
+	);
+	po.push( "data-domparent-value = 1 인 부모 : " +
+		el.find('[data-domparent-value="3"]')
+		  .parent({tagname:"div","data-domparent-value":"1"}).attr("data-domparent-value")
+	);
+
+	// 함수로 판단하는 방법
+	var _fn = function(el){
+		return (ax5.dom.attr(el, "data-domparent-value") == "2");
+	};
+	po.push( "data-domparent-value = 2 인 부모 : " +
+		el.find('[data-domparent-value="3"]')
+		  .parent(_fn).attr("data-domparent-value")
+	);
+	el.append(po.join('<br/>'));
+
+
+	// 이벤트로 연결하는 방법
+	el.on("click", function(e){
+		var target = ax5.dom.parent(e.target, {tagname:"div","data-domparent-value":"1"});
+		if(target){
+			alert( ax5.dom.attr(target, "data-domparent-value") );
+			// 1이 출력된다.
+		}
+	});
+})();
+</script>
+</pre>
+
+	<div class="callout basic">
+		<h4>parent 메소드의 제작의도</h4>
+		<p>
+			옥돔에서 <code>parent</code> 메소드의 역할은 이벤트에서 원하는 조건의 엘리먼트를 찾기위해 개발되었다.
+			타겟 엘리먼트의 부모를 구하는 작업을 단순하게 수행 시킬 수도 있지만. 만일 이 메소드를 이용하여 타겟의 모든 부모를 구하려 한다면 직접 while 문을 이용해서 개발하길 권장한다.
+			옥돔의 <code>parent</code>를 이용해서 모든 부모를 구하려고 시도한다면 속도가 느려질 것이다.
+		</p>
+	</div>
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-child">ax5.dom.child</h2>
+	<p>
+		타겟 엘리먼트의 직계자식들을 반환한다. 자식의 자식은 반환하지 않는 다는 뜻이다. 물론 남의 자식도 구해주진 못한다.
+	</p>
+<pre>
+<div id="div-ax5-dom-child" class="script-result" style="position:relative;">
+	<div class="target-div">1</div>
+	<div class="target-div">2</div>
+	<div class="target-div">3</div>
+	<div class="target-div">4</div>
+</div>
+<script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-dom-child");
+	var po = [];
+	el.child().elements.forEach(function(element){
+		po.push( ax5.dom.html(element) );
+	});
+	el.append(po.join(','));
+})();
+</script>
+</pre>
+</article>

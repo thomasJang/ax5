@@ -1,13 +1,15 @@
+<label data-menu-item="label"><span>Object</span></label>
+
 <article class="content"> <!-- clone -->
     <h2 data-menu-item="ax5-util-clone">ax5.util.clone</h2>
 
 <pre>
-<div id="ax5-util-clone" class="script-result"></div>
+<div id="div-ax5-util-clone" class="script-result"></div>
 <script>
     (function(){
         var a = {a:1};
         var b = a;
-        var el = ax5.dom("#ax5-util-clone");
+        var el = ax5.dom("#div-ax5-util-clone");
 
         el.append("(a == b) => " + (a == b) + "<br/>");
         b = ax5.util.clone(a);
@@ -16,19 +18,6 @@
 </script>
 </pre>
 
-<h4>Result</h4>
-<div id="ax5-util-clone" class="script-result"></div>
-<script>
-    (function(){
-        var a = {a:1};
-        var b = a;
-        var el = ax5.dom("#ax5-util-clone");
-
-        el.append("(a == b) => " + (a == b) + "<br/>");
-        b = ax5.util.clone(a);
-        el.append("(a == b) => " + (a == b));
-    })();
-</script>
 <p>
     변수 a를 b에 대입하면 변수 b는 a의 참조가 됩니다. 참조가 된 변수 b의 속성 b.a의 값을 바꾸었을 때 a.a의 값도 함께 바뀌는 상황을 초래합니다.
     그런 이유로 때로 원치 않는 결과를 얻을 수 있습니다. 이럴 때엔 ax5.util.clone함수를 이용하여 변수 a의 복제된 오브젝트를 만들어 사용할 수 있습니다.
@@ -39,13 +28,13 @@
     <h2 data-menu-item="ax5-util-each">ax5.util.each</h2>
 
 <pre>
-<div id="ax5-util-each" class="script-result"></div>
+<div id="div-ax5-util-each" class="script-result"></div>
 <script>
     (function(){
         var util = ax5.util;
         var a = {a:"axisj", b:"ax5"};
         var b = [9,8,5,4,3,1];
-        var el = ax5.dom("#ax5-util-each");
+        var el = ax5.dom("#div-ax5-util-each");
 
         var po = [];
         po.push("* a");
@@ -60,28 +49,6 @@
     })();
 </script>
 </pre>
-
-<h4>Result</h4>
-<div id="ax5-util-each" class="script-result"></div>
-<script>
-    (function(){
-        var util = ax5.util;
-        var a = {a:"axisj", b:"ax5"};
-        var b = [9,8,5,4,3,1];
-        var el = ax5.dom("#ax5-util-each");
-
-        var po = [];
-        po.push("* a");
-        util.each(a, function(k, v){
-           po.push(k + ":" + v + " | " + this);
-        });
-        po.push("* b");
-        util.each(b, function(index, item){
-            po.push(index + ":" + item + " | " + this);
-        });
-        el.html(po.join('<br/>'));
-    })();
-</script>
 <p>
     each를 이용하여 Array또는 Object의 아이템을 순환처리 할수 있습니다.
 </p>
@@ -90,10 +57,10 @@
 <article class="content"> <!-- filter -->
     <h2 data-menu-item="ax5-util-filter">ax5.util.filter</h2>
 <pre>
-<div id="ax5-util-filter" class="script-result"></div>
+<div id="div-ax5-util-filter" class="script-result"></div>
 <script>
     (function(){
-        var util = ax5.util, result, el = ax5.dom("#ax5-util-filter");
+        var util = ax5.util, result, el = ax5.dom("#div-ax5-util-filter");
 
         var aarray = [5,4,3,2,1];
         result = util.filter( aarray, function(){
@@ -112,39 +79,16 @@
     })();
 </script>
 </pre>
-
-<h4>Result</h4>
-<div id="ax5-util-filter" class="script-result"></div>
-<script>
-    (function(){
-        var util = ax5.util, result, el = ax5.dom("#ax5-util-filter");
-
-        var aarray = [5,4,3,2,1];
-        result = util.filter( aarray, function(){
-            return this % 2;
-        });
-        el.append( result.join(",") );
-        el.append( "<hr/>" );
-
-        var list = [
-            {isdel:1, name:"ax5-1"},{name:"ax5-2"},{isdel:1, name:"ax5-3"},{name:"ax5-4"},{name:"ax5-5"}
-        ];
-        result = util.filter( list, function(){
-            return (this.isdel != 1);
-        });
-        el.append( JSON.stringify(result) );
-    })();
-</script>
 </article>
 
 
 <article class="content">
 	<h2 data-menu-item="ax5-util-search">ax5.util.search</h2>
 <pre>
-<div id="ax5-util-search" class="script-result"></div>
+<div id="div-ax5-util-search" class="script-result"></div>
 <script>
     (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-search");
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-search");
         var a = ["A","X","5"];
         var idx = util.search(a, function(){
             return this == "X";
@@ -167,33 +111,6 @@
     })();
 </script>
 </pre>
-
-<h4>Result</h4>
-<div id="ax5-util-search" class="script-result"></div>
-<script>
-(function(){
-    var util = ax5.util, el = ax5.dom("#ax5-util-search");
-    var a = ["A","X","5"];
-    var idx = util.search(a, function(){
-       return this == "X";
-    });
-    el.append(a[idx]);
-    el.append(" / ");
-    el.append(a[
-            util.search(a, function(idx){
-                return idx == 2;
-            })
-        ]);
-
-    var b = {a:"AX5-0", x:"AX5-1", 5:"AX5-2"};
-    el.append(" / ");
-    el.append(b[
-            util.search(b, function(k, v){
-                return k == "x";
-            })
-        ]);
-})();
-</script>
 <p>
     search는 배열을 대상으로 할 때와 오브젝트를 대상으로 할 때 결과가 다르다. Array의 경우에는 Array의 인덱스가 리턴되고 Object의 경우에는 Object의 키가 리턴된다.
 </p>
@@ -205,10 +122,10 @@
 <article class="content">
     <h2 data-menu-item="ax5-util-map">ax5.util.map</h2>
 <pre>
-<div id="ax5-util-map" class="script-result"></div>
+<div id="div-ax5-util-map" class="script-result"></div>
 <script>
     (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-map");
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-map");
         var a = [1,2,3,4,5];
         a = util.map(a, function(){
             return {id:this};
@@ -218,18 +135,6 @@
 </script>
 </pre>
 
-<h4>Result</h4>
-<div id="ax5-util-map" class="script-result"></div>
-<script>
-    (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-map");
-        var a = [1,2,3,4,5];
-        a = util.map(a, function(){
-            return {id:this};
-        });
-        el.append( util.to_json(a) );
-    })();
-</script>
 <p>
     map은 배열이나 오브젝트로 새로운 배열집합을 만들어내는 특징이 있습니다. 개발을 하다보면 이런 상황이 간혹 생기게 마련입니다.
     배열을 또 선언해서 push를 해도 되지만 상당히 귀찮게 됩니다. 예제에서는 숫자 배열로 오브젝트배열을 간단하게 만들어 봤습니다.
@@ -239,10 +144,10 @@
 <article class="content">
     <h2 data-menu-item="ax5-util-merge">ax5.util.merge</h2>
 <pre>
-<div id="ax5-util-merge" class="script-result"></div>
+<div id="div-ax5-util-merge" class="script-result"></div>
 <script>
     (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-merge");
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-merge");
         var a = [1,2,3], b = [7,8,9];
         a = util.merge(a, b);
         el.append( util.to_json(a) );
@@ -250,16 +155,6 @@
 </script>
 </pre>
 
-<h4>Result</h4>
-<div id="ax5-util-merge" class="script-result"></div>
-<script>
-    (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-merge");
-        var a = [1,2,3], b = [7,8,9];
-        a = util.merge(a, b);
-        el.append( util.to_json(a) );
-    })();
-</script>
 <p>
 concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 처리하기 때문에 a의 타입이 반드시 Array가 아니더라도 사용가능합니다.
 </p>
@@ -271,10 +166,10 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 <article class="content">
     <h2 data-menu-item="ax5-util-reduce">ax5.util.reduce</h2>
 <pre>
-<div id="ax5-util-reduce" class="script-result"></div>
+<div id="div-ax5-util-reduce" class="script-result"></div>
 <script>
     (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-reduce");
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-reduce");
         var aarray = [5,4,3,2,1], result;
         result = util.reduce( aarray, function(p, n){
             return p * n;
@@ -291,25 +186,6 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 </script>
 </pre>
 
-<h4>Result</h4>
-<div id="ax5-util-reduce" class="script-result"></div>
-<script>
-    (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-reduce");
-        var aarray = [5,4,3,2,1], result;
-        result = util.reduce( aarray, function(p, n){
-            return p * n;
-        });
-        el.append('result = ' + result);
-        el.append('/' + util.to_json(aarray) );
-
-        result = util.reduce({a:1, b:2}, function(p, n){
-            return parseInt(p|0) + parseInt(n);
-        });
-        el.append('<br/>result = ' + result);
-
-    })();
-</script>
 <p>
     배열의 왼쪽에서 오른쪽으로 연산을 진행하는데 수행한 결과가 왼쪽 값으로 반영되어 최종 왼쪽 값을 반환합니다.
 </p>
@@ -321,10 +197,10 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 <article class="content">
     <h2 data-menu-item="ax5-util-reduce_right">ax5.util.reduce_right</h2>
 <pre>
-<div id="ax5-util-reduce_right" class="script-result"></div>
+<div id="div-ax5-util-reduce_right" class="script-result"></div>
 <script>
     (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-reduce_right");
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-reduce_right");
         var aarray = [5,4,3,2,1], result;
         result = util.reduce_right( aarray, function(p, n){
             return p - n;
@@ -335,19 +211,6 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 </script>
 </pre>
 
-<h4>Result</h4>
-<div id="ax5-util-reduce_right" class="script-result"></div>
-<script>
-    (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-reduce_right");
-        var aarray = [5,4,3,2,1], result;
-        result = util.reduce_right( aarray, function(p, n){
-            return p - n;
-        });
-        el.append('result = ' + result);
-        el.append('/' + util.to_json(aarray) );
-    })();
-</script>
 <p>
     reduce의 역순입니다. reduce_right는 Object타입을 지원하지 않습니다.
 </p>
@@ -358,32 +221,57 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 
 <article class="content">
     <h2 data-menu-item="ax5-util-extend">ax5.util.extend</h2>
+    <p>
+        타겟 오브젝트에 원하는 오브젝트를 덮어쓰기 한다. 덮어쓰기 옵션으로 마지막 인자로 <code>true</code>를 부여 하면 덮어쓰기 처리된다.
+        예제에서와 같이 <code>obj1.b</code>의 경우 값이 치환되는 현상이 있는데. 하위 키까지 오브젝트를 덮어쓰기 하려면 <code>extend_all</code>을 사용한다.
+    </p>
 <pre>
+<div id="div-ax5-util-extend" class="script-result"></div>
+<script>
+    (function(){
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-extend");
+        var po = [];
 
+        var obj1 = {a:1, b:{a:1}};
+        var obj2 = {a:2, b:3, c:4};
+
+        util.extend(obj1, obj2);
+        po.push( util.to_json(obj1) );
+        util.extend(obj1, obj2, true);
+        po.push( util.to_json(obj1) );
+
+        el.append( po.join('<br/>') );
+    })();
+</script>
 </pre>
 
-    <h4>Result</h4>
-    <div id="ax5-util-extend" class="script-result"></div>
-    <script>
-        (function(){
-            var util = ax5.util, el = ax5.dom("#ax5-util-extend");
-        })();
-    </script>
 </article>
 
 <article class="content">
     <h2 data-menu-item="ax5-util-extend_all">ax5.util.extend_all</h2>
+    <p>
+        <code>extend</code>로는 처리 할수 없는 오브젝트안에 오브젝트 덮어쓰기를 지원한다.
+    </p>
 <pre>
+<div id="div-ax5-util-extend_all" class="script-result"></div>
+<script>
+    (function(){
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-extend_all");
+        var po = [];
 
+        var obj1 = {a:1, b:{a:1}};
+        var obj2 = {a:2, b:{a:3, b:4}, c:4};
+
+        util.extend_all(obj1, obj2);
+        po.push( util.to_json(obj1) );
+        util.extend_all(obj1, obj2, true);
+        po.push( util.to_json(obj1) );
+
+        el.append( po.join('<br/>') );
+    })();
+</script>
 </pre>
 
-    <h4>Result</h4>
-    <div id="ax5-util-extend_all" class="script-result"></div>
-    <script>
-        (function(){
-            var util = ax5.util, el = ax5.dom("#ax5-util-extend_all");
-        })();
-    </script>
 </article>
 
 
@@ -391,31 +279,52 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 
 <article class="content">
     <h2 data-menu-item="ax5-util-first">ax5.util.first</h2>
+    <p>
+        Array 또는 Object의 첫번째 인자를 반환 합니다. 하지만 Array의 경우에는 first함수를 사용하는 것 보다 <code>Array[0]</code>를 사용하는 것이 더 빠르다.
+    </p>
 <pre>
+<div id="div-ax5-util-first" class="script-result"></div>
+<script>
+    (function(){
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-first");
+        var po = [];
 
+        var _arr = ["ax5","axisj"];
+        var _obj = {k:"ax5", z:"axisj"};
+
+        po.push( util.first(_arr) );
+        po.push( util.to_json( util.first( _obj) ) );
+
+        el.append( po.join('<br/>') );
+    })();
+</script>
 </pre>
 
-    <h4>Result</h4>
-    <div id="ax5-util-first" class="script-result"></div>
-    <script>
-        (function(){
-            var util = ax5.util, el = ax5.dom("#ax5-util-first");
-
-        })();
-    </script>
 </article>
 
 <article class="content">
     <h2 data-menu-item="ax5-util-last">ax5.util.last</h2>
+    <p>
+        first가 있으니 last가 있어야 겠다. Array나 Object의 마지막 인자를 반환한다.
+        Array의 마지막 인자를 구할 때 <code>Array[Array.length-1]</code>를 사용하는데 개발자 성향에 따라 호불호가 있겠다.
+        Object에 대해서는 굉장히 귀찮을 코딩을 줄여주어 꽤 효과적이다.
+    </p>
 <pre>
+<div id="div-ax5-util-last" class="script-result"></div>
+<script>
+    (function(){
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-last");
+        var po = [];
 
+        var _arr = ["ax5","axisj"];
+        var _obj = {k:"ax5", z:"axisj"};
+
+        po.push( util.last(_arr) );
+        po.push( util.to_json( util.last( _obj) ) );
+
+        el.append( po.join('<br/>') );
+    })();
+</script>
 </pre>
 
-    <h4>Result</h4>
-    <div id="ax5-util-last" class="script-result"></div>
-    <script>
-        (function(){
-            var util = ax5.util, el = ax5.dom("#ax5-util-last");
-        })();
-    </script>
 </article>

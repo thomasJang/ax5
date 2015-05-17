@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-04-13 
+ publish date : 2015-04-20 
 -->
 <html lang="en">
 <head>
@@ -132,6 +132,7 @@
 
 <!-- split -->
 
+<label data-menu-item="label"><span>Type</span></label>
 <article class="content"> <!-- type -->
     <h2 data-menu-item="ax5-util-get-type">ax5.util.get_type</h2>
     <div class="callout">
@@ -142,10 +143,10 @@
         </p>
     </div>
 <pre class="prettyprint linenums">
-&lt;div id="ax5-util-get-type" class="script-result">&lt;/div>
+&lt;div id="div-ax5-util-get-type" class="script-result">&lt;/div>
 &lt;script>
     (function(){
-        var util = ax5.util, result, el = ax5.dom("#ax5-util-get-type");
+        var util = ax5.util, result, el = ax5.dom("#div-ax5-util-get-type");
 
         el.append( "1 = " + util.get_type(1) + "&lt;br/>" );
         el.append( "'1' = " + util.get_type("1") + "&lt;br/>" );
@@ -163,26 +164,29 @@
         + util.get_type( document.createDocumentFragment() ) + "&lt;br/>" );
     })();
 &lt;/script>
-</pre>
+</pre><h4>Result</h4>
+<div id="div-ax5-util-get-type" class="script-result"></div>
+<script>
+    (function(){
+        var util = ax5.util, result, el = ax5.dom("#div-ax5-util-get-type");
 
-    <h4>Result</h4>
-    <div id="ax5-util-get-type" class="script-result"></div>
-    <script>
-        (function(){
-            var util = ax5.util, result, el = ax5.dom("#ax5-util-get-type");
+        el.append( "1 = " + util.get_type(1) + "<br/>" );
+        el.append( "'1' = " + util.get_type("1") + "<br/>" );
+        el.append( "[0,1,2] = " + util.get_type([0,1,2]) + "<br/>" );
+        el.append( "{a:1} = " + util.get_type({a:1}) + "<br/>" );
+        el.append( 'ax5.dom.get("#ax5-util-get-type")[0] = '
+        + util.get_type( ax5.dom.get("#ax5-util-get-type")[0] ) + "<br/>" );
+        el.append( 'document.querySelectorAll(".content") = '
+        + util.get_type( document.querySelectorAll(".content") ) + "<br/>" );
+        el.append( 'function(){} = ' + util.get_type( function(){} ) + "<br/>" );
 
-            el.append( "1 = " + util.get_type(1) + "<br/>" );
-            el.append( "'1' = " + util.get_type("1") + "<br/>" );
-            el.append( "[0,1,2] = " + util.get_type([0,1,2]) + "<br/>" );
-            el.append( "{a:1} = " + util.get_type({a:1}) + "<br/>" );
-            el.append( 'ax5.dom.get("#ax5-util-get-type")[0] = ' + util.get_type( ax5.dom.get("#ax5-util-get-type")[0] ) + "<br/>" );
-            el.append( 'document.querySelectorAll(".content") = ' + util.get_type( document.querySelectorAll(".content") ) + "<br/>" );
-            el.append( 'function(){} = ' + util.get_type( function(){} ) + "<br/>" );
-            var ___a;
-            el.append( 'var ___a; ___a = ' + util.get_type( ___a ) + "<br/>" );
-            el.append( 'document.createDocumentFragment() = ' + util.get_type( document.createDocumentFragment() ) + "<br/>" );
-        })();
-    </script>
+        var ___a;
+        el.append( 'var ___a; ___a = ' + util.get_type( ___a ) + "<br/>" );
+        el.append( 'document.createDocumentFragment() = '
+        + util.get_type( document.createDocumentFragment() ) + "<br/>" );
+    })();
+</script>
+
 </article>
 
 
@@ -225,37 +229,39 @@
 
 <!-- split -->
 
+<label data-menu-item="label"><span>Object</span></label>
+
 <article class="content"> <!-- clone -->
     <h2 data-menu-item="ax5-util-clone">ax5.util.clone</h2>
 
 <pre class="prettyprint linenums">
-&lt;div id="ax5-util-clone" class="script-result">&lt;/div>
+&lt;div id="div-ax5-util-clone" class="script-result">&lt;/div>
 &lt;script>
     (function(){
         var a = {a:1};
         var b = a;
-        var el = ax5.dom("#ax5-util-clone");
+        var el = ax5.dom("#div-ax5-util-clone");
 
         el.append("(a == b) => " + (a == b) + "&lt;br/>");
         b = ax5.util.clone(a);
         el.append("(a == b) => " + (a == b));
     })();
 &lt;/script>
-</pre>
-
-<h4>Result</h4>
-<div id="ax5-util-clone" class="script-result"></div>
+</pre><h4>Result</h4>
+<div id="div-ax5-util-clone" class="script-result"></div>
 <script>
     (function(){
         var a = {a:1};
         var b = a;
-        var el = ax5.dom("#ax5-util-clone");
+        var el = ax5.dom("#div-ax5-util-clone");
 
         el.append("(a == b) => " + (a == b) + "<br/>");
         b = ax5.util.clone(a);
         el.append("(a == b) => " + (a == b));
     })();
 </script>
+
+
 <p>
     변수 a를 b에 대입하면 변수 b는 a의 참조가 됩니다. 참조가 된 변수 b의 속성 b.a의 값을 바꾸었을 때 a.a의 값도 함께 바뀌는 상황을 초래합니다.
     그런 이유로 때로 원치 않는 결과를 얻을 수 있습니다. 이럴 때엔 ax5.util.clone함수를 이용하여 변수 a의 복제된 오브젝트를 만들어 사용할 수 있습니다.
@@ -266,13 +272,13 @@
     <h2 data-menu-item="ax5-util-each">ax5.util.each</h2>
 
 <pre class="prettyprint linenums">
-&lt;div id="ax5-util-each" class="script-result">&lt;/div>
+&lt;div id="div-ax5-util-each" class="script-result">&lt;/div>
 &lt;script>
     (function(){
         var util = ax5.util;
         var a = {a:"axisj", b:"ax5"};
         var b = [9,8,5,4,3,1];
-        var el = ax5.dom("#ax5-util-each");
+        var el = ax5.dom("#div-ax5-util-each");
 
         var po = [];
         po.push("* a");
@@ -286,21 +292,19 @@
         el.html(po.join('&lt;br/>'));
     })();
 &lt;/script>
-</pre>
-
-<h4>Result</h4>
-<div id="ax5-util-each" class="script-result"></div>
+</pre><h4>Result</h4>
+<div id="div-ax5-util-each" class="script-result"></div>
 <script>
     (function(){
         var util = ax5.util;
         var a = {a:"axisj", b:"ax5"};
         var b = [9,8,5,4,3,1];
-        var el = ax5.dom("#ax5-util-each");
+        var el = ax5.dom("#div-ax5-util-each");
 
         var po = [];
         po.push("* a");
         util.each(a, function(k, v){
-           po.push(k + ":" + v + " | " + this);
+            po.push(k + ":" + v + " | " + this);
         });
         po.push("* b");
         util.each(b, function(index, item){
@@ -309,6 +313,7 @@
         el.html(po.join('<br/>'));
     })();
 </script>
+
 <p>
     each를 이용하여 Array또는 Object의 아이템을 순환처리 할수 있습니다.
 </p>
@@ -317,10 +322,10 @@
 <article class="content"> <!-- filter -->
     <h2 data-menu-item="ax5-util-filter">ax5.util.filter</h2>
 <pre class="prettyprint linenums">
-&lt;div id="ax5-util-filter" class="script-result">&lt;/div>
+&lt;div id="div-ax5-util-filter" class="script-result">&lt;/div>
 &lt;script>
     (function(){
-        var util = ax5.util, result, el = ax5.dom("#ax5-util-filter");
+        var util = ax5.util, result, el = ax5.dom("#div-ax5-util-filter");
 
         var aarray = [5,4,3,2,1];
         result = util.filter( aarray, function(){
@@ -338,13 +343,11 @@
         el.append( JSON.stringify(result) );
     })();
 &lt;/script>
-</pre>
-
-<h4>Result</h4>
-<div id="ax5-util-filter" class="script-result"></div>
+</pre><h4>Result</h4>
+<div id="div-ax5-util-filter" class="script-result"></div>
 <script>
     (function(){
-        var util = ax5.util, result, el = ax5.dom("#ax5-util-filter");
+        var util = ax5.util, result, el = ax5.dom("#div-ax5-util-filter");
 
         var aarray = [5,4,3,2,1];
         result = util.filter( aarray, function(){
@@ -362,16 +365,17 @@
         el.append( JSON.stringify(result) );
     })();
 </script>
+
 </article>
 
 
 <article class="content">
 	<h2 data-menu-item="ax5-util-search">ax5.util.search</h2>
 <pre class="prettyprint linenums">
-&lt;div id="ax5-util-search" class="script-result">&lt;/div>
+&lt;div id="div-ax5-util-search" class="script-result">&lt;/div>
 &lt;script>
     (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-search");
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-search");
         var a = ["A","X","5"];
         var idx = util.search(a, function(){
             return this == "X";
@@ -393,34 +397,33 @@
             ]);
     })();
 &lt;/script>
-</pre>
-
-<h4>Result</h4>
-<div id="ax5-util-search" class="script-result"></div>
+</pre><h4>Result</h4>
+<div id="div-ax5-util-search" class="script-result"></div>
 <script>
-(function(){
-    var util = ax5.util, el = ax5.dom("#ax5-util-search");
-    var a = ["A","X","5"];
-    var idx = util.search(a, function(){
-       return this == "X";
-    });
-    el.append(a[idx]);
-    el.append(" / ");
-    el.append(a[
-            util.search(a, function(idx){
-                return idx == 2;
-            })
-        ]);
+    (function(){
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-search");
+        var a = ["A","X","5"];
+        var idx = util.search(a, function(){
+            return this == "X";
+        });
+        el.append(a[idx]);
+        el.append(" / ");
+        el.append(a[
+                util.search(a, function(idx){
+                    return idx == 2;
+                })
+            ]);
 
-    var b = {a:"AX5-0", x:"AX5-1", 5:"AX5-2"};
-    el.append(" / ");
-    el.append(b[
-            util.search(b, function(k, v){
-                return k == "x";
-            })
-        ]);
-})();
+        var b = {a:"AX5-0", x:"AX5-1", 5:"AX5-2"};
+        el.append(" / ");
+        el.append(b[
+                util.search(b, function(k, v){
+                    return k == "x";
+                })
+            ]);
+    })();
 </script>
+
 <p>
     search는 배열을 대상으로 할 때와 오브젝트를 대상으로 할 때 결과가 다르다. Array의 경우에는 Array의 인덱스가 리턴되고 Object의 경우에는 Object의 키가 리턴된다.
 </p>
@@ -432,10 +435,10 @@
 <article class="content">
     <h2 data-menu-item="ax5-util-map">ax5.util.map</h2>
 <pre class="prettyprint linenums">
-&lt;div id="ax5-util-map" class="script-result">&lt;/div>
+&lt;div id="div-ax5-util-map" class="script-result">&lt;/div>
 &lt;script>
     (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-map");
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-map");
         var a = [1,2,3,4,5];
         a = util.map(a, function(){
             return {id:this};
@@ -443,13 +446,11 @@
         el.append( util.to_json(a) );
     })();
 &lt;/script>
-</pre>
-
-<h4>Result</h4>
-<div id="ax5-util-map" class="script-result"></div>
+</pre><h4>Result</h4>
+<div id="div-ax5-util-map" class="script-result"></div>
 <script>
     (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-map");
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-map");
         var a = [1,2,3,4,5];
         a = util.map(a, function(){
             return {id:this};
@@ -457,6 +458,8 @@
         el.append( util.to_json(a) );
     })();
 </script>
+
+
 <p>
     map은 배열이나 오브젝트로 새로운 배열집합을 만들어내는 특징이 있습니다. 개발을 하다보면 이런 상황이 간혹 생기게 마련입니다.
     배열을 또 선언해서 push를 해도 되지만 상당히 귀찮게 됩니다. 예제에서는 숫자 배열로 오브젝트배열을 간단하게 만들어 봤습니다.
@@ -466,27 +469,27 @@
 <article class="content">
     <h2 data-menu-item="ax5-util-merge">ax5.util.merge</h2>
 <pre class="prettyprint linenums">
-&lt;div id="ax5-util-merge" class="script-result">&lt;/div>
+&lt;div id="div-ax5-util-merge" class="script-result">&lt;/div>
 &lt;script>
     (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-merge");
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-merge");
         var a = [1,2,3], b = [7,8,9];
         a = util.merge(a, b);
         el.append( util.to_json(a) );
     })();
 &lt;/script>
-</pre>
-
-<h4>Result</h4>
-<div id="ax5-util-merge" class="script-result"></div>
+</pre><h4>Result</h4>
+<div id="div-ax5-util-merge" class="script-result"></div>
 <script>
     (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-merge");
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-merge");
         var a = [1,2,3], b = [7,8,9];
         a = util.merge(a, b);
         el.append( util.to_json(a) );
     })();
 </script>
+
+
 <p>
 concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 처리하기 때문에 a의 타입이 반드시 Array가 아니더라도 사용가능합니다.
 </p>
@@ -498,10 +501,10 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 <article class="content">
     <h2 data-menu-item="ax5-util-reduce">ax5.util.reduce</h2>
 <pre class="prettyprint linenums">
-&lt;div id="ax5-util-reduce" class="script-result">&lt;/div>
+&lt;div id="div-ax5-util-reduce" class="script-result">&lt;/div>
 &lt;script>
     (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-reduce");
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-reduce");
         var aarray = [5,4,3,2,1], result;
         result = util.reduce( aarray, function(p, n){
             return p * n;
@@ -516,13 +519,11 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
         el.append('&lt;br/>result = ' + result);
     })();
 &lt;/script>
-</pre>
-
-<h4>Result</h4>
-<div id="ax5-util-reduce" class="script-result"></div>
+</pre><h4>Result</h4>
+<div id="div-ax5-util-reduce" class="script-result"></div>
 <script>
     (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-reduce");
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-reduce");
         var aarray = [5,4,3,2,1], result;
         result = util.reduce( aarray, function(p, n){
             return p * n;
@@ -531,12 +532,14 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
         el.append('/' + util.to_json(aarray) );
 
         result = util.reduce({a:1, b:2}, function(p, n){
+            // Object의 경우 첫번째 p 값이 undefined 입니다.
             return parseInt(p|0) + parseInt(n);
         });
         el.append('<br/>result = ' + result);
-
     })();
 </script>
+
+
 <p>
     배열의 왼쪽에서 오른쪽으로 연산을 진행하는데 수행한 결과가 왼쪽 값으로 반영되어 최종 왼쪽 값을 반환합니다.
 </p>
@@ -548,10 +551,10 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 <article class="content">
     <h2 data-menu-item="ax5-util-reduce_right">ax5.util.reduce_right</h2>
 <pre class="prettyprint linenums">
-&lt;div id="ax5-util-reduce_right" class="script-result">&lt;/div>
+&lt;div id="div-ax5-util-reduce_right" class="script-result">&lt;/div>
 &lt;script>
     (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-reduce_right");
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-reduce_right");
         var aarray = [5,4,3,2,1], result;
         result = util.reduce_right( aarray, function(p, n){
             return p - n;
@@ -560,13 +563,11 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
         el.append('/' + util.to_json(aarray) );
     })();
 &lt;/script>
-</pre>
-
-<h4>Result</h4>
-<div id="ax5-util-reduce_right" class="script-result"></div>
+</pre><h4>Result</h4>
+<div id="div-ax5-util-reduce_right" class="script-result"></div>
 <script>
     (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-reduce_right");
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-reduce_right");
         var aarray = [5,4,3,2,1], result;
         result = util.reduce_right( aarray, function(p, n){
             return p - n;
@@ -575,6 +576,8 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
         el.append('/' + util.to_json(aarray) );
     })();
 </script>
+
+
 <p>
     reduce의 역순입니다. reduce_right는 Object타입을 지원하지 않습니다.
 </p>
@@ -585,32 +588,93 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 
 <article class="content">
     <h2 data-menu-item="ax5-util-extend">ax5.util.extend</h2>
+    <p>
+        타겟 오브젝트에 원하는 오브젝트를 덮어쓰기 한다. 덮어쓰기 옵션으로 마지막 인자로 <code>true</code>를 부여 하면 덮어쓰기 처리된다.
+        예제에서와 같이 <code>obj1.b</code>의 경우 값이 치환되는 현상이 있는데. 하위 키까지 오브젝트를 덮어쓰기 하려면 <code>extend_all</code>을 사용한다.
+    </p>
 <pre class="prettyprint linenums">
+&lt;div id="div-ax5-util-extend" class="script-result">&lt;/div>
+&lt;script>
+    (function(){
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-extend");
+        var po = [];
 
-</pre>
+        var obj1 = {a:1, b:{a:1}};
+        var obj2 = {a:2, b:3, c:4};
 
-    <h4>Result</h4>
-    <div id="ax5-util-extend" class="script-result"></div>
-    <script>
-        (function(){
-            var util = ax5.util, el = ax5.dom("#ax5-util-extend");
-        })();
-    </script>
+        util.extend(obj1, obj2);
+        po.push( util.to_json(obj1) );
+        util.extend(obj1, obj2, true);
+        po.push( util.to_json(obj1) );
+
+        el.append( po.join('&lt;br/>') );
+    })();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-util-extend" class="script-result"></div>
+<script>
+    (function(){
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-extend");
+        var po = [];
+
+        var obj1 = {a:1, b:{a:1}};
+        var obj2 = {a:2, b:3, c:4};
+
+        util.extend(obj1, obj2);
+        po.push( util.to_json(obj1) );
+        util.extend(obj1, obj2, true);
+        po.push( util.to_json(obj1) );
+
+        el.append( po.join('<br/>') );
+    })();
+</script>
+
+
 </article>
 
 <article class="content">
     <h2 data-menu-item="ax5-util-extend_all">ax5.util.extend_all</h2>
+    <p>
+        <code>extend</code>로는 처리 할수 없는 오브젝트안에 오브젝트 덮어쓰기를 지원한다.
+    </p>
 <pre class="prettyprint linenums">
+&lt;div id="div-ax5-util-extend_all" class="script-result">&lt;/div>
+&lt;script>
+    (function(){
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-extend_all");
+        var po = [];
 
-</pre>
+        var obj1 = {a:1, b:{a:1}};
+        var obj2 = {a:2, b:{a:3, b:4}, c:4};
 
-    <h4>Result</h4>
-    <div id="ax5-util-extend_all" class="script-result"></div>
-    <script>
-        (function(){
-            var util = ax5.util, el = ax5.dom("#ax5-util-extend_all");
-        })();
-    </script>
+        util.extend_all(obj1, obj2);
+        po.push( util.to_json(obj1) );
+        util.extend_all(obj1, obj2, true);
+        po.push( util.to_json(obj1) );
+
+        el.append( po.join('&lt;br/>') );
+    })();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-util-extend_all" class="script-result"></div>
+<script>
+    (function(){
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-extend_all");
+        var po = [];
+
+        var obj1 = {a:1, b:{a:1}};
+        var obj2 = {a:2, b:{a:3, b:4}, c:4};
+
+        util.extend_all(obj1, obj2);
+        po.push( util.to_json(obj1) );
+        util.extend_all(obj1, obj2, true);
+        po.push( util.to_json(obj1) );
+
+        el.append( po.join('<br/>') );
+    })();
+</script>
+
+
 </article>
 
 
@@ -618,37 +682,92 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 
 <article class="content">
     <h2 data-menu-item="ax5-util-first">ax5.util.first</h2>
+    <p>
+        Array 또는 Object의 첫번째 인자를 반환 합니다. 하지만 Array의 경우에는 first함수를 사용하는 것 보다 <code>Array[0]</code>를 사용하는 것이 더 빠르다.
+    </p>
 <pre class="prettyprint linenums">
+&lt;div id="div-ax5-util-first" class="script-result">&lt;/div>
+&lt;script>
+    (function(){
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-first");
+        var po = [];
 
-</pre>
+        var _arr = ["ax5","axisj"];
+        var _obj = {k:"ax5", z:"axisj"};
 
-    <h4>Result</h4>
-    <div id="ax5-util-first" class="script-result"></div>
-    <script>
-        (function(){
-            var util = ax5.util, el = ax5.dom("#ax5-util-first");
+        po.push( util.first(_arr) );
+        po.push( util.to_json( util.first( _obj) ) );
 
-        })();
-    </script>
+        el.append( po.join('&lt;br/>') );
+    })();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-util-first" class="script-result"></div>
+<script>
+    (function(){
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-first");
+        var po = [];
+
+        var _arr = ["ax5","axisj"];
+        var _obj = {k:"ax5", z:"axisj"};
+
+        po.push( util.first(_arr) );
+        po.push( util.to_json( util.first( _obj) ) );
+
+        el.append( po.join('<br/>') );
+    })();
+</script>
+
+
 </article>
 
 <article class="content">
     <h2 data-menu-item="ax5-util-last">ax5.util.last</h2>
+    <p>
+        first가 있으니 last가 있어야 겠다. Array나 Object의 마지막 인자를 반환한다.
+        Array의 마지막 인자를 구할 때 <code>Array[Array.length-1]</code>를 사용하는데 개발자 성향에 따라 호불호가 있겠다.
+        Object에 대해서는 굉장히 귀찮을 코딩을 줄여주어 꽤 효과적이다.
+    </p>
 <pre class="prettyprint linenums">
+&lt;div id="div-ax5-util-last" class="script-result">&lt;/div>
+&lt;script>
+    (function(){
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-last");
+        var po = [];
 
-</pre>
+        var _arr = ["ax5","axisj"];
+        var _obj = {k:"ax5", z:"axisj"};
 
-    <h4>Result</h4>
-    <div id="ax5-util-last" class="script-result"></div>
-    <script>
-        (function(){
-            var util = ax5.util, el = ax5.dom("#ax5-util-last");
-        })();
-    </script>
+        po.push( util.last(_arr) );
+        po.push( util.to_json( util.last( _obj) ) );
+
+        el.append( po.join('&lt;br/>') );
+    })();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-util-last" class="script-result"></div>
+<script>
+    (function(){
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-last");
+        var po = [];
+
+        var _arr = ["ax5","axisj"];
+        var _obj = {k:"ax5", z:"axisj"};
+
+        po.push( util.last(_arr) );
+        po.push( util.to_json( util.last( _obj) ) );
+
+        el.append( po.join('<br/>') );
+    })();
+</script>
+
+
 </article>
 
 
 <!-- split -->
+
+<label data-menu-item="label"><span>String</span></label>
 
 <article class="content">
     <h2 data-menu-item="ax5-util-left">ax5.util.left</h2>
@@ -656,29 +775,29 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
         자주 다루게 되는 문자열의 특정위치 구하기. 문자열의 인덱스 또는 특정문자열의 위치까지 왼쪽에서부터 잘라 주어 편리한 코딩을 지원한다.
     </p>
 <pre class="prettyprint linenums">
-&lt;div id="ax5-util-left" class="script-result">&lt;/div>
+&lt;div id="div-ax5-util-left" class="script-result">&lt;/div>
 &lt;script>
     (function(){
         var util = ax5.util;
         var po = [];
         po.push( util.left("abcd.efd", 3) );
         po.push( util.left("abcd.efd", ".") );
-        ax5.dom("#ax5-util-left").html(po.join('&lt;br/>'));
+        ax5.dom("#div-ax5-util-left").html(po.join('&lt;br/>'));
     })();
 &lt;/script>
-</pre>
+</pre><h4>Result</h4>
+<div id="div-ax5-util-left" class="script-result"></div>
+<script>
+    (function(){
+        var util = ax5.util;
+        var po = [];
+        po.push( util.left("abcd.efd", 3) );
+        po.push( util.left("abcd.efd", ".") );
+        ax5.dom("#div-ax5-util-left").html(po.join('<br/>'));
+    })();
+</script>
 
-    <h4>Result</h4>
-    <div id="ax5-util-left" class="script-result"></div>
-    <script>
-        (function(){
-            var util = ax5.util;
-            var po = [];
-            po.push( util.left("abcd.efd", 3) );
-            po.push( util.left("abcd.efd", ".") );
-            ax5.dom("#ax5-util-left").html(po.join('<br/>'));
-        })();
-    </script>
+
 </article>
 
 
@@ -689,29 +808,29 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
         자주 다루게 되는 문자열의 특정위치 구하기. 문자열의 인덱스 또는 특정문자열의 위치까지 오픈쪽에서부터 잘라 주어 편리한 코딩을 지원한다.
     </p>
 <pre class="prettyprint linenums">
-&lt;div id="ax5-util-right" class="script-result">&lt;/div>
+&lt;div id="div-ax5-util-right" class="script-result">&lt;/div>
 &lt;script>
     (function(){
         var util = ax5.util;
         var po = [];
         po.push( util.right("abcd.efd", 3) );
         po.push( util.right("abcd.efd", ".") );
-        ax5.dom("#ax5-util-right").html(po.join('&lt;br/>'));
+        ax5.dom("#div-ax5-util-right").html(po.join('&lt;br/>'));
     })();
 &lt;/script>
-</pre>
+</pre><h4>Result</h4>
+<div id="div-ax5-util-right" class="script-result"></div>
+<script>
+    (function(){
+        var util = ax5.util;
+        var po = [];
+        po.push( util.right("abcd.efd", 3) );
+        po.push( util.right("abcd.efd", ".") );
+        ax5.dom("#div-ax5-util-right").html(po.join('<br/>'));
+    })();
+</script>
 
-    <h4>Result</h4>
-    <div id="ax5-util-right" class="script-result"></div>
-    <script>
-        (function(){
-            var util = ax5.util;
-            var po = [];
-            po.push( util.right("abcd.efd", 3) );
-            po.push( util.right("abcd.efd", ".") );
-            ax5.dom("#ax5-util-right").html(po.join('<br/>'));
-        })();
-    </script>
+
 </article>
 
 
@@ -719,29 +838,29 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 <article class="content">
     <h2 data-menu-item="ax5-util-camel_case">ax5.util.camel_case</h2>
 <pre class="prettyprint linenums">
-&lt;div id="ax5-util-camel-case" class="script-result">&lt;/div>
+&lt;div id="div-ax5-util-camel-case" class="script-result">&lt;/div>
 &lt;script>
     (function(){
         var po = [];
         po.push(ax5.util.camel_case("inner-width"));
         po.push(ax5.util.camel_case("camelCase"));
         po.push(ax5.util.camel_case("a_bc"));
-        ax5.dom("#ax5-util-camel-case").html(po.join('&lt;br/>'));
+        ax5.dom("#div-ax5-util-camel-case").html(po.join('&lt;br/>'));
     })();
 &lt;/script>
-</pre>
+</pre><h4>Result</h4>
+<div id="div-ax5-util-camel-case" class="script-result"></div>
+<script>
+    (function(){
+        var po = [];
+        po.push(ax5.util.camel_case("inner-width"));
+        po.push(ax5.util.camel_case("camelCase"));
+        po.push(ax5.util.camel_case("a_bc"));
+        ax5.dom("#div-ax5-util-camel-case").html(po.join('<br/>'));
+    })();
+</script>
 
-    <h4>Result</h4>
-    <div id="ax5-util-camel-case" class="script-result"></div>
-    <script>
-        (function(){
-            var po = [];
-            po.push(ax5.util.camel_case("inner-width"));
-            po.push(ax5.util.camel_case("camelCase"));
-            po.push(ax5.util.camel_case("a_bc"));
-            ax5.dom("#ax5-util-camel-case").html(po.join('<br/>'));
-        })();
-    </script>
+
 </article>
 
 
@@ -750,10 +869,10 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 <article class="content">
     <h2 data-menu-item="ax5-util-snake_case">ax5.util.snake_case</h2>
 <pre class="prettyprint linenums">
-&lt;div id="ax5-util-snake_case" class="script-result">&lt;/div>
+&lt;div id="div-ax5-util-snake_case" class="script-result">&lt;/div>
 &lt;script>
     (function(){
-        var util = ax5.util, el = ax5.dom("#ax5-util-snake_case");
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-snake_case");
         var po = [];
         po.push(util.snake_case("inner-width"));
         po.push(util.snake_case("camelCase"));
@@ -761,24 +880,26 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
         el.html(po.join('&lt;br/>'));
     })();
 &lt;/script>
-</pre>
+</pre><h4>Result</h4>
+<div id="div-ax5-util-snake_case" class="script-result"></div>
+<script>
+    (function(){
+        var util = ax5.util, el = ax5.dom("#div-ax5-util-snake_case");
+        var po = [];
+        po.push(util.snake_case("inner-width"));
+        po.push(util.snake_case("camelCase"));
+        po.push(util.snake_case("a_bc"));
+        el.html(po.join('<br/>'));
+    })();
+</script>
 
-    <h4>Result</h4>
-    <div id="ax5-util-snake_case" class="script-result"></div>
-    <script>
-        (function(){
-            var util = ax5.util, el = ax5.dom("#ax5-util-snake_case");
-            var po = [];
-            po.push(util.snake_case("inner-width"));
-            po.push(util.snake_case("camelCase"));
-            po.push(util.snake_case("a_bc"));
-            el.html(po.join('<br/>'));
-        })();
-    </script>
+
 </article>
 
 
 <!-- split -->
+
+<label data-menu-item="label"><span>Number</span></label>
 
 <article class="content">
 	<h2 data-menu-item="ax5-util-number">ax5.util.number</h2>
@@ -787,10 +908,10 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 		<code>ax5.util</code>로는 <code>ax5.util.number(num, {round:1, money:true});</code>로 한번에 처리 할 수 있다.
 	</p>
 <pre class="prettyprint linenums">
-&lt;div id="ax5-util-number" class="script-result">&lt;/div>
+&lt;div id="div-ax5-util-number" class="script-result">&lt;/div>
 &lt;script>
 	(function(){
-		var util = ax5.util, el = ax5.dom("#ax5-util-number");
+		var util = ax5.util, el = ax5.dom("#div-ax5-util-number");
 
 		var po = [];
 		po.push('round(1) : ' + ax5.util.number(123456789.678, {round:1}) );
@@ -811,60 +932,173 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 
 	})();
 &lt;/script>
-</pre>
+</pre><h4>Result</h4>
+<div id="div-ax5-util-number" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-util-number");
 
-	<h4>Result</h4>
-	<div id="ax5-util-number" class="script-result"></div>
-	<script>
-		(function(){
-			var util = ax5.util, el = ax5.dom("#ax5-util-number");
+		var po = [];
+		po.push('round(1) : ' + ax5.util.number(123456789.678, {round:1}) );
 
-			var po = [];
-			po.push('round(1) : ' + ax5.util.number(123456789.678, {round:1}) );
-			po.push('round(1) money() : ' + ax5.util.number(123456789.678, {round:1, money:true}) );
-			po.push('round(2) byte() : ' + ax5.util.number(123456789.678, {round:2, byte:true}) );
-			po.push('abs() round(2) money() : ' + ax5.util.number(-123456789.678, {abs:true, round:2, money:true}) );
-			po.push('abs() round(2) money() : ' + ax5.util.number("A-1234~~56789.8~888PX", {abs:true, round:2, money:true}) );
-			el.append( po.join('<br/>') );
+		po.push('round(1) money() : '
+		+ ax5.util.number(123456789.678, {round:1, money:true}) );
 
-		})();
-	</script>
+		po.push('round(2) byte() : '
+		+ ax5.util.number(123456789.678, {round:2, byte:true}) );
+
+		po.push('abs() round(2) money() : '
+		+ ax5.util.number(-123456789.678, {abs:true, round:2, money:true}) );
+
+		po.push('abs() round(2) money() : '
+		+ ax5.util.number("A-1234~~56789.8~888PX", {abs:true, round:2, money:true}) );
+
+		el.append( po.join('<br/>') );
+
+	})();
+</script>
+
+
 </article>
 
 <!-- split -->
 
+<label data-menu-item="label"><span>Misc</span></label>
+
 <article class="content">
 	<h2 data-menu-item="ax5-util-param">ax5.util.param</h2>
+	<p>
+		프로그램을 짜다보면 파라미터값이 Object가 될 수도 String이 될 수도 있는데.
+		이런 상황에서 파라미터 값에 대해 항상 동일한 검증을 요구하는 상황에 놓이게 된다.
+	</p>
 <pre class="prettyprint linenums">
+&lt;div id="div-ax5-util-param" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-util-param");
+		var po = [];
 
-</pre>
+		// 오브젝트로 param
+		po.push( util.param({a:1,b:'123\'"2&'}, "param") );
+		// param이면 그대로
+		po.push( util.param("a=1&b=12'\"32", "param") );
+		// 옵션이 없으면 OBject로
+		po.push( util.to_json(util.param("a=1&b=1232")) );
 
-	<h4>Result</h4>
-	<div id="ax5-util-param" class="script-result"></div>
-	<script>
-		(function(){
-			var util = ax5.util, el = ax5.dom("#ax5-util-param");
+		el.append( po.join('&lt;br/>') );
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-util-param" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-util-param");
+		var po = [];
 
-		})();
-	</script>
+		// 오브젝트로 param
+		po.push( util.param({a:1,b:'123\'"2&'}, "param") );
+		// param이면 그대로
+		po.push( util.param("a=1&b=12'\"32", "param") );
+		// 옵션이 없으면 OBject로
+		po.push( util.to_json(util.param("a=1&b=1232")) );
+
+		el.append( po.join('<br/>') );
+	})();
+</script>
+
+
 </article>
 
 
 
 <article class="content">
 	<h2 data-menu-item="ax5-util-parse_json">ax5.util.parse_json</h2>
+	<p>
+		json은 이제 xml을 밀어내고 범용 데이터 포멧의 표준이 되었다. 그런데 json데이터의 형식은 몇가지 규칙이 있는데. <code>"key":"value"</code>의 형식을 유지해야 한다는 점이다.
+		key값을 따옴표로 감싸지 않으면 대게의 json parser는 에러는 뱉어내게 된다. 물론 대부분의 상황에서 규칙을 지켜야 겠지만. 귀찬을 때가 있다. 또는 function을 부여 한다던지.
+	</p>
 <pre class="prettyprint linenums">
+&lt;div id="div-ax5-util-parse_json" class="script-result">&lt;/div>
+&lt;script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-util-parse_json");
+	var po = [];
 
-</pre>
+	po.push( util.to_json( util.parse_json("[{'a':'99'},'2','3']")[0] ) );
+	// ax5 parse_json은 json 구문에 대해 관대 합니다.
+	po.push( util.parse_json("{a:1}").a );
+	// 옵션 : 강제 적용 여부 (json 문자열 검사를 무시하고 오브젝트 변환을 시도합니다.)
+	po.push( util.to_json( util.parse_json("{'a':1, 'b':function(){return 1;}}", false) ) );
+	po.push( util.to_json( util.parse_json("{'a':1, 'b':function(){return 1;}}", true) ) );
 
-	<h4>Result</h4>
-	<div id="ax5-util-parse_json" class="script-result"></div>
-	<script>
-		(function(){
-			var util = ax5.util, el = ax5.dom("#ax5-util-parse_json");
+	el.append( po.join('&lt;br/>') );
+})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-util-parse_json" class="script-result"></div>
+<script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-util-parse_json");
+	var po = [];
 
-		})();
-	</script>
+	po.push( util.to_json( util.parse_json("[{'a':'99'},'2','3']")[0] ) );
+	// ax5 parse_json은 json 구문에 대해 관대 합니다.
+	po.push( util.parse_json("{a:1}").a );
+	// 옵션 : 강제 적용 여부 (json 문자열 검사를 무시하고 오브젝트 변환을 시도합니다.)
+	po.push( util.to_json( util.parse_json("{'a':1, 'b':function(){return 1;}}", false) ) );
+	po.push( util.to_json( util.parse_json("{'a':1, 'b':function(){return 1;}}", true) ) );
+
+	el.append( po.join('<br/>') );
+})();
+</script>
+
+
+</article>
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-util-to_json">ax5.util.to_json</h2>
+	<p>
+		모든 Object를 JSONString으로 바꾸어 버린다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-util-to_json" class="script-result">&lt;/div>
+&lt;script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-util-to_json");
+	var po = [];
+
+	po.push( util.to_json(1) );
+	po.push( util.to_json("A") );
+	po.push( util.to_json([1,2,3,'A']) );
+	po.push( util.to_json({a:'a',x:'x'}) );
+	po.push( util.to_json([1, {a:'a',x:'x'}]) );
+	po.push( util.to_json({a:'a', x:'x', list:[1,2,3]}) );
+	po.push( util.to_json(function(){}) );
+
+	el.append( po.join('&lt;br/>') );
+})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-util-to_json" class="script-result"></div>
+<script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-util-to_json");
+	var po = [];
+
+	po.push( util.to_json(1) );
+	po.push( util.to_json("A") );
+	po.push( util.to_json([1,2,3,'A']) );
+	po.push( util.to_json({a:'a',x:'x'}) );
+	po.push( util.to_json([1, {a:'a',x:'x'}]) );
+	po.push( util.to_json({a:'a', x:'x', list:[1,2,3]}) );
+	po.push( util.to_json(function(){}) );
+
+	el.append( po.join('<br/>') );
+})();
+</script>
+
+
 </article>
 
 
@@ -872,17 +1106,34 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 <article class="content">
 	<h2 data-menu-item="ax5-util-get_cookie">ax5.util.get_cookie</h2>
 <pre class="prettyprint linenums">
+&lt;div id="div-ax5-util-get_cookie" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-util-get_cookie");
+		var po = [];
 
-</pre>
+		util.set_cookie("ax5-cookie", "abcde");
+		util.set_cookie("ax5-cookie-path", "abcde", 2, {path:"/"});
+		po.push( util.get_cookie("ax5-cookie") );
+		po.push( util.get_cookie("ax5-cookie-path") );
+		el.append( po.join('&lt;br/>') );
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-util-get_cookie" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-util-get_cookie");
+		var po = [];
 
-	<h4>Result</h4>
-	<div id="ax5-util-get_cookie" class="script-result"></div>
-	<script>
-		(function(){
-			var util = ax5.util, el = ax5.dom("#ax5-util-get_cookie");
+		util.set_cookie("ax5-cookie", "abcde");
+		util.set_cookie("ax5-cookie-path", "abcde", 2, {path:"/"});
+		po.push( util.get_cookie("ax5-cookie") );
+		po.push( util.get_cookie("ax5-cookie-path") );
+		el.append( po.join('<br/>') );
+	})();
+</script>
 
-		})();
-	</script>
 </article>
 
 
@@ -890,35 +1141,64 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 <article class="content">
 	<h2 data-menu-item="ax5-util-set_cookie">ax5.util.set_cookie</h2>
 <pre class="prettyprint linenums">
+&lt;div id="div-ax5-util-set_cookie" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-util-set_cookie");
+		var po = [];
 
-</pre>
+		util.set_cookie("ax5-cookie", "abcde");
+		util.set_cookie("ax5-cookie-path", "abcde", 2, {path:"/"});
+		po.push( util.get_cookie("ax5-cookie") );
+		po.push( util.get_cookie("ax5-cookie-path") );
+		el.append( po.join('&lt;br/>') );
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-util-set_cookie" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-util-set_cookie");
+		var po = [];
 
-	<h4>Result</h4>
-	<div id="ax5-util-set_cookie" class="script-result"></div>
-	<script>
-		(function(){
-			var util = ax5.util, el = ax5.dom("#ax5-util-set_cookie");
+		util.set_cookie("ax5-cookie", "abcde");
+		util.set_cookie("ax5-cookie-path", "abcde", 2, {path:"/"});
+		po.push( util.get_cookie("ax5-cookie") );
+		po.push( util.get_cookie("ax5-cookie-path") );
+		el.append( po.join('<br/>') );
+	})();
+</script>
 
-		})();
-	</script>
 </article>
 
 
 
 <article class="content">
 	<h2 data-menu-item="ax5-util-alert">ax5.util.alert</h2>
+	<p>
+		디버깅 중에 변수를 alert해 본다던지, 서버에서 리턴된 값을 alert한다던지 하는 상황에서 오브젝트 타입에 따라 처리하는 것 보다. <code>편하다 정말</code>
+	</p>
 <pre class="prettyprint linenums">
+&lt;div id="div-ax5-util-alert" class="script-result">&lt;/div>
+&lt;script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-util-alert");
+	var po = [];
+	po.push('&lt;button class="ax-btn" onclick="ax5.util.alert({a:1,b:2});">alert&lt;/button>');
+	el.append( po.join('') );
+})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-util-alert" class="script-result"></div>
+<script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-util-alert");
+	var po = [];
+	po.push('<button class="ax-btn" onclick="ax5.util.alert({a:1,b:2});">alert</button>');
+	el.append( po.join('') );
+})();
+</script>
 
-</pre>
-
-	<h4>Result</h4>
-	<div id="ax5-util-alert" class="script-result"></div>
-	<script>
-		(function(){
-			var util = ax5.util, el = ax5.dom("#ax5-util-alert");
-
-		})();
-	</script>
 </article>
 
 
@@ -926,45 +1206,1252 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 
 <article class="content">
 	<h2 data-menu-item="ax5-util-to_array">ax5.util.to_array</h2>
+	<p>
+		<code>nodelist</code>, <code>arguments</code>와 같은 유사배열의 경우 length와 같은 속성을 가지고 있지만 Array.prototype에 정의된 함수는 사용 할수 없다.
+		<code>to_array</code>를 이용하면 유사배열을 배열로 convert하기 때문에 편하다.
+	</p>
 <pre class="prettyprint linenums">
+&lt;div id="div-ax5-util-to_array" class="script-result">&lt;/div>
+&lt;script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-util-to_array");
+	var po = [];
 
-</pre>
+	function something(){
+		var arr = util.to_array(arguments);
+		po.push( util.to_json(arr) );
+	}
+	something("A","X","I","S","J");
 
-	<h4>Result</h4>
-	<div id="ax5-util-to_array" class="script-result"></div>
-	<script>
-		(function(){
-			var util = ax5.util, el = ax5.dom("#ax5-util-to_array");
+	el.append( po.join('&lt;br/>') );
+})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-util-to_array" class="script-result"></div>
+<script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-util-to_array");
+	var po = [];
 
-		})();
-	</script>
-</article>
+	function something(){
+		var arr = util.to_array(arguments);
+		po.push( util.to_json(arr) );
+	}
+	something("A","X","I","S","J");
 
+	el.append( po.join('<br/>') );
+})();
+</script>
 
-
-
-<article class="content">
-	<h2 data-menu-item="ax5-util-to_json">ax5.util.to_json</h2>
-<pre class="prettyprint linenums">
-
-</pre>
-
-	<h4>Result</h4>
-	<div id="ax5-util-to_json" class="script-result"></div>
-	<script>
-		(function(){
-			var util = ax5.util, el = ax5.dom("#ax5-util-to_json");
-
-		})();
-	</script>
 </article>
 
 <!-- split -->
 
 <article class="cover">
+
     <h1 data-menu-item="ax5-dom">ax5.dom</h1>
+
+    <p>
+        ax5.dom은 jQuery방식의 dom select와 네이티브 방식의 select를 혼용하여 사용 할 수 있게 설계되었다.
+        예를 들어 <code>ax5.dom("#id")</code>로 엘리먼트 select를 해둔 상태에서 ax5.dom에 준비된 다양한 method들을 사용하다가
+        <code>for</code>구문 안에서 element를 다룰 때에는 <code>ax5.dom.css(element, {width:100});</code>처럼 select를 다시 하시 않고 좀더 가볍고 직접적인 방법으로
+        원하는 기능을 사용하는 것이다.
+    </p>
+
+    <div class="callout good">
+        <h4>ax5.dom() <span class="ax info">vs</span> ax5.dom.get()</h4>
+        <ul>
+            <li>
+                ax5.dom("#id").elements[0] === ax5.dom.get("#id")[0]
+            </li>
+            <li>
+                ax5.dom("#ax5-dom-get").width( ); === ax5.dom.width( ax5.dom.get("#ax5-dom-get") );
+            </li>
+            <li>
+                ax5.dom("#ax5-dom-get").attr("id"); === ax5.dom.attr( ax5.dom.get("#ax5-dom-get"), "id" );
+            </li>
+        </ul>
+    </div>
+
+    <p>
+        얼핏 보면 <code>ax5.dom.</code>을 사용하는 것은 대단히 불편해 보인다. 하지만 프로그램의 성능을 위해서는 element select횟수를 최대한 줄이고 캐시된 element를 이용하여 코딩하려는 노력이 필요하다.
+        그리고 코드의 길이가 문제라면면각자의 개발환경에 맞도록 <code>var util = ax5.util</code>과 같은 방식으로 개인의 기호에 맞게 바꾸어 사용하면 크게 문제될 일도 아니다.
+    </p>
+
 </article>
 
+
+
+<!-- split -->
+
+<label data-menu-item="label"><span>Get</span></label>
+<article class="content">
+	<h2 data-menu-item="ax5-dom-get">ax5.dom.get</h2>
+	<p>
+		CSS셀렉터가 복잡하고 다양한 버전의 <code>Selecting Elements</code>를 지원하는 것을 중요하다.
+		하지만 그 보다 중요한것은 속도이다. 복잡한 형태의 <code>CSS Query</code>문을 처리 하기위해 많은 리소스를 사용하는 것은 바람직하지 않다.
+		ax5의 dom Selecting은 프로그래머가 보다 빠르게 <code>Selecting Elements</code>를 할 수 있는 제한적인 형태의 <code>CSS Query</code>
+		사용을 지향한다.
+	</p>
+	<p>
+		가급적 하나의 조건으로 Query하여 프로그램 하도록 유도하고 불가피하게 하나의 조건으로 쿼리 하지 못한다면 sub_query하여 Selecting 할 수 있도록 한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-get" class="script-result">
+	&lt;form>
+		&lt;input type="text" class="ax-inp" />
+		&lt;button class="ax-btn">OK&lt;/button>
+	&lt;/form>
+&lt;/div>
+&lt;script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-dom-get");
+	var po = [];
+	el.append( '&lt;br/>' );
+	ax5.dom.get("a").forEach(function(item){
+		po.push( "" + item.tagName + " href=" + ax5.dom.attr(item, "href") );
+	});
+	el.append( po.join(',') );
+	el.append( '&lt;br/>' );
+
+	po = [];
+	ax5.dom.get(".visual").forEach(function(item){
+		po.push( "" + item.tagName  + " class=" + ax5.dom.attr(item, "class") );
+	});
+	el.append( po.join(',') );
+	el.append( '&lt;br/>' );
+
+	po = [];
+	el.find("[type=text]").elements.forEach(function(item){
+		po.push( "" + item.tagName  + " class=" + ax5.dom.attr(item, "class") );
+	});
+	el.append( po.join(',') );
+	el.append( '&lt;br/>' );
+
+	po = [];
+	ax5.dom.get("#div-ax5-dom-get", ".ax-btn").forEach(function(item){
+		po.push( "" + item.tagName  + " class=" + ax5.dom.attr(item, "class") );
+	});
+	el.append( po.join(',') );
+	el.append( '&lt;br/>' );
+})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-get" class="script-result">
+	<form>
+		<input type="text" class="ax-inp" />
+		<button class="ax-btn">OK</button>
+	</form>
+</div>
+<script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-dom-get");
+	var po = [];
+	el.append( '<br/>' );
+	ax5.dom.get("a").forEach(function(item){
+		po.push( "" + item.tagName + " href=" + ax5.dom.attr(item, "href") );
+	});
+	el.append( po.join(',') );
+	el.append( '<br/>' );
+
+	po = [];
+	ax5.dom.get(".visual").forEach(function(item){
+		po.push( "" + item.tagName  + " class=" + ax5.dom.attr(item, "class") );
+	});
+	el.append( po.join(',') );
+	el.append( '<br/>' );
+
+	po = [];
+	el.find("[type=text]").elements.forEach(function(item){
+		po.push( "" + item.tagName  + " class=" + ax5.dom.attr(item, "class") );
+	});
+	el.append( po.join(',') );
+	el.append( '<br/>' );
+
+	po = [];
+	ax5.dom.get("#div-ax5-dom-get", ".ax-btn").forEach(function(item){
+		po.push( "" + item.tagName  + " class=" + ax5.dom.attr(item, "class") );
+	});
+	el.append( po.join(',') );
+	el.append( '<br/>' );
+})();
+</script>
+
+</article>
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-get_one">ax5.dom.get_one</h2>
+	<p>
+		get_one은 Selecting 엘리먼트중 첫번째 엘리먼트를 반환한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-get_one" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-get_one");
+		el.append( 'tagName = ' + ax5.dom.get_one("#div-ax5-dom-get_one").tagName + '&lt;br/>' );
+		el.append( 'nodeType = ' + ax5.dom.get_one("#div-ax5-dom-get_one").nodeType );
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-get_one" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-get_one");
+		el.append( 'tagName = ' + ax5.dom.get_one("#div-ax5-dom-get_one").tagName + '<br/>' );
+		el.append( 'nodeType = ' + ax5.dom.get_one("#div-ax5-dom-get_one").nodeType );
+	})();
+</script>
+
+</article>
+
+<!-- split -->
+
+<label data-menu-item="label"><span>Attributes</span></label>
+<article class="content">
+	<h2 data-menu-item="ax5-dom-css">ax5.dom.css</h2>
+	<p>
+		ax5.dom(이하 '옥돔')은 getter와 setter를 하나의 메소드로 처리한다라는 원칙을 가지고 제작되었다.
+		그 시작으로 DOM CSS 조작 메소드인 <code>.css()</code>를 보자면 다음과 같다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-css" class="script-result">
+	&lt;div class="target-div">&lt;/div>
+&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-css");
+		var po = [];
+
+		// 인자값을 문자열로 했을 땐 get
+		po.push( 'el.css("width") => ' + el.css("width") );
+
+		var target_div = el.find(".target-div");
+
+		// 인자값을 Object로 했을 땐 set
+		target_div.css({height:50, background:"#ccc", margin:"10px", "text-align":"center", "line-height":50, border:"2px solid #000", "border-radius":10});
+		po.push( 'target_div.css("height") => ' + target_div.css("height") );
+		target_div.html("height: 50px;");
+
+		// 한번에 여러개의 속성 가져오기
+		po.push( util.to_json( target_div.css(["width","height","border"]) ) );
+		el.append( po.join('&lt;br/>') );
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-css" class="script-result">
+	<div class="target-div"></div>
+</div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-css");
+		var po = [];
+
+		// 인자값을 문자열로 했을 땐 get
+		po.push( 'el.css("width") => ' + el.css("width") );
+
+		var target_div = el.find(".target-div");
+
+		// 인자값을 Object로 했을 땐 set
+		target_div.css({height:50, background:"#ccc", margin:"10px", "text-align":"center", "line-height":50, border:"2px solid #000", "border-radius":10});
+		po.push( 'target_div.css("height") => ' + target_div.css("height") );
+		target_div.html("height: 50px;");
+
+		// 한번에 여러개의 속성 가져오기
+		po.push( util.to_json( target_div.css(["width","height","border"]) ) );
+		el.append( po.join('<br/>') );
+	})();
+</script>
+
+
+	<div class="callout basic">
+		<h4>CSS 지원범위</h4>
+		<p>
+			ax5와 jQuery의 CSS 비교
+			<a href="/api-test/css.html" target="_blank">/api-test/css.html</a>
+		</p>
+	</div>
+	<p>
+		이러고 보니 jQuery랑 별반 다를 것도 없다. 하지만 jQuery 디테일에 비교하면 아직 터무니 없다.
+		옥돔을 너무 맹신하진 말자. 믿지말고 의심하고 코드를 이해해야 한다. 옥돔의 모든 코드는 언제나 오픈되어 있고 자세히 설명해주고 있다.
+	</p>
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-attr">ax5.dom.attr</h2>
+	<p>
+		옥돔의 attr메소드를 이용하면 모든 attribute를 읽고 쓸 수 있는데. <code>class</code>는 처리 할 수 없다.
+		그 이유는 옥돔의 잘못은 아니다. 브라우저가 안된다고 하니까. 안되는 것 뿐이다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-attr" class="script-result">
+	&lt;div class="target-div">&lt;/div>
+&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-attr");
+		var po = [];
+		var target_div = el.find(".target-div");
+		target_div.attr({"data-attr-0":0, "data-attr-1":1, "data-attr-2":2});
+
+		target_div.attr({"data-attr-2":null}); // attribute 제거
+		//다음의 방법으로 해도 같은 결과를 얻을 수 있다.
+		//ax5.dom.attr(target_div.elements[0], {"data-attr-2":null});
+
+		po.push( el.html().replace(/&lt;/g,'&lt;') );
+		po.push( 'target_div.attr("data-attr-1") = ' + target_div.attr("data-attr-1") );
+		el.append( po.join('&lt;br/>') );
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-attr" class="script-result">
+	<div class="target-div"></div>
+</div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-attr");
+		var po = [];
+		var target_div = el.find(".target-div");
+		target_div.attr({"data-attr-0":0, "data-attr-1":1, "data-attr-2":2});
+
+		target_div.attr({"data-attr-2":null}); // attribute 제거
+		//다음의 방법으로 해도 같은 결과를 얻을 수 있다.
+		//ax5.dom.attr(target_div.elements[0], {"data-attr-2":null});
+
+		po.push( el.html().replace(/</g,'&lt;') );
+		po.push( 'target_div.attr("data-attr-1") = ' + target_div.attr("data-attr-1") );
+		el.append( po.join('<br/>') );
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-class_name">ax5.dom.class_name</h2>
+	<p>
+		jQuery방식으로 개발한다면 <code>addClass, removeClass, toggleClass</code>가 익숙하다. 필자도 옥돔의 방식으로 개발하면 가끔 실수를 한다.(지금은 실수 안하지만)
+		그렇지만 api도 원칙에 입각해서 만들어 져야 한다. 옥돔의 원칙은 하나의 메소드로 여러가지 일을 하는 것이다. <br/>
+		다른 메소드들과 다르게 첫번째 인자로 <code>add,remove,toggle,has</code>명령어를 넣어야 한다. 명령어를 생략하면 <code>has</code>로 처리한다.
+		class_name이 다른 다른 메소들과 다른 이유는 key, value 형식의 조건이 아니기 때문이다. (사실 만들면서 짜증이 났던 부분이다.)
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-class_name" class="script-result">
+	&lt;div class="target-div">&lt;/div>
+&lt;/div>
+&lt;script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-dom-class_name");
+	var po = [];
+	var target_div = el.find(".target-div");
+
+	// 한개의 class 삽입
+	target_div.class_name("add", "c");
+	po.push( el.html().replace(/&lt;/g,'&lt;') );
+
+	// 여러개의 class 삽입
+	ax5.dom.class_name(target_div, "add", ["a","b"]);
+	// 이런식으로도 할 수 있다는건 이제 모두 잘 아는 사실이다. 모르겠다면 위로 스크롤 해보자
+	po.push( el.html().replace(/&lt;/g,'&lt;') );
+
+	// toggle
+	target_div.class_name("toggle", "a");
+	po.push( el.html().replace(/&lt;/g,'&lt;') );
+
+	// 제거
+	target_div.class_name("remove", "c");
+	po.push( el.html().replace(/&lt;/g,'&lt;') );
+
+	el.append( po.join('&lt;br/>') );
+})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-class_name" class="script-result">
+	<div class="target-div"></div>
+</div>
+<script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-dom-class_name");
+	var po = [];
+	var target_div = el.find(".target-div");
+
+	// 한개의 class 삽입
+	target_div.class_name("add", "c");
+	po.push( el.html().replace(/</g,'&lt;') );
+
+	// 여러개의 class 삽입
+	ax5.dom.class_name(target_div, "add", ["a","b"]);
+	// 이런식으로도 할 수 있다는건 이제 모두 잘 아는 사실이다. 모르겠다면 위로 스크롤 해보자
+	po.push( el.html().replace(/</g,'&lt;') );
+
+	// toggle
+	target_div.class_name("toggle", "a");
+	po.push( el.html().replace(/</g,'&lt;') );
+
+	// 제거
+	target_div.class_name("remove", "c");
+	po.push( el.html().replace(/</g,'&lt;') );
+
+	el.append( po.join('<br/>') );
+})();
+</script>
+
+</article>
+
+<!-- split -->
+
+<label data-menu-item="label"><span>Box Model</span></label>
+<article class="content">
+	<h2 data-menu-item="ax5-dom-width">ax5.dom.width</h2>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-width" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-width");
+		var po = [];
+
+		po.push( el.width() );
+		po.push( ax5.dom.width(el) );
+		el.append( po.join('&lt;br/>') );
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-width" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-width");
+		var po = [];
+
+		po.push( el.width() );
+		po.push( ax5.dom.width(el) );
+		el.append( po.join('<br/>') );
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-height">ax5.dom.height</h2>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-height" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-height");
+		var po = [];
+
+		el.append( el.height()+'&lt;br/>' ); // 한줄이 추가되면
+		el.append( ax5.dom.height(el)+'&lt;br/>' ); // 높이가
+		el.append( el.height()+'&lt;br/>' ); // 증가한다.
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-height" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-height");
+		var po = [];
+
+		el.append( el.height()+'<br/>' ); // 한줄이 추가되면
+		el.append( ax5.dom.height(el)+'<br/>' ); // 높이가
+		el.append( el.height()+'<br/>' ); // 증가한다.
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-offset">ax5.dom.offset</h2>
+	<p>
+		타겟 엘리먼트가 어디에 어떤 상황으로 있던 페이지 내에서의 절대위치를 반환한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-offset" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-offset");
+		var po = [];
+
+		po.push( util.to_json( el.offset() ) );
+		el.append(po.join('&lt;br/>'));
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-offset" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-offset");
+		var po = [];
+
+		po.push( util.to_json( el.offset() ) );
+		el.append(po.join('<br/>'));
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-position">ax5.dom.position</h2>
+	<p>
+		타겟 엘리먼트가 속한 부모엘리먼트로 부터의 위치를 반환한다.
+		타겟 엘리먼트에 <code>margin</code>이 있으면 옥돔이 잘못 했다. 라고 생각할 수 있다. 그렇지 않다 <code>margin</code>도 box model 안에 포함된다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-position" class="script-result" style="position:relative;">
+	&lt;div class="target-div" style="height:20px;border:1px solid #000;">&lt;/div>
+&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-position");
+		var po = [];
+
+		po.push( util.to_json( el.find(".target-div").position() ) );
+		el.append(po.join('&lt;br/>'));
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-position" class="script-result" style="position:relative;">
+	<div class="target-div" style="height:20px;border:1px solid #000;"></div>
+</div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-position");
+		var po = [];
+
+		po.push( util.to_json( el.find(".target-div").position() ) );
+		el.append(po.join('<br/>'));
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-box_model">ax5.dom.box_model</h2>
+	<p>
+		box model에 관련된 값만 모아서 한번에 호출 할 수 있다. 왜!? 만들었을까 박스모델을 한번에 호출해서 쓸일이 있을거야..
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-box_model" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-box_model");
+		var po = [];
+		po.push( util.to_json(el.box_model()) );
+		po.push( util.to_json(el.box_model("width")) );
+		el.append( po.join('&lt;hr/>') );
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-box_model" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-box_model");
+		var po = [];
+		po.push( util.to_json(el.box_model()) );
+		po.push( util.to_json(el.box_model("width")) );
+		el.append( po.join('<hr/>') );
+	})();
+</script>
+
+</article>
+
+<!-- split -->
+
+<label data-menu-item="label"><span>Manipulate</span></label>
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-append">ax5.dom.append</h2>
+	<p>
+		타겟에 마지막 자식으로 <code>HTML Tag</code>나 <code>Element</code>를 추가한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-append" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-append");
+
+		el.append("&lt;div>div&lt;/div>");
+		el.append("ABCD 가나다라");
+		el.append("----");
+		// 맨위에 삽입된 div를 맨 아래로 삽입
+		el.append( el.find("div").elements[0] );
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-append" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-append");
+
+		el.append("<div>div</div>");
+		el.append("ABCD 가나다라");
+		el.append("----");
+		// 맨위에 삽입된 div를 맨 아래로 삽입
+		el.append( el.find("div").elements[0] );
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-prepend">ax5.dom.prepend</h2>
+	<p>
+		타겟의 첫번째 자식으로 <code>HTML Tag</code>나 <code>Element</code>를 추가한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-prepend" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-prepend");
+
+		el.prepend("&lt;div>div&lt;/div>");
+		el.prepend("ABCD 가나다라");
+		el.prepend("----");
+		// 맨아래 삽입된 div를 맨 위로 삽입
+		el.prepend( el.find("div").elements[0] );
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-prepend" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-prepend");
+
+		el.prepend("<div>div</div>");
+		el.prepend("ABCD 가나다라");
+		el.prepend("----");
+		// 맨아래 삽입된 div를 맨 위로 삽입
+		el.prepend( el.find("div").elements[0] );
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-before">ax5.dom.before</h2>
+	<p>
+		타겟의 앞으로 <code>HTML Tag</code>나 <code>Element</code>를 추가한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-before" class="script-result">
+	&lt;div class="target-div">target&lt;/div>
+&lt;/div>
+&lt;script>
+	(function(){
+		ax5.dom("#div-ax5-dom-before").find(".target-div").before("before");
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-before" class="script-result">
+	<div class="target-div">target</div>
+</div>
+<script>
+	(function(){
+		ax5.dom("#div-ax5-dom-before").find(".target-div").before("before");
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-after">ax5.dom.after</h2>
+	<p>
+		타겟의 뒤로 <code>HTML Tag</code>나 <code>Element</code>를 추가한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-after" class="script-result">
+	&lt;div class="target-div">target&lt;/div>
+&lt;/div>
+&lt;script>
+	(function(){
+		ax5.dom("#div-ax5-dom-after").find(".target-div").after("after");
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-after" class="script-result">
+	<div class="target-div">target</div>
+</div>
+<script>
+	(function(){
+		ax5.dom("#div-ax5-dom-after").find(".target-div").after("after");
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-html">ax5.dom.html</h2>
+	<p>
+		타겟의 <code>innerHTML</code>를 바꾸어 준다. 내부에서는 타겟안에 들어있는 내용물, 즉 엘리먼트를 지우고
+		그 다음으로 새로운 tag를 채우게 되는데 엘리먼트를 지울 때는 연결된 이벤트까지 지워준다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-html" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-html");
+
+		el.html("HTML&lt;u>태그&lt;/u>를 추가합니다.");
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-html" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-html");
+
+		el.html("HTML<u>태그</u>를 추가합니다.");
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-remove">ax5.dom.remove</h2>
+	<p>
+		타겟 엘리먼트를 제거한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-remove" class="script-result">
+	~~~~
+	&lt;div class="remove-target">****&lt;/div>
+	~~~~
+&lt;/div>
+&lt;script>
+	(function(){
+		var el = ax5.dom("#div-ax5-dom-remove");
+		el.find(".remove-target").remove();
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-remove" class="script-result">
+	~~~~
+	<div class="remove-target">****</div>
+	~~~~
+</div>
+<script>
+	(function(){
+		var el = ax5.dom("#div-ax5-dom-remove");
+		el.find(".remove-target").remove();
+	})();
+</script>
+
+</article>
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-data">ax5.dom.data</h2>
+	<p>
+		타겟 엘리먼트에 개발자 취향대로 데이터를 추가 할 수 있다.
+		엘리먼트에 데이터(변수)를 할당하게 되면 스코프도 관리가 편리하고 엘리먼트가 지워질 때 데이터도 함께 소멸 되기 때문에
+		가끔씩 유용하다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-data" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-data");
+		el.data({ax:"5"});
+		el.append(" el.data['ax'] =  " + el.data("ax"));
+		el.append("&lt;br/>");
+		el.data("remove", "ax");
+		el.append(" el.data['ax'] =  " + el.data("ax"));
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-data" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-data");
+		el.data({ax:"5"});
+		el.append(" el.data['ax'] =  " + el.data("ax"));
+		el.append("<br/>");
+		el.data("remove", "ax");
+		el.append(" el.data['ax'] =  " + el.data("ax"));
+	})();
+</script>
+
+</article>
+
+<!-- split -->
+
+<label data-menu-item="label"><span>Travel</span></label>
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-prev">ax5.dom.prev</h2>
+	<p>
+		타겟 엘리먼트의 앞에 위치한 엘리먼트를 반환한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-prev" class="script-result" style="position:relative;">
+	&lt;div>prev&lt;/div>
+	&lt;div class="target-div">&lt;/div>
+	&lt;div>next&lt;/div>
+&lt;/div>
+&lt;script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-dom-prev");
+	var po = [];
+	po.push( "prev = '" + el.find(".target-div").prev().html() + "'" );
+	el.append(po.join('&lt;br/>'));
+})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-prev" class="script-result" style="position:relative;">
+	<div>prev</div>
+	<div class="target-div"></div>
+	<div>next</div>
+</div>
+<script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-dom-prev");
+	var po = [];
+	po.push( "prev = '" + el.find(".target-div").prev().html() + "'" );
+	el.append(po.join('<br/>'));
+})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-next">ax5.dom.next</h2>
+	<p>
+		타겟 엘리먼트의 다음에 위치한 엘리먼트를 반환한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-next" class="script-result" style="position:relative;">
+	&lt;div>prev&lt;/div>
+	&lt;div class="target-div">&lt;/div>
+	&lt;div>next&lt;/div>	&lt;div class="target-div">&lt;/div>
+&lt;/div>
+&lt;script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-dom-next");
+	var po = [];
+	po.push( "next = '" + el.find(".target-div").next().html() + "'" );
+	el.append(po.join('&lt;br/>'));
+})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-next" class="script-result" style="position:relative;">
+	<div>prev</div>
+	<div class="target-div"></div>
+	<div>next</div>	<div class="target-div"></div>
+</div>
+<script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-dom-next");
+	var po = [];
+	po.push( "next = '" + el.find(".target-div").next().html() + "'" );
+	el.append(po.join('<br/>'));
+})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-parent">ax5.dom.parent</h2>
+	<p>
+		메소드 이름처럼 부모 엘리먼트를 원하는 조건으로 찾아서 반환해 준다.
+		주의 할 점은 조건에 부합하는 부모들을 구해주지 않는 다는 점이다. 조건에 매치되는 하나의 부모를 반환한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-parent" class="script-result" style="position:relative;">
+	&lt;div data-domparent-value="1">
+		&lt;div data-domparent-value="2">
+			&lt;div data-domparent-value="3">클릭하세요.&lt;/div>
+		&lt;/div>
+	&lt;/div>
+&lt;/div>
+&lt;script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-dom-parent");
+	var po = [];
+
+	po.push( "3의 부모 : " +
+		el.find('[data-domparent-value="3"]')
+		  .parent().attr("data-domparent-value")
+	);
+	po.push( "3의 부모의 부모 : " +
+		el.find('[data-domparent-value="3"]')
+		  .parent().parent().attr("data-domparent-value")
+	);
+	po.push( "3의 부모의 부모의 부모 : " +
+		el.find('[data-domparent-value="3"]')
+		  .parent().parent().parent().attr("data-domparent-value")
+	);
+	po.push( "data-domparent-value = 1 인 부모 : " +
+		el.find('[data-domparent-value="3"]')
+		  .parent({tagname:"div","data-domparent-value":"1"}).attr("data-domparent-value")
+	);
+
+	// 함수로 판단하는 방법
+	var _fn = function(el){
+		return (ax5.dom.attr(el, "data-domparent-value") == "2");
+	};
+	po.push( "data-domparent-value = 2 인 부모 : " +
+		el.find('[data-domparent-value="3"]')
+		  .parent(_fn).attr("data-domparent-value")
+	);
+	el.append(po.join('&lt;br/>'));
+
+
+	// 이벤트로 연결하는 방법
+	el.on("click", function(e){
+		var target = ax5.dom.parent(e.target, {tagname:"div","data-domparent-value":"1"});
+		if(target){
+			alert( ax5.dom.attr(target, "data-domparent-value") );
+			// 1이 출력된다.
+		}
+	});
+})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-parent" class="script-result" style="position:relative;">
+	<div data-domparent-value="1">
+		<div data-domparent-value="2">
+			<div data-domparent-value="3">클릭하세요.</div>
+		</div>
+	</div>
+</div>
+<script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-dom-parent");
+	var po = [];
+
+	po.push( "3의 부모 : " +
+		el.find('[data-domparent-value="3"]')
+		  .parent().attr("data-domparent-value")
+	);
+	po.push( "3의 부모의 부모 : " +
+		el.find('[data-domparent-value="3"]')
+		  .parent().parent().attr("data-domparent-value")
+	);
+	po.push( "3의 부모의 부모의 부모 : " +
+		el.find('[data-domparent-value="3"]')
+		  .parent().parent().parent().attr("data-domparent-value")
+	);
+	po.push( "data-domparent-value = 1 인 부모 : " +
+		el.find('[data-domparent-value="3"]')
+		  .parent({tagname:"div","data-domparent-value":"1"}).attr("data-domparent-value")
+	);
+
+	// 함수로 판단하는 방법
+	var _fn = function(el){
+		return (ax5.dom.attr(el, "data-domparent-value") == "2");
+	};
+	po.push( "data-domparent-value = 2 인 부모 : " +
+		el.find('[data-domparent-value="3"]')
+		  .parent(_fn).attr("data-domparent-value")
+	);
+	el.append(po.join('<br/>'));
+
+
+	// 이벤트로 연결하는 방법
+	el.on("click", function(e){
+		var target = ax5.dom.parent(e.target, {tagname:"div","data-domparent-value":"1"});
+		if(target){
+			alert( ax5.dom.attr(target, "data-domparent-value") );
+			// 1이 출력된다.
+		}
+	});
+})();
+</script>
+
+
+	<div class="callout basic">
+		<h4>parent 메소드의 제작의도</h4>
+		<p>
+			옥돔에서 <code>parent</code> 메소드의 역할은 이벤트에서 원하는 조건의 엘리먼트를 찾기위해 개발되었다.
+			타겟 엘리먼트의 부모를 구하는 작업을 단순하게 수행 시킬 수도 있지만. 만일 이 메소드를 이용하여 타겟의 모든 부모를 구하려 한다면 직접 while 문을 이용해서 개발하길 권장한다.
+			옥돔의 <code>parent</code>를 이용해서 모든 부모를 구하려고 시도한다면 속도가 느려질 것이다.
+		</p>
+	</div>
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-child">ax5.dom.child</h2>
+	<p>
+		타겟 엘리먼트의 직계자식들을 반환한다. 자식의 자식은 반환하지 않는 다는 뜻이다. 물론 남의 자식도 구해주진 못한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-child" class="script-result" style="position:relative;">
+	&lt;div class="target-div">1&lt;/div>
+	&lt;div class="target-div">2&lt;/div>
+	&lt;div class="target-div">3&lt;/div>
+	&lt;div class="target-div">4&lt;/div>
+&lt;/div>
+&lt;script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-dom-child");
+	var po = [];
+	el.child().elements.forEach(function(element){
+		po.push( ax5.dom.html(element) );
+	});
+	el.append(po.join(','));
+})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-child" class="script-result" style="position:relative;">
+	<div class="target-div">1</div>
+	<div class="target-div">2</div>
+	<div class="target-div">3</div>
+	<div class="target-div">4</div>
+</div>
+<script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-dom-child");
+	var po = [];
+	el.child().elements.forEach(function(element){
+		po.push( ax5.dom.html(element) );
+	});
+	el.append(po.join(','));
+})();
+</script>
+
+</article>
+
+<!-- split -->
+
+<label data-menu-item="label"><span>Event</span></label>
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-on">ax5.dom.on</h2>
+	<p>
+		타겟 엘리먼트에 원하는 이벤트타입의 이벤트를 바인딩한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-on" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var el = ax5.dom("#div-ax5-dom-on");
+		var fn_a = function(e){
+			alert("fn_a : " + e.type);
+		};
+		var fn_b = function(e){
+			alert("fn_b : " + e.type);
+		};
+
+		el.append("클릭하세요")
+		.on("click", function(e){
+			alert(e.type);
+		});
+		el.on("click", fn_a);
+		el.on("click.fn_b", fn_b); // 이벤트 타입에 핸들지정 off 할 때 핸들이 할당된 이벤트만 제거 할 수 있다.
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-on" class="script-result"></div>
+<script>
+	(function(){
+		var el = ax5.dom("#div-ax5-dom-on");
+		var fn_a = function(e){
+			alert("fn_a : " + e.type);
+		};
+		var fn_b = function(e){
+			alert("fn_b : " + e.type);
+		};
+
+		el.append("클릭하세요")
+		.on("click", function(e){
+			alert(e.type);
+		});
+		el.on("click", fn_a);
+		el.on("click.fn_b", fn_b); // 이벤트 타입에 핸들지정 off 할 때 핸들이 할당된 이벤트만 제거 할 수 있다.
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-off">ax5.dom.off</h2>
+	<p>
+		타겟 엘리먼트에 원하는 이벤트타입의 이벤트를 언바인딩한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-off" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var el = ax5.dom("#div-ax5-dom-off");
+		var fn_a = function(e){
+			alert("fn_a : " + e.type);
+		};
+		var fn_b = function(e){
+			alert("fn_b : " + e.type);
+		};
+
+		el.append("클릭하세요")
+				.on("click", function(e){
+					alert(e.type);
+				});
+		// 위에서 정의한 이벤트는 제거 된다.
+		el.off("click");
+		el.on("click.fn_b", fn_b);
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-off" class="script-result"></div>
+<script>
+	(function(){
+		var el = ax5.dom("#div-ax5-dom-off");
+		var fn_a = function(e){
+			alert("fn_a : " + e.type);
+		};
+		var fn_b = function(e){
+			alert("fn_b : " + e.type);
+		};
+
+		el.append("클릭하세요")
+				.on("click", function(e){
+					alert(e.type);
+				});
+		// 위에서 정의한 이벤트는 제거 된다.
+		el.off("click");
+		el.on("click.fn_b", fn_b);
+	})();
+</script>
+
+</article>
+
+<!-- split -->
+
+<label data-menu-item="label"><span>Browser</span></label>
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-ready">ax5.dom.ready</h2>
+	<p>
+		<code>DOMContentLoaded</code>, <code>load</code>, <code>onreadystatechange</code>, <code>onload</code>등 여러가지 문서의 로드 완료 상태체크 이벤트를 활용하여
+		문서 준비완료가 되거나 되어 있으면 사용자가 정의한 함수를 실행한다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-ready" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var el = ax5.dom("#div-ax5-dom-ready");
+		el.append( "script start at " + (new Date()).getTime() + "&lt;br/>" );
+		ax5.dom.ready(function(){
+			el.append( "i'm ready at " + (new Date()).getTime() );
+		});
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-ready" class="script-result"></div>
+<script>
+	(function(){
+		var el = ax5.dom("#div-ax5-dom-ready");
+		el.append( "script start at " + (new Date()).getTime() + "<br/>" );
+		ax5.dom.ready(function(){
+			el.append( "i'm ready at " + (new Date()).getTime() );
+		});
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-resize">ax5.dom.resize</h2>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-resize" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var el = ax5.dom("#div-ax5-dom-resize");
+		el.append( "script start at " + (new Date()).getTime() + "&lt;br/>" );
+		el.append('&lt;div class="resize-log">&lt;/div>');
+		var log = el.find(".resize-log");
+		ax5.dom.resize(function(){
+			log.html( "i'm resize at " + (new Date()).getTime() + "&lt;br/>" );
+		});
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-resize" class="script-result"></div>
+<script>
+	(function(){
+		var el = ax5.dom("#div-ax5-dom-resize");
+		el.append( "script start at " + (new Date()).getTime() + "<br/>" );
+		el.append('<div class="resize-log"></div>');
+		var log = el.find(".resize-log");
+		ax5.dom.resize(function(){
+			log.html( "i'm resize at " + (new Date()).getTime() + "<br/>" );
+		});
+	})();
+</script>
+
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-scroll">ax5.dom.scroll</h2>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-scroll" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var el = ax5.dom("#div-ax5-dom-scroll");
+		el.append( "script start at " + (new Date()).getTime() + "&lt;br/>" );
+		el.append('&lt;div class="scroll-log">&lt;/div>');
+		var log = el.find(".scroll-log");
+		ax5.dom.scroll(function(){
+			log.html( "i'm scroll at " + (new Date()).getTime() + "&lt;br/>" );
+		});
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-scroll" class="script-result"></div>
+<script>
+	(function(){
+		var el = ax5.dom("#div-ax5-dom-scroll");
+		el.append( "script start at " + (new Date()).getTime() + "<br/>" );
+		el.append('<div class="scroll-log"></div>');
+		var log = el.find(".scroll-log");
+		ax5.dom.scroll(function(){
+			log.html( "i'm scroll at " + (new Date()).getTime() + "<br/>" );
+		});
+	})();
+</script>
+
+</article>
 
 
 <!-- split -->
@@ -974,70 +2461,70 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 </article>
 <article class="content">
     <h3>일반적인 방법</h3>
-    <pre class="prettyprint linenums">
-    ax5.xhr{
-        method: "POST",
-        url   : "data.php",
-        param : "str=1234",
-        res   : function (response, status) {
-            console.log("success");
-            console.log(this);
-        },
-        error : function () {
-            console.log("error");
-            console.log(this);
-        }
-    });
-    </pre>
+<pre class="prettyprint linenums">
+ax5.xhr{
+    method: "POST",
+    url   : "data.php",
+    param : "str=1234",
+    res   : function (response, status) {
+        console.log("success");
+        console.log(this);
+    },
+    error : function () {
+        console.log("error");
+        console.log(this);
+    }
+});
+</pre>
     <h3>error 를 사용하지 않는 방법</h3>
-    <pre class="prettyprint linenums">
-    ax5.xhr({ // req 또는 request 둘다 사용 가능합니다.
-        method: "POST",
-        url   : "data.php",
-        param : "str=1234",
-        res   : function (response, status) {
-            // status 값이 200 인지 판단 가능
-            console.log(this);
-        }
-    });
-    </pre>
+<pre class="prettyprint linenums">
+ax5.xhr({ // req 또는 request 둘다 사용 가능합니다.
+    method: "POST",
+    url   : "data.php",
+    param : "str=1234",
+    res   : function (response, status) {
+        // status 값이 200 인지 판단 가능
+        console.log(this);
+    }
+});
+</pre>
     <h3>timeout 값 설정</h3>
-    <pre class="prettyprint linenums">
-    ax5.xhr({
-        method: "POST",
-        url   : "data.php",
-        param : "str=1234",
-        res   : function (response, status) {
-            // status 값이 200 인지 판단 가능
-            console.log(this);
-        },
-        timeout: 1
-    });
-    </pre>
+<pre class="prettyprint linenums">
+ax5.xhr({
+    method: "POST",
+    url   : "data.php",
+    param : "str=1234",
+    res   : function (response, status) {
+        // status 값이 200 인지 판단 가능
+        console.log(this);
+    },
+    timeout: 1
+});
+</pre>
     <h3>queue 처리</h3>
-    <pre class="prettyprint linenums">
-     var xhr_queue = [];
-     xhr_queue.push({
-        method: "POST",
-        url   : "../samples/ax5/xhr/data.php",
-        param : "str=1234",
-        res   : function (response, status) {
-            console.log(response);
-        }
-     });
-     xhr_queue.push({
-        method: "POST",
-        url   : "../samples/ax5/xhr/data.php",
-        param : "str=1234",
-        res   : function (response, status) {
-            console.log(response);
-        }
-     });
+<pre class="prettyprint linenums">
+ var xhr_queue = [];
+ xhr_queue.push({
+    method: "POST",
+    url   : "../samples/ax5/xhr/data.php",
+    param : "str=1234",
+    res   : function (response, status) {
+        console.log(response);
+    }
+ });
+ xhr_queue.push({
+    method: "POST",
+    url   : "../samples/ax5/xhr/data.php",
+    param : "str=1234",
+    res   : function (response, status) {
+        console.log(response);
+    }
+ });
 
-     ax5.xhr(xhr_queue, function() {
-        console.log("큐 완료")
-     });
-    </pre>
+ ax5.xhr(xhr_queue, function() {
+    console.log("큐 완료")
+ });
+</pre>
 </article>
 
 <!-- split -->
