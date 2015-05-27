@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-05-17 
+ * 2015-05-27 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -271,7 +271,7 @@
 		 * ```
 		 */
 		var onerror = function(){
-			console.error(ax5.util.to_array(arguments).join(":"));
+			console.error(U.to_array(arguments).join(":"));
 		};
 
 		/**
@@ -1369,6 +1369,7 @@
 
 			return result;
 		}
+
 		/**
 		 * 배열 비슷한 오브젝트를 배열로 변환해줍니다.
 		 * @method ax5.util.to_array
@@ -2008,6 +2009,14 @@
 					dom.empty(this.elements);
 					return this;
 				};
+				/**
+				 * 웹지엘 컨텍스트를 반환합니다.
+				 * @method ax5.dom0.get_webgl_context
+				 * @returns {wegGl context}
+				 */
+				this.get_webgl_context = function (){
+					return dom.get_webgl_context(this.elements);
+				}
 			}
 
 			return ax;
@@ -3385,6 +3394,20 @@
 			return els;
 		}
 
+		/**
+		 * 웹지엘 컨텍스트를 반환합니다.
+		 * @method ax5.dom.get_webgl_context
+		 * @returns {wegGl context}
+		 */
+		function get_webgl_context(els){
+			els = va_elem(els, "data");
+			var apis = ['experimental-webgl','webgl','webkit-3d','moz-webgl','3d'],
+				i = apis.length, el = els[0], ctx;
+			while (i--) if (ctx = el.getContext(apis[i], {antialias: true})) break;
+			if (ctx == null) alert("WebGL is not available");
+			return ctx;
+		}
+
 		U.extend(ax5.dom, {
 			ready     : ready,
 			scroll    : scroll,
@@ -3414,7 +3437,8 @@
 			offset    : offset,
 			position  : position,
 			box_model : box_model,
-			data      : data
+			data      : data,
+			get_webgl_context: get_webgl_context
 		});
 	})();
 

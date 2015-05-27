@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-04-20 
+ publish date : 2015-05-27 
 -->
 <html lang="en">
 <head>
@@ -14,12 +14,8 @@
 	<link rel="stylesheet" type="text/css" href="http://cdn.axisj.com/axicon/axicon.min.css">
 	
     <script type="text/javascript" src="../plugin/prettify/prettify.js"></script>
-    <script type="text/javascript" src="../src/ax5-polyfill.js"></script>
-    <script type="text/javascript" src="../src/ax5-core.js"></script>
-    <script type="text/javascript" src="../src/ax5-xhr.js"></script>
-    <script type="text/javascript" src="../src/ax5-ui.js"></script>
-	
-	    
+    <script type="text/javascript" src="../src/ax5.js"></script>
+
 </head>
 <body>
 
@@ -64,6 +60,7 @@
 <article class="content">
     <h2 class="menu">ax5 시작하기</h2>
     <p>html파일을 준비합니다. 다음과 같이 예쁘게</p>
+
 <pre class="prettyprint linenums">
 &lt;!DOCTYPE html>
 &lt;html lang="en">
@@ -125,6 +122,146 @@
 <!-- split -->
 
 <article class="cover">
+    <h1 data-menu-item="ax5-info">ax5.info</h1>
+</article>
+
+
+<label data-menu-item="label"><span>Memebers</span></label>
+<article class="content"> <!-- type -->
+    <h2 data-menu-item="ax5-info-version">ax5.info.version</h2>
+
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-info-version" class="script-result">&lt;/div>
+&lt;script>
+(function(){
+	var util = ax5.util, result, el = ax5.dom("#div-ax5-info-version");
+	el.append('ax5 version is :' + ax5.info.version);
+})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-info-version" class="script-result"></div>
+<script>
+(function(){
+	var util = ax5.util, result, el = ax5.dom("#div-ax5-info-version");
+	el.append('ax5 version is :' + ax5.info.version);
+})();
+</script>
+
+</article>
+
+
+
+
+<article class="content"> <!-- type -->
+	<h2 data-menu-item="ax5-info-event_keys">ax5.info.event_keys</h2>
+
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-info-event_keys" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, result, el = ax5.dom("#div-ax5-info-event_keys");
+		el.append(util.to_json(ax5.info.event_keys));
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-info-event_keys" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, result, el = ax5.dom("#div-ax5-info-event_keys");
+		el.append(util.to_json(ax5.info.event_keys));
+	})();
+</script>
+
+</article>
+
+
+
+
+
+<article class="content"> <!-- type -->
+	<h2 data-menu-item="ax5-info-browser">ax5.info.browser</h2>
+
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-info-browser" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, result, el = ax5.dom("#div-ax5-info-browser");
+		el.append(util.to_json(ax5.info.browser));
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-info-browser" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, result, el = ax5.dom("#div-ax5-info-browser");
+		el.append(util.to_json(ax5.info.browser));
+	})();
+</script>
+
+</article>
+
+
+
+
+
+<article class="content"> <!-- type -->
+	<h2 data-menu-item="ax5-info-base_url">ax5.info.base_url</h2>
+	<p>base_url 의 역할은 웹애플리케이션에 위치한 ax5 라이브러리의 위치하기 위해서 이다.</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-info-base_url" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, result, el = ax5.dom("#div-ax5-info-base_url");
+		el.append(util.to_json(ax5.info.base_url));
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-info-base_url" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, result, el = ax5.dom("#div-ax5-info-base_url");
+		el.append(util.to_json(ax5.info.base_url));
+	})();
+</script>
+
+</article>
+
+
+
+
+<!--
+<article class="content">
+	<h2 data-menu-item="ax5-info-onerror">ax5.info.onerror</h2>
+	<p>ax5 라이브러리에서 발생되는 모든 에러를 가로채는데 사용한다.</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-info-onerror" class="script-result">&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, result, el = ax5.dom("#div-ax5-info-onerror");
+		// 에러를 가로채지 않고 에러발생
+		el.on(123, function(){
+
+		});
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-info-onerror" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, result, el = ax5.dom("#div-ax5-info-onerror");
+		// 에러를 가로채지 않고 에러발생
+		el.on(123, function(){
+
+		});
+	})();
+</script>
+
+</article>
+-->
+
+<!-- split -->
+
+<article class="cover">
     <h1 data-menu-item="ax5-util">ax5.util</h1>
 </article>
 
@@ -145,46 +282,46 @@
 <pre class="prettyprint linenums">
 &lt;div id="div-ax5-util-get-type" class="script-result">&lt;/div>
 &lt;script>
-    (function(){
-        var util = ax5.util, result, el = ax5.dom("#div-ax5-util-get-type");
+(function(){
+    var util = ax5.util, result, el = ax5.dom("#div-ax5-util-get-type");
 
-        el.append( "1 = " + util.get_type(1) + "&lt;br/>" );
-        el.append( "'1' = " + util.get_type("1") + "&lt;br/>" );
-        el.append( "[0,1,2] = " + util.get_type([0,1,2]) + "&lt;br/>" );
-        el.append( "{a:1} = " + util.get_type({a:1}) + "&lt;br/>" );
-        el.append( 'ax5.dom.get("#ax5-util-get-type")[0] = '
-        + util.get_type( ax5.dom.get("#ax5-util-get-type")[0] ) + "&lt;br/>" );
-        el.append( 'document.querySelectorAll(".content") = '
-        + util.get_type( document.querySelectorAll(".content") ) + "&lt;br/>" );
-        el.append( 'function(){} = ' + util.get_type( function(){} ) + "&lt;br/>" );
+    el.append( "1 = " + util.get_type(1) + "&lt;br/>" );
+    el.append( "'1' = " + util.get_type("1") + "&lt;br/>" );
+    el.append( "[0,1,2] = " + util.get_type([0,1,2]) + "&lt;br/>" );
+    el.append( "{a:1} = " + util.get_type({a:1}) + "&lt;br/>" );
+    el.append( 'ax5.dom.get("#ax5-util-get-type")[0] = '
+    + util.get_type( ax5.dom.get("#ax5-util-get-type")[0] ) + "&lt;br/>" );
+    el.append( 'document.querySelectorAll(".content") = '
+    + util.get_type( document.querySelectorAll(".content") ) + "&lt;br/>" );
+    el.append( 'function(){} = ' + util.get_type( function(){} ) + "&lt;br/>" );
 
-        var ___a;
-        el.append( 'var ___a; ___a = ' + util.get_type( ___a ) + "&lt;br/>" );
-        el.append( 'document.createDocumentFragment() = '
-        + util.get_type( document.createDocumentFragment() ) + "&lt;br/>" );
-    })();
+    var ___a;
+    el.append( 'var ___a; ___a = ' + util.get_type( ___a ) + "&lt;br/>" );
+    el.append( 'document.createDocumentFragment() = '
+    + util.get_type( document.createDocumentFragment() ) + "&lt;br/>" );
+})();
 &lt;/script>
 </pre><h4>Result</h4>
 <div id="div-ax5-util-get-type" class="script-result"></div>
 <script>
-    (function(){
-        var util = ax5.util, result, el = ax5.dom("#div-ax5-util-get-type");
+(function(){
+    var util = ax5.util, result, el = ax5.dom("#div-ax5-util-get-type");
 
-        el.append( "1 = " + util.get_type(1) + "<br/>" );
-        el.append( "'1' = " + util.get_type("1") + "<br/>" );
-        el.append( "[0,1,2] = " + util.get_type([0,1,2]) + "<br/>" );
-        el.append( "{a:1} = " + util.get_type({a:1}) + "<br/>" );
-        el.append( 'ax5.dom.get("#ax5-util-get-type")[0] = '
-        + util.get_type( ax5.dom.get("#ax5-util-get-type")[0] ) + "<br/>" );
-        el.append( 'document.querySelectorAll(".content") = '
-        + util.get_type( document.querySelectorAll(".content") ) + "<br/>" );
-        el.append( 'function(){} = ' + util.get_type( function(){} ) + "<br/>" );
+    el.append( "1 = " + util.get_type(1) + "<br/>" );
+    el.append( "'1' = " + util.get_type("1") + "<br/>" );
+    el.append( "[0,1,2] = " + util.get_type([0,1,2]) + "<br/>" );
+    el.append( "{a:1} = " + util.get_type({a:1}) + "<br/>" );
+    el.append( 'ax5.dom.get("#ax5-util-get-type")[0] = '
+    + util.get_type( ax5.dom.get("#ax5-util-get-type")[0] ) + "<br/>" );
+    el.append( 'document.querySelectorAll(".content") = '
+    + util.get_type( document.querySelectorAll(".content") ) + "<br/>" );
+    el.append( 'function(){} = ' + util.get_type( function(){} ) + "<br/>" );
 
-        var ___a;
-        el.append( 'var ___a; ___a = ' + util.get_type( ___a ) + "<br/>" );
-        el.append( 'document.createDocumentFragment() = '
-        + util.get_type( document.createDocumentFragment() ) + "<br/>" );
-    })();
+    var ___a;
+    el.append( 'var ___a; ___a = ' + util.get_type( ___a ) + "<br/>" );
+    el.append( 'document.createDocumentFragment() = '
+    + util.get_type( document.createDocumentFragment() ) + "<br/>" );
+})();
 </script>
 
 </article>
@@ -1380,6 +1517,8 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 </article>
 
 
+
+
 <article class="content">
 	<h2 data-menu-item="ax5-dom-get_one">ax5.dom.get_one</h2>
 	<p>
@@ -1401,6 +1540,43 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 		var util = ax5.util, el = ax5.dom("#div-ax5-dom-get_one");
 		el.append( 'tagName = ' + ax5.dom.get_one("#div-ax5-dom-get_one").tagName + '<br/>' );
 		el.append( 'nodeType = ' + ax5.dom.get_one("#div-ax5-dom-get_one").nodeType );
+	})();
+</script>
+
+</article>
+
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-get_webgl_context">ax5.dom.get_webgl_context</h2>
+	<p>
+		webGL context 개체를 반환합니다. webGL을 지원하지 않는 브라우저에서는 <code>null</code> 을 반환합니다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div id="div-ax5-dom-get_webgl_context" class="script-result">
+	&lt;canvas id="canvas-element-id" width="200" height="80" style="border: 2px dotted blue;">
+		Your browser does not support webGL
+	&lt;/canvas>
+&lt;/div>
+&lt;script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#canvas-element-id");
+		var context = el.get_webgl_context();
+		ax5.dom("#div-ax5-dom-get_webgl_context").append(context.toString());
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div id="div-ax5-dom-get_webgl_context" class="script-result">
+	<canvas id="canvas-element-id" width="200" height="80" style="border: 2px dotted blue;">
+		Your browser does not support webGL
+	</canvas>
+</div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#canvas-element-id");
+		var context = el.get_webgl_context();
+		ax5.dom("#div-ax5-dom-get_webgl_context").append(context.toString());
 	})();
 </script>
 

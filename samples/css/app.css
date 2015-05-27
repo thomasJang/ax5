@@ -294,7 +294,9 @@ pre.prettyprint {
             line-height: 15px;
             text-align: center;
             padding: 0px 5px;
-            background: #eee; }
+            background: #eee;
+            opacity: 0.6;
+            border-bottom-left-radius: 5px; }
       .app-page .app-nav-left ul ul {
         padding: 0px 0px 0px 0px;
         display: none; }
