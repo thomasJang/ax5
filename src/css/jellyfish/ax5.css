@@ -2532,3 +2532,20 @@ a.ax {
       vertical-align: middle;
       text-align: center; }
 
+.ax5-ui-keypad table {
+  border-collapse: collapse;
+  border-spacing: 0px;
+  border: 0px none; }
+  .ax5-ui-keypad table td {
+    position: relative;
+    box-sizing: content-box;
+    padding: 0px;
+    margin: 0px;
+    vertical-align: top; }
+    .ax5-ui-keypad table td .ax-btn-wraper {
+      padding: 5px;
+      box-sizing: border-box; }
+    .ax5-ui-keypad table td button {
+      margin: 0px;
+      width: 100%;
+      height: 100%; }

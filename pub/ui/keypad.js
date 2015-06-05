@@ -8,8 +8,13 @@
 		this.main = (function(){
 			if (ax_super) ax_super.call(this); // 부모호출
 			this.config = {
+				theme: 'default',
 				keys: {
-
+					label: 'label',
+					value: 'value',
+					rowspan: 'rowspan',
+					colspan: 'colspan',
+					klass: 'klass'
 				}
 			};
 		}).apply(this, arguments);
@@ -24,14 +29,22 @@
 		 * ```
 		 * set_config({
 		 *      target : {Element|AX5 nodelist}, // 메뉴 UI를 출력할 대상
-		 *      keys : { // keys 는 menu ui 내부에서 사용되는 키값을 사용자가 변경 할 수 있는 환경설정값 이다. 개발환경에 맞게 커스트마이징 할 수 있다.
-		 *          value: {String} ['value'] 메뉴의 값
-		 *          text: {String} ['text'] 메뉴의 텍스트 라벨
-		 *          shotcut: {String} ['shotcut'] 메뉴의 단축키
-		 *          data: {String} ['data'],
-		 *          menu: {String} ['menu'] 메뉴키 - 자식아이템도 이 키 값으로 인식한다.
+		 *      keys : { // keys 는 ui 내부에서 사용되는 키값을 사용자가 변경 할 수 있는 환경설정값 이다. 개발환경에 맞게 커스트마이징 할 수 있다.
+		 *          value: {String} ['value'] 키의 값
+		 *          label: {String} ['label'] 키의 텍스트 라벨
+		 *          rowspan: {String} ['rowspan']
+		 *          colspan: {String} ['colspan']
+		 *          klass: {String} ['klass'] 키에 추가할 CSS Class
 		 *      },
-		 *      onclick: {Function} [onclick] - 메뉴 아이템 클릭이벤트 처리자
+		 *		board: {
+		 *			keys: [
+		 *				{label:"7", value:7} ...
+		 *			],
+		 *			col_width: 100,
+		 *			col_height: 100,
+		 *			col_paddings: "5px"
+		 *		},
+		 *      onclick: {Function} [onclick] - 아이템 클릭이벤트 처리자
 		 * });
 		 * ```
 		 */
@@ -39,8 +52,8 @@
 		this.init = function(){
 			// after set_config();
 			//console.log(this.config);
-			if(!cfg.target || !cfg.key_board){
-				U.error("aui_keypad_400", "[ax5.ui.keypad] config.target, config.key_board is required");
+			if(!cfg.target || !cfg.board){
+				U.error("aui_keypad_400", "[ax5.ui.keypad] config.target, config.board is required");
 			}
 			cfg.target = ax5.dom(cfg.target);
 			this.set_layout();
@@ -48,22 +61,63 @@
 
 		this.set_layout = function(){
 			var cfg = this.config,
-				po = [];
+				keys = cfg.keys,
+				po = [],
+				col_width = (cfg.board.col_width||10),
+				col_height = (cfg.board.col_height||10)
+
+
+			po.push('<div class="ax5-ui-keypad ' +cfg.theme + '">');
+			po.push('<table cellpadding="0" cellspacing="0">');
+			po.push('<tbody>');
+				po.push('<tr>');
+			for(var i=0, ll=cfg.board.keys.length, item;i<ll;i++){
+				item = cfg.board.keys[i];
+
+				if(item.newline){
+					po.push('<tr>');
+				}else {
+					po.push('<td rowspan="' + (item[keys.rowspan] || 1) + '" colspan="' + (item[keys.colspan] || 1) + '" ' +
+						'style="'+ (function(css){
+							css = [];
+							if((item[keys.colspan] || 1) == 1){
+								css.push("width:" + col_width + "px");
+							}
+							return css.join(';');
+						})() +'">');
+					po.push('<div class="ax-btn-wraper" style="'+ (function(css){
+							css = [];
+							if((item[keys.rowspan] || 1) == 1){
+								css.push("height:" + col_height + "px");
+							}else{
+								css.push("height:" + (col_height * item[keys.rowspan]) + "px");
+							}
+							return css.join(';');
+						})() +'">');
+					po.push('<button class="ax-btn">' + item[keys.label] + '</button>');
+					po.push('</div>');
+					po.push('</td>');
+				}
+			}
+
+			po.push('</tbody>');
+			po.push('</table>');
+			po.push('</div>');
 
 			cfg.target.html( po.join('') );
-			cfg.target.find('[data-menu-item-index]').on("click", (function(e){
+			cfg.target.find('[data-keypad-item-index]').on("click", (function(e){
 				this.onclick(e||window.event);
 			}).bind(this));
 		};
 
 		this.onclick = function(e, target, index){
 			target = axd.parent(e.target, function(target){
-				if(ax5.dom.attr(target, "data-menu-item-index")){
+				if(ax5.dom.attr(target, "data-keypad-item-index")){
 					return true;
 				}
 			});
 			if(target){
-				index = axd.attr(target, "data-menu-item-index");
+				index = axd.attr(target, "data-keypad-item-index");
 				if(this.config.onclick){
 					this.config.onclick.call({
 						menu: this.config[cfg.keys.menu],

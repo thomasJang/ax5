@@ -117,13 +117,20 @@ ax5.dom.ready(function(){
 		};
 	})();
 	app.set_menu_height();
-	app.menu_taping();
+
+	if (app.timeout) clearTimeout(app.timeout);
+	app.timeout = setTimeout(function () {
+		app.menu_taping();
+	}, 300);
 	app.onscroll();
 });
 
 ax5.dom.resize(function(){
 	app.set_menu_height();
-	app.menu_taping();
+	if (app.timeout) clearTimeout(app.timeout);
+	app.timeout = setTimeout(function () {
+		app.menu_taping();
+	}, 300);
 });
 
 ax5.dom.scroll(function() {
@@ -134,6 +141,6 @@ ax5.dom.scroll(function() {
 		if (app.timeout) clearTimeout(app.timeout);
 		app.timeout = setTimeout(function () {
 			app.menu_taping();
-		}, 1);
+		}, 10);
 	}
 });

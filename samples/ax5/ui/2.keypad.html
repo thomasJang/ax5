@@ -20,28 +20,30 @@ ax5.util.require(["ui/keypad.js"], function(){
 	var my_keypad = new ax5.ui.keypad();
 	my_keypad.set_config({
 		target: ax5.dom.get("#ui-keypad-target-basic"),
-		key_board: {
-			keys:[
+		theme: "default",
+		board: {
+			keys: [
 				{label:"7", value:7},
 				{label:"8", value:8},
 				{label:"9", value:9},
 				{label:"-", value:"del"},
+				{newline:true},
 				{label:"4", value:4},
 				{label:"5", value:5},
 				{label:"6", value:6},
 				{label:"CLR", value:"clear"},
+				{newline:true},
 				{label:"1", value:1},
 				{label:"2", value:2},
 				{label:"3", value:3},
 				{label:"ENTER", value:"return", rowspan:2},
+				{newline:true},
 				{label:"0", value:0},
 				{label:"", value:null},
 				{label:"", value:null}
 			],
-			col_size: 4,
-			col_width: 100,
-			col_height: 100,
-			col_margin: 5
+			col_width: 60,
+			col_height: 60
 		}
 	});
 });
