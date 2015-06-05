@@ -1,16 +1,3 @@
-/**
- * @class ax5.ui.menu
- * @classdesc
- * @version v0.0.1
- * @author tom@axisj.com
- * @logs
- * 2014-04-21 tom : 시작
- * @example
- * ```
- * var my_menu = new ax5.ui.menu();
- * ```
- */
-
 (function(root, ax_super) {
 
 	var U = ax5.util, axd = ax5.dom;
@@ -22,22 +9,17 @@
 			if (ax_super) ax_super.call(this); // 부모호출
 			this.config = {
 				keys: {
-					value:"value",
-					text:"text",
-					shortcut:"shortcut",
-					data:"data",
-					menu:"menu"
+
 				}
 			};
-
 		}).apply(this, arguments);
 
 		var cfg = this.config;
 		/**
-		 * Preferences of Menu UI
-		 * @method ax5.ui.menu.set_config
+		 * Preferences of Keypad UI
+		 * @method ax5.ui.keypad.set_config
 		 * @param {Object} config - 클래스 속성값
-		 * @returns {ax5.ui.menu}
+		 * @returns {ax5.ui.keypad}
 		 * @example
 		 * ```
 		 * set_config({
@@ -49,7 +31,6 @@
 		 *          data: {String} ['data'],
 		 *          menu: {String} ['menu'] 메뉴키 - 자식아이템도 이 키 값으로 인식한다.
 		 *      },
-		 *      menu : {Array} menu item
 		 *      onclick: {Function} [onclick] - 메뉴 아이템 클릭이벤트 처리자
 		 * });
 		 * ```
@@ -58,30 +39,16 @@
 		this.init = function(){
 			// after set_config();
 			//console.log(this.config);
-			if(!cfg.target || !cfg.menu){
-				U.error("aui_menu_400", "[ax5.ui.menu] config.target, config.menu is required");
+			if(!cfg.target || !cfg.key_board){
+				U.error("aui_keypad_400", "[ax5.ui.keypad] config.target, config.key_board is required");
 			}
 			cfg.target = ax5.dom(cfg.target);
-			this.print_list();
+			this.set_layout();
 		};
 
-		this.print_list = function(){
+		this.set_layout = function(){
 			var cfg = this.config,
-				po = [],
-				get_child_menu_html = function(_po_, _menu_, _depth_){
-					_po_.push('<ul class="ax-item-group ax-item-group-depth-' + _depth_ + '">');
-					for(var i= 0,l=_menu_.length;i<l;i++){
-						_po_.push('<a class="ax-item" data-menu-item-index="'+ i +'">');
-						_po_.push(_menu_[i][cfg.keys.text]);
-						_po_.push('</a>');
-						if(_menu_[i][cfg.keys.menu] && _menu_[i][cfg.keys.menu].length > 0){
-							get_child_menu_html(_po_, _menu_[i][cfg.keys.menu], _depth_+1);
-						}
-					}
-					_po_.push('</ul>');
-				};
-
-			get_child_menu_html(po, cfg[cfg.keys.menu], 0);
+				po = [];
 
 			cfg.target.html( po.join('') );
 			cfg.target.find('[data-menu-item-index]').on("click", (function(e){
@@ -112,10 +79,10 @@
 
 	//== ui class 공통 처리 구문
 	if (U.is_function(ax_super)) ax_class.prototype = new ax_super(); // 상속
-	root.menu = ax_class; // ax5.ui에 연결
+	root.keypad = ax_class; // ax5.ui에 연결
 
 	if (typeof define === "function" && define.amd) {
-		define("_ax5_ui_menu", [], function () { return ax_class; }); // for requireJS
+		define("_ax5_ui_keypad", [], function () { return ax_class; }); // for requireJS
 	}
 	//== ui class 공통 처리 구문
 

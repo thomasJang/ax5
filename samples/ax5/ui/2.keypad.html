@@ -1,0 +1,51 @@
+<article class="cover">
+	<h1 data-menu-item="ax-ui-keypad">Keypad</h1>
+	<p class="lead">
+
+	</p>
+</article>
+
+
+
+<article class="content">
+	<h3 data-menu-item="ax-ui-keypad-basic" class="capitalize">basic</h3>
+
+<pre>
+<div class="tag-result">
+	<div id="ui-keypad-target-basic"></div>
+</div>
+<script type="text/javascript">
+ax5.info.base_url = "../pub/";
+ax5.util.require(["ui/keypad.js"], function(){
+	var my_keypad = new ax5.ui.keypad();
+	my_keypad.set_config({
+		target: ax5.dom.get("#ui-keypad-target-basic"),
+		key_board: {
+			keys:[
+				{label:"7", value:7},
+				{label:"8", value:8},
+				{label:"9", value:9},
+				{label:"-", value:"del"},
+				{label:"4", value:4},
+				{label:"5", value:5},
+				{label:"6", value:6},
+				{label:"CLR", value:"clear"},
+				{label:"1", value:1},
+				{label:"2", value:2},
+				{label:"3", value:3},
+				{label:"ENTER", value:"return", rowspan:2},
+				{label:"0", value:0},
+				{label:"", value:null},
+				{label:"", value:null}
+			],
+			col_size: 4,
+			col_width: 100,
+			col_height: 100,
+			col_margin: 5
+		}
+	});
+});
+</script>
+</pre>
+
+</article>
