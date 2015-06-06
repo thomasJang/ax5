@@ -26,24 +26,26 @@ ax5.util.require(["ui/keypad.js"], function(){
 				{label:"7", value:7},
 				{label:"8", value:8},
 				{label:"9", value:9},
-				{label:"-", value:"del"},
+				{label:'<i class="axi axi-delete"></i>', value:"del", klass:"warning"},
 				{newline:true},
 				{label:"4", value:4},
 				{label:"5", value:5},
 				{label:"6", value:6},
-				{label:"CLR", value:"clear"},
+				{label:"CLR", value:"clear", klass:"danger"},
 				{newline:true},
 				{label:"1", value:1},
 				{label:"2", value:2},
 				{label:"3", value:3},
-				{label:"ENTER", value:"return", rowspan:2},
+				{label:"ENTER", value:"return", rowspan:2, klass:"basic"},
 				{newline:true},
 				{label:"0", value:0},
-				{label:"", value:null},
-				{label:"", value:null}
+				{label:"", value:null, colspan:2}
 			],
 			col_width: 60,
 			col_height: 60
+		},
+		onclick: function(){
+			console.log(this);
 		}
 	});
 });

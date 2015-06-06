@@ -8,6 +8,7 @@
 		this.main = (function(){
 			if (ax_super) ax_super.call(this); // 부모호출
 			this.config = {
+				click_event_name: (('ontouchstart' in document.documentElement) ? "touchstart" : "click"),
 				theme: 'default',
 				keys: {
 					label: 'label',
@@ -66,7 +67,6 @@
 				col_width = (cfg.board.col_width||10),
 				col_height = (cfg.board.col_height||10)
 
-
 			po.push('<div class="ax5-ui-keypad ' +cfg.theme + '">');
 			po.push('<table cellpadding="0" cellspacing="0">');
 			po.push('<tbody>');
@@ -75,37 +75,37 @@
 				item = cfg.board.keys[i];
 
 				if(item.newline){
-					po.push('<tr>');
+					po.push('</tr><tr>');
 				}else {
 					po.push('<td rowspan="' + (item[keys.rowspan] || 1) + '" colspan="' + (item[keys.colspan] || 1) + '" ' +
-						'style="'+ (function(css){
+						'style="' + (function(css){
 							css = [];
 							if((item[keys.colspan] || 1) == 1){
 								css.push("width:" + col_width + "px");
 							}
 							return css.join(';');
-						})() +'">');
-					po.push('<div class="ax-btn-wraper" style="'+ (function(css){
+						})() + '">');
+					po.push('<div class="ax-btn-wraper" style="' + (function(css){
 							css = [];
 							if((item[keys.rowspan] || 1) == 1){
 								css.push("height:" + col_height + "px");
-							}else{
+							}
+							else{
 								css.push("height:" + (col_height * item[keys.rowspan]) + "px");
 							}
 							return css.join(';');
-						})() +'">');
-					po.push('<button class="ax-btn">' + item[keys.label] + '</button>');
+						})() + '">');
+					po.push('<button class="ax-btn ' + item[keys.klass] + '" data-keypad-item-index="' + i + '">' + item[keys.label] + '</button>');
 					po.push('</div>');
 					po.push('</td>');
 				}
 			}
-
 			po.push('</tbody>');
 			po.push('</table>');
 			po.push('</div>');
 
 			cfg.target.html( po.join('') );
-			cfg.target.find('[data-keypad-item-index]').on("click", (function(e){
+			cfg.target.find('[data-keypad-item-index]').on(cfg.click_event_name, (function(e){
 				this.onclick(e||window.event);
 			}).bind(this));
 		};
@@ -120,8 +120,8 @@
 				index = axd.attr(target, "data-keypad-item-index");
 				if(this.config.onclick){
 					this.config.onclick.call({
-						menu: this.config[cfg.keys.menu],
-						item: this.config[cfg.keys.menu][index],
+						keys: this.config.board.keys,
+						item: this.config.board.keys[index],
 						target: cfg.target.elements[0],
 						item_target: target
 					});
