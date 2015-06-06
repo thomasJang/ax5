@@ -64,8 +64,8 @@
 			var cfg = this.config,
 				keys = cfg.keys,
 				po = [],
-				col_width = (cfg.board.col_width||10),
-				col_height = (cfg.board.col_height||10)
+				col_width = (cfg.board.col_width||"10px"),
+				col_height = (cfg.board.col_height||"10px");
 
 			po.push('<div class="ax5-ui-keypad ' +cfg.theme + '">');
 			po.push('<table cellpadding="0" cellspacing="0">');
@@ -81,17 +81,18 @@
 						'style="' + (function(css){
 							css = [];
 							if((item[keys.colspan] || 1) == 1){
-								css.push("width:" + col_width + "px");
+								css.push("width:" + col_width);
 							}
 							return css.join(';');
 						})() + '">');
 					po.push('<div class="ax-btn-wraper" style="' + (function(css){
 							css = [];
 							if((item[keys.rowspan] || 1) == 1){
-								css.push("height:" + col_height + "px");
+								css.push("height:" + col_height);
 							}
 							else{
-								css.push("height:" + (col_height * item[keys.rowspan]) + "px");
+								var unit = (col_height.replace(/\d+/g, '') || "px");
+								css.push("height:" + ( U.number(col_height) * item[keys.rowspan]) + unit);
 							}
 							return css.join(';');
 						})() + '">');
