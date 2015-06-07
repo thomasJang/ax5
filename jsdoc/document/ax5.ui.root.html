@@ -41,14 +41,14 @@
 
     
     <script>
-    var config = {"monospaceLinks":true,"cleverLinks":true,"default":{"outputSourceFiles":true},"applicationName":"ax5.io","git_liblink":"https://github.com/tom-axisj/ax5/tree/master/src/","disqus":"","googleAnalytics":"","openGraph":{"title":"ax5.io","type":"JSDOC API","image":"http://dev.axisj.com/ui/AXJ.png","site_name":"new html5 javascript framework","url":"http://newdoc.axisj.com"},"meta":{"title":"ax5 API","description":"자바스크립트 UI Library ax5 JSDOC API서비스 입니다.","keyword":"AXISJ, JSDOC, API"}};
+    var config = {"monospaceLinks":true,"cleverLinks":true,"default":{"outputSourceFiles":true},"applicationName":"ax5.io","git_liblink":"https://github.com/axisj-com/ax5/tree/dev/src/","disqus":"","googleAnalytics":"","openGraph":{"title":"ax5.io","type":"JSDOC API","image":"http://dev.axisj.com/ui/AXJ.png","site_name":"new html5 javascript framework","url":"http://newdoc.axisj.com"},"meta":{"title":"ax5 API","description":"자바스크립트 UI Library ax5 JSDOC API서비스 입니다.","keyword":"AXISJ, JSDOC, API"}};
     </script>
     
 
     
 </head>
 <body>
-<div id="wrap" class="clearfix ax5.ui.ax_ui">
+<div id="wrap" class="clearfix ax5.ui.root">
     
 <div class="navigation">
     <h3 class="applicationName"><a href="index.html"><i class="axi axi-axisj"></i> ax5.io</a></h3>
@@ -207,6 +207,8 @@
             
                 <li data-name="ax5.dom0.data"><a href="ax5.dom0.html#data">data</a></li>
             
+                <li data-name="ax5.dom0.empty"><a href="ax5.dom0.html#empty">empty</a></li>
+            
                 <li data-name="ax5.dom0.find"><a href="ax5.dom0.html#find">find</a></li>
             
                 <li data-name="ax5.dom0.height"><a href="ax5.dom0.html#height">height</a></li>
@@ -250,11 +252,15 @@
             
             <span class="subtitle">Members</span>
             
+                <li data-name="ax5.info.base_url"><a href="ax5.info.html#base_url">base_url</a></li>
+            
                 <li data-name="ax5.info.browser"><a href="ax5.info.html#browser">browser</a></li>
             
                 <li data-name="ax5.info.event_keys"><a href="ax5.info.html#event_keys">event_keys</a></li>
             
                 <li data-name="ax5.info.is_browser"><a href="ax5.info.html#is_browser">is_browser</a></li>
+            
+                <li data-name="ax5.info.onerror"><a href="ax5.info.html#onerror">onerror</a></li>
             
                 <li data-name="ax5.info.version"><a href="ax5.info.html#version">version</a></li>
             
@@ -400,9 +406,9 @@
             </ul>
         </li>
     
-        <li class="item" data-name="ax5.ui.ax_ui">
+        <li class="item" data-name="ax5.ui.mask">
             <span class="title">
-                <a href="ax5.ui.ax_ui.html">ax5.ui.ax_ui</a>
+                <a href="ax5.ui.mask.html">ax5.ui.mask</a>
                 
             </span>
             <ul class="members itemMembers">
@@ -415,7 +421,57 @@
             
             <span class="subtitle">Methods</span>
             
-                <li data-name="ax5.ui.ax_ui.set_config"><a href="ax5.ui.ax_ui.html#set_config">set_config</a></li>
+                <li data-name="ax5.ui.mask.close"><a href="ax5.ui.mask.html#close">close</a></li>
+            
+                <li data-name="ax5.ui.mask.open"><a href="ax5.ui.mask.html#open">open</a></li>
+            
+                <li data-name="ax5.ui.mask.set_config"><a href="ax5.ui.mask.html#set_config">set_config</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="ax5.ui.menu">
+            <span class="title">
+                <a href="ax5.ui.menu.html">ax5.ui.menu</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="ax5.ui.menu.set_config"><a href="ax5.ui.menu.html#set_config">set_config</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="ax5.ui.root">
+            <span class="title">
+                <a href="ax5.ui.root.html">ax5.ui.root</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="ax5.ui.root.set_config"><a href="ax5.ui.root.html#set_config">set_config</a></li>
             
             </ul>
             <ul class="events itemMembers">
@@ -426,7 +482,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="ax5.ui.ax_ui.html">Class: ax_ui</h1>
+        <h1 class="page-title" data-filename="ax5.ui.root.html">Class: root</h1>
         
 
 
@@ -435,7 +491,7 @@
     
 <header>
     <h2>
-    ax_ui
+    root
     </h2>
     
         <div class="class-description"><p>ax5 ui class 코어 클래스 모든 클래스의 공통 함수를 가지고 있습니다.</p></div>
@@ -450,17 +506,17 @@
         
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="ax_ui">
+        <h4 class="name" id="root">
             
-            new ax5.ui.ax_ui<span class="signature">()</span>
+            new ax5.ui.root<span class="signature">()</span>
         </h4>
     
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3616" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L3711" target="_blank">
             ax5.js,
-            line 3616</a>
+            line 3711</a>
         </div>
         
     </div>
@@ -528,7 +584,7 @@
         
 
     
-    <pre class="prettyprint linenums"><code>var myui = new ax5.ui.ax_ui();</code></pre>
+    <pre class="prettyprint linenums"><code>var myui = new ax5.ui.root();</code></pre>
     
 
     
@@ -558,15 +614,15 @@
     <div class="nameContainer">
         <h4 class="name" id="set_config">
             
-            <span class="type-signature static">static</span>ax5.ui.ax_ui.set_config<span class="signature">(config, <span class="optional">call_init</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.ui.ax_ui.html">ax5.ui.ax_ui</a>}</span>
+            <span class="type-signature static">static</span>ax5.ui.root.set_config<span class="signature">(config, <span class="optional">call_init</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{ax5.ui.ax_ui}</span>
         </h4>
     
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/tom-axisj/ax5/tree/master/src/ax5.js#L3631" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L3732" target="_blank">
             ax5.js,
-            line 3631</a>
+            line 3732</a>
         </div>
         
     </div>
@@ -725,7 +781,7 @@
         
 
     
-    <pre class="prettyprint linenums"><code>var myui = new ax5.ui.ax_ui();
+    <pre class="prettyprint linenums"><code>var myui = new ax5.ui.root();
 myui.set_config({
     id:&quot;abcd&quot;
 });</code></pre>
@@ -751,7 +807,7 @@ myui.set_config({
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Wed Apr 01 2015 17:26:38 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sat May 09 2015 01:12:48 GMT+0900 (KST)
         </footer>
     </div>
 </div>

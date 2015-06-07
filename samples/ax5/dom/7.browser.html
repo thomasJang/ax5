@@ -1,0 +1,68 @@
+<label data-menu-item="label"><span>Browser</span></label>
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-ready">ax5.dom.ready</h2>
+	<p>
+		<code>DOMContentLoaded</code>, <code>load</code>, <code>onreadystatechange</code>, <code>onload</code>등 여러가지 문서의 로드 완료 상태체크 이벤트를 활용하여
+		문서 준비완료가 되거나 되어 있으면 사용자가 정의한 함수를 실행한다.
+	</p>
+<pre>
+<div id="div-ax5-dom-ready" class="script-result"></div>
+<script>
+	(function(){
+		var el = ax5.dom("#div-ax5-dom-ready");
+		el.append( "script start at " + (new Date()).getTime() + "<br/>" );
+		ax5.dom.ready(function(){
+			el.append( "i'm ready at " + (new Date()).getTime() );
+		});
+	})();
+</script>
+</pre>
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-resize">ax5.dom.resize</h2>
+	<p>
+
+	</p>
+<pre>
+<div id="div-ax5-dom-resize" class="script-result"></div>
+<script>
+	(function(){
+		var el = ax5.dom("#div-ax5-dom-resize");
+		el.append( "script start at " + (new Date()).getTime() + "<br/>" );
+		el.append('<div class="resize-log"></div>');
+		var log = el.find(".resize-log");
+		ax5.dom.resize(function(){
+			log.html( "i'm resize at " + (new Date()).getTime() + "<br/>" );
+		});
+	})();
+</script>
+</pre>
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-scroll">ax5.dom.scroll</h2>
+	<p>
+
+	</p>
+<pre>
+<div id="div-ax5-dom-scroll" class="script-result"></div>
+<script>
+	(function(){
+		var el = ax5.dom("#div-ax5-dom-scroll");
+		el.append( "script start at " + (new Date()).getTime() + "<br/>" );
+		el.append('<div class="scroll-log"></div>');
+		var log = el.find(".scroll-log");
+		ax5.dom.scroll(function(){
+			log.html( "i'm scroll at " + (new Date()).getTime() + "<br/>" );
+		});
+	})();
+</script>
+</pre>
+</article>

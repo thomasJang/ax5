@@ -1,137 +1,119 @@
 <article class="cover">
+
+	<div class="callout basic">
+		<h4>ax5.ui.**</h4>
+		<p>
+			ax5.ui는 core 클래스인 ax5.ui.root만 ax5.js파일에 포함되어 있고 나머지 각각의 UI 클래스들은 별도의 파일에 만들어져 있다.
+			UI클래스들은 해당 UI를 사용하고자 할 때 <code>ax5.util.require</code>를 이용하여 스크립트 로딩하거나 HTML head에 삽입한 후 사용해야 한다.
+		</p>
+		<p>
+			본 페이지 예제에서는 모두 스크립트 로딩방식으로 설명하고 있지만 실제 업무에 적용할 때에는 각자 환경에 맞는 방법으로 적용할 수 있다.
+		</p>
+	</div>
+
     <h1 data-menu-item="ax-ui-mask">Mask</h1>
 	<p class="lead">
 		웹 애플리케이션 전체또는 특정 영역을 불투명한 레이어로 덮어서 웹애플리케이션의 UI를 사용 불능 상태로 만들거나 비동기 데이터 호출중에 사용자에게 답답함을 줄여주는 역할을 합니다.
 	</p>
 </article>
+
+
+
 <article class="content">
-	
 	<h3 data-menu-item="ax-ui-mask-default">Element Mask</h3>
 
-	<div class="tag-result">
-
-		<div id="mask-target" style="border:1px solid #ccc;width:500px;height:500px;text-align: center;">
-			<h1>Mask Target</h1>
-			<p>마스크 될 엘리먼트 타겟</p>
-		</div>
-		<div class="DH10"></div>
-		<button class="ax-btn" onclick="app_mask_open();">마스크열기</button>
-		<button class="ax-btn" onclick="app_mask_close();">마스크닫기</button>
-
-	</div>
 <pre>
-<div id="mask-target" style="border:1px solid #ccc;width:500px;height:500px;text-align: center;">
-	<h1>Mask Target</h1>
-	<p>마스크 될 엘리먼트 타겟</p>
+<div class="tag-result">
+	<div id="mask-target" style="border:1px solid #ccc;width:500px;height:500px;text-align: center;">
+		<h1>Mask Target</h1>
+		<p>마스크 될 엘리먼트 타겟</p>
+	</div>
+	<div class="DH10"></div>
+	<button class="ax-btn" onclick="app_mask_open();">마스크열기</button>
+	<button class="ax-btn" onclick="app_mask_close();">마스크닫기</button>
 </div>
-<div class="DH10"></div>
-<button class="ax-btn" onclick="app_mask_open();">마스크열기</button>
-<button class="ax-btn" onclick="app_mask_close();">마스크닫기</button>
+<script type="text/javascript">
+ax5.info.base_url = "../pub/";
+ax5.util.require(["ui/mask.min.js"], function(){
+	window.app_mask = new ax5.ui.mask();
+	app_mask.set_config({
+		target: document.body, // 미리 선언했지만
+		content: "<h1>ready</h1>",
+		onchange: function(){
+
+		}
+	});
+
+	window.app_mask_open = function() {
+		app_mask.open({
+			// 변경가능하다.
+			target: ax5.dom.get("#mask-target"),
+			content: "<h1>Loading..</h1>",
+			onchange: function () {
+
+			}
+		});
+
+		// 다음의 구문을 실행하면 mask_target은 set_config에서 설정한 target으로 처리 된다.
+		// app_mask.open();
+	};
+	window.app_mask_close = function(){
+		app_mask.close();
+	};
+});
+</script>
 </pre>
 
 	<div class="callout info">
 		<h4>마스크 컨셉</h4>
 		<p>
-			마스크는 크게 두가지 방법으로 쓰이는 것을 고려 하여 제작하였다. 첫째는 특정 엘리먼트에 마스크가 입혀지는 경우. 둘째는 웹브라우저 문서 전체에 마스크가 입혀지는 이다.
-			<code>mask_target</code>값으로 조절 할 수 있는데 <code>document.body</code>나 <code>ax5.dom.get("#mask-target")</code>을 부여하여 다른게 사용 할 수 있는데. <code>document.getElementById</code>를 이용하여도 무관하다.
-			<br>
-			엘리먼트에 마스크가 입혀지는 경우 대상 엘리먼트에 <code>.ax-masking</code>클래스가 추가되면서 blur효과가 입혀지는데. 바디에 적용하는 경우에도 <code>onchange</code> 함수에서 <code>this.type</code>으로 예외처리 하여 원하는 대상에 <code>.ax-masking</code> 클래스를 부여하거나 해제할 수 있다.
+			마스크는 두가지 방법으로 사용할 수 있게 제작하였다.
+			첫째는 특정 엘리먼트에 마스크가 입혀지는 경우.
+			둘째는 웹브라우저내 문서 전체에 마스크가 입혀지는 것이다.<br>
+			<code>mask_target</code>값으로 방식을 달리 할수 있다. <code>document.body</code>이나 <code>ax5.dom.get("#mask-target")</code>을 <code>mask_target</code>에 할당 할 수 있고. <code>document.getElementById</code>를 이용하여도 무관하다.
+			엘리먼트에 마스크가 입혀지는 경우 대상 엘리먼트에 <code>.ax-masking</code>클래스가 추가되면서 blur효과가 추가된다. 바디에 적용하는 경우에도 <code>onchange</code> 함수에서 <code>this.type</code>으로 예외처리 하여 원하는 대상에 <code>.ax-masking</code> 클래스를 추가/해제할 수 있다.
 		</p>
 	</div>
+</article>
 
 
+
+<article class="content">
 	<h3 data-menu-item="ax-ui-mask-body">Body Mask</h3>
-	<div class="tag-result">
-		<button class="ax-btn" onclick="app_body_mask_open();">마스크열기</button>
-	</div>
+
 <pre>
-<button class="ax-btn" onclick="app_body_mask_open();">마스크열기</button>
-</pre>
+<div class="tag-result">
+	<button class="ax-btn" onclick="app_body_mask_open();">마스크열기</button>
+</div>
+<script type="text/javascript">
 
-	<h3>Script</h3>
-<pre>
-(function(root){
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.min.js"], function(){
+ax5.util.require(["ui/mask.min.js"], function(){
 
-		root.app_mask = new ax5.ui.mask();
-		app_mask.set_config({
-			mask_target: document.body,
-			content: "<h1>ready</h1>",
-			onchange: function(){
+	window.app_body_mask = new ax5.ui.mask();
+	app_body_mask.set_config({
+		target: document.body,
+		content: "<h1>ready</h1>",
+		onchange: function(){
 
-			}
-		});
-
-		root.app_mask_open = function() {
-			app_mask.open({
-				mask_target: ax5.dom.get("#mask-target"),
-				content: "<h1>Loading..</h1>",
-				onchange: function () {
-
-				}
-			});
-		};
-		root.app_mask_close = function(){
-			app_mask.close();
-		};
-
-		root.app_body_mask_open = function(){
-			app_mask.open({
-				content:"<h2>2초후 마스크가 제거 됩니다.</h2>",
-				onchange: function () {
-
-				}
-			});
-			setTimeout(function(){
-				app_mask.close();
-			}, 2000);
 		}
 	});
-})(window);
+
+	window.app_body_mask_open = function(){
+		app_body_mask.open({
+			content:"<h2>2초후 마스크가 제거 됩니다.</h2>",
+			onchange: function () {
+				console.log(this);
+			}
+		});
+		setTimeout(function(){
+			app_body_mask.close();
+		}, 2000);
+	}
+
+});
+</script>
 </pre>
 
 </article>
 
-<script type="text/javascript">
-	(function(root){
-		ax5.info.base_url = "../pub/";
-		ax5.util.require(["ui/mask.min.js"], function(){
 
-			root.app_mask = new ax5.ui.mask();
-			app_mask.set_config({
-				mask_target: document.body,
-				content: "<h1>ready</h1>",
-				onchange: function(){
-
-				}
-			});
-
-			root.app_mask_open = function() {
-				app_mask.open({
-					mask_target: ax5.dom.get("#mask-target"),
-					content: "<h1>Loading..</h1>",
-					onchange: function () {
-
-					}
-				});
-			};
-			root.app_mask_close = function(){
-				app_mask.close();
-			};
-
-			root.app_body_mask_open = function(){
-				app_mask.open({
-					content:"<h2>2초후 마스크가 제거 됩니다.</h2>",
-					onchange: function () {
-						console.log(this);
-					}
-				});
-				setTimeout(function(){
-					app_mask.close();
-				}, 2000);
-			}
-		});
-	})(window);
-
-</script>

@@ -1,0 +1,98 @@
+<label data-menu-item="label"><span>Get</span></label>
+<article class="content">
+	<h2 data-menu-item="ax5-dom-get">ax5.dom.get</h2>
+	<p>
+		CSS셀렉터가 복잡하고 다양한 버전의 <code>Selecting Elements</code>를 지원하는 것을 중요하다.
+		하지만 그 보다 중요한것은 속도이다. 복잡한 형태의 <code>CSS Query</code>문을 처리 하기위해 많은 리소스를 사용하는 것은 바람직하지 않다.
+		ax5의 dom Selecting은 프로그래머가 보다 빠르게 <code>Selecting Elements</code>를 할 수 있는 제한적인 형태의 <code>CSS Query</code>
+		사용을 지향한다.
+	</p>
+	<p>
+		가급적 하나의 조건으로 Query하여 프로그램 하도록 유도하고 불가피하게 하나의 조건으로 쿼리 하지 못한다면 sub_query하여 Selecting 할 수 있도록 한다.
+	</p>
+<pre>
+<div id="div-ax5-dom-get" class="script-result">
+	<form>
+		<input type="text" class="ax-inp" />
+		<button class="ax-btn">OK</button>
+	</form>
+</div>
+<script>
+(function(){
+	var util = ax5.util, el = ax5.dom("#div-ax5-dom-get");
+	var po = [];
+	el.append( '<br/>' );
+	ax5.dom.get("a").forEach(function(item){
+		po.push( "" + item.tagName + " href=" + ax5.dom.attr(item, "href") );
+	});
+	el.append( po.join(',') );
+	el.append( '<br/>' );
+
+	po = [];
+	ax5.dom.get(".visual").forEach(function(item){
+		po.push( "" + item.tagName  + " class=" + ax5.dom.attr(item, "class") );
+	});
+	el.append( po.join(',') );
+	el.append( '<br/>' );
+
+	po = [];
+	el.find("[type=text]").elements.forEach(function(item){
+		po.push( "" + item.tagName  + " class=" + ax5.dom.attr(item, "class") );
+	});
+	el.append( po.join(',') );
+	el.append( '<br/>' );
+
+	po = [];
+	ax5.dom.get("#div-ax5-dom-get", ".ax-btn").forEach(function(item){
+		po.push( "" + item.tagName  + " class=" + ax5.dom.attr(item, "class") );
+	});
+	el.append( po.join(',') );
+	el.append( '<br/>' );
+})();
+</script>
+</pre>
+</article>
+
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-get_one">ax5.dom.get_one</h2>
+	<p>
+		get_one은 Selecting 엘리먼트중 첫번째 엘리먼트를 반환한다.
+	</p>
+<pre>
+<div id="div-ax5-dom-get_one" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#div-ax5-dom-get_one");
+		el.append( 'tagName = ' + ax5.dom.get_one("#div-ax5-dom-get_one").tagName + '<br/>' );
+		el.append( 'nodeType = ' + ax5.dom.get_one("#div-ax5-dom-get_one").nodeType );
+	})();
+</script>
+</pre>
+</article>
+
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-get_webgl_context">ax5.dom.get_webgl_context</h2>
+	<p>
+		webGL context 개체를 반환합니다. webGL을 지원하지 않는 브라우저에서는 <code>null</code> 을 반환합니다.
+	</p>
+<pre>
+<div id="div-ax5-dom-get_webgl_context" class="script-result">
+	<canvas id="canvas-element-id" width="200" height="80" style="border: 2px dotted blue;">
+		Your browser does not support webGL
+	</canvas>
+</div>
+<script>
+	(function(){
+		var util = ax5.util, el = ax5.dom("#canvas-element-id");
+		var context = el.get_webgl_context();
+		ax5.dom("#div-ax5-dom-get_webgl_context").append(context.toString());
+	})();
+</script>
+</pre>
+</article>

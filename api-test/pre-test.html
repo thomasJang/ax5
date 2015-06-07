@@ -10,34 +10,19 @@
     </style>
 </head>
 <body>
-
-<div id="test">!</div>
-
+<div id="parent">
+    <div id="test">!</div>
+</div>
 </body>
 <script type="text/javascript">
-ax5.dom("#test").empty();
 
-/*
-ax5.dom("#test").html('<div class="col-menu-item" data-register-menu="quick">'+
-'<span class="ic ic-star"></span>'+
-'<div class="badge">5</div>'+
-'</div>'+
-'<div class="col-menu-item-split"></div>'+
-'<div class="col-menu-item" data-register-menu="detail">'+
-'<span class="ic ic-th"></span>'+
-'</div>'+
-'<div class="col-menu-item-split"></div>'+
-'<div class="col-menu-item" data-register-menu="numpad">'+
-'<span class="ic ic-calculator"></span>'+
-'</div>');
-*/
+    ax5.dom.ready(function(){
+       console.log(1);
+    });
 
+    ax5.dom.ready(function(){
+        console.log(2);
+    });
 
-//ax5.dom("#test").html("<a>1</a>");
-
-ax5.dom("#test").append("<a>1</a>");
-ax5.dom("#test").before("<a>P</a>");
-ax5.dom("#test").after("<a>P</a>");
-//ax5.dom("#test").append("1");
 </script>
 </html>

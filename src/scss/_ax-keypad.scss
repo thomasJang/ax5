@@ -1,0 +1,30 @@
+@mixin keypad-variant($name, $base-color, $background, $color) {
+
+}
+
+// mixins --------------------------------------------- end
+
+.ax5-ui-keypad{
+	table{
+		table-layout: fixed;
+		border-collapse: collapse;
+		border-spacing: 0px;
+		border: 0px none;
+		width: 100%;
+		td{
+			position: relative;
+			box-sizing: content-box;
+			padding: 0px;margin:0px;
+			vertical-align: top;
+			.ax-btn-wraper{
+				padding:3px;
+				box-sizing: border-box;
+			}
+			button{
+				margin:0px;
+
+				width:100%;height:100%;
+			}
+		}
+	}
+}

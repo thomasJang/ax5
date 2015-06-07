@@ -1,0 +1,60 @@
+<label data-menu-item="label"><span>Event</span></label>
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-on">ax5.dom.on</h2>
+	<p>
+		타겟 엘리먼트에 원하는 이벤트타입의 이벤트를 바인딩한다.
+	</p>
+<pre>
+<div id="div-ax5-dom-on" class="script-result"></div>
+<script>
+	(function(){
+		var el = ax5.dom("#div-ax5-dom-on");
+		var fn_a = function(e){
+			alert("fn_a : " + e.type);
+		};
+		var fn_b = function(e){
+			alert("fn_b : " + e.type);
+		};
+
+		el.append("클릭하세요")
+		.on("click", function(e){
+			alert(e.type);
+		});
+		el.on("click", fn_a);
+		el.on("click.fn_b", fn_b); // 이벤트 타입에 핸들지정 off 할 때 핸들이 할당된 이벤트만 제거 할 수 있다.
+	})();
+</script>
+</pre>
+</article>
+
+
+
+<article class="content">
+	<h2 data-menu-item="ax5-dom-off">ax5.dom.off</h2>
+	<p>
+		타겟 엘리먼트에 원하는 이벤트타입의 이벤트를 언바인딩한다.
+	</p>
+<pre>
+<div id="div-ax5-dom-off" class="script-result"></div>
+<script>
+	(function(){
+		var el = ax5.dom("#div-ax5-dom-off");
+		var fn_a = function(e){
+			alert("fn_a : " + e.type);
+		};
+		var fn_b = function(e){
+			alert("fn_b : " + e.type);
+		};
+
+		el.append("클릭하세요")
+				.on("click", function(e){
+					alert(e.type);
+				});
+		// 위에서 정의한 이벤트는 제거 된다.
+		el.off("click");
+		el.on("click.fn_b", fn_b);
+	})();
+</script>
+</pre>
+</article>

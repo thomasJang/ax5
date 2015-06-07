@@ -10,7 +10,7 @@
 }
 
 .pln {
-    color: #333333;
+    color: #3b609e;
 }
 
 @media screen {
@@ -19,7 +19,7 @@
     }
 
     .kwd {
-        color: #333333;
+        color: #468a46;
     }
 
     .com {
@@ -35,7 +35,7 @@
     }
 
     .pun {
-        color: #333333;
+        color: #9e5615;
     }
 
     .opn {
@@ -47,7 +47,7 @@
     }
 
     .tag {
-        color: navy;
+        color: #f5871f;
     }
 
     .atn {
@@ -76,7 +76,7 @@
     }
 
     .kwd {
-        color: #006;
+        color: #70328a;
         font-weight: bold;
     }
 
@@ -99,7 +99,7 @@
     }
 
     .tag {
-        color: #006;
+        color: #f5871f;
         font-weight: bold;
     }
 

@@ -1,15 +1,48 @@
+/**
+ * @class ax5.ui.mask
+ * @classdesc
+ * @version v0.0.1
+ * @author tom@axisj.com
+ * @logs
+ * 2014-04-01 tom : 시작
+ * @example
+ * ```
+ * var my_mask = new ax5.ui.mask();
+ * ```
+ */
+
 (function(root, ax_super) {
+
 	var U = ax5.util, axd = ax5.dom;
 
 	var ax_class = function () {
 		var self = this;
-		if (ax_super) ax_super.call(this); // 부모호출
-		this.config = {
-			mask_target: axd.get(document.body)[0]
-		};
-		this.mask_content = '<h1>AX5 Mask</h1>';
-		this.status = "off";
 
+		// 클래스 생성자
+		this.main = (function(){
+			if (ax_super) ax_super.call(this); // 부모호출
+			this.config = {
+				target: axd.get(document.body)[0]
+			};
+			this.mask_content = '<h1>AX5 Mask</h1>';
+			this.status = "off";
+
+		}).apply(this, arguments);
+
+		/**
+		 * Preferences of Mask UI
+		 * @method ax5.ui.mask.set_config
+		 * @param {Object} config - 클래스 속성값
+		 * @returns {ax5.ui.mask}
+		 * @example
+		 * ```
+		 * set_config({
+		 *      target : {Element|AX5 nodelist}, // 마스크 처리할 대상
+		 *      content : {String}, // 마스크안에 들어가는 내용물
+		 *      onchange: function(){} // 마스크 상태변경 시 호출되는 함수 this.type으로 예외처리 가능
+		 * }
+		 * ```
+		 */
 		//== class body start
 		this.init = function(){
 			// after set_config();
@@ -24,7 +57,32 @@
 			return this.mask_content;
 		};
 
+		/**
+		 * open mask
+		 * @method ax5.ui.mask.open
+		 * @param {Object} config
+		 * @returns {ax5.ui.mask}
+		 * @example
+		 * ```js
+		 * my_mask.open({
+		 *     target: document.body,
+		 *     content: "<h1>Loading..</h1>",
+		 *     onchange: function () {
+		 *
+		 *     }
+		 * });
+		 *
+		 * my_mask.open({
+		 *     target: ax5.dom.get("#mask-target"),
+		 *     content: "<h1>Loading..</h1>",
+		 *     onchange: function () {
+		 *
+		 *     }
+		 * });
+		 * ```
+		 */
 		this.open = function(config){
+			// todo : z-index 옵션으로 지정가능 하도록 변경
 			if(this.status === "on") this.close();
 			if(config && config.content) this.set_body(config.content);
 			self.mask_config = {};
@@ -32,7 +90,7 @@
 			U.extend(self.mask_config, config, true);
 
 			var cfg = self.mask_config,
-				mask_target = axd.get(cfg.mask_target)[0],
+				target = axd.get(cfg.target)[0],
 				po = [], css, mask_id = 'ax-mask-'+ ax5.get_guid(), _mask, css = {},
 				that = {};
 
@@ -45,11 +103,11 @@
 				po.push('</div>');
 			po.push('</div>');
 
-			if(mask_target == document.body){
-				axd.append(mask_target, po.join(''));
+			if(target == document.body){
+				axd.append(target, po.join(''));
 			}else{
 				axd.append(document.body, po.join(''));
-				var box_model = axd.box_model(mask_target);
+				var box_model = axd.box_model(target);
 				css = {
 					position:"absolute",
 					left: box_model.offset.left,
@@ -57,10 +115,10 @@
 				    width: box_model.width,
 					height: box_model.height
 				};
-				axd.class_name(mask_target, "add", "ax-masking");
+				axd.class_name(target, "add", "ax-masking");
 			}
 			this._mask = _mask = axd.get("#"+mask_id);
-			this.mask_target = mask_target;
+			this.target = target;
 			this.status = "on";
 			axd.css(_mask, css);
 
@@ -70,36 +128,40 @@
 				};
 				cfg.onchange.call(that, that);
 			}
+			return this;
 		};
 
+		/**
+		 * close mask
+		 * @method ax5.ui.mask.close
+		 * @returns {ax5.ui.mask}
+		 * @example
+		 * ```
+		 * my_mask.close();
+		 * ```
+		 */
 		this.close = function(){
 			var cfg = this.mask_config;
 			axd.remove(this._mask);
-			axd.class_name(this.mask_target, "remove", "ax-masking");
+			axd.class_name(this.target, "remove", "ax-masking");
 			if(cfg.onchange) {
 				that = {
 					type: "close"
 				};
 				cfg.onchange.call(that, that);
 			}
+			return this;
 		};
 		//== class body end
 	};
 
 
-	//== ui class 공통 처리 구문. ==================================
-	// define ether to super object
-	if (ax_super) ax_class.prototype = new ax_super();
-
-	if (typeof root.module === "object" && root.module && typeof root.module.exports === "object") {
-		root.module.exports = ax_class; // commonJS
-	} else {
-		root.mask = ax_class; // global object
-		if (typeof define === "function" && define.amd) {
-			/*global define */
-			define("_ax5_ui_mask", [], function () { return ax_class; }); // requireJS
-		}
+	//== ui class 공통 처리 구문
+	if (U.is_function(ax_super)) ax_class.prototype = new ax_super(); // 상속
+	root.mask = ax_class; // ax5.ui에 연결
+	if (typeof define === "function" && define.amd) {
+		define("_ax5_ui_mask", [], function () { return ax_class; }); // for requireJS
 	}
-	//== ui class 공통 처리 구문. ==================================
+	//== ui class 공통 처리 구문
 
 })(ax5.ui, ax5.ui.root);

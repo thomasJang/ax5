@@ -1,0 +1,109 @@
+@mixin item-variant($name, $base-color, $background, $color) {
+	.ax-item {
+		&.#{$name} {
+			color: $color;
+			background-color: $background;
+			border-color: darken($background, 20%);
+		}
+	}
+
+	a.ax-item {
+		&.#{$name} {
+			color: $color;
+			.list-group-item-heading {
+				color: inherit;
+			}
+
+			&:hover,
+			&:focus {
+				color: #fff;
+				background-color: $base-color;
+				border-color: darken($base-color, 20%);
+			}
+			&.active,
+			&.active:hover,
+			&.active:focus {
+				color: #fff;
+				background-color: $base-color;
+				border-color: darken($base-color, 20%);
+			}
+		}
+	}
+}
+
+// mixins --------------------------------------------- end
+
+.ax-item-group{
+	padding: 0px;
+	.ax-item, .ax-item-group{
+		@include ax();
+		position: relative;
+		display: block;
+		padding: 10px 15px;
+		// Place the border on the list items and negative margin up for better styling
+		margin-bottom: -1px;
+		background-color: $item-group-bg;
+		border: 1px solid $item-group-border;
+		// Round the first and last items
+		&:first-child {
+			@include ax-border-radius($item-group-border-radius, "top");
+		}
+		&:last-child {
+			margin-bottom: 0;
+			@include ax-border-radius($item-group-border-radius, "bottom");
+		}
+	}
+	.ax-item-group{
+		padding: 10px 10px;
+	}
+	a.ax-item{
+		color: $item-group-link-color;
+		cursor: pointer;
+
+		// Hover state
+		&:hover,
+		&:focus {
+			text-decoration: none;
+			color: $item-group-link-hover-color;
+			background-color: $item-group-hover-bg;
+		}
+	}
+	.ax-item{
+		// Disabled state
+		&.disabled,
+		&.disabled:hover,
+		&.disabled:focus {
+			background-color: $item-group-disabled-bg;
+			color: $item-group-disabled-color;
+			cursor: not-allowed;
+		}
+
+		// Active class on item itself, not parent
+		&.active,
+		&.active:hover,
+		&.active:focus {
+			z-index: 2; // Place active items above their siblings for proper border styling
+			color: $item-group-active-color;
+			background-color: $item-group-active-bg;
+			border-color: $item-group-active-border;
+		}
+	}
+
+	// situation
+	// -- good
+	@include item-variant(good, $theme-good, $item-group-good-bg, $item-group-good-border);
+	// -- info
+	@include item-variant(info, $theme-info, $item-group-info-bg, $item-group-info-border);
+	// -- warning
+	@include item-variant(warning, $theme-warning, $item-group-warning-bg, $item-group-warning-border);
+	// -- danger
+	@include item-variant(danger, $theme-danger, $item-group-danger-bg, $item-group-danger-border);
+	// -- link
+	@include item-variant(link, $theme-link, $item-group-link-bg, $item-group-link-border);
+	// -- special
+	@include item-variant(special, $theme-special, $item-group-special-bg, $item-group-special-border);
+
+	&:not(.ax-item-group-depth-0){
+		background-color: darken($item-group-bg, 3%);
+	}
+}

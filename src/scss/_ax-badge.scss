@@ -44,17 +44,17 @@
 	}
 
 	// Account for badges in navs
-	.list-group-item.active > &,
+	.ax-item.active > &,
 	.nav-pills > .active > a > & {
 		color: $badge-active-color;
 		background-color: $badge-active-bg;
 	}
 
-	.list-group-item > & {
+	.ax-item > & {
 		float: right;
 	}
 
-	.list-group-item > & + & {
+	.ax-item > & + & {
 		margin-right: 5px;
 	}
 

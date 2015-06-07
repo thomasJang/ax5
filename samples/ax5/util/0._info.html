@@ -1,0 +1,94 @@
+<article class="cover">
+    <h1 data-menu-item="ax5-info">ax5.info</h1>
+</article>
+
+
+<label data-menu-item="label"><span>Memebers</span></label>
+<article class="content"> <!-- type -->
+    <h2 data-menu-item="ax5-info-version">ax5.info.version</h2>
+
+<pre>
+<div id="div-ax5-info-version" class="script-result"></div>
+<script>
+(function(){
+	var util = ax5.util, result, el = ax5.dom("#div-ax5-info-version");
+	el.append('ax5 version is :' + ax5.info.version);
+})();
+</script>
+</pre>
+</article>
+
+
+
+
+<article class="content"> <!-- type -->
+	<h2 data-menu-item="ax5-info-event_keys">ax5.info.event_keys</h2>
+
+<pre>
+<div id="div-ax5-info-event_keys" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, result, el = ax5.dom("#div-ax5-info-event_keys");
+		el.append(util.to_json(ax5.info.event_keys));
+	})();
+</script>
+</pre>
+</article>
+
+
+
+
+
+<article class="content"> <!-- type -->
+	<h2 data-menu-item="ax5-info-browser">ax5.info.browser</h2>
+
+<pre>
+<div id="div-ax5-info-browser" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, result, el = ax5.dom("#div-ax5-info-browser");
+		el.append(util.to_json(ax5.info.browser));
+	})();
+</script>
+</pre>
+</article>
+
+
+
+
+
+<article class="content"> <!-- type -->
+	<h2 data-menu-item="ax5-info-base_url">ax5.info.base_url</h2>
+	<p>base_url 의 역할은 웹애플리케이션에 위치한 ax5 라이브러리의 위치하기 위해서 이다.</p>
+<pre>
+<div id="div-ax5-info-base_url" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, result, el = ax5.dom("#div-ax5-info-base_url");
+		el.append(util.to_json(ax5.info.base_url));
+	})();
+</script>
+</pre>
+</article>
+
+
+
+
+<!--
+<article class="content">
+	<h2 data-menu-item="ax5-info-onerror">ax5.info.onerror</h2>
+	<p>ax5 라이브러리에서 발생되는 모든 에러를 가로채는데 사용한다.</p>
+<pre>
+<div id="div-ax5-info-onerror" class="script-result"></div>
+<script>
+	(function(){
+		var util = ax5.util, result, el = ax5.dom("#div-ax5-info-onerror");
+		// 에러를 가로채지 않고 에러발생
+		el.on(123, function(){
+
+		});
+	})();
+</script>
+</pre>
+</article>
+-->

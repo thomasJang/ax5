@@ -28,7 +28,7 @@
 				if (hdeb) {
 					for (i = 0; i < del; i++) if (hwp.call(obj, de[i])) r.push(de[i]);
 				}
-				return result;
+				return r;
 			};
 		}());
 	}
