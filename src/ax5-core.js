@@ -95,7 +95,7 @@
 		 * ```
 		 */
 		var onerror = function(){
-			console.error(ax5.util.to_array(arguments).join(":"));
+			console.error(U.to_array(arguments).join(":"));
 		};
 
 		/**
@@ -1193,6 +1193,7 @@
 
 			return result;
 		}
+
 		/**
 		 * 배열 비슷한 오브젝트를 배열로 변환해줍니다.
 		 * @method ax5.util.to_array
@@ -1291,6 +1292,73 @@
 			ax5.info.onerror.apply(this, arguments);
 		}
 
+		/**
+		 * webGl context 에 적용할 셰이더를 셰이더 스크립트로 부터 변환합니다.
+		 * @method ax5.util.get_shader
+		 * @param {WebGLRenderingContext} gl
+		 * @param {script|String|Array} script
+		 * @param {String} [typ] - x-shader/x-fragment|x-shader/x-vertex
+		 * @returns {shader}
+		 */
+		function get_shader(gl, script, typ){
+			if (!script) {
+				return null;
+			}
+
+			var str = "", s, shader;
+			if(is_string(script) || is_array(script)){
+				str = [].concat(script).join('');
+				if (typ == "x-shader/x-fragment") {
+					shader = gl.createShader(gl.FRAGMENT_SHADER);
+				} else if (typ == "x-shader/x-vertex") {
+					shader = gl.createShader(gl.VERTEX_SHADER);
+				} else {
+					return null;
+				}
+			}
+			else
+			{
+				s = script.firstChild;
+				while (s) {
+					if (s.nodeType == 3) {
+						str += s.textContent;
+					}
+					s = s.nextSibling;
+				}
+				if (script.type == "x-shader/x-fragment") {
+					shader = gl.createShader(gl.FRAGMENT_SHADER);
+				} else if (script.type == "x-shader/x-vertex") {
+					shader = gl.createShader(gl.VERTEX_SHADER);
+				} else {
+					return null;
+				}
+			}
+
+			gl.shaderSource(shader, str);
+			gl.compileShader(shader);
+
+			if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+				alert(gl.getShaderInfoLog(shader));
+				return null;
+			}
+			return shader;
+		}
+
+		var requestAnimFrame = (function() {
+			return window.requestAnimationFrame ||
+				window.webkitRequestAnimationFrame ||
+				window.mozRequestAnimationFrame ||
+				window.oRequestAnimationFrame ||
+				window.msRequestAnimationFrame ||
+				function(/* function FrameRequestCallback */ callback, /* DOMElement Element */ element) {
+					window.setTimeout(callback, 1000/60);
+				};
+		})();
+
+		function request_ani_frame(o){
+			requestAnimFrame(o);
+		}
+
 		return {
             alert       : alert,
             each        : each,
@@ -1328,7 +1396,9 @@
             to_array    : to_array,
             merge       : merge,
             param       : param,
-			error       : error
+			error       : error,
+			get_shader  : get_shader,
+			request_ani_frame : request_ani_frame
 		}
 	})();
 
@@ -1357,6 +1427,10 @@
 				this.toString = function () {
 					return "[object ax5.dom]";
 				};
+				if(typeof query === 'undefined') {
+					U.error("ax5.dom(undefined) is error ");
+					return;
+				}
 				/**
 				 * query selected elements
 				 * @member {Array} ax5.dom0.elements
@@ -1832,6 +1906,14 @@
 					dom.empty(this.elements);
 					return this;
 				};
+				/**
+				 * 웹지엘 컨텍스트를 반환합니다.
+				 * @method ax5.dom0.get_webgl_context
+				 * @returns {wegGl context}
+				 */
+				this.get_webgl_context = function (){
+					return dom.get_webgl_context(this.elements);
+				}
 			}
 
 			return ax;
@@ -3209,6 +3291,20 @@
 			return els;
 		}
 
+		/**
+		 * 웹지엘 컨텍스트를 반환합니다.
+		 * @method ax5.dom.get_webgl_context
+		 * @returns {wegGl context}
+		 */
+		function get_webgl_context(els){
+			els = va_elem(els, "data");
+			var apis = ['experimental-webgl','webgl','webkit-3d','moz-webgl','3d'],
+				i = apis.length, el = els[0], ctx;
+			while (i--) if (ctx = el.getContext(apis[i], {antialias: true})) break;
+			if (ctx == null) alert("WebGL is not available");
+			return ctx;
+		}
+
 		U.extend(ax5.dom, {
 			ready     : ready,
 			scroll    : scroll,
@@ -3238,7 +3334,8 @@
 			offset    : offset,
 			position  : position,
 			box_model : box_model,
-			data      : data
+			data      : data,
+			get_webgl_context: get_webgl_context
 		});
 	})();
 

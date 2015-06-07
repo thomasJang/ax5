@@ -1,0 +1,118 @@
+<article class="cover">
+	<h1 data-menu-item="ax-ui-keypad">Keypad</h1>
+	<p class="lead">
+
+	</p>
+</article>
+
+
+<!-- basic -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-keypad-basic" class="capitalize">basic</h3>
+
+<pre>
+<div class="tag-result">
+	<div id="ui-keypad-basic-target" style="width:240px;"></div>
+</div>
+<script type="text/javascript">
+ax5.info.base_url = "../pub/";
+ax5.util.require(["ui/keypad.js"], function(){
+	var my_keypad = new ax5.ui.keypad();
+	my_keypad.set_config({
+		target: ax5.dom.get("#ui-keypad-basic-target"),
+		theme: "default",
+		board: {
+			keys: [
+				{label:"7", value:7},
+				{label:"8", value:8},
+				{label:"9", value:9},
+				{label:'<i class="axi axi-delete"></i>', value:"del", klass:"warning"},
+				{newline:true},
+				{label:"4", value:4},
+				{label:"5", value:5},
+				{label:"6", value:6},
+				{label:"CLR", value:"clear", klass:"danger"},
+				{newline:true},
+				{label:"1", value:1},
+				{label:"2", value:2},
+				{label:"3", value:3},
+				{label:"ENTER", value:"return", rowspan:2, klass:"basic"},
+				{newline:true},
+				{label:"0", value:0},
+				{label:"", value:null, colspan:2}
+			],
+			col_width: "25%",
+			col_height: "60px"
+		},
+		onclick: function(){
+			console.log(this);
+		}
+	});
+});
+</script>
+</pre>
+
+</article>
+
+
+<!-- examples -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-keypad-example" class="capitalize">example</h3>
+
+<pre>
+<div class="tag-result">
+	<div style="padding:3px;">
+		<input type="text" class="ax-inp lg" id="ui-keypad-example-disp" value="" style="width:234px;text-align: right;" />
+	</div>
+	<div id="ui-keypad-example-target" style="width:240px;"></div>
+</div>
+<script type="text/javascript">
+	ax5.info.base_url = "../pub/";
+	ax5.util.require(["ui/keypad.js"], function(){
+		var my_disp = ax5.dom.get_one("#ui-keypad-example-disp");
+		var my_keypad = new ax5.ui.keypad();
+		my_keypad.set_config({
+			target: ax5.dom.get("#ui-keypad-example-target"),
+			theme: "default",
+			board: {
+				keys: [
+					{label:"7", value:7},
+					{label:"8", value:8},
+					{label:"9", value:9},
+					{label:"0", value:0},
+					{newline:true},
+					{label:"4", value:4},
+					{label:"5", value:5},
+					{label:"6", value:6},
+					{label:'<i class="axi axi-delete"></i>', value:"del", klass:"warning"},
+					{newline:true},
+					{label:"1", value:1},
+					{label:"2", value:2},
+					{label:"3", value:3},
+					{label:"ENTER", value:"return", klass:"basic"}
+				],
+				col_width: "25%",
+				col_height: "60px"
+			},
+			onclick: function(){
+				if(this.item.value == null) return;
+				if(this.item.value == "del"){
+					if(my_disp.value == "") return;
+					my_disp.value = ax5.util.number(ax5.util.number(my_disp.value.substr(0, my_disp.value.length-1)), {money:true});
+				}
+				else
+				if(this.item.value == "return"){
+					if(my_disp.value == "") return;
+					alert(ax5.util.number(my_disp.value));
+				}
+				else{
+					if(my_disp.value == "" && ax5.util.number(this.item.value) == 0) return;
+					my_disp.value = ax5.util.number('' + ax5.util.number(my_disp.value) + this.item.value, {money:true});
+				}
+			}
+		});
+	});
+</script>
+</pre>
+
+</article>

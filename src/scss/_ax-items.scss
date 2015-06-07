@@ -35,7 +35,7 @@
 
 .ax-item-group{
 	padding: 0px;
-	.ax-item{
+	.ax-item, .ax-item-group{
 		@include ax();
 		position: relative;
 		display: block;
@@ -44,17 +44,17 @@
 		margin-bottom: -1px;
 		background-color: $item-group-bg;
 		border: 1px solid $item-group-border;
-
 		// Round the first and last items
 		&:first-child {
 			@include ax-border-radius($item-group-border-radius, "top");
-			//@include border-bottom-radius(0);
 		}
 		&:last-child {
 			margin-bottom: 0;
 			@include ax-border-radius($item-group-border-radius, "bottom");
-			//@include border-top-radius(0);
 		}
+	}
+	.ax-item-group{
+		padding: 10px 10px;
 	}
 	a.ax-item{
 		color: $item-group-link-color;
@@ -68,7 +68,6 @@
 			background-color: $item-group-hover-bg;
 		}
 	}
-
 	.ax-item{
 		// Disabled state
 		&.disabled,
@@ -103,4 +102,8 @@
 	@include item-variant(link, $theme-link, $item-group-link-bg, $item-group-link-border);
 	// -- special
 	@include item-variant(special, $theme-special, $item-group-special-bg, $item-group-special-border);
+
+	&:not(.ax-item-group-depth-0){
+		background-color: darken($item-group-bg, 3%);
+	}
 }

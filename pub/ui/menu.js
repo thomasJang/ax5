@@ -66,26 +66,22 @@
 		};
 
 		this.print_list = function(){
-			var cfg = this.config, po = [],
-				get_child_menu_html = function(menu){
-
+			var cfg = this.config,
+				po = [],
+				get_child_menu_html = function(_po_, _menu_, _depth_){
+					_po_.push('<ul class="ax-item-group ax-item-group-depth-' + _depth_ + '">');
+					for(var i= 0,l=_menu_.length;i<l;i++){
+						_po_.push('<a class="ax-item" data-menu-item-index="'+ i +'">');
+						_po_.push(_menu_[i][cfg.keys.text]);
+						_po_.push('</a>');
+						if(_menu_[i][cfg.keys.menu] && _menu_[i][cfg.keys.menu].length > 0){
+							get_child_menu_html(_po_, _menu_[i][cfg.keys.menu], _depth_+1);
+						}
+					}
+					_po_.push('</ul>');
 				};
 
-
-
-
-			po.push('<ul class="ax-item-group">');
-			for(var i= 0,l=cfg[cfg.keys.menu].length;i<l;i++){
-				po.push('<a class="ax-item" data-menu-item-index="'+ i +'">');
-					po.push(cfg[cfg.keys.menu][i][cfg.keys.text]);
-				po.push('</a>');
-				if(cfg[cfg.keys.menu][i][cfg.keys.menu] && cfg[cfg.keys.menu][i][cfg.keys.menu].length > 0){
-
-				}
-			}
-			po.push('</ul>');
-
-
+			get_child_menu_html(po, cfg[cfg.keys.menu], 0);
 
 			cfg.target.html( po.join('') );
 			cfg.target.find('[data-menu-item-index]').on("click", (function(e){
