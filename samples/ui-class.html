@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-06-06 
+ publish date : 2015-06-07 
 -->
 <html lang="en">
 <head>
@@ -428,7 +428,7 @@ ax5.util.require(["ui/menu.js"], function(){
 
 <pre class="prettyprint linenums">
 &lt;div class="tag-result">
-	&lt;div id="ui-keypad-basic-target" style="width:240px;">&lt;/div>
+	&lt;div id="ui-keypad-basic-target" style="width:300px;">&lt;/div>
 &lt;/div>
 &lt;script type="text/javascript">
 ax5.info.base_url = "../pub/";
@@ -442,22 +442,22 @@ ax5.util.require(["ui/keypad.js"], function(){
 				{label:"7", value:7},
 				{label:"8", value:8},
 				{label:"9", value:9},
-				{label:'&lt;i class="axi axi-delete">&lt;/i>', value:"del", klass:"warning"},
+				{label:'&lt;i class="axi axi-delete">&lt;/i>', value:"del", klass:"warning", width:"40%"},
 				{newline:true},
 				{label:"4", value:4},
 				{label:"5", value:5},
 				{label:"6", value:6},
-				{label:"CLR", value:"clear", klass:"danger"},
+				{label:"CLR", value:"clear", klass:"danger", width:"40%"},
 				{newline:true},
 				{label:"1", value:1},
 				{label:"2", value:2},
 				{label:"3", value:3},
-				{label:"ENTER", value:"return", rowspan:2, klass:"basic"},
+				{label:"ENTER", value:"return", rowspan:2, klass:"basic", width:"40%"},
 				{newline:true},
 				{label:"0", value:0},
 				{label:"", value:null, colspan:2}
 			],
-			col_width: "25%",
+			col_width: "20%",
 			col_height: "60px"
 		},
 		onclick: function(){
@@ -468,7 +468,7 @@ ax5.util.require(["ui/keypad.js"], function(){
 &lt;/script>
 </pre><h4>Result</h4>
 <div class="tag-result">
-	<div id="ui-keypad-basic-target" style="width:240px;"></div>
+	<div id="ui-keypad-basic-target" style="width:300px;"></div>
 </div>
 <script type="text/javascript">
 ax5.info.base_url = "../pub/";
@@ -482,22 +482,22 @@ ax5.util.require(["ui/keypad.js"], function(){
 				{label:"7", value:7},
 				{label:"8", value:8},
 				{label:"9", value:9},
-				{label:'<i class="axi axi-delete"></i>', value:"del", klass:"warning"},
+				{label:'<i class="axi axi-delete"></i>', value:"del", klass:"warning", width:"40%"},
 				{newline:true},
 				{label:"4", value:4},
 				{label:"5", value:5},
 				{label:"6", value:6},
-				{label:"CLR", value:"clear", klass:"danger"},
+				{label:"CLR", value:"clear", klass:"danger", width:"40%"},
 				{newline:true},
 				{label:"1", value:1},
 				{label:"2", value:2},
 				{label:"3", value:3},
-				{label:"ENTER", value:"return", rowspan:2, klass:"basic"},
+				{label:"ENTER", value:"return", rowspan:2, klass:"basic", width:"40%"},
 				{newline:true},
 				{label:"0", value:0},
 				{label:"", value:null, colspan:2}
 			],
-			col_width: "25%",
+			col_width: "20%",
 			col_height: "60px"
 		},
 		onclick: function(){

@@ -13,6 +13,7 @@
 				keys: {
 					label: 'label',
 					value: 'value',
+					width: 'width',
 					rowspan: 'rowspan',
 					colspan: 'colspan',
 					klass: 'klass'
@@ -81,7 +82,7 @@
 						'style="' + (function(css){
 							css = [];
 							if((item[keys.colspan] || 1) == 1){
-								css.push("width:" + col_width);
+								css.push("width:" + (item[keys.width] ? item[keys.width] : col_width) );
 							}
 							return css.join(';');
 						})() + '">');
