@@ -18,10 +18,12 @@ ax5.dom.ready(function(){
 			theme_selector = ax5.dom("#ax5-theme-select");
 			theme_selector.html( po.join('') );
 
-			var _theme;
+			var _theme = null;
 			if((_theme = ax5.util.get_cookie("ax5theme"))){
 				theme_selector.elements[0].value = _theme;
 				theme.change(_theme);
+			}else {
+				theme.change(themes[0]);
 			}
 			theme_selector.on("change", function(e) {
 				theme.change(e.target.value);
@@ -29,7 +31,7 @@ ax5.dom.ready(function(){
 		},
 		change: function(theme){
 			var t = theme.split("/");
-			console.log({"href" : "../src/css/" + t[1] +"/ax5.css"});
+			//console.log({"href" : "../src/css/" + t[1] +"/ax5.css"});
 			ax5.dom("#ax5-theme").attr({"href" : "../src/css/" + t[1] +"/ax5.css"});
 			ax5.util.set_cookie("ax5theme", theme);
 		}
