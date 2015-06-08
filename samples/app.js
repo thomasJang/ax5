@@ -23,7 +23,7 @@ ax5.dom.ready(function(){
 				theme_selector.elements[0].value = _theme;
 				theme.change(_theme);
 			}else {
-				theme.change(themes[0]);
+				theme.change(themes.join('/'));
 			}
 			theme_selector.on("change", function(e) {
 				theme.change(e.target.value);
