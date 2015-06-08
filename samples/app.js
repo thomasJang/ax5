@@ -29,6 +29,7 @@ ax5.dom.ready(function(){
 		},
 		change: function(theme){
 			var t = theme.split("/");
+			console.log({"href" : "../src/css/" + t[1] +"/ax5.css"});
 			ax5.dom("#ax5-theme").attr({"href" : "../src/css/" + t[1] +"/ax5.css"});
 			ax5.util.set_cookie("ax5theme", theme);
 		}
