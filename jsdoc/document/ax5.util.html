@@ -130,6 +130,8 @@
             
                 <li data-name="ax5.dom.get_one"><a href="ax5.dom.html#get_one">get_one</a></li>
             
+                <li data-name="ax5.dom.get_webgl_context"><a href="ax5.dom.html#get_webgl_context">get_webgl_context</a></li>
+            
                 <li data-name="ax5.dom.height"><a href="ax5.dom.html#height">height</a></li>
             
                 <li data-name="ax5.dom.html"><a href="ax5.dom.html#html">html</a></li>
@@ -210,6 +212,8 @@
                 <li data-name="ax5.dom0.empty"><a href="ax5.dom0.html#empty">empty</a></li>
             
                 <li data-name="ax5.dom0.find"><a href="ax5.dom0.html#find">find</a></li>
+            
+                <li data-name="ax5.dom0.get_webgl_context"><a href="ax5.dom0.html#get_webgl_context">get_webgl_context</a></li>
             
                 <li data-name="ax5.dom0.height"><a href="ax5.dom0.html#height">height</a></li>
             
@@ -317,6 +321,8 @@
             
                 <li data-name="ax5.util.get_cookie"><a href="ax5.util.html#get_cookie">get_cookie</a></li>
             
+                <li data-name="ax5.util.get_shader"><a href="ax5.util.html#get_shader">get_shader</a></li>
+            
                 <li data-name="ax5.util.get_type"><a href="ax5.util.html#get_type">get_type</a></li>
             
                 <li data-name="ax5.util.is_array"><a href="ax5.util.html#is_array">is_array</a></li>
@@ -399,6 +405,29 @@
             <span class="subtitle">Methods</span>
             
                 <li data-name="ax5.xhr.config"><a href="ax5.xhr.html#config">config</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="ax5.ui.keypad">
+            <span class="title">
+                <a href="ax5.ui.keypad.html">ax5.ui.keypad</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="ax5.ui.keypad.set_config"><a href="ax5.ui.keypad.html#set_config">set_config</a></li>
             
             </ul>
             <ul class="events itemMembers">
@@ -2007,6 +2036,199 @@ value
     <pre class="prettyprint linenums"><code class="lang-js">ax5.util.get_cookie(&quot;jslib&quot;);</code></pre>
     
 
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="get_shader">
+            
+            <span class="type-signature static">static</span>ax5.util.get_shader<span class="signature">(gl, script, <span class="optional">typ</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{shader}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <i class="axi axi-github"></i>
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1471" target="_blank">
+            ax5.js,
+            line 1471</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>webGl context 에 적용할 셰이더를 셰이더 스크립트로 부터 변환합니다.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>gl</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">WebGLRenderingContext</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>script</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">script</span>
+|
+
+<span class="param-type">String</span>
+|
+
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>typ</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>x-shader/x-fragment|x-shader/x-vertex</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
     
 </dd>
 
@@ -3885,9 +4107,9 @@ console.log(_arr);
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1388" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1389" target="_blank">
             ax5.js,
-            line 1388</a>
+            line 1389</a>
         </div>
         
     </div>
@@ -4222,9 +4444,9 @@ console.log(ax5.util.number(&quot;A-1234~~56789.8~888PX&quot;, {abs:true, round:
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1419" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1420" target="_blank">
             ax5.js,
-            line 1419</a>
+            line 1420</a>
         </div>
         
     </div>
@@ -5805,9 +6027,9 @@ ax5.util.snake_case(&quot;inner_width&quot;);
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1372" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1373" target="_blank">
             ax5.js,
-            line 1372</a>
+            line 1373</a>
         </div>
         
     </div>
@@ -6091,7 +6313,7 @@ console.log( ax.to_json(myObject) );</code></pre>
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sat May 09 2015 01:12:48 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sun Jun 07 2015 21:54:34 GMT+0900 (KST)
         </footer>
     </div>
 </div>

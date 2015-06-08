@@ -86,7 +86,9 @@
 			},
 			theme: {
 				files: {
-					'src/css/jellyfish/ax5.css': 'src/scss/jellyfish/ax5.scss'
+					'src/css/jellyfish/ax5.css': 'src/scss/jellyfish/ax5.scss',
+					'src/css/chequer/ax5.css': 'src/scss/chequer/ax5.scss',
+					'src/css/chequer-cacao/ax5.css': 'src/scss/chequer-cacao/ax5.scss'
 				}
 			},
 			sample_doc: {
@@ -101,9 +103,11 @@
 				'<%= grunt.template.today("yyyy-mm-dd") %> \n*/\n'
 			},
 			target: {
-				files: [{
-					expand: true, cwd: 'src/css/jellyfish', src: ['*.css', '!*.min.css'], dest: 'src/css/jellyfish', ext: '.min.css'
-				}]
+				files: [
+					{expand: true, cwd: 'src/css/jellyfish', src: ['*.css', '!*.min.css'], dest: 'src/css/jellyfish', ext: '.min.css'},
+					{expand: true, cwd: 'src/css/chequer', src: ['*.css', '!*.min.css'], dest: 'src/css/chequer', ext: '.min.css'},
+					{expand: true, cwd: 'src/css/chequer-cacao', src: ['*.css', '!*.min.css'], dest: 'src/css/chequer-cacao', ext: '.min.css'}
+				]
 			}
 		}
 	});

@@ -2085,7 +2085,7 @@
 				/**
 				 * 웹지엘 컨텍스트를 반환합니다.
 				 * @method ax5.dom0.get_webgl_context
-				 * @returns {wegGl context}
+				 * @returns {wegGlContext}
 				 */
 				this.get_webgl_context = function (){
 					return dom.get_webgl_context(this.elements);
@@ -3470,7 +3470,7 @@
 		/**
 		 * 웹지엘 컨텍스트를 반환합니다.
 		 * @method ax5.dom.get_webgl_context
-		 * @returns {wegGl context}
+		 * @returns {wegGlContext}
 		 */
 		function get_webgl_context(els){
 			els = va_elem(els, "data");

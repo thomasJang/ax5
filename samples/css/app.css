@@ -97,6 +97,15 @@ pre.prettyprint {
           width: 1px;
           background-image: -webkit-linear-gradient( top , rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
           background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)); }
+    .app-nav .box-content .theme-selector {
+      position: absolute;
+      right: 0px;
+      top: 0px;
+      height: 60px;
+      line-height: 60px;
+      text-align: center;
+      padding: 0px 20px;
+      font-size: 14px; }
 
 .app-visual {
   z-index: 900;

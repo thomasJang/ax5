@@ -1,3 +1,15 @@
+/**
+ * @class ax5.ui.keypad
+ * @classdesc
+ * @version v0.0.1
+ * @author tom@axisj.com
+ * @logs
+ * 2014-06-06 tom : 시작
+ * @example
+ * ```
+ * var my_pad = new ax5.ui.keypad();
+ * ```
+ */
 (function(root, ax_super) {
 
 	var U = ax5.util, axd = ax5.dom;

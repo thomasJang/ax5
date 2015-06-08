@@ -39,21 +39,21 @@ a.ax{
     text-decoration: $link-hover-decoration;
   }
   &.mute{color: $theme-muted;}
-  &.basic{@include get-text-link($theme-basic);}
-  &.good{@include get-text-link($theme-good);}
-  &.info{@include get-text-link($theme-info);}
-  &.warning{@include get-text-link($theme-warning);}
-  &.danger{@include get-text-link($theme-danger);}
-  &.special{@include get-text-link($theme-special);}
+  &.basic{@include get-text-link($basic-text-color);}
+  &.good{@include get-text-link($good-text-color);}
+  &.info{@include get-text-link($info-text-color);}
+  &.warning{@include get-text-link($warning-text-color);}
+  &.danger{@include get-text-link($danger-text-color);}
+  &.special{@include get-text-link($special-text-color);}
 }
 
 .ax{
   // situation
   &.mute{color: $theme-muted;}
-  &.basic{@include get-text-link($theme-basic);}
-  &.good{@include get-text-link($theme-good);}
-  &.info{@include get-text-link($theme-info);}
-  &.warning{@include get-text-link($theme-warning);}
-  &.danger{@include get-text-link($theme-danger);}
-  &.special{@include get-text-link($theme-special);}
+  &.basic{@include get-text-link($basic-text-color);}
+  &.good{@include get-text-link($good-text-color);}
+  &.info{@include get-text-link($info-text-color);}
+  &.warning{@include get-text-link($warning-text-color);}
+  &.danger{@include get-text-link($danger-text-color);}
+  &.special{@include get-text-link($special-text-color);}
 }
