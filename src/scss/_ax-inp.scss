@@ -17,6 +17,12 @@
   // Customize the `:focus` state to imitate native WebKit styles.
   @include form-control-focus($color-hover);
   @include placeholder($text-color);
+
+	&[disabled], &[readonly]{
+		@include ax-inp-gradient($input-bg-disabled, $input-bg-disabled);
+		@include box-shadow(none);
+		opacity: 1; // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655
+	}
 }
 
 @mixin input-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius, $height) {
@@ -83,12 +89,6 @@
   
   @include input-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, $input-border-radius-base, $input-height-base);
 
-  &[disabled], &[readonly]{
-	@include ax-inp-gradient($input-bg-disabled, $input-bg-disabled);
-	@include box-shadow(none);
-	opacity: 1; // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655
-  }
-
   // situation
   &.basic{
 	@include input-variant($input-basic-text-color, $input-basic-text-shadow, $input-basic-bg, $input-basic-bg-image, $input-basic-color-hover, $input-basic-border, $input-basic-drop-shadow);
@@ -121,6 +121,13 @@
   &.xs {
 	@include input-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $border-radius-small, $input-height-xs);
   }
+
+
+	&[disabled], &[readonly]{
+		@include ax-inp-gradient($input-bg-disabled, $input-bg-disabled);
+		@include box-shadow(none);
+		opacity: 1; // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655
+	}
 }
 
 .ax-select{
