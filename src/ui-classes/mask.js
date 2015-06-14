@@ -1,18 +1,17 @@
-/**
- * @class ax5.ui.mask
- * @classdesc
- * @version v0.0.1
- * @author tom@axisj.com
- * @logs
- * 2014-04-01 tom : 시작
- * @example
- * ```
- * var my_mask = new ax5.ui.mask();
- * ```
- */
-
+// ax5.ui.mask
 (function(root, ax_super) {
-
+	/**
+	 * @class ax5.ui.mask
+	 * @classdesc
+	 * @version v0.0.1
+	 * @author tom@axisj.com
+	 * @logs
+	 * 2014-04-01 tom : 시작
+	 * @example
+	 * ```
+	 * var my_mask = new ax5.ui.mask();
+	 * ```
+	 */
 	var U = ax5.util, axd = ax5.dom;
 
 	var ax_class = function () {

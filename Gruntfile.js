@@ -4,28 +4,32 @@
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		concat: {
-			options: {
-				stripBanners: true,
-				separator: ';',
-				banner: '/*\n'+
-				' * <%= pkg.name %> - v<%= pkg.version %> \n' +
-				' * <%= grunt.template.today("yyyy-mm-dd") %> \n' +
-				' * www.axisj.com Javascript UI Library\n' +
-				' * \n' +
-				' * Copyright 2013, 2015 AXISJ.com and other contributors \n' +
-				' * Released under the MIT license \n' +
-				' * www.axisj.com/ax5/license \n' +
-				' */\n\n',
-				separator: '\n\n'
-			},
 			basic: {
-				src: [
-					'src/ax5-polyfill.js',
-					'src/ax5-core.js',
-					'src/ax5-xhr.js',
-					'src/ax5-ui.js'
-				],
-				dest: 'src/ax5.js'
+				options: {
+					stripBanners: true,
+					separator: ';',
+					banner: '/*\n'+
+					' * <%= pkg.name %> - v<%= pkg.version %> \n' +
+					' * <%= grunt.template.today("yyyy-mm-dd") %> \n' +
+					' * www.axisj.com Javascript UI Library\n' +
+					' * \n' +
+					' * Copyright 2013, 2015 AXISJ.com and other contributors \n' +
+					' * Released under the MIT license \n' +
+					' * www.axisj.com/ax5/license \n' +
+					' */\n\n',
+					separator: '\n\n'
+				},
+				files: {
+					'src/ax5.js': [
+						'src/ax5-polyfill.js',
+						'src/ax5-core.js',
+						'src/ax5-xhr.js',
+						'src/ax5-ui.js'
+					],
+					'src/ui-classes/all.js': [
+						'src/ui-classes/*.js', '!src/ui-classes/all.js'
+					]
+				}
 			}
 		},
 

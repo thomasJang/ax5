@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-06-08 
+ publish date : 2015-06-14 
 -->
 <html lang="en">
 <head>
@@ -31,7 +31,7 @@
 			<li class="vline"></li>
 			<li><a href="ui-class.html">UI Class</a></li>
 			<li class="vline"></li>
-			<li><a href="customize.html">Customize</a></li>
+			<li><a href="#" onclick="alert('준비중인 컨텐츠 입니다.');">Customize</a></li>
 			<li class="vline"></li>
 			<li><a href="/jsdoc/">JSDOC</a></li>
 			<li class="vline"></li>
@@ -629,6 +629,40 @@ ax5.util.require(["ui/keypad.js"], function(){
 
 
 </article>
+
+<!-- split -->
+
+<article class="cover">
+	<h1 data-menu-item="ax-ui-dialog">dialog</h1>
+	<p class="lead">
+		dialog는 <code>window.alert</code>나 <code>window.confirm</code>의 대체 수단으로 사용이 가능한 UI 이다.
+		그래서 생각을 하다보니 <code>prompt</code>도 대체 가능 해야 한다고 생각이 바겼다.
+	</p>
+</article>
+
+
+<!-- basic -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-dialog-alert" class="capitalize">alert</h3>
+	<p>alert는 단순 알림외에도 웹 브라우저나 웹 애플리케이션의 프로세스를 일시 중지 시키는 기능도 가지고 있다. 하지만 dialog에서는 개발자가 다소 어려운 방법으로 구현을 해야 가능하다. (아쉽다)</p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+	&lt;div id="ui-dialog-basic-target" style="width:300px;">&lt;/div>
+&lt;/div>
+&lt;script type="text/javascript">
+
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result">
+	<div id="ui-dialog-basic-target" style="width:300px;"></div>
+</div>
+<script type="text/javascript">
+
+</script>
+
+
+</article>
+
 
 <!-- split -->
 

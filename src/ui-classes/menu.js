@@ -1,18 +1,17 @@
-/**
- * @class ax5.ui.menu
- * @classdesc
- * @version v0.0.1
- * @author tom@axisj.com
- * @logs
- * 2014-04-21 tom : 시작
- * @example
- * ```
- * var my_menu = new ax5.ui.menu();
- * ```
- */
-
+// ax5.ui.menu
 (function(root, ax_super) {
-
+	/**
+	 * @class ax5.ui.menu
+	 * @classdesc
+	 * @version v0.0.1
+	 * @author tom@axisj.com
+	 * @logs
+	 * 2014-04-21 tom : 시작
+	 * @example
+	 * ```
+	 * var my_menu = new ax5.ui.menu();
+	 * ```
+	 */
 	var U = ax5.util, axd = ax5.dom;
 
 	//== UI Class
