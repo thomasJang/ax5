@@ -53,9 +53,21 @@
 	}
 }
 
+@include keyframes(ax-dialog) {
+	from {
+		@include opacity(0.0);
+		@include transform(scale(0.7) )
+	}
+	to {
+		@include opacity($mask-bg-opacity);
+		@include transform(scale(1) )
+	}
+}
 // mixins --------------------------------------------- end
 
 .ax5-ui-dialog{
+	@include animation(ax-dialog 0.2s ease-in-out);
+
 	@include ax-dialog();
 	@include ax-dialog-section();
 

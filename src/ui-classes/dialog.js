@@ -52,26 +52,26 @@
 			//== class body start
 		this.init = function(){
 			// after set_config();
+			cfg.id = 'ax5-dialog-' + ax5.get_guid();
 			this.mask = new ax5.ui.mask();
 			this.mask.set_config(cfg.mask);
 		};
 
 		this.get_content = function(dialog_id, opts){
 			var
-				po = [],
-				btns = opts.btns || cfg.btns;
+				po = [];
 
-			po.push('<div id="' + dialog_id + '" data-ax5-ui="dialog" class="ax5-ui-dialog ' + (opts.theme || cfg.theme || "") + '">');
+			po.push('<div id="' + dialog_id + '" data-ax5-ui="dialog" class="ax5-ui-dialog ' + opts.theme + '">');
 			po.push('<div class="ax-dialog-heading">');
 			po.push( (opts.title || cfg.title || "") );
 			po.push('</div>');
 			po.push('<div class="ax-dialog-body">');
 				po.push('<div class="ax-dialog-msg">');
-				po.push( (opts.msg || cfg.msg || "") );
+				po.push( (opts.msg || cfg.msg || "").replace(/\n/g, "<br/>") );
 				po.push('</div>');
 				po.push('<div class="ax-dialog-buttons">');
-					U.each(btns, function(){
-						po.push('<button type="button" class="ax-btn">' + this.label + '</button>')
+					U.each(opts.btns, function(k, v){
+						po.push('<button type="button" data-ax-dialog-btn="' + k + '" class="ax-btn ' + opts.theme + '">' + this.label + '</button>')
 					});
 				po.push('</div>');
 			po.push('</div>');
@@ -84,24 +84,96 @@
 				pos = {},
 				box = {},
 				po,
-				dialog_id = opts.id || 'ax5-dialog-' + ax5.get_guid(),
 				dialog_target;
+
+			opts.id = (opts.id || cfg.id);
+			opts.dialog_type = "alert";
+			opts.theme = (opts.theme || cfg.theme || "");
+			if(typeof opts.btns === "undefined"){
+				opts.btns = U.clone(cfg.btns);
+			}
 
 			this.mask.open();
 			box = {
 				width: opts.width || cfg.width
 			};
-			axd.append(document.body, this.get_content(dialog_id, opts));
-			dialog_target = ax5.dom('#' + dialog_id);
+			axd.append(document.body, this.get_content(opts.id, opts));
+			dialog_target = ax5.dom('#' + opts.id);
 			dialog_target.css({width: box.width});
 
-			// dialog 높이 구하기
+			// dialog 높이 구하기 - 너비가 정해지면 높이가 변경 될 것.
+			box.height = dialog_target.height();
 			//- position 정렬
 			if(typeof opts.position === "undefined" || opts.position === "center"){
-
+				pos.top = ax5.dom.height(document.body) / 2 - box.height/2;
+				pos.left = ax5.dom.width(document.body) / 2 - box.width/2;
+			}else{
+				pos.left = opts.position.left || 0;
+				pos.top = opts.position.top || 0;
 			}
+			dialog_target.css(pos);
 
-			//todo : 정렬처리
+			// bind button event
+			dialog_target.find("[data-ax-dialog-btn]").elements[0].focus();
+			dialog_target.find("[data-ax-dialog-btn]").on(cfg.click_event_name, (function(e){
+				this.btn_onclick(e||window.event, dialog_target, opts, callback);
+			}).bind(this));
+			
+			// bind key event
+			axd(window).on("keydown", (function(e){
+				this.onkeyup(e||window.event, dialog_target, opts, callback);
+			}).bind(this))
+		};
+
+		this.btn_onclick = function(e, dialog_target, opts, callback, target, k){
+			target = axd.parent(e.target, function(target){
+				if(ax5.dom.attr(target, "data-ax-dialog-btn")){
+					return true;
+				}
+			});
+			if(target){
+				k = axd.attr(target, "data-ax-dialog-btn");
+
+				var that = {
+					key: k, value: opts.btns[k],
+					dialog_id: opts.id,
+					item_target: target
+				};
+
+				if(opts.btns[k].onclick){
+					opts.btns[k].onclick.call(that);
+				}
+				else
+				if(k === "ok"){
+					if(callback) callback.call(that);
+				}
+				if(opts.dialog_type === "alert"){
+					dialog_target.remove();
+					this.mask.close();
+				}
+			}
+		};
+		
+		this.onkeyup = function(e, dialog_target, opts, callback, target, k){
+			if(e.keyCode == ax5.info.event_keys.ESC){
+				dialog_target.remove();
+				this.mask.close();
+			}
+			/*
+			else
+			if(e.keyCode == ax5.info.event_keys.SPACE || e.keyCode == ax5.info.event_keys.RETURN){
+
+				var that = {
+					key: "ok", value: "",
+					dialog_id: opts.id,
+					item_target: target
+				};
+
+				if(callback) callback.call(that);
+				dialog_target.remove();
+				this.mask.close();
+			}
+			*/
 		};
 
 	};

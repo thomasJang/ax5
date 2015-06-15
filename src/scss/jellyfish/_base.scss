@@ -436,10 +436,10 @@ $mask-over-z-index: 2000;
 $dialog-box-model: $panel-box-model;
 $dialog-bg: $panel-bg;
 $dialog-border: 1px solid rgb(255/2, 255/2, 255/2);
-$dialog-box-shaodw: 0px 0px 4px 0px rgba(0,0,0,0.50);
+$dialog-box-shaodw: 0px 0px 5px 0px rgba(0,0,0,0.60);
 $dialog-body-padding: $panel-body-padding;
-$dialog-heading-padding: $panel-heading-padding;
-$dialog-border-radius: $panel-border-radius;
+$dialog-heading-padding: 8px 12px;
+$dialog-border-radius: 8px;
 
 //** Border color for elements within dialog
 $dialog-default-text: $panel-default-text;

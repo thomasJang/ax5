@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-06-15 
+ publish date : 2015-06-16 
 -->
 <html lang="en">
 <head>
@@ -641,6 +641,7 @@ ax5.util.require(["ui/keypad.js"], function(){
 </article>
 
 
+
 <!-- basic -->
 <article class="content">
 	<h3 data-menu-item="ax-ui-dialog-alert" class="capitalize">alert</h3>
@@ -657,11 +658,13 @@ ax5.util.require(["ui/keypad.js"], function(){
 		my_dialog.set_config({
 			mask: {} // default target : document.body
 		});
+
+		// default
 		ax5.dom("#ax-ui-dialog-alert-btn").on("click", function(){
 			my_dialog.alert({
-				title:"AX5",
-				msg:"알러트 메세지",
-				theme: ""
+				id: "dialog-01", // [string] - id를 정하지 않으면 자동 증가되는 아이디를 갖게됨.
+				title: '&lt;i class="axi axi-ion-alert">&lt;/i> Default alert',
+				msg: '&lt;span class="ax">알러트 메세지 기본 타입의 Alert입니다.&lt;/span>\n&lt;span class="ax basic">테마를 정하지 않았습니다.&lt;/span>',
 			}, function(){
 				console.log(this);
 			});
@@ -679,11 +682,13 @@ ax5.util.require(["ui/keypad.js"], function(){
 		my_dialog.set_config({
 			mask: {} // default target : document.body
 		});
+
+		// default
 		ax5.dom("#ax-ui-dialog-alert-btn").on("click", function(){
 			my_dialog.alert({
-				title:"AX5",
-				msg:"알러트 메세지",
-				theme: ""
+				id: "dialog-01", // [string] - id를 정하지 않으면 자동 증가되는 아이디를 갖게됨.
+				title: '<i class="axi axi-ion-alert"></i> Default alert',
+				msg: '<span class="ax">알러트 메세지 기본 타입의 Alert입니다.</span>\n<span class="ax basic">테마를 정하지 않았습니다.</span>',
 			}, function(){
 				console.log(this);
 			});
@@ -692,8 +697,150 @@ ax5.util.require(["ui/keypad.js"], function(){
 </script>
 
 
+	<div class="callout info">
+		<h4>callback</h4>
+		<p>
+			전통적인 방식의 개발에서는 window.alert를 호출하면 웹 애플리케이션이 hold된다. 하지만 직접구현한 UI 컴포넌트에서 그런 기능을 기대 하는 것은
+			어리석다. 한번 더 생각해보면 자바스크립트로 그런 작업을 할 수 있다면 보안에 문제가 많기 때문이다. 스크립트를 삽입해서 웹 애플리케이션을 먹통으로 만드는 일이 너무도 빈번 하지 않겠는가.
+			그런 이유로 직접 구현한 UI 컴포넌트에서 dialog를 호출하고 사용자 입력 후 다음 함수를 실행 하게 하려면 <code>callback</code>함수를 이용하여야 한다.
+		</p>
+		<p>
+			<code>my_dialog.alert({}, function(){});</code>에서 두번째 인자가 <code>callback</code>함수가 되는데 사용자 입력을 받으면 호출되게 된다.
+		</p>
+	</div>
 </article>
 
+
+
+<!-- theme -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-dialog-alert-theme" class="capitalize">alert theme</h3>
+	<p>
+		ax5의 모든 UI 컴포넌트가 그랬듯이 비슷한 컬러셋트를 사용할 수 있다.
+	</p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+	&lt;button class="ax-btn basic" id="ax-ui-dialog-alert-basic-btn">Alert Basic&lt;/button>
+	&lt;button class="ax-btn good" id="ax-ui-dialog-alert-good-btn">Alert Good&lt;/button>
+	&lt;button class="ax-btn info" id="ax-ui-dialog-alert-info-btn">Alert Info&lt;/button>
+	&lt;button class="ax-btn warning" id="ax-ui-dialog-alert-warning-btn">Alert Warning&lt;/button>
+	&lt;button class="ax-btn danger" id="ax-ui-dialog-alert-danger-btn">Alert Danger&lt;/button>
+	&lt;button class="ax-btn special" id="ax-ui-dialog-alert-special-btn">Alert Special&lt;/button>
+&lt;/div>
+&lt;script type="text/javascript">
+	ax5.info.base_url = "../pub/";
+	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
+		var my_dialog = new ax5.ui.dialog();
+		my_dialog.set_config({
+			mask: {} // default target : document.body
+		});
+
+		// basic
+		ax5.dom("#ax-ui-dialog-alert-basic-btn").on("click", function(){
+			my_dialog.alert({
+				theme: 'basic', title: '&lt;i class="axi axi-stars">&lt;/i> alert', msg: 'basic color',
+			}, function(){ console.log(this); });
+		});
+
+		// good
+		ax5.dom("#ax-ui-dialog-alert-good-btn").on("click", function(){
+			my_dialog.alert({
+				theme: 'good', title: '&lt;i class="axi axi-thumbs-o-up">&lt;/i> alert', msg: 'good color',
+			}, function(){ console.log(this); });
+		});
+
+		// info
+		ax5.dom("#ax-ui-dialog-alert-info-btn").on("click", function(){
+			my_dialog.alert({
+				theme: 'info', title: '&lt;i class="axi axi-thumbs-o-up">&lt;/i> alert', msg: 'info color',
+			}, function(){ console.log(this); });
+		});
+
+		// warning
+		ax5.dom("#ax-ui-dialog-alert-warning-btn").on("click", function(){
+			my_dialog.alert({
+				theme: 'warning', title: '&lt;i class="axi axi-warning">&lt;/i> alert', msg: 'warning color',
+			}, function(){ console.log(this); });
+		});
+
+		// danger
+		ax5.dom("#ax-ui-dialog-alert-danger-btn").on("click", function(){
+			my_dialog.alert({
+				theme: 'danger', title: '&lt;i class="axi axi-times-circle">&lt;/i> alert', msg: 'danger color',
+			}, function(){ console.log(this); });
+		});
+
+		// special
+		ax5.dom("#ax-ui-dialog-alert-special-btn").on("click", function(){
+			my_dialog.alert({
+				theme: 'special', title: '&lt;i class="axi axi-times-circle">&lt;/i> alert', msg: 'special color',
+			}, function(){ console.log(this); });
+		});
+	});
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result">
+	<button class="ax-btn basic" id="ax-ui-dialog-alert-basic-btn">Alert Basic</button>
+	<button class="ax-btn good" id="ax-ui-dialog-alert-good-btn">Alert Good</button>
+	<button class="ax-btn info" id="ax-ui-dialog-alert-info-btn">Alert Info</button>
+	<button class="ax-btn warning" id="ax-ui-dialog-alert-warning-btn">Alert Warning</button>
+	<button class="ax-btn danger" id="ax-ui-dialog-alert-danger-btn">Alert Danger</button>
+	<button class="ax-btn special" id="ax-ui-dialog-alert-special-btn">Alert Special</button>
+</div>
+<script type="text/javascript">
+	ax5.info.base_url = "../pub/";
+	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
+		var my_dialog = new ax5.ui.dialog();
+		my_dialog.set_config({
+			mask: {} // default target : document.body
+		});
+
+		// basic
+		ax5.dom("#ax-ui-dialog-alert-basic-btn").on("click", function(){
+			my_dialog.alert({
+				theme: 'basic', title: '<i class="axi axi-stars"></i> alert', msg: 'basic color',
+			}, function(){ console.log(this); });
+		});
+
+		// good
+		ax5.dom("#ax-ui-dialog-alert-good-btn").on("click", function(){
+			my_dialog.alert({
+				theme: 'good', title: '<i class="axi axi-thumbs-o-up"></i> alert', msg: 'good color',
+			}, function(){ console.log(this); });
+		});
+
+		// info
+		ax5.dom("#ax-ui-dialog-alert-info-btn").on("click", function(){
+			my_dialog.alert({
+				theme: 'info', title: '<i class="axi axi-thumbs-o-up"></i> alert', msg: 'info color',
+			}, function(){ console.log(this); });
+		});
+
+		// warning
+		ax5.dom("#ax-ui-dialog-alert-warning-btn").on("click", function(){
+			my_dialog.alert({
+				theme: 'warning', title: '<i class="axi axi-warning"></i> alert', msg: 'warning color',
+			}, function(){ console.log(this); });
+		});
+
+		// danger
+		ax5.dom("#ax-ui-dialog-alert-danger-btn").on("click", function(){
+			my_dialog.alert({
+				theme: 'danger', title: '<i class="axi axi-times-circle"></i> alert', msg: 'danger color',
+			}, function(){ console.log(this); });
+		});
+
+		// special
+		ax5.dom("#ax-ui-dialog-alert-special-btn").on("click", function(){
+			my_dialog.alert({
+				theme: 'special', title: '<i class="axi axi-times-circle"></i> alert', msg: 'special color',
+			}, function(){ console.log(this); });
+		});
+	});
+</script>
+
+
+</article>
 
 <!-- split -->
 

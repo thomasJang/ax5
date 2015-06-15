@@ -34,7 +34,6 @@ pre.prettyprint {
 
 .app-wrap {
   position: relative;
-  width: 970px;
   margin: 0px; }
 
 .app-nav {
@@ -59,7 +58,6 @@ pre.prettyprint {
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.3); }
   .app-nav .box-content {
     position: relative;
-    width: 970px;
     margin: 0px; }
     .app-nav .box-content ul, .app-nav .box-content li {
       margin: 0px;
@@ -151,9 +149,11 @@ pre.prettyprint {
   padding: 280px 0px 0px 0px; }
   .app-page .app-content {
     position: relative;
-    width: 750px;
+    min-width: 750px;
+    max-width: 1200px;
     margin: 0px;
-    padding-left: 240px; }
+    padding-left: 240px;
+    padding-right: 40px; }
     .app-page .app-content a[name] {
       display: block;
       height: 10px; }

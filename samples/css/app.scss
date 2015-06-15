@@ -72,7 +72,7 @@ $app-nav-left: 200px;
 $app-visual-height: 280px;
 .app-wrap{
   position: relative;
-  width: $app-page-width;
+  //width: $app-page-width;
   margin: 0px;
 }
 .app-nav{
@@ -97,7 +97,7 @@ $app-visual-height: 280px;
   }
   .box-content{
 	position: relative;
-	width: $app-page-width;
+	//width: $app-page-width;
 	margin:0px;
 	ul, li{margin:0px;padding:0px;}
 	li{list-style: none;display: inline;}
@@ -183,9 +183,11 @@ $app-visual-height: 280px;
   padding: $app-visual-height 0px 0px 0px;
   .app-content{
 	position: relative;
-	width: ($app-page-width - $app-nav-left - 20);
+	  min-width: ($app-page-width - $app-nav-left - 20);
+	  max-width: 1200px;
 	margin:0px;
     padding-left: ($app-nav-left + 40);
+	  padding-right: 40px;
 
     a[name]{
       display: block;
