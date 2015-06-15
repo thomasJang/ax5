@@ -2618,55 +2618,6 @@ a.ax {
   border-bottom-left-radius: 6px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); }
 
-/*
-.ax-floating-contenxt{
-  @include ax-panel-floating();
-}
-.ax-floating-modal{
-  @include ax-panel-floating();
-}
-.ax-floating-toast{
-  @include ax-panel-floating();
-}
-.ax-floating-dialog{
-  @include ax-panel-floating();
-}
-.ax-floating-progress{
-  @include ax-panel-floating();
-}
-.ax-floating-tooltip{
-  @include ax-panel-floating();
-}
-*/
-@-webkit-keyframes ax-masking {
-  from {
-    -webkit-transform: scale(1); }
-
-  to {
-    -webkit-transform: scale(0.96); } }
-
-@-moz-keyframes ax-masking {
-  from {
-    -moz-transform: scale(1); }
-
-  to {
-    -moz-transform: scale(0.96); } }
-
-@keyframes ax-masking {
-  from {
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);
-    -ms-transform: scale(1);
-    -o-transform: scale(1);
-    transform: scale(1); }
-
-  to {
-    -webkit-transform: scale(0.96);
-    -moz-transform: scale(0.96);
-    -ms-transform: scale(0.96);
-    -o-transform: scale(0.96);
-    transform: scale(0.96); } }
-
 @-webkit-keyframes ax-mask {
   from {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
@@ -2705,10 +2656,7 @@ a.ax {
   -moz-transform: translateZ(0);
   -ms-transform: translateZ(0);
   -o-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-animation: ax-masking 0.2s ease-in-out;
-  -moz-animation: ax-masking 0.2s ease-in-out;
-  animation: ax-masking 0.2s ease-in-out; }
+  transform: translateZ(0); }
 
 .ax-mask {
   z-index: 1000;
@@ -2773,3 +2721,82 @@ a.ax {
       margin: 0px;
       width: 100%;
       height: 100%; }
+
+.ax5-ui-dialog {
+  color: #333333;
+  font-size: 13px;
+  font-weight: 400;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 18px;
+  box-sizing: border-box;
+  background-color: #fff;
+  border: 1px solid gray;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+  position: fixed;
+  left: 0px;
+  top: 0px; }
+  .ax5-ui-dialog .ax-dialog-heading {
+    font-weight: 600;
+    padding: 10px 12px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px; }
+    .ax5-ui-dialog .ax-dialog-heading .badge {
+      font-size: 0.8em;
+      color: #f5f5f5;
+      background-color: #333333; }
+  .ax5-ui-dialog .ax-dialog-body {
+    padding: 12px;
+    text-align: center; }
+    .ax5-ui-dialog .ax-dialog-body .ax-dialog-msg {
+      padding-top: 12px;
+      padding-bottom: 12px; }
+    .ax5-ui-dialog .ax-dialog-body .ax-dialog-buttons {
+      margin-top: 12px; }
+  .ax5-ui-dialog .ax-dialog-heading {
+    color: #333333;
+    background: #f5f5f5; }
+    .ax5-ui-dialog .ax-dialog-heading .badge {
+      color: #f5f5f5;
+      background-color: #333333; }
+  .ax5-ui-dialog.basic .ax-dialog-heading {
+    color: #fff;
+    background: #46B686; }
+    .ax5-ui-dialog.basic .ax-dialog-heading .badge {
+      color: #46B686;
+      background-color: #fff; }
+  .ax5-ui-dialog.good .ax-dialog-heading {
+    color: #fff;
+    background: #CBCBCB; }
+    .ax5-ui-dialog.good .ax-dialog-heading .badge {
+      color: #CBCBCB;
+      background-color: #fff; }
+  .ax5-ui-dialog.info .ax-dialog-heading {
+    color: #fff;
+    background: #BC382F; }
+    .ax5-ui-dialog.info .ax-dialog-heading .badge {
+      color: #BC382F;
+      background-color: #fff; }
+  .ax5-ui-dialog.warning .ax-dialog-heading {
+    color: #fff;
+    background: #DE463B; }
+    .ax5-ui-dialog.warning .ax-dialog-heading .badge {
+      color: #DE463B;
+      background-color: #fff; }
+  .ax5-ui-dialog.danger .ax-dialog-heading {
+    color: #fff;
+    background: #99221a; }
+    .ax5-ui-dialog.danger .ax-dialog-heading .badge {
+      color: #99221a;
+      background-color: #fff; }
+  .ax5-ui-dialog.special .ax-dialog-heading {
+    color: #fff;
+    background: #CDCDCD; }
+    .ax5-ui-dialog.special .ax-dialog-heading .badge {
+      color: #CDCDCD;
+      background-color: #fff; }

@@ -106,6 +106,7 @@ ax5.dom.ready(function(){
 				},
 				menu_taping: function(opt){
 					if(typeof opt === "undefined" && nav_left_on) return false;
+					
 					var s_top = ax5.dom.scroll().top, _i = null;
 					for(var i= 0,l=menu_list.length;i<l;i++){
 						if( menu_list[i].top + ((i < l-1) ? menu_list[i+1].top - menu_list[i].top - window_height/3 : 0) > s_top){
@@ -124,13 +125,13 @@ ax5.dom.ready(function(){
 					var nav_height = ax5.dom.height(app_nav_left[0]),
 						nav_sc_top = app_nav_left[0].scrollTop,
 						el_top = menu_list[_i].el.position().top + 40;
+
 					if(nav_height + nav_sc_top < el_top){
 						app_nav_left[0].scrollTop = el_top - nav_height;
 					}
 					else if(nav_sc_top > el_top - 40){
 						app_nav_left[0].scrollTop = el_top - 40;
 					}
-
 					selected_menu_list_index = _i;
 				},
 				onscroll: function(){

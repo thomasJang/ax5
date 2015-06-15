@@ -23,7 +23,7 @@
 			this.config = {
 				target: axd.get(document.body)[0]
 			};
-			this.mask_content = '<h1>AX5 Mask</h1>';
+			this.mask_content = '';
 			this.status = "off";
 
 		}).apply(this, arguments);

@@ -948,11 +948,12 @@
 				};
 
 			// 로드해야 할 모듈들을 doc.head에 삽입하고 로드가 성공여부를 리턴합니다.
-			for (var i = 0; i < mods.length; i++) {
+			for (var i = 0, l = mods.length; i < l; i++) {
 				var src = mods[i], type = right(src, "."), hasPlugin = false,
 					plugin, plugin_src = info.base_url + src, attr_nm = (type === "js") ? "src" : "href",
-					plug_load, plug_err;
-				for (var s = 0; s < scripts.length; s++) {
+					plug_load, plug_err, s = scripts.length;
+
+				while(s--){
 					if (scripts[s].getAttribute(attr_nm) === plugin_src) {
 						hasPlugin = true;
 						break;
@@ -960,8 +961,10 @@
 				}
 
 				if (hasPlugin) {
+
 					loadCount--;
 					onload();
+
 				} else {
 
 					plugin = (type === "js") ?
@@ -987,8 +990,15 @@
 					ax5.xhr({
 						url : plugin_src, contentType: "",
 						res : function (response, status) {
-							var time_id;
-							head.appendChild(plugin);
+							var time_id, hasPlugin = false, scripts = dom.get("script[src]"), s = scripts.length;
+							while(s--){
+								if (scripts[s].getAttribute(attr_nm) === plugin_src) {
+									hasPlugin = true;
+									break;
+								}
+							}
+
+							if(!hasPlugin) head.appendChild(plugin);
 							plugin.onload = function(e) {
 								plug_load(e, plugin_src);
 								if(time_id) clearTimeout(time_id);

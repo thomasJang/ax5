@@ -430,3 +430,35 @@ $mask-bg: $gray-dark;
 $mask-bg-opacity: 0.6;
 $mask-text-color: $gray-lighter;
 $mask-text-shadow: 0px 1px 0px $black;
+$mask-over-z-index: 2000;
+
+//== dialog
+$dialog-box-model: $panel-box-model;
+$dialog-bg: $panel-bg;
+$dialog-border: 1px solid rgb(255/2, 255/2, 255/2);
+$dialog-box-shaodw: 0px 0px 4px 0px rgba(0,0,0,0.50);
+$dialog-body-padding: $panel-body-padding;
+$dialog-heading-padding: $panel-heading-padding;
+$dialog-border-radius: $panel-border-radius;
+
+//** Border color for elements within dialog
+$dialog-default-text: $panel-default-text;
+$dialog-default-heading-bg: $panel-default-heading-bg;
+
+$dialog-basic-text: $panel-basic-text;
+$dialog-basic-heading-bg: $panel-basic-heading-bg;
+
+$dialog-good-text: $panel-good-text;
+$dialog-good-heading-bg: $panel-good-heading-bg;
+
+$dialog-info-text: $panel-info-text;
+$dialog-info-heading-bg: $panel-info-heading-bg;
+
+$dialog-warning-text: $panel-warning-text;
+$dialog-warning-heading-bg: $panel-warning-heading-bg;
+
+$dialog-danger-text: $panel-danger-text;
+$dialog-danger-heading-bg: $panel-danger-heading-bg;
+
+$dialog-special-text: $panel-special-text;
+$dialog-special-heading-bg: $panel-special-heading-bg;

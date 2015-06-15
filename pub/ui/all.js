@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-06-14 
+ * 2015-06-15 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -17,7 +17,7 @@
 	 * @version v0.0.1
 	 * @author tom@axisj.com
 	 * @logs
-	 * 2014-06-06 tom : 시작
+	 * 2014-06-15 tom : 시작
 	 * @example
 	 * ```
 	 * var my_dialog = new ax5.ui.dialog();
@@ -33,14 +33,18 @@
 			if (ax_super) ax_super.call(this); // 부모호출
 			this.config = {
 				click_event_name: (('ontouchstart' in document.documentElement) ? "touchstart" : "click"),
+				mask: {
+					target: document.body,
+					content: ''
+				},
 				theme: 'default',
-				keys: {
-					label: 'label',
-					value: 'value',
-					width: 'width',
-					rowspan: 'rowspan',
-					colspan: 'colspan',
-					klass: 'klass'
+				width: 300,
+				title: '',
+				msg: '',
+				btns: {
+					ok: {
+						label: 'ok'
+					}
 				}
 			};
 		}).apply(this, arguments);
@@ -58,11 +62,56 @@
 			//== class body start
 		this.init = function(){
 			// after set_config();
-			//console.log(this.config);
-			if(!cfg.target || !cfg.board){
-				U.error("aui_keypad_400", "[ax5.ui.keypad] config.target, config.board is required");
+			this.mask = new ax5.ui.mask();
+			this.mask.set_config(cfg.mask);
+		};
+
+		this.get_content = function(dialog_id, opts){
+			var
+				po = [],
+				btns = opts.btns || cfg.btns;
+
+			po.push('<div id="' + dialog_id + '" data-ax5-ui="dialog" class="ax5-ui-dialog ' + (opts.theme || cfg.theme || "") + '">');
+			po.push('<div class="ax-dialog-heading">');
+			po.push( (opts.title || cfg.title || "") );
+			po.push('</div>');
+			po.push('<div class="ax-dialog-body">');
+				po.push('<div class="ax-dialog-msg">');
+				po.push( (opts.msg || cfg.msg || "") );
+				po.push('</div>');
+				po.push('<div class="ax-dialog-buttons">');
+					U.each(btns, function(){
+						po.push('<button type="button" class="ax-btn">' + this.label + '</button>')
+					});
+				po.push('</div>');
+			po.push('</div>');
+			po.push('</div>');
+			return po.join('');
+		};
+
+		this.alert = function(opts, callback){
+			var
+				pos = {},
+				box = {},
+				po,
+				dialog_id = opts.id || 'ax5-dialog-' + ax5.get_guid(),
+				dialog_target;
+
+			this.mask.open();
+			box = {
+				width: opts.width || cfg.width
+			};
+			axd.append(document.body, this.get_content(dialog_id, opts));
+			dialog_target = ax5.dom('#' + dialog_id);
+			dialog_target.css({width: box.width});
+
+			// dialog 높이 구하기
+			//- position 정렬
+			if(typeof opts.position === "undefined" || opts.position === "center"){
+
 			}
-			cfg.target = ax5.dom(cfg.target);
+
+			//todo : 정렬처리
 		};
 
 	};
@@ -262,7 +311,7 @@
 			this.config = {
 				target: axd.get(document.body)[0]
 			};
-			this.mask_content = '<h1>AX5 Mask</h1>';
+			this.mask_content = '';
 			this.status = "off";
 
 		}).apply(this, arguments);

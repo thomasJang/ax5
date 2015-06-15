@@ -1,42 +1,13 @@
-@mixin ax-floating() {
+@mixin ax-mask() {
   position: absolute;
 }
-@mixin ax-panel-floating(){
+@mixin ax-panel-mask(){
   @include ax-panel();
   position: absolute;
 }
 
 // mixins --------------------------------------------- end
 
-/*
-.ax-floating-contenxt{
-  @include ax-panel-floating();
-}
-.ax-floating-modal{
-  @include ax-panel-floating();
-}
-.ax-floating-toast{
-  @include ax-panel-floating();
-}
-.ax-floating-dialog{
-  @include ax-panel-floating();
-}
-.ax-floating-progress{
-  @include ax-panel-floating();
-}
-.ax-floating-tooltip{
-  @include ax-panel-floating();
-}
-*/
-
-@include keyframes(ax-masking) {
-  from {
-    @include transform(scale(1.0));
-  }
-  to {
-    @include transform(scale(0.96));
-  }
-}
 @include keyframes(ax-mask) {
   from {
     @include opacity(0.0);
@@ -50,7 +21,6 @@
   //position: fixed;
   @include transform(scale(0.96) );
   @include transform(translateZ(0));
-  @include animation(ax-masking 0.2s ease-in-out);
 }
 .ax-mask{
   z-index: $mask-z-index;

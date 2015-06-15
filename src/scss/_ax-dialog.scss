@@ -1,0 +1,82 @@
+@mixin ax-dialog() {
+	@include ax();
+	box-sizing: $dialog-box-model;
+	background-color: $dialog-bg;
+	border: $dialog-border;
+
+	@include ax-border-radius($dialog-border-radius);
+	@include box-shadow($dialog-box-shaodw);
+
+	z-index: $mask-over-z-index;
+	position: fixed;
+	left: 0px;
+	top: 0px;
+}
+
+@mixin ax-dialog-section() {
+	.ax-dialog-heading{
+		//font-size: 1em;
+		font-weight: 600;
+		padding: $dialog-heading-padding;
+		border-bottom: 1px solid transparent;
+		@include ax-border-radius($dialog-border-radius, "top", -1);
+		.badge {
+			font-size: 0.8em;
+			color: $dialog-default-heading-bg;
+			background-color: $dialog-default-text;
+		}
+	}
+	.ax-dialog-body{
+		padding: $dialog-body-padding;
+		text-align: center;
+		.ax-dialog-msg{
+			padding-top: $dialog-body-padding;
+			padding-bottom: $dialog-body-padding;
+		}
+		.ax-dialog-buttons{
+			margin-top: $dialog-body-padding;
+		}
+	}
+}
+
+@mixin dialog-variant($text-color, $heading-bg-color) {
+	.ax-dialog-heading{
+		color: $text-color;
+		background: $heading-bg-color;
+		.badge {
+			color: $heading-bg-color;
+			background-color: $text-color;
+		}
+	}
+	.ax-dialog-body{
+
+	}
+}
+
+// mixins --------------------------------------------- end
+
+.ax5-ui-dialog{
+	@include ax-dialog();
+	@include ax-dialog-section();
+
+	@include dialog-variant($dialog-default-text, $dialog-default-heading-bg);
+
+	&.basic{
+		@include dialog-variant($dialog-basic-text, $dialog-basic-heading-bg);
+	}
+	&.good{
+		@include dialog-variant($dialog-good-text, $dialog-good-heading-bg);
+	}
+	&.info{
+		@include dialog-variant($dialog-info-text, $dialog-info-heading-bg);
+	}
+	&.warning{
+		@include dialog-variant($dialog-warning-text, $dialog-warning-heading-bg);
+	}
+	&.danger{
+		@include dialog-variant($dialog-danger-text, $dialog-danger-heading-bg);
+	}
+	&.special{
+		@include dialog-variant($dialog-special-text, $dialog-special-heading-bg);
+	}
+}

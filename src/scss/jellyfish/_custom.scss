@@ -1,0 +1,13 @@
+//~~ extend within jellyfish
+
+//== ax5-ui-dialog 재정의
+.ax5-ui-dialog {
+	.ax-dialog-body{
+		.ax-dialog-buttons{
+			display: inline-block;
+			border: 1px solid #C8C8C8;
+			padding: 2px;
+			border-radius: 8px;
+		}
+	}
+}
