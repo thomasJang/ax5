@@ -189,3 +189,8 @@
 	//== ui class 공통 처리 구문
 
 })(ax5.ui, ax5.ui.root);
+
+
+// todo : confirm 기능 구현 alert에 btns만 확장 하면 끄읏
+// todo : prompt
+// todo : toast
