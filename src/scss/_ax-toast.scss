@@ -1,0 +1,137 @@
+@mixin ax-toast() {
+	@include ax();
+	box-sizing: $toast-box-model;
+	border: $toast-border;
+
+	@include ax-border-radius($toast-border-radius);
+	@include box-shadow($toast-box-shaodw);
+	position: relative;
+	margin: 0px 0px 10px 0px;
+}
+
+@mixin ax-toast-section() {
+	display: table;
+	padding: $toast-body-padding;
+	.ax-toast-axicon {
+		display: table-cell;
+		padding: $toast-body-padding;
+		text-align: left;
+		font-size:24px;
+		width: 24px;
+		vertical-align: middle;
+	}
+	.ax-toast-body{
+		display: table-cell;
+		padding: $toast-body-padding;
+		text-align: left;
+		vertical-align: middle;
+	}
+	.ax-toast-buttons{
+		display: table-cell;
+		padding: $toast-body-padding;
+		text-align: right;
+		vertical-align: middle;
+		button{
+			&:not(:last-child){
+				margin-right: 3px;
+			}
+		}
+	}
+}
+
+@mixin toast-variant($text-color, $bg-color, $color) {
+	background: $bg-color;
+	color: $text-color;
+	.ax-toast-axicon {
+		color: $color;
+	}
+}
+
+@include keyframes(ax-toast) {
+	from {
+		@include opacity(0.0);
+		@include transform( translateX(100px) )
+	}
+	to {
+		@include opacity($mask-bg-opacity);
+		@include transform( translateX(0px) )
+	}
+}
+
+@include keyframes(ax-toast-removed) {
+	from {
+		@include opacity(1.0);
+		@include transform( translateX(0px) );
+	}
+	to {
+		@include opacity(0.0);
+		@include transform( translateX(300px) );
+	}
+}
+
+@include keyframes(ax-toast-destroy) {
+	from {
+		@include opacity(1.0);
+	}
+	to {
+		@include opacity(0.0);
+	}
+}
+// mixins --------------------------------------------- end
+
+.ax5-ui-toast-container {
+	z-index: $mask-over-z-index;
+	position: fixed;
+	@if($toast-container-position == 0){
+		left: $toast-container-margin;
+		top: $toast-container-margin;
+	}
+	@else if($toast-container-position == 1) {
+		right: $toast-container-margin;
+		top: $toast-container-margin;
+	}
+	@else if($toast-container-position == 2) {
+		right: $toast-container-margin;
+		bottom: $toast-container-margin;
+	}
+	@else if($toast-container-position == 3) {
+		left: $toast-container-margin;
+		bottom: $toast-container-margin;
+	}
+
+	.ax5-ui-toast{
+		@include animation(ax-toast 0.2s ease-in-out);
+		@include ax-toast();
+		@include ax-toast-section();
+		@include transition(all 0.2s ease-in-out);
+
+		@include toast-variant($toast-default-text, $toast-default-bg, $toast-default-color);
+
+		&.basic{
+			@include toast-variant($toast-basic-text, $toast-basic-bg, $toast-basic-color);
+		}
+		&.good{
+			@include toast-variant($toast-good-text, $toast-good-bg, $toast-good-color);
+		}
+		&.info{
+			@include toast-variant($toast-info-text, $toast-info-bg, $toast-info-color);
+		}
+		&.warning{
+			@include toast-variant($toast-warning-text, $toast-warning-bg, $toast-warning-color);
+		}
+		&.danger{
+			@include toast-variant($toast-danger-text, $toast-danger-bg, $toast-danger-color);
+		}
+		&.special{
+			@include toast-variant($toast-special-text, $toast-special-bg, $toast-special-color);
+		}
+
+		&.removed{
+			@include animation(ax-toast-removed 0.2s ease-in-out forwards);
+		}
+		&.destroy{
+			@include animation(ax-toast-destroy 0.2s ease-in-out forwards);
+		}
+	}
+}
+

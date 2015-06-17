@@ -656,16 +656,15 @@ ax5.util.require(["ui/keypad.js"], function(){
 	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
 		var my_dialog = new ax5.ui.dialog();
 		my_dialog.set_config({
+			title: '&lt;i class="axi axi-ion-alert">&lt;/i> Default alert',
 			mask: {} // default target : document.body
 		});
 
 		// default
 		ax5.dom("#ax-ui-dialog-alert-btn").on("click", function(){
-			my_dialog.alert({
-				id: "dialog-01", // [string] - id를 정하지 않으면 자동 증가되는 아이디를 갖게됨.
-				title: '&lt;i class="axi axi-ion-alert">&lt;/i> Default alert',
-				msg: '&lt;span class="ax">알러트 메세지 기본 타입의 Alert입니다.&lt;/span>\n&lt;span class="ax basic">테마를 정하지 않았습니다.&lt;/span>',
-			}, function(){
+			my_dialog.alert(
+			'&lt;span class="ax">알러트 메세지 기본 타입의 Alert입니다.&lt;/span>\n&lt;span class="ax basic">테마를 정하지 않았습니다.&lt;/span>',
+			function(){
 				console.log(this);
 			});
 		});
@@ -680,16 +679,15 @@ ax5.util.require(["ui/keypad.js"], function(){
 	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
 		var my_dialog = new ax5.ui.dialog();
 		my_dialog.set_config({
+			title: '<i class="axi axi-ion-alert"></i> Default alert',
 			mask: {} // default target : document.body
 		});
 
 		// default
 		ax5.dom("#ax-ui-dialog-alert-btn").on("click", function(){
-			my_dialog.alert({
-				id: "dialog-01", // [string] - id를 정하지 않으면 자동 증가되는 아이디를 갖게됨.
-				title: '<i class="axi axi-ion-alert"></i> Default alert',
-				msg: '<span class="ax">알러트 메세지 기본 타입의 Alert입니다.</span>\n<span class="ax basic">테마를 정하지 않았습니다.</span>',
-			}, function(){
+			my_dialog.alert(
+			'<span class="ax">알러트 메세지 기본 타입의 Alert입니다.</span>\n<span class="ax basic">테마를 정하지 않았습니다.</span>',
+			function(){
 				console.log(this);
 			});
 		});
@@ -1078,15 +1076,15 @@ ax5.util.require(["ui/keypad.js"], function(){
 	ax5.info.base_url = "../pub/";
 	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
 		var my_dialog = new ax5.ui.dialog();
-		my_dialog.set_config({});
+		my_dialog.set_config({
+			title: '&lt;i class="axi axi-circle-check">&lt;/i> AX5 Confirm',
+		});
 
 		// default
 		ax5.dom("#ax-ui-dialog-prompt-custom-btn").on("click", function(){
 			my_dialog.prompt({
 				theme: 'info',
 				width: 400,
-				title: '&lt;i class="axi axi-circle-check">&lt;/i> AX5 Confirm',
-				msg: '값을 입력하세요',
 				input: {
 					data1: {label:"data1의 라벨"},
 					data2: {label:"data2의 라벨"}
@@ -1105,19 +1103,154 @@ ax5.util.require(["ui/keypad.js"], function(){
 	ax5.info.base_url = "../pub/";
 	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
 		var my_dialog = new ax5.ui.dialog();
-		my_dialog.set_config({});
+		my_dialog.set_config({
+			title: '<i class="axi axi-circle-check"></i> AX5 Confirm',
+		});
 
 		// default
 		ax5.dom("#ax-ui-dialog-prompt-custom-btn").on("click", function(){
 			my_dialog.prompt({
 				theme: 'info',
 				width: 400,
-				title: '<i class="axi axi-circle-check"></i> AX5 Confirm',
-				msg: '값을 입력하세요',
 				input: {
 					data1: {label:"data1의 라벨"},
 					data2: {label:"data2의 라벨"}
 				}
+			}, function(){
+				console.log(this);
+			});
+		});
+	});
+</script>
+
+
+</article>
+
+<!-- split -->
+
+<article class="cover">
+	<h1 data-menu-item="ax-ui-toast">Toast</h1>
+	<p class="lead">
+		toast는 웹 애플리케이션의 상태를 사용자에게 세련되게 알려주는 UI이다.
+		스크린의 우측이나 우 하단 영역에서 박스가 노출되었다가 일정 시간이 지나면 자연스럽게 사라진다. 웹 애플리케이션에서는
+		웹 브라우저의 우측이나 우 하단 영역에서 박스가 노출 되었다가 사라지게 된다.
+	</p>
+</article>
+
+
+
+<!-- basic -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-toast-default" class="capitalize">default</h3>
+	<p></p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+	&lt;button class="ax-btn good" id="ax-ui-toast-good-btn">Toast Good&lt;/button>
+	&lt;button class="ax-btn info" id="ax-ui-toast-info-btn">Toast Info&lt;/button>
+&lt;/div>
+&lt;script type="text/javascript">
+	ax5.info.base_url = "../pub/";
+	ax5.util.require(["ui/mask.js", "ui/toast.js"], function(){
+		window.my_toast = new ax5.ui.toast();
+		my_toast.set_config({
+			axicon: '&lt;i class="axi axi-circle-check">&lt;/i>',
+		});
+
+		// default
+		ax5.dom("#ax-ui-toast-good-btn").on("click", function(){
+			my_toast.push({
+				theme: 'good',
+				msg: 'Not Working!\nPlease check your files'
+			}, function(){
+				console.log(this);
+			});
+		});
+		// default
+		ax5.dom("#ax-ui-toast-info-btn").on("click", function(){
+			my_toast.push({
+				theme: 'info',
+				msg: 'Not Working!\nPlease check your files'
+			}, function(){
+				console.log(this);
+			});
+		});
+	});
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result">
+	<button class="ax-btn good" id="ax-ui-toast-good-btn">Toast Good</button>
+	<button class="ax-btn info" id="ax-ui-toast-info-btn">Toast Info</button>
+</div>
+<script type="text/javascript">
+	ax5.info.base_url = "../pub/";
+	ax5.util.require(["ui/mask.js", "ui/toast.js"], function(){
+		window.my_toast = new ax5.ui.toast();
+		my_toast.set_config({
+			axicon: '<i class="axi axi-circle-check"></i>',
+		});
+
+		// default
+		ax5.dom("#ax-ui-toast-good-btn").on("click", function(){
+			my_toast.push({
+				theme: 'good',
+				msg: 'Not Working!\nPlease check your files'
+			}, function(){
+				console.log(this);
+			});
+		});
+		// default
+		ax5.dom("#ax-ui-toast-info-btn").on("click", function(){
+			my_toast.push({
+				theme: 'info',
+				msg: 'Not Working!\nPlease check your files'
+			}, function(){
+				console.log(this);
+			});
+		});
+	});
+</script>
+
+
+</article>
+
+
+
+<!-- basic confirm-->
+<article class="content">
+	<h3 data-menu-item="ax-ui-toast-confirm" class="capitalize">confirm</h3>
+	<p></p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+	&lt;button class="ax-btn danger" id="ax-ui-toast-confirm-btn">Confirm Toast&lt;/button>
+&lt;/div>
+&lt;script type="text/javascript">
+	ax5.info.base_url = "../pub/";
+	ax5.util.require(["ui/mask.js", "ui/toast.js"], function(){
+		// default
+		ax5.dom("#ax-ui-toast-confirm-btn").on("click", function(){
+			my_toast.confirm({
+				axicon: '&lt;i class="axi axi-face-unlock">&lt;/i>',
+				theme: 'danger',
+				msg: 'Not Working!\nPlease check your files'
+			}, function(){
+				console.log(this);
+			});
+		});
+	});
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result">
+	<button class="ax-btn danger" id="ax-ui-toast-confirm-btn">Confirm Toast</button>
+</div>
+<script type="text/javascript">
+	ax5.info.base_url = "../pub/";
+	ax5.util.require(["ui/mask.js", "ui/toast.js"], function(){
+		// default
+		ax5.dom("#ax-ui-toast-confirm-btn").on("click", function(){
+			my_toast.confirm({
+				axicon: '<i class="axi axi-face-unlock"></i>',
+				theme: 'danger',
+				msg: 'Not Working!\nPlease check your files'
 			}, function(){
 				console.log(this);
 			});

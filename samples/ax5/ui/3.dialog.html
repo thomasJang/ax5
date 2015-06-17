@@ -22,16 +22,15 @@
 	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
 		var my_dialog = new ax5.ui.dialog();
 		my_dialog.set_config({
+			title: '<i class="axi axi-ion-alert"></i> Default alert',
 			mask: {} // default target : document.body
 		});
 
 		// default
 		ax5.dom("#ax-ui-dialog-alert-btn").on("click", function(){
-			my_dialog.alert({
-				id: "dialog-01", // [string] - id를 정하지 않으면 자동 증가되는 아이디를 갖게됨.
-				title: '<i class="axi axi-ion-alert"></i> Default alert',
-				msg: '<span class="ax">알러트 메세지 기본 타입의 Alert입니다.</span>\n<span class="ax basic">테마를 정하지 않았습니다.</span>',
-			}, function(){
+			my_dialog.alert(
+			'<span class="ax">알러트 메세지 기본 타입의 Alert입니다.</span>\n<span class="ax basic">테마를 정하지 않았습니다.</span>',
+			function(){
 				console.log(this);
 			});
 		});
@@ -264,15 +263,15 @@
 	ax5.info.base_url = "../pub/";
 	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
 		var my_dialog = new ax5.ui.dialog();
-		my_dialog.set_config({});
+		my_dialog.set_config({
+			title: '<i class="axi axi-circle-check"></i> AX5 Confirm',
+		});
 
 		// default
 		ax5.dom("#ax-ui-dialog-prompt-custom-btn").on("click", function(){
 			my_dialog.prompt({
 				theme: 'info',
 				width: 400,
-				title: '<i class="axi axi-circle-check"></i> AX5 Confirm',
-				msg: '값을 입력하세요',
 				input: {
 					data1: {label:"data1의 라벨"},
 					data2: {label:"data2의 라벨"}

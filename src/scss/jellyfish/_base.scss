@@ -462,3 +462,41 @@ $dialog-danger-heading-bg: $panel-danger-heading-bg;
 
 $dialog-special-text: $panel-special-text;
 $dialog-special-heading-bg: $panel-special-heading-bg;
+
+//== toast
+$toast-container-position: 1; // 0:left,top / 1:right,top / 2:right,bottom / 3:left,bottom
+$toast-container-margin: 10px;
+$toast-box-model: $panel-box-model;
+$toast-border: 1px solid rgb(255/2, 255/2, 255/2);
+$toast-box-shaodw: 0px 0px 5px 0px rgba(0,0,0,0.60);
+$toast-body-padding: 6px;
+$toast-border-radius: 8px;
+
+//** Border color for elements within toast
+$toast-default-text: $panel-default-text;
+$toast-default-bg: $panel-bg;
+$toast-default-color: $text-color;
+
+$toast-basic-text: $panel-default-text;
+$toast-basic-bg: $panel-bg;
+$toast-basic-color: $panel-basic-heading-bg;
+
+$toast-good-text: $panel-default-text;
+$toast-good-bg: $panel-bg;
+$toast-good-color: $panel-good-heading-bg;
+
+$toast-info-text: $panel-default-text;
+$toast-info-bg: $panel-bg;
+$toast-info-color: $panel-info-heading-bg;
+
+$toast-warning-text: $panel-default-text;
+$toast-warning-bg: $panel-bg;
+$toast-warning-color: $panel-warning-heading-bg;
+
+$toast-danger-text: $panel-default-text;
+$toast-danger-bg: $panel-bg;
+$toast-danger-color: $panel-danger-heading-bg;
+
+$toast-special-text: $panel-default-text;
+$toast-special-bg: $panel-bg;
+$toast-special-color: $panel-special-heading-bg;

@@ -1,0 +1,80 @@
+<article class="cover">
+	<h1 data-menu-item="ax-ui-toast">Toast</h1>
+	<p class="lead">
+		toast는 웹 애플리케이션의 상태를 사용자에게 세련되게 알려주는 UI이다.
+		스크린의 우측이나 우 하단 영역에서 박스가 노출되었다가 일정 시간이 지나면 자연스럽게 사라진다. 웹 애플리케이션에서는
+		웹 브라우저의 우측이나 우 하단 영역에서 박스가 노출 되었다가 사라지게 된다.
+	</p>
+</article>
+
+
+
+<!-- basic -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-toast-default" class="capitalize">default</h3>
+	<p></p>
+<pre>
+<div class="tag-result">
+	<button class="ax-btn good" id="ax-ui-toast-good-btn">Toast Good</button>
+	<button class="ax-btn info" id="ax-ui-toast-info-btn">Toast Info</button>
+</div>
+<script type="text/javascript">
+	ax5.info.base_url = "../pub/";
+	ax5.util.require(["ui/mask.js", "ui/toast.js"], function(){
+		window.my_toast = new ax5.ui.toast();
+		my_toast.set_config({
+			axicon: '<i class="axi axi-circle-check"></i>',
+		});
+
+		// default
+		ax5.dom("#ax-ui-toast-good-btn").on("click", function(){
+			my_toast.push({
+				theme: 'good',
+				msg: 'Not Working!\nPlease check your files'
+			}, function(){
+				console.log(this);
+			});
+		});
+		// default
+		ax5.dom("#ax-ui-toast-info-btn").on("click", function(){
+			my_toast.push({
+				theme: 'info',
+				msg: 'Not Working!\nPlease check your files'
+			}, function(){
+				console.log(this);
+			});
+		});
+	});
+</script>
+</pre>
+
+</article>
+
+
+
+<!-- basic confirm-->
+<article class="content">
+	<h3 data-menu-item="ax-ui-toast-confirm" class="capitalize">confirm</h3>
+	<p></p>
+<pre>
+<div class="tag-result">
+	<button class="ax-btn danger" id="ax-ui-toast-confirm-btn">Confirm Toast</button>
+</div>
+<script type="text/javascript">
+	ax5.info.base_url = "../pub/";
+	ax5.util.require(["ui/mask.js", "ui/toast.js"], function(){
+		// default
+		ax5.dom("#ax-ui-toast-confirm-btn").on("click", function(){
+			my_toast.confirm({
+				axicon: '<i class="axi axi-face-unlock"></i>',
+				theme: 'danger',
+				msg: 'Not Working!\nPlease check your files'
+			}, function(){
+				console.log(this);
+			});
+		});
+	});
+</script>
+</pre>
+
+</article>

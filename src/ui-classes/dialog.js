@@ -165,30 +165,32 @@
 				po = [];
 
 			po.push('<div id="' + dialog_id + '" data-ax5-ui="dialog" class="ax5-ui-dialog ' + opts.theme + '">');
-			po.push('<div class="ax-dialog-heading">');
-			po.push( (opts.title || cfg.title || "") );
-			po.push('</div>');
-			po.push('<div class="ax-dialog-body">');
-			po.push('<div class="ax-dialog-msg">');
-			if(opts.input){
-				U.each(opts.input, function(k, v) {
-					po.push('<div class="ax-dialog-prompt">');
-					po.push( this.label.replace(/\n/g, "<br/>") );
-					po.push('</div>');
-					po.push('<input type="text" class="ax-inp" data-ax-dialog-prompt="' + k + '" style="width:100%;" />');
-				});
-			}
-			else{
-				po.push( (opts.msg || cfg.msg || "").replace(/\n/g, "<br/>") );
-			}
+				po.push('<div class="ax-dialog-heading">');
+				po.push( (opts.title || cfg.title || "") );
+				po.push('</div>');
+				po.push('<div class="ax-dialog-body">');
+					po.push('<div class="ax-dialog-msg">');
+					if(opts.input){
+						U.each(opts.input, function(k, v) {
+							po.push('<div class="ax-dialog-prompt">');
+							po.push( this.label.replace(/\n/g, "<br/>") );
+							po.push('</div>');
+							po.push('<input type="text" class="ax-inp" data-ax-dialog-prompt="' + k + '" style="width:100%;" />');
+						});
+					}
+					else{
+						po.push( (opts.msg || cfg.msg || "").replace(/\n/g, "<br/>") );
+					}
 
-			po.push('</div>');
-			po.push('<div class="ax-dialog-buttons">');
-			U.each(opts.btns, function(k, v){
-				po.push('<button type="button" data-ax-dialog-btn="' + k + '" class="ax-btn ' + this.theme + '">' + this.label + '</button>');
-			});
-			po.push('</div>');
-			po.push('</div>');
+					po.push('</div>');
+					po.push('<div class="ax-dialog-buttons">');
+						po.push('<div class="ax-button-wrap">');
+						U.each(opts.btns, function(k, v){
+							po.push('<button type="button" data-ax-dialog-btn="' + k + '" class="ax-btn ' + this.theme + '">' + this.label + '</button>');
+						});
+						po.push('</div>');
+					po.push('</div>');
+				po.push('</div>');
 			po.push('</div>');
 			return po.join('');
 		};
