@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-06-16 
+ publish date : 2015-06-17 
 -->
 <html lang="en">
 <head>
@@ -835,6 +835,292 @@ ax5.util.require(["ui/keypad.js"], function(){
 			my_dialog.alert({
 				theme: 'special', title: '<i class="axi axi-times-circle"></i> alert', msg: 'special color',
 			}, function(){ console.log(this); });
+		});
+	});
+</script>
+
+
+</article>
+
+
+
+<!-- confirm -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-dialog-confirm" class="capitalize">confirm</h3>
+	<p>alert에서 btns 를 확장하면 confirm이 된다. theme를 정의해주면 alert와 마찬가지로 사용이 가능하다.</p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+	&lt;button class="ax-btn" id="ax-ui-dialog-confirm-btn">Confirm&lt;/button>
+	&lt;button class="ax-btn good" id="ax-ui-dialog-confirm-good-btn">Confirm good&lt;/button>
+&lt;/div>
+&lt;script type="text/javascript">
+	ax5.info.base_url = "../pub/";
+	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
+		var my_dialog = new ax5.ui.dialog();
+		my_dialog.set_config({});
+
+		// default
+		ax5.dom("#ax-ui-dialog-confirm-btn").on("click", function(){
+			my_dialog.confirm({
+				title: '&lt;i class="axi axi-ion-alert">&lt;/i> Default alert',
+				msg: 'confirm message',
+			}, function(result){
+				console.log(result, this);
+			});
+		});
+
+		// good
+		ax5.dom("#ax-ui-dialog-confirm-good-btn").on("click", function(){
+			my_dialog.confirm({
+				theme: 'good',
+				title: '&lt;i class="axi axi-ion-alert">&lt;/i> Good',
+				msg: 'confirm message',
+			}, function(result){
+				console.log(result, this);
+			});
+		});
+	});
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result">
+	<button class="ax-btn" id="ax-ui-dialog-confirm-btn">Confirm</button>
+	<button class="ax-btn good" id="ax-ui-dialog-confirm-good-btn">Confirm good</button>
+</div>
+<script type="text/javascript">
+	ax5.info.base_url = "../pub/";
+	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
+		var my_dialog = new ax5.ui.dialog();
+		my_dialog.set_config({});
+
+		// default
+		ax5.dom("#ax-ui-dialog-confirm-btn").on("click", function(){
+			my_dialog.confirm({
+				title: '<i class="axi axi-ion-alert"></i> Default alert',
+				msg: 'confirm message',
+			}, function(result){
+				console.log(result, this);
+			});
+		});
+
+		// good
+		ax5.dom("#ax-ui-dialog-confirm-good-btn").on("click", function(){
+			my_dialog.confirm({
+				theme: 'good',
+				title: '<i class="axi axi-ion-alert"></i> Good',
+				msg: 'confirm message',
+			}, function(result){
+				console.log(result, this);
+			});
+		});
+	});
+</script>
+
+
+</article>
+
+
+
+<!-- confirm-custom -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-dialog-confirm-custom" class="capitalize">confirm custom</h3>
+	<p>btns속성을 확장하여 임의의 버튼셋을 구성할 수 있다. 이 기능 좋다.</p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+	&lt;button class="ax-btn warning" id="ax-ui-dialog-confirm-custom-btn">&lt;i class="axi axi-circle-check">&lt;/i> Confirm&lt;/button>
+&lt;/div>
+&lt;script type="text/javascript">
+	ax5.info.base_url = "../pub/";
+	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
+		var my_dialog = new ax5.ui.dialog();
+		my_dialog.set_config({});
+
+		// default
+		ax5.dom("#ax-ui-dialog-confirm-custom-btn").on("click", function(){
+			my_dialog.confirm({
+				theme: 'warning',
+				title: '&lt;i class="axi axi-circle-check">&lt;/i> AX5 Confirm',
+				msg: '정말 삭제하시겠습니까?',
+				btns: {
+					del: {
+						label:'&lt;i class="axi axi-delete2">&lt;/i> Delete', theme:'warning', onclick: function(key){
+							console.log(key, this);
+							my_dialog.close();
+						}
+					},
+					cancel: {
+						label:'&lt;i class="axi axi-cancel">&lt;/i> Cancel', onclick: function(key){
+							console.log(key, this);
+							my_dialog.close();
+						}
+					},
+					other: {
+						label:'Other', onclick: function(key){
+							console.log(key, this);
+							//my_dialog.close(); // 닫기를 안할 수도 있겠어요.
+						}
+					}
+				}
+			});
+		});
+	});
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result">
+	<button class="ax-btn warning" id="ax-ui-dialog-confirm-custom-btn"><i class="axi axi-circle-check"></i> Confirm</button>
+</div>
+<script type="text/javascript">
+	ax5.info.base_url = "../pub/";
+	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
+		var my_dialog = new ax5.ui.dialog();
+		my_dialog.set_config({});
+
+		// default
+		ax5.dom("#ax-ui-dialog-confirm-custom-btn").on("click", function(){
+			my_dialog.confirm({
+				theme: 'warning',
+				title: '<i class="axi axi-circle-check"></i> AX5 Confirm',
+				msg: '정말 삭제하시겠습니까?',
+				btns: {
+					del: {
+						label:'<i class="axi axi-delete2"></i> Delete', theme:'warning', onclick: function(key){
+							console.log(key, this);
+							my_dialog.close();
+						}
+					},
+					cancel: {
+						label:'<i class="axi axi-cancel"></i> Cancel', onclick: function(key){
+							console.log(key, this);
+							my_dialog.close();
+						}
+					},
+					other: {
+						label:'Other', onclick: function(key){
+							console.log(key, this);
+							//my_dialog.close(); // 닫기를 안할 수도 있겠어요.
+						}
+					}
+				}
+			});
+		});
+	});
+</script>
+
+
+</article>
+
+
+
+<!-- prompt -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-dialog-prompt" class="capitalize">prompt</h3>
+	<p></p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+	&lt;button class="ax-btn warning" id="ax-ui-dialog-prompt-btn">Prompt&lt;/button>
+&lt;/div>
+&lt;script type="text/javascript">
+	ax5.info.base_url = "../pub/";
+	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
+		var my_dialog = new ax5.ui.dialog();
+		my_dialog.set_config({});
+
+		// default
+		ax5.dom("#ax-ui-dialog-prompt-btn").on("click", function(){
+			my_dialog.prompt({
+				theme: 'warning',
+				width: 400,
+				title: '&lt;i class="axi axi-circle-check">&lt;/i> AX5 Confirm',
+				msg: '값을 입력하세요'
+			}, function(){
+				console.log(this.value);
+			});
+		});
+	});
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result">
+	<button class="ax-btn warning" id="ax-ui-dialog-prompt-btn">Prompt</button>
+</div>
+<script type="text/javascript">
+	ax5.info.base_url = "../pub/";
+	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
+		var my_dialog = new ax5.ui.dialog();
+		my_dialog.set_config({});
+
+		// default
+		ax5.dom("#ax-ui-dialog-prompt-btn").on("click", function(){
+			my_dialog.prompt({
+				theme: 'warning',
+				width: 400,
+				title: '<i class="axi axi-circle-check"></i> AX5 Confirm',
+				msg: '값을 입력하세요'
+			}, function(){
+				console.log(this.value);
+			});
+		});
+	});
+</script>
+
+
+</article>
+
+
+
+<!-- prompt custom -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-dialog-prompt-custom" class="capitalize">prompt custom</h3>
+	<p></p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+	&lt;button class="ax-btn info" id="ax-ui-dialog-prompt-custom-btn">Prompt&lt;/button>
+&lt;/div>
+&lt;script type="text/javascript">
+	ax5.info.base_url = "../pub/";
+	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
+		var my_dialog = new ax5.ui.dialog();
+		my_dialog.set_config({});
+
+		// default
+		ax5.dom("#ax-ui-dialog-prompt-custom-btn").on("click", function(){
+			my_dialog.prompt({
+				theme: 'info',
+				width: 400,
+				title: '&lt;i class="axi axi-circle-check">&lt;/i> AX5 Confirm',
+				msg: '값을 입력하세요',
+				input: {
+					data1: {label:"data1의 라벨"},
+					data2: {label:"data2의 라벨"}
+				}
+			}, function(){
+				console.log(this);
+			});
+		});
+	});
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result">
+	<button class="ax-btn info" id="ax-ui-dialog-prompt-custom-btn">Prompt</button>
+</div>
+<script type="text/javascript">
+	ax5.info.base_url = "../pub/";
+	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
+		var my_dialog = new ax5.ui.dialog();
+		my_dialog.set_config({});
+
+		// default
+		ax5.dom("#ax-ui-dialog-prompt-custom-btn").on("click", function(){
+			my_dialog.prompt({
+				theme: 'info',
+				width: 400,
+				title: '<i class="axi axi-circle-check"></i> AX5 Confirm',
+				msg: '값을 입력하세요',
+				input: {
+					data1: {label:"data1의 라벨"},
+					data2: {label:"data2의 라벨"}
+				}
+			}, function(){
+				console.log(this);
+			});
 		});
 	});
 </script>

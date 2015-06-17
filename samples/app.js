@@ -68,6 +68,7 @@ ax5.dom.ready(function(){
 
 					menu_list.push({
 						id: el_name,
+						dom: el,
 						top: dom.offset(el).top
 					});
 					dom.before(el, '<div style="position:relative;left:0px;top:-75px;" id="'+ el_name +'"></div>');
@@ -100,6 +101,12 @@ ax5.dom.ready(function(){
 
 			return {
 				menu_list: menu_list,
+				resize_document: function(){
+					var i = menu_list.length;
+					while(i--){
+						menu_list[i].top = dom.offset(menu_list[i].dom).top;
+					}
+				},
 				set_menu_height: function(){
 					window_height = dom(window).height();
 					dom.css(app_nav_left, {"height":ax5.dom.height(window) - 60});
@@ -169,6 +176,7 @@ ax5.dom.resize(function(){
 	app.set_menu_height();
 	if (app.timeout) clearTimeout(app.timeout);
 	app.timeout = setTimeout(function () {
+		app.resize_document();
 		app.menu_taping();
 	}, 300);
 });

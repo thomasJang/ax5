@@ -160,6 +160,8 @@
             
                 <li data-name="ax5.dom.scroll"><a href="ax5.dom.html#scroll">scroll</a></li>
             
+                <li data-name="ax5.dom.val"><a href="ax5.dom.html#val">val</a></li>
+            
                 <li data-name="ax5.dom.width"><a href="ax5.dom.html#width">width</a></li>
             
             </ul>
@@ -236,6 +238,8 @@
                 <li data-name="ax5.dom0.prev"><a href="ax5.dom0.html#prev">prev</a></li>
             
                 <li data-name="ax5.dom0.remove"><a href="ax5.dom0.html#remove">remove</a></li>
+            
+                <li data-name="ax5.dom0.val"><a href="ax5.dom0.html#val">val</a></li>
             
                 <li data-name="ax5.dom0.width"><a href="ax5.dom0.html#width">width</a></li>
             
@@ -412,6 +416,35 @@
             </ul>
         </li>
     
+        <li class="item" data-name="ax5.ui.dialog">
+            <span class="title">
+                <a href="ax5.ui.dialog.html">ax5.ui.dialog</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="ax5.ui.dialog.alert"><a href="ax5.ui.dialog.html#alert">alert</a></li>
+            
+                <li data-name="ax5.ui.dialog.confirm"><a href="ax5.ui.dialog.html#confirm">confirm</a></li>
+            
+                <li data-name="ax5.ui.dialog.prompt"><a href="ax5.ui.dialog.html#prompt">prompt</a></li>
+            
+                <li data-name="ax5.ui.dialog.set_config"><a href="ax5.ui.dialog.html#set_config">set_config</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
         <li class="item" data-name="ax5.ui.keypad">
             <span class="title">
                 <a href="ax5.ui.keypad.html">ax5.ui.keypad</a>
@@ -520,7 +553,7 @@
         <article>
             <pre class="prettyprint source linenums"><code>/*
  * ax5 - v0.0.1 
- * 2015-06-07 
+ * 2015-06-17 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -1644,11 +1677,12 @@
 				};
 
 			// 로드해야 할 모듈들을 doc.head에 삽입하고 로드가 성공여부를 리턴합니다.
-			for (var i = 0; i &lt; mods.length; i++) {
+			for (var i = 0, l = mods.length; i &lt; l; i++) {
 				var src = mods[i], type = right(src, "."), hasPlugin = false,
 					plugin, plugin_src = info.base_url + src, attr_nm = (type === "js") ? "src" : "href",
-					plug_load, plug_err;
-				for (var s = 0; s &lt; scripts.length; s++) {
+					plug_load, plug_err, s = scripts.length;
+
+				while(s--){
 					if (scripts[s].getAttribute(attr_nm) === plugin_src) {
 						hasPlugin = true;
 						break;
@@ -1656,8 +1690,10 @@
 				}
 
 				if (hasPlugin) {
+
 					loadCount--;
 					onload();
+
 				} else {
 
 					plugin = (type === "js") ?
@@ -1683,8 +1719,15 @@
 					ax5.xhr({
 						url : plugin_src, contentType: "",
 						res : function (response, status) {
-							var time_id;
-							head.appendChild(plugin);
+							var time_id, hasPlugin = false, scripts = dom.get("script[src]"), s = scripts.length;
+							while(s--){
+								if (scripts[s].getAttribute(attr_nm) === plugin_src) {
+									hasPlugin = true;
+									break;
+								}
+							}
+
+							if(!hasPlugin) head.appendChild(plugin);
 							plugin.onload = function(e) {
 								plug_load(e, plugin_src);
 								if(time_id) clearTimeout(time_id);
@@ -2609,7 +2652,16 @@
 				 */
 				this.get_webgl_context = function (){
 					return dom.get_webgl_context(this.elements);
-				}
+				};
+				/**
+				 * 엘리먼트의 value값을 반환합니다.
+				 * @method ax5.dom0.val
+				 * @param {String} [v] - element.value에 부여할 값
+				 * @returns {String}
+				 */
+				this.val = function(v){
+					return dom.val(this.elements, v);
+				};
 			}
 
 			return ax;
@@ -3824,7 +3876,7 @@
 		 * ```
 		 */
 		function position(els) {
-			els = va_elem(els, "offset");
+			els = va_elem(els, "position");
 			var el = els[0], el_parent,
 				pos = {top: 0, left: 0}, parentPos = {top: 0, left: 0};
 
@@ -3993,12 +4045,29 @@
 		 * @returns {wegGlContext}
 		 */
 		function get_webgl_context(els){
-			els = va_elem(els, "data");
+			els = va_elem(els, "get_webgl_context");
 			var apis = ['experimental-webgl','webgl','webkit-3d','moz-webgl','3d'],
 				i = apis.length, el = els[0], ctx;
 			while (i--) if (ctx = el.getContext(apis[i], {antialias: true})) break;
 			if (ctx == null) alert("WebGL is not available");
 			return ctx;
+		}
+
+		/**
+		 * 엘리먼트 value값을 반환합니다.
+		 * @method ax5.dom.val
+		 * @param {Elements|Element} elements
+		 * @param {String} [v] - element.value에 부여할 값
+		 * @returns {String}
+		 */
+		function val(els, v){
+			els = va_elem(els, "val");
+			if(els[0] && 'value' in els[0]){
+				if(typeof v !== "undefined") els[0].value = v;
+				return els[0].value;
+			}else{
+				return null;
+			}
 		}
 
 		U.extend(ax5.dom, {
@@ -4031,7 +4100,8 @@
 			position  : position,
 			box_model : box_model,
 			data      : data,
-			get_webgl_context: get_webgl_context
+			get_webgl_context: get_webgl_context,
+			val       : val
 		});
 	})();
 
@@ -4386,7 +4456,7 @@ ax5.ui = (function (core) {
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sun Jun 07 2015 21:54:34 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Wed Jun 17 2015 11:29:41 GMT+0900 (KST)
         </footer>
     </div>
 </div>

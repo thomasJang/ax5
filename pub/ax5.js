@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-06-16 
+ * 2015-06-17 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -2099,7 +2099,16 @@
 				 */
 				this.get_webgl_context = function (){
 					return dom.get_webgl_context(this.elements);
-				}
+				};
+				/**
+				 * 엘리먼트의 value값을 반환합니다.
+				 * @method ax5.dom0.val
+				 * @param {String} [v] - element.value에 부여할 값
+				 * @returns {String}
+				 */
+				this.val = function(v){
+					return dom.val(this.elements, v);
+				};
 			}
 
 			return ax;
@@ -3314,7 +3323,7 @@
 		 * ```
 		 */
 		function position(els) {
-			els = va_elem(els, "offset");
+			els = va_elem(els, "position");
 			var el = els[0], el_parent,
 				pos = {top: 0, left: 0}, parentPos = {top: 0, left: 0};
 
@@ -3483,12 +3492,29 @@
 		 * @returns {wegGlContext}
 		 */
 		function get_webgl_context(els){
-			els = va_elem(els, "data");
+			els = va_elem(els, "get_webgl_context");
 			var apis = ['experimental-webgl','webgl','webkit-3d','moz-webgl','3d'],
 				i = apis.length, el = els[0], ctx;
 			while (i--) if (ctx = el.getContext(apis[i], {antialias: true})) break;
 			if (ctx == null) alert("WebGL is not available");
 			return ctx;
+		}
+
+		/**
+		 * 엘리먼트 value값을 반환합니다.
+		 * @method ax5.dom.val
+		 * @param {Elements|Element} elements
+		 * @param {String} [v] - element.value에 부여할 값
+		 * @returns {String}
+		 */
+		function val(els, v){
+			els = va_elem(els, "val");
+			if(els[0] && 'value' in els[0]){
+				if(typeof v !== "undefined") els[0].value = v;
+				return els[0].value;
+			}else{
+				return null;
+			}
 		}
 
 		U.extend(ax5.dom, {
@@ -3521,7 +3547,8 @@
 			position  : position,
 			box_model : box_model,
 			data      : data,
-			get_webgl_context: get_webgl_context
+			get_webgl_context: get_webgl_context,
+			val       : val
 		});
 	})();
 

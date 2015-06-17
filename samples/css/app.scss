@@ -183,11 +183,12 @@ $app-visual-height: 280px;
   padding: $app-visual-height 0px 0px 0px;
   .app-content{
 	position: relative;
-	  min-width: ($app-page-width - $app-nav-left - 20);
-	  max-width: 1200px;
+	min-width: ($app-page-width - $app-nav-left - 20);
+	max-width: 1200px;
 	margin:0px;
-    padding-left: ($app-nav-left + 40);
-	  padding-right: 40px;
+	padding-left: ($app-nav-left + 40);
+	padding-right: 40px;
+	padding-bottom: 100px;
 
     a[name]{
       display: block;

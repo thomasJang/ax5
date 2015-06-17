@@ -48,7 +48,7 @@
     
 </head>
 <body>
-<div id="wrap" class="clearfix ax5.ui.keypad">
+<div id="wrap" class="clearfix dialog.js">
     
 <div class="navigation">
     <h3 class="applicationName"><a href="index.html"><i class="axi axi-axisj"></i> ax5.io</a></h3>
@@ -544,289 +544,358 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="ax5.ui.keypad.html">Class: keypad</h1>
+        <h1 class="page-title" data-filename="dialog.js.html">Source: ui-classes/dialog.js</h1>
         
 
 
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// ax5.ui.dialog
+(function(root, ax_super) {
 
-<section>
-    
-<header>
-    <h2>
-    keypad
-    </h2>
-    
-</header>  
+	/**
+	 * @class ax5.ui.dialog
+	 * @classdesc
+	 * @version v0.0.1
+	 * @author tom@axisj.com
+	 * @logs
+	 * 2014-06-15 tom : 시작
+	 * @example
+	 * ```
+	 * var my_dialog = new ax5.ui.dialog();
+	 * ```
+	 */
 
-<article>
-    <div class="container-overview">
-    
-    
-    
-        
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="keypad">
-            
-            new ax5.ui.keypad<span class="signature">()</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ui-classes/keypad.js#L3" target="_blank">
-            ui-classes/keypad.js,
-            line 3</a>
-        </div>
-        
-    </div>
+	var U = ax5.util, axd = ax5.dom;
 
-    
-</dt>
-<dd>
-    
-    
+	//== UI Class
+	var ax_class = function(){
+		// 클래스 생성자
+		this.main = (function(){
+			if (ax_super) ax_super.call(this); // 부모호출
+			this.config = {
+				click_event_name: "click", //(('ontouchstart' in document.documentElement) ? "touchstart" : "click"),
+				mask: {
+					target: document.body,
+					content: ''
+				},
+				theme: 'default',
+				width: 300,
+				title: '',
+				msg: ''
+			};
+		}).apply(this, arguments);
 
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    <dt class="tag-version">Version:</dt>
-    <dd class="tag-version"><ul class="dummy"><li>v0.0.1</li></ul></dd>
-    
-    
-    
+		this.active_dialog = null;
+		this.mask = new ax5.ui.mask();
 
-    
-    
-    
-    <dt class="tag-author">Author:</dt>
-    <dd class="tag-author">
-        <ul>
-            <li>tom@axisj.com</li>
-        </ul>
-    </dd>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
+		var cfg = this.config;
+		/**
+		 * Preferences of dialog UI
+		 * @method ax5.ui.dialog.set_config
+		 * @param {Object} config - 클래스 속성값
+		 * @returns {ax5.ui.dialog}
+		 * @example
+		 * ```
+		 * ```
+		 */
+			//== class body start
+		this.init = function(){
+			// after set_config();
+			cfg.id = 'ax5-dialog-' + ax5.get_guid();
 
-    
-    
+			this.mask.set_config(cfg.mask);
+		};
 
-    
+		/**
+		 * open the dialog of alert type
+		 * @method ax5.ui.dialog.alert
+		 * @param {Object|String} [{theme, title, msg, btns}|msg] - dialog 속성을 json으로 정의하거나 msg만 전달
+		 * @param {Function} [callback] - 사용자 확인 이벤트시 호출될 callback 함수
+		 * @returns {ax5.ui.dialog}
+		 * @example
+		 * ```
+		 * my_dialog.alert({
+		 *  title: 'app title',
+		 *  msg: 'alert'
+		 * }, function(){});
+		 * ```
+		 */
+		this.alert = function(opts, callback) {
+			if(U.is_string(opts)){
+				opts = {
+					title: cfg.title,
+					msg: opts
+				}
+			}
+			opts.dialog_type = "alert";
+			opts.theme = (opts.theme || cfg.theme || "");
+			if(typeof opts.btns === "undefined"){
+				opts.btns = {
+					ok: {label: 'ok', theme: opts.theme}
+				};
+			}
+			this.open(opts, callback);
+			return this;
+		};
 
-    
-    
-    
-    
-    
-    
-    
-        <h5>Example</h5>
-        
+		/**
+		 * open the dialog of confirm type
+		 * @method ax5.ui.dialog.confirm
+		 * @param {Object|String} [{theme, title, msg, btns}|msg] - dialog 속성을 json으로 정의하거나 msg만 전달
+		 * @param {Function} [callback] - 사용자 확인 이벤트시 호출될 callback 함수
+		 * @returns {ax5.ui.dialog}
+		 * @example
+		 * ```
+		 * my_dialog.confirm({
+		 *  title: 'app title',
+		 *  msg: 'confirm'
+		 * }, function(){});
+		 * ```
+		 */
+		this.confirm = function(opts, callback) {
+			if(U.is_string(opts)){
+				opts = {
+					title: cfg.title,
+					msg: opts
+				}
+			}
+			opts.dialog_type = "confirm";
+			opts.theme = (opts.theme || cfg.theme || "");
+			if(typeof opts.btns === "undefined"){
+				opts.btns = {
+					ok: {label: 'ok', theme: opts.theme},
+					cancel: {label: 'cancel'}
+				};
+			}
+			this.open(opts, callback);
+			return this;
+		};
 
-    
-    <pre class="prettyprint linenums"><code>var my_pad = new ax5.ui.keypad();</code></pre>
-    
+		/**
+		 * open the dialog of prompt type
+		 * @method ax5.ui.dialog.prompt
+		 * @param {Object|String} [{theme, title, msg, btns, input}|msg] - dialog 속성을 json으로 정의하거나 msg만 전달
+		 * @param {Function} [callback] - 사용자 확인 이벤트시 호출될 callback 함수
+		 * @returns {ax5.ui.dialog}
+		 * @example
+		 * ```
+		 * my_dialog.prompt({
+		 *  title: 'app title',
+		 *  msg: 'alert'
+		 * }, function(){});
+		 * ```
+		 */
+		this.prompt = function(opts, callback) {
+			if(U.is_string(opts)){
+				opts = {
+					title: cfg.title,
+					msg: opts
+				}
+			}
+			opts.dialog_type = "prompt";
+			opts.theme = (opts.theme || cfg.theme || "");
 
-    
-</dd>
+			if(typeof opts.input === "undefined"){
+				opts.input = {
+					value: {label: (opts.msg || cfg.msg || "")}
+				};
+			}
+			if(typeof opts.btns === "undefined"){
+				opts.btns = {
+					ok: {label: 'ok', theme: opts.theme},
+					cancel: {label: 'cancel'}
+				};
+			}
+			this.open(opts, callback);
+			return this;
+		};
 
-    
-    </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        <h3 class="subsection-title">Methods</h3>
-        
-        <dl>
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="set_config">
-            
-            <span class="type-signature static">static</span>ax5.ui.keypad.set_config<span class="signature">(config)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.ui.keypad.html">ax5.ui.keypad</a>}</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ui-classes/keypad.js#L37" target="_blank">
-            ui-classes/keypad.js,
-            line 37</a>
-        </div>
-        
-    </div>
 
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>Preferences of Keypad UI</p>
-    </div>
-    
+		this.get_content = function(dialog_id, opts){
+			var
+				po = [];
 
-    
-    
-    
-    
-    
-        
+			po.push('&lt;div id="' + dialog_id + '" data-ax5-ui="dialog" class="ax5-ui-dialog ' + opts.theme + '">');
+			po.push('&lt;div class="ax-dialog-heading">');
+			po.push( (opts.title || cfg.title || "") );
+			po.push('&lt;/div>');
+			po.push('&lt;div class="ax-dialog-body">');
+			po.push('&lt;div class="ax-dialog-msg">');
+			if(opts.input){
+				U.each(opts.input, function(k, v) {
+					po.push('&lt;div class="ax-dialog-prompt">');
+					po.push( this.label.replace(/\n/g, "&lt;br/>") );
+					po.push('&lt;/div>');
+					po.push('&lt;input type="text" class="ax-inp" data-ax-dialog-prompt="' + k + '" style="width:100%;" />');
+				});
+			}
+			else{
+				po.push( (opts.msg || cfg.msg || "").replace(/\n/g, "&lt;br/>") );
+			}
 
-<table class="params">
-    <thead>
-	<tr>
+			po.push('&lt;/div>');
+			po.push('&lt;div class="ax-dialog-buttons">');
+			U.each(opts.btns, function(k, v){
+				po.push('&lt;button type="button" data-ax-dialog-btn="' + k + '" class="ax-btn ' + this.theme + '">' + this.label + '&lt;/button>');
+			});
+			po.push('&lt;/div>');
+			po.push('&lt;/div>');
+			po.push('&lt;/div>');
+			return po.join('');
+		};
+
+		this.open = function(opts, callback){
+			var
+				pos = {},
+				box = {},
+				po;
+
+			opts.id = (opts.id || cfg.id);
+
+			this.mask.open();
+			box = {
+				width: opts.width || cfg.width
+			};
+			axd.append(document.body, this.get_content(opts.id, opts));
+			this.active_dialog = ax5.dom('#' + opts.id);
+			this.active_dialog.css({width: box.width});
+
+			// dialog 높이 구하기 - 너비가 정해지면 높이가 변경 될 것.
+			box.height = this.active_dialog.height();
+			//- position 정렬
+			if(typeof opts.position === "undefined" || opts.position === "center"){
+				pos.top = ax5.dom.height(document.body) / 2 - box.height/2;
+				pos.left = ax5.dom.width(document.body) / 2 - box.width/2;
+			}else{
+				pos.left = opts.position.left || 0;
+				pos.top = opts.position.top || 0;
+			}
+			this.active_dialog.css(pos);
+
+			// bind button event
+			if(opts.dialog_type === "prompt") {
+				this.active_dialog.find("[data-ax-dialog-prompt]").elements[0].focus();
+			}else{
+				this.active_dialog.find("[data-ax-dialog-btn]").elements[0].focus();
+			}
+			this.active_dialog.find("[data-ax-dialog-btn]").on(cfg.click_event_name, (function(e){
+				this.btn_onclick(e||window.event, opts, callback);
+			}).bind(this));
+			
+			// bind key event
+			axd(window).on("keydown.ax-dialog", (function(e){
+				this.onkeyup(e||window.event, opts, callback);
+			}).bind(this))
+		};
+
+		this.btn_onclick = function(e, opts, callback, target, k){
+			target = axd.parent(e.target, function(target){
+				if(ax5.dom.attr(target, "data-ax-dialog-btn")){
+					return true;
+				}
+			});
+			if(target){
+				k = axd.attr(target, "data-ax-dialog-btn");
+
+				var that = {
+						key: k, value: opts.btns[k],
+						dialog_id: opts.id,
+						item_target: target
+					};
+				if(opts.dialog_type === "prompt") {
+					var validate = true;
+					for (var oi in opts.input) {
+						that[oi] = this.active_dialog.find('[data-ax-dialog-prompt=' + oi + ']').val();
+						if(that[oi] == "" || that[oi] == null){
+							validate = false;
+							break;
+						}
+					}
+				}
+				if(opts.btns[k].onclick){
+					opts.btns[k].onclick.call(that, k);
+				}
+				else
+				if(opts.dialog_type === "alert"){
+					if(callback) callback.call(that, k);
+					this.close();
+				}
+				else
+				if(opts.dialog_type === "confirm"){
+					if(callback) callback.call(that, k);
+					this.close();
+				}
+				else
+				if(opts.dialog_type === "prompt"){
+					if(k === 'ok') {
+						if(!validate) {
+							this.active_dialog.find('[data-ax-dialog-prompt]').elements[0].focus();
+							return false;
+						}
+					}
+					if(callback) callback.call(that, k);
+					this.close();
+				}
+			}
+		};
 		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>config</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
+		this.onkeyup = function(e, opts, callback, target, k){
+			if(e.keyCode == ax5.info.event_keys.ESC){
+				this.close();
+			}
+			if(opts.dialog_type === "prompt") {
+				if(e.keyCode == ax5.info.event_keys.RETURN){
+					var that = {
+						key: k, value: opts.btns[k],
+						dialog_id: opts.id,
+						item_target: target
+					};
+					var validate = true;
+					for (var oi in opts.input) {
+						that[oi] = this.active_dialog.find('[data-ax-dialog-prompt=' + oi + ']').val();
+						if(that[oi] == "" || that[oi] == null){
+							validate = false;
+							break;
+						}
+					}
+					if(!validate) return false;
+					if(callback) callback.call(that, k);
+					this.close();
+				}
+			}
+		};
+
+		this.close = function(){
+			if(this.active_dialog){
+				this.active_dialog.remove();
+				this.mask.close();
+				this.active_dialog = null;
+				axd(window).off("keydown.ax-dialog");
+			}
+			return this;
+		}
+	};
+	//== UI Class
+
+	//== ui class 공통 처리 구문
+	if (U.is_function(ax_super)) ax_class.prototype = new ax_super(); // 상속
+	root.dialog = ax_class; // ax5.ui에 연결
+
+	if (typeof define === "function" && define.amd) {
+		define("_ax5_ui_dialog", [], function () { return ax_class; }); // for requireJS
+	}
+	//== ui class 공통 처리 구문
+
+})(ax5.ui, ax5.ui.root);
 
 
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                <p>클래스 속성값</p></td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-
-
-    
-    
-    
-        <h5>Example</h5>
-        
-
-    
-    <pre class="prettyprint linenums"><code>set_config({
-     target : {Element|AX5 nodelist}, // 메뉴 UI를 출력할 대상
-     keys : { // keys 는 ui 내부에서 사용되는 키값을 사용자가 변경 할 수 있는 환경설정값 이다. 개발환경에 맞게 커스트마이징 할 수 있다.
-         value: {String} ['value'] 키의 값
-         label: {String} ['label'] 키의 텍스트 라벨
-         rowspan: {String} ['rowspan']
-         colspan: {String} ['colspan']
-         klass: {String} ['klass'] 키에 추가할 CSS Class
-     },
-        board: {
-            keys: [
-                {label:&quot;7&quot;, value:7} ...
-            ],
-            col_width: 100,
-            col_height: 100,
-            col_paddings: &quot;5px&quot;
-        },
-     onclick: {Function} [onclick] - 아이템 클릭이벤트 처리자
-});</code></pre>
-    
-
-    
-</dd>
-
-        </dl>
-    
-    
-    
-    
-    
-</article>
-
-</section>  
+// todo : confirm 기능 구현 alert에 btns만 확장 하면 끄읏
+// todo : prompt
+// todo : toast</code></pre>
+        </article>
+    </section>
 
 
 
@@ -835,7 +904,7 @@
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Wed Jun 17 2015 11:29:42 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Wed Jun 17 2015 11:29:41 GMT+0900 (KST)
         </footer>
     </div>
 </div>

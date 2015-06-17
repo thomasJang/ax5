@@ -33,8 +33,17 @@
 			padding-top: $dialog-body-padding;
 			padding-bottom: $dialog-body-padding;
 		}
+		.ax-dialog-prompt {
+			text-align: left;
+			padding-bottom: $dialog-body-padding/2;
+		}
 		.ax-dialog-buttons{
 			margin-top: $dialog-body-padding;
+			button{
+				&:not(:last-child){
+					margin-right: 3px;
+				}
+			}
 		}
 	}
 }

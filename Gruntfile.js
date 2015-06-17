@@ -78,6 +78,10 @@
 			lib: {
 				files: ['src/**/*.js','!src/**/*.min.js'],
 				tasks: ['pub-js']
+			},
+			css: {
+				files: ['src/**/*.min.css'],
+				tasks: ['pub-css']
 			}
 		},
 		sass: {
@@ -124,7 +128,7 @@
 	grunt.loadNpmTasks('grunt-sass');
 
 	grunt.registerTask('pub-js', ['concat','uglify:core','copy:js','uglify:ui','watch:lib']);
-	grunt.registerTask('pub-css', ['cssmin','copy:css']);
+	grunt.registerTask('pub-css', ['cssmin','copy:css','watch:css']);
 	
 	grunt.registerTask('sass-make-theme', ['sass:theme','watch:theme']);
 	grunt.registerTask('sass-make-doc', ['sass:sample_doc','watch:sample_doc']);

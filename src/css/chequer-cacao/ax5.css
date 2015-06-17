@@ -2783,8 +2783,13 @@ a.ax {
     .ax5-ui-dialog .ax-dialog-body .ax-dialog-msg {
       padding-top: 12px;
       padding-bottom: 12px; }
+    .ax5-ui-dialog .ax-dialog-body .ax-dialog-prompt {
+      text-align: left;
+      padding-bottom: 6px; }
     .ax5-ui-dialog .ax-dialog-body .ax-dialog-buttons {
       margin-top: 12px; }
+      .ax5-ui-dialog .ax-dialog-body .ax-dialog-buttons button:not(:last-child) {
+        margin-right: 3px; }
   .ax5-ui-dialog .ax-dialog-heading {
     color: #333333;
     background: #f5f5f5; }

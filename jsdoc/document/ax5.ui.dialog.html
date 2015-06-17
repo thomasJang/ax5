@@ -48,7 +48,7 @@
     
 </head>
 <body>
-<div id="wrap" class="clearfix ax5.ui.keypad">
+<div id="wrap" class="clearfix ax5.ui.dialog">
     
 <div class="navigation">
     <h3 class="applicationName"><a href="index.html"><i class="axi axi-axisj"></i> ax5.io</a></h3>
@@ -544,7 +544,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="ax5.ui.keypad.html">Class: keypad</h1>
+        <h1 class="page-title" data-filename="ax5.ui.dialog.html">Class: dialog</h1>
         
 
 
@@ -553,7 +553,7 @@
     
 <header>
     <h2>
-    keypad
+    dialog
     </h2>
     
 </header>  
@@ -566,17 +566,17 @@
         
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="keypad">
+        <h4 class="name" id="dialog">
             
-            new ax5.ui.keypad<span class="signature">()</span>
+            new ax5.ui.dialog<span class="signature">()</span>
         </h4>
     
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ui-classes/keypad.js#L3" target="_blank">
-            ui-classes/keypad.js,
-            line 3</a>
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ui-classes/dialog.js#L4" target="_blank">
+            ui-classes/dialog.js,
+            line 4</a>
         </div>
         
     </div>
@@ -644,7 +644,7 @@
         
 
     
-    <pre class="prettyprint linenums"><code>var my_pad = new ax5.ui.keypad();</code></pre>
+    <pre class="prettyprint linenums"><code>var my_dialog = new ax5.ui.dialog();</code></pre>
     
 
     
@@ -672,17 +672,17 @@
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="set_config">
+        <h4 class="name" id="alert">
             
-            <span class="type-signature static">static</span>ax5.ui.keypad.set_config<span class="signature">(config)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.ui.keypad.html">ax5.ui.keypad</a>}</span>
+            <span class="type-signature static">static</span>ax5.ui.dialog.alert<span class="signature">(<span class="optional">{theme, title, msg, btns}|msg</span>, <span class="optional">callback</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.ui.dialog.html">ax5.ui.dialog</a>}</span>
         </h4>
     
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ui-classes/keypad.js#L37" target="_blank">
-            ui-classes/keypad.js,
-            line 37</a>
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ui-classes/dialog.js#L58" target="_blank">
+            ui-classes/dialog.js,
+            line 58</a>
         </div>
         
     </div>
@@ -693,7 +693,532 @@
     
     
     <div class="description">
-        <p>Preferences of Keypad UI</p>
+        <p>open the dialog of alert type</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>{theme, title, msg, btns}|msg</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>dialog 속성을 json으로 정의하거나 msg만 전달</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>사용자 확인 이벤트시 호출될 callback 함수</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint linenums"><code>my_dialog.alert({
+ title: 'app title',
+ msg: 'alert'
+}, function(){});</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="confirm">
+            
+            <span class="type-signature static">static</span>ax5.ui.dialog.confirm<span class="signature">(<span class="optional">{theme, title, msg, btns}|msg</span>, <span class="optional">callback</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.ui.dialog.html">ax5.ui.dialog</a>}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <i class="axi axi-github"></i>
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ui-classes/dialog.js#L90" target="_blank">
+            ui-classes/dialog.js,
+            line 90</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>open the dialog of confirm type</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>{theme, title, msg, btns}|msg</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>dialog 속성을 json으로 정의하거나 msg만 전달</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>사용자 확인 이벤트시 호출될 callback 함수</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint linenums"><code>my_dialog.confirm({
+ title: 'app title',
+ msg: 'confirm'
+}, function(){});</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="prompt">
+            
+            <span class="type-signature static">static</span>ax5.ui.dialog.prompt<span class="signature">(<span class="optional">{theme, title, msg, btns, input}|msg</span>, <span class="optional">callback</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.ui.dialog.html">ax5.ui.dialog</a>}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <i class="axi axi-github"></i>
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ui-classes/dialog.js#L123" target="_blank">
+            ui-classes/dialog.js,
+            line 123</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>open the dialog of prompt type</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>{theme, title, msg, btns, input}|msg</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>dialog 속성을 json으로 정의하거나 msg만 전달</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>사용자 확인 이벤트시 호출될 callback 함수</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint linenums"><code>my_dialog.prompt({
+ title: 'app title',
+ msg: 'alert'
+}, function(){});</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="set_config">
+            
+            <span class="type-signature static">static</span>ax5.ui.dialog.set_config<span class="signature">(config)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.ui.dialog.html">ax5.ui.dialog</a>}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <i class="axi axi-github"></i>
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ui-classes/dialog.js#L41" target="_blank">
+            ui-classes/dialog.js,
+            line 41</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Preferences of dialog UI</p>
     </div>
     
 
@@ -794,25 +1319,8 @@
         
 
     
-    <pre class="prettyprint linenums"><code>set_config({
-     target : {Element|AX5 nodelist}, // 메뉴 UI를 출력할 대상
-     keys : { // keys 는 ui 내부에서 사용되는 키값을 사용자가 변경 할 수 있는 환경설정값 이다. 개발환경에 맞게 커스트마이징 할 수 있다.
-         value: {String} ['value'] 키의 값
-         label: {String} ['label'] 키의 텍스트 라벨
-         rowspan: {String} ['rowspan']
-         colspan: {String} ['colspan']
-         klass: {String} ['klass'] 키에 추가할 CSS Class
-     },
-        board: {
-            keys: [
-                {label:&quot;7&quot;, value:7} ...
-            ],
-            col_width: 100,
-            col_height: 100,
-            col_paddings: &quot;5px&quot;
-        },
-     onclick: {Function} [onclick] - 아이템 클릭이벤트 처리자
-});</code></pre>
+    <pre class="prettyprint linenums"><code><p><code>
+</code></p></code></pre>
     
 
     
