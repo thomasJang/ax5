@@ -11,11 +11,7 @@
 }
 
 @mixin input-group-addon($text-color, $text-shadow, $border, $bg, $bg-image, $drop-shadow){
-
-	position: absolute;
-	width: 60px;
-
-  display: block;
+  display: table-cell;
   //display: inline-block;
   font-weight: $btn-font-weight;
   text-align: center;
@@ -31,25 +27,26 @@
   @if($bg-image == "") 	{ @include ax-btn-gradient(nth($bg, 1), nth($bg, 2)); }
   @else						{ @include background-image($bg-image); }
   @include box-shadow($drop-shadow);
-  @include input-size(($padding-base-vertical - 4), $padding-base-horizontal, $font-size-base, ($line-height-base - 8), $input-border-radius-base, ($input-height-base - 8));
+  @include input-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, $input-border-radius-base, $input-height-base);
   @include user-select(none);
 
-	&:first-child{
-		left:4px;top:4px;
-	}
-	&:not(:first-child){
+  &:first-child{
 
-	}
-	&:last-child{
-		right:4px;top:4px;
-	}
-	&:not(:last-child){
+  }
+  &:not(:first-child){
+	@include border-left-radius(0);
+	border-left:0px none;
+  }
+  &:last-child{
 
-	}
-	&:not(:first-child):not(:last-child) {
+  }
+  &:not(:last-child){
+	@include border-right-radius(0);
+	border-right:0px none;
+  }
+  &:not(:first-child):not(:last-child) {
 
-	}
-
+  }
 }
 
 @mixin input-group-has-axicon($text-color, $text-shadow, $bg, $bg-image, $color-hover, $border, $drop-shadow, $axicon-content){
@@ -59,8 +56,8 @@
 	  @include input-group-radius($input-border-radius-base);
 	}
 	&:not(:first-child){
-	  //@include border-left-radius(0);
-	  //border-left:0px none;
+	  @include border-left-radius(0);
+	  border-left:0px none;
 	}
 	@include input-variant($text-color, $text-shadow, $bg, $bg-image, $color-hover, $border, $drop-shadow);
   }
@@ -82,10 +79,10 @@
 
 @mixin input-group-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius, $height){
   .ax-addon {
-	padding: ($padding-vertical - 4) $padding-horizontal;
+	padding: $padding-vertical $padding-horizontal;
 	font-size: $font-size;
-	line-height: ($line-height - 8) + px;
-	height: ($height - 8);
+	line-height: $line-height;
+	height: $height;
 	overflow: hidden;
 	display: inline-block;
   }
@@ -103,14 +100,12 @@
 	@else {
 	  border-radius: $border-radius;
 	}
-
+	
 	&:not(:first-child){
-	  //@include border-left-radius(0);
-		padding-left: 70px;
+	  @include border-left-radius(0);
 	}
 	&:not(:last-child){
-	  //@include border-right-radius(0);
-		padding-right: 70px;
+	  @include border-right-radius(0);
 	}
   }
   .axicon {
@@ -137,15 +132,11 @@
   .ax-inp{
 	display: table-cell;
 	margin: 0px;
-
-
 	&:not(:first-child){
-	  //@include border-left-radius(0);
-		padding-left: 70px;
+	  @include border-left-radius(0);
 	}
 	&:not(:last-child){
-	  //@include border-right-radius(0);
-		padding-right: 70px;
+	  @include border-right-radius(0);
 	}
   }
 

@@ -155,7 +155,7 @@
 			if(opts.toast_type === "push"){
 				// 자동 제거 타이머 시작
 				setTimeout((function(){
-					this.close(opts, toast_box);
+					this.close(opts, toast_box, callback);
 				}).bind(this), cfg.display_time);
 			}
 			else
@@ -177,7 +177,7 @@
 				var that = {
 						key: k, value: opts.btns[k],
 						toast_id: opts.id,
-						item_target: target
+						btn_target: target
 					};
 
 				if(opts.btns[k].onclick){
@@ -191,29 +191,10 @@
 			}
 		};
 
+		// todo : confirm 타입 토스트일 때 키보드 이벤트 추가 할 수 있음.
 		this.onkeyup = function(e, opts, callback, target, k){
 			if(e.keyCode == ax5.info.event_keys.ESC){
 				this.close();
-			}
-			if(opts.toast_type === "prompt") {
-				if(e.keyCode == ax5.info.event_keys.RETURN){
-					var that = {
-						key: k, value: opts.btns[k],
-						toast_id: opts.id,
-						item_target: target
-					};
-					var empty_key = null;
-					for (var oi in opts.input) {
-						that[oi] = this.active_toast.find('[data-ax-toast-prompt=' + oi + ']').val();
-						if(that[oi] == "" || that[oi] == null){
-							empty_key = oi;
-							break;
-						}
-					}
-					if(empty_key) return false;
-					if(callback) callback.call(that, k);
-					this.close();
-				}
 			}
 		};
 
@@ -226,15 +207,22 @@
 		 * my_toast.close();
 		 * ```
 		 */
-		this.close = function(opts, toast_box){
-			toast_box.class_name("add", (opts.toast_type == "push") ? "removed" : "destroy");
+		this.close = function(opts, toast_box, callback){
+			if(typeof toast_box === "undefined") {
+				opts = U.last(this.queue);
+				toast_box = ax5.dom('#' + opts.id);
+			}
+			var that = {
+				toast_id: opts.id
+			};
 
-			this.queue = U.filter( this.queue, function(){
+			toast_box.class_name("add", (opts.toast_type == "push") ? "removed" : "destroy");
+			this.queue = U.filter(this.queue, function () {
 				return opts.id != this.id;
 			});
-
-			setTimeout(function() {
+			setTimeout(function () {
 				toast_box.remove();
+				if(callback) callback.call(that);
 			}, cfg.animate_time);
 			return this;
 		}

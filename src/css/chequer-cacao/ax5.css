@@ -168,10 +168,7 @@ a.ax {
   .ax-btn:active, .ax-btn.active {
     outline: 0;
     background-image: none;
-    background: #b6b6b6;
-    background-image: -webkit-linear-gradient(top, #b6b6b6, #b6b6b6);
-    background-image: linear-gradient(to bottom, #b6b6b6, #b6b6b6);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#b6b6b6, endColorstr=#b6b6b6); }
+    box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset; }
   .ax-btn:hover, .ax-btn:focus, .ax-btn.focus {
     text-decoration: none;
     color: #2e2e2f;
@@ -189,10 +186,7 @@ a.ax {
   .ax-btn:active, .ax-btn.active {
     outline: 0;
     background-image: none;
-    background: #b6b6b6;
-    background-image: -webkit-linear-gradient(top, #b6b6b6, #b6b6b6);
-    background-image: linear-gradient(to bottom, #b6b6b6, #b6b6b6);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#b6b6b6, endColorstr=#b6b6b6); }
+    box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset; }
   .ax-btn.disabled, .ax-btn[disabled], fieldset[disabled] .ax-btn {
     cursor: not-allowed;
     pointer-events: none;
@@ -235,10 +229,7 @@ a.ax {
     .ax-btn.basic:active, .ax-btn.basic.active {
       outline: 0;
       background-image: none;
-      background: #cbbe00;
-      background-image: -webkit-linear-gradient(top, #cbbe00, #cbbe00);
-      background-image: linear-gradient(to bottom, #cbbe00, #cbbe00);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#cbbe00, endColorstr=#cbbe00); }
+      box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset; }
     .ax-btn.basic.disabled, .ax-btn.basic[disabled], fieldset[disabled] .ax-btn.basic {
       cursor: not-allowed;
       pointer-events: none;
@@ -275,10 +266,7 @@ a.ax {
     .ax-btn.good:active, .ax-btn.good.active {
       outline: 0;
       background-image: none;
-      background: #332627;
-      background-image: -webkit-linear-gradient(top, #332627, #332627);
-      background-image: linear-gradient(to bottom, #332627, #332627);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#332627, endColorstr=#332627); }
+      box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset; }
     .ax-btn.good.disabled, .ax-btn.good[disabled], fieldset[disabled] .ax-btn.good {
       cursor: not-allowed;
       pointer-events: none;
@@ -315,10 +303,7 @@ a.ax {
     .ax-btn.info:active, .ax-btn.info.active {
       outline: 0;
       background-image: none;
-      background: #ec7809;
-      background-image: -webkit-linear-gradient(top, #ec7809, #ec7809);
-      background-image: linear-gradient(to bottom, #ec7809, #ec7809);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ec7809, endColorstr=#ec7809); }
+      box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset; }
     .ax-btn.info.disabled, .ax-btn.info[disabled], fieldset[disabled] .ax-btn.info {
       cursor: not-allowed;
       pointer-events: none;
@@ -355,10 +340,7 @@ a.ax {
     .ax-btn.warning:active, .ax-btn.warning.active {
       outline: 0;
       background-image: none;
-      background: #cc4900;
-      background-image: -webkit-linear-gradient(top, #cc4900, #cc4900);
-      background-image: linear-gradient(to bottom, #cc4900, #cc4900);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#cc4900, endColorstr=#cc4900); }
+      box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset; }
     .ax-btn.warning.disabled, .ax-btn.warning[disabled], fieldset[disabled] .ax-btn.warning {
       cursor: not-allowed;
       pointer-events: none;
@@ -395,10 +377,7 @@ a.ax {
     .ax-btn.danger:active, .ax-btn.danger.active {
       outline: 0;
       background-image: none;
-      background: #662400;
-      background-image: -webkit-linear-gradient(top, #662400, #662400);
-      background-image: linear-gradient(to bottom, #662400, #662400);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#662400, endColorstr=#662400); }
+      box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset; }
     .ax-btn.danger.disabled, .ax-btn.danger[disabled], fieldset[disabled] .ax-btn.danger {
       cursor: not-allowed;
       pointer-events: none;
@@ -435,10 +414,7 @@ a.ax {
     .ax-btn.link:active, .ax-btn.link.active {
       outline: 0;
       background-image: none;
-      background: #e6e6e6;
-      background-image: -webkit-linear-gradient(top, #e6e6e6, #e6e6e6);
-      background-image: linear-gradient(to bottom, #e6e6e6, #e6e6e6);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#e6e6e6, endColorstr=#e6e6e6); }
+      box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset; }
     .ax-btn.link.disabled, .ax-btn.link[disabled], fieldset[disabled] .ax-btn.link {
       cursor: not-allowed;
       pointer-events: none;
@@ -475,10 +451,7 @@ a.ax {
     .ax-btn.special:active, .ax-btn.special.active {
       outline: 0;
       background-image: none;
-      background: #101010;
-      background-image: -webkit-linear-gradient(top, #101010, #101010);
-      background-image: linear-gradient(to bottom, #101010, #101010);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#101010, endColorstr=#101010); }
+      box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset; }
     .ax-btn.special.disabled, .ax-btn.special[disabled], fieldset[disabled] .ax-btn.special {
       cursor: not-allowed;
       pointer-events: none;
@@ -502,7 +475,7 @@ a.ax {
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px; }
   .ax-btn.xs {
-    padding: 1px 5px;
+    padding: 0px 5px;
     font-size: 12px;
     line-height: 1.5;
     border-top-left-radius: 3px;
@@ -732,10 +705,10 @@ a.ax {
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px; }
   .ax-inp.xs {
-    padding: 1px 5px;
+    padding: 0px 5px;
     font-size: 12px;
     line-height: 1.5;
-    height: 22px;
+    height: 20px;
     border-radius: 3px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -970,10 +943,10 @@ a.ax {
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px; }
   .ax-select.xs {
-    padding: 1px 5px;
+    padding: 0px 5px;
     font-size: 12px;
     line-height: 1.5;
-    height: 22px;
+    height: 20px;
     border-radius: 3px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -1201,7 +1174,7 @@ a.ax {
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px; }
   .ax-textarea.xs {
-    padding: 1px 5px;
+    padding: 0px 5px;
     font-size: 12px;
     line-height: 1.5;
     height: auto;
@@ -2140,7 +2113,7 @@ a.ax {
   .ax-inp-group.lg .ax-addon {
     padding: 1px 10px;
     font-size: 17px;
-    line-height: -6.66667px;
+    line-height: -6.6666667;
     height: 27px;
     overflow: hidden;
     display: inline-block; }
@@ -2166,14 +2139,14 @@ a.ax {
   .ax-inp-group.sm .ax-addon {
     padding: -2px 5px;
     font-size: 12px;
-    line-height: -6.5px;
+    line-height: 16px;
     height: 16px;
     overflow: hidden;
     display: inline-block; }
   .ax-inp-group.sm .ax-inp {
     padding: 2px 5px;
     font-size: 12px;
-    line-height: 1.5;
+    line-height: 24px;
     height: 24px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -2187,20 +2160,20 @@ a.ax {
     box-sizing: border-box;
     padding: 2px 5px;
     font-size: 12px;
-    line-height: 1.5;
+    line-height: 24px;
     height: 24px; }
   .ax-inp-group.xs .ax-addon {
-    padding: -3px 5px;
+    padding: -4px 5px;
     font-size: 12px;
-    line-height: -6.5px;
-    height: 14px;
+    line-height: 12px;
+    height: 12px;
     overflow: hidden;
     display: inline-block; }
   .ax-inp-group.xs .ax-inp {
-    padding: 1px 5px;
+    padding: 0px 5px;
     font-size: 12px;
-    line-height: 1.5;
-    height: 22px;
+    line-height: 20px;
+    height: 20px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
@@ -2211,10 +2184,14 @@ a.ax {
       padding-right: 70px; }
   .ax-inp-group.xs .axicon {
     box-sizing: border-box;
-    padding: 1px 5px;
+    padding: 0px 5px;
     font-size: 12px;
-    line-height: 1.5;
-    height: 22px; }
+    line-height: 20px;
+    height: 20px; }
+  .ax-inp-group.xs .ax-addon:first-child {
+    top: 6px; }
+  .ax-inp-group.xs .ax-addon:last-child {
+    top: 6px; }
 
 .ax-item-group {
   padding: 0px; }
@@ -2832,3 +2809,264 @@ a.ax {
     .ax5-ui-dialog.special .ax-dialog-heading .badge {
       color: #292929;
       background-color: #fff; }
+
+@-webkit-keyframes ax-toast {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-transform: translateX(100px); }
+
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+    opacity: 0.6;
+    -webkit-transform: translateX(0px); } }
+
+@-moz-keyframes ax-toast {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -moz-transform: translateX(100px); }
+
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+    opacity: 0.6;
+    -moz-transform: translateX(0px); } }
+
+@keyframes ax-toast {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-transform: translateX(100px);
+    -moz-transform: translateX(100px);
+    -ms-transform: translateX(100px);
+    -o-transform: translateX(100px);
+    transform: translateX(100px); }
+
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+    opacity: 0.6;
+    -webkit-transform: translateX(0px);
+    -moz-transform: translateX(0px);
+    -ms-transform: translateX(0px);
+    -o-transform: translateX(0px);
+    transform: translateX(0px); } }
+
+@-webkit-keyframes ax-toast-removed {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+    -webkit-transform: translateX(0px); }
+
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-transform: translateX(300px); } }
+
+@-moz-keyframes ax-toast-removed {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+    -moz-transform: translateX(0px); }
+
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -moz-transform: translateX(300px); } }
+
+@keyframes ax-toast-removed {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+    -moz-transform: translateX(0px);
+    -ms-transform: translateX(0px);
+    -o-transform: translateX(0px);
+    transform: translateX(0px); }
+
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-transform: translateX(300px);
+    -moz-transform: translateX(300px);
+    -ms-transform: translateX(300px);
+    -o-transform: translateX(300px);
+    transform: translateX(300px); } }
+
+@-webkit-keyframes ax-toast-destroy {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1; }
+
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0; } }
+
+@-moz-keyframes ax-toast-destroy {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1; }
+
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0; } }
+
+@keyframes ax-toast-destroy {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1; }
+
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0; } }
+
+.ax5-ui-toast-container {
+  z-index: 2000;
+  position: fixed;
+  right: 10px;
+  top: 10px; }
+  .ax5-ui-toast-container .ax5-ui-toast {
+    -webkit-animation: ax-toast 0.2s ease-in-out;
+    -moz-animation: ax-toast 0.2s ease-in-out;
+    animation: ax-toast 0.2s ease-in-out;
+    color: #333333;
+    font-size: 13px;
+    font-weight: 400;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 18px;
+    box-sizing: border-box;
+    border: 1px solid gray;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+    opacity: 0.8;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.6);
+    position: relative;
+    margin: 0px 0px 10px 0px;
+    display: table;
+    padding: 6px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    background: #fff;
+    color: #333333; }
+    .ax5-ui-toast-container .ax5-ui-toast .ax-toast-axicon {
+      display: table-cell;
+      padding: 6px;
+      text-align: left;
+      font-size: 24px;
+      width: 24px;
+      vertical-align: middle; }
+    .ax5-ui-toast-container .ax5-ui-toast .ax-toast-body {
+      display: table-cell;
+      padding: 6px;
+      text-align: left;
+      vertical-align: middle; }
+    .ax5-ui-toast-container .ax5-ui-toast .ax-toast-buttons {
+      display: table-cell;
+      padding: 6px;
+      text-align: right;
+      vertical-align: middle; }
+      .ax5-ui-toast-container .ax5-ui-toast .ax-toast-buttons button:not(:last-child) {
+        margin-right: 3px; }
+    .ax5-ui-toast-container .ax5-ui-toast .ax-toast-axicon {
+      color: #333333; }
+    .ax5-ui-toast-container .ax5-ui-toast.basic {
+      background: #fff;
+      color: #333333; }
+      .ax5-ui-toast-container .ax5-ui-toast.basic .ax-toast-axicon {
+        color: #FEEE00; }
+    .ax5-ui-toast-container .ax5-ui-toast.good {
+      background: #fff;
+      color: #333333; }
+      .ax5-ui-toast-container .ax5-ui-toast.good .ax-toast-axicon {
+        color: #503C3E; }
+    .ax5-ui-toast-container .ax5-ui-toast.info {
+      background: #fff;
+      color: #333333; }
+      .ax5-ui-toast-container .ax5-ui-toast.info .ax-toast-axicon {
+        color: #F79231; }
+    .ax5-ui-toast-container .ax5-ui-toast.warning {
+      background: #fff;
+      color: #333333; }
+      .ax5-ui-toast-container .ax5-ui-toast.warning .ax-toast-axicon {
+        color: #FF5B00; }
+    .ax5-ui-toast-container .ax5-ui-toast.danger {
+      background: #fff;
+      color: #333333; }
+      .ax5-ui-toast-container .ax5-ui-toast.danger .ax-toast-axicon {
+        color: #993700; }
+    .ax5-ui-toast-container .ax5-ui-toast.special {
+      background: #fff;
+      color: #333333; }
+      .ax5-ui-toast-container .ax5-ui-toast.special .ax-toast-axicon {
+        color: #292929; }
+    .ax5-ui-toast-container .ax5-ui-toast.removed {
+      -webkit-animation: ax-toast-removed 0.2s ease-in-out forwards;
+      -moz-animation: ax-toast-removed 0.2s ease-in-out forwards;
+      animation: ax-toast-removed 0.2s ease-in-out forwards; }
+    .ax5-ui-toast-container .ax5-ui-toast.destroy {
+      -webkit-animation: ax-toast-destroy 0.2s ease-in-out forwards;
+      -moz-animation: ax-toast-destroy 0.2s ease-in-out forwards;
+      animation: ax-toast-destroy 0.2s ease-in-out forwards; }
+
+.ax5-ui-touch-grid {
+  height: 100%;
+  box-sizing: border-box; }
+  .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-header {
+    box-sizing: border-box;
+    border: 2px solid #BCBCBD;
+    background: #FFFFFF;
+    background-image: -webkit-linear-gradient(top, #FFFFFF, #F1F1F1);
+    background-image: linear-gradient(to bottom, #FFFFFF, #F1F1F1);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#F1F1F1); }
+    .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-header table {
+      box-sizing: border-box;
+      table-layout: fixed;
+      border-collapse: collapse;
+      border-spacing: 0px; }
+      .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-header table tbody td, .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-header table tbody th {
+        box-sizing: border-box;
+        padding: 0px 7px;
+        padding-top: 2px;
+        vertical-align: middle;
+        line-height: 1em;
+        cursor: pointer; }
+        .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-header table tbody td:not(:last-child), .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-header table tbody th:not(:last-child) {
+          border-right: 2px solid #BCBCBD; }
+  .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body {
+    box-sizing: border-box;
+    border: 2px solid #BCBCBD;
+    border-top: 0px none;
+    position: relative;
+    overflow: hidden;
+    background: #FFFFFF;
+    background-image: -webkit-linear-gradient(top, #FFFFFF, #FFFFFF);
+    background-image: linear-gradient(to bottom, #FFFFFF, #FFFFFF);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#FFFFFF); }
+    .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table {
+      box-sizing: border-box;
+      table-layout: fixed;
+      border-collapse: collapse;
+      border-spacing: 0px; }
+      .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody td, .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody th {
+        box-sizing: border-box;
+        padding: 0px 7px;
+        padding-top: 2px;
+        vertical-align: middle;
+        line-height: 1em;
+        cursor: pointer;
+        border-bottom: 2px solid #BCBCBD; }
+        .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody td:not(:last-child), .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody th:not(:last-child) {
+          border-right: 2px solid #BCBCBD; }
+    .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body .touch-grid-main-content {
+      box-sizing: border-box;
+      position: relative; }
+    .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody tr:hover td, .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody tr:hover th {
+      background: #F7F7F7;
+      background-image: -webkit-linear-gradient(top, #F7F7F7, #F7F7F7);
+      background-image: linear-gradient(to bottom, #F7F7F7, #F7F7F7);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F7F7F7, endColorstr=#F7F7F7); }
+    .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody tr.focus td, .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody tr.focus th {
+      background: #F0F0F0;
+      background-image: -webkit-linear-gradient(top, #F0F0F0, #F0F0F0);
+      background-image: linear-gradient(to bottom, #F0F0F0, #F0F0F0);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F0F0F0, endColorstr=#F0F0F0); }

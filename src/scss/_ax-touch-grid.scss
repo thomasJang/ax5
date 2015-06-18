@@ -1,0 +1,74 @@
+// btn Linear Gradient
+@mixin touch-grid-table($padding, $border, $cell-border) {
+	table{
+		box-sizing: border-box;
+		//width: 100%;
+		table-layout: fixed;
+		border-collapse: collapse;
+		border-spacing: 0px;
+		tbody {
+			td, th {
+				box-sizing: border-box;
+				padding: $padding;
+				padding-top: 2px;
+				vertical-align: middle;
+				line-height: 1em;
+				cursor: pointer;
+				&:not(:last-child){
+					border-right: $border;
+				}
+				@if($cell-border != ""){
+					border-bottom: $border;
+				}
+			}
+		}
+	}
+}
+
+@mixin touch-grid-table-body() {
+	table{
+		tbody {
+			tr{
+				&:hover {
+					td, th {
+						@include ax-gradient(nth($touch-grid-body-hover-bg, 1), nth($touch-grid-body-hover-bg, 2));
+					}
+				}
+				&.focus {
+					td, th {
+						@include ax-gradient(nth($touch-grid-body-focus-bg, 1), nth($touch-grid-body-focus-bg, 2));
+					}
+				}
+			}
+		}
+	}
+}
+
+// mixins --------------------------------------------- end
+
+.ax5-ui-touch-grid {
+	height: 100%;
+	box-sizing: border-box;
+	.touch-grid-main{
+		.touch-grid-main-header {
+			box-sizing: border-box;
+			border: $touch-grid-header-border;
+			@include ax-gradient(nth($touch-grid-header-bg, 1), nth($touch-grid-header-bg, 2));
+			@include touch-grid-table($touch-grid-header-padding, $touch-grid-header-border, "");
+		}
+		.touch-grid-main-body {
+			box-sizing: border-box;
+			border: $touch-grid-header-border;
+			border-top: 0px none;
+			position:relative;
+			overflow:hidden;
+			@include ax-gradient(nth($touch-grid-body-bg, 1), nth($touch-grid-body-bg, 2));
+			@include touch-grid-table($touch-grid-body-padding, $touch-grid-body-border, $touch-grid-body-border);
+			.touch-grid-main-content{
+				box-sizing: border-box;
+				position: relative;
+			}
+			@include touch-grid-table-body();
+		}
+	}
+}

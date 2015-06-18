@@ -2,6 +2,7 @@
 	@include ax();
 	box-sizing: $toast-box-model;
 	border: $toast-border;
+	@include opacity(0.8);
 
 	@include ax-border-radius($toast-border-radius);
 	@include box-shadow($toast-box-shaodw);

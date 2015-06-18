@@ -251,7 +251,7 @@
 				var that = {
 						key: k, value: opts.btns[k],
 						dialog_id: opts.id,
-						item_target: target
+						btn_target: target
 					};
 				if(opts.dialog_type === "prompt") {
 					var empty_key = null;
@@ -299,7 +299,7 @@
 					var that = {
 						key: k, value: opts.btns[k],
 						dialog_id: opts.id,
-						item_target: target
+						btn_target: target
 					};
 					var empty_key = null;
 					for (var oi in opts.input) {

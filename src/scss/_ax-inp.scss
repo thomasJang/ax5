@@ -26,7 +26,13 @@
 }
 
 @mixin input-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius, $height) {
-  padding: $padding-vertical $padding-horizontal;
+	@if ($padding-vertical < 0) {
+		padding: 0px $padding-horizontal;
+	}
+	@else {
+		padding: $padding-vertical $padding-horizontal;
+	}
+
   font-size: $font-size;
   line-height: $line-height;
   height: $height;

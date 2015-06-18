@@ -475,7 +475,7 @@ a.ax {
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px; }
   .ax-btn.xs {
-    padding: 1px 5px;
+    padding: 0px 5px;
     font-size: 12px;
     line-height: 1.5;
     border-top-left-radius: 3px;
@@ -705,10 +705,10 @@ a.ax {
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px; }
   .ax-inp.xs {
-    padding: 1px 5px;
+    padding: 0px 5px;
     font-size: 12px;
     line-height: 1.5;
-    height: 22px;
+    height: 20px;
     border-radius: 3px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -943,10 +943,10 @@ a.ax {
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px; }
   .ax-select.xs {
-    padding: 1px 5px;
+    padding: 0px 5px;
     font-size: 12px;
     line-height: 1.5;
-    height: 22px;
+    height: 20px;
     border-radius: 3px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -1174,7 +1174,7 @@ a.ax {
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px; }
   .ax-textarea.xs {
-    padding: 1px 5px;
+    padding: 0px 5px;
     font-size: 12px;
     line-height: 1.5;
     height: auto;
@@ -1191,7 +1191,9 @@ a.ax {
   border-spacing: 0px;
   vertical-align: middle; }
   .ax-inp-group .ax-addon {
-    display: table-cell;
+    position: absolute;
+    width: 60px;
+    display: block;
     font-weight: normal;
     text-align: center;
     vertical-align: middle;
@@ -1206,10 +1208,10 @@ a.ax {
     background-image: linear-gradient(to bottom, #FFFFFF, #F0F0F0);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#F0F0F0);
     box-shadow: none;
-    padding: 4px 7px;
+    padding: 0px 7px;
     font-size: 13px;
-    line-height: 1.428571429;
-    height: 28px;
+    line-height: -6.571428571;
+    height: 20px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1219,25 +1221,23 @@ a.ax {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; }
-    .ax-inp-group .ax-addon:not(:first-child) {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
-      border-left: 0px none; }
-    .ax-inp-group .ax-addon:not(:last-child) {
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0;
-      border-right: 0px none; }
+    .ax-inp-group .ax-addon:first-child {
+      left: 4px;
+      top: 4px; }
+    .ax-inp-group .ax-addon:last-child {
+      right: 4px;
+      top: 4px; }
   .ax-inp-group .ax-inp {
     display: table-cell;
     margin: 0px; }
     .ax-inp-group .ax-inp:not(:first-child) {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0; }
+      padding-left: 70px; }
     .ax-inp-group .ax-inp:not(:last-child) {
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0; }
+      padding-right: 70px; }
   .ax-inp-group.basic .ax-addon {
-    display: table-cell;
+    position: absolute;
+    width: 60px;
+    display: block;
     font-weight: normal;
     text-align: center;
     vertical-align: middle;
@@ -1252,10 +1252,10 @@ a.ax {
     background-image: linear-gradient(to bottom, #5ec4e3, #32B4DC);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#5ec4e3, endColorstr=#32B4DC);
     box-shadow: none;
-    padding: 4px 7px;
+    padding: 0px 7px;
     font-size: 13px;
-    line-height: 1.428571429;
-    height: 28px;
+    line-height: -6.571428571;
+    height: 20px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1265,14 +1265,12 @@ a.ax {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; }
-    .ax-inp-group.basic .ax-addon:not(:first-child) {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
-      border-left: 0px none; }
-    .ax-inp-group.basic .ax-addon:not(:last-child) {
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0;
-      border-right: 0px none; }
+    .ax-inp-group.basic .ax-addon:first-child {
+      left: 4px;
+      top: 4px; }
+    .ax-inp-group.basic .ax-addon:last-child {
+      right: 4px;
+      top: 4px; }
   .ax-inp-group.basic .ax-inp {
     color: #187490;
     text-shadow: none;
@@ -1301,7 +1299,9 @@ a.ax {
       box-shadow: none;
       opacity: 1; }
   .ax-inp-group.good .ax-addon {
-    display: table-cell;
+    position: absolute;
+    width: 60px;
+    display: block;
     font-weight: normal;
     text-align: center;
     vertical-align: middle;
@@ -1316,10 +1316,10 @@ a.ax {
     background-image: linear-gradient(to bottom, #92c85b, #78B43C);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#92c85b, endColorstr=#78B43C);
     box-shadow: none;
-    padding: 4px 7px;
+    padding: 0px 7px;
     font-size: 13px;
-    line-height: 1.428571429;
-    height: 28px;
+    line-height: -6.571428571;
+    height: 20px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1329,14 +1329,12 @@ a.ax {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; }
-    .ax-inp-group.good .ax-addon:not(:first-child) {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
-      border-left: 0px none; }
-    .ax-inp-group.good .ax-addon:not(:last-child) {
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0;
-      border-right: 0px none; }
+    .ax-inp-group.good .ax-addon:first-child {
+      left: 4px;
+      top: 4px; }
+    .ax-inp-group.good .ax-addon:last-child {
+      right: 4px;
+      top: 4px; }
   .ax-inp-group.good .ax-inp {
     color: #456822;
     text-shadow: none;
@@ -1365,7 +1363,9 @@ a.ax {
       box-shadow: none;
       opacity: 1; }
   .ax-inp-group.info .ax-addon {
-    display: table-cell;
+    position: absolute;
+    width: 60px;
+    display: block;
     font-weight: normal;
     text-align: center;
     vertical-align: middle;
@@ -1380,10 +1380,10 @@ a.ax {
     background-image: linear-gradient(to bottom, #004582, #002A4F);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#004582, endColorstr=#002A4F);
     box-shadow: none;
-    padding: 4px 7px;
+    padding: 0px 7px;
     font-size: 13px;
-    line-height: 1.428571429;
-    height: 28px;
+    line-height: -6.571428571;
+    height: 20px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1393,14 +1393,12 @@ a.ax {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; }
-    .ax-inp-group.info .ax-addon:not(:first-child) {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
-      border-left: 0px none; }
-    .ax-inp-group.info .ax-addon:not(:last-child) {
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0;
-      border-right: 0px none; }
+    .ax-inp-group.info .ax-addon:first-child {
+      left: 4px;
+      top: 4px; }
+    .ax-inp-group.info .ax-addon:last-child {
+      right: 4px;
+      top: 4px; }
   .ax-inp-group.info .ax-inp {
     color: black;
     text-shadow: none;
@@ -1429,7 +1427,9 @@ a.ax {
       box-shadow: none;
       opacity: 1; }
   .ax-inp-group.warning .ax-addon {
-    display: table-cell;
+    position: absolute;
+    width: 60px;
+    display: block;
     font-weight: normal;
     text-align: center;
     vertical-align: middle;
@@ -1444,10 +1444,10 @@ a.ax {
     background-image: linear-gradient(to bottom, #ec9069, #E66E3C);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ec9069, endColorstr=#E66E3C);
     box-shadow: none;
-    padding: 4px 7px;
+    padding: 0px 7px;
     font-size: 13px;
-    line-height: 1.428571429;
-    height: 28px;
+    line-height: -6.571428571;
+    height: 20px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1457,14 +1457,12 @@ a.ax {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; }
-    .ax-inp-group.warning .ax-addon:not(:first-child) {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
-      border-left: 0px none; }
-    .ax-inp-group.warning .ax-addon:not(:last-child) {
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0;
-      border-right: 0px none; }
+    .ax-inp-group.warning .ax-addon:first-child {
+      left: 4px;
+      top: 4px; }
+    .ax-inp-group.warning .ax-addon:last-child {
+      right: 4px;
+      top: 4px; }
   .ax-inp-group.warning .ax-inp {
     color: #a74015;
     text-shadow: none;
@@ -1493,7 +1491,9 @@ a.ax {
       box-shadow: none;
       opacity: 1; }
   .ax-inp-group.danger .ax-addon {
-    display: table-cell;
+    position: absolute;
+    width: 60px;
+    display: block;
     font-weight: normal;
     text-align: center;
     vertical-align: middle;
@@ -1508,10 +1508,10 @@ a.ax {
     background-image: linear-gradient(to bottom, #d4511b, #a74015);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#d4511b, endColorstr=#a74015);
     box-shadow: none;
-    padding: 4px 7px;
+    padding: 0px 7px;
     font-size: 13px;
-    line-height: 1.428571429;
-    height: 28px;
+    line-height: -6.571428571;
+    height: 20px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1521,14 +1521,12 @@ a.ax {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; }
-    .ax-inp-group.danger .ax-addon:not(:first-child) {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
-      border-left: 0px none; }
-    .ax-inp-group.danger .ax-addon:not(:last-child) {
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0;
-      border-right: 0px none; }
+    .ax-inp-group.danger .ax-addon:first-child {
+      left: 4px;
+      top: 4px; }
+    .ax-inp-group.danger .ax-addon:last-child {
+      right: 4px;
+      top: 4px; }
   .ax-inp-group.danger .ax-inp {
     color: #a74015;
     text-shadow: none;
@@ -1557,7 +1555,9 @@ a.ax {
       box-shadow: none;
       opacity: 1; }
   .ax-inp-group.special .ax-addon {
-    display: table-cell;
+    position: absolute;
+    width: 60px;
+    display: block;
     font-weight: normal;
     text-align: center;
     vertical-align: middle;
@@ -1572,10 +1572,10 @@ a.ax {
     background-image: linear-gradient(to bottom, #a430b9, #bc4cd0);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#a430b9, endColorstr=#bc4cd0);
     box-shadow: none;
-    padding: 4px 7px;
+    padding: 0px 7px;
     font-size: 13px;
-    line-height: 1.428571429;
-    height: 28px;
+    line-height: -6.571428571;
+    height: 20px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1585,14 +1585,12 @@ a.ax {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; }
-    .ax-inp-group.special .ax-addon:not(:first-child) {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
-      border-left: 0px none; }
-    .ax-inp-group.special .ax-addon:not(:last-child) {
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0;
-      border-right: 0px none; }
+    .ax-inp-group.special .ax-addon:first-child {
+      left: 4px;
+      top: 4px; }
+    .ax-inp-group.special .ax-addon:last-child {
+      right: 4px;
+      top: 4px; }
   .ax-inp-group.special .ax-inp {
     color: #802690;
     text-shadow: none;
@@ -1621,7 +1619,9 @@ a.ax {
       box-shadow: none;
       opacity: 1; }
   .ax-inp-group.has-basic .ax-addon {
-    display: table-cell;
+    position: absolute;
+    width: 60px;
+    display: block;
     font-weight: normal;
     text-align: center;
     vertical-align: middle;
@@ -1636,10 +1636,10 @@ a.ax {
     background-image: linear-gradient(to bottom, #5ec4e3, #32B4DC);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#5ec4e3, endColorstr=#32B4DC);
     box-shadow: none;
-    padding: 4px 7px;
+    padding: 0px 7px;
     font-size: 13px;
-    line-height: 1.428571429;
-    height: 28px;
+    line-height: -6.571428571;
+    height: 20px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1649,14 +1649,12 @@ a.ax {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; }
-    .ax-inp-group.has-basic .ax-addon:not(:first-child) {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
-      border-left: 0px none; }
-    .ax-inp-group.has-basic .ax-addon:not(:last-child) {
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0;
-      border-right: 0px none; }
+    .ax-inp-group.has-basic .ax-addon:first-child {
+      left: 4px;
+      top: 4px; }
+    .ax-inp-group.has-basic .ax-addon:last-child {
+      right: 4px;
+      top: 4px; }
   .ax-inp-group.has-basic .ax-inp {
     display: table-cell;
     color: #187490;
@@ -1672,10 +1670,6 @@ a.ax {
       border-top-right-radius: 6px;
       border-bottom-right-radius: 6px;
       border-bottom-left-radius: 6px; }
-    .ax-inp-group.has-basic .ax-inp:not(:first-child) {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
-      border-left: 0px none; }
     .ax-inp-group.has-basic .ax-inp:focus {
       border-color: #32B4DC;
       outline: 0;
@@ -1707,7 +1701,9 @@ a.ax {
     .ax-inp-group.has-basic .axicon:before {
       content: '\f164'; }
   .ax-inp-group.has-good .ax-addon {
-    display: table-cell;
+    position: absolute;
+    width: 60px;
+    display: block;
     font-weight: normal;
     text-align: center;
     vertical-align: middle;
@@ -1722,10 +1718,10 @@ a.ax {
     background-image: linear-gradient(to bottom, #92c85b, #78B43C);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#92c85b, endColorstr=#78B43C);
     box-shadow: none;
-    padding: 4px 7px;
+    padding: 0px 7px;
     font-size: 13px;
-    line-height: 1.428571429;
-    height: 28px;
+    line-height: -6.571428571;
+    height: 20px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1735,14 +1731,12 @@ a.ax {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; }
-    .ax-inp-group.has-good .ax-addon:not(:first-child) {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
-      border-left: 0px none; }
-    .ax-inp-group.has-good .ax-addon:not(:last-child) {
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0;
-      border-right: 0px none; }
+    .ax-inp-group.has-good .ax-addon:first-child {
+      left: 4px;
+      top: 4px; }
+    .ax-inp-group.has-good .ax-addon:last-child {
+      right: 4px;
+      top: 4px; }
   .ax-inp-group.has-good .ax-inp {
     display: table-cell;
     color: #456822;
@@ -1758,10 +1752,6 @@ a.ax {
       border-top-right-radius: 6px;
       border-bottom-right-radius: 6px;
       border-bottom-left-radius: 6px; }
-    .ax-inp-group.has-good .ax-inp:not(:first-child) {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
-      border-left: 0px none; }
     .ax-inp-group.has-good .ax-inp:focus {
       border-color: #78B43C;
       outline: 0;
@@ -1793,7 +1783,9 @@ a.ax {
     .ax-inp-group.has-good .axicon:before {
       content: '\f164'; }
   .ax-inp-group.has-info .ax-addon {
-    display: table-cell;
+    position: absolute;
+    width: 60px;
+    display: block;
     font-weight: normal;
     text-align: center;
     vertical-align: middle;
@@ -1808,10 +1800,10 @@ a.ax {
     background-image: linear-gradient(to bottom, #004582, #002A4F);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#004582, endColorstr=#002A4F);
     box-shadow: none;
-    padding: 4px 7px;
+    padding: 0px 7px;
     font-size: 13px;
-    line-height: 1.428571429;
-    height: 28px;
+    line-height: -6.571428571;
+    height: 20px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1821,14 +1813,12 @@ a.ax {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; }
-    .ax-inp-group.has-info .ax-addon:not(:first-child) {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
-      border-left: 0px none; }
-    .ax-inp-group.has-info .ax-addon:not(:last-child) {
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0;
-      border-right: 0px none; }
+    .ax-inp-group.has-info .ax-addon:first-child {
+      left: 4px;
+      top: 4px; }
+    .ax-inp-group.has-info .ax-addon:last-child {
+      right: 4px;
+      top: 4px; }
   .ax-inp-group.has-info .ax-inp {
     display: table-cell;
     color: black;
@@ -1844,10 +1834,6 @@ a.ax {
       border-top-right-radius: 6px;
       border-bottom-right-radius: 6px;
       border-bottom-left-radius: 6px; }
-    .ax-inp-group.has-info .ax-inp:not(:first-child) {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
-      border-left: 0px none; }
     .ax-inp-group.has-info .ax-inp:focus {
       border-color: #002A4F;
       outline: 0;
@@ -1879,7 +1865,9 @@ a.ax {
     .ax-inp-group.has-info .axicon:before {
       content: '\e6c6'; }
   .ax-inp-group.has-warning .ax-addon {
-    display: table-cell;
+    position: absolute;
+    width: 60px;
+    display: block;
     font-weight: normal;
     text-align: center;
     vertical-align: middle;
@@ -1894,10 +1882,10 @@ a.ax {
     background-image: linear-gradient(to bottom, #ec9069, #E66E3C);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ec9069, endColorstr=#E66E3C);
     box-shadow: none;
-    padding: 4px 7px;
+    padding: 0px 7px;
     font-size: 13px;
-    line-height: 1.428571429;
-    height: 28px;
+    line-height: -6.571428571;
+    height: 20px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1907,14 +1895,12 @@ a.ax {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; }
-    .ax-inp-group.has-warning .ax-addon:not(:first-child) {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
-      border-left: 0px none; }
-    .ax-inp-group.has-warning .ax-addon:not(:last-child) {
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0;
-      border-right: 0px none; }
+    .ax-inp-group.has-warning .ax-addon:first-child {
+      left: 4px;
+      top: 4px; }
+    .ax-inp-group.has-warning .ax-addon:last-child {
+      right: 4px;
+      top: 4px; }
   .ax-inp-group.has-warning .ax-inp {
     display: table-cell;
     color: #a74015;
@@ -1930,10 +1916,6 @@ a.ax {
       border-top-right-radius: 6px;
       border-bottom-right-radius: 6px;
       border-bottom-left-radius: 6px; }
-    .ax-inp-group.has-warning .ax-inp:not(:first-child) {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
-      border-left: 0px none; }
     .ax-inp-group.has-warning .ax-inp:focus {
       border-color: #E66E3C;
       outline: 0;
@@ -1965,7 +1947,9 @@ a.ax {
     .ax-inp-group.has-warning .axicon:before {
       content: '\e730'; }
   .ax-inp-group.has-danger .ax-addon {
-    display: table-cell;
+    position: absolute;
+    width: 60px;
+    display: block;
     font-weight: normal;
     text-align: center;
     vertical-align: middle;
@@ -1980,10 +1964,10 @@ a.ax {
     background-image: linear-gradient(to bottom, #d4511b, #a74015);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#d4511b, endColorstr=#a74015);
     box-shadow: none;
-    padding: 4px 7px;
+    padding: 0px 7px;
     font-size: 13px;
-    line-height: 1.428571429;
-    height: 28px;
+    line-height: -6.571428571;
+    height: 20px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1993,14 +1977,12 @@ a.ax {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; }
-    .ax-inp-group.has-danger .ax-addon:not(:first-child) {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
-      border-left: 0px none; }
-    .ax-inp-group.has-danger .ax-addon:not(:last-child) {
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0;
-      border-right: 0px none; }
+    .ax-inp-group.has-danger .ax-addon:first-child {
+      left: 4px;
+      top: 4px; }
+    .ax-inp-group.has-danger .ax-addon:last-child {
+      right: 4px;
+      top: 4px; }
   .ax-inp-group.has-danger .ax-inp {
     display: table-cell;
     color: #a74015;
@@ -2016,10 +1998,6 @@ a.ax {
       border-top-right-radius: 6px;
       border-bottom-right-radius: 6px;
       border-bottom-left-radius: 6px; }
-    .ax-inp-group.has-danger .ax-inp:not(:first-child) {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
-      border-left: 0px none; }
     .ax-inp-group.has-danger .ax-inp:focus {
       border-color: #a74015;
       outline: 0;
@@ -2051,7 +2029,9 @@ a.ax {
     .ax-inp-group.has-danger .axicon:before {
       content: '\e72f'; }
   .ax-inp-group.has-special .ax-addon {
-    display: table-cell;
+    position: absolute;
+    width: 60px;
+    display: block;
     font-weight: normal;
     text-align: center;
     vertical-align: middle;
@@ -2066,10 +2046,10 @@ a.ax {
     background-image: linear-gradient(to bottom, #a430b9, #bc4cd0);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#a430b9, endColorstr=#bc4cd0);
     box-shadow: none;
-    padding: 4px 7px;
+    padding: 0px 7px;
     font-size: 13px;
-    line-height: 1.428571429;
-    height: 28px;
+    line-height: -6.571428571;
+    height: 20px;
     border-radius: 6px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -2079,14 +2059,12 @@ a.ax {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; }
-    .ax-inp-group.has-special .ax-addon:not(:first-child) {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
-      border-left: 0px none; }
-    .ax-inp-group.has-special .ax-addon:not(:last-child) {
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0;
-      border-right: 0px none; }
+    .ax-inp-group.has-special .ax-addon:first-child {
+      left: 4px;
+      top: 4px; }
+    .ax-inp-group.has-special .ax-addon:last-child {
+      right: 4px;
+      top: 4px; }
   .ax-inp-group.has-special .ax-inp {
     display: table-cell;
     color: #802690;
@@ -2102,10 +2080,6 @@ a.ax {
       border-top-right-radius: 6px;
       border-bottom-right-radius: 6px;
       border-bottom-left-radius: 6px; }
-    .ax-inp-group.has-special .ax-inp:not(:first-child) {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
-      border-left: 0px none; }
     .ax-inp-group.has-special .ax-inp:focus {
       border-color: #bc4cd0;
       outline: 0;
@@ -2137,10 +2111,10 @@ a.ax {
     .ax-inp-group.has-special .axicon:before {
       content: '\e60a'; }
   .ax-inp-group.lg .ax-addon {
-    padding: 5px 10px;
+    padding: 1px 10px;
     font-size: 17px;
-    line-height: 1.3333333;
-    height: 35px;
+    line-height: -6.6666667;
+    height: 27px;
     overflow: hidden;
     display: inline-block; }
   .ax-inp-group.lg .ax-inp {
@@ -2153,11 +2127,9 @@ a.ax {
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px; }
     .ax-inp-group.lg .ax-inp:not(:first-child) {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0; }
+      padding-left: 70px; }
     .ax-inp-group.lg .ax-inp:not(:last-child) {
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0; }
+      padding-right: 70px; }
   .ax-inp-group.lg .axicon {
     box-sizing: border-box;
     padding: 5px 10px;
@@ -2165,61 +2137,61 @@ a.ax {
     line-height: 1.3333333;
     height: 35px; }
   .ax-inp-group.sm .ax-addon {
-    padding: 2px 5px;
+    padding: -2px 5px;
     font-size: 12px;
-    line-height: 1.5;
-    height: 24px;
+    line-height: 16px;
+    height: 16px;
     overflow: hidden;
     display: inline-block; }
   .ax-inp-group.sm .ax-inp {
     padding: 2px 5px;
     font-size: 12px;
-    line-height: 1.5;
+    line-height: 24px;
     height: 24px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px; }
     .ax-inp-group.sm .ax-inp:not(:first-child) {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0; }
+      padding-left: 70px; }
     .ax-inp-group.sm .ax-inp:not(:last-child) {
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0; }
+      padding-right: 70px; }
   .ax-inp-group.sm .axicon {
     box-sizing: border-box;
     padding: 2px 5px;
     font-size: 12px;
-    line-height: 1.5;
+    line-height: 24px;
     height: 24px; }
   .ax-inp-group.xs .ax-addon {
-    padding: 1px 5px;
+    padding: -4px 5px;
     font-size: 12px;
-    line-height: 1.5;
-    height: 22px;
+    line-height: 12px;
+    height: 12px;
     overflow: hidden;
     display: inline-block; }
   .ax-inp-group.xs .ax-inp {
-    padding: 1px 5px;
+    padding: 0px 5px;
     font-size: 12px;
-    line-height: 1.5;
-    height: 22px;
+    line-height: 20px;
+    height: 20px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px; }
     .ax-inp-group.xs .ax-inp:not(:first-child) {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0; }
+      padding-left: 70px; }
     .ax-inp-group.xs .ax-inp:not(:last-child) {
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0; }
+      padding-right: 70px; }
   .ax-inp-group.xs .axicon {
     box-sizing: border-box;
-    padding: 1px 5px;
+    padding: 0px 5px;
     font-size: 12px;
-    line-height: 1.5;
-    height: 22px; }
+    line-height: 20px;
+    height: 20px; }
+  .ax-inp-group.xs .ax-addon:first-child {
+    top: 6px; }
+  .ax-inp-group.xs .ax-addon:last-child {
+    top: 6px; }
 
 .ax-item-group {
   padding: 0px; }
@@ -2960,6 +2932,8 @@ a.ax {
     line-height: 18px;
     box-sizing: border-box;
     border: 1px solid gray;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+    opacity: 0.8;
     border-radius: 8px;
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.6);
     position: relative;
@@ -3030,6 +3004,69 @@ a.ax {
       -webkit-animation: ax-toast-destroy 0.2s ease-in-out forwards;
       -moz-animation: ax-toast-destroy 0.2s ease-in-out forwards;
       animation: ax-toast-destroy 0.2s ease-in-out forwards; }
+
+.ax5-ui-touch-grid {
+  height: 100%;
+  box-sizing: border-box; }
+  .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-header {
+    box-sizing: border-box;
+    border: 1px solid #BCBCBD;
+    background: #FFFFFF;
+    background-image: -webkit-linear-gradient(top, #FFFFFF, #F1F1F1);
+    background-image: linear-gradient(to bottom, #FFFFFF, #F1F1F1);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#F1F1F1); }
+    .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-header table {
+      box-sizing: border-box;
+      table-layout: fixed;
+      border-collapse: collapse;
+      border-spacing: 0px; }
+      .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-header table tbody td, .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-header table tbody th {
+        box-sizing: border-box;
+        padding: 0px 7px;
+        padding-top: 2px;
+        vertical-align: middle;
+        line-height: 1em;
+        cursor: pointer; }
+        .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-header table tbody td:not(:last-child), .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-header table tbody th:not(:last-child) {
+          border-right: 1px solid #BCBCBD; }
+  .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body {
+    box-sizing: border-box;
+    border: 1px solid #BCBCBD;
+    border-top: 0px none;
+    position: relative;
+    overflow: hidden;
+    background: #FFFFFF;
+    background-image: -webkit-linear-gradient(top, #FFFFFF, #FFFFFF);
+    background-image: linear-gradient(to bottom, #FFFFFF, #FFFFFF);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#FFFFFF); }
+    .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table {
+      box-sizing: border-box;
+      table-layout: fixed;
+      border-collapse: collapse;
+      border-spacing: 0px; }
+      .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody td, .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody th {
+        box-sizing: border-box;
+        padding: 0px 7px;
+        padding-top: 2px;
+        vertical-align: middle;
+        line-height: 1em;
+        cursor: pointer;
+        border-bottom: 1px solid #BCBCBD; }
+        .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody td:not(:last-child), .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody th:not(:last-child) {
+          border-right: 1px solid #BCBCBD; }
+    .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body .touch-grid-main-content {
+      box-sizing: border-box;
+      position: relative; }
+    .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody tr:hover td, .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody tr:hover th {
+      background: #F7F7F7;
+      background-image: -webkit-linear-gradient(top, #F7F7F7, #F7F7F7);
+      background-image: linear-gradient(to bottom, #F7F7F7, #F7F7F7);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F7F7F7, endColorstr=#F7F7F7); }
+    .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody tr.focus td, .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody tr.focus th {
+      background: #F0F0F0;
+      background-image: -webkit-linear-gradient(top, #F0F0F0, #F0F0F0);
+      background-image: linear-gradient(to bottom, #F0F0F0, #F0F0F0);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F0F0F0, endColorstr=#F0F0F0); }
 
 .ax-button-wrap {
   display: inline-block;

@@ -94,7 +94,7 @@ $padding-large-horizontal:  10px;
 $padding-small-vertical:    2px;
 $padding-small-horizontal:  5px;
 
-$padding-xs-vertical:       1px;
+$padding-xs-vertical:       0px;
 $padding-xs-horizontal:     5px;
 
 $line-height-large:         1.3333333; // extra decimals for Win 8.1 Chrome
@@ -500,3 +500,18 @@ $toast-danger-color: $panel-danger-heading-bg;
 $toast-special-text: $panel-default-text;
 $toast-special-bg: $panel-bg;
 $toast-special-color: $panel-special-heading-bg;
+
+//== touch-grid
+$touch-grid-header-bg: (#FFFFFF, #F1F1F1); // 그리드 헤더 배경색들
+$touch-grid-header-border: 1px solid #BCBCBD;
+$touch-grid-header-padding: 0px $padding-base-horizontal;
+
+$touch-grid-body-bg: (#FFFFFF, #FFFFFF);
+$touch-grid-body-border: 1px solid #BCBCBD;
+$touch-grid-body-padding: 0px $padding-base-horizontal;
+
+$touch-grid-body-even-bg: (#FFFFFF, #FFFFFF);
+$touch-grid-body-hover-bg: (#F7F7F7, #F7F7F7);
+$touch-grid-body-focus-bg: (#F0F0F0, #F0F0F0);
+
+
