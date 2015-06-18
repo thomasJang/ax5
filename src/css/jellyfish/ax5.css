@@ -3054,7 +3054,7 @@ a.ax {
         border-bottom: 1px solid #BCBCBD; }
         .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody td:not(:last-child), .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody th:not(:last-child) {
           border-right: 1px solid #BCBCBD; }
-    .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body .touch-grid-main-content {
+    .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body .touch-grid-content {
       box-sizing: border-box;
       position: relative; }
     .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody tr:hover td, .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody tr:hover th {
@@ -3062,7 +3062,7 @@ a.ax {
       background-image: -webkit-linear-gradient(top, #F7F7F7, #F7F7F7);
       background-image: linear-gradient(to bottom, #F7F7F7, #F7F7F7);
       filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F7F7F7, endColorstr=#F7F7F7); }
-    .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody tr.focus td, .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody tr.focus th {
+    .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody tr:active td, .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody tr:active th, .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody tr.focus td, .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody tr.focus th {
       background: #F0F0F0;
       background-image: -webkit-linear-gradient(top, #F0F0F0, #F0F0F0);
       background-image: linear-gradient(to bottom, #F0F0F0, #F0F0F0);

@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-06-18 
+ * 2015-06-19 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -1084,7 +1084,8 @@
 				click_event_name: (('ontouchstart' in document.documentElement) ? "touchstart" : "click"),
 				theme: 'default',
 				head_height: 28,
-				item_height: 28
+				item_height: 28,
+				body: {}
 			};
 		}).apply(this, arguments);
 
@@ -1213,7 +1214,7 @@
 					po.push('<tbody>');
 					for (var r = 0, len = this.list.length, item; r < len; r++) {
 						item = this.list[r];
-						po.push('<tr style="height:' + cfg.item_height + 'px;">');
+						po.push('<tr data-touch-grid-item-row="' + r + '" style="height:' + cfg.item_height + 'px;">');
 						for(var i=0, l=this.col_group.length;i<l;i++) {
 							po.push('<td>' + item[this.col_group[i].key] + '</td>');
 						}
@@ -1227,7 +1228,62 @@
 
 		this.set_list = function(list){
 			this.list = list;
+			this.focused_index = -1;
 			this.els["main-body-content"].html( this.get_list() );
+			this.els["main-body-content"].on("click", (function(e){
+				this.onclick(e||window.event);
+			}).bind(this));
+			this.focus(0);
+		};
+
+		this.focus = function(index){
+			if(this.focused_index > -1){
+				// remove focus
+				this.els["main-body-content"].find('[data-touch-grid-item-row="'+ this.focused_index +'"]').class_name("remove", "focus");
+			}
+			// add focus
+			var
+				focused_item = this.els["main-body-content"].find('[data-touch-grid-item-row="'+ index +'"]'),
+				focused_item_height = focused_item.height(),
+				focused_item_top = focused_item.position().top,
+				body_content_top = this.els["main-body-content"].position().top,
+				body_height = this.els["main-body"].height(),
+				view_position_top = focused_item_top + focused_item_height - body_content_top;
+
+			focused_item.class_name("add", "focus");
+			this.focused_index = index;
+
+			// content scroll
+			console.log(view_position_top, body_height);
+			if(view_position_top > body_height){
+
+				this.els["main-body-content"].css({top: (body_height - view_position_top) });
+			}
+			else{
+				
+			}
+		};
+
+		this.onclick = function(e, target, index, that){
+			target = axd.parent(e.target, function(target){
+				if(axd.attr(target, "data-touch-grid-item-row")){
+					return true;
+				}
+			});
+			if(target){
+				index = axd.attr(target, "data-touch-grid-item-row");
+				that = {
+					list: this.list,
+					item: this.list[index],
+					target: cfg.target.elements[0],
+					item_target: target
+				};
+
+				this.focus(index);
+				if(cfg.body.onclick){
+					cfg.body.onclick.call(that);
+				}
+			}
 		}
 	};
 	//== UI Class

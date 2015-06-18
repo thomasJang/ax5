@@ -34,7 +34,7 @@
 						@include ax-gradient(nth($touch-grid-body-hover-bg, 1), nth($touch-grid-body-hover-bg, 2));
 					}
 				}
-				&.focus {
+				&:active, &.focus {
 					td, th {
 						@include ax-gradient(nth($touch-grid-body-focus-bg, 1), nth($touch-grid-body-focus-bg, 2));
 					}
@@ -64,9 +64,10 @@
 			overflow:hidden;
 			@include ax-gradient(nth($touch-grid-body-bg, 1), nth($touch-grid-body-bg, 2));
 			@include touch-grid-table($touch-grid-body-padding, $touch-grid-body-border, $touch-grid-body-border);
-			.touch-grid-main-content{
+			.touch-grid-content{
 				box-sizing: border-box;
 				position: relative;
+				//width:100%;
 			}
 			@include touch-grid-table-body();
 		}
