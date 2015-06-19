@@ -1236,11 +1236,16 @@
 			this.focus(0);
 		};
 
-		this.focus = function(index){
+		this.focus = function(index, by){
 			if(this.focused_index > -1){
 				// remove focus
 				this.els["main-body-content"].find('[data-touch-grid-item-row="'+ this.focused_index +'"]').class_name("remove", "focus");
 			}
+
+			if(typeof by !== "undefined"){
+				
+			}
+
 			// add focus
 			var
 				focused_item = this.els["main-body-content"].find('[data-touch-grid-item-row="'+ index +'"]'),
@@ -1248,19 +1253,20 @@
 				focused_item_top = focused_item.position().top,
 				body_content_top = this.els["main-body-content"].position().top,
 				body_height = this.els["main-body"].height(),
-				view_position_top = focused_item_top + focused_item_height - body_content_top;
+				view_position_top = focused_item_top - U.number(body_content_top, {abs:true});
 
 			focused_item.class_name("add", "focus");
 			this.focused_index = index;
 
 			// content scroll
-			console.log(view_position_top, body_height);
-			if(view_position_top > body_height){
-
-				this.els["main-body-content"].css({top: (body_height - view_position_top) });
+			if(view_position_top < 0){
+				this.els["main-body-content"].css({top: -(focused_item_top) });
+			}
+			else if(view_position_top + focused_item_height > body_height){
+				this.els["main-body-content"].css({top: (body_height - view_position_top - focused_item_height) });
 			}
 			else{
-				
+				// nothing
 			}
 		};
 
@@ -1285,6 +1291,7 @@
 				}
 			}
 		}
+
 	};
 	//== UI Class
 
