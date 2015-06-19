@@ -2154,7 +2154,7 @@
 			else if (elem && elem.nodeType === 9) return [elem.documentElement];
 			else if (elem && elem.toString() == "[object ax5.dom]") return elem.elements;
 			else if (type !== "array" && type !== "nodelist") {
-				console.error("ax5.dom." + fn_name + " : elements parameter incorrect");
+				//console.error("ax5.dom." + fn_name + " : elements parameter incorrect");
 				return [];
 			}
 			return elem;
@@ -3888,6 +3888,15 @@ ax5.ui = (function (core) {
 		};
 		this.init = function () {
 			console.log(this.config);
+		};
+
+		this.bind_window_resize = function(callBack){
+			ax5.dom.resize((function(){
+				if(this.bind_window_resize__) clearTimeout(this.bind_window_resize__);
+				this.bind_window_resize__ = setTimeout((function(){
+					callBack.call(this);
+				}).bind(this), 10);
+			}).bind(this));
 		};
 	}
 

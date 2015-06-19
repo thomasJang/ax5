@@ -3010,10 +3010,14 @@ a.ax {
 
 .ax5-ui-touch-grid {
   height: 100%;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden; }
   .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-header {
     box-sizing: border-box;
     border: 2px solid #BCBCBD;
+    position: relative;
+    overflow: hidden;
     background: #FFFFFF;
     background-image: -webkit-linear-gradient(top, #FFFFFF, #F1F1F1);
     background-image: linear-gradient(to bottom, #FFFFFF, #F1F1F1);

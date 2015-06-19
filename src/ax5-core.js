@@ -1978,7 +1978,7 @@
 			else if (elem && elem.nodeType === 9) return [elem.documentElement];
 			else if (elem && elem.toString() == "[object ax5.dom]") return elem.elements;
 			else if (type !== "array" && type !== "nodelist") {
-				console.error("ax5.dom." + fn_name + " : elements parameter incorrect");
+				//console.error("ax5.dom." + fn_name + " : elements parameter incorrect");
 				return [];
 			}
 			return elem;

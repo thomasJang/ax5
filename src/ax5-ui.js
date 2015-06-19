@@ -48,6 +48,15 @@ ax5.ui = (function (core) {
 		this.init = function () {
 			console.log(this.config);
 		};
+
+		this.bind_window_resize = function(callBack){
+			ax5.dom.resize((function(){
+				if(this.bind_window_resize__) clearTimeout(this.bind_window_resize__);
+				this.bind_window_resize__ = setTimeout((function(){
+					callBack.call(this);
+				}).bind(this), 10);
+			}).bind(this));
+		};
 	}
 
 	return {

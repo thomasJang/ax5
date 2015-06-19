@@ -2,7 +2,6 @@
 @mixin touch-grid-table($padding, $border, $cell-border) {
 	table{
 		box-sizing: border-box;
-		//width: 100%;
 		table-layout: fixed;
 		border-collapse: collapse;
 		border-spacing: 0px;
@@ -49,10 +48,14 @@
 .ax5-ui-touch-grid {
 	height: 100%;
 	box-sizing: border-box;
+	position:relative;
+	overflow:hidden;
 	.touch-grid-main{
 		.touch-grid-main-header {
 			box-sizing: border-box;
 			border: $touch-grid-header-border;
+			position:relative;
+			overflow:hidden;
 			@include ax-gradient(nth($touch-grid-header-bg, 1), nth($touch-grid-header-bg, 2));
 			@include touch-grid-table($touch-grid-header-padding, $touch-grid-header-border, "");
 		}

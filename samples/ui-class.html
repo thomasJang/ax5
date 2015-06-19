@@ -1280,7 +1280,13 @@ ax5.util.require(["ui/keypad.js"], function(){
 	</p>
 <pre class="prettyprint linenums">
 &lt;div class="tag-result">
-	&lt;div id="ax-ui-touch-grid-default" style="height:300px;">&lt;/div>
+	&lt;div id="ax-ui-touch-grid-default" style="height:200px;">&lt;/div>
+	&lt;div style="padding:5px;">
+		&lt;button class="ax-btn lg" id="ax-ui-touch-grid-default-first">&lt;i class="axi axi-angle-double-up">&lt;/i>&lt;/button>
+		&lt;button class="ax-btn lg" id="ax-ui-touch-grid-default-up">&lt;i class="axi axi-angle-up">&lt;/i>&lt;/button>
+		&lt;button class="ax-btn lg" id="ax-ui-touch-grid-default-down">&lt;i class="axi axi-angle-down">&lt;/i>&lt;/button>
+		&lt;button class="ax-btn lg" id="ax-ui-touch-grid-default-last">&lt;i class="axi axi-angle-double-down">&lt;/i>&lt;/button>
+	&lt;/div>
 &lt;/div>
 &lt;script type="text/javascript">
 	ax5.info.base_url = "../pub/";
@@ -1288,12 +1294,13 @@ ax5.util.require(["ui/keypad.js"], function(){
 		var my_touch_grid = new ax5.ui.touch_grid();
 		my_touch_grid.set_config({
 			target: ax5.dom.get("#ax-ui-touch-grid-default"),
-			head_height: 30,
+			head_height: 40,
+			head_align: "center",
 			item_height: 40,
 			col_group: [
-				{key: 'date', label: 'Date', width: 120},
-				{key: 'date', label: 'Date', width: 120},
-				{key: 'title', label: '제목', width: '*'}
+				{key: 'date', label: 'Date', width: 120, align:"center"},
+				{key: 'title', label: '제목', width: '*'},
+				{key: 'price', label: 'Price', width: 120, formatter:"money", align:"right"}
 			],
 			body: {
 				onclick: function(){
@@ -1303,20 +1310,39 @@ ax5.util.require(["ui/keypad.js"], function(){
 		});
 
 		my_touch_grid.set_list([
-			{date:'2015-06-07', title:'체커 사용가이드'},
-			{date:'2015-06-06', title:'체커에 대한 사용동의 안내'},
-			{date:'2015-06-07', title:'체커 사용가이드'},
-			{date:'2015-06-06', title:'체커에 대한 사용동의 안내'},
-			{date:'2015-06-07', title:'체커 사용가이드'},
-			{date:'2015-06-06', title:'체커에 대한 사용동의 안내'},
-			{date:'2015-06-07', title:'체커 사용가이드'},
-			{date:'2015-06-06', title:'체커에 대한 사용동의 안내'}
+			{date:'2015-06-07', title:'1 체커 사용가이드', price:205677},
+			{date:'2015-06-06', title:'2 체커에 대한 사용동의 안내', price:'205677'},
+			{date:'2015-06-07', title:'3 체커 사용가이드'},
+			{date:'2015-06-06', title:'4 체커에 대한 사용동의 안내'},
+			{date:'2015-06-07', title:'5 체커 사용가이드'},
+			{date:'2015-06-06', title:'6 체커에 대한 사용동의 안내'},
+			{date:'2015-06-07', title:'7 체커 사용가이드'},
+			{date:'2015-06-06', title:'8 체커에 대한 사용동의 안내'}
 		]);
+
+		ax5.dom("#ax-ui-touch-grid-default-first").on("click", function(){
+			my_touch_grid.focus(0);
+		});
+		ax5.dom("#ax-ui-touch-grid-default-up").on("click", function(){
+			my_touch_grid.focus(-1, "by");
+		});
+		ax5.dom("#ax-ui-touch-grid-default-down").on("click", function(){
+			my_touch_grid.focus(1, "by");
+		});
+		ax5.dom("#ax-ui-touch-grid-default-last").on("click", function(){
+			my_touch_grid.focus("last");
+		});
 	});
 &lt;/script>
 </pre><h4>Result</h4>
 <div class="tag-result">
-	<div id="ax-ui-touch-grid-default" style="height:300px;"></div>
+	<div id="ax-ui-touch-grid-default" style="height:200px;"></div>
+	<div style="padding:5px;">
+		<button class="ax-btn lg" id="ax-ui-touch-grid-default-first"><i class="axi axi-angle-double-up"></i></button>
+		<button class="ax-btn lg" id="ax-ui-touch-grid-default-up"><i class="axi axi-angle-up"></i></button>
+		<button class="ax-btn lg" id="ax-ui-touch-grid-default-down"><i class="axi axi-angle-down"></i></button>
+		<button class="ax-btn lg" id="ax-ui-touch-grid-default-last"><i class="axi axi-angle-double-down"></i></button>
+	</div>
 </div>
 <script type="text/javascript">
 	ax5.info.base_url = "../pub/";
@@ -1324,12 +1350,13 @@ ax5.util.require(["ui/keypad.js"], function(){
 		var my_touch_grid = new ax5.ui.touch_grid();
 		my_touch_grid.set_config({
 			target: ax5.dom.get("#ax-ui-touch-grid-default"),
-			head_height: 30,
+			head_height: 40,
+			head_align: "center",
 			item_height: 40,
 			col_group: [
-				{key: 'date', label: 'Date', width: 120},
-				{key: 'date', label: 'Date', width: 120},
-				{key: 'title', label: '제목', width: '*'}
+				{key: 'date', label: 'Date', width: 120, align:"center"},
+				{key: 'title', label: '제목', width: '*'},
+				{key: 'price', label: 'Price', width: 120, formatter:"money", align:"right"}
 			],
 			body: {
 				onclick: function(){
@@ -1339,15 +1366,28 @@ ax5.util.require(["ui/keypad.js"], function(){
 		});
 
 		my_touch_grid.set_list([
-			{date:'2015-06-07', title:'체커 사용가이드'},
-			{date:'2015-06-06', title:'체커에 대한 사용동의 안내'},
-			{date:'2015-06-07', title:'체커 사용가이드'},
-			{date:'2015-06-06', title:'체커에 대한 사용동의 안내'},
-			{date:'2015-06-07', title:'체커 사용가이드'},
-			{date:'2015-06-06', title:'체커에 대한 사용동의 안내'},
-			{date:'2015-06-07', title:'체커 사용가이드'},
-			{date:'2015-06-06', title:'체커에 대한 사용동의 안내'}
+			{date:'2015-06-07', title:'1 체커 사용가이드', price:205677},
+			{date:'2015-06-06', title:'2 체커에 대한 사용동의 안내', price:'205677'},
+			{date:'2015-06-07', title:'3 체커 사용가이드'},
+			{date:'2015-06-06', title:'4 체커에 대한 사용동의 안내'},
+			{date:'2015-06-07', title:'5 체커 사용가이드'},
+			{date:'2015-06-06', title:'6 체커에 대한 사용동의 안내'},
+			{date:'2015-06-07', title:'7 체커 사용가이드'},
+			{date:'2015-06-06', title:'8 체커에 대한 사용동의 안내'}
 		]);
+
+		ax5.dom("#ax-ui-touch-grid-default-first").on("click", function(){
+			my_touch_grid.focus(0);
+		});
+		ax5.dom("#ax-ui-touch-grid-default-up").on("click", function(){
+			my_touch_grid.focus(-1, "by");
+		});
+		ax5.dom("#ax-ui-touch-grid-default-down").on("click", function(){
+			my_touch_grid.focus(1, "by");
+		});
+		ax5.dom("#ax-ui-touch-grid-default-last").on("click", function(){
+			my_touch_grid.focus("last");
+		});
 	});
 </script>
 
