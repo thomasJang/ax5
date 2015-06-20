@@ -19,32 +19,31 @@
 	<button class="ax-btn info" id="ax-ui-toast-info-btn">Toast Info</button>
 </div>
 <script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.js", "ui/toast.js"], function(){
-		window.my_toast = new ax5.ui.toast();
-		my_toast.set_config({
-			axicon: '<i class="axi axi-circle-check"></i>',
-		});
+(function(){
+	window.my_toast = new ax5.ui.toast();
+	my_toast.set_config({
+		axicon: '<i class="axi axi-circle-check"></i>',
+	});
 
-		// default
-		ax5.dom("#ax-ui-toast-good-btn").on("click", function(){
-			my_toast.push({
-				theme: 'good',
-				msg: 'Not Working!\nPlease check your files'
-			}, function(){
-				console.log(this);
-			});
-		});
-		// default
-		ax5.dom("#ax-ui-toast-info-btn").on("click", function(){
-			my_toast.push({
-				theme: 'info',
-				msg: 'Not Working!\nPlease check your files'
-			}, function(){
-				console.log(this);
-			});
+	// default
+	ax5.dom("#ax-ui-toast-good-btn").on("click", function(){
+		my_toast.push({
+			theme: 'good',
+			msg: 'Not Working!\nPlease check your files'
+		}, function(){
+			console.log(this);
 		});
 	});
+	// default
+	ax5.dom("#ax-ui-toast-info-btn").on("click", function(){
+		my_toast.push({
+			theme: 'info',
+			msg: 'Not Working!\nPlease check your files'
+		}, function(){
+			console.log(this);
+		});
+	});
+})();
 </script>
 </pre>
 
@@ -61,19 +60,18 @@
 	<button class="ax-btn danger" id="ax-ui-toast-confirm-btn">Confirm Toast</button>
 </div>
 <script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.js", "ui/toast.js"], function(){
-		// default
-		ax5.dom("#ax-ui-toast-confirm-btn").on("click", function(){
-			my_toast.confirm({
-				axicon: '<i class="axi axi-face-unlock"></i>',
-				theme: 'danger',
-				msg: 'Not Working!\nPlease check your files'
-			}, function(){
-				console.log(this);
-			});
+(function(){
+	// default
+	ax5.dom("#ax-ui-toast-confirm-btn").on("click", function(){
+		my_toast.confirm({
+			axicon: '<i class="axi axi-face-unlock"></i>',
+			theme: 'danger',
+			msg: 'Not Working!\nPlease check your files'
+		}, function(){
+			console.log(this);
 		});
 	});
+})();
 </script>
 </pre>
 

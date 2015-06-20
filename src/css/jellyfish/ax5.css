@@ -3072,6 +3072,12 @@ a.ax {
       background-image: linear-gradient(to bottom, #F0F0F0, #F0F0F0);
       filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F0F0F0, endColorstr=#F0F0F0); }
 
+.ax5-ui-calender {
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden; }
+
 .ax-button-wrap {
   display: inline-block;
   border: 1px solid #C8C8C8;

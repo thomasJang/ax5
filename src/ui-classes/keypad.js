@@ -33,6 +33,7 @@
 			};
 		}).apply(this, arguments);
 
+		this.target = null;
 		var cfg = this.config;
 		/**
 		 * Preferences of Keypad UI
@@ -69,12 +70,12 @@
 			if(!cfg.target || !cfg.board){
 				U.error("aui_keypad_400", "[ax5.ui.keypad] config.target, config.board is required");
 			}
-			cfg.target = ax5.dom(cfg.target);
+			this.target = ax5.dom(cfg.target);
 			this.set_layout();
 		};
 
 		this.set_layout = function(){
-			var cfg = this.config,
+			var
 				keys = cfg.keys,
 				po = [],
 				col_width = (cfg.board.col_width||"10px"),
@@ -118,8 +119,8 @@
 			po.push('</table>');
 			po.push('</div>');
 
-			cfg.target.html( po.join('') );
-			cfg.target.find('[data-keypad-item-index]').on(cfg.click_event_name, (function(e){
+			this.target.html( po.join('') );
+			this.target.find('[data-keypad-item-index]').on(cfg.click_event_name, (function(e){
 				this.onclick(e||window.event);
 			}).bind(this));
 		};
@@ -136,7 +137,7 @@
 					this.config.onclick.call({
 						keys: this.config.board.keys,
 						item: this.config.board.keys[index],
-						target: cfg.target.elements[0],
+						target: this.target.elements[0],
 						item_target: target
 					});
 				}

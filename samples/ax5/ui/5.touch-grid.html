@@ -24,50 +24,49 @@
 	</div>
 </div>
 <script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/touch-grid.js"], function(){
-		var my_touch_grid = new ax5.ui.touch_grid();
-		my_touch_grid.set_config({
-			target: ax5.dom.get("#ax-ui-touch-grid-default-target"),
-			head_height: 40,
-			head_align: "center",
-			item_height: 40,
-			col_group: [
-				{key: 'date', label: 'Date', width: 120, align:"center"},
-				{key: 'title', label: '제목', width: '*'},
-				{key: 'price', label: 'Price', width: 120, formatter:"money", align:"right"}
-			],
-			body: {
-				onclick: function(){
-					console.log(this);
-				}
+(function(){
+	var my_touch_grid = new ax5.ui.touch_grid();
+	my_touch_grid.set_config({
+		target: ax5.dom.get("#ax-ui-touch-grid-default-target"),
+		head_height: 40,
+		head_align: "center",
+		item_height: 40,
+		col_group: [
+			{key: 'date', label: 'Date', width: 120, align:"center"},
+			{key: 'title', label: '제목', width: '*'},
+			{key: 'price', label: 'Price', width: 120, formatter:"money", align:"right"}
+		],
+		body: {
+			onclick: function(){
+				console.log(this);
 			}
-		});
-
-		my_touch_grid.set_list([
-			{date:'2015-06-07', title:'1 체커 사용가이드', price:205677},
-			{date:'2015-06-06', title:'2 체커에 대한 사용동의 안내', price:'205677'},
-			{date:'2015-06-07', title:'3 체커 사용가이드'},
-			{date:'2015-06-06', title:'4 체커에 대한 사용동의 안내'},
-			{date:'2015-06-07', title:'5 체커 사용가이드'},
-			{date:'2015-06-06', title:'6 체커에 대한 사용동의 안내'},
-			{date:'2015-06-07', title:'7 체커 사용가이드'},
-			{date:'2015-06-06', title:'8 체커에 대한 사용동의 안내'}
-		]);
-
-		ax5.dom("#ax-ui-touch-grid-default-first").on("click", function(){
-			my_touch_grid.focus(0);
-		});
-		ax5.dom("#ax-ui-touch-grid-default-up").on("click", function(){
-			my_touch_grid.focus(-1, "by");
-		});
-		ax5.dom("#ax-ui-touch-grid-default-down").on("click", function(){
-			my_touch_grid.focus(1, "by");
-		});
-		ax5.dom("#ax-ui-touch-grid-default-last").on("click", function(){
-			my_touch_grid.focus("last");
-		});
+		}
 	});
+
+	my_touch_grid.set_list([
+		{date:'2015-06-07', title:'1 체커 사용가이드', price:205677},
+		{date:'2015-06-06', title:'2 체커에 대한 사용동의 안내', price:'205677'},
+		{date:'2015-06-07', title:'3 체커 사용가이드'},
+		{date:'2015-06-06', title:'4 체커에 대한 사용동의 안내'},
+		{date:'2015-06-07', title:'5 체커 사용가이드'},
+		{date:'2015-06-06', title:'6 체커에 대한 사용동의 안내'},
+		{date:'2015-06-07', title:'7 체커 사용가이드'},
+		{date:'2015-06-06', title:'8 체커에 대한 사용동의 안내'}
+	]);
+
+	ax5.dom("#ax-ui-touch-grid-default-first").on("click", function(){
+		my_touch_grid.focus(0);
+	});
+	ax5.dom("#ax-ui-touch-grid-default-up").on("click", function(){
+		my_touch_grid.focus(-1, "by");
+	});
+	ax5.dom("#ax-ui-touch-grid-default-down").on("click", function(){
+		my_touch_grid.focus(1, "by");
+	});
+	ax5.dom("#ax-ui-touch-grid-default-last").on("click", function(){
+		my_touch_grid.focus("last");
+	});
+})();
 </script>
 </pre>
 
@@ -99,53 +98,53 @@
 	</div>
 </div>
 <script type="text/javascript">
-	ax5.util.require(["ui/touch-grid.js"], function(){
-		var my_touch_grid = new ax5.ui.touch_grid();
-		my_touch_grid.set_config({
-			target: ax5.dom.get("#ax-ui-touch-grid-bigsize-target"),
-			head_height: 40,
-			head_align: "center",
-			item_height: 40,
-			col_group: [
-				{key: 'no', label: '번호', width: 120, align:"center", formatter: function(){
-					return ax5.util.number(this.value, {money: true});
-				}},
-				{key: 'title', label: '제목', width: '*'},
-				{key: 'price', label: 'Price', width: 120, formatter:"money", align:"right"}
-			],
-			body: {
-				onclick: function(){
-					console.log(this);
-				}
+(function(){
+	var my_touch_grid = new ax5.ui.touch_grid();
+	my_touch_grid.set_config({
+		target: ax5.dom.get("#ax-ui-touch-grid-bigsize-target"),
+		head_height: 40,
+		head_align: "center",
+		item_height: 40,
+		col_group: [
+			{key: 'no', label: '번호', width: 120, align:"center", formatter: function(){
+				return ax5.util.number(this.value, {money: true});
+			}},
+			{key: 'title', label: '제목', width: '*'},
+			{key: 'price', label: 'Price', width: 120, formatter:"money", align:"right"}
+		],
+		body: {
+			onclick: function(){
+				console.log(this);
 			}
-		});
-
-		var list = [];
-		for(var i=1;i<10001;i++){
-			list.push({no:i, title:'제목 '+ i,  price: i*1000});
 		}
-		my_touch_grid.set_list(list);
-
-		function print_html_node(){
-			ax5.dom('#ax-ui-touch-grid-bigsize-tr-count').html( '<b>' + ax5.dom("#ax-ui-touch-grid-bigsize-target").find("tr").elements.length + '개</b>' );
-		}
-		ax5.dom("#ax-ui-touch-grid-bigsize-first").on("click", function(){
-			my_touch_grid.focus(0);
-			print_html_node();
-		});
-		ax5.dom("#ax-ui-touch-grid-bigsize-up").on("click", function(){
-			my_touch_grid.focus(-1, "by");
-			print_html_node();
-		});
-		ax5.dom("#ax-ui-touch-grid-bigsize-down").on("click", function(){
-			my_touch_grid.focus(1, "by");
-			print_html_node();
-		});
-		ax5.dom("#ax-ui-touch-grid-bigsize-last").on("click", function(){
-			my_touch_grid.focus("last");
-			print_html_node();
-		});
 	});
+
+	var list = [];
+	for(var i=1;i<10001;i++){
+		list.push({no:i, title:'제목 '+ i,  price: i*1000});
+	}
+	my_touch_grid.set_list(list);
+
+	function print_html_node(){
+		ax5.dom('#ax-ui-touch-grid-bigsize-tr-count').html( '<b>' + ax5.dom("#ax-ui-touch-grid-bigsize-target").find("tr").elements.length + '개</b>' );
+	}
+	ax5.dom("#ax-ui-touch-grid-bigsize-first").on("click", function(){
+		my_touch_grid.focus(0);
+		print_html_node();
+	});
+	ax5.dom("#ax-ui-touch-grid-bigsize-up").on("click", function(){
+		my_touch_grid.focus(-1, "by");
+		print_html_node();
+	});
+	ax5.dom("#ax-ui-touch-grid-bigsize-down").on("click", function(){
+		my_touch_grid.focus(1, "by");
+		print_html_node();
+	});
+	ax5.dom("#ax-ui-touch-grid-bigsize-last").on("click", function(){
+		my_touch_grid.focus("last");
+		print_html_node();
+	});
+})();
 </script>
 </pre>
 

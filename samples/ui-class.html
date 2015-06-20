@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-06-20 
+ publish date : 2015-06-21 
 -->
 <html lang="en">
 <head>
@@ -14,7 +14,8 @@
 	<link rel="stylesheet" type="text/css" href="http://cdn.axisj.com/axicon/axicon.min.css">
 	
     <script type="text/javascript" src="../plugin/prettify/prettify.js"></script>
-    <script type="text/javascript" src="../src/ax5.js"></script>
+    <script type="text/javascript" src="../pub/ax5.js"></script>
+	<script type="text/javascript" src="../pub/ui/all.js"></script>
 
 </head>
 <body>
@@ -58,6 +59,32 @@
 <!-- split -->
 
 <article class="cover">
+    <h1 data-menu-item="ax-ui-intro">Install</h1>
+	<p class="lead">
+		ax5 ui 는 require 이용하여 개별 UI를 선택적으로 사용하는 방법과 <code>ui/all.js</code>를 이용하여 바로 사용하는 방법이 있다.
+		본 문서에서는 편의상 <code>ui/all.js</code>를 html head에 추가하여 소개하고 있다.
+	</p>
+
+<pre class="prettyprint linenums">
+&lt;script type="text/javascript" src="../pub/ax5.js">&lt;/script>
+&lt;script type="text/javascript" src="../pub/ui/all.js">&lt;/script>
+</pre>
+
+<pre class="prettyprint linenums">
+&lt;script type="text/javascript">
+ax5.info.base_url = "../pub/";
+ax5.util.require(["ui/menu.js"], function() {
+
+});
+&lt;/script>
+</pre>
+
+</article>
+
+
+<!-- split -->
+
+<article class="cover">
 
 	<div class="callout basic">
 		<h4>ax5.ui.**</h4>
@@ -92,8 +119,7 @@
 	&lt;button class="ax-btn" onclick="app_mask_close();">마스크닫기&lt;/button>
 &lt;/div>
 &lt;script type="text/javascript">
-ax5.info.base_url = "../pub/";
-ax5.util.require(["ui/mask.min.js"], function(){
+(function(){
 	window.app_mask = new ax5.ui.mask();
 	app_mask.set_config({
 		target: document.body, // 미리 선언했지만
@@ -119,7 +145,7 @@ ax5.util.require(["ui/mask.min.js"], function(){
 	window.app_mask_close = function(){
 		app_mask.close();
 	};
-});
+})();
 &lt;/script>
 </pre><h4>Result</h4>
 <div class="tag-result">
@@ -132,8 +158,7 @@ ax5.util.require(["ui/mask.min.js"], function(){
 	<button class="ax-btn" onclick="app_mask_close();">마스크닫기</button>
 </div>
 <script type="text/javascript">
-ax5.info.base_url = "../pub/";
-ax5.util.require(["ui/mask.min.js"], function(){
+(function(){
 	window.app_mask = new ax5.ui.mask();
 	app_mask.set_config({
 		target: document.body, // 미리 선언했지만
@@ -159,7 +184,7 @@ ax5.util.require(["ui/mask.min.js"], function(){
 	window.app_mask_close = function(){
 		app_mask.close();
 	};
-});
+})();
 </script>
 
 
@@ -185,9 +210,7 @@ ax5.util.require(["ui/mask.min.js"], function(){
 	&lt;button class="ax-btn" onclick="app_body_mask_open();">마스크열기&lt;/button>
 &lt;/div>
 &lt;script type="text/javascript">
-
-ax5.util.require(["ui/mask.min.js"], function(){
-
+(function(){
 	window.app_body_mask = new ax5.ui.mask();
 	app_body_mask.set_config({
 		target: document.body,
@@ -208,17 +231,14 @@ ax5.util.require(["ui/mask.min.js"], function(){
 			app_body_mask.close();
 		}, 2000);
 	}
-
-});
+})();
 &lt;/script>
 </pre><h4>Result</h4>
 <div class="tag-result">
 	<button class="ax-btn" onclick="app_body_mask_open();">마스크열기</button>
 </div>
 <script type="text/javascript">
-
-ax5.util.require(["ui/mask.min.js"], function(){
-
+(function(){
 	window.app_body_mask = new ax5.ui.mask();
 	app_body_mask.set_config({
 		target: document.body,
@@ -239,8 +259,7 @@ ax5.util.require(["ui/mask.min.js"], function(){
 			app_body_mask.close();
 		}, 2000);
 	}
-
-});
+})();
 </script>
 
 
@@ -268,8 +287,7 @@ ax5.util.require(["ui/mask.min.js"], function(){
 	&lt;div id="ui-menu-target-basic" style="height:150px;">&lt;/div>
 &lt;/div>
 &lt;script type="text/javascript">
-ax5.info.base_url = "../pub/";
-ax5.util.require(["ui/menu.js"], function(){
+(function(){
 
 	var my_menu = new ax5.ui.menu(1,2,3);
 	my_menu.set_config({
@@ -288,15 +306,14 @@ ax5.util.require(["ui/menu.js"], function(){
 		}
 	});
 
-});
+})();
 &lt;/script>
 </pre><h4>Result</h4>
 <div class="tag-result">
 	<div id="ui-menu-target-basic" style="height:150px;"></div>
 </div>
 <script type="text/javascript">
-ax5.info.base_url = "../pub/";
-ax5.util.require(["ui/menu.js"], function(){
+(function(){
 
 	var my_menu = new ax5.ui.menu(1,2,3);
 	my_menu.set_config({
@@ -315,7 +332,7 @@ ax5.util.require(["ui/menu.js"], function(){
 		}
 	});
 
-});
+})();
 </script>
 
 
@@ -331,84 +348,80 @@ ax5.util.require(["ui/menu.js"], function(){
 	&lt;div id="ui-menu-target-tree" style="height:400px;">&lt;/div>
 &lt;/div>
 &lt;script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/menu.js"], function(){
-
-		var my_menu = new ax5.ui.menu(1,2,3);
-		my_menu.set_config({
-			target: ax5.dom.get("#ui-menu-target-tree"),
-			keys: {
-				value:"id",
+(function(){
+	var my_menu = new ax5.ui.menu(1,2,3);
+	my_menu.set_config({
+		target: ax5.dom.get("#ui-menu-target-tree"),
+		keys: {
+			value:"id",
 // 선언하지 않으면 'value' 이 외에도 text, shortcut, data 등을 재 정의 할 수 있다 다음줄에 menu 와 함께
-				menu:"menu"
+			menu:"menu"
+		},
+		type: "default", // default | pop
+		menu: [
+			{
+				id:"1", text:"메뉴 A",
+				menu: [
+					{id:"1-1", text:"메뉴 A의 A"},
+					{id:"1-2", text:"메뉴 A의 B",
+						menu: [
+							{id:"1-2-1", text:"메뉴 A의 A"},
+							{id:"1-2-2", text:"메뉴 A의 B"},
+							{id:"1-2-3", text:"메뉴 A의 C"}
+						]
+					},
+					{id:"1-3", text:"메뉴 A의 C"}
+				]
 			},
-			type: "default", // default | pop
-			menu: [
-				{
-					id:"1", text:"메뉴 A",
-					menu: [
-						{id:"1-1", text:"메뉴 A의 A"},
-						{id:"1-2", text:"메뉴 A의 B",
-							menu: [
-								{id:"1-2-1", text:"메뉴 A의 A"},
-								{id:"1-2-2", text:"메뉴 A의 B"},
-								{id:"1-2-3", text:"메뉴 A의 C"}
-							]
-						},
-						{id:"1-3", text:"메뉴 A의 C"}
-					]
-				},
-				{id:"2", text:"메뉴 B"},
-				{id:"3", text:"메뉴 C"}
-			],
-			onclick: function(){
-				console.log(this);
-			}
-		});
-
+			{id:"2", text:"메뉴 B"},
+			{id:"3", text:"메뉴 C"}
+		],
+		onclick: function(){
+			console.log(this);
+		}
 	});
+
+})();
 &lt;/script>
 </pre><h4>Result</h4>
 <div class="tag-result">
 	<div id="ui-menu-target-tree" style="height:400px;"></div>
 </div>
 <script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/menu.js"], function(){
-
-		var my_menu = new ax5.ui.menu(1,2,3);
-		my_menu.set_config({
-			target: ax5.dom.get("#ui-menu-target-tree"),
-			keys: {
-				value:"id",
+(function(){
+	var my_menu = new ax5.ui.menu(1,2,3);
+	my_menu.set_config({
+		target: ax5.dom.get("#ui-menu-target-tree"),
+		keys: {
+			value:"id",
 // 선언하지 않으면 'value' 이 외에도 text, shortcut, data 등을 재 정의 할 수 있다 다음줄에 menu 와 함께
-				menu:"menu"
+			menu:"menu"
+		},
+		type: "default", // default | pop
+		menu: [
+			{
+				id:"1", text:"메뉴 A",
+				menu: [
+					{id:"1-1", text:"메뉴 A의 A"},
+					{id:"1-2", text:"메뉴 A의 B",
+						menu: [
+							{id:"1-2-1", text:"메뉴 A의 A"},
+							{id:"1-2-2", text:"메뉴 A의 B"},
+							{id:"1-2-3", text:"메뉴 A의 C"}
+						]
+					},
+					{id:"1-3", text:"메뉴 A의 C"}
+				]
 			},
-			type: "default", // default | pop
-			menu: [
-				{
-					id:"1", text:"메뉴 A",
-					menu: [
-						{id:"1-1", text:"메뉴 A의 A"},
-						{id:"1-2", text:"메뉴 A의 B",
-							menu: [
-								{id:"1-2-1", text:"메뉴 A의 A"},
-								{id:"1-2-2", text:"메뉴 A의 B"},
-								{id:"1-2-3", text:"메뉴 A의 C"}
-							]
-						},
-						{id:"1-3", text:"메뉴 A의 C"}
-					]
-				},
-				{id:"2", text:"메뉴 B"},
-				{id:"3", text:"메뉴 C"}
-			],
-			onclick: function(){
-				console.log(this);
-			}
-		});
-
+			{id:"2", text:"메뉴 B"},
+			{id:"3", text:"메뉴 C"}
+		],
+		onclick: function(){
+			console.log(this);
+		}
 	});
+
+})();
 </script>
 
 
@@ -434,8 +447,7 @@ ax5.util.require(["ui/menu.js"], function(){
 	&lt;div id="ui-keypad-basic-target" style="width:300px;height: 250px;">&lt;/div>
 &lt;/div>
 &lt;script type="text/javascript">
-ax5.info.base_url = "../pub/";
-ax5.util.require(["ui/keypad.js"], function(){
+(function(){
 	var my_keypad = new ax5.ui.keypad();
 	my_keypad.set_config({
 		target: ax5.dom.get("#ui-keypad-basic-target"),
@@ -467,15 +479,14 @@ ax5.util.require(["ui/keypad.js"], function(){
 			console.log(this);
 		}
 	});
-});
+})();
 &lt;/script>
 </pre><h4>Result</h4>
 <div class="tag-result">
 	<div id="ui-keypad-basic-target" style="width:300px;height: 250px;"></div>
 </div>
 <script type="text/javascript">
-ax5.info.base_url = "../pub/";
-ax5.util.require(["ui/keypad.js"], function(){
+(function(){
 	var my_keypad = new ax5.ui.keypad();
 	my_keypad.set_config({
 		target: ax5.dom.get("#ui-keypad-basic-target"),
@@ -507,7 +518,7 @@ ax5.util.require(["ui/keypad.js"], function(){
 			console.log(this);
 		}
 	});
-});
+})();
 </script>
 
 
@@ -526,51 +537,50 @@ ax5.util.require(["ui/keypad.js"], function(){
 	&lt;div id="ui-keypad-example-target" style="width:240px;">&lt;/div>
 &lt;/div>
 &lt;script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/keypad.js"], function(){
-		var my_disp = ax5.dom.get_one("#ui-keypad-example-disp");
-		var my_keypad = new ax5.ui.keypad();
-		my_keypad.set_config({
-			target: ax5.dom.get("#ui-keypad-example-target"),
-			theme: "default",
-			board: {
-				keys: [
-					{label:"7", value:7},
-					{label:"8", value:8},
-					{label:"9", value:9},
-					{label:"0", value:0},
-					{newline:true},
-					{label:"4", value:4},
-					{label:"5", value:5},
-					{label:"6", value:6},
-					{label:'&lt;i class="axi axi-delete">&lt;/i>', value:"del", klass:"warning"},
-					{newline:true},
-					{label:"1", value:1},
-					{label:"2", value:2},
-					{label:"3", value:3},
-					{label:"ENTER", value:"return", klass:"basic"}
-				],
-				col_width: "25%",
-				col_height: "60px"
-			},
-			onclick: function(){
-				if(this.item.value == null) return;
-				if(this.item.value == "del"){
-					if(my_disp.value == "") return;
-					my_disp.value = ax5.util.number(ax5.util.number(my_disp.value.substr(0, my_disp.value.length-1)), {money:true});
-				}
-				else
-				if(this.item.value == "return"){
-					if(my_disp.value == "") return;
-					alert(ax5.util.number(my_disp.value));
-				}
-				else{
-					if(my_disp.value == "" && ax5.util.number(this.item.value) == 0) return;
-					my_disp.value = ax5.util.number('' + ax5.util.number(my_disp.value) + this.item.value, {money:true});
-				}
+(function(){
+	var my_disp = ax5.dom.get_one("#ui-keypad-example-disp");
+	var my_keypad = new ax5.ui.keypad();
+	my_keypad.set_config({
+		target: ax5.dom.get("#ui-keypad-example-target"),
+		theme: "default",
+		board: {
+			keys: [
+				{label:"7", value:7},
+				{label:"8", value:8},
+				{label:"9", value:9},
+				{label:"0", value:0},
+				{newline:true},
+				{label:"4", value:4},
+				{label:"5", value:5},
+				{label:"6", value:6},
+				{label:'&lt;i class="axi axi-delete">&lt;/i>', value:"del", klass:"warning"},
+				{newline:true},
+				{label:"1", value:1},
+				{label:"2", value:2},
+				{label:"3", value:3},
+				{label:"ENTER", value:"return", klass:"basic"}
+			],
+			col_width: "25%",
+			col_height: "60px"
+		},
+		onclick: function(){
+			if(this.item.value == null) return;
+			if(this.item.value == "del"){
+				if(my_disp.value == "") return;
+				my_disp.value = ax5.util.number(ax5.util.number(my_disp.value.substr(0, my_disp.value.length-1)), {money:true});
 			}
-		});
+			else
+			if(this.item.value == "return"){
+				if(my_disp.value == "") return;
+				alert(ax5.util.number(my_disp.value));
+			}
+			else{
+				if(my_disp.value == "" && ax5.util.number(this.item.value) == 0) return;
+				my_disp.value = ax5.util.number('' + ax5.util.number(my_disp.value) + this.item.value, {money:true});
+			}
+		}
 	});
+})();
 &lt;/script>
 </pre><h4>Result</h4>
 <div class="tag-result" style="height: 250px;">
@@ -580,51 +590,50 @@ ax5.util.require(["ui/keypad.js"], function(){
 	<div id="ui-keypad-example-target" style="width:240px;"></div>
 </div>
 <script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/keypad.js"], function(){
-		var my_disp = ax5.dom.get_one("#ui-keypad-example-disp");
-		var my_keypad = new ax5.ui.keypad();
-		my_keypad.set_config({
-			target: ax5.dom.get("#ui-keypad-example-target"),
-			theme: "default",
-			board: {
-				keys: [
-					{label:"7", value:7},
-					{label:"8", value:8},
-					{label:"9", value:9},
-					{label:"0", value:0},
-					{newline:true},
-					{label:"4", value:4},
-					{label:"5", value:5},
-					{label:"6", value:6},
-					{label:'<i class="axi axi-delete"></i>', value:"del", klass:"warning"},
-					{newline:true},
-					{label:"1", value:1},
-					{label:"2", value:2},
-					{label:"3", value:3},
-					{label:"ENTER", value:"return", klass:"basic"}
-				],
-				col_width: "25%",
-				col_height: "60px"
-			},
-			onclick: function(){
-				if(this.item.value == null) return;
-				if(this.item.value == "del"){
-					if(my_disp.value == "") return;
-					my_disp.value = ax5.util.number(ax5.util.number(my_disp.value.substr(0, my_disp.value.length-1)), {money:true});
-				}
-				else
-				if(this.item.value == "return"){
-					if(my_disp.value == "") return;
-					alert(ax5.util.number(my_disp.value));
-				}
-				else{
-					if(my_disp.value == "" && ax5.util.number(this.item.value) == 0) return;
-					my_disp.value = ax5.util.number('' + ax5.util.number(my_disp.value) + this.item.value, {money:true});
-				}
+(function(){
+	var my_disp = ax5.dom.get_one("#ui-keypad-example-disp");
+	var my_keypad = new ax5.ui.keypad();
+	my_keypad.set_config({
+		target: ax5.dom.get("#ui-keypad-example-target"),
+		theme: "default",
+		board: {
+			keys: [
+				{label:"7", value:7},
+				{label:"8", value:8},
+				{label:"9", value:9},
+				{label:"0", value:0},
+				{newline:true},
+				{label:"4", value:4},
+				{label:"5", value:5},
+				{label:"6", value:6},
+				{label:'<i class="axi axi-delete"></i>', value:"del", klass:"warning"},
+				{newline:true},
+				{label:"1", value:1},
+				{label:"2", value:2},
+				{label:"3", value:3},
+				{label:"ENTER", value:"return", klass:"basic"}
+			],
+			col_width: "25%",
+			col_height: "60px"
+		},
+		onclick: function(){
+			if(this.item.value == null) return;
+			if(this.item.value == "del"){
+				if(my_disp.value == "") return;
+				my_disp.value = ax5.util.number(ax5.util.number(my_disp.value.substr(0, my_disp.value.length-1)), {money:true});
 			}
-		});
+			else
+			if(this.item.value == "return"){
+				if(my_disp.value == "") return;
+				alert(ax5.util.number(my_disp.value));
+			}
+			else{
+				if(my_disp.value == "" && ax5.util.number(this.item.value) == 0) return;
+				my_disp.value = ax5.util.number('' + ax5.util.number(my_disp.value) + this.item.value, {money:true});
+			}
+		}
 	});
+})();
 </script>
 
 
@@ -636,7 +645,8 @@ ax5.util.require(["ui/keypad.js"], function(){
 	<h1 data-menu-item="ax-ui-dialog">Dialog</h1>
 	<p class="lead">
 		dialog는 <code>window.alert</code>나 <code>window.confirm</code>의 대체 수단으로 사용이 가능한 UI 이다.
-		어떻게 하면 잘 만들까? 생각을 하다보니 <code>prompt</code>도 구현해야 겠다.
+		어떻게 하면 잘 만들까? 생각을 하다보니 <code>prompt</code>도 구현해야 겠다. <br/>
+		dialog는 ax5.ui.mask합성하므로 해당 스크립트가 문서에 포함되어야 한다.
 	</p>
 </article>
 
@@ -652,46 +662,46 @@ ax5.util.require(["ui/keypad.js"], function(){
 	&lt;button class="ax-btn" id="ax-ui-dialog-alert-btn">Alert&lt;/button>
 &lt;/div>
 &lt;script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
-		var my_dialog = new ax5.ui.dialog();
-		my_dialog.set_config({
-			title: '&lt;i class="axi axi-ion-alert">&lt;/i> Default alert',
-			mask: {} // default target : document.body
-		});
+(function(){
+	// ui dependency : mask
+	var my_dialog = new ax5.ui.dialog();
+	my_dialog.set_config({
+		title: '&lt;i class="axi axi-ion-alert">&lt;/i> Default alert',
+		mask: {} // default target : document.body
+	});
 
-		// default
-		ax5.dom("#ax-ui-dialog-alert-btn").on("click", function(){
-			my_dialog.alert(
-			'&lt;span class="ax">알러트 메세지 기본 타입의 Alert입니다.&lt;/span>\n&lt;span class="ax basic">테마를 정하지 않았습니다.&lt;/span>',
-			function(){
-				console.log(this);
-			});
+	// default
+	ax5.dom("#ax-ui-dialog-alert-btn").on("click", function(){
+		my_dialog.alert(
+		'&lt;span class="ax">알러트 메세지 기본 타입의 Alert입니다.&lt;/span>\n&lt;span class="ax basic">테마를 정하지 않았습니다.&lt;/span>',
+		function(){
+			console.log(this);
 		});
 	});
+})();
 &lt;/script>
 </pre><h4>Result</h4>
 <div class="tag-result">
 	<button class="ax-btn" id="ax-ui-dialog-alert-btn">Alert</button>
 </div>
 <script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
-		var my_dialog = new ax5.ui.dialog();
-		my_dialog.set_config({
-			title: '<i class="axi axi-ion-alert"></i> Default alert',
-			mask: {} // default target : document.body
-		});
+(function(){
+	// ui dependency : mask
+	var my_dialog = new ax5.ui.dialog();
+	my_dialog.set_config({
+		title: '<i class="axi axi-ion-alert"></i> Default alert',
+		mask: {} // default target : document.body
+	});
 
-		// default
-		ax5.dom("#ax-ui-dialog-alert-btn").on("click", function(){
-			my_dialog.alert(
-			'<span class="ax">알러트 메세지 기본 타입의 Alert입니다.</span>\n<span class="ax basic">테마를 정하지 않았습니다.</span>',
-			function(){
-				console.log(this);
-			});
+	// default
+	ax5.dom("#ax-ui-dialog-alert-btn").on("click", function(){
+		my_dialog.alert(
+		'<span class="ax">알러트 메세지 기본 타입의 Alert입니다.</span>\n<span class="ax basic">테마를 정하지 않았습니다.</span>',
+		function(){
+			console.log(this);
 		});
 	});
+})();
 </script>
 
 
@@ -726,55 +736,55 @@ ax5.util.require(["ui/keypad.js"], function(){
 	&lt;button class="ax-btn special" id="ax-ui-dialog-alert-special-btn">Alert Special&lt;/button>
 &lt;/div>
 &lt;script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
-		var my_dialog = new ax5.ui.dialog();
-		my_dialog.set_config({
-			mask: {} // default target : document.body
-		});
-
-		// basic
-		ax5.dom("#ax-ui-dialog-alert-basic-btn").on("click", function(){
-			my_dialog.alert({
-				theme: 'basic', title: '&lt;i class="axi axi-stars">&lt;/i> alert', msg: 'basic color',
-			}, function(){ console.log(this); });
-		});
-
-		// good
-		ax5.dom("#ax-ui-dialog-alert-good-btn").on("click", function(){
-			my_dialog.alert({
-				theme: 'good', title: '&lt;i class="axi axi-thumbs-o-up">&lt;/i> alert', msg: 'good color',
-			}, function(){ console.log(this); });
-		});
-
-		// info
-		ax5.dom("#ax-ui-dialog-alert-info-btn").on("click", function(){
-			my_dialog.alert({
-				theme: 'info', title: '&lt;i class="axi axi-thumbs-o-up">&lt;/i> alert', msg: 'info color',
-			}, function(){ console.log(this); });
-		});
-
-		// warning
-		ax5.dom("#ax-ui-dialog-alert-warning-btn").on("click", function(){
-			my_dialog.alert({
-				theme: 'warning', title: '&lt;i class="axi axi-warning">&lt;/i> alert', msg: 'warning color',
-			}, function(){ console.log(this); });
-		});
-
-		// danger
-		ax5.dom("#ax-ui-dialog-alert-danger-btn").on("click", function(){
-			my_dialog.alert({
-				theme: 'danger', title: '&lt;i class="axi axi-times-circle">&lt;/i> alert', msg: 'danger color',
-			}, function(){ console.log(this); });
-		});
-
-		// special
-		ax5.dom("#ax-ui-dialog-alert-special-btn").on("click", function(){
-			my_dialog.alert({
-				theme: 'special', title: '&lt;i class="axi axi-times-circle">&lt;/i> alert', msg: 'special color',
-			}, function(){ console.log(this); });
-		});
+(function(){
+	// ui dependency : mask
+	var my_dialog = new ax5.ui.dialog();
+	my_dialog.set_config({
+		mask: {} // default target : document.body
 	});
+
+	// basic
+	ax5.dom("#ax-ui-dialog-alert-basic-btn").on("click", function(){
+		my_dialog.alert({
+			theme: 'basic', title: '&lt;i class="axi axi-stars">&lt;/i> alert', msg: 'basic color',
+		}, function(){ console.log(this); });
+	});
+
+	// good
+	ax5.dom("#ax-ui-dialog-alert-good-btn").on("click", function(){
+		my_dialog.alert({
+			theme: 'good', title: '&lt;i class="axi axi-thumbs-o-up">&lt;/i> alert', msg: 'good color',
+		}, function(){ console.log(this); });
+	});
+
+	// info
+	ax5.dom("#ax-ui-dialog-alert-info-btn").on("click", function(){
+		my_dialog.alert({
+			theme: 'info', title: '&lt;i class="axi axi-thumbs-o-up">&lt;/i> alert', msg: 'info color',
+		}, function(){ console.log(this); });
+	});
+
+	// warning
+	ax5.dom("#ax-ui-dialog-alert-warning-btn").on("click", function(){
+		my_dialog.alert({
+			theme: 'warning', title: '&lt;i class="axi axi-warning">&lt;/i> alert', msg: 'warning color',
+		}, function(){ console.log(this); });
+	});
+
+	// danger
+	ax5.dom("#ax-ui-dialog-alert-danger-btn").on("click", function(){
+		my_dialog.alert({
+			theme: 'danger', title: '&lt;i class="axi axi-times-circle">&lt;/i> alert', msg: 'danger color',
+		}, function(){ console.log(this); });
+	});
+
+	// special
+	ax5.dom("#ax-ui-dialog-alert-special-btn").on("click", function(){
+		my_dialog.alert({
+			theme: 'special', title: '&lt;i class="axi axi-times-circle">&lt;/i> alert', msg: 'special color',
+		}, function(){ console.log(this); });
+	});
+})();
 &lt;/script>
 </pre><h4>Result</h4>
 <div class="tag-result">
@@ -786,55 +796,55 @@ ax5.util.require(["ui/keypad.js"], function(){
 	<button class="ax-btn special" id="ax-ui-dialog-alert-special-btn">Alert Special</button>
 </div>
 <script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
-		var my_dialog = new ax5.ui.dialog();
-		my_dialog.set_config({
-			mask: {} // default target : document.body
-		});
-
-		// basic
-		ax5.dom("#ax-ui-dialog-alert-basic-btn").on("click", function(){
-			my_dialog.alert({
-				theme: 'basic', title: '<i class="axi axi-stars"></i> alert', msg: 'basic color',
-			}, function(){ console.log(this); });
-		});
-
-		// good
-		ax5.dom("#ax-ui-dialog-alert-good-btn").on("click", function(){
-			my_dialog.alert({
-				theme: 'good', title: '<i class="axi axi-thumbs-o-up"></i> alert', msg: 'good color',
-			}, function(){ console.log(this); });
-		});
-
-		// info
-		ax5.dom("#ax-ui-dialog-alert-info-btn").on("click", function(){
-			my_dialog.alert({
-				theme: 'info', title: '<i class="axi axi-thumbs-o-up"></i> alert', msg: 'info color',
-			}, function(){ console.log(this); });
-		});
-
-		// warning
-		ax5.dom("#ax-ui-dialog-alert-warning-btn").on("click", function(){
-			my_dialog.alert({
-				theme: 'warning', title: '<i class="axi axi-warning"></i> alert', msg: 'warning color',
-			}, function(){ console.log(this); });
-		});
-
-		// danger
-		ax5.dom("#ax-ui-dialog-alert-danger-btn").on("click", function(){
-			my_dialog.alert({
-				theme: 'danger', title: '<i class="axi axi-times-circle"></i> alert', msg: 'danger color',
-			}, function(){ console.log(this); });
-		});
-
-		// special
-		ax5.dom("#ax-ui-dialog-alert-special-btn").on("click", function(){
-			my_dialog.alert({
-				theme: 'special', title: '<i class="axi axi-times-circle"></i> alert', msg: 'special color',
-			}, function(){ console.log(this); });
-		});
+(function(){
+	// ui dependency : mask
+	var my_dialog = new ax5.ui.dialog();
+	my_dialog.set_config({
+		mask: {} // default target : document.body
 	});
+
+	// basic
+	ax5.dom("#ax-ui-dialog-alert-basic-btn").on("click", function(){
+		my_dialog.alert({
+			theme: 'basic', title: '<i class="axi axi-stars"></i> alert', msg: 'basic color',
+		}, function(){ console.log(this); });
+	});
+
+	// good
+	ax5.dom("#ax-ui-dialog-alert-good-btn").on("click", function(){
+		my_dialog.alert({
+			theme: 'good', title: '<i class="axi axi-thumbs-o-up"></i> alert', msg: 'good color',
+		}, function(){ console.log(this); });
+	});
+
+	// info
+	ax5.dom("#ax-ui-dialog-alert-info-btn").on("click", function(){
+		my_dialog.alert({
+			theme: 'info', title: '<i class="axi axi-thumbs-o-up"></i> alert', msg: 'info color',
+		}, function(){ console.log(this); });
+	});
+
+	// warning
+	ax5.dom("#ax-ui-dialog-alert-warning-btn").on("click", function(){
+		my_dialog.alert({
+			theme: 'warning', title: '<i class="axi axi-warning"></i> alert', msg: 'warning color',
+		}, function(){ console.log(this); });
+	});
+
+	// danger
+	ax5.dom("#ax-ui-dialog-alert-danger-btn").on("click", function(){
+		my_dialog.alert({
+			theme: 'danger', title: '<i class="axi axi-times-circle"></i> alert', msg: 'danger color',
+		}, function(){ console.log(this); });
+	});
+
+	// special
+	ax5.dom("#ax-ui-dialog-alert-special-btn").on("click", function(){
+		my_dialog.alert({
+			theme: 'special', title: '<i class="axi axi-times-circle"></i> alert', msg: 'special color',
+		}, function(){ console.log(this); });
+	});
+})();
 </script>
 
 
@@ -852,32 +862,31 @@ ax5.util.require(["ui/keypad.js"], function(){
 	&lt;button class="ax-btn good" id="ax-ui-dialog-confirm-good-btn">Confirm good&lt;/button>
 &lt;/div>
 &lt;script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
-		var my_dialog = new ax5.ui.dialog();
-		my_dialog.set_config({});
+(function(){
+	var my_dialog = new ax5.ui.dialog();
+	my_dialog.set_config({});
 
-		// default
-		ax5.dom("#ax-ui-dialog-confirm-btn").on("click", function(){
-			my_dialog.confirm({
-				title: '&lt;i class="axi axi-ion-alert">&lt;/i> Default alert',
-				msg: 'confirm message',
-			}, function(result){
-				console.log(result, this);
-			});
-		});
-
-		// good
-		ax5.dom("#ax-ui-dialog-confirm-good-btn").on("click", function(){
-			my_dialog.confirm({
-				theme: 'good',
-				title: '&lt;i class="axi axi-ion-alert">&lt;/i> Good',
-				msg: 'confirm message',
-			}, function(result){
-				console.log(result, this);
-			});
+	// default
+	ax5.dom("#ax-ui-dialog-confirm-btn").on("click", function(){
+		my_dialog.confirm({
+			title: '&lt;i class="axi axi-ion-alert">&lt;/i> Default alert',
+			msg: 'confirm message',
+		}, function(result){
+			console.log(result, this);
 		});
 	});
+
+	// good
+	ax5.dom("#ax-ui-dialog-confirm-good-btn").on("click", function(){
+		my_dialog.confirm({
+			theme: 'good',
+			title: '&lt;i class="axi axi-ion-alert">&lt;/i> Good',
+			msg: 'confirm message',
+		}, function(result){
+			console.log(result, this);
+		});
+	});
+})();
 &lt;/script>
 </pre><h4>Result</h4>
 <div class="tag-result">
@@ -885,32 +894,31 @@ ax5.util.require(["ui/keypad.js"], function(){
 	<button class="ax-btn good" id="ax-ui-dialog-confirm-good-btn">Confirm good</button>
 </div>
 <script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
-		var my_dialog = new ax5.ui.dialog();
-		my_dialog.set_config({});
+(function(){
+	var my_dialog = new ax5.ui.dialog();
+	my_dialog.set_config({});
 
-		// default
-		ax5.dom("#ax-ui-dialog-confirm-btn").on("click", function(){
-			my_dialog.confirm({
-				title: '<i class="axi axi-ion-alert"></i> Default alert',
-				msg: 'confirm message',
-			}, function(result){
-				console.log(result, this);
-			});
-		});
-
-		// good
-		ax5.dom("#ax-ui-dialog-confirm-good-btn").on("click", function(){
-			my_dialog.confirm({
-				theme: 'good',
-				title: '<i class="axi axi-ion-alert"></i> Good',
-				msg: 'confirm message',
-			}, function(result){
-				console.log(result, this);
-			});
+	// default
+	ax5.dom("#ax-ui-dialog-confirm-btn").on("click", function(){
+		my_dialog.confirm({
+			title: '<i class="axi axi-ion-alert"></i> Default alert',
+			msg: 'confirm message',
+		}, function(result){
+			console.log(result, this);
 		});
 	});
+
+	// good
+	ax5.dom("#ax-ui-dialog-confirm-good-btn").on("click", function(){
+		my_dialog.confirm({
+			theme: 'good',
+			title: '<i class="axi axi-ion-alert"></i> Good',
+			msg: 'confirm message',
+		}, function(result){
+			console.log(result, this);
+		});
+	});
+})();
 </script>
 
 
@@ -927,80 +935,78 @@ ax5.util.require(["ui/keypad.js"], function(){
 	&lt;button class="ax-btn warning" id="ax-ui-dialog-confirm-custom-btn">&lt;i class="axi axi-circle-check">&lt;/i> Confirm&lt;/button>
 &lt;/div>
 &lt;script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
-		var my_dialog = new ax5.ui.dialog();
-		my_dialog.set_config({});
+(function(){
+	var my_dialog = new ax5.ui.dialog();
+	my_dialog.set_config({});
 
-		// default
-		ax5.dom("#ax-ui-dialog-confirm-custom-btn").on("click", function(){
-			my_dialog.confirm({
-				theme: 'warning',
-				title: '&lt;i class="axi axi-circle-check">&lt;/i> AX5 Confirm',
-				msg: '정말 삭제하시겠습니까?',
-				btns: {
-					del: {
-						label:'&lt;i class="axi axi-delete2">&lt;/i> Delete', theme:'warning', onclick: function(key){
-							console.log(key, this);
-							my_dialog.close();
-						}
-					},
-					cancel: {
-						label:'&lt;i class="axi axi-cancel">&lt;/i> Cancel', onclick: function(key){
-							console.log(key, this);
-							my_dialog.close();
-						}
-					},
-					other: {
-						label:'Other', onclick: function(key){
-							console.log(key, this);
-							//my_dialog.close(); // 닫기를 안할 수도 있겠어요.
-						}
+	// default
+	ax5.dom("#ax-ui-dialog-confirm-custom-btn").on("click", function(){
+		my_dialog.confirm({
+			theme: 'warning',
+			title: '&lt;i class="axi axi-circle-check">&lt;/i> AX5 Confirm',
+			msg: '정말 삭제하시겠습니까?',
+			btns: {
+				del: {
+					label:'&lt;i class="axi axi-delete2">&lt;/i> Delete', theme:'warning', onclick: function(key){
+						console.log(key, this);
+						my_dialog.close();
+					}
+				},
+				cancel: {
+					label:'&lt;i class="axi axi-cancel">&lt;/i> Cancel', onclick: function(key){
+						console.log(key, this);
+						my_dialog.close();
+					}
+				},
+				other: {
+					label:'Other', onclick: function(key){
+						console.log(key, this);
+						//my_dialog.close(); // 닫기를 안할 수도 있겠어요.
 					}
 				}
-			});
+			}
 		});
 	});
+})();
 &lt;/script>
 </pre><h4>Result</h4>
 <div class="tag-result">
 	<button class="ax-btn warning" id="ax-ui-dialog-confirm-custom-btn"><i class="axi axi-circle-check"></i> Confirm</button>
 </div>
 <script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
-		var my_dialog = new ax5.ui.dialog();
-		my_dialog.set_config({});
+(function(){
+	var my_dialog = new ax5.ui.dialog();
+	my_dialog.set_config({});
 
-		// default
-		ax5.dom("#ax-ui-dialog-confirm-custom-btn").on("click", function(){
-			my_dialog.confirm({
-				theme: 'warning',
-				title: '<i class="axi axi-circle-check"></i> AX5 Confirm',
-				msg: '정말 삭제하시겠습니까?',
-				btns: {
-					del: {
-						label:'<i class="axi axi-delete2"></i> Delete', theme:'warning', onclick: function(key){
-							console.log(key, this);
-							my_dialog.close();
-						}
-					},
-					cancel: {
-						label:'<i class="axi axi-cancel"></i> Cancel', onclick: function(key){
-							console.log(key, this);
-							my_dialog.close();
-						}
-					},
-					other: {
-						label:'Other', onclick: function(key){
-							console.log(key, this);
-							//my_dialog.close(); // 닫기를 안할 수도 있겠어요.
-						}
+	// default
+	ax5.dom("#ax-ui-dialog-confirm-custom-btn").on("click", function(){
+		my_dialog.confirm({
+			theme: 'warning',
+			title: '<i class="axi axi-circle-check"></i> AX5 Confirm',
+			msg: '정말 삭제하시겠습니까?',
+			btns: {
+				del: {
+					label:'<i class="axi axi-delete2"></i> Delete', theme:'warning', onclick: function(key){
+						console.log(key, this);
+						my_dialog.close();
+					}
+				},
+				cancel: {
+					label:'<i class="axi axi-cancel"></i> Cancel', onclick: function(key){
+						console.log(key, this);
+						my_dialog.close();
+					}
+				},
+				other: {
+					label:'Other', onclick: function(key){
+						console.log(key, this);
+						//my_dialog.close(); // 닫기를 안할 수도 있겠어요.
 					}
 				}
-			});
+			}
 		});
 	});
+})();
 </script>
 
 
@@ -1017,46 +1023,44 @@ ax5.util.require(["ui/keypad.js"], function(){
 	&lt;button class="ax-btn warning" id="ax-ui-dialog-prompt-btn">Prompt&lt;/button>
 &lt;/div>
 &lt;script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
-		var my_dialog = new ax5.ui.dialog();
-		my_dialog.set_config({});
+(function(){
+	var my_dialog = new ax5.ui.dialog();
+	my_dialog.set_config({});
 
-		// default
-		ax5.dom("#ax-ui-dialog-prompt-btn").on("click", function(){
-			my_dialog.prompt({
-				theme: 'warning',
-				width: 400,
-				title: '&lt;i class="axi axi-circle-check">&lt;/i> AX5 Confirm',
-				msg: '값을 입력하세요'
-			}, function(){
-				console.log(this.value);
-			});
+	// default
+	ax5.dom("#ax-ui-dialog-prompt-btn").on("click", function(){
+		my_dialog.prompt({
+			theme: 'warning',
+			width: 400,
+			title: '&lt;i class="axi axi-circle-check">&lt;/i> AX5 Confirm',
+			msg: '값을 입력하세요'
+		}, function(){
+			console.log(this.value);
 		});
 	});
+})();
 &lt;/script>
 </pre><h4>Result</h4>
 <div class="tag-result">
 	<button class="ax-btn warning" id="ax-ui-dialog-prompt-btn">Prompt</button>
 </div>
 <script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
-		var my_dialog = new ax5.ui.dialog();
-		my_dialog.set_config({});
+(function(){
+	var my_dialog = new ax5.ui.dialog();
+	my_dialog.set_config({});
 
-		// default
-		ax5.dom("#ax-ui-dialog-prompt-btn").on("click", function(){
-			my_dialog.prompt({
-				theme: 'warning',
-				width: 400,
-				title: '<i class="axi axi-circle-check"></i> AX5 Confirm',
-				msg: '값을 입력하세요'
-			}, function(){
-				console.log(this.value);
-			});
+	// default
+	ax5.dom("#ax-ui-dialog-prompt-btn").on("click", function(){
+		my_dialog.prompt({
+			theme: 'warning',
+			width: 400,
+			title: '<i class="axi axi-circle-check"></i> AX5 Confirm',
+			msg: '값을 입력하세요'
+		}, function(){
+			console.log(this.value);
 		});
 	});
+})();
 </script>
 
 
@@ -1073,54 +1077,52 @@ ax5.util.require(["ui/keypad.js"], function(){
 	&lt;button class="ax-btn info" id="ax-ui-dialog-prompt-custom-btn">Prompt&lt;/button>
 &lt;/div>
 &lt;script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
-		var my_dialog = new ax5.ui.dialog();
-		my_dialog.set_config({
-			title: '&lt;i class="axi axi-circle-check">&lt;/i> AX5 Confirm',
-		});
+(function(){
+	var my_dialog = new ax5.ui.dialog();
+	my_dialog.set_config({
+		title: '&lt;i class="axi axi-circle-check">&lt;/i> AX5 Confirm',
+	});
 
-		// default
-		ax5.dom("#ax-ui-dialog-prompt-custom-btn").on("click", function(){
-			my_dialog.prompt({
-				theme: 'info',
-				width: 400,
-				input: {
-					data1: {label:"data1의 라벨"},
-					data2: {label:"data2의 라벨"}
-				}
-			}, function(){
-				console.log(this);
-			});
+	// default
+	ax5.dom("#ax-ui-dialog-prompt-custom-btn").on("click", function(){
+		my_dialog.prompt({
+			theme: 'info',
+			width: 400,
+			input: {
+				data1: {label:"data1의 라벨"},
+				data2: {label:"data2의 라벨"}
+			}
+		}, function(){
+			console.log(this);
 		});
 	});
+})();
 &lt;/script>
 </pre><h4>Result</h4>
 <div class="tag-result">
 	<button class="ax-btn info" id="ax-ui-dialog-prompt-custom-btn">Prompt</button>
 </div>
 <script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
-		var my_dialog = new ax5.ui.dialog();
-		my_dialog.set_config({
-			title: '<i class="axi axi-circle-check"></i> AX5 Confirm',
-		});
+(function(){
+	var my_dialog = new ax5.ui.dialog();
+	my_dialog.set_config({
+		title: '<i class="axi axi-circle-check"></i> AX5 Confirm',
+	});
 
-		// default
-		ax5.dom("#ax-ui-dialog-prompt-custom-btn").on("click", function(){
-			my_dialog.prompt({
-				theme: 'info',
-				width: 400,
-				input: {
-					data1: {label:"data1의 라벨"},
-					data2: {label:"data2의 라벨"}
-				}
-			}, function(){
-				console.log(this);
-			});
+	// default
+	ax5.dom("#ax-ui-dialog-prompt-custom-btn").on("click", function(){
+		my_dialog.prompt({
+			theme: 'info',
+			width: 400,
+			input: {
+				data1: {label:"data1의 라벨"},
+				data2: {label:"data2의 라벨"}
+			}
+		}, function(){
+			console.log(this);
 		});
 	});
+})();
 </script>
 
 
@@ -1149,32 +1151,31 @@ ax5.util.require(["ui/keypad.js"], function(){
 	&lt;button class="ax-btn info" id="ax-ui-toast-info-btn">Toast Info&lt;/button>
 &lt;/div>
 &lt;script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.js", "ui/toast.js"], function(){
-		window.my_toast = new ax5.ui.toast();
-		my_toast.set_config({
-			axicon: '&lt;i class="axi axi-circle-check">&lt;/i>',
-		});
+(function(){
+	window.my_toast = new ax5.ui.toast();
+	my_toast.set_config({
+		axicon: '&lt;i class="axi axi-circle-check">&lt;/i>',
+	});
 
-		// default
-		ax5.dom("#ax-ui-toast-good-btn").on("click", function(){
-			my_toast.push({
-				theme: 'good',
-				msg: 'Not Working!\nPlease check your files'
-			}, function(){
-				console.log(this);
-			});
-		});
-		// default
-		ax5.dom("#ax-ui-toast-info-btn").on("click", function(){
-			my_toast.push({
-				theme: 'info',
-				msg: 'Not Working!\nPlease check your files'
-			}, function(){
-				console.log(this);
-			});
+	// default
+	ax5.dom("#ax-ui-toast-good-btn").on("click", function(){
+		my_toast.push({
+			theme: 'good',
+			msg: 'Not Working!\nPlease check your files'
+		}, function(){
+			console.log(this);
 		});
 	});
+	// default
+	ax5.dom("#ax-ui-toast-info-btn").on("click", function(){
+		my_toast.push({
+			theme: 'info',
+			msg: 'Not Working!\nPlease check your files'
+		}, function(){
+			console.log(this);
+		});
+	});
+})();
 &lt;/script>
 </pre><h4>Result</h4>
 <div class="tag-result">
@@ -1182,32 +1183,31 @@ ax5.util.require(["ui/keypad.js"], function(){
 	<button class="ax-btn info" id="ax-ui-toast-info-btn">Toast Info</button>
 </div>
 <script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.js", "ui/toast.js"], function(){
-		window.my_toast = new ax5.ui.toast();
-		my_toast.set_config({
-			axicon: '<i class="axi axi-circle-check"></i>',
-		});
+(function(){
+	window.my_toast = new ax5.ui.toast();
+	my_toast.set_config({
+		axicon: '<i class="axi axi-circle-check"></i>',
+	});
 
-		// default
-		ax5.dom("#ax-ui-toast-good-btn").on("click", function(){
-			my_toast.push({
-				theme: 'good',
-				msg: 'Not Working!\nPlease check your files'
-			}, function(){
-				console.log(this);
-			});
-		});
-		// default
-		ax5.dom("#ax-ui-toast-info-btn").on("click", function(){
-			my_toast.push({
-				theme: 'info',
-				msg: 'Not Working!\nPlease check your files'
-			}, function(){
-				console.log(this);
-			});
+	// default
+	ax5.dom("#ax-ui-toast-good-btn").on("click", function(){
+		my_toast.push({
+			theme: 'good',
+			msg: 'Not Working!\nPlease check your files'
+		}, function(){
+			console.log(this);
 		});
 	});
+	// default
+	ax5.dom("#ax-ui-toast-info-btn").on("click", function(){
+		my_toast.push({
+			theme: 'info',
+			msg: 'Not Working!\nPlease check your files'
+		}, function(){
+			console.log(this);
+		});
+	});
+})();
 </script>
 
 
@@ -1224,38 +1224,36 @@ ax5.util.require(["ui/keypad.js"], function(){
 	&lt;button class="ax-btn danger" id="ax-ui-toast-confirm-btn">Confirm Toast&lt;/button>
 &lt;/div>
 &lt;script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.js", "ui/toast.js"], function(){
-		// default
-		ax5.dom("#ax-ui-toast-confirm-btn").on("click", function(){
-			my_toast.confirm({
-				axicon: '&lt;i class="axi axi-face-unlock">&lt;/i>',
-				theme: 'danger',
-				msg: 'Not Working!\nPlease check your files'
-			}, function(){
-				console.log(this);
-			});
+(function(){
+	// default
+	ax5.dom("#ax-ui-toast-confirm-btn").on("click", function(){
+		my_toast.confirm({
+			axicon: '&lt;i class="axi axi-face-unlock">&lt;/i>',
+			theme: 'danger',
+			msg: 'Not Working!\nPlease check your files'
+		}, function(){
+			console.log(this);
 		});
 	});
+})();
 &lt;/script>
 </pre><h4>Result</h4>
 <div class="tag-result">
 	<button class="ax-btn danger" id="ax-ui-toast-confirm-btn">Confirm Toast</button>
 </div>
 <script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.js", "ui/toast.js"], function(){
-		// default
-		ax5.dom("#ax-ui-toast-confirm-btn").on("click", function(){
-			my_toast.confirm({
-				axicon: '<i class="axi axi-face-unlock"></i>',
-				theme: 'danger',
-				msg: 'Not Working!\nPlease check your files'
-			}, function(){
-				console.log(this);
-			});
+(function(){
+	// default
+	ax5.dom("#ax-ui-toast-confirm-btn").on("click", function(){
+		my_toast.confirm({
+			axicon: '<i class="axi axi-face-unlock"></i>',
+			theme: 'danger',
+			msg: 'Not Working!\nPlease check your files'
+		}, function(){
+			console.log(this);
 		});
 	});
+})();
 </script>
 
 
@@ -1289,50 +1287,49 @@ ax5.util.require(["ui/keypad.js"], function(){
 	&lt;/div>
 &lt;/div>
 &lt;script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/touch-grid.js"], function(){
-		var my_touch_grid = new ax5.ui.touch_grid();
-		my_touch_grid.set_config({
-			target: ax5.dom.get("#ax-ui-touch-grid-default-target"),
-			head_height: 40,
-			head_align: "center",
-			item_height: 40,
-			col_group: [
-				{key: 'date', label: 'Date', width: 120, align:"center"},
-				{key: 'title', label: '제목', width: '*'},
-				{key: 'price', label: 'Price', width: 120, formatter:"money", align:"right"}
-			],
-			body: {
-				onclick: function(){
-					console.log(this);
-				}
+(function(){
+	var my_touch_grid = new ax5.ui.touch_grid();
+	my_touch_grid.set_config({
+		target: ax5.dom.get("#ax-ui-touch-grid-default-target"),
+		head_height: 40,
+		head_align: "center",
+		item_height: 40,
+		col_group: [
+			{key: 'date', label: 'Date', width: 120, align:"center"},
+			{key: 'title', label: '제목', width: '*'},
+			{key: 'price', label: 'Price', width: 120, formatter:"money", align:"right"}
+		],
+		body: {
+			onclick: function(){
+				console.log(this);
 			}
-		});
-
-		my_touch_grid.set_list([
-			{date:'2015-06-07', title:'1 체커 사용가이드', price:205677},
-			{date:'2015-06-06', title:'2 체커에 대한 사용동의 안내', price:'205677'},
-			{date:'2015-06-07', title:'3 체커 사용가이드'},
-			{date:'2015-06-06', title:'4 체커에 대한 사용동의 안내'},
-			{date:'2015-06-07', title:'5 체커 사용가이드'},
-			{date:'2015-06-06', title:'6 체커에 대한 사용동의 안내'},
-			{date:'2015-06-07', title:'7 체커 사용가이드'},
-			{date:'2015-06-06', title:'8 체커에 대한 사용동의 안내'}
-		]);
-
-		ax5.dom("#ax-ui-touch-grid-default-first").on("click", function(){
-			my_touch_grid.focus(0);
-		});
-		ax5.dom("#ax-ui-touch-grid-default-up").on("click", function(){
-			my_touch_grid.focus(-1, "by");
-		});
-		ax5.dom("#ax-ui-touch-grid-default-down").on("click", function(){
-			my_touch_grid.focus(1, "by");
-		});
-		ax5.dom("#ax-ui-touch-grid-default-last").on("click", function(){
-			my_touch_grid.focus("last");
-		});
+		}
 	});
+
+	my_touch_grid.set_list([
+		{date:'2015-06-07', title:'1 체커 사용가이드', price:205677},
+		{date:'2015-06-06', title:'2 체커에 대한 사용동의 안내', price:'205677'},
+		{date:'2015-06-07', title:'3 체커 사용가이드'},
+		{date:'2015-06-06', title:'4 체커에 대한 사용동의 안내'},
+		{date:'2015-06-07', title:'5 체커 사용가이드'},
+		{date:'2015-06-06', title:'6 체커에 대한 사용동의 안내'},
+		{date:'2015-06-07', title:'7 체커 사용가이드'},
+		{date:'2015-06-06', title:'8 체커에 대한 사용동의 안내'}
+	]);
+
+	ax5.dom("#ax-ui-touch-grid-default-first").on("click", function(){
+		my_touch_grid.focus(0);
+	});
+	ax5.dom("#ax-ui-touch-grid-default-up").on("click", function(){
+		my_touch_grid.focus(-1, "by");
+	});
+	ax5.dom("#ax-ui-touch-grid-default-down").on("click", function(){
+		my_touch_grid.focus(1, "by");
+	});
+	ax5.dom("#ax-ui-touch-grid-default-last").on("click", function(){
+		my_touch_grid.focus("last");
+	});
+})();
 &lt;/script>
 </pre><h4>Result</h4>
 <div class="tag-result">
@@ -1345,50 +1342,49 @@ ax5.util.require(["ui/keypad.js"], function(){
 	</div>
 </div>
 <script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/touch-grid.js"], function(){
-		var my_touch_grid = new ax5.ui.touch_grid();
-		my_touch_grid.set_config({
-			target: ax5.dom.get("#ax-ui-touch-grid-default-target"),
-			head_height: 40,
-			head_align: "center",
-			item_height: 40,
-			col_group: [
-				{key: 'date', label: 'Date', width: 120, align:"center"},
-				{key: 'title', label: '제목', width: '*'},
-				{key: 'price', label: 'Price', width: 120, formatter:"money", align:"right"}
-			],
-			body: {
-				onclick: function(){
-					console.log(this);
-				}
+(function(){
+	var my_touch_grid = new ax5.ui.touch_grid();
+	my_touch_grid.set_config({
+		target: ax5.dom.get("#ax-ui-touch-grid-default-target"),
+		head_height: 40,
+		head_align: "center",
+		item_height: 40,
+		col_group: [
+			{key: 'date', label: 'Date', width: 120, align:"center"},
+			{key: 'title', label: '제목', width: '*'},
+			{key: 'price', label: 'Price', width: 120, formatter:"money", align:"right"}
+		],
+		body: {
+			onclick: function(){
+				console.log(this);
 			}
-		});
-
-		my_touch_grid.set_list([
-			{date:'2015-06-07', title:'1 체커 사용가이드', price:205677},
-			{date:'2015-06-06', title:'2 체커에 대한 사용동의 안내', price:'205677'},
-			{date:'2015-06-07', title:'3 체커 사용가이드'},
-			{date:'2015-06-06', title:'4 체커에 대한 사용동의 안내'},
-			{date:'2015-06-07', title:'5 체커 사용가이드'},
-			{date:'2015-06-06', title:'6 체커에 대한 사용동의 안내'},
-			{date:'2015-06-07', title:'7 체커 사용가이드'},
-			{date:'2015-06-06', title:'8 체커에 대한 사용동의 안내'}
-		]);
-
-		ax5.dom("#ax-ui-touch-grid-default-first").on("click", function(){
-			my_touch_grid.focus(0);
-		});
-		ax5.dom("#ax-ui-touch-grid-default-up").on("click", function(){
-			my_touch_grid.focus(-1, "by");
-		});
-		ax5.dom("#ax-ui-touch-grid-default-down").on("click", function(){
-			my_touch_grid.focus(1, "by");
-		});
-		ax5.dom("#ax-ui-touch-grid-default-last").on("click", function(){
-			my_touch_grid.focus("last");
-		});
+		}
 	});
+
+	my_touch_grid.set_list([
+		{date:'2015-06-07', title:'1 체커 사용가이드', price:205677},
+		{date:'2015-06-06', title:'2 체커에 대한 사용동의 안내', price:'205677'},
+		{date:'2015-06-07', title:'3 체커 사용가이드'},
+		{date:'2015-06-06', title:'4 체커에 대한 사용동의 안내'},
+		{date:'2015-06-07', title:'5 체커 사용가이드'},
+		{date:'2015-06-06', title:'6 체커에 대한 사용동의 안내'},
+		{date:'2015-06-07', title:'7 체커 사용가이드'},
+		{date:'2015-06-06', title:'8 체커에 대한 사용동의 안내'}
+	]);
+
+	ax5.dom("#ax-ui-touch-grid-default-first").on("click", function(){
+		my_touch_grid.focus(0);
+	});
+	ax5.dom("#ax-ui-touch-grid-default-up").on("click", function(){
+		my_touch_grid.focus(-1, "by");
+	});
+	ax5.dom("#ax-ui-touch-grid-default-down").on("click", function(){
+		my_touch_grid.focus(1, "by");
+	});
+	ax5.dom("#ax-ui-touch-grid-default-last").on("click", function(){
+		my_touch_grid.focus("last");
+	});
+})();
 </script>
 
 
@@ -1420,53 +1416,53 @@ ax5.util.require(["ui/keypad.js"], function(){
 	&lt;/div>
 &lt;/div>
 &lt;script type="text/javascript">
-	ax5.util.require(["ui/touch-grid.js"], function(){
-		var my_touch_grid = new ax5.ui.touch_grid();
-		my_touch_grid.set_config({
-			target: ax5.dom.get("#ax-ui-touch-grid-bigsize-target"),
-			head_height: 40,
-			head_align: "center",
-			item_height: 40,
-			col_group: [
-				{key: 'no', label: '번호', width: 120, align:"center", formatter: function(){
-					return ax5.util.number(this.value, {money: true});
-				}},
-				{key: 'title', label: '제목', width: '*'},
-				{key: 'price', label: 'Price', width: 120, formatter:"money", align:"right"}
-			],
-			body: {
-				onclick: function(){
-					console.log(this);
-				}
+(function(){
+	var my_touch_grid = new ax5.ui.touch_grid();
+	my_touch_grid.set_config({
+		target: ax5.dom.get("#ax-ui-touch-grid-bigsize-target"),
+		head_height: 40,
+		head_align: "center",
+		item_height: 40,
+		col_group: [
+			{key: 'no', label: '번호', width: 120, align:"center", formatter: function(){
+				return ax5.util.number(this.value, {money: true});
+			}},
+			{key: 'title', label: '제목', width: '*'},
+			{key: 'price', label: 'Price', width: 120, formatter:"money", align:"right"}
+		],
+		body: {
+			onclick: function(){
+				console.log(this);
 			}
-		});
-
-		var list = [];
-		for(var i=1;i&lt;10001;i++){
-			list.push({no:i, title:'제목 '+ i,  price: i*1000});
 		}
-		my_touch_grid.set_list(list);
-
-		function print_html_node(){
-			ax5.dom('#ax-ui-touch-grid-bigsize-tr-count').html( '&lt;b>' + ax5.dom("#ax-ui-touch-grid-bigsize-target").find("tr").elements.length + '개&lt;/b>' );
-		}
-		ax5.dom("#ax-ui-touch-grid-bigsize-first").on("click", function(){
-			my_touch_grid.focus(0);
-			print_html_node();
-		});
-		ax5.dom("#ax-ui-touch-grid-bigsize-up").on("click", function(){
-			my_touch_grid.focus(-1, "by");
-			print_html_node();
-		});
-		ax5.dom("#ax-ui-touch-grid-bigsize-down").on("click", function(){
-			my_touch_grid.focus(1, "by");
-			print_html_node();
-		});
-		ax5.dom("#ax-ui-touch-grid-bigsize-last").on("click", function(){
-			my_touch_grid.focus("last");
-			print_html_node();
-		});
 	});
+
+	var list = [];
+	for(var i=1;i&lt;10001;i++){
+		list.push({no:i, title:'제목 '+ i,  price: i*1000});
+	}
+	my_touch_grid.set_list(list);
+
+	function print_html_node(){
+		ax5.dom('#ax-ui-touch-grid-bigsize-tr-count').html( '&lt;b>' + ax5.dom("#ax-ui-touch-grid-bigsize-target").find("tr").elements.length + '개&lt;/b>' );
+	}
+	ax5.dom("#ax-ui-touch-grid-bigsize-first").on("click", function(){
+		my_touch_grid.focus(0);
+		print_html_node();
+	});
+	ax5.dom("#ax-ui-touch-grid-bigsize-up").on("click", function(){
+		my_touch_grid.focus(-1, "by");
+		print_html_node();
+	});
+	ax5.dom("#ax-ui-touch-grid-bigsize-down").on("click", function(){
+		my_touch_grid.focus(1, "by");
+		print_html_node();
+	});
+	ax5.dom("#ax-ui-touch-grid-bigsize-last").on("click", function(){
+		my_touch_grid.focus("last");
+		print_html_node();
+	});
+})();
 &lt;/script>
 </pre><h4>Result</h4>
 <div class="tag-result">
@@ -1481,53 +1477,98 @@ ax5.util.require(["ui/keypad.js"], function(){
 	</div>
 </div>
 <script type="text/javascript">
-	ax5.util.require(["ui/touch-grid.js"], function(){
-		var my_touch_grid = new ax5.ui.touch_grid();
-		my_touch_grid.set_config({
-			target: ax5.dom.get("#ax-ui-touch-grid-bigsize-target"),
-			head_height: 40,
-			head_align: "center",
-			item_height: 40,
-			col_group: [
-				{key: 'no', label: '번호', width: 120, align:"center", formatter: function(){
-					return ax5.util.number(this.value, {money: true});
-				}},
-				{key: 'title', label: '제목', width: '*'},
-				{key: 'price', label: 'Price', width: 120, formatter:"money", align:"right"}
-			],
-			body: {
-				onclick: function(){
-					console.log(this);
-				}
+(function(){
+	var my_touch_grid = new ax5.ui.touch_grid();
+	my_touch_grid.set_config({
+		target: ax5.dom.get("#ax-ui-touch-grid-bigsize-target"),
+		head_height: 40,
+		head_align: "center",
+		item_height: 40,
+		col_group: [
+			{key: 'no', label: '번호', width: 120, align:"center", formatter: function(){
+				return ax5.util.number(this.value, {money: true});
+			}},
+			{key: 'title', label: '제목', width: '*'},
+			{key: 'price', label: 'Price', width: 120, formatter:"money", align:"right"}
+		],
+		body: {
+			onclick: function(){
+				console.log(this);
 			}
-		});
-
-		var list = [];
-		for(var i=1;i<10001;i++){
-			list.push({no:i, title:'제목 '+ i,  price: i*1000});
 		}
-		my_touch_grid.set_list(list);
-
-		function print_html_node(){
-			ax5.dom('#ax-ui-touch-grid-bigsize-tr-count').html( '<b>' + ax5.dom("#ax-ui-touch-grid-bigsize-target").find("tr").elements.length + '개</b>' );
-		}
-		ax5.dom("#ax-ui-touch-grid-bigsize-first").on("click", function(){
-			my_touch_grid.focus(0);
-			print_html_node();
-		});
-		ax5.dom("#ax-ui-touch-grid-bigsize-up").on("click", function(){
-			my_touch_grid.focus(-1, "by");
-			print_html_node();
-		});
-		ax5.dom("#ax-ui-touch-grid-bigsize-down").on("click", function(){
-			my_touch_grid.focus(1, "by");
-			print_html_node();
-		});
-		ax5.dom("#ax-ui-touch-grid-bigsize-last").on("click", function(){
-			my_touch_grid.focus("last");
-			print_html_node();
-		});
 	});
+
+	var list = [];
+	for(var i=1;i<10001;i++){
+		list.push({no:i, title:'제목 '+ i,  price: i*1000});
+	}
+	my_touch_grid.set_list(list);
+
+	function print_html_node(){
+		ax5.dom('#ax-ui-touch-grid-bigsize-tr-count').html( '<b>' + ax5.dom("#ax-ui-touch-grid-bigsize-target").find("tr").elements.length + '개</b>' );
+	}
+	ax5.dom("#ax-ui-touch-grid-bigsize-first").on("click", function(){
+		my_touch_grid.focus(0);
+		print_html_node();
+	});
+	ax5.dom("#ax-ui-touch-grid-bigsize-up").on("click", function(){
+		my_touch_grid.focus(-1, "by");
+		print_html_node();
+	});
+	ax5.dom("#ax-ui-touch-grid-bigsize-down").on("click", function(){
+		my_touch_grid.focus(1, "by");
+		print_html_node();
+	});
+	ax5.dom("#ax-ui-touch-grid-bigsize-last").on("click", function(){
+		my_touch_grid.focus("last");
+		print_html_node();
+	});
+})();
+</script>
+
+
+</article>
+
+<!-- split -->
+
+<article class="cover">
+	<h1 data-menu-item="ax-ui-calendar">Calendar</h1>
+	<p class="lead">
+
+	</p>
+</article>
+
+
+
+<!-- basic -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-calendar-default" class="capitalize">default</h3>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+	&lt;div id="ui-calendar-default-target" style="width:300px;height: 250px;">&lt;/div>
+	&lt;div style="padding:5px;">
+
+	&lt;/div>
+&lt;/div>
+&lt;script type="text/javascript">
+(function(){
+
+})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result">
+	<div id="ui-calendar-default-target" style="width:300px;height: 250px;"></div>
+	<div style="padding:5px;">
+
+	</div>
+</div>
+<script type="text/javascript">
+(function(){
+
+})();
 </script>
 
 

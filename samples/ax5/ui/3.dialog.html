@@ -2,7 +2,8 @@
 	<h1 data-menu-item="ax-ui-dialog">Dialog</h1>
 	<p class="lead">
 		dialog는 <code>window.alert</code>나 <code>window.confirm</code>의 대체 수단으로 사용이 가능한 UI 이다.
-		어떻게 하면 잘 만들까? 생각을 하다보니 <code>prompt</code>도 구현해야 겠다.
+		어떻게 하면 잘 만들까? 생각을 하다보니 <code>prompt</code>도 구현해야 겠다. <br/>
+		dialog는 ax5.ui.mask합성하므로 해당 스크립트가 문서에 포함되어야 한다.
 	</p>
 </article>
 
@@ -18,23 +19,23 @@
 	<button class="ax-btn" id="ax-ui-dialog-alert-btn">Alert</button>
 </div>
 <script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
-		var my_dialog = new ax5.ui.dialog();
-		my_dialog.set_config({
-			title: '<i class="axi axi-ion-alert"></i> Default alert',
-			mask: {} // default target : document.body
-		});
+(function(){
+	// ui dependency : mask
+	var my_dialog = new ax5.ui.dialog();
+	my_dialog.set_config({
+		title: '<i class="axi axi-ion-alert"></i> Default alert',
+		mask: {} // default target : document.body
+	});
 
-		// default
-		ax5.dom("#ax-ui-dialog-alert-btn").on("click", function(){
-			my_dialog.alert(
-			'<span class="ax">알러트 메세지 기본 타입의 Alert입니다.</span>\n<span class="ax basic">테마를 정하지 않았습니다.</span>',
-			function(){
-				console.log(this);
-			});
+	// default
+	ax5.dom("#ax-ui-dialog-alert-btn").on("click", function(){
+		my_dialog.alert(
+		'<span class="ax">알러트 메세지 기본 타입의 Alert입니다.</span>\n<span class="ax basic">테마를 정하지 않았습니다.</span>',
+		function(){
+			console.log(this);
 		});
 	});
+})();
 </script>
 </pre>
 
@@ -69,55 +70,55 @@
 	<button class="ax-btn special" id="ax-ui-dialog-alert-special-btn">Alert Special</button>
 </div>
 <script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
-		var my_dialog = new ax5.ui.dialog();
-		my_dialog.set_config({
-			mask: {} // default target : document.body
-		});
-
-		// basic
-		ax5.dom("#ax-ui-dialog-alert-basic-btn").on("click", function(){
-			my_dialog.alert({
-				theme: 'basic', title: '<i class="axi axi-stars"></i> alert', msg: 'basic color',
-			}, function(){ console.log(this); });
-		});
-
-		// good
-		ax5.dom("#ax-ui-dialog-alert-good-btn").on("click", function(){
-			my_dialog.alert({
-				theme: 'good', title: '<i class="axi axi-thumbs-o-up"></i> alert', msg: 'good color',
-			}, function(){ console.log(this); });
-		});
-
-		// info
-		ax5.dom("#ax-ui-dialog-alert-info-btn").on("click", function(){
-			my_dialog.alert({
-				theme: 'info', title: '<i class="axi axi-thumbs-o-up"></i> alert', msg: 'info color',
-			}, function(){ console.log(this); });
-		});
-
-		// warning
-		ax5.dom("#ax-ui-dialog-alert-warning-btn").on("click", function(){
-			my_dialog.alert({
-				theme: 'warning', title: '<i class="axi axi-warning"></i> alert', msg: 'warning color',
-			}, function(){ console.log(this); });
-		});
-
-		// danger
-		ax5.dom("#ax-ui-dialog-alert-danger-btn").on("click", function(){
-			my_dialog.alert({
-				theme: 'danger', title: '<i class="axi axi-times-circle"></i> alert', msg: 'danger color',
-			}, function(){ console.log(this); });
-		});
-
-		// special
-		ax5.dom("#ax-ui-dialog-alert-special-btn").on("click", function(){
-			my_dialog.alert({
-				theme: 'special', title: '<i class="axi axi-times-circle"></i> alert', msg: 'special color',
-			}, function(){ console.log(this); });
-		});
+(function(){
+	// ui dependency : mask
+	var my_dialog = new ax5.ui.dialog();
+	my_dialog.set_config({
+		mask: {} // default target : document.body
 	});
+
+	// basic
+	ax5.dom("#ax-ui-dialog-alert-basic-btn").on("click", function(){
+		my_dialog.alert({
+			theme: 'basic', title: '<i class="axi axi-stars"></i> alert', msg: 'basic color',
+		}, function(){ console.log(this); });
+	});
+
+	// good
+	ax5.dom("#ax-ui-dialog-alert-good-btn").on("click", function(){
+		my_dialog.alert({
+			theme: 'good', title: '<i class="axi axi-thumbs-o-up"></i> alert', msg: 'good color',
+		}, function(){ console.log(this); });
+	});
+
+	// info
+	ax5.dom("#ax-ui-dialog-alert-info-btn").on("click", function(){
+		my_dialog.alert({
+			theme: 'info', title: '<i class="axi axi-thumbs-o-up"></i> alert', msg: 'info color',
+		}, function(){ console.log(this); });
+	});
+
+	// warning
+	ax5.dom("#ax-ui-dialog-alert-warning-btn").on("click", function(){
+		my_dialog.alert({
+			theme: 'warning', title: '<i class="axi axi-warning"></i> alert', msg: 'warning color',
+		}, function(){ console.log(this); });
+	});
+
+	// danger
+	ax5.dom("#ax-ui-dialog-alert-danger-btn").on("click", function(){
+		my_dialog.alert({
+			theme: 'danger', title: '<i class="axi axi-times-circle"></i> alert', msg: 'danger color',
+		}, function(){ console.log(this); });
+	});
+
+	// special
+	ax5.dom("#ax-ui-dialog-alert-special-btn").on("click", function(){
+		my_dialog.alert({
+			theme: 'special', title: '<i class="axi axi-times-circle"></i> alert', msg: 'special color',
+		}, function(){ console.log(this); });
+	});
+})();
 </script>
 </pre>
 
@@ -135,32 +136,31 @@
 	<button class="ax-btn good" id="ax-ui-dialog-confirm-good-btn">Confirm good</button>
 </div>
 <script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
-		var my_dialog = new ax5.ui.dialog();
-		my_dialog.set_config({});
+(function(){
+	var my_dialog = new ax5.ui.dialog();
+	my_dialog.set_config({});
 
-		// default
-		ax5.dom("#ax-ui-dialog-confirm-btn").on("click", function(){
-			my_dialog.confirm({
-				title: '<i class="axi axi-ion-alert"></i> Default alert',
-				msg: 'confirm message',
-			}, function(result){
-				console.log(result, this);
-			});
-		});
-
-		// good
-		ax5.dom("#ax-ui-dialog-confirm-good-btn").on("click", function(){
-			my_dialog.confirm({
-				theme: 'good',
-				title: '<i class="axi axi-ion-alert"></i> Good',
-				msg: 'confirm message',
-			}, function(result){
-				console.log(result, this);
-			});
+	// default
+	ax5.dom("#ax-ui-dialog-confirm-btn").on("click", function(){
+		my_dialog.confirm({
+			title: '<i class="axi axi-ion-alert"></i> Default alert',
+			msg: 'confirm message',
+		}, function(result){
+			console.log(result, this);
 		});
 	});
+
+	// good
+	ax5.dom("#ax-ui-dialog-confirm-good-btn").on("click", function(){
+		my_dialog.confirm({
+			theme: 'good',
+			title: '<i class="axi axi-ion-alert"></i> Good',
+			msg: 'confirm message',
+		}, function(result){
+			console.log(result, this);
+		});
+	});
+})();
 </script>
 </pre>
 
@@ -177,40 +177,39 @@
 	<button class="ax-btn warning" id="ax-ui-dialog-confirm-custom-btn"><i class="axi axi-circle-check"></i> Confirm</button>
 </div>
 <script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
-		var my_dialog = new ax5.ui.dialog();
-		my_dialog.set_config({});
+(function(){
+	var my_dialog = new ax5.ui.dialog();
+	my_dialog.set_config({});
 
-		// default
-		ax5.dom("#ax-ui-dialog-confirm-custom-btn").on("click", function(){
-			my_dialog.confirm({
-				theme: 'warning',
-				title: '<i class="axi axi-circle-check"></i> AX5 Confirm',
-				msg: '정말 삭제하시겠습니까?',
-				btns: {
-					del: {
-						label:'<i class="axi axi-delete2"></i> Delete', theme:'warning', onclick: function(key){
-							console.log(key, this);
-							my_dialog.close();
-						}
-					},
-					cancel: {
-						label:'<i class="axi axi-cancel"></i> Cancel', onclick: function(key){
-							console.log(key, this);
-							my_dialog.close();
-						}
-					},
-					other: {
-						label:'Other', onclick: function(key){
-							console.log(key, this);
-							//my_dialog.close(); // 닫기를 안할 수도 있겠어요.
-						}
+	// default
+	ax5.dom("#ax-ui-dialog-confirm-custom-btn").on("click", function(){
+		my_dialog.confirm({
+			theme: 'warning',
+			title: '<i class="axi axi-circle-check"></i> AX5 Confirm',
+			msg: '정말 삭제하시겠습니까?',
+			btns: {
+				del: {
+					label:'<i class="axi axi-delete2"></i> Delete', theme:'warning', onclick: function(key){
+						console.log(key, this);
+						my_dialog.close();
+					}
+				},
+				cancel: {
+					label:'<i class="axi axi-cancel"></i> Cancel', onclick: function(key){
+						console.log(key, this);
+						my_dialog.close();
+					}
+				},
+				other: {
+					label:'Other', onclick: function(key){
+						console.log(key, this);
+						//my_dialog.close(); // 닫기를 안할 수도 있겠어요.
 					}
 				}
-			});
+			}
 		});
 	});
+})();
 </script>
 </pre>
 
@@ -227,23 +226,22 @@
 	<button class="ax-btn warning" id="ax-ui-dialog-prompt-btn">Prompt</button>
 </div>
 <script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
-		var my_dialog = new ax5.ui.dialog();
-		my_dialog.set_config({});
+(function(){
+	var my_dialog = new ax5.ui.dialog();
+	my_dialog.set_config({});
 
-		// default
-		ax5.dom("#ax-ui-dialog-prompt-btn").on("click", function(){
-			my_dialog.prompt({
-				theme: 'warning',
-				width: 400,
-				title: '<i class="axi axi-circle-check"></i> AX5 Confirm',
-				msg: '값을 입력하세요'
-			}, function(){
-				console.log(this.value);
-			});
+	// default
+	ax5.dom("#ax-ui-dialog-prompt-btn").on("click", function(){
+		my_dialog.prompt({
+			theme: 'warning',
+			width: 400,
+			title: '<i class="axi axi-circle-check"></i> AX5 Confirm',
+			msg: '값을 입력하세요'
+		}, function(){
+			console.log(this.value);
 		});
 	});
+})();
 </script>
 </pre>
 
@@ -260,27 +258,26 @@
 	<button class="ax-btn info" id="ax-ui-dialog-prompt-custom-btn">Prompt</button>
 </div>
 <script type="text/javascript">
-	ax5.info.base_url = "../pub/";
-	ax5.util.require(["ui/mask.js", "ui/dialog.js"], function(){
-		var my_dialog = new ax5.ui.dialog();
-		my_dialog.set_config({
-			title: '<i class="axi axi-circle-check"></i> AX5 Confirm',
-		});
+(function(){
+	var my_dialog = new ax5.ui.dialog();
+	my_dialog.set_config({
+		title: '<i class="axi axi-circle-check"></i> AX5 Confirm',
+	});
 
-		// default
-		ax5.dom("#ax-ui-dialog-prompt-custom-btn").on("click", function(){
-			my_dialog.prompt({
-				theme: 'info',
-				width: 400,
-				input: {
-					data1: {label:"data1의 라벨"},
-					data2: {label:"data2의 라벨"}
-				}
-			}, function(){
-				console.log(this);
-			});
+	// default
+	ax5.dom("#ax-ui-dialog-prompt-custom-btn").on("click", function(){
+		my_dialog.prompt({
+			theme: 'info',
+			width: 400,
+			input: {
+				data1: {label:"data1의 라벨"},
+				data2: {label:"data2의 라벨"}
+			}
+		}, function(){
+			console.log(this);
 		});
 	});
+})();
 </script>
 </pre>
 

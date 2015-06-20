@@ -3074,3 +3074,9 @@ a.ax {
       background-image: -webkit-linear-gradient(top, #F0F0F0, #F0F0F0);
       background-image: linear-gradient(to bottom, #F0F0F0, #F0F0F0);
       filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F0F0F0, endColorstr=#F0F0F0); }
+
+.ax5-ui-calender {
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden; }

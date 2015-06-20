@@ -31,6 +31,7 @@
 
 		}).apply(this, arguments);
 
+		this.target = null;
 		var cfg = this.config;
 		/**
 		 * Preferences of Menu UI
@@ -60,12 +61,12 @@
 			if(!cfg.target || !cfg.menu){
 				U.error("aui_menu_400", "[ax5.ui.menu] config.target, config.menu is required");
 			}
-			cfg.target = ax5.dom(cfg.target);
+			this.target = ax5.dom(cfg.target);
 			this.print_list();
 		};
 
 		this.print_list = function(){
-			var cfg = this.config,
+			var
 				po = [],
 				get_child_menu_html = function(_po_, _menu_, _depth_){
 					_po_.push('<ul class="ax-item-group ax-item-group-depth-' + _depth_ + '">');
@@ -82,8 +83,8 @@
 
 			get_child_menu_html(po, cfg[cfg.keys.menu], 0);
 
-			cfg.target.html( po.join('') );
-			cfg.target.find('[data-menu-item-index]').on("click", (function(e){
+			this.target.html( po.join('') );
+			this.target.find('[data-menu-item-index]').on("click", (function(e){
 				this.onclick(e||window.event);
 			}).bind(this));
 		};
@@ -100,7 +101,7 @@
 					this.config.onclick.call({
 						menu: this.config[cfg.keys.menu],
 						item: this.config[cfg.keys.menu][index],
-						target: cfg.target.elements[0],
+						target: this.target.elements[0],
 						item_target: target
 					});
 				}

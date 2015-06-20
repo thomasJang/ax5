@@ -33,8 +33,7 @@
 	<button class="ax-btn" onclick="app_mask_close();">마스크닫기</button>
 </div>
 <script type="text/javascript">
-ax5.info.base_url = "../pub/";
-ax5.util.require(["ui/mask.min.js"], function(){
+(function(){
 	window.app_mask = new ax5.ui.mask();
 	app_mask.set_config({
 		target: document.body, // 미리 선언했지만
@@ -60,7 +59,7 @@ ax5.util.require(["ui/mask.min.js"], function(){
 	window.app_mask_close = function(){
 		app_mask.close();
 	};
-});
+})();
 </script>
 </pre>
 
@@ -86,9 +85,7 @@ ax5.util.require(["ui/mask.min.js"], function(){
 	<button class="ax-btn" onclick="app_body_mask_open();">마스크열기</button>
 </div>
 <script type="text/javascript">
-
-ax5.util.require(["ui/mask.min.js"], function(){
-
+(function(){
 	window.app_body_mask = new ax5.ui.mask();
 	app_body_mask.set_config({
 		target: document.body,
@@ -109,8 +106,7 @@ ax5.util.require(["ui/mask.min.js"], function(){
 			app_body_mask.close();
 		}, 2000);
 	}
-
-});
+})();
 </script>
 </pre>
 

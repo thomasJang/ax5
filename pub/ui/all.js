@@ -1,12 +1,148 @@
 /*
  * ax5 - v0.0.1 
- * 2015-06-20 
+ * 2015-06-21 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
  * Released under the MIT license 
  * www.axisj.com/ax5/license 
  */
+
+// ax5.ui.calendar
+(function(root, ax_super) {
+	/**
+	 * @class ax5.ui.calendar
+	 * @classdesc
+	 * @version v0.0.1
+	 * @author tom@axisj.com
+	 * @logs
+	 * 2014-06-21 tom : 시작
+	 * @example
+	 * ```
+	 * var my_pad = new ax5.ui.calendar();
+	 * ```
+	 */
+	var U = ax5.util, axd = ax5.dom;
+
+	//== UI Class
+	var ax_class = function(){
+		// 클래스 생성자
+		this.main = (function(){
+			if (ax_super) ax_super.call(this); // 부모호출
+			this.config = {
+				click_event_name: (('ontouchstart' in document.documentElement) ? "touchstart" : "click"),
+				theme: 'default',
+				mode: 'day', // day|month|year,
+				week_names: [
+					{ name: "SUN" },
+					{ name: "MON" },
+					{ name: "TUE" },
+					{ name: "WED" },
+					{ name: "THU" },
+					{ name: "FRI" },
+					{ name: "SAT" }
+				]
+			};
+		}).apply(this, arguments);
+
+		this.target = null;
+		var cfg = this.config;
+		/**
+		 * Preferences of calendar UI
+		 * @method ax5.ui.calendar.set_config
+		 * @param {Object} config - 클래스 속성값
+		 * @returns {ax5.ui.calendar}
+		 * @example
+		 * ```
+		 * set_config({
+		 *      target : {Element|AX5 nodelist}, // 메뉴 UI를 출력할 대상
+		 *      mode: {String}, // [day|month|year] - 화면 출력 모드
+		 *      onclick: {Function} // [onclick] - 아이템 클릭이벤트 처리자
+		 * });
+		 * ```
+		 */
+			//== class body start
+		this.init = function(){
+			// after set_config();
+			//console.log(this.config);
+			if(!cfg.target){
+				U.error("aui_calendar_400", "[ax5.ui.calendar] config.target is required");
+			}
+			this.target = ax5.dom(cfg.target);
+
+			this.target.html( this.get_frame() );
+
+			// 파트수집
+			this.els = {
+				"root": this.target.find('[data-calendar-els="root"]')
+			};
+
+			this.print();
+		};
+
+		this.get_frame = function(){
+			var po = [];
+			po.push('<div class="ax5-ui-calendar ' + cfg.theme + '" data-calendar-els="root">');
+			po.push('</div>');
+			return po.join('');
+		};
+
+		this.print = function(){
+			this.els["root"].html( this.get_page(cfg.mode) );
+			this.els["root"].find('[data-calendar-item-index]').on(cfg.click_event_name, (function(e){
+				this.onclick(e||window.event);
+			}).bind(this));
+		};
+
+		this.get_page = function(mode){
+			var po = [];
+			po.push('<table data-calendar-table="' + typ + '">');
+			var i = 0; while (i < 6) {
+				po.push('<tr>');
+				var k = 0; while (k < 7) {
+					po.push('<td>');
+					po.push('</td>');
+					k++;
+				}
+				po.push('</tr>');
+				i++;
+			}
+			po.push('</table>');
+
+			return po.join('');
+		};
+
+		this.onclick = function(e, target, index){
+			target = axd.parent(e.target, function(target){
+				if(ax5.dom.attr(target, "data-calendar-item-index")){
+					return true;
+				}
+			});
+			if(target){
+				index = axd.attr(target, "data-calendar-item-index");
+				if(this.config.onclick){
+					this.config.onclick.call({
+						keys: this.config.board.keys,
+						item: this.config.board.keys[index],
+						target: cfg.target.elements[0],
+						item_target: target
+					});
+				}
+			}
+		};
+	};
+	//== UI Class
+
+	//== ui class 공통 처리 구문
+	if (U.is_function(ax_super)) ax_class.prototype = new ax_super(); // 상속
+	root.calendar = ax_class; // ax5.ui에 연결
+
+	if (typeof define === "function" && define.amd) {
+		define("_ax5_ui_calendar", [], function () { return ax_class; }); // for requireJS
+	}
+	//== ui class 공통 처리 구문
+
+})(ax5.ui, ax5.ui.root);
 
 // ax5.ui.dialog
 (function(root, ax_super) {
@@ -398,6 +534,7 @@
 			};
 		}).apply(this, arguments);
 
+		this.target = null;
 		var cfg = this.config;
 		/**
 		 * Preferences of Keypad UI
@@ -434,12 +571,12 @@
 			if(!cfg.target || !cfg.board){
 				U.error("aui_keypad_400", "[ax5.ui.keypad] config.target, config.board is required");
 			}
-			cfg.target = ax5.dom(cfg.target);
+			this.target = ax5.dom(cfg.target);
 			this.set_layout();
 		};
 
 		this.set_layout = function(){
-			var cfg = this.config,
+			var
 				keys = cfg.keys,
 				po = [],
 				col_width = (cfg.board.col_width||"10px"),
@@ -483,8 +620,8 @@
 			po.push('</table>');
 			po.push('</div>');
 
-			cfg.target.html( po.join('') );
-			cfg.target.find('[data-keypad-item-index]').on(cfg.click_event_name, (function(e){
+			this.target.html( po.join('') );
+			this.target.find('[data-keypad-item-index]').on(cfg.click_event_name, (function(e){
 				this.onclick(e||window.event);
 			}).bind(this));
 		};
@@ -501,7 +638,7 @@
 					this.config.onclick.call({
 						keys: this.config.board.keys,
 						item: this.config.board.keys[index],
-						target: cfg.target.elements[0],
+						target: this.target.elements[0],
 						item_target: target
 					});
 				}
@@ -721,6 +858,7 @@
 
 		}).apply(this, arguments);
 
+		this.target = null;
 		var cfg = this.config;
 		/**
 		 * Preferences of Menu UI
@@ -750,12 +888,12 @@
 			if(!cfg.target || !cfg.menu){
 				U.error("aui_menu_400", "[ax5.ui.menu] config.target, config.menu is required");
 			}
-			cfg.target = ax5.dom(cfg.target);
+			this.target = ax5.dom(cfg.target);
 			this.print_list();
 		};
 
 		this.print_list = function(){
-			var cfg = this.config,
+			var
 				po = [],
 				get_child_menu_html = function(_po_, _menu_, _depth_){
 					_po_.push('<ul class="ax-item-group ax-item-group-depth-' + _depth_ + '">');
@@ -772,8 +910,8 @@
 
 			get_child_menu_html(po, cfg[cfg.keys.menu], 0);
 
-			cfg.target.html( po.join('') );
-			cfg.target.find('[data-menu-item-index]').on("click", (function(e){
+			this.target.html( po.join('') );
+			this.target.find('[data-menu-item-index]').on("click", (function(e){
 				this.onclick(e||window.event);
 			}).bind(this));
 		};
@@ -790,7 +928,7 @@
 					this.config.onclick.call({
 						menu: this.config[cfg.keys.menu],
 						item: this.config[cfg.keys.menu][index],
-						target: cfg.target.elements[0],
+						target: this.target.elements[0],
 						item_target: target
 					});
 				}
@@ -1354,36 +1492,6 @@
 			else{
 				this.els["main-body-content"].find('[data-touch-grid-item-row="'+ index +'"]').class_name("add", "focus");
 			}
-
-
-			/*
-			if(this.virtual_scroll.start_index <= index && this.virtual_scroll.end_index >= index){
-				var focused_item, focused_item_height, focused_item_top, body_content_top, body_height, view_position_top;
-					focused_item = this.els["main-body-content"].find('[data-touch-grid-item-row="'+ index +'"]');
-					if(focused_item.length == 0) return; // find 실패
-					focused_item_top = index * cfg.item_height,
-					body_content_top = this.els["main-body-content"].position().top,
-					body_height = this.els["main-body"].height(),
-					view_position_top = focused_item_top + body_content_top;
-
-				focused_item.class_name("add", "focus");
-				if( (view_position_top + cfg.item_height) > body_height ){
-					this.els["main-body-content"].css({top: body_height - (focused_item_top + cfg.item_height) });
-				}
-				else if( view_position_top < 0 ){
-					this.els["main-body-content"].css({top: - (focused_item_top) });
-				}
-
-			}
-			else
-			{
-				//var scroll_index = index - this.virtual_scroll.size;
-				//if(scroll_index < 0) scroll_index = 0;
-				//console.log(scroll_index);
-
-				this.content_scroll(index);
-			}
-			*/
 		};
 
 		this.onclick = function(e, target, index, that){

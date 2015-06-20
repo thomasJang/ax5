@@ -295,36 +295,6 @@
 			else{
 				this.els["main-body-content"].find('[data-touch-grid-item-row="'+ index +'"]').class_name("add", "focus");
 			}
-
-
-			/*
-			if(this.virtual_scroll.start_index <= index && this.virtual_scroll.end_index >= index){
-				var focused_item, focused_item_height, focused_item_top, body_content_top, body_height, view_position_top;
-					focused_item = this.els["main-body-content"].find('[data-touch-grid-item-row="'+ index +'"]');
-					if(focused_item.length == 0) return; // find 실패
-					focused_item_top = index * cfg.item_height,
-					body_content_top = this.els["main-body-content"].position().top,
-					body_height = this.els["main-body"].height(),
-					view_position_top = focused_item_top + body_content_top;
-
-				focused_item.class_name("add", "focus");
-				if( (view_position_top + cfg.item_height) > body_height ){
-					this.els["main-body-content"].css({top: body_height - (focused_item_top + cfg.item_height) });
-				}
-				else if( view_position_top < 0 ){
-					this.els["main-body-content"].css({top: - (focused_item_top) });
-				}
-
-			}
-			else
-			{
-				//var scroll_index = index - this.virtual_scroll.size;
-				//if(scroll_index < 0) scroll_index = 0;
-				//console.log(scroll_index);
-
-				this.content_scroll(index);
-			}
-			*/
 		};
 
 		this.onclick = function(e, target, index, that){
