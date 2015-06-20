@@ -80,7 +80,11 @@
 <article class="content">
 	<h3 data-menu-item="ax-ui-touch-grid-bigsize" class="capitalize">bigsize</h3>
 	<p>
-
+		아이템의 갯수가 많아지면 문서에 html노드를 너무 많이 만들어 내게 된다. 당장 사용하지도 않을 것인데.
+		그로 인데 웹 애플리케이션의 속도가 저하되는 문제가 발생된다. 이를 해결 하기 위해 현재 스크롤에 보이는 아이템만 출력시키는 꼼수가 필요하다.
+	</p>
+	<p>
+		아래 예제에서보면 <code>list</code>에 10,000개의 아이템이 담겨 있다. 하지만 div안에 담겨있는 html노드 수는 6개를 유지하고 있다. (헤드에 1개 바디에 5개)
 	</p>
 <pre>
 <div class="tag-result">
@@ -90,6 +94,8 @@
 		<button class="ax-btn lg" id="ax-ui-touch-grid-bigsize-up">&nbsp;<i class="axi axi-angle-up"></i>&nbsp;</button>
 		<button class="ax-btn lg" id="ax-ui-touch-grid-bigsize-down">&nbsp;<i class="axi axi-angle-down"></i>&nbsp;</button>
 		<button class="ax-btn lg" id="ax-ui-touch-grid-bigsize-last">&nbsp;<i class="axi axi-angle-double-down"></i>&nbsp;</button>
+
+		TR 의 갯수는 <span id="ax-ui-touch-grid-bigsize-tr-count"></span>
 	</div>
 </div>
 <script type="text/javascript">
@@ -101,7 +107,9 @@
 			head_align: "center",
 			item_height: 40,
 			col_group: [
-				{key: 'no', label: '번호', width: 120, align:"center"},
+				{key: 'no', label: '번호', width: 120, align:"center", formatter: function(){
+					return ax5.util.number(this.value, {money: true});
+				}},
 				{key: 'title', label: '제목', width: '*'},
 				{key: 'price', label: 'Price', width: 120, formatter:"money", align:"right"}
 			],
@@ -113,22 +121,29 @@
 		});
 
 		var list = [];
-		for(var i=1;i<101;i++){
+		for(var i=1;i<10001;i++){
 			list.push({no:i, title:'제목 '+ i,  price: i*1000});
 		}
 		my_touch_grid.set_list(list);
 
+		function print_html_node(){
+			ax5.dom('#ax-ui-touch-grid-bigsize-tr-count').html( '<b>' + ax5.dom("#ax-ui-touch-grid-bigsize-target").find("tr").elements.length + '개</b>' );
+		}
 		ax5.dom("#ax-ui-touch-grid-bigsize-first").on("click", function(){
 			my_touch_grid.focus(0);
+			print_html_node();
 		});
 		ax5.dom("#ax-ui-touch-grid-bigsize-up").on("click", function(){
 			my_touch_grid.focus(-1, "by");
+			print_html_node();
 		});
 		ax5.dom("#ax-ui-touch-grid-bigsize-down").on("click", function(){
 			my_touch_grid.focus(1, "by");
+			print_html_node();
 		});
 		ax5.dom("#ax-ui-touch-grid-bigsize-last").on("click", function(){
 			my_touch_grid.focus("last");
+			print_html_node();
 		});
 	});
 </script>
