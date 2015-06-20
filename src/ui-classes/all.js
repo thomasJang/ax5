@@ -1090,6 +1090,7 @@
 			};
 		}).apply(this, arguments);
 
+		this.target = null;
 		this.focused_index = -1;
 		this.col_group = [];
 		this.col_width_sum = 0;
@@ -1110,7 +1111,8 @@
 		//== class body start
 		this.init = function(){
 			if(!cfg.target) U.error("aui_touch_grid_400", "[ax5.ui.touch_grid] config.target is required");
-			cfg.target = ax5.dom(cfg.target);
+
+			this.target = ax5.dom(cfg.target);
 
 			// 데이터 정리
 			//console.log(cfg.col_group[1]);
@@ -1118,15 +1120,15 @@
 			//console.log(cfg.col_group[1]);
 
 			// 프레임 생성
-			cfg.target.append( this.get_frame() );
+			this.target.html( this.get_frame() );
 
 			// 파트수집
 			this.els = {
-				"root": cfg.target.find('[data-touch-grid-els="root"]'),
-				"main": cfg.target.find('[data-touch-grid-els="main"]'),
-				"main-header": cfg.target.find('[data-touch-grid-els="main-header"]'),
-				"main-body": cfg.target.find('[data-touch-grid-els="main-body"]'),
-				"main-body-content": cfg.target.find('[data-touch-grid-els="main-body-content"]')
+				"root": this.target.find('[data-touch-grid-els="root"]'),
+				"main": this.target.find('[data-touch-grid-els="main"]'),
+				"main-header": this.target.find('[data-touch-grid-els="main-header"]'),
+				"main-body": this.target.find('[data-touch-grid-els="main-body"]'),
+				"main-body-content": this.target.find('[data-touch-grid-els="main-body-content"]')
 			};
 			this.set_size_frame();
 			this.els["main-header"].html( this.get_header("main-header") );
@@ -1158,18 +1160,20 @@
 
 		this.set_size_frame = function(){  /* resizable */
 			var
-				target_height = cfg.target.height();
+				target_height = this.target.height();
 
 			this.els["main"].css({height: target_height});
 			this.els["main-header"].css({height: cfg.head_height});
 			this.els["main-body"].css({height: target_height - cfg.head_height});
+
+			this.virtual_scroll.size = Math.ceil((target_height - cfg.head_height) / cfg.item_height);
 		};
 
 		// col_group의 속성값을 정리하여 줍니다. - width등
 		this.convert_col_group = function(col_group){ /* resizable */
 			var
 				CG = [],
-				target_width = cfg.target.width(),
+				target_width = this.target.width(),
 				free_width = target_width,
 				free_width_col_count = 0;
 
@@ -1254,9 +1258,10 @@
 
 		this.get_list = function(typ){
 			var
-				po = [];
+				po = [],
+				end_index = this.virtual_scroll.end_index;
 
-				for (var r = 0, len = this.list.length, item; r < len; r++) {
+				for (var r = this.virtual_scroll.start_index, len = ((end_index > this.list.length) ? this.list.length : end_index), item; r < len; r++) {
 					item = this.list[r];
 					po.push('<tr data-touch-grid-item-row="' + r + '" style="height:' + cfg.item_height + 'px;">');
 					for(var i=0, l=this.col_group.length;i<l;i++) {
@@ -1295,12 +1300,23 @@
 
 		this.set_list = function(list){
 			this.list = list;
-			this.focused_index = -1;
+			this.focused_index = 0;
+			this.content_scroll(0);
+		};
+
+		this.content_scroll = function(top){
+			this.els["main-body-content"].css({top: -top });
+
+			this.virtual_scroll.start_index = Math.floor(top / cfg.item_height);
+			this.virtual_scroll.end_index = U.number(this.virtual_scroll.start_index) + U.number(this.virtual_scroll.size);
+
+			this.els["main-body-content"].css({'padding-top': this.virtual_scroll.start_index * cfg.item_height });
 			this.els["main-body-content-tbody"].html( this.get_list("main-body") );
+
+			this.els["main-body-content"].find('[data-touch-grid-item-row="'+ this.focused_index +'"]').class_name("add", "focus");
 			this.els["main-body-content-tbody"].on("click", (function(e){
 				this.onclick(e||window.event);
 			}).bind(this));
-			this.focus(0);
 		};
 
 		this.focus = function(index, by){
@@ -1320,28 +1336,54 @@
 			index = U.number(index);
 			if(index < 0) index = 0;
 			if(index >= this.list.length) index = this.list.length-1;
+			this.focused_index = index;
 
-			// add focus
-			var focused_item, focused_item_height, focused_item_top, body_content_top, body_height, view_position_top;
-				focused_item = this.els["main-body-content"].find('[data-touch-grid-item-row="'+ index +'"]');
-				if(focused_item.length == 0) return; // find 실
-				focused_item_height = focused_item.height(),
-				focused_item_top = focused_item.position().top,
+			var focused_item_top, body_content_top, body_height, view_position_top;
+
+				focused_item_top = index * cfg.item_height,
 				body_content_top = this.els["main-body-content"].position().top,
 				body_height = this.els["main-body"].height(),
 				view_position_top = focused_item_top + body_content_top;
 
-			focused_item.class_name("add", "focus");
-			this.focused_index = index;
-
-			// console.log((view_position_top + focused_item_height), body_height, view_position_top);
-			// content scroll
-			if( (view_position_top + focused_item_height) > body_height ){
-				this.els["main-body-content"].css({top: body_height - (focused_item_top + focused_item_height) });
+			if( (view_position_top + cfg.item_height) > body_height ){
+				this.content_scroll( -(body_height - (focused_item_top + cfg.item_height)) );
 			}
 			else if( view_position_top < 0 ){
-				this.els["main-body-content"].css({top: - (focused_item_top) });
+				this.content_scroll( focused_item_top );
 			}
+			else{
+				this.els["main-body-content"].find('[data-touch-grid-item-row="'+ index +'"]').class_name("add", "focus");
+			}
+
+
+			/*
+			if(this.virtual_scroll.start_index <= index && this.virtual_scroll.end_index >= index){
+				var focused_item, focused_item_height, focused_item_top, body_content_top, body_height, view_position_top;
+					focused_item = this.els["main-body-content"].find('[data-touch-grid-item-row="'+ index +'"]');
+					if(focused_item.length == 0) return; // find 실패
+					focused_item_top = index * cfg.item_height,
+					body_content_top = this.els["main-body-content"].position().top,
+					body_height = this.els["main-body"].height(),
+					view_position_top = focused_item_top + body_content_top;
+
+				focused_item.class_name("add", "focus");
+				if( (view_position_top + cfg.item_height) > body_height ){
+					this.els["main-body-content"].css({top: body_height - (focused_item_top + cfg.item_height) });
+				}
+				else if( view_position_top < 0 ){
+					this.els["main-body-content"].css({top: - (focused_item_top) });
+				}
+
+			}
+			else
+			{
+				//var scroll_index = index - this.virtual_scroll.size;
+				//if(scroll_index < 0) scroll_index = 0;
+				//console.log(scroll_index);
+
+				this.content_scroll(index);
+			}
+			*/
 		};
 
 		this.onclick = function(e, target, index, that){
@@ -1355,7 +1397,7 @@
 				that = {
 					list: this.list,
 					item: this.list[index],
-					target: cfg.target.elements[0],
+					target: this.target.elements[0],
 					item_target: target
 				};
 

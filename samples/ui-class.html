@@ -1280,7 +1280,7 @@ ax5.util.require(["ui/keypad.js"], function(){
 	</p>
 <pre class="prettyprint linenums">
 &lt;div class="tag-result">
-	&lt;div id="ax-ui-touch-grid-default" style="height:200px;position:relative;">&lt;/div>
+	&lt;div id="ax-ui-touch-grid-default-target" style="height:200px;">&lt;/div>
 	&lt;div style="padding:5px;">
 		&lt;button class="ax-btn lg" id="ax-ui-touch-grid-default-first">&nbsp;&lt;i class="axi axi-angle-double-up">&lt;/i>&nbsp;&lt;/button>
 		&lt;button class="ax-btn lg" id="ax-ui-touch-grid-default-up">&nbsp;&lt;i class="axi axi-angle-up">&lt;/i>&nbsp;&lt;/button>
@@ -1293,7 +1293,7 @@ ax5.util.require(["ui/keypad.js"], function(){
 	ax5.util.require(["ui/touch-grid.js"], function(){
 		var my_touch_grid = new ax5.ui.touch_grid();
 		my_touch_grid.set_config({
-			target: ax5.dom.get("#ax-ui-touch-grid-default"),
+			target: ax5.dom.get("#ax-ui-touch-grid-default-target"),
 			head_height: 40,
 			head_align: "center",
 			item_height: 40,
@@ -1336,7 +1336,7 @@ ax5.util.require(["ui/keypad.js"], function(){
 &lt;/script>
 </pre><h4>Result</h4>
 <div class="tag-result">
-	<div id="ax-ui-touch-grid-default" style="height:200px;position:relative;"></div>
+	<div id="ax-ui-touch-grid-default-target" style="height:200px;"></div>
 	<div style="padding:5px;">
 		<button class="ax-btn lg" id="ax-ui-touch-grid-default-first">&nbsp;<i class="axi axi-angle-double-up"></i>&nbsp;</button>
 		<button class="ax-btn lg" id="ax-ui-touch-grid-default-up">&nbsp;<i class="axi axi-angle-up"></i>&nbsp;</button>
@@ -1349,7 +1349,7 @@ ax5.util.require(["ui/keypad.js"], function(){
 	ax5.util.require(["ui/touch-grid.js"], function(){
 		var my_touch_grid = new ax5.ui.touch_grid();
 		my_touch_grid.set_config({
-			target: ax5.dom.get("#ax-ui-touch-grid-default"),
+			target: ax5.dom.get("#ax-ui-touch-grid-default-target"),
 			head_height: 40,
 			head_align: "center",
 			item_height: 40,
@@ -1386,6 +1386,119 @@ ax5.util.require(["ui/keypad.js"], function(){
 			my_touch_grid.focus(1, "by");
 		});
 		ax5.dom("#ax-ui-touch-grid-default-last").on("click", function(){
+			my_touch_grid.focus("last");
+		});
+	});
+</script>
+
+
+</article>
+
+
+
+
+<!-- bigsize -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-touch-grid-bigsize" class="capitalize">bigsize</h3>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+	&lt;div id="ax-ui-touch-grid-bigsize-target" style="height:220px;">&lt;/div>
+	&lt;div style="padding:5px;">
+		&lt;button class="ax-btn lg" id="ax-ui-touch-grid-bigsize-first">&nbsp;&lt;i class="axi axi-angle-double-up">&lt;/i>&nbsp;&lt;/button>
+		&lt;button class="ax-btn lg" id="ax-ui-touch-grid-bigsize-up">&nbsp;&lt;i class="axi axi-angle-up">&lt;/i>&nbsp;&lt;/button>
+		&lt;button class="ax-btn lg" id="ax-ui-touch-grid-bigsize-down">&nbsp;&lt;i class="axi axi-angle-down">&lt;/i>&nbsp;&lt;/button>
+		&lt;button class="ax-btn lg" id="ax-ui-touch-grid-bigsize-last">&nbsp;&lt;i class="axi axi-angle-double-down">&lt;/i>&nbsp;&lt;/button>
+	&lt;/div>
+&lt;/div>
+&lt;script type="text/javascript">
+	ax5.util.require(["ui/touch-grid.js"], function(){
+		var my_touch_grid = new ax5.ui.touch_grid();
+		my_touch_grid.set_config({
+			target: ax5.dom.get("#ax-ui-touch-grid-bigsize-target"),
+			head_height: 40,
+			head_align: "center",
+			item_height: 40,
+			col_group: [
+				{key: 'no', label: '번호', width: 120, align:"center"},
+				{key: 'title', label: '제목', width: '*'},
+				{key: 'price', label: 'Price', width: 120, formatter:"money", align:"right"}
+			],
+			body: {
+				onclick: function(){
+					console.log(this);
+				}
+			}
+		});
+
+		var list = [];
+		for(var i=1;i&lt;101;i++){
+			list.push({no:i, title:'제목 '+ i,  price: i*1000});
+		}
+		my_touch_grid.set_list(list);
+
+		ax5.dom("#ax-ui-touch-grid-bigsize-first").on("click", function(){
+			my_touch_grid.focus(0);
+		});
+		ax5.dom("#ax-ui-touch-grid-bigsize-up").on("click", function(){
+			my_touch_grid.focus(-1, "by");
+		});
+		ax5.dom("#ax-ui-touch-grid-bigsize-down").on("click", function(){
+			my_touch_grid.focus(1, "by");
+		});
+		ax5.dom("#ax-ui-touch-grid-bigsize-last").on("click", function(){
+			my_touch_grid.focus("last");
+		});
+	});
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result">
+	<div id="ax-ui-touch-grid-bigsize-target" style="height:220px;"></div>
+	<div style="padding:5px;">
+		<button class="ax-btn lg" id="ax-ui-touch-grid-bigsize-first">&nbsp;<i class="axi axi-angle-double-up"></i>&nbsp;</button>
+		<button class="ax-btn lg" id="ax-ui-touch-grid-bigsize-up">&nbsp;<i class="axi axi-angle-up"></i>&nbsp;</button>
+		<button class="ax-btn lg" id="ax-ui-touch-grid-bigsize-down">&nbsp;<i class="axi axi-angle-down"></i>&nbsp;</button>
+		<button class="ax-btn lg" id="ax-ui-touch-grid-bigsize-last">&nbsp;<i class="axi axi-angle-double-down"></i>&nbsp;</button>
+	</div>
+</div>
+<script type="text/javascript">
+	ax5.util.require(["ui/touch-grid.js"], function(){
+		var my_touch_grid = new ax5.ui.touch_grid();
+		my_touch_grid.set_config({
+			target: ax5.dom.get("#ax-ui-touch-grid-bigsize-target"),
+			head_height: 40,
+			head_align: "center",
+			item_height: 40,
+			col_group: [
+				{key: 'no', label: '번호', width: 120, align:"center"},
+				{key: 'title', label: '제목', width: '*'},
+				{key: 'price', label: 'Price', width: 120, formatter:"money", align:"right"}
+			],
+			body: {
+				onclick: function(){
+					console.log(this);
+				}
+			}
+		});
+
+		var list = [];
+		for(var i=1;i<101;i++){
+			list.push({no:i, title:'제목 '+ i,  price: i*1000});
+		}
+		my_touch_grid.set_list(list);
+
+		ax5.dom("#ax-ui-touch-grid-bigsize-first").on("click", function(){
+			my_touch_grid.focus(0);
+		});
+		ax5.dom("#ax-ui-touch-grid-bigsize-up").on("click", function(){
+			my_touch_grid.focus(-1, "by");
+		});
+		ax5.dom("#ax-ui-touch-grid-bigsize-down").on("click", function(){
+			my_touch_grid.focus(1, "by");
+		});
+		ax5.dom("#ax-ui-touch-grid-bigsize-last").on("click", function(){
 			my_touch_grid.focus("last");
 		});
 	});
