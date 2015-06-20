@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-06-19 
+ * 2015-06-20 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -1094,6 +1094,7 @@
 		this.col_group = [];
 		this.col_width_sum = 0;
 		this.list = [];
+		this.virtual_scroll = {};
 
 		var cfg = this.config;
 
@@ -1129,6 +1130,9 @@
 			};
 			this.set_size_frame();
 			this.els["main-header"].html( this.get_header("main-header") );
+			this.els["main-body-content"].html( this.get_body("main-body") );
+
+			this.els["main-body-content-tbody"] = this.els["main-body-content"].find('[data-touch-grid-els="main-body-content-tbody"]');
 
 			this.bind_window_resize(function(){
 				this.col_group = this.convert_col_group(cfg.col_group);
@@ -1207,7 +1211,7 @@
 			for(var i=0, l=this.col_group.length;i<l;i++) {
 				this.els["main"].find('[data-touch-grid-col="' + i + '"]').css( {"width": this.col_group[i].width} );
 			}
-			//this.els["main"].find('[data-touch-grid-table]').css( {width: this.col_width_sum} );
+			this.els["main"].find('[data-touch-grid-table]').css( {width: this.col_width_sum} );
 		};
 
 		this.get_header = function(typ){
@@ -1237,30 +1241,35 @@
 			return po.join('');
 		};
 
+		this.get_body = function(typ){
+			var
+				po = [];
+				po.push('<table data-touch-grid-table="' + typ + '" style="width:' + this.col_width_sum + 'px;">');
+				po.push( this.get_col_group() );
+				po.push('<tbody data-touch-grid-els="main-body-content-tbody"></tbody>');
+				po.push('</table>');
+
+			return po.join('');
+		};
+
 		this.get_list = function(typ){
 			var
 				po = [];
 
-			if(this.list.length > 0) {
-				po.push('<table data-touch-grid-table="' + typ + '" style="width:' + this.col_width_sum + 'px;">');
-					po.push( this.get_col_group() );
-					po.push('<tbody>');
-					for (var r = 0, len = this.list.length, item; r < len; r++) {
-						item = this.list[r];
-						po.push('<tr data-touch-grid-item-row="' + r + '" style="height:' + cfg.item_height + 'px;">');
-						for(var i=0, l=this.col_group.length;i<l;i++) {
-							po.push('<td style="' + (
-									function(C){
-										if(!C.align) return '';
-										return 'text-align:' + C.align + ';';
-									}
-								)(this.col_group[i]) + '">' + this.get_col_value(item, this.col_group, i) + '</td>');
-						}
-						po.push('</tr>');
+				for (var r = 0, len = this.list.length, item; r < len; r++) {
+					item = this.list[r];
+					po.push('<tr data-touch-grid-item-row="' + r + '" style="height:' + cfg.item_height + 'px;">');
+					for(var i=0, l=this.col_group.length;i<l;i++) {
+						po.push('<td style="' + (
+								function(C){
+									if(!C.align) return '';
+									return 'text-align:' + C.align + ';';
+								}
+							)(this.col_group[i]) + '">' + this.get_col_value(item, this.col_group, i) + '</td>');
 					}
-					po.push('</tbody>');
-				po.push('</table>');
-			}
+					po.push('</tr>');
+				}
+
 			return po.join('');
 		};
 
@@ -1287,8 +1296,8 @@
 		this.set_list = function(list){
 			this.list = list;
 			this.focused_index = -1;
-			this.els["main-body-content"].html( this.get_list("main-body") );
-			this.els["main-body-content"].on("click", (function(e){
+			this.els["main-body-content-tbody"].html( this.get_list("main-body") );
+			this.els["main-body-content-tbody"].on("click", (function(e){
 				this.onclick(e||window.event);
 			}).bind(this));
 			this.focus(0);
