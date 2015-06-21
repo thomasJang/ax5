@@ -48,7 +48,7 @@
     
 </head>
 <body>
-<div id="wrap" class="clearfix ax5.ui.root">
+<div id="wrap" class="clearfix calendar.js">
     
 <div class="navigation">
     <h3 class="applicationName"><a href="index.html"><i class="axi axi-axisj"></i> ax5.io</a></h3>
@@ -627,323 +627,152 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="ax5.ui.root.html">Class: root</h1>
+        <h1 class="page-title" data-filename="calendar.js.html">Source: ui-classes/calendar.js</h1>
         
 
 
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// ax5.ui.calendar
+(function(root, ax_super) {
+	/**
+	 * @class ax5.ui.calendar
+	 * @classdesc
+	 * @version v0.0.1
+	 * @author tom@axisj.com
+	 * @logs
+	 * 2014-06-21 tom : 시작
+	 * @example
+	 * ```
+	 * var my_pad = new ax5.ui.calendar();
+	 * ```
+	 */
+	var U = ax5.util, axd = ax5.dom;
 
-<section>
-    
-<header>
-    <h2>
-    root
-    </h2>
-    
-        <div class="class-description"><p>ax5 ui class 코어 클래스 모든 클래스의 공통 함수를 가지고 있습니다.</p></div>
-    
-</header>  
+	//== UI Class
+	var ax_class = function(){
+		// 클래스 생성자
+		this.main = (function(){
+			if (ax_super) ax_super.call(this); // 부모호출
+			this.config = {
+				click_event_name: (('ontouchstart' in document.documentElement) ? "touchstart" : "click"),
+				theme: 'default',
+				mode: 'day', // day|month|year,
+				week_names: [
+					{ name: "SUN" },
+					{ name: "MON" },
+					{ name: "TUE" },
+					{ name: "WED" },
+					{ name: "THU" },
+					{ name: "FRI" },
+					{ name: "SAT" }
+				],
+				display_date: (new Date())
+			};
+		}).apply(this, arguments);
 
-<article>
-    <div class="container-overview">
-    
-    
-    
-        
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="root">
-            
-            new ax5.ui.root<span class="signature">()</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L4054" target="_blank">
-            ax5.js,
-            line 4054</a>
-        </div>
-        
-    </div>
+		this.target = null;
+		var cfg = this.config;
+		var a_day = 1000 * 60 * 60 * 24;
 
-    
-</dt>
-<dd>
-    
-    
+		/**
+		 * Preferences of calendar UI
+		 * @method ax5.ui.calendar.set_config
+		 * @param {Object} config - 클래스 속성값
+		 * @returns {ax5.ui.calendar}
+		 * @example
+		 * ```
+		 * set_config({
+		 *      target : {Element|AX5 nodelist}, // 메뉴 UI를 출력할 대상
+		 *      mode: {String}, // [day|month|year] - 화면 출력 모드
+		 *      onclick: {Function} // [onclick] - 아이템 클릭이벤트 처리자
+		 * });
+		 * ```
+		 */
+			//== class body start
+		this.init = function(){
+			// after set_config();
+			//console.log(this.config);
+			if(!cfg.target){
+				U.error("aui_calendar_400", "[ax5.ui.calendar] config.target is required");
+			}
+			this.target = ax5.dom(cfg.target);
 
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    <dt class="tag-version">Version:</dt>
-    <dd class="tag-version"><ul class="dummy"><li>v0.0.1</li></ul></dd>
-    
-    
-    
+			this.target.html( this.get_frame() );
 
-    
-    
-    
-    <dt class="tag-author">Author:</dt>
-    <dd class="tag-author">
-        <ul>
-            <li>tom@axisj.com</li>
-        </ul>
-    </dd>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
+			// 파트수집
+			this.els = {
+				"root": this.target.find('[data-calendar-els="root"]')
+			};
 
-    
-    
+			this.print(cfg.mode, cfg.display_date);
+		};
 
-    
+		this.get_frame = function(){
+			var po = [];
+			po.push('&lt;div class="ax5-ui-calendar ' + cfg.theme + '" data-calendar-els="root">');
+			po.push('&lt;/div>');
+			return po.join('');
+		};
 
-    
-    
-    
-    
-    
-    
-    
-        <h5>Example</h5>
-        
-
-    
-    <pre class="prettyprint linenums"><code>var myui = new ax5.ui.root();</code></pre>
-    
-
-    
-</dd>
-
-    
-    </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        <h3 class="subsection-title">Methods</h3>
-        
-        <dl>
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="set_config">
-            
-            <span class="type-signature static">static</span>ax5.ui.root.set_config<span class="signature">(config, <span class="optional">call_init</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{ax5.ui.ax_ui}</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L4075" target="_blank">
-            ax5.js,
-            line 4075</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>클래스의 속성 정의 메소드 속성 확장후에 내부에 init 함수를 호출합니다.</p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		<th>Default</th>
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>config</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
+		this.print = function(mode, now_date){
+			var po = [], aa = '123';
 
 
-            
-            </td>
-            
-            
-                <td class="default">
-                
-                </td>
-            
-            
-            <td class="description last">
-                
-                    
-                    
-                        
-                    
-                
-                <p>클래스 속성값</p></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>call_init</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Boolean</span>
 
+			po.push('&lt;table data-calendar-table="' + mode + '">');
+			var i = 0; while (i &lt; 6) {
+				po.push('&lt;tr>');
+				var k = 0; while (k &lt; 7) {
+					po.push('&lt;td>');
+					po.push('&lt;/td>');
+					k++;
+				}
+				po.push('&lt;/tr>');
+				i++;
+			}
+			po.push('&lt;/table>');
 
-            
-            </td>
-            
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-            
-            <td class="description last">
-                
-                    
-                        <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                <p>init 함수 호출 여부</p></td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
+			this.els["root"].html( po.join('') );
+			this.els["root"].find('[data-calendar-item-index]').on(cfg.click_event_name, (function(e){
+				this.onclick(e||window.event);
+			}).bind(this));
+		};
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
+		this.onclick = function(e, target, index){
+			target = axd.parent(e.target, function(target){
+				if(ax5.dom.attr(target, "data-calendar-item-index")){
+					return true;
+				}
+			});
+			if(target){
+				index = axd.attr(target, "data-calendar-item-index");
+				if(this.config.onclick){
+					this.config.onclick.call({
+						keys: this.config.board.keys,
+						item: this.config.board.keys[index],
+						target: cfg.target.elements[0],
+						item_target: target
+					});
+				}
+			}
+		};
+	};
+	//== UI Class
 
-    
-    
+	//== ui class 공통 처리 구문
+	if (U.is_function(ax_super)) ax_class.prototype = new ax_super(); // 상속
+	root.calendar = ax_class; // ax5.ui에 연결
 
-    
+	if (typeof define === "function" && define.amd) {
+		define("_ax5_ui_calendar", [], function () { return ax_class; }); // for requireJS
+	}
+	//== ui class 공통 처리 구문
 
-    
-    
-    
-    
-    
-    
-    
-
-
-    
-    
-    
-        <h5>Example</h5>
-        
-
-    
-    <pre class="prettyprint linenums"><code>var myui = new ax5.ui.root();
-myui.set_config({
-    id:&quot;abcd&quot;
-});</code></pre>
-    
-
-    
-</dd>
-
-        </dl>
-    
-    
-    
-    
-    
-</article>
-
-</section>  
+})(ax5.ui, ax5.ui.root);</code></pre>
+        </article>
+    </section>
 
 
 

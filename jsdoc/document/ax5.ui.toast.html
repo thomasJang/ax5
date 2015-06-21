@@ -48,7 +48,7 @@
     
 </head>
 <body>
-<div id="wrap" class="clearfix ax5.ui.root">
+<div id="wrap" class="clearfix ax5.ui.toast">
     
 <div class="navigation">
     <h3 class="applicationName"><a href="index.html"><i class="axi axi-axisj"></i> ax5.io</a></h3>
@@ -627,7 +627,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="ax5.ui.root.html">Class: root</h1>
+        <h1 class="page-title" data-filename="ax5.ui.toast.html">Class: toast</h1>
         
 
 
@@ -636,10 +636,8 @@
     
 <header>
     <h2>
-    root
+    toast
     </h2>
-    
-        <div class="class-description"><p>ax5 ui class 코어 클래스 모든 클래스의 공통 함수를 가지고 있습니다.</p></div>
     
 </header>  
 
@@ -651,17 +649,17 @@
         
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="root">
+        <h4 class="name" id="toast">
             
-            new ax5.ui.root<span class="signature">()</span>
+            new ax5.ui.toast<span class="signature">()</span>
         </h4>
     
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L4054" target="_blank">
-            ax5.js,
-            line 4054</a>
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ui-classes/toast.js#L4" target="_blank">
+            ui-classes/toast.js,
+            line 4</a>
         </div>
         
     </div>
@@ -729,7 +727,7 @@
         
 
     
-    <pre class="prettyprint linenums"><code>var myui = new ax5.ui.root();</code></pre>
+    <pre class="prettyprint linenums"><code>var my_toast = new ax5.ui.toast();</code></pre>
     
 
     
@@ -757,17 +755,17 @@
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="set_config">
+        <h4 class="name" id="alert">
             
-            <span class="type-signature static">static</span>ax5.ui.root.set_config<span class="signature">(config, <span class="optional">call_init</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{ax5.ui.ax_ui}</span>
+            <span class="type-signature static">static</span>ax5.ui.toast.alert<span class="signature">(<span class="optional">{theme, axicon, msg, btns}|msg</span>, <span class="optional">callback</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.ui.toast.html">ax5.ui.toast</a>}</span>
         </h4>
     
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L4075" target="_blank">
-            ax5.js,
-            line 4075</a>
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ui-classes/toast.js#L57" target="_blank">
+            ui-classes/toast.js,
+            line 57</a>
         </div>
         
     </div>
@@ -778,7 +776,7 @@
     
     
     <div class="description">
-        <p>클래스의 속성 정의 메소드 속성 확장후에 내부에 init 함수를 호출합니다.</p>
+        <p>open the toast of alert type</p>
     </div>
     
 
@@ -799,8 +797,6 @@
 		<th>Type</th>
 		
 		
-		<th>Default</th>
-		
 		
 		<th class="last">Description</th>
 	</tr>
@@ -811,56 +807,21 @@
 	
         <tr>
             
-                <td class="name"><code>config</code></td>
+                <td class="name"><code>{theme, axicon, msg, btns}|msg</code></td>
             
             
             <td class="type">
             
                 
 <span class="param-type">Object</span>
+|
+
+<span class="param-type">String</span>
 
 
             
             </td>
             
-            
-                <td class="default">
-                
-                </td>
-            
-            
-            <td class="description last">
-                
-                    
-                    
-                        
-                    
-                
-                <p>클래스 속성값</p></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>call_init</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Boolean</span>
-
-
-            
-            </td>
-            
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
             
             
             <td class="description last">
@@ -872,7 +833,37 @@
                         
                     
                 
-                <p>init 함수 호출 여부</p></td>
+                <p>toast 속성을 json으로 정의하거나 msg만 전달</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>사용자 확인 이벤트시 호출될 callback 함수</p></td>
         </tr>
 	
 	
@@ -926,10 +917,405 @@
         
 
     
-    <pre class="prettyprint linenums"><code>var myui = new ax5.ui.root();
-myui.set_config({
-    id:&quot;abcd&quot;
-});</code></pre>
+    <pre class="prettyprint linenums"><code>my_toast.alert({
+ title: '&lt;i class=&quot;axi axi-axisj&quot;&gt;&lt;/i&gt;',
+ msg: 'alert'
+}, function(){});</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="close">
+            
+            <span class="type-signature static">static</span>ax5.ui.toast.close<span class="signature">()</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.ui.toast.html">ax5.ui.toast</a>}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <i class="axi axi-github"></i>
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ui-classes/toast.js#L201" target="_blank">
+            ui-classes/toast.js,
+            line 201</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>close the toast</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint linenums"><code>my_toast.close();</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="confirm">
+            
+            <span class="type-signature static">static</span>ax5.ui.toast.confirm<span class="signature">(<span class="optional">{theme, axicon, msg, btns}|msg</span>, <span class="optional">callback</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.ui.toast.html">ax5.ui.toast</a>}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <i class="axi axi-github"></i>
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ui-classes/toast.js#L84" target="_blank">
+            ui-classes/toast.js,
+            line 84</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>open the toast of confirm type</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>{theme, axicon, msg, btns}|msg</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>toast 속성을 json으로 정의하거나 msg만 전달</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>사용자 확인 이벤트시 호출될 callback 함수</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint linenums"><code>my_toast.confirm({
+ axicon: '&lt;i class=&quot;axi axi-axisj&quot;&gt;&lt;/i&gt;',
+ msg: 'confirm'
+}, function(){});</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="set_config">
+            
+            <span class="type-signature static">static</span>ax5.ui.toast.set_config<span class="signature">(config)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="ax5.ui.toast.html">ax5.ui.toast</a>}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <i class="axi axi-github"></i>
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ui-classes/toast.js#L39" target="_blank">
+            ui-classes/toast.js,
+            line 39</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Preferences of toast UI</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>클래스 속성값</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint linenums"><code><p><code>
+</code></p></code></pre>
     
 
     

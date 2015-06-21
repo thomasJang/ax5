@@ -48,7 +48,7 @@
     
 </head>
 <body>
-<div id="wrap" class="clearfix ax5.ui.root">
+<div id="wrap" class="clearfix touch-grid.js">
     
 <div class="navigation">
     <h3 class="applicationName"><a href="index.html"><i class="axi axi-axisj"></i> ax5.io</a></h3>
@@ -627,323 +627,349 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="ax5.ui.root.html">Class: root</h1>
+        <h1 class="page-title" data-filename="touch-grid.js.html">Source: ui-classes/touch-grid.js</h1>
         
 
 
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// ax5.ui.touch_grid
+(function(root, ax_super) {
 
-<section>
-    
-<header>
-    <h2>
-    root
-    </h2>
-    
-        <div class="class-description"><p>ax5 ui class 코어 클래스 모든 클래스의 공통 함수를 가지고 있습니다.</p></div>
-    
-</header>  
+	/**
+	 * @class ax5.ui.touch_grid
+	 * @classdesc
+	 * @version v0.0.1
+	 * @author tom@axisj.com
+	 * @logs
+	 * 2014-06-17 tom : 시작
+	 * @example
+	 * ```
+	 * var my_touch_grid = new ax5.ui.touch_grid();
+	 * ```
+	 */
 
-<article>
-    <div class="container-overview">
-    
-    
-    
-        
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="root">
-            
-            new ax5.ui.root<span class="signature">()</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L4054" target="_blank">
-            ax5.js,
-            line 4054</a>
-        </div>
-        
-    </div>
+	var U = ax5.util, axd = ax5.dom;
 
-    
-</dt>
-<dd>
-    
-    
+	//== UI Class
+	var ax_class = function(){
+		// 클래스 생성자
+		this.main = (function(){
+			if (ax_super) ax_super.call(this); // 부모호출
+			this.config = {
+				click_event_name: (('ontouchstart' in document.documentElement) ? "touchstart" : "click"),
+				theme: 'default',
+				head_height: 28,
+				item_height: 28,
+				col_min_width: 30,
+				body: {}
+			};
+		}).apply(this, arguments);
 
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    <dt class="tag-version">Version:</dt>
-    <dd class="tag-version"><ul class="dummy"><li>v0.0.1</li></ul></dd>
-    
-    
-    
+		this.target = null;
+		this.focused_index = -1;
+		this.col_group = [];
+		this.col_width_sum = 0;
+		this.list = [];
+		this.virtual_scroll = {};
 
-    
-    
-    
-    <dt class="tag-author">Author:</dt>
-    <dd class="tag-author">
-        <ul>
-            <li>tom@axisj.com</li>
-        </ul>
-    </dd>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
+		var cfg = this.config;
 
-    
-    
+		/**
+		 * Preferences of touch-grid UI
+		 * @method ax5.ui.touch_grid.set_config
+		 * @param {Object} config - 클래스 속성값
+		 * @returns {ax5.ui.touch_grid}
+		 * @example
+		 * ```
+		 * ```
+		 */
+		//== class body start
+		this.init = function(){
+			if(!cfg.target) U.error("aui_touch_grid_400", "[ax5.ui.touch_grid] config.target is required");
 
-    
+			this.target = ax5.dom(cfg.target);
 
-    
-    
-    
-    
-    
-    
-    
-        <h5>Example</h5>
-        
+			// 데이터 정리
+			//console.log(cfg.col_group[1]);
+			this.col_group = this.convert_col_group(cfg.col_group);
+			//console.log(cfg.col_group[1]);
 
-    
-    <pre class="prettyprint linenums"><code>var myui = new ax5.ui.root();</code></pre>
-    
+			// 프레임 생성
+			this.target.html( this.get_frame() );
 
-    
-</dd>
+			// 파트수집
+			this.els = {
+				"root": this.target.find('[data-touch-grid-els="root"]'),
+				"main": this.target.find('[data-touch-grid-els="main"]'),
+				"main-header": this.target.find('[data-touch-grid-els="main-header"]'),
+				"main-body": this.target.find('[data-touch-grid-els="main-body"]'),
+				"main-body-content": this.target.find('[data-touch-grid-els="main-body-content"]')
+			};
+			this.set_size_frame();
+			this.els["main-header"].html( this.get_header("main-header") );
+			this.els["main-body-content"].html( this.get_body("main-body") );
 
-    
-    </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        <h3 class="subsection-title">Methods</h3>
-        
-        <dl>
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="set_config">
-            
-            <span class="type-signature static">static</span>ax5.ui.root.set_config<span class="signature">(config, <span class="optional">call_init</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{ax5.ui.ax_ui}</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L4075" target="_blank">
-            ax5.js,
-            line 4075</a>
-        </div>
-        
-    </div>
+			this.els["main-body-content-tbody"] = this.els["main-body-content"].find('[data-touch-grid-els="main-body-content-tbody"]');
 
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>클래스의 속성 정의 메소드 속성 확장후에 내부에 init 함수를 호출합니다.</p>
-    </div>
-    
+			this.bind_window_resize(function(){
+				this.col_group = this.convert_col_group(cfg.col_group);
+				this.set_size_frame();
+				this.set_size_col_group();
+			});
+		};
 
-    
-    
-    
-    
-    
-        
+		this.get_frame = function(){
+			// 그리드 레이아웃 구성
+			var po = [];
+			po.push('&lt;div class="ax5-ui-touch-grid ' + cfg.theme + '" data-touch-grid-els="root">');
+				po.push('&lt;div class="touch-grid-main" data-touch-grid-els="main">');
+					po.push('&lt;div class="touch-grid-main-header" data-touch-grid-els="main-header">');
+					po.push('&lt;/div>');
+					po.push('&lt;div class="touch-grid-main-body" data-touch-grid-els="main-body">');
+						po.push('&lt;div class="touch-grid-content" data-touch-grid-els="main-body-content">&lt;/div>');
+					po.push('&lt;/div>');
+				po.push('&lt;/div>');
+			po.push('&lt;/div>');
+			return po.join('');
+		};
 
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		<th>Default</th>
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>config</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
+		this.set_size_frame = function(){  /* resizable */
+			var
+				target_height = this.target.height();
 
+			this.els["main"].css({height: target_height});
+			this.els["main-header"].css({height: cfg.head_height});
+			this.els["main-body"].css({height: target_height - cfg.head_height});
 
-            
-            </td>
-            
-            
-                <td class="default">
-                
-                </td>
-            
-            
-            <td class="description last">
-                
-                    
-                    
-                        
-                    
-                
-                <p>클래스 속성값</p></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>call_init</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Boolean</span>
+			this.virtual_scroll.size = Math.ceil((target_height - cfg.head_height) / cfg.item_height);
+		};
 
+		// col_group의 속성값을 정리하여 줍니다. - width등
+		this.convert_col_group = function(col_group){ /* resizable */
+			var
+				CG = [],
+				target_width = this.target.width(),
+				free_width = target_width,
+				free_width_col_count = 0;
 
-            
-            </td>
-            
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-            
-            <td class="description last">
-                
-                    
-                        <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                <p>init 함수 호출 여부</p></td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
+			for(var i=0, l=col_group.length;i&lt;l;i++) CG.push(U.clone(col_group[i]));
+			this.col_width_sum = 0;
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
+			for(var i=0, l=CG.length;i&lt;l;i++){
+				if(!U.is_undefined(CG[i].width) && CG[i].width !== "*"){
+					this.col_width_sum += U.number(CG[i].width);
+					free_width -= U.number(CG[i].width);
+				}else{
+					free_width_col_count++;
+				}
+			}
+			if(free_width_col_count > 0) {
+				for (var i = 0, l = CG.length; i &lt; l; i++) {
+					if (U.is_undefined(CG[i].width) || CG[i].width === "*") {
+						CG[i].width = free_width / free_width_col_count;
+						if(CG[i].width &lt; cfg.col_min_width) CG[i].width = cfg.col_min_width;
+						this.col_width_sum += U.number(CG[i].width);
+					}
+				}
+			}
 
-    
-    
+			return CG;
+		};
 
-    
+		this.get_col_group = function(){
+			var po = [];
+			po.push('&lt;colgroup>');
+			for(var i=0, l=this.col_group.length;i&lt;l;i++){
+				po.push('&lt;col data-touch-grid-col="' + i + '"  style="width:' + this.col_group[i].width + 'px;" />');
+			}
+			po.push('&lt;/colgroup>');
+			return po.join('');
+		};
 
-    
-    
-    
-    
-    
-    
-    
+		this.set_size_col_group = function(){
+			for(var i=0, l=this.col_group.length;i&lt;l;i++) {
+				this.els["main"].find('[data-touch-grid-col="' + i + '"]').css( {"width": this.col_group[i].width} );
+			}
+			this.els["main"].find('[data-touch-grid-table]').css( {width: this.col_width_sum} );
+		};
 
+		this.get_header = function(typ){
+			var
+				po = [];
 
-    
-    
-    
-        <h5>Example</h5>
-        
+			po.push('&lt;table data-touch-grid-table="' + typ + '" style="width:' + this.col_width_sum + 'px;height:' + cfg.head_height + 'px;">');
+				po.push( this.get_col_group() );
+				po.push('&lt;tbody>');
+					po.push('&lt;tr style="' + (
+							function(){
+								if(!cfg.head_align) return '';
+								return 'text-align:' + cfg.head_align + ';';
+							}
+						)() + '">');
+					for(var i=0, l=this.col_group.length;i&lt;l;i++) {
+						po.push('&lt;td style="' + (
+								function(C){
+									if(cfg.head_align || !C.align) return '';
+									return 'text-align:' + C.align + ';';
+								}
+							)(this.col_group[i]) + '">' + this.col_group[i].label + '&lt;/td>');
+					}
+					po.push('&lt;/tr>');
+				po.push('&lt;/tbody>');
+			po.push('&lt;/table>');
+			return po.join('');
+		};
 
-    
-    <pre class="prettyprint linenums"><code>var myui = new ax5.ui.root();
-myui.set_config({
-    id:&quot;abcd&quot;
-});</code></pre>
-    
+		this.get_body = function(typ){
+			var
+				po = [];
+				po.push('&lt;table data-touch-grid-table="' + typ + '" style="width:' + this.col_width_sum + 'px;">');
+				po.push( this.get_col_group() );
+				po.push('&lt;tbody data-touch-grid-els="main-body-content-tbody">&lt;/tbody>');
+				po.push('&lt;/table>');
 
-    
-</dd>
+			return po.join('');
+		};
 
-        </dl>
-    
-    
-    
-    
-    
-</article>
+		this.get_list = function(typ){
+			var
+				po = [],
+				end_index = this.virtual_scroll.end_index;
 
-</section>  
+				for (var r = this.virtual_scroll.start_index, len = ((end_index > this.list.length) ? this.list.length : end_index), item; r &lt; len; r++) {
+					item = this.list[r];
+					po.push('&lt;tr data-touch-grid-item-row="' + r + '" style="height:' + cfg.item_height + 'px;">');
+					for(var i=0, l=this.col_group.length;i&lt;l;i++) {
+						po.push('&lt;td style="' + (
+								function(C){
+									if(!C.align) return '';
+									return 'text-align:' + C.align + ';';
+								}
+							)(this.col_group[i]) + '">' + this.get_col_value(item, this.col_group, i) + '&lt;/td>');
+					}
+					po.push('&lt;/tr>');
+				}
+
+			return po.join('');
+		};
+
+		this.get_col_value = function(item, CG, ci){
+			if(U.is_function(CG[ci].formatter)){
+				var that = {
+					list: this.list,
+					item: item,
+					col_group: CG,
+					key: CG[ci].key,
+					col_index: ci,
+					value: item[CG[ci].key]
+				};
+				return CG[ci].formatter.call(that) || "";
+			}
+			else if(CG[ci].formatter === "money"){
+				return U.number(item[CG[ci].key]||0, {money:true});
+			}
+			else {
+				return item[CG[ci].key]||"";
+			}
+		};
+
+		this.set_list = function(list){
+			this.list = list;
+			this.focused_index = 0;
+			this.content_scroll(0);
+		};
+
+		this.content_scroll = function(top){
+			this.els["main-body-content"].css({top: -top });
+
+			this.virtual_scroll.start_index = Math.floor(top / cfg.item_height);
+			this.virtual_scroll.end_index = U.number(this.virtual_scroll.start_index) + U.number(this.virtual_scroll.size);
+
+			this.els["main-body-content"].css({'padding-top': this.virtual_scroll.start_index * cfg.item_height });
+			this.els["main-body-content-tbody"].html( this.get_list("main-body") );
+
+			this.els["main-body-content"].find('[data-touch-grid-item-row="'+ this.focused_index +'"]').class_name("add", "focus");
+			this.els["main-body-content-tbody"].on("click", (function(e){
+				this.onclick(e||window.event);
+			}).bind(this));
+		};
+
+		this.focus = function(index, by){
+			if(this.focused_index > -1){
+				// remove focus
+				this.els["main-body-content"].find('[data-touch-grid-item-row="'+ this.focused_index +'"]').class_name("remove", "focus");
+			}
+
+			if(index == "last"){
+				index = this.list.length-1;
+			}
+			else if(typeof by !== "undefined"){
+				if(this.focused_index == -1) return;
+				index = this.focused_index + index;
+			}
+
+			index = U.number(index);
+			if(index &lt; 0) index = 0;
+			if(index >= this.list.length) index = this.list.length-1;
+			this.focused_index = index;
+
+			var focused_item_top, body_content_top, body_height, view_position_top;
+
+				focused_item_top = index * cfg.item_height,
+				body_content_top = this.els["main-body-content"].position().top,
+				body_height = this.els["main-body"].height(),
+				view_position_top = focused_item_top + body_content_top;
+
+			if( (view_position_top + cfg.item_height) > body_height ){
+				this.content_scroll( -(body_height - (focused_item_top + cfg.item_height)) );
+			}
+			else if( view_position_top &lt; 0 ){
+				this.content_scroll( focused_item_top );
+			}
+			else{
+				this.els["main-body-content"].find('[data-touch-grid-item-row="'+ index +'"]').class_name("add", "focus");
+			}
+		};
+
+		this.onclick = function(e, target, index, that){
+			target = axd.parent(e.target, function(target){
+				if(axd.attr(target, "data-touch-grid-item-row")){
+					return true;
+				}
+			});
+			if(target){
+				index = axd.attr(target, "data-touch-grid-item-row");
+				that = {
+					list: this.list,
+					item: this.list[index],
+					target: this.target.elements[0],
+					item_target: target
+				};
+
+				this.focus(index);
+				if(cfg.body.onclick){
+					cfg.body.onclick.call(that);
+				}
+			}
+		}
+
+	};
+	//== UI Class
+
+	//== ui class 공통 처리 구문
+	if (U.is_function(ax_super)) ax_class.prototype = new ax_super(); // 상속
+	root.touch_grid = ax_class; // ax5.ui에 연결
+
+	if (typeof define === "function" && define.amd) {
+		define("_ax5_ui_touch_grid", [], function () { return ax_class; }); // for requireJS
+	}
+	//== ui class 공통 처리 구문
+
+})(ax5.ui, ax5.ui.root);</code></pre>
+        </article>
+    </section>
 
 
 

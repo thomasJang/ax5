@@ -313,6 +313,10 @@
             
                 <li data-name="ax5.util.clone"><a href="ax5.util.html#clone">clone</a></li>
             
+                <li data-name="ax5.util.date"><a href="ax5.util.html#date">date</a></li>
+            
+                <li data-name="ax5.util.days_of_month"><a href="ax5.util.html#days_of_month">days_of_month</a></li>
+            
                 <li data-name="ax5.util.each"><a href="ax5.util.html#each">each</a></li>
             
                 <li data-name="ax5.util.extend"><a href="ax5.util.html#extend">extend</a></li>
@@ -375,6 +379,8 @@
             
                 <li data-name="ax5.util.set_cookie"><a href="ax5.util.html#set_cookie">set_cookie</a></li>
             
+                <li data-name="ax5.util.set_digit"><a href="ax5.util.html#set_digit">set_digit</a></li>
+            
                 <li data-name="ax5.util.snake_case"><a href="ax5.util.html#snake_case">snake_case</a></li>
             
                 <li data-name="ax5.util.to_array"><a href="ax5.util.html#to_array">to_array</a></li>
@@ -416,6 +422,29 @@
             </ul>
         </li>
     
+        <li class="item" data-name="ax5.ui.calendar">
+            <span class="title">
+                <a href="ax5.ui.calendar.html">ax5.ui.calendar</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="ax5.ui.calendar.set_config"><a href="ax5.ui.calendar.html#set_config">set_config</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
         <li class="item" data-name="ax5.ui.dialog">
             <span class="title">
                 <a href="ax5.ui.dialog.html">ax5.ui.dialog</a>
@@ -432,6 +461,8 @@
             <span class="subtitle">Methods</span>
             
                 <li data-name="ax5.ui.dialog.alert"><a href="ax5.ui.dialog.html#alert">alert</a></li>
+            
+                <li data-name="ax5.ui.dialog.close"><a href="ax5.ui.dialog.html#close">close</a></li>
             
                 <li data-name="ax5.ui.dialog.confirm"><a href="ax5.ui.dialog.html#confirm">confirm</a></li>
             
@@ -541,6 +572,58 @@
             </ul>
         </li>
     
+        <li class="item" data-name="ax5.ui.toast">
+            <span class="title">
+                <a href="ax5.ui.toast.html">ax5.ui.toast</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="ax5.ui.toast.alert"><a href="ax5.ui.toast.html#alert">alert</a></li>
+            
+                <li data-name="ax5.ui.toast.close"><a href="ax5.ui.toast.html#close">close</a></li>
+            
+                <li data-name="ax5.ui.toast.confirm"><a href="ax5.ui.toast.html#confirm">confirm</a></li>
+            
+                <li data-name="ax5.ui.toast.set_config"><a href="ax5.ui.toast.html#set_config">set_config</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="ax5.ui.touch_grid">
+            <span class="title">
+                <a href="ax5.ui.touch_grid.html">ax5.ui.touch_grid</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="ax5.ui.touch_grid.set_config"><a href="ax5.ui.touch_grid.html#set_config">set_config</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
     </ul>
 </div>
     <div class="main">
@@ -626,9 +709,9 @@
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1194" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1205" target="_blank">
             ax5.js,
-            line 1194</a>
+            line 1205</a>
         </div>
         
     </div>
@@ -768,9 +851,9 @@ ax5.util.alert(&quot;정말?&quot;);</code></pre>
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1259" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1271" target="_blank">
             ax5.js,
-            line 1259</a>
+            line 1271</a>
         </div>
         
     </div>
@@ -902,9 +985,9 @@ ax5.util.camel_case(&quot;inner_width&quot;);
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L826" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L837" target="_blank">
             ax5.js,
-            line 826</a>
+            line 837</a>
         </div>
         
     </div>
@@ -1035,6 +1118,313 @@ console.log(obja, objb);
             
 <dt>
     <div class="nameContainer">
+        <h4 class="name" id="date">
+            
+            <span class="type-signature static">static</span>ax5.util.date<span class="signature">(d, cond)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Date|String}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <i class="axi axi-github"></i>
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1560" target="_blank">
+            ax5.js,
+            line 1560</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>날짜 형식의 문자열이나 Date객체를 조건에 맞게 처리 한 후 원하는 return 값으로 반환합니다.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>d</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+|
+
+<span class="param-type">Date</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>cond</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint linenums"><code class="lang-js">ax5.util.date('2013-01-01'); // Tue Jan 01 2013 23:59:00 GMT+0900 (KST)
+ax5.util.date((new Date()), {add:{d:10}, return:'yyyy/mm/dd'}); // &quot;2015/07/01&quot;
+ax5.util.date('1919-03-01', {add:{d:10}, return:'yyyy/mm/dd'}); // &quot;1919/03/11&quot;</code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="days_of_month">
+            
+            <span class="type-signature static">static</span>ax5.util.days_of_month<span class="signature">(y, m)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Number}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <i class="axi axi-github"></i>
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1732" target="_blank">
+            ax5.js,
+            line 1732</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>년월에 맞는 날자수를 반환합니다.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>m</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
         <h4 class="name" id="each">
             
             <span class="type-signature static">static</span>ax5.util.each<span class="signature">(O, _fn)</span>
@@ -1043,9 +1433,9 @@ console.log(obja, objb);
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L400" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L411" target="_blank">
             ax5.js,
-            line 400</a>
+            line 411</a>
         </div>
         
     </div>
@@ -1202,9 +1592,9 @@ axf.each({a:1, b:2}, function(){
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L753" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L764" target="_blank">
             ax5.js,
-            line 753</a>
+            line 764</a>
         </div>
         
     </div>
@@ -1421,9 +1811,9 @@ axf.extend(obja, {a:2}, true);</code></pre>
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L783" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L794" target="_blank">
             ax5.js,
-            line 783</a>
+            line 794</a>
         </div>
         
     </div>
@@ -1642,9 +2032,9 @@ ax5.util.extend_all(aa, {b:{a:2, c:3}}, true);
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L622" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L633" target="_blank">
             ax5.js,
-            line 622</a>
+            line 633</a>
         </div>
         
     </div>
@@ -1812,9 +2202,9 @@ console.log( ax5.util.to_json(result) );
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L984" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L995" target="_blank">
             ax5.js,
-            line 984</a>
+            line 995</a>
         </div>
         
     </div>
@@ -1948,9 +2338,9 @@ console.log( ax5.util.to_json(result) );
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1067" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1078" target="_blank">
             ax5.js,
-            line 1067</a>
+            line 1078</a>
         </div>
         
     </div>
@@ -2084,9 +2474,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1481" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1493" target="_blank">
             ax5.js,
-            line 1481</a>
+            line 1493</a>
         </div>
         
     </div>
@@ -2277,9 +2667,9 @@ value
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L845" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L856" target="_blank">
             ax5.js,
-            line 845</a>
+            line 856</a>
         </div>
         
     </div>
@@ -2428,9 +2818,9 @@ console.log( axf.get_type(b) );</code></pre>
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L921" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L932" target="_blank">
             ax5.js,
-            line 921</a>
+            line 932</a>
         </div>
         
     </div>
@@ -2552,9 +2942,9 @@ console.log( axf.get_type(b) );</code></pre>
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L903" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L914" target="_blank">
             ax5.js,
-            line 903</a>
+            line 914</a>
         </div>
         
     </div>
@@ -2676,9 +3066,9 @@ console.log( axf.get_type(b) );</code></pre>
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L930" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L941" target="_blank">
             ax5.js,
-            line 930</a>
+            line 941</a>
         </div>
         
     </div>
@@ -2800,9 +3190,9 @@ console.log( axf.get_type(b) );</code></pre>
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L957" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L968" target="_blank">
             ax5.js,
-            line 957</a>
+            line 968</a>
         </div>
         
     </div>
@@ -2924,9 +3314,9 @@ console.log( axf.get_type(b) );</code></pre>
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L975" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L986" target="_blank">
             ax5.js,
-            line 975</a>
+            line 986</a>
         </div>
         
     </div>
@@ -3048,9 +3438,9 @@ console.log( axf.get_type(b) );</code></pre>
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L948" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L959" target="_blank">
             ax5.js,
-            line 948</a>
+            line 959</a>
         </div>
         
     </div>
@@ -3172,9 +3562,9 @@ console.log( axf.get_type(b) );</code></pre>
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L912" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L923" target="_blank">
             ax5.js,
-            line 912</a>
+            line 923</a>
         </div>
         
     </div>
@@ -3296,9 +3686,9 @@ console.log( axf.get_type(b) );</code></pre>
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L939" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L950" target="_blank">
             ax5.js,
-            line 939</a>
+            line 950</a>
         </div>
         
     </div>
@@ -3420,9 +3810,9 @@ console.log( axf.get_type(b) );</code></pre>
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L966" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L977" target="_blank">
             ax5.js,
-            line 966</a>
+            line 977</a>
         </div>
         
     </div>
@@ -3544,9 +3934,9 @@ console.log( axf.get_type(b) );</code></pre>
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L894" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L905" target="_blank">
             ax5.js,
-            line 894</a>
+            line 905</a>
         </div>
         
     </div>
@@ -3668,9 +4058,9 @@ console.log( axf.get_type(b) );</code></pre>
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1010" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1021" target="_blank">
             ax5.js,
-            line 1010</a>
+            line 1021</a>
         </div>
         
     </div>
@@ -3804,9 +4194,9 @@ console.log( axf.get_type(b) );</code></pre>
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1209" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1220" target="_blank">
             ax5.js,
-            line 1209</a>
+            line 1220</a>
         </div>
         
     </div>
@@ -3965,9 +4355,9 @@ ax5.util.left(&quot;abcd.efd&quot;, &quot;.&quot;);
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L435" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L446" target="_blank">
             ax5.js,
-            line 435</a>
+            line 446</a>
         </div>
         
     </div>
@@ -4140,9 +4530,9 @@ console.log(_arr);
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1399" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1411" target="_blank">
             ax5.js,
-            line 1399</a>
+            line 1411</a>
         </div>
         
     </div>
@@ -4302,9 +4692,9 @@ console.log(_arr);
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1296" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1308" target="_blank">
             ax5.js,
-            line 1296</a>
+            line 1308</a>
         </div>
         
     </div>
@@ -4477,9 +4867,9 @@ console.log(ax5.util.number(&quot;A-1234~~56789.8~888PX&quot;, {abs:true, round:
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1430" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1442" target="_blank">
             ax5.js,
-            line 1430</a>
+            line 1442</a>
         </div>
         
     </div>
@@ -4654,9 +5044,9 @@ ax5.util.param(&quot;a=1&amp;b=1232&quot;);
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L717" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L728" target="_blank">
             ax5.js,
-            line 717</a>
+            line 728</a>
         </div>
         
     </div>
@@ -4834,9 +5224,9 @@ console.log(ax5.util.parse_json(&quot;[{'a':'99'},'2','3']&quot;));
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L549" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L560" target="_blank">
             ax5.js,
-            line 549</a>
+            line 560</a>
         </div>
         
     </div>
@@ -5002,9 +5392,9 @@ ax5.util.reduce({a:1, b:2}, function(p, n){
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L595" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L606" target="_blank">
             ax5.js,
-            line 595</a>
+            line 606</a>
         </div>
         
     </div>
@@ -5163,9 +5553,9 @@ console.log(result, aarray);
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1088" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1099" target="_blank">
             ax5.js,
-            line 1088</a>
+            line 1099</a>
         </div>
         
     </div>
@@ -5356,9 +5746,9 @@ ax5.util.require([&quot;ax5_class_sample.js&quot;], function(){
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1234" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1245" target="_blank">
             ax5.js,
-            line 1234</a>
+            line 1245</a>
         </div>
         
     </div>
@@ -5517,9 +5907,9 @@ ax5.util.right(&quot;abcd.efd&quot;, &quot;.&quot;);
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L486" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L497" target="_blank">
             ax5.js,
-            line 486</a>
+            line 497</a>
         </div>
         
     </div>
@@ -5703,9 +6093,9 @@ ax5.util.search({k1:&quot;name&quot;,k2:&quot;value&quot;}, &quot;value&quot;);
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1037" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1048" target="_blank">
             ax5.js,
-            line 1037</a>
+            line 1048</a>
         </div>
         
     </div>
@@ -5917,6 +6307,246 @@ ax5.util.set_cookie(&quot;jslib&quot;, &quot;AX5&quot;, 3, {path:&quot;/&quot;, 
             
 <dt>
     <div class="nameContainer">
+        <h4 class="name" id="set_digit">
+            
+            <span class="type-signature static">static</span>ax5.util.set_digit<span class="signature">(num, length, <span class="optional">padder</span>, <span class="optional">radix</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{String}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <i class="axi axi-github"></i>
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1716" target="_blank">
+            ax5.js,
+            line 1716</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>원하는 횟수 만큼 자릿수 맞춤 문자열을 포함한 문자열을 반환합니다.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>num</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+|
+
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>length</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>padder</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>radix</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
         <h4 class="name" id="snake_case">
             
             <span class="type-signature static">static</span>ax5.util.snake_case<span class="signature">(str)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{String}</span>
@@ -5925,9 +6555,9 @@ ax5.util.set_cookie(&quot;jslib&quot;, &quot;AX5&quot;, 3, {path:&quot;/&quot;, 
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1277" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1289" target="_blank">
             ax5.js,
-            line 1277</a>
+            line 1289</a>
         </div>
         
     </div>
@@ -6060,9 +6690,9 @@ ax5.util.snake_case(&quot;inner_width&quot;);
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1383" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L1395" target="_blank">
             ax5.js,
-            line 1383</a>
+            line 1395</a>
         </div>
         
     </div>
@@ -6199,9 +6829,9 @@ ax5.util.snake_case(&quot;inner_width&quot;);
         
         <div class="tag-source">
             <i class="axi axi-github"></i>
-            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L665" target="_blank">
+            <a href="https://github.com/axisj-com/ax5/tree/dev/src/ax5.js#L676" target="_blank">
             ax5.js,
-            line 665</a>
+            line 676</a>
         </div>
         
     </div>
@@ -6346,7 +6976,7 @@ console.log( ax.to_json(myObject) );</code></pre>
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Wed Jun 17 2015 11:29:42 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sun Jun 21 2015 23:31:48 GMT+0900 (KST)
         </footer>
     </div>
 </div>

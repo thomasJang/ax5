@@ -91,9 +91,17 @@
 		};
 
 		this.print = function(mode, now_date){
-			var po = [], aa = '123';
+			var
+				dot_date = U.date(now_date),
+				po = [],
+				month_start_date = new Date(dot_date.getFullYear(), dot_date.getMonth(), 1, 12),
+				table_start_date = (function(){
+					var day = month_start_date.getDay();
+					if (day == 0) day = 7;
+					return U.date(month_start_date, {add:{d:-day}});
+				})();
 
-
+			console.log( month_start_date, table_start_date );
 
 			po.push('<table data-calendar-table="' + mode + '">');
 			var i = 0; while (i < 6) {

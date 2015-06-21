@@ -1629,6 +1629,9 @@
 					d = new Date();
 				}
 			}
+			else{
+				d = new Date(d);
+			}
 
 			if(typeof cond === "undefined"){
 				return d;
