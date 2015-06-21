@@ -22,7 +22,10 @@
 </div>
 <script type="text/javascript">
 (function(){
-
+	var my_calendar = new ax5.ui.calendar();
+	my_calendar.set_config({
+		target: ax5.dom.get('#ui-calendar-default-target')
+	});
 })();
 </script>
 </pre>

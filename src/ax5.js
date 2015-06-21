@@ -292,6 +292,16 @@
 			HOME: 36, END: 35, PAGEUP: 33, PAGEDOWN: 34, INSERT: 45, SPACE: 32
 		};
 
+		var week_names = [
+			{ label: "일" },
+			{ label: "월" },
+			{ label: "화" },
+			{ label: "수" },
+			{ label: "목" },
+			{ label: "금" },
+			{ label: "토" }
+		];
+
 		/**
 		 * 사용자 브라우저 식별용 오브젝트
 		 * @member {Object} ax5.info.browser
@@ -382,6 +392,7 @@
 			base_url: base_url,
 			onerror: onerror,
 			event_keys: event_keys,
+			week_names: week_names,
 			browser: browser,
 			is_browser: is_browser,
 			wheel_enm: wheel_enm,
@@ -1247,6 +1258,7 @@
 		 */
 		function right(str, pos) {
 			if (typeof str === "undefined" || typeof pos === "undefined") return "";
+			str = ''+str;
 			if (is_string(pos)) {
 				return (str.lastIndexOf(pos) > -1) ? str.substr(str.lastIndexOf(pos) + 1) : str;
 			} else if (is_number(pos)) {
@@ -1545,6 +1557,197 @@
 			requestAnimFrame(o);
 		}
 
+		/**
+		 * 날짜 형식의 문자열이나 Date객체를 조건에 맞게 처리 한 후 원하는 return 값으로 반환합니다.
+		 * @method ax5.util.date
+		 * @param {String|Date} d
+		 * @param {Object} cond
+		 * @returns {Date|String}
+		 * @example
+		 * ```js
+		 * ax5.util.date('2013-01-01'); // Tue Jan 01 2013 23:59:00 GMT+0900 (KST)
+		 * ax5.util.date((new Date()), {add:{d:10}, return:'yyyy/mm/dd'}); // "2015/07/01"
+		 * ax5.util.date('1919-03-01', {add:{d:10}, return:'yyyy/mm/dd'}); // "1919/03/11"
+		 * ```
+		 */
+		function date(d, cond){
+			function local_date(yy, mm, dd, hh, mi, ss){
+				var utc_d, local_d;
+				local_d = new Date();
+				if(typeof hh === "undefined") hh = 23;
+				if(typeof mi === "undefined") mi = 59;
+				utc_d = new Date(Date.UTC(yy, mm, dd||1, hh, mi, ss||0));
+
+				if(mm == 0 && dd == 1 && utc_d.getUTCHours() + (utc_d.getTimezoneOffset()/60) < 0){
+					utc_d.setUTCHours(0);
+				}else{
+					utc_d.setUTCHours(utc_d.getUTCHours() + (utc_d.getTimezoneOffset()/60));
+				}
+				return utc_d;
+			}
+
+			var yy, mm, dd, hh, mi,
+				aDateTime, aTimes, aTime, aDate,
+				utc_d, local_d,
+				va;
+
+			if(is_string(d)){
+				if(d.length == 0){
+					d = new Date();
+				}
+				else if (d.length > 15) {
+					aDateTime = d.split(/ /g), aTimes, aTime,
+					aDate = aDateTime[0].split(/\D/g),
+					yy = aDate[0];
+					mm = parseFloat(aDate[1]);
+					dd = parseFloat(aDate[2]);
+					aTime = aDateTime[1] || "09:00";
+					aTimes = aTime.left(5).split(":");
+					hh = parseFloat(aTimes[0]);
+					mi = parseFloat(aTimes[1]);
+					if (aTime.right(2) === "AM" || aTime.right(2) === "PM") hh += 12;
+					d = local_date(yy, mm-1, dd, hh, mi);
+				}
+				else if(d.length == 14){
+					va = d.replace(/\D/g, "");
+					d = local_date(va.substr(0, 4), va.substr(4, 2)-1, number(va.substr(6, 2)), number(va.substr(8, 2)), number(va.substr(10, 2)), number(va.substr(12, 2)));
+				}
+				else if (d.length > 7) {
+					va = d.replace(/\D/g, "");
+					d = local_date(va.substr(0, 4), va.substr(4, 2)-1, number(va.substr(6, 2)));
+				}
+				else if (d.length > 4) {
+					va = d.replace(/\D/g, "");
+					d = local_date(va.substr(0, 4), va.substr(4, 2)-1, 1);
+				}
+				else if (d.length > 2) {
+					va = d.replace(/\D/g, "");
+					return local_date(va.substr(0, 4), va.substr(4, 2)-1, 1);
+				}
+				else
+				{
+					d = new Date();
+				}
+			}
+
+			if(typeof cond === "undefined"){
+				return d;
+			}
+			else
+			{
+				if(cond["add"]){
+					d = (function(_d, opts){
+						var
+							yy, mm, dd, mxdd,
+							DyMilli = ((1000 * 60) * 60) * 24;
+
+						if (typeof opts["d"] !== "undefined") {
+							_d.setTime(_d.getTime() + (opts["d"] * DyMilli));
+						}
+						else if (typeof opts["m"] !== "undefined") {
+							yy = _d.getFullYear();
+							mm = _d.getMonth();
+							dd = _d.getDate();
+							yy = yy + parseInt(opts["m"] / 12);
+							mm += opts["m"] % 12;
+							mxdd = days_of_month(yy, mm);
+							if (mxdd < dd) dd = mxdd;
+							_d = new Date(yy, mm, dd, 12);
+						} else if (typeof opts["y"] !== "undefined") {
+							_d.setTime(_d.getTime() + ((opts["y"] * 365) * DyMilli));
+						} else {
+							_d.setTime(_d.getTime() + (opts["y"] * DyMilli));
+						}
+						return _d;
+					})(d, cond["add"]);
+				}
+				if(cond["return"]){
+					return (function(){
+						var fStr = cond["return"], nY, nM, nD, nH, nMM, nS, nDW;
+
+						nY = d.getUTCFullYear();
+						nM = set_digit(d.getMonth() + 1, 2);
+						nD = set_digit(d.getDate(), 2);
+						nH = set_digit(d.getHours(), 2);
+						nMM = set_digit(d.getMinutes(), 2);
+						nS = set_digit(d.getSeconds(), 2);
+						nDW = d.getDay();
+
+						var yre = /[^y]*(yyyy)[^y]*/gi; yre.exec(fStr); var regY = RegExp.$1;
+						var mre = /[^m]*(mm)[^m]*/gi; mre.exec(fStr); var regM = RegExp.$1;
+						var dre = /[^d]*(dd)[^d]*/gi; dre.exec(fStr); var regD = RegExp.$1;
+						var hre = /[^h]*(hh)[^h]*/gi; hre.exec(fStr); var regH = RegExp.$1;
+						var mire = /[^m]*(mi)[^i]*/gi; mire.exec(fStr); var regMI = RegExp.$1;
+						var sre = /[^s]*(ss)[^s]*/gi; sre.exec(fStr); var regS = RegExp.$1;
+						var dwre = /[^d]*(dw)[^w]*/gi; dwre.exec(fStr); var regDW = RegExp.$1;
+
+						if (regY === "yyyy") {
+							fStr = fStr.replace(regY, right(nY, regY.length));
+						}
+						if (regM === "mm") {
+							if (regM.length == 1) nM = (d.getMonth() + 1);
+							fStr = fStr.replace(regM, nM);
+						}
+						if (regD === "dd") {
+							if (regD.length == 1) nD = d.getDate();
+							fStr = fStr.replace(regD, nD);
+						}
+						if (regH === "hh") {
+							fStr = fStr.replace(regH, nH);
+						}
+						if (regMI === "mi") {
+							fStr = fStr.replace(regMI, nMM);
+						}
+						if (regS === "ss") {
+							fStr = fStr.replace(regS, nS);
+						}
+						if (regDW == "dw") {
+							fStr = fStr.replace(regDW, info.week_names[nDW].label);
+						}
+						return fStr;
+					})();
+				}
+				else{
+					return d;
+				}
+			}
+		}
+
+		/**
+		 * 원하는 횟수 만큼 자릿수 맞춤 문자열을 포함한 문자열을 반환합니다.
+		 * @method ax5.util.set_digit
+		 * @param {String|Number} num
+		 * @param {Number} length
+		 * @param {String} [padder=0]
+		 * @param {Number} [radix]
+		 * @returns {String}
+		 */
+		function set_digit(num, length, padder, radix){
+			var s = num.toString(radix || 10);
+			return times( (padder || '0'), (length - s.length) ) + s;
+		}
+
+		function times(s, count) { return count < 1 ? '' : new Array(count + 1).join(s); }
+
+		/**
+		 * 년월에 맞는 날자수를 반환합니다.
+		 * @method ax5.util.days_of_month
+		 * @param {Number} y
+		 * @param {Number} m
+		 * @returns {Number}
+		 */
+		function days_of_month(y, m) {
+			if(m == 3 || m == 5 || m == 8 || m == 10){
+				return 30;
+			}
+			else if(m == 1){
+				return (((y % 4 == 0) && (y % 100 != 0)) || (y % 400 == 0)) ? 29 : 28;
+			}
+			else{
+				return 31;
+			}
+		}
+
 		return {
             alert       : alert,
             each        : each,
@@ -1584,7 +1787,11 @@
             param       : param,
 			error       : error,
 			get_shader  : get_shader,
-			request_ani_frame : request_ani_frame
+			request_ani_frame : request_ani_frame,
+			date        : date,
+			set_digit   : set_digit,
+			times       : times,
+			days_of_month : days_of_month
 		}
 	})();
 

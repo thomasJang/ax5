@@ -1555,7 +1555,10 @@ ax5.util.require(["ui/menu.js"], function() {
 &lt;/div>
 &lt;script type="text/javascript">
 (function(){
-
+	var my_calendar = new ax5.ui.calendar();
+	my_calendar.set_config({
+		target: ax5.dom.get('#ui-calendar-default-target')
+	});
 })();
 &lt;/script>
 </pre><h4>Result</h4>
@@ -1567,7 +1570,10 @@ ax5.util.require(["ui/menu.js"], function() {
 </div>
 <script type="text/javascript">
 (function(){
-
+	var my_calendar = new ax5.ui.calendar();
+	my_calendar.set_config({
+		target: ax5.dom.get('#ui-calendar-default-target')
+	});
 })();
 </script>
 

@@ -31,12 +31,15 @@
 					{ name: "THU" },
 					{ name: "FRI" },
 					{ name: "SAT" }
-				]
+				],
+				display_date: (new Date())
 			};
 		}).apply(this, arguments);
 
 		this.target = null;
 		var cfg = this.config;
+		var a_day = 1000 * 60 * 60 * 24;
+
 		/**
 		 * Preferences of calendar UI
 		 * @method ax5.ui.calendar.set_config
@@ -67,7 +70,7 @@
 				"root": this.target.find('[data-calendar-els="root"]')
 			};
 
-			this.print();
+			this.print(cfg.mode, cfg.display_date);
 		};
 
 		this.get_frame = function(){
@@ -77,16 +80,12 @@
 			return po.join('');
 		};
 
-		this.print = function(){
-			this.els["root"].html( this.get_page(cfg.mode) );
-			this.els["root"].find('[data-calendar-item-index]').on(cfg.click_event_name, (function(e){
-				this.onclick(e||window.event);
-			}).bind(this));
-		};
+		this.print = function(mode, now_date){
+			var po = [], aa = '123';
 
-		this.get_page = function(mode){
-			var po = [];
-			po.push('<table data-calendar-table="' + typ + '">');
+
+
+			po.push('<table data-calendar-table="' + mode + '">');
 			var i = 0; while (i < 6) {
 				po.push('<tr>');
 				var k = 0; while (k < 7) {
@@ -99,7 +98,10 @@
 			}
 			po.push('</table>');
 
-			return po.join('');
+			this.els["root"].html( po.join('') );
+			this.els["root"].find('[data-calendar-item-index]').on(cfg.click_event_name, (function(e){
+				this.onclick(e||window.event);
+			}).bind(this));
 		};
 
 		this.onclick = function(e, target, index){
