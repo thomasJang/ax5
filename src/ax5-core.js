@@ -1453,9 +1453,6 @@
 					d = new Date();
 				}
 			}
-			else{
-				d = new Date(d);
-			}
 
 			if(typeof cond === "undefined"){
 				return d;
@@ -1486,7 +1483,7 @@
 							_d.setTime(_d.getTime() + (opts["y"] * DyMilli));
 						}
 						return _d;
-					})(d, cond["add"]);
+					})(new Date(d), cond["add"]);
 				}
 				if(cond["return"]){
 					return (function(){

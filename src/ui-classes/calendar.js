@@ -23,6 +23,7 @@
 				click_event_name: (('ontouchstart' in document.documentElement) ? "touchstart" : "click"),
 				theme: 'default',
 				mode: 'day', // day|month|year,
+				date_format: 'yyyy-mm-dd',
 				display_date: (new Date())
 			};
 		}).apply(this, arguments);
@@ -102,7 +103,7 @@
 					po.push('<tr>');
 					k = 0; while (k < 7) {
 						po.push('<td>');
-						po.push('<a>' + loop_date.getDate() + '</a>')
+						po.push('<a data-calendar-item-date="' + U.date(loop_date, {return:cfg.date_format}) + '">' + loop_date.getDate() + '</a>')
 						po.push('</td>');
 						k++;
 						loop_date = U.date(loop_date, {add:{d:1}});
@@ -114,24 +115,23 @@
 			po.push('</table>');
 
 			this.els["root"].html( po.join('') );
-			this.els["root"].find('[data-calendar-item-index]').on(cfg.click_event_name, (function(e){
+			this.els["root"].find('[data-calendar-item-date]').on(cfg.click_event_name, (function(e){
 				this.onclick(e||window.event);
 			}).bind(this));
 		};
 
-		this.onclick = function(e, target, index){
+		this.onclick = function(e, target, value){
 			target = axd.parent(e.target, function(target){
-				if(ax5.dom.attr(target, "data-calendar-item-index")){
+				if(ax5.dom.attr(target, "data-calendar-item-date")){
 					return true;
 				}
 			});
 			if(target){
-				index = axd.attr(target, "data-calendar-item-index");
+				value = axd.attr(target, "data-calendar-item-date");
 				if(this.config.onclick){
 					this.config.onclick.call({
-						keys: this.config.board.keys,
-						item: this.config.board.keys[index],
-						target: cfg.target.elements[0],
+						date: value,
+						target: this.target.elements[0],
 						item_target: target
 					});
 				}
