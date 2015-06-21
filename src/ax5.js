@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-06-21 
+ * 2015-06-22 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -293,13 +293,13 @@
 		};
 
 		var week_names = [
-			{ label: "일" },
-			{ label: "월" },
-			{ label: "화" },
-			{ label: "수" },
-			{ label: "목" },
-			{ label: "금" },
-			{ label: "토" }
+			{ label: "SUN" },
+			{ label: "MON" },
+			{ label: "TUE" },
+			{ label: "WED" },
+			{ label: "THU" },
+			{ label: "FRI" },
+			{ label: "SAT" }
 		];
 
 		/**

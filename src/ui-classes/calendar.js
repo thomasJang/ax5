@@ -23,15 +23,6 @@
 				click_event_name: (('ontouchstart' in document.documentElement) ? "touchstart" : "click"),
 				theme: 'default',
 				mode: 'day', // day|month|year,
-				week_names: [
-					{ name: "SUN" },
-					{ name: "MON" },
-					{ name: "TUE" },
-					{ name: "WED" },
-					{ name: "THU" },
-					{ name: "FRI" },
-					{ name: "SAT" }
-				],
 				display_date: (new Date())
 			};
 		}).apply(this, arguments);
@@ -89,21 +80,37 @@
 					var day = month_start_date.getDay();
 					if (day == 0) day = 7;
 					return U.date(month_start_date, {add:{d:-day}});
-				})();
-
-			console.log( month_start_date, table_start_date );
+				})(),
+				loop_date,
+				this_month = dot_date.getMonth(),
+				i, k;
 
 			po.push('<table data-calendar-table="' + mode + '">');
-			var i = 0; while (i < 6) {
+			po.push('<thead>');
 				po.push('<tr>');
-				var k = 0; while (k < 7) {
+				k = 0; while (k < 7) {
 					po.push('<td>');
+					po.push( ax5.info.week_names[k].label );
 					po.push('</td>');
 					k++;
 				}
 				po.push('</tr>');
-				i++;
-			}
+			po.push('</thead>');
+			po.push('<tbody>');
+				loop_date = table_start_date;
+				i = 0; while (i < 6) {
+					po.push('<tr>');
+					k = 0; while (k < 7) {
+						po.push('<td>');
+						po.push('<a>' + loop_date.getDate() + '</a>')
+						po.push('</td>');
+						k++;
+						loop_date = U.date(loop_date, {add:{d:1}});
+					}
+					po.push('</tr>');
+					i++;
+				}
+			po.push('</tbody>');
 			po.push('</table>');
 
 			this.els["root"].html( po.join('') );

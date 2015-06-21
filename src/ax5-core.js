@@ -117,13 +117,13 @@
 		};
 
 		var week_names = [
-			{ label: "일" },
-			{ label: "월" },
-			{ label: "화" },
-			{ label: "수" },
-			{ label: "목" },
-			{ label: "금" },
-			{ label: "토" }
+			{ label: "SUN" },
+			{ label: "MON" },
+			{ label: "TUE" },
+			{ label: "WED" },
+			{ label: "THU" },
+			{ label: "FRI" },
+			{ label: "SAT" }
 		];
 
 		/**
