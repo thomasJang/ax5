@@ -23,6 +23,8 @@
 				click_event_name: (('ontouchstart' in document.documentElement) ? "touchstart" : "click"),
 				theme: 'default',
 				mode: 'day', // day|month|year,
+				item_width: 50, item_height: 50,
+				item_padding: 2,
 				date_format: 'yyyy-mm-dd',
 				display_date: (new Date())
 			};
@@ -55,24 +57,57 @@
 			}
 			this.target = ax5.dom(cfg.target);
 
+			//cfg.item_height = cfg.item_width = cfg.width / 7;
+			cfg.display_date = U.date(cfg.display_date);
 			this.target.html( this.get_frame() );
 
 			// 파트수집
 			this.els = {
-				"root": this.target.find('[data-calendar-els="root"]')
+				"root": this.target.find('[data-calendar-els="root"]'),
+				"control": this.target.find('[data-calendar-els="control"]'),
+				"control-display": this.target.find('[data-calendar-els="control-display"]'),
+				"body": this.target.find('[data-calendar-els="body"]'),
 			};
 
-			this.print(cfg.mode, cfg.display_date);
+			if(cfg.control) {
+				this.els["control"].find('[data-calendar-move]').on(cfg.click_event_name, (function (e) {
+					this.move(e || window.event);
+				}).bind(this));
+			}
+
+			if(cfg.mode == "day") {
+				this.print_day(cfg.display_date);
+			}
+			else if(cfg.mode == "month"){
+
+			}
+			else if(cfg.mode == "year"){
+
+			}
 		};
 
 		this.get_frame = function(){
 			var po = [];
-			po.push('<div class="ax5-ui-calendar ' + cfg.theme + '" data-calendar-els="root">');
+			po.push('<div class="ax5-ui-calendar ' + cfg.theme + '" data-calendar-els="root" style="width:' + cfg.width + 'px;" onselectstart="return false;">');
+			if(cfg.control){
+				po.push('<div class="calendar-control" data-calendar-els="control" style="height:' + cfg.item_height + 'px;line-height:' + cfg.item_height + 'px;">');
+					po.push('<a class="date-move-left" data-calendar-move="left" style="width:' + cfg.item_width + 'px;">' + cfg.control.left + '</a>');
+					po.push('<div class="date-display" data-calendar-els="control-display"></div>');
+					po.push('<a class="date-move-right" data-calendar-move="right" style="width:' + cfg.item_width + 'px;">' + cfg.control.right + '</a>');
+				po.push('</div>');
+			}
+			po.push('<div class="calendar-body" data-calendar-els="body"></div>');
 			po.push('</div>');
 			return po.join('');
 		};
 
-		this.print = function(mode, now_date){
+		this.set_display = function(){
+			if(cfg.control) {
+				this.els["control-display"].html(U.date(cfg.display_date, {return: cfg.control.display}));
+			}
+		};
+
+		this.print_day = function(now_date){
 			var
 				dot_date = U.date(now_date),
 				po = [],
@@ -84,13 +119,19 @@
 				})(),
 				loop_date,
 				this_month = dot_date.getMonth(),
+				this_date = dot_date.getDate(),
+				item_styles = [
+					'width:' + cfg.item_width + 'px',
+					'height:' + cfg.item_height + 'px', 'line-height:' + (cfg.item_height-cfg.item_padding*2) + 'px',
+					'padding:' + cfg.item_padding + 'px'
+				],
 				i, k;
 
-			po.push('<table data-calendar-table="' + mode + '">');
+			po.push('<table data-calendar-table="day">');
 			po.push('<thead>');
 				po.push('<tr>');
 				k = 0; while (k < 7) {
-					po.push('<td>');
+					po.push('<td class="calendar-col-' + k + '">');
 					po.push( ax5.info.week_names[k].label );
 					po.push('</td>');
 					k++;
@@ -102,8 +143,11 @@
 				i = 0; while (i < 6) {
 					po.push('<tr>');
 					k = 0; while (k < 7) {
-						po.push('<td>');
-						po.push('<a data-calendar-item-date="' + U.date(loop_date, {return:cfg.date_format}) + '">' + loop_date.getDate() + '</a>')
+						po.push('<td class="calendar-col-' + k + '" style="' + item_styles.join(';') + ';">');
+							po.push('<a class="calendar-item-date ' + (function(){
+								return ( loop_date.getMonth() == this_month ) ? ( loop_date.getDate() == this_date ) ? "focus" : "live" : "";
+							})() + '" data-calendar-item-date="' + U.date(loop_date, {return:cfg.date_format}) + '">' +
+							loop_date.getDate() + '</a>');
 						po.push('</td>');
 						k++;
 						loop_date = U.date(loop_date, {add:{d:1}});
@@ -114,10 +158,12 @@
 			po.push('</tbody>');
 			po.push('</table>');
 
-			this.els["root"].html( po.join('') );
-			this.els["root"].find('[data-calendar-item-date]').on(cfg.click_event_name, (function(e){
+			this.els["body"].html( po.join('') );
+			this.els["body"].find('[data-calendar-item-date]').on(cfg.click_event_name, (function(e){
 				this.onclick(e||window.event);
 			}).bind(this));
+
+			this.set_display();
 		};
 
 		this.onclick = function(e, target, value){
@@ -128,6 +174,7 @@
 			});
 			if(target){
 				value = axd.attr(target, "data-calendar-item-date");
+
 				if(this.config.onclick){
 					this.config.onclick.call({
 						date: value,
@@ -137,6 +184,42 @@
 				}
 			}
 		};
+
+		this.move = function(e, target, value){
+			target = axd.parent(e.target, function(target){
+				if(ax5.dom.attr(target, "data-calendar-move")){
+					return true;
+				}
+			});
+			if(target){
+				value = axd.attr(target, "data-calendar-move");
+
+				if(cfg.mode == "day") {
+					if(value == "left") {
+						cfg.display_date = U.date(cfg.display_date, {add: {m:-1}});
+					}
+					else{
+						cfg.display_date = U.date(cfg.display_date, {add: {m:1}});
+					}
+					this.print_day(cfg.display_date);
+				}
+			}
+		};
+
+		this.set_display_date = function(d){
+			cfg.display_date = U.date(d);
+			if(cfg.mode == "day") {
+				this.print_day(cfg.display_date);
+			}
+			else if(cfg.mode == "month"){
+
+			}
+			else if(cfg.mode == "year"){
+
+			}
+		};
+
+
 	};
 	//== UI Class
 

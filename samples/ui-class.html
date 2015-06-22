@@ -1547,17 +1547,17 @@ ax5.util.require(["ui/menu.js"], function() {
 
 	</p>
 <pre class="prettyprint linenums">
-&lt;div class="tag-result">
-	&lt;div id="ui-calendar-default-target" style="width:300px;height: 250px;">&lt;/div>
-	&lt;div style="padding:5px;">
-
-	&lt;/div>
+&lt;div class="tag-result" style="background: #fff;border:1px solid #ccc;">
+	&lt;div id="ui-calendar-default-target">&lt;/div>
 &lt;/div>
 &lt;script type="text/javascript">
 (function(){
 	var my_calendar = new ax5.ui.calendar();
 	my_calendar.set_config({
 		target: ax5.dom.get('#ui-calendar-default-target'),
+		item_width: 50,
+		item_height: 50,
+		item_padding: 4,
 		onclick: function(){
 			console.log(this);
 		}
@@ -1565,22 +1565,84 @@ ax5.util.require(["ui/menu.js"], function() {
 })();
 &lt;/script>
 </pre><h4>Result</h4>
-<div class="tag-result">
-	<div id="ui-calendar-default-target" style="width:300px;height: 250px;"></div>
-	<div style="padding:5px;">
-
-	</div>
+<div class="tag-result" style="background: #fff;border:1px solid #ccc;">
+	<div id="ui-calendar-default-target"></div>
 </div>
 <script type="text/javascript">
 (function(){
 	var my_calendar = new ax5.ui.calendar();
 	my_calendar.set_config({
 		target: ax5.dom.get('#ui-calendar-default-target'),
+		item_width: 50,
+		item_height: 50,
+		item_padding: 4,
 		onclick: function(){
 			console.log(this);
 		}
 	});
 })();
+</script>
+
+
+</article>
+
+
+
+<!-- date control -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-calendar-control" class="capitalize">control</h3>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result" style="background: #fff;border:1px solid #ccc;">
+	&lt;div id="ui-calendar-control-target">&lt;/div>
+&lt;/div>
+&lt;script type="text/javascript">
+	(function(){
+		var my_calendar = new ax5.ui.calendar();
+		my_calendar.set_config({
+			target: ax5.dom.get('#ui-calendar-control-target'),
+			control: {
+				left: '&lt;i class="axi axi-ion-arrow-left-b">&lt;/i>',
+				display: 'yyyy년 mm월',
+				right: '&lt;i class="axi axi-ion-arrow-right-b">&lt;/i>'
+			},
+			width: 350,
+			item_width: 50,
+			item_height: 50,
+			item_padding: 4,
+			display_date: '2015-05-01',
+			onclick: function(){
+				console.log(this);
+			}
+		});
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result" style="background: #fff;border:1px solid #ccc;">
+	<div id="ui-calendar-control-target"></div>
+</div>
+<script type="text/javascript">
+	(function(){
+		var my_calendar = new ax5.ui.calendar();
+		my_calendar.set_config({
+			target: ax5.dom.get('#ui-calendar-control-target'),
+			control: {
+				left: '<i class="axi axi-ion-arrow-left-b"></i>',
+				display: 'yyyy년 mm월',
+				right: '<i class="axi axi-ion-arrow-right-b"></i>'
+			},
+			width: 350,
+			item_width: 50,
+			item_height: 50,
+			item_padding: 4,
+			display_date: '2015-05-01',
+			onclick: function(){
+				console.log(this);
+			}
+		});
+	})();
 </script>
 
 
