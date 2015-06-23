@@ -16,6 +16,7 @@
 				box-sizing: border-box;
 			}
 			.ax-btn {
+				vertical-align: middle;
 				position: relative;
 				margin: 0px;
 				width: 100%;
@@ -33,6 +34,29 @@
 		display: table-cell;
 		vertical-align: top;
 		@include component-grid-table-layout();
+
+		.ax-btn {
+			.label{
+				position: relative;
+				font-size: ceil(($font-size-base * 1.5));
+			}
+		}
+		.has-addon {
+			.ax-btn {
+				.label{
+					font-size: ceil(($font-size-base * 1.2));
+				}
+				.addon{
+					position: relative;
+					font-size: ceil(($font-size-base * 1));
+					background: #002A4F;
+					@include ax-gradient(nth($component-grid-addon-bg, 1), nth($component-grid-addon-bg, 2));
+					color: $component-grid-addon-text-color;
+					border-radius: 10px;
+					text-shadow: none;
+				}
+			}
+		}
 	}
 	.component-grid-control{
 		display: table-cell;
@@ -41,7 +65,9 @@
 		table{
 			td{
 				.ax-btn{
-					font-size: ceil(($font-size-base * 2));
+					font-size: ceil(($font-size-base * 2.5));
+					text-align: center;
+					padding:0px;
 				}
 			}
 		}

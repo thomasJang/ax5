@@ -313,11 +313,15 @@
 				"control": this.target.find('[data-component-grid-els="control"]')
 			};
 
-			/* 아이템 이벤트 바인딩
+			// 아이템 이벤트 바인딩
 			this.target.find('[data-component-grid-item-index]').on(cfg.click_event_name, (function(e){
 				this.onclick(e||window.event);
 			}).bind(this));
-			*/
+			
+			// 컨트롤 이벤트 바인딩
+			this.target.find('[data-component-grid-control]').on(cfg.click_event_name, (function(e){
+				this.onmove(e||window.event);
+			}).bind(this));
 		};
 		
 		this.get_frame = function(){
@@ -334,7 +338,7 @@
 							po.push('<tr>');
 							for(var c=0;c<cfg.cols;c++) {
 								po.push('<td style="width:' + cfg.col_width + '">');
-								po.push('<div class="ax-item-wraper" style="height:' + cfg.col_height + 'px;">');
+								po.push('<div class="ax-item-wraper ' + (cfg.item.addon? "has-addon":"") + '" style="height:' + cfg.col_height + 'px;">');
 
 								po.push('<div class="ax-btn ' + (cfg.item.klass||"") + '" data-component-grid-item-index="' + i + '"></div>');
 
@@ -358,14 +362,14 @@
 						po.push('<tr>');
 							po.push('<td>');
 							po.push('<div class="ax-item-wraper" style="height:' + cfg.control.height + 'px;">');
-								po.push('<button class="ax-btn ' + (cfg.item.klass||"") + '" data-component-grid-prev="' + i + '">' + cfg.control.prev + '</buttton>');
+								po.push('<button class="ax-btn ' + (cfg.item.klass||"") + '" data-component-grid-control="prev">' + cfg.control.prev + '</buttton>');
 							po.push('</div>');
 							po.push('</td>');
 						po.push('</tr>');
 						po.push('<tr>');
 							po.push('<td>');
 							po.push('<div class="ax-item-wraper" style="height:' + cfg.control.height + 'px;">');
-								po.push('<button class="ax-btn ' + (cfg.item.klass||"") + '" data-component-grid-prev="' + i + '">' + cfg.control.next + '</button>');
+								po.push('<button class="ax-btn ' + (cfg.item.klass||"") + '" data-component-grid-control="next">' + cfg.control.next + '</button>');
 							po.push('</div>');
 							po.push('</td>');
 						po.push('</tr>');
@@ -387,31 +391,86 @@
 			if(target){
 				index = axd.attr(target, "data-component-grid-item-index");
 				if(this.config.onclick){
-					/*
+
+					//console.log(U.number(index) + this.page.no * this.page.size);
 					this.config.onclick.call({
-						keys: this.config.board.keys,
-						item: this.config.board.keys[index],
+						index: index,
+						list: this.list,
+						item: this.list[ U.number(index) + this.page.no * this.page.size ],
 						target: this.target.elements[0],
 						item_target: target
 					});
-					*/
+				}
+			}
+		};
+		
+		this.onmove = function(e, target, dirc){
+			target = axd.parent(e.target, function(target){
+				if(ax5.dom.attr(target, "data-component-grid-control")){
+					return true;
+				}
+			});
+			if(target){
+				dirc = axd.attr(target, "data-component-grid-control");
+				if(dirc == "prev"){
+					if(this.page.no < 1){
+
+					}
+					else{
+						this.page.no--;
+						this.print_list();
+					}
+				}
+				else{
+					if(this.page.no < this.page.count-1){
+						this.page.no++;
+						this.print_list();
+					}
 				}
 			}
 		};
 
 		this.set_list = function(list){
 			this.list = list;
-
 			this.page.no = 0;
 			this.page.size = cfg.rows * cfg.cols;
 			this.page.count = Math.ceil( this.list.length / this.page.size );
+			this.print_list();
+		};
+
+		this.print_list = function(){
+			console.log(this.page.no);
+			function formatter(val, format){
+				if(U.is_function(format)){
+					var that = {
+						value: val
+					};
+					return format.call(that);
+				}
+				else if(format == "money"){
+					return U.number(val, {money:true});
+				}
+				else{
+					return val;
+				}
+			}
 
 			var item_index = this.page.no * this.page.size;
 			for(var i=0;i<this.page.size;i++){
+				var
+					node = this.els["body"].find('[data-component-grid-item-index="' + i + '"]'),
+					item = this.list[item_index];
 
+				if(item) {
+					node.html('<div class="label" style="' + cfg.item.label.style + '">' + formatter(item[cfg.item.label.key], cfg.item.label.formatter) + '</div>');
+					if (cfg.item.addon) {
+						node.append('<div class="addon" style="' + cfg.item.addon.style + '">' + formatter(item[cfg.item.addon.key], cfg.item.addon.formatter) + '</div>');
+					}
+				}else{
+					node.empty();
+				}
 				item_index++;
 			}
-			
 		}
 	};
 	//== UI Class
