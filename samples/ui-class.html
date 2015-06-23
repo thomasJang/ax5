@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-06-22 
+ publish date : 2015-06-23 
 -->
 <html lang="en">
 <head>
@@ -79,12 +79,6 @@ ax5.util.require(["ui/menu.js"], function() {
 &lt;/script>
 </pre>
 
-</article>
-
-
-<!-- split -->
-
-<article class="cover">
 
 	<div class="callout basic">
 		<h4>ax5.ui.**</h4>
@@ -92,11 +86,14 @@ ax5.util.require(["ui/menu.js"], function() {
 			ax5.ui는 core 클래스인 ax5.ui.root만 ax5.js파일에 포함되어 있고 나머지 각각의 UI 클래스들은 별도의 파일에 만들어져 있다.
 			UI클래스들은 해당 UI를 사용하고자 할 때 <code>ax5.util.require</code>를 이용하여 스크립트 로딩하거나 HTML head에 삽입한 후 사용해야 한다.
 		</p>
-		<p>
-			본 페이지 예제에서는 모두 스크립트 로딩방식으로 설명하고 있지만 실제 업무에 적용할 때에는 각자 환경에 맞는 방법으로 적용할 수 있다.
-		</p>
 	</div>
 
+</article>
+
+
+<!-- split -->
+
+<article class="cover">
     <h1 data-menu-item="ax-ui-mask">Mask</h1>
 	<p class="lead">
 		웹 애플리케이션 전체또는 특정 영역을 불투명한 레이어로 덮어서 웹애플리케이션의 UI를 사용 불능 상태로 만들거나 비동기 데이터 호출중에 사용자에게 답답함을 줄여주는 역할을 합니다.
@@ -1643,6 +1640,127 @@ ax5.util.require(["ui/menu.js"], function() {
 			}
 		});
 	})();
+</script>
+
+
+</article>
+
+<!-- split -->
+
+<article class="cover">
+	<h1 data-menu-item="ax-ui-component-grid">Component-grid</h1>
+	<p class="lead">
+
+	</p>
+</article>
+
+
+
+<!-- basic -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-component-grid-default" class="capitalize">default</h3>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+	&lt;div id="ui-component-grid-default-target">&lt;/div>
+&lt;/div>
+&lt;script type="text/javascript">
+(function(){
+	var my_component_grid = new ax5.ui.component_grid();
+	my_component_grid.set_config({
+		target: ax5.dom.get("#ui-component-grid-default-target"),
+		theme: "default",
+		item: {
+			label: {key: 'title'},
+			addon: {key: 'price', formatter: 'money'},
+			klass: ''
+		},
+		control:{
+			width: 50,
+			prev: '&lt;i class="axi axi-keyboard-arrow-up">&lt;/i>',
+			next: '&lt;i class="axi axi-keyboard-arrow-down">&lt;/i>'
+		},
+		cols: 4,
+		rows: 2,
+		col_width: '33%',
+		col_height: 60,
+		onclick: function(){
+			console.log(this);
+		}
+	});
+
+	my_component_grid.set_list([
+		{code:'item-01-001', title:'상품1', price:4000},
+		{code:'item-01-002', title:'상품2', price:3000},
+		{code:'item-01-003', title:'상품3', price:2500},
+		{code:'item-01-004', title:'상품4', price:1000},
+		{code:'item-01-005', title:'상품5', price:2000},
+		{code:'item-01-006', title:'상품6', price:4500},
+		{code:'item-01-007', title:'상품7', price:5000},
+		{code:'item-01-008', title:'상품8', price:8000},
+		{code:'item-01-009', title:'상품9', price:4000},
+		{code:'item-01-010', title:'상품10', price:3000},
+		{code:'item-01-011', title:'상품11', price:2500},
+		{code:'item-01-012', title:'상품12', price:1000},
+		{code:'item-01-013', title:'상품13', price:2000},
+		{code:'item-01-014', title:'상품14', price:4500},
+		{code:'item-01-015', title:'상품15', price:5000},
+		{code:'item-01-016', title:'상품16', price:8000},
+		{code:'item-01-017', title:'상품17', price:2200}
+	]);
+})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result">
+	<div id="ui-component-grid-default-target"></div>
+</div>
+<script type="text/javascript">
+(function(){
+	var my_component_grid = new ax5.ui.component_grid();
+	my_component_grid.set_config({
+		target: ax5.dom.get("#ui-component-grid-default-target"),
+		theme: "default",
+		item: {
+			label: {key: 'title'},
+			addon: {key: 'price', formatter: 'money'},
+			klass: ''
+		},
+		control:{
+			width: 50,
+			prev: '<i class="axi axi-keyboard-arrow-up"></i>',
+			next: '<i class="axi axi-keyboard-arrow-down"></i>'
+		},
+		cols: 4,
+		rows: 2,
+		col_width: '33%',
+		col_height: 60,
+		onclick: function(){
+			console.log(this);
+		}
+	});
+
+	my_component_grid.set_list([
+		{code:'item-01-001', title:'상품1', price:4000},
+		{code:'item-01-002', title:'상품2', price:3000},
+		{code:'item-01-003', title:'상품3', price:2500},
+		{code:'item-01-004', title:'상품4', price:1000},
+		{code:'item-01-005', title:'상품5', price:2000},
+		{code:'item-01-006', title:'상품6', price:4500},
+		{code:'item-01-007', title:'상품7', price:5000},
+		{code:'item-01-008', title:'상품8', price:8000},
+		{code:'item-01-009', title:'상품9', price:4000},
+		{code:'item-01-010', title:'상품10', price:3000},
+		{code:'item-01-011', title:'상품11', price:2500},
+		{code:'item-01-012', title:'상품12', price:1000},
+		{code:'item-01-013', title:'상품13', price:2000},
+		{code:'item-01-014', title:'상품14', price:4500},
+		{code:'item-01-015', title:'상품15', price:5000},
+		{code:'item-01-016', title:'상품16', price:8000},
+		{code:'item-01-017', title:'상품17', price:2200}
+	]);
+})();
 </script>
 
 

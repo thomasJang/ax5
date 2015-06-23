@@ -1,0 +1,49 @@
+@mixin component-grid-table-layout(){
+	table {
+		table-layout: fixed;
+		border-collapse: collapse;
+		border-spacing: 0px;
+		border: 0px none;
+		width: 100%;
+		td {
+			position: relative;
+			box-sizing: content-box;
+			padding: 0px;
+			margin: 0px;
+			vertical-align: top;
+			.ax-item-wraper {
+				padding: 3px;
+				box-sizing: border-box;
+			}
+			.ax-btn {
+				position: relative;
+				margin: 0px;
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
+}
+
+// mixins --------------------------------------------- end
+
+.ax5-ui-component-grid {
+	display: table;
+	.component-grid-body {
+		display: table-cell;
+		vertical-align: top;
+		@include component-grid-table-layout();
+	}
+	.component-grid-control{
+		display: table-cell;
+		vertical-align: top;
+		@include component-grid-table-layout();
+		table{
+			td{
+				.ax-btn{
+					font-size: ceil(($font-size-base * 2));
+				}
+			}
+		}
+	}
+}

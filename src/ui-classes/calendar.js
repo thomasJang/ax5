@@ -127,7 +127,7 @@
 				],
 				i, k;
 
-			po.push('<table data-calendar-table="day">');
+			po.push('<table data-calendar-table="day" cellpadding="0" cellspacing="0">');
 			po.push('<thead>');
 				po.push('<tr>');
 				k = 0; while (k < 7) {

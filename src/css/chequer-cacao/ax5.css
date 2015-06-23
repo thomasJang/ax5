@@ -3075,6 +3075,57 @@ a.ax {
       background-image: linear-gradient(to bottom, #F0F0F0, #F0F0F0);
       filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F0F0F0, endColorstr=#F0F0F0); }
 
+.ax5-ui-component-grid {
+  display: table; }
+  .ax5-ui-component-grid .component-grid-body {
+    display: table-cell;
+    vertical-align: top; }
+    .ax5-ui-component-grid .component-grid-body table {
+      table-layout: fixed;
+      border-collapse: collapse;
+      border-spacing: 0px;
+      border: 0px none;
+      width: 100%; }
+      .ax5-ui-component-grid .component-grid-body table td {
+        position: relative;
+        box-sizing: content-box;
+        padding: 0px;
+        margin: 0px;
+        vertical-align: top; }
+        .ax5-ui-component-grid .component-grid-body table td .ax-item-wraper {
+          padding: 3px;
+          box-sizing: border-box; }
+        .ax5-ui-component-grid .component-grid-body table td .ax-btn {
+          position: relative;
+          margin: 0px;
+          width: 100%;
+          height: 100%; }
+  .ax5-ui-component-grid .component-grid-control {
+    display: table-cell;
+    vertical-align: top; }
+    .ax5-ui-component-grid .component-grid-control table {
+      table-layout: fixed;
+      border-collapse: collapse;
+      border-spacing: 0px;
+      border: 0px none;
+      width: 100%; }
+      .ax5-ui-component-grid .component-grid-control table td {
+        position: relative;
+        box-sizing: content-box;
+        padding: 0px;
+        margin: 0px;
+        vertical-align: top; }
+        .ax5-ui-component-grid .component-grid-control table td .ax-item-wraper {
+          padding: 3px;
+          box-sizing: border-box; }
+        .ax5-ui-component-grid .component-grid-control table td .ax-btn {
+          position: relative;
+          margin: 0px;
+          width: 100%;
+          height: 100%; }
+    .ax5-ui-component-grid .component-grid-control table td .ax-btn {
+      font-size: 26px; }
+
 .ax5-ui-calendar {
   box-sizing: border-box;
   position: relative; }

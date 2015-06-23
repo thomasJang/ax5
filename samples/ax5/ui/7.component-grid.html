@@ -1,0 +1,68 @@
+<article class="cover">
+	<h1 data-menu-item="ax-ui-component-grid">Component-grid</h1>
+	<p class="lead">
+
+	</p>
+</article>
+
+
+
+<!-- basic -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-component-grid-default" class="capitalize">default</h3>
+	<p>
+
+	</p>
+<pre>
+<div class="tag-result">
+	<div id="ui-component-grid-default-target"></div>
+</div>
+<script type="text/javascript">
+(function(){
+	var my_component_grid = new ax5.ui.component_grid();
+	my_component_grid.set_config({
+		target: ax5.dom.get("#ui-component-grid-default-target"),
+		theme: "default",
+		item: {
+			label: {key: 'title'},
+			addon: {key: 'price', formatter: 'money'},
+			klass: ''
+		},
+		control:{
+			width: 50,
+			prev: '<i class="axi axi-keyboard-arrow-up"></i>',
+			next: '<i class="axi axi-keyboard-arrow-down"></i>'
+		},
+		cols: 4,
+		rows: 2,
+		col_width: '33%',
+		col_height: 60,
+		onclick: function(){
+			console.log(this);
+		}
+	});
+
+	my_component_grid.set_list([
+		{code:'item-01-001', title:'상품1', price:4000},
+		{code:'item-01-002', title:'상품2', price:3000},
+		{code:'item-01-003', title:'상품3', price:2500},
+		{code:'item-01-004', title:'상품4', price:1000},
+		{code:'item-01-005', title:'상품5', price:2000},
+		{code:'item-01-006', title:'상품6', price:4500},
+		{code:'item-01-007', title:'상품7', price:5000},
+		{code:'item-01-008', title:'상품8', price:8000},
+		{code:'item-01-009', title:'상품9', price:4000},
+		{code:'item-01-010', title:'상품10', price:3000},
+		{code:'item-01-011', title:'상품11', price:2500},
+		{code:'item-01-012', title:'상품12', price:1000},
+		{code:'item-01-013', title:'상품13', price:2000},
+		{code:'item-01-014', title:'상품14', price:4500},
+		{code:'item-01-015', title:'상품15', price:5000},
+		{code:'item-01-016', title:'상품16', price:8000},
+		{code:'item-01-017', title:'상품17', price:2200}
+	]);
+})();
+</script>
+</pre>
+
+</article>
