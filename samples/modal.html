@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>ax5</title>
+
+	<link rel="stylesheet" type="text/css" href="../plugin/prettify/github.css">
+	<link rel="stylesheet" type="text/css" href="../pub/css/jellyfish/ax5.min.css" id="ax5-theme">
+	<link rel="stylesheet" type="text/css" href="http://cdn.axisj.com/axicon/axicon.min.css">
+
+	<script type="text/javascript" src="../plugin/prettify/prettify.js"></script>
+	<script type="text/javascript" src="../pub/ax5.js"></script>
+	<script type="text/javascript" src="../pub/ui/all.js"></script>
+</head>
+<body style="text-align:center;">
+	<h1>
+	MODAL
+	</h1>
+
+	<button class="ax-btn lg" id="modal-close">CLOSE</button>
+
+	<script>
+	// 자바스크립트 주소로 부터 파라미터 JSON변환하기
+	var param = {},
+		parameter = window.location.search.replace(/^\?/, '').split(/&/g),
+		i = parameter.length, pidx;
+
+	while(i--){
+		param[ parameter[i].substr(0, pidx = parameter[i].indexOf("=")) ] =
+				parameter[i].substr( pidx + 1 );
+	}
+	//console.log(param);
+
+	ax5.dom("#modal-close").on("click", function(){
+		var _window = parent||opener||window;
+		var fn = eval("_window." + param.callback);
+		var args = [];
+		//args.shift();
+		fn.apply(null, args);
+	});
+	</script>
+</body>
+</html>

@@ -545,3 +545,34 @@ $calendar-focus-text-color: #fff;
 //== component-grid
 $component-grid-addon-bg: (#002A4F, #002A4F);
 $component-grid-addon-text-color: #fff;
+
+//== modal
+$modal-box-model: $panel-box-model;
+$modal-bg: $panel-bg;
+$modal-border: 1px solid rgb(255/2, 255/2, 255/2);
+$modal-box-shaodw: 0px 0px 4px 0px rgba(0,0,0,0.50);
+$modal-body-padding: $panel-body-padding;
+$modal-heading-padding: 0px 12px;
+$modal-border-radius: $panel-border-radius;
+
+//** Border color for elements within modal
+$modal-default-text: $panel-default-text;
+$modal-default-heading-bg: darken($panel-default-heading-bg, 5%);
+
+$modal-basic-text: $panel-basic-text;
+$modal-basic-heading-bg: $panel-basic-heading-bg;
+
+$modal-good-text: $panel-good-text;
+$modal-good-heading-bg: $panel-good-heading-bg;
+
+$modal-info-text: $panel-info-text;
+$modal-info-heading-bg: $panel-info-heading-bg;
+
+$modal-warning-text: $panel-warning-text;
+$modal-warning-heading-bg: $panel-warning-heading-bg;
+
+$modal-danger-text: $panel-danger-text;
+$modal-danger-heading-bg: $panel-danger-heading-bg;
+
+$modal-special-text: $panel-special-text;
+$modal-special-heading-bg: $panel-special-heading-bg;

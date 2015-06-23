@@ -3260,3 +3260,133 @@ a.ax {
         color: #32B4DC; }
         .ax5-ui-calendar .calendar-body table tbody td.calendar-col-6 .calendar-item-date.live:hover, .ax5-ui-calendar .calendar-body table tbody th.calendar-col-6 .calendar-item-date.live:hover {
           color: #fff; }
+
+@-webkit-keyframes ax-modal {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-transform: scale(0.7); }
+
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+    opacity: 0.6;
+    -webkit-transform: scale(1); } }
+
+@-moz-keyframes ax-modal {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -moz-transform: scale(0.7); }
+
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+    opacity: 0.6;
+    -moz-transform: scale(1); } }
+
+@keyframes ax-modal {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-transform: scale(0.7);
+    -moz-transform: scale(0.7);
+    -ms-transform: scale(0.7);
+    -o-transform: scale(0.7);
+    transform: scale(0.7); }
+
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+    opacity: 0.6;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1); } }
+
+.ax5-ui-modal {
+  -webkit-animation: ax-modal 0.2s ease-in-out;
+  -moz-animation: ax-modal 0.2s ease-in-out;
+  animation: ax-modal 0.2s ease-in-out;
+  color: #333333;
+  font-size: 13px;
+  font-weight: 400;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 18px;
+  box-sizing: border-box;
+  background-color: #fff;
+  border: 1px solid gray;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;
+  align-content: stretch;
+  flex-flow: column; }
+  .ax5-ui-modal .ax-modal-heading {
+    flex: none;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 0px 12px;
+    border-bottom: 1px solid transparent;
+    box-sizing: border-box;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px; }
+    .ax5-ui-modal .ax-modal-heading .badge {
+      font-size: 0.8em;
+      color: #e8e8e8;
+      background-color: #333333; }
+  .ax5-ui-modal .ax-modal-body {
+    padding: 12px;
+    text-align: center;
+    flex: 1;
+    position: relative; }
+    .ax5-ui-modal .ax-modal-body iframe {
+      border: 0px none; }
+  .ax5-ui-modal .ax-modal-heading {
+    color: #333333;
+    background: #e8e8e8; }
+    .ax5-ui-modal .ax-modal-heading .badge {
+      color: #e8e8e8;
+      background-color: #333333; }
+  .ax5-ui-modal.basic .ax-modal-heading {
+    color: #5A3100;
+    background: #FEEE00; }
+    .ax5-ui-modal.basic .ax-modal-heading .badge {
+      color: #FEEE00;
+      background-color: #5A3100; }
+  .ax5-ui-modal.good .ax-modal-heading {
+    color: #fff;
+    background: #503C3E; }
+    .ax5-ui-modal.good .ax-modal-heading .badge {
+      color: #503C3E;
+      background-color: #fff; }
+  .ax5-ui-modal.info .ax-modal-heading {
+    color: #fff;
+    background: #F79231; }
+    .ax5-ui-modal.info .ax-modal-heading .badge {
+      color: #F79231;
+      background-color: #fff; }
+  .ax5-ui-modal.warning .ax-modal-heading {
+    color: #fff;
+    background: #FF5B00; }
+    .ax5-ui-modal.warning .ax-modal-heading .badge {
+      color: #FF5B00;
+      background-color: #fff; }
+  .ax5-ui-modal.danger .ax-modal-heading {
+    color: #fff;
+    background: #993700; }
+    .ax5-ui-modal.danger .ax-modal-heading .badge {
+      color: #993700;
+      background-color: #fff; }
+  .ax5-ui-modal.special .ax-modal-heading {
+    color: #fff;
+    background: #292929; }
+    .ax5-ui-modal.special .ax-modal-heading .badge {
+      color: #292929;
+      background-color: #fff; }

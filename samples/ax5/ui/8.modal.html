@@ -20,7 +20,12 @@
 <script type="text/javascript">
 (function(){
 	var my_modal = new ax5.ui.modal();
-	my_modal.set_config({});
+	my_modal.set_config({
+		title: '<i class="axi axi-circle-check"></i> AX5 Modal',
+		heading:{
+			height: 50
+		}
+	});
 
 	// default
 	ax5.dom("#ax-ui-modal-default-btn").on("click", function(){
@@ -28,19 +33,27 @@
 			id: 'modal-df-01',
 			theme: 'info',
 			width: 400,
-			title: '<i class="axi axi-circle-check"></i> AX5 Confirm',
+			height: 600,
+
 			http: {
-				method: '',
-				url: '',
-				param: ''
+				method: 'GET',
+				url: 'modal.html',
+				param: {
+					callback: 'window.modal_default_close' // 모달 컨텐츠 창으로 자바스크립트 오브젝트를 직접 넘길 순 없는 일..
+				}
 			},
 			onload: function(){
-
+				console.log('load', this);
 			},
 			onclose: function(){
-
+				console.log('close', this);
 			}
 		});
+
+		// callback: 'window.modal_default_close' 인해 호출
+		window.modal_default_close = function(){
+			my_modal.close();
+		};
 
 	});
 })();

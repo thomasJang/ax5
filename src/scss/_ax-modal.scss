@@ -11,15 +11,24 @@
 	position: fixed;
 	left: 0px;
 	top: 0px;
+	overflow: hidden;
 }
 
 @mixin ax-modal-section() {
+	display: flex;
+	align-items: stretch;
+	align-content: stretch;
+	flex-flow: column;
+
 	.ax-modal-heading{
-		//font-size: 1em;
+		flex: none;
+		font-size: ceil(($font-size-base * 1.5));
 		font-weight: 600;
 		padding: $modal-heading-padding;
 		border-bottom: 1px solid transparent;
+		box-sizing: border-box;
 		@include ax-border-radius($modal-border-radius, "top", -1);
+
 		.badge {
 			font-size: 0.8em;
 			color: $modal-default-heading-bg;
@@ -29,21 +38,10 @@
 	.ax-modal-body{
 		padding: $modal-body-padding;
 		text-align: center;
-		.ax-modal-msg{
-			padding-top: $modal-body-padding;
-			padding-bottom: $modal-body-padding;
-		}
-		.ax-modal-prompt {
-			text-align: left;
-			padding-bottom: $modal-body-padding/2;
-		}
-		.ax-modal-buttons{
-			margin-top: $modal-body-padding;
-			button{
-				&:not(:last-child){
-					margin-right: 3px;
-				}
-			}
+		flex: 1;
+		position: relative;
+		iframe{
+			border: 0px none;
 		}
 	}
 }
