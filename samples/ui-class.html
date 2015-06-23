@@ -1882,6 +1882,91 @@ ax5.util.require(["ui/menu.js"], function() {
 
 <!-- split -->
 
+<article class="cover">
+	<h1 data-menu-item="ax-ui-modal">Modal</h1>
+	<p class="lead">
+
+	</p>
+</article>
+
+
+
+<!-- basic -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-modal-default" class="capitalize">default</h3>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+	&lt;button class="ax-btn" id="ax-ui-modal-default-btn">modal 창 열기&lt;/button>
+&lt;/div>
+&lt;script type="text/javascript">
+(function(){
+	var my_modal = new ax5.ui.modal();
+	my_modal.set_config({});
+
+	// default
+	ax5.dom("#ax-ui-modal-default-btn").on("click", function(){
+		my_modal.open({
+			id: 'modal-df-01',
+			theme: 'info',
+			width: 400,
+			title: '&lt;i class="axi axi-circle-check">&lt;/i> AX5 Confirm',
+			http: {
+				method: '',
+				url: '',
+				param: ''
+			},
+			onload: function(){
+
+			},
+			onclose: function(){
+
+			}
+		});
+
+	});
+})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result">
+	<button class="ax-btn" id="ax-ui-modal-default-btn">modal 창 열기</button>
+</div>
+<script type="text/javascript">
+(function(){
+	var my_modal = new ax5.ui.modal();
+	my_modal.set_config({});
+
+	// default
+	ax5.dom("#ax-ui-modal-default-btn").on("click", function(){
+		my_modal.open({
+			id: 'modal-df-01',
+			theme: 'info',
+			width: 400,
+			title: '<i class="axi axi-circle-check"></i> AX5 Confirm',
+			http: {
+				method: '',
+				url: '',
+				param: ''
+			},
+			onload: function(){
+
+			},
+			onclose: function(){
+
+			}
+		});
+
+	});
+})();
+</script>
+
+
+</article>
+
+<!-- split -->
+
 		<!-- end div class="nav-content"-->
 	</div>
 	<div class="app-nav-left" id="app-nav-left"></div>

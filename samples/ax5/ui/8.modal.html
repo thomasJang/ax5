@@ -1,0 +1,50 @@
+<article class="cover">
+	<h1 data-menu-item="ax-ui-modal">Modal</h1>
+	<p class="lead">
+
+	</p>
+</article>
+
+
+
+<!-- basic -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-modal-default" class="capitalize">default</h3>
+	<p>
+
+	</p>
+<pre>
+<div class="tag-result">
+	<button class="ax-btn" id="ax-ui-modal-default-btn">modal 창 열기</button>
+</div>
+<script type="text/javascript">
+(function(){
+	var my_modal = new ax5.ui.modal();
+	my_modal.set_config({});
+
+	// default
+	ax5.dom("#ax-ui-modal-default-btn").on("click", function(){
+		my_modal.open({
+			id: 'modal-df-01',
+			theme: 'info',
+			width: 400,
+			title: '<i class="axi axi-circle-check"></i> AX5 Confirm',
+			http: {
+				method: '',
+				url: '',
+				param: ''
+			},
+			onload: function(){
+
+			},
+			onclose: function(){
+
+			}
+		});
+
+	});
+})();
+</script>
+</pre>
+
+</article>

@@ -1,0 +1,103 @@
+@mixin ax-modal() {
+	@include ax();
+	box-sizing: $modal-box-model;
+	background-color: $modal-bg;
+	border: $modal-border;
+
+	@include ax-border-radius($modal-border-radius);
+	@include box-shadow($modal-box-shaodw);
+
+	z-index: $mask-over-z-index;
+	position: fixed;
+	left: 0px;
+	top: 0px;
+}
+
+@mixin ax-modal-section() {
+	.ax-modal-heading{
+		//font-size: 1em;
+		font-weight: 600;
+		padding: $modal-heading-padding;
+		border-bottom: 1px solid transparent;
+		@include ax-border-radius($modal-border-radius, "top", -1);
+		.badge {
+			font-size: 0.8em;
+			color: $modal-default-heading-bg;
+			background-color: $modal-default-text;
+		}
+	}
+	.ax-modal-body{
+		padding: $modal-body-padding;
+		text-align: center;
+		.ax-modal-msg{
+			padding-top: $modal-body-padding;
+			padding-bottom: $modal-body-padding;
+		}
+		.ax-modal-prompt {
+			text-align: left;
+			padding-bottom: $modal-body-padding/2;
+		}
+		.ax-modal-buttons{
+			margin-top: $modal-body-padding;
+			button{
+				&:not(:last-child){
+					margin-right: 3px;
+				}
+			}
+		}
+	}
+}
+
+@mixin modal-variant($text-color, $heading-bg-color) {
+	.ax-modal-heading{
+		color: $text-color;
+		background: $heading-bg-color;
+		.badge {
+			color: $heading-bg-color;
+			background-color: $text-color;
+		}
+	}
+	.ax-modal-body{
+
+	}
+}
+
+@include keyframes(ax-modal) {
+	from {
+		@include opacity(0.0);
+		@include transform(scale(0.7) )
+	}
+	to {
+		@include opacity($mask-bg-opacity);
+		@include transform(scale(1) )
+	}
+}
+// mixins --------------------------------------------- end
+
+.ax5-ui-modal{
+	@include animation(ax-modal 0.2s ease-in-out);
+
+	@include ax-modal();
+	@include ax-modal-section();
+
+	@include modal-variant($modal-default-text, $modal-default-heading-bg);
+
+	&.basic{
+		@include modal-variant($modal-basic-text, $modal-basic-heading-bg);
+	}
+	&.good{
+		@include modal-variant($modal-good-text, $modal-good-heading-bg);
+	}
+	&.info{
+		@include modal-variant($modal-info-text, $modal-info-heading-bg);
+	}
+	&.warning{
+		@include modal-variant($modal-warning-text, $modal-warning-heading-bg);
+	}
+	&.danger{
+		@include modal-variant($modal-danger-text, $modal-danger-heading-bg);
+	}
+	&.special{
+		@include modal-variant($modal-special-text, $modal-special-heading-bg);
+	}
+}
