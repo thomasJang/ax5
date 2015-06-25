@@ -503,11 +503,11 @@ $toast-special-color: $panel-special-heading-bg;
 
 //== touch-grid
 $touch-grid-header-bg: (#FFFFFF, #F1F1F1); // 그리드 헤더 배경색들
-$touch-grid-header-border: 1px solid #BCBCBD;
+$touch-grid-header-border: 2px solid #BCBCBD;
 $touch-grid-header-padding: 0px $padding-base-horizontal;
 
 $touch-grid-body-bg: (#FFFFFF, #FFFFFF);
-$touch-grid-body-border: 1px solid #BCBCBD;
+$touch-grid-body-border: 2px solid #BCBCBD;
 $touch-grid-body-padding: 0px $padding-base-horizontal;
 
 $touch-grid-body-even-bg: (#FFFFFF, #FFFFFF);
@@ -552,7 +552,7 @@ $modal-border: 1px solid rgb(255/2, 255/2, 255/2);
 $modal-box-shaodw: 0px 0px 4px 0px rgba(0,0,0,0.50);
 $modal-body-padding: 0px;
 $modal-heading-padding: 0px 12px;
-$modal-border-radius: $panel-border-radius;
+$modal-border-radius: 0px; //$panel-border-radius;
 
 //** Border color for elements within modal
 $modal-default-text: $panel-default-text;
@@ -575,3 +575,12 @@ $modal-danger-heading-bg: $panel-danger-heading-bg;
 
 $modal-special-text: $panel-special-text;
 $modal-special-heading-bg: $panel-special-heading-bg;
+
+//== progress
+$progress-bg: #eee;
+$progress-border: 1px solid #ccc;
+$progress-height: 20;
+$progress-padding: 2;
+
+$progress-bar-bg: #eee;
+$progress-bar-border: 1px solid #ccc;

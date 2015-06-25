@@ -71,10 +71,17 @@
 				"main-body": this.target.find('[data-touch-grid-els="main-body"]'),
 				"main-body-content": this.target.find('[data-touch-grid-els="main-body-content"]')
 			};
+
+			if(cfg.control){
+				this.els["control"] =  this.target.find('[data-touch-grid-els="control"]');
+				this.els["control"].on("click", (function(e){
+					this.oncontrol(e||window.event);
+				}).bind(this));
+			}
+
 			this.set_size_frame();
 			this.els["main-header"].html( this.get_header("main-header") );
 			this.els["main-body-content"].html( this.get_body("main-body") );
-
 			this.els["main-body-content-tbody"] = this.els["main-body-content"].find('[data-touch-grid-els="main-body-content-tbody"]');
 
 			this.bind_window_resize(function(){
@@ -88,13 +95,51 @@
 			// 그리드 레이아웃 구성
 			var po = [];
 			po.push('<div class="ax5-ui-touch-grid ' + cfg.theme + '" data-touch-grid-els="root">');
-				po.push('<div class="touch-grid-main" data-touch-grid-els="main">');
-					po.push('<div class="touch-grid-main-header" data-touch-grid-els="main-header">');
-					po.push('</div>');
-					po.push('<div class="touch-grid-main-body" data-touch-grid-els="main-body">');
-						po.push('<div class="touch-grid-content" data-touch-grid-els="main-body-content"></div>');
+				po.push('<div class="touch-grid-body" data-touch-grid-els="body">');
+					po.push('<div class="touch-grid-main" data-touch-grid-els="main">');
+						po.push('<div class="touch-grid-main-header" data-touch-grid-els="main-header">');
+						po.push('</div>');
+						po.push('<div class="touch-grid-main-body" data-touch-grid-els="main-body">');
+							po.push('<div class="touch-grid-content" data-touch-grid-els="main-body-content"></div>');
+						po.push('</div>');
 					po.push('</div>');
 				po.push('</div>');
+			if(cfg.control) {
+				po.push('<div class="touch-grid-control" data-touch-grid-els="control" style="width:' + cfg.control.width + 'px;">');
+					po.push('<table cellpadding="0" cellspacing="0" style="height:100%;">');
+						po.push('<tbody>');
+						if(cfg.control.first) {
+							po.push('<tr>');
+							po.push('<td>');
+							po.push('<div class="ax-item-wraper"><button class="ax-btn ' + (cfg.control.klass || "") + '" data-touch-grid-control="first">' + cfg.control.first + '</buttton></div>');
+							po.push('</td>');
+							po.push('</tr>');
+						}
+						if(cfg.control.prev) {
+							po.push('<tr>');
+							po.push('<td>');
+							po.push('<div class="ax-item-wraper"><button class="ax-btn ' + (cfg.control.klass || "") + '" data-touch-grid-control="prev">' + cfg.control.prev + '</buttton></div>');
+							po.push('</td>');
+							po.push('</tr>');
+						}
+						if(cfg.control.next) {
+							po.push('<tr>');
+							po.push('<td>');
+							po.push('<div class="ax-item-wraper"><button class="ax-btn ' + (cfg.control.klass || "") + '" data-touch-grid-control="next">' + cfg.control.next + '</button></div>');
+							po.push('</td>');
+							po.push('</tr>');
+						}
+						if(cfg.control.last) {
+							po.push('<tr>');
+							po.push('<td>');
+							po.push('<div class="ax-item-wraper"><button class="ax-btn ' + (cfg.control.klass || "") + '" data-touch-grid-control="last">' + cfg.control.last + '</buttton></div>');
+							po.push('</td>');
+							po.push('</tr>');
+						}
+						po.push('</tbody>');
+					po.push('</table>');
+				po.push('</div>');
+			}
 			po.push('</div>');
 			return po.join('');
 		};
@@ -106,7 +151,12 @@
 			this.els["main"].css({height: target_height});
 			this.els["main-header"].css({height: cfg.head_height});
 			this.els["main-body"].css({height: target_height - cfg.head_height});
-
+			if(cfg.control) {
+				this.els["control"].css({height: target_height});
+				var control_item = this.els["control"].find(".ax-item-wraper");
+				//console.log(control_item.elements.length);
+				control_item.css({height: target_height / control_item.elements.length});
+			}
 			this.virtual_scroll.size = Math.ceil((target_height - cfg.head_height) / cfg.item_height);
 		};
 
@@ -117,6 +167,10 @@
 				target_width = this.target.width(),
 				free_width = target_width,
 				free_width_col_count = 0;
+
+			if(cfg.control) {
+				free_width -= cfg.control.width;
+			}
 
 			for(var i=0, l=col_group.length;i<l;i++) CG.push(U.clone(col_group[i]));
 			this.col_width_sum = 0;
@@ -138,6 +192,9 @@
 					}
 				}
 			}
+			if(cfg.control) {
+				this.col_width_sum -= cfg.control.width;
+			}
 
 			return CG;
 		};
@@ -156,6 +213,7 @@
 			for(var i=0, l=this.col_group.length;i<l;i++) {
 				this.els["main"].find('[data-touch-grid-col="' + i + '"]').css( {"width": this.col_group[i].width} );
 			}
+
 			this.els["main"].find('[data-touch-grid-table]').css( {width: this.col_width_sum} );
 		};
 
@@ -163,7 +221,7 @@
 			var
 				po = [];
 
-			po.push('<table data-touch-grid-table="' + typ + '" style="width:' + this.col_width_sum + 'px;height:' + cfg.head_height + 'px;">');
+			po.push('<table data-touch-grid-table="' + typ + '" style="width:' + this.col_width_sum + 'px;height:' + cfg.head_height + 'px;line-height:' + cfg.head_height + 'px;">');
 				po.push( this.get_col_group() );
 				po.push('<tbody>');
 					po.push('<tr style="' + (
@@ -255,6 +313,7 @@
 			this.els["main-body-content-tbody"].html( this.get_list("main-body") );
 
 			this.els["main-body-content"].find('[data-touch-grid-item-row="'+ this.focused_index +'"]').class_name("add", "focus");
+
 			this.els["main-body-content-tbody"].on("click", (function(e){
 				this.onclick(e||window.event);
 			}).bind(this));
@@ -317,7 +376,39 @@
 					cfg.body.onclick.call(that);
 				}
 			}
-		}
+		};
+
+		this.oncontrol = function(e, target, index, that){
+			target = axd.parent(e.target, function(target){
+				if(axd.attr(target, "data-touch-grid-control")){
+					return true;
+				}
+			});
+			if(target){
+				index = axd.attr(target, "data-touch-grid-control");
+				that = {
+					control: index,
+					target: this.target.elements[0],
+					item_target: target
+				};
+
+				if(index == "first"){
+					this.focus(0);
+				}
+				else if(index == "prev"){
+					this.focus(-1, "by");
+				}
+				else if(index == "next"){
+					this.focus(1, "by");
+				}
+				else if(index == "last"){
+					this.focus("last");
+				}
+				if(cfg.control.onclick){
+					cfg.control.onclick.call(that);
+				}
+			}
+		};
 
 	};
 	//== UI Class

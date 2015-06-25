@@ -1271,33 +1271,6 @@ a.ax {
     .ax-inp-group.basic .ax-addon:last-child {
       right: 4px;
       top: 4px; }
-  .ax-inp-group.basic .ax-inp {
-    color: #988e00;
-    text-shadow: none;
-    border: 1px solid #fff232;
-    background: #ffffff;
-    background-image: -webkit-linear-gradient(top, #ffffff, #FFFFFF);
-    background-image: linear-gradient(to bottom, #ffffff, #FFFFFF);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#FFFFFF);
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15) inset; }
-    .ax-inp-group.basic .ax-inp:focus {
-      border-color: #FEEE00;
-      outline: 0;
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(254, 238, 0, 0.6); }
-    .ax-inp-group.basic .ax-inp::-moz-placeholder {
-      color: #988e00;
-      opacity: 1; }
-    .ax-inp-group.basic .ax-inp:-ms-input-placeholder {
-      color: #988e00; }
-    .ax-inp-group.basic .ax-inp::-webkit-input-placeholder {
-      color: #988e00; }
-    .ax-inp-group.basic .ax-inp[disabled], .ax-inp-group.basic .ax-inp[readonly] {
-      background: #eeeeee;
-      background-image: -webkit-linear-gradient(top, #eeeeee, #eeeeee);
-      background-image: linear-gradient(to bottom, #eeeeee, #eeeeee);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#eeeeee, endColorstr=#eeeeee);
-      box-shadow: none;
-      opacity: 1; }
   .ax-inp-group.good .ax-addon {
     position: absolute;
     width: 60px;
@@ -1335,33 +1308,6 @@ a.ax {
     .ax-inp-group.good .ax-addon:last-child {
       right: 4px;
       top: 4px; }
-  .ax-inp-group.good .ax-inp {
-    color: #161011;
-    text-shadow: none;
-    border: 1px solid #332627;
-    background: #ffffff;
-    background-image: -webkit-linear-gradient(top, #ffffff, #FFFFFF);
-    background-image: linear-gradient(to bottom, #ffffff, #FFFFFF);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#FFFFFF);
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15) inset; }
-    .ax-inp-group.good .ax-inp:focus {
-      border-color: #503C3E;
-      outline: 0;
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(80, 60, 62, 0.6); }
-    .ax-inp-group.good .ax-inp::-moz-placeholder {
-      color: #161011;
-      opacity: 1; }
-    .ax-inp-group.good .ax-inp:-ms-input-placeholder {
-      color: #161011; }
-    .ax-inp-group.good .ax-inp::-webkit-input-placeholder {
-      color: #161011; }
-    .ax-inp-group.good .ax-inp[disabled], .ax-inp-group.good .ax-inp[readonly] {
-      background: #eeeeee;
-      background-image: -webkit-linear-gradient(top, #eeeeee, #eeeeee);
-      background-image: linear-gradient(to bottom, #eeeeee, #eeeeee);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#eeeeee, endColorstr=#eeeeee);
-      box-shadow: none;
-      opacity: 1; }
   .ax-inp-group.info .ax-addon {
     position: absolute;
     width: 60px;
@@ -1399,33 +1345,6 @@ a.ax {
     .ax-inp-group.info .ax-addon:last-child {
       right: 4px;
       top: 4px; }
-  .ax-inp-group.info .ax-inp {
-    color: #bb5f07;
-    text-shadow: none;
-    border: 1px solid #f79231;
-    background: #fff;
-    background-image: -webkit-linear-gradient(top, #fff, #fff);
-    background-image: linear-gradient(to bottom, #fff, #fff);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#fff, endColorstr=#fff);
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15) inset; }
-    .ax-inp-group.info .ax-inp:focus {
-      border-color: #F79231;
-      outline: 0;
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(247, 146, 49, 0.6); }
-    .ax-inp-group.info .ax-inp::-moz-placeholder {
-      color: #bb5f07;
-      opacity: 1; }
-    .ax-inp-group.info .ax-inp:-ms-input-placeholder {
-      color: #bb5f07; }
-    .ax-inp-group.info .ax-inp::-webkit-input-placeholder {
-      color: #bb5f07; }
-    .ax-inp-group.info .ax-inp[disabled], .ax-inp-group.info .ax-inp[readonly] {
-      background: #eeeeee;
-      background-image: -webkit-linear-gradient(top, #eeeeee, #eeeeee);
-      background-image: linear-gradient(to bottom, #eeeeee, #eeeeee);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#eeeeee, endColorstr=#eeeeee);
-      box-shadow: none;
-      opacity: 1; }
   .ax-inp-group.warning .ax-addon {
     position: absolute;
     width: 60px;
@@ -1463,33 +1382,6 @@ a.ax {
     .ax-inp-group.warning .ax-addon:last-child {
       right: 4px;
       top: 4px; }
-  .ax-inp-group.warning .ax-inp {
-    color: #993700;
-    text-shadow: none;
-    border: 1px solid #ff5b00;
-    background: #ffffff;
-    background-image: -webkit-linear-gradient(top, #ffffff, #FFFFFF);
-    background-image: linear-gradient(to bottom, #ffffff, #FFFFFF);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#FFFFFF);
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15) inset; }
-    .ax-inp-group.warning .ax-inp:focus {
-      border-color: #FF5B00;
-      outline: 0;
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 91, 0, 0.6); }
-    .ax-inp-group.warning .ax-inp::-moz-placeholder {
-      color: #993700;
-      opacity: 1; }
-    .ax-inp-group.warning .ax-inp:-ms-input-placeholder {
-      color: #993700; }
-    .ax-inp-group.warning .ax-inp::-webkit-input-placeholder {
-      color: #993700; }
-    .ax-inp-group.warning .ax-inp[disabled], .ax-inp-group.warning .ax-inp[readonly] {
-      background: #eeeeee;
-      background-image: -webkit-linear-gradient(top, #eeeeee, #eeeeee);
-      background-image: linear-gradient(to bottom, #eeeeee, #eeeeee);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#eeeeee, endColorstr=#eeeeee);
-      box-shadow: none;
-      opacity: 1; }
   .ax-inp-group.danger .ax-addon {
     position: absolute;
     width: 60px;
@@ -1527,33 +1419,6 @@ a.ax {
     .ax-inp-group.danger .ax-addon:last-child {
       right: 4px;
       top: 4px; }
-  .ax-inp-group.danger .ax-inp {
-    color: #993700;
-    text-shadow: none;
-    border: 1px solid #993700;
-    background: #ffffff;
-    background-image: -webkit-linear-gradient(top, #ffffff, #FFFFFF);
-    background-image: linear-gradient(to bottom, #ffffff, #FFFFFF);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#FFFFFF);
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15) inset; }
-    .ax-inp-group.danger .ax-inp:focus {
-      border-color: #993700;
-      outline: 0;
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(153, 55, 0, 0.6); }
-    .ax-inp-group.danger .ax-inp::-moz-placeholder {
-      color: #993700;
-      opacity: 1; }
-    .ax-inp-group.danger .ax-inp:-ms-input-placeholder {
-      color: #993700; }
-    .ax-inp-group.danger .ax-inp::-webkit-input-placeholder {
-      color: #993700; }
-    .ax-inp-group.danger .ax-inp[disabled], .ax-inp-group.danger .ax-inp[readonly] {
-      background: #eeeeee;
-      background-image: -webkit-linear-gradient(top, #eeeeee, #eeeeee);
-      background-image: linear-gradient(to bottom, #eeeeee, #eeeeee);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#eeeeee, endColorstr=#eeeeee);
-      box-shadow: none;
-      opacity: 1; }
   .ax-inp-group.special .ax-addon {
     position: absolute;
     width: 60px;
@@ -1591,33 +1456,6 @@ a.ax {
     .ax-inp-group.special .ax-addon:last-child {
       right: 4px;
       top: 4px; }
-  .ax-inp-group.special .ax-inp {
-    color: black;
-    text-shadow: none;
-    border: 1px solid black;
-    background: #ffffff;
-    background-image: -webkit-linear-gradient(top, #ffffff, #FFFFFF);
-    background-image: linear-gradient(to bottom, #ffffff, #FFFFFF);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#FFFFFF);
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15) inset; }
-    .ax-inp-group.special .ax-inp:focus {
-      border-color: #292929;
-      outline: 0;
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(41, 41, 41, 0.6); }
-    .ax-inp-group.special .ax-inp::-moz-placeholder {
-      color: black;
-      opacity: 1; }
-    .ax-inp-group.special .ax-inp:-ms-input-placeholder {
-      color: black; }
-    .ax-inp-group.special .ax-inp::-webkit-input-placeholder {
-      color: black; }
-    .ax-inp-group.special .ax-inp[disabled], .ax-inp-group.special .ax-inp[readonly] {
-      background: #eeeeee;
-      background-image: -webkit-linear-gradient(top, #eeeeee, #eeeeee);
-      background-image: linear-gradient(to bottom, #eeeeee, #eeeeee);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#eeeeee, endColorstr=#eeeeee);
-      box-shadow: none;
-      opacity: 1; }
   .ax-inp-group.has-basic .ax-addon {
     position: absolute;
     width: 60px;
@@ -1656,38 +1494,12 @@ a.ax {
       right: 4px;
       top: 4px; }
   .ax-inp-group.has-basic .ax-inp {
-    display: table-cell;
-    color: #988e00;
-    text-shadow: none;
-    border: 1px solid #fff232;
-    background: #ffffff;
-    background-image: -webkit-linear-gradient(top, #ffffff, #FFFFFF);
-    background-image: linear-gradient(to bottom, #ffffff, #FFFFFF);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#FFFFFF);
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15) inset; }
+    display: table-cell; }
     .ax-inp-group.has-basic .ax-inp:not(:last-child) {
       border-top-left-radius: 6px;
       border-top-right-radius: 6px;
       border-bottom-right-radius: 6px;
       border-bottom-left-radius: 6px; }
-    .ax-inp-group.has-basic .ax-inp:focus {
-      border-color: #FEEE00;
-      outline: 0;
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(254, 238, 0, 0.6); }
-    .ax-inp-group.has-basic .ax-inp::-moz-placeholder {
-      color: #988e00;
-      opacity: 1; }
-    .ax-inp-group.has-basic .ax-inp:-ms-input-placeholder {
-      color: #988e00; }
-    .ax-inp-group.has-basic .ax-inp::-webkit-input-placeholder {
-      color: #988e00; }
-    .ax-inp-group.has-basic .ax-inp[disabled], .ax-inp-group.has-basic .ax-inp[readonly] {
-      background: #eeeeee;
-      background-image: -webkit-linear-gradient(top, #eeeeee, #eeeeee);
-      background-image: linear-gradient(to bottom, #eeeeee, #eeeeee);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#eeeeee, endColorstr=#eeeeee);
-      box-shadow: none;
-      opacity: 1; }
   .ax-inp-group.has-basic .axicon {
     position: absolute;
     right: 0px;
@@ -1738,38 +1550,12 @@ a.ax {
       right: 4px;
       top: 4px; }
   .ax-inp-group.has-good .ax-inp {
-    display: table-cell;
-    color: #161011;
-    text-shadow: none;
-    border: 1px solid #332627;
-    background: #ffffff;
-    background-image: -webkit-linear-gradient(top, #ffffff, #FFFFFF);
-    background-image: linear-gradient(to bottom, #ffffff, #FFFFFF);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#FFFFFF);
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15) inset; }
+    display: table-cell; }
     .ax-inp-group.has-good .ax-inp:not(:last-child) {
       border-top-left-radius: 6px;
       border-top-right-radius: 6px;
       border-bottom-right-radius: 6px;
       border-bottom-left-radius: 6px; }
-    .ax-inp-group.has-good .ax-inp:focus {
-      border-color: #503C3E;
-      outline: 0;
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(80, 60, 62, 0.6); }
-    .ax-inp-group.has-good .ax-inp::-moz-placeholder {
-      color: #161011;
-      opacity: 1; }
-    .ax-inp-group.has-good .ax-inp:-ms-input-placeholder {
-      color: #161011; }
-    .ax-inp-group.has-good .ax-inp::-webkit-input-placeholder {
-      color: #161011; }
-    .ax-inp-group.has-good .ax-inp[disabled], .ax-inp-group.has-good .ax-inp[readonly] {
-      background: #eeeeee;
-      background-image: -webkit-linear-gradient(top, #eeeeee, #eeeeee);
-      background-image: linear-gradient(to bottom, #eeeeee, #eeeeee);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#eeeeee, endColorstr=#eeeeee);
-      box-shadow: none;
-      opacity: 1; }
   .ax-inp-group.has-good .axicon {
     position: absolute;
     right: 0px;
@@ -1820,38 +1606,12 @@ a.ax {
       right: 4px;
       top: 4px; }
   .ax-inp-group.has-info .ax-inp {
-    display: table-cell;
-    color: #bb5f07;
-    text-shadow: none;
-    border: 1px solid #f79231;
-    background: #fff;
-    background-image: -webkit-linear-gradient(top, #fff, #fff);
-    background-image: linear-gradient(to bottom, #fff, #fff);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#fff, endColorstr=#fff);
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15) inset; }
+    display: table-cell; }
     .ax-inp-group.has-info .ax-inp:not(:last-child) {
       border-top-left-radius: 6px;
       border-top-right-radius: 6px;
       border-bottom-right-radius: 6px;
       border-bottom-left-radius: 6px; }
-    .ax-inp-group.has-info .ax-inp:focus {
-      border-color: #F79231;
-      outline: 0;
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(247, 146, 49, 0.6); }
-    .ax-inp-group.has-info .ax-inp::-moz-placeholder {
-      color: #bb5f07;
-      opacity: 1; }
-    .ax-inp-group.has-info .ax-inp:-ms-input-placeholder {
-      color: #bb5f07; }
-    .ax-inp-group.has-info .ax-inp::-webkit-input-placeholder {
-      color: #bb5f07; }
-    .ax-inp-group.has-info .ax-inp[disabled], .ax-inp-group.has-info .ax-inp[readonly] {
-      background: #eeeeee;
-      background-image: -webkit-linear-gradient(top, #eeeeee, #eeeeee);
-      background-image: linear-gradient(to bottom, #eeeeee, #eeeeee);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#eeeeee, endColorstr=#eeeeee);
-      box-shadow: none;
-      opacity: 1; }
   .ax-inp-group.has-info .axicon {
     position: absolute;
     right: 0px;
@@ -1902,38 +1662,12 @@ a.ax {
       right: 4px;
       top: 4px; }
   .ax-inp-group.has-warning .ax-inp {
-    display: table-cell;
-    color: #993700;
-    text-shadow: none;
-    border: 1px solid #ff5b00;
-    background: #ffffff;
-    background-image: -webkit-linear-gradient(top, #ffffff, #FFFFFF);
-    background-image: linear-gradient(to bottom, #ffffff, #FFFFFF);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#FFFFFF);
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15) inset; }
+    display: table-cell; }
     .ax-inp-group.has-warning .ax-inp:not(:last-child) {
       border-top-left-radius: 6px;
       border-top-right-radius: 6px;
       border-bottom-right-radius: 6px;
       border-bottom-left-radius: 6px; }
-    .ax-inp-group.has-warning .ax-inp:focus {
-      border-color: #FF5B00;
-      outline: 0;
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 91, 0, 0.6); }
-    .ax-inp-group.has-warning .ax-inp::-moz-placeholder {
-      color: #993700;
-      opacity: 1; }
-    .ax-inp-group.has-warning .ax-inp:-ms-input-placeholder {
-      color: #993700; }
-    .ax-inp-group.has-warning .ax-inp::-webkit-input-placeholder {
-      color: #993700; }
-    .ax-inp-group.has-warning .ax-inp[disabled], .ax-inp-group.has-warning .ax-inp[readonly] {
-      background: #eeeeee;
-      background-image: -webkit-linear-gradient(top, #eeeeee, #eeeeee);
-      background-image: linear-gradient(to bottom, #eeeeee, #eeeeee);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#eeeeee, endColorstr=#eeeeee);
-      box-shadow: none;
-      opacity: 1; }
   .ax-inp-group.has-warning .axicon {
     position: absolute;
     right: 0px;
@@ -1984,38 +1718,12 @@ a.ax {
       right: 4px;
       top: 4px; }
   .ax-inp-group.has-danger .ax-inp {
-    display: table-cell;
-    color: #993700;
-    text-shadow: none;
-    border: 1px solid #993700;
-    background: #ffffff;
-    background-image: -webkit-linear-gradient(top, #ffffff, #FFFFFF);
-    background-image: linear-gradient(to bottom, #ffffff, #FFFFFF);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#FFFFFF);
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15) inset; }
+    display: table-cell; }
     .ax-inp-group.has-danger .ax-inp:not(:last-child) {
       border-top-left-radius: 6px;
       border-top-right-radius: 6px;
       border-bottom-right-radius: 6px;
       border-bottom-left-radius: 6px; }
-    .ax-inp-group.has-danger .ax-inp:focus {
-      border-color: #993700;
-      outline: 0;
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(153, 55, 0, 0.6); }
-    .ax-inp-group.has-danger .ax-inp::-moz-placeholder {
-      color: #993700;
-      opacity: 1; }
-    .ax-inp-group.has-danger .ax-inp:-ms-input-placeholder {
-      color: #993700; }
-    .ax-inp-group.has-danger .ax-inp::-webkit-input-placeholder {
-      color: #993700; }
-    .ax-inp-group.has-danger .ax-inp[disabled], .ax-inp-group.has-danger .ax-inp[readonly] {
-      background: #eeeeee;
-      background-image: -webkit-linear-gradient(top, #eeeeee, #eeeeee);
-      background-image: linear-gradient(to bottom, #eeeeee, #eeeeee);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#eeeeee, endColorstr=#eeeeee);
-      box-shadow: none;
-      opacity: 1; }
   .ax-inp-group.has-danger .axicon {
     position: absolute;
     right: 0px;
@@ -2066,38 +1774,12 @@ a.ax {
       right: 4px;
       top: 4px; }
   .ax-inp-group.has-special .ax-inp {
-    display: table-cell;
-    color: black;
-    text-shadow: none;
-    border: 1px solid black;
-    background: #ffffff;
-    background-image: -webkit-linear-gradient(top, #ffffff, #FFFFFF);
-    background-image: linear-gradient(to bottom, #ffffff, #FFFFFF);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#FFFFFF);
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15) inset; }
+    display: table-cell; }
     .ax-inp-group.has-special .ax-inp:not(:last-child) {
       border-top-left-radius: 6px;
       border-top-right-radius: 6px;
       border-bottom-right-radius: 6px;
       border-bottom-left-radius: 6px; }
-    .ax-inp-group.has-special .ax-inp:focus {
-      border-color: #292929;
-      outline: 0;
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(41, 41, 41, 0.6); }
-    .ax-inp-group.has-special .ax-inp::-moz-placeholder {
-      color: black;
-      opacity: 1; }
-    .ax-inp-group.has-special .ax-inp:-ms-input-placeholder {
-      color: black; }
-    .ax-inp-group.has-special .ax-inp::-webkit-input-placeholder {
-      color: black; }
-    .ax-inp-group.has-special .ax-inp[disabled], .ax-inp-group.has-special .ax-inp[readonly] {
-      background: #eeeeee;
-      background-image: -webkit-linear-gradient(top, #eeeeee, #eeeeee);
-      background-image: linear-gradient(to bottom, #eeeeee, #eeeeee);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#eeeeee, endColorstr=#eeeeee);
-      box-shadow: none;
-      opacity: 1; }
   .ax-inp-group.has-special .axicon {
     position: absolute;
     right: 0px;
@@ -2683,29 +2365,48 @@ a.ax {
       height: 100%; }
 
 @-webkit-keyframes ax-dialog {
-  from {
+  0% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-transform: scale(1); }
+
+  1% {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     opacity: 0;
     -webkit-transform: scale(0.7); }
 
-  to {
+  100% {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
     opacity: 0.6;
     -webkit-transform: scale(1); } }
 
 @-moz-keyframes ax-dialog {
-  from {
+  0% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -moz-transform: scale(1); }
+
+  1% {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     opacity: 0;
     -moz-transform: scale(0.7); }
 
-  to {
+  100% {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
     opacity: 0.6;
     -moz-transform: scale(1); } }
 
 @keyframes ax-dialog {
-  from {
+  0% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1); }
+
+  1% {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     opacity: 0;
     -webkit-transform: scale(0.7);
@@ -2714,7 +2415,7 @@ a.ax {
     -o-transform: scale(0.7);
     transform: scale(0.7); }
 
-  to {
+  100% {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
     opacity: 0.6;
     -webkit-transform: scale(1);
@@ -2724,9 +2425,9 @@ a.ax {
     transform: scale(1); } }
 
 .ax5-ui-dialog {
-  -webkit-animation: ax-dialog 0.2s ease-in-out;
-  -moz-animation: ax-dialog 0.2s ease-in-out;
-  animation: ax-dialog 0.2s ease-in-out;
+  -webkit-animation: ax-dialog 0.1s ease-in-out;
+  -moz-animation: ax-dialog 0.1s ease-in-out;
+  animation: ax-dialog 0.1s ease-in-out;
   color: #333333;
   font-size: 13px;
   font-weight: 400;
@@ -3012,68 +2713,102 @@ a.ax {
   height: 100%;
   box-sizing: border-box;
   position: relative;
-  overflow: hidden; }
-  .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-header {
-    box-sizing: border-box;
-    border: 2px solid #BCBCBD;
-    position: relative;
-    overflow: hidden;
-    background: #FFFFFF;
-    background-image: -webkit-linear-gradient(top, #FFFFFF, #F1F1F1);
-    background-image: linear-gradient(to bottom, #FFFFFF, #F1F1F1);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#F1F1F1); }
-    .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-header table {
+  overflow: hidden;
+  display: table;
+  table-layout: fixed; }
+  .ax5-ui-touch-grid .touch-grid-body {
+    display: table-cell;
+    vertical-align: top; }
+    .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-header {
       box-sizing: border-box;
+      border: 2px solid #BCBCBD;
+      position: relative;
+      overflow: hidden;
+      background: #FFFFFF;
+      background-image: -webkit-linear-gradient(top, #FFFFFF, #F1F1F1);
+      background-image: linear-gradient(to bottom, #FFFFFF, #F1F1F1);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#F1F1F1); }
+      .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-header table {
+        box-sizing: border-box;
+        table-layout: fixed;
+        border-collapse: collapse;
+        border-spacing: 0px; }
+        .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-header table tbody td, .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-header table tbody th {
+          box-sizing: border-box;
+          padding: 0px 7px;
+          vertical-align: middle;
+          line-height: 1em;
+          cursor: pointer; }
+          .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-header table tbody td:not(:last-child), .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-header table tbody th:not(:last-child) {
+            border-right: 2px solid #BCBCBD; }
+    .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-body {
+      box-sizing: border-box;
+      border: 2px solid #BCBCBD;
+      border-top: 0px none;
+      position: relative;
+      overflow: hidden;
+      background: #FFFFFF;
+      background-image: -webkit-linear-gradient(top, #FFFFFF, #FFFFFF);
+      background-image: linear-gradient(to bottom, #FFFFFF, #FFFFFF);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#FFFFFF); }
+      .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-body table {
+        box-sizing: border-box;
+        table-layout: fixed;
+        border-collapse: collapse;
+        border-spacing: 0px; }
+        .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-body table tbody td, .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-body table tbody th {
+          box-sizing: border-box;
+          padding: 0px 7px;
+          vertical-align: middle;
+          line-height: 1em;
+          cursor: pointer;
+          border-bottom: 2px solid #BCBCBD; }
+          .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-body table tbody td:not(:last-child), .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-body table tbody th:not(:last-child) {
+            border-right: 2px solid #BCBCBD; }
+      .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-body .touch-grid-content {
+        box-sizing: border-box;
+        position: relative; }
+      .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-body table tbody tr td {
+        font-size: 16px; }
+      .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-body table tbody tr:hover td, .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-body table tbody tr:hover th {
+        background: #F7F7F7;
+        background-image: -webkit-linear-gradient(top, #F7F7F7, #F7F7F7);
+        background-image: linear-gradient(to bottom, #F7F7F7, #F7F7F7);
+        filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F7F7F7, endColorstr=#F7F7F7); }
+      .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-body table tbody tr:active td, .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-body table tbody tr:active th, .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-body table tbody tr.focus td, .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-body table tbody tr.focus th {
+        background: #F0F0F0;
+        background-image: -webkit-linear-gradient(top, #F0F0F0, #F0F0F0);
+        background-image: linear-gradient(to bottom, #F0F0F0, #F0F0F0);
+        filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F0F0F0, endColorstr=#F0F0F0); }
+  .ax5-ui-touch-grid .touch-grid-control {
+    display: table-cell;
+    vertical-align: top; }
+    .ax5-ui-touch-grid .touch-grid-control table {
       table-layout: fixed;
       border-collapse: collapse;
-      border-spacing: 0px; }
-      .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-header table tbody td, .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-header table tbody th {
-        box-sizing: border-box;
-        padding: 0px 7px;
-        padding-top: 2px;
-        vertical-align: middle;
-        line-height: 1em;
-        cursor: pointer; }
-        .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-header table tbody td:not(:last-child), .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-header table tbody th:not(:last-child) {
-          border-right: 2px solid #BCBCBD; }
-  .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body {
-    box-sizing: border-box;
-    border: 2px solid #BCBCBD;
-    border-top: 0px none;
-    position: relative;
-    overflow: hidden;
-    background: #FFFFFF;
-    background-image: -webkit-linear-gradient(top, #FFFFFF, #FFFFFF);
-    background-image: linear-gradient(to bottom, #FFFFFF, #FFFFFF);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#FFFFFF); }
-    .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table {
-      box-sizing: border-box;
-      table-layout: fixed;
-      border-collapse: collapse;
-      border-spacing: 0px; }
-      .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody td, .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody th {
-        box-sizing: border-box;
-        padding: 0px 7px;
-        padding-top: 2px;
-        vertical-align: middle;
-        line-height: 1em;
-        cursor: pointer;
-        border-bottom: 2px solid #BCBCBD; }
-        .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody td:not(:last-child), .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody th:not(:last-child) {
-          border-right: 2px solid #BCBCBD; }
-    .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body .touch-grid-content {
-      box-sizing: border-box;
-      position: relative; }
-    .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody tr:hover td, .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody tr:hover th {
-      background: #F7F7F7;
-      background-image: -webkit-linear-gradient(top, #F7F7F7, #F7F7F7);
-      background-image: linear-gradient(to bottom, #F7F7F7, #F7F7F7);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F7F7F7, endColorstr=#F7F7F7); }
-    .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody tr:active td, .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody tr:active th, .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody tr.focus td, .ax5-ui-touch-grid .touch-grid-main .touch-grid-main-body table tbody tr.focus th {
-      background: #F0F0F0;
-      background-image: -webkit-linear-gradient(top, #F0F0F0, #F0F0F0);
-      background-image: linear-gradient(to bottom, #F0F0F0, #F0F0F0);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F0F0F0, endColorstr=#F0F0F0); }
+      border-spacing: 0px;
+      border: 0px none;
+      width: 100%; }
+      .ax5-ui-touch-grid .touch-grid-control table td {
+        position: relative;
+        box-sizing: content-box;
+        padding: 0px;
+        margin: 0px;
+        vertical-align: top; }
+        .ax5-ui-touch-grid .touch-grid-control table td .ax-item-wraper {
+          padding: 1px 3px;
+          box-sizing: border-box; }
+        .ax5-ui-touch-grid .touch-grid-control table td .ax-btn {
+          vertical-align: middle;
+          position: relative;
+          margin: 0px;
+          width: 100%;
+          height: 100%; }
+    .ax5-ui-touch-grid .touch-grid-control table td .ax-btn {
+      font-size: 33px;
+      text-align: center;
+      padding: 0px;
+      border-width: 2px; }
 
 .ax5-ui-component-grid {
   display: table; }
@@ -3262,29 +2997,48 @@ a.ax {
           color: #fff; }
 
 @-webkit-keyframes ax-modal {
-  from {
+  0% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-transform: scale(1); }
+
+  1% {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     opacity: 0;
     -webkit-transform: scale(0.7); }
 
-  to {
+  100% {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
     opacity: 0.6;
     -webkit-transform: scale(1); } }
 
 @-moz-keyframes ax-modal {
-  from {
+  0% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -moz-transform: scale(1); }
+
+  1% {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     opacity: 0;
     -moz-transform: scale(0.7); }
 
-  to {
+  100% {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
     opacity: 0.6;
     -moz-transform: scale(1); } }
 
 @keyframes ax-modal {
-  from {
+  0% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1); }
+
+  1% {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     opacity: 0;
     -webkit-transform: scale(0.7);
@@ -3293,7 +3047,7 @@ a.ax {
     -o-transform: scale(0.7);
     transform: scale(0.7); }
 
-  to {
+  100% {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
     opacity: 0.6;
     -webkit-transform: scale(1);
@@ -3303,9 +3057,9 @@ a.ax {
     transform: scale(1); } }
 
 .ax5-ui-modal {
-  -webkit-animation: ax-modal 0.2s ease-in-out;
-  -moz-animation: ax-modal 0.2s ease-in-out;
-  animation: ax-modal 0.2s ease-in-out;
+  -webkit-animation: ax-modal 0.1s ease-in-out;
+  -moz-animation: ax-modal 0.1s ease-in-out;
+  animation: ax-modal 0.1s ease-in-out;
   color: #333333;
   font-size: 13px;
   font-weight: 400;
@@ -3390,3 +3144,4 @@ a.ax {
     .ax5-ui-modal.special .ax-modal-heading .badge {
       color: #292929;
       background-color: #fff; }
+

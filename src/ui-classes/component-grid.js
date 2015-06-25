@@ -193,7 +193,6 @@
 		};
 
 		this.print_list = function(){
-			console.log(this.page.no);
 			function formatter(val, format){
 				if(U.is_function(format)){
 					var that = {

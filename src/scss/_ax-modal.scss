@@ -61,19 +61,23 @@
 }
 
 @include keyframes(ax-modal) {
-	from {
+	0% {
 		@include opacity(0.0);
-		@include transform(scale(0.7) )
+		@include transform( scale(1) );
 	}
-	to {
+	1% {
+		@include opacity(0.0);
+		@include transform( scale(0.7) );
+	}
+	100% {
 		@include opacity($mask-bg-opacity);
-		@include transform(scale(1) )
+		@include transform( scale(1) );
 	}
 }
 // mixins --------------------------------------------- end
 
 .ax5-ui-modal{
-	@include animation(ax-modal 0.2s ease-in-out);
+	@include animation(ax-modal 0.1s ease-in-out);
 
 	@include ax-modal();
 	@include ax-modal-section();

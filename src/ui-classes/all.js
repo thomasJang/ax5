@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-06-24 
+ * 2015-06-25 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -439,7 +439,6 @@
 		};
 
 		this.print_list = function(){
-			console.log(this.page.no);
 			function formatter(val, format){
 				if(U.is_function(format)){
 					var that = {
@@ -701,6 +700,7 @@
 
 			// dialog 높이 구하기 - 너비가 정해지면 높이가 변경 될 것.
 			box.height = this.active_dialog.height();
+
 			//- position 정렬
 			if(typeof opts.position === "undefined" || opts.position === "center"){
 				pos.top = ax5.dom.height(document.body) / 2 - box.height/2;
@@ -1473,6 +1473,170 @@
 // todo : prompt
 // todo : toast
 
+// ax5.ui.progress
+(function(root, ax_super) {
+	/**
+	 * @class ax5.ui.progress
+	 * @classdesc
+	 * @version v0.0.1
+	 * @author tom@axisj.com
+	 * @logs
+	 * 2014-06-23 tom : 시작
+	 * @example
+	 * ```
+	 * var my_progress = new ax5.ui.progress();
+	 * ```
+	 */
+	var U = ax5.util, axd = ax5.dom;
+	
+	//== UI Class
+	var ax_class = function(){
+		// 클래스 생성자
+		this.main = (function(){
+			if (ax_super) ax_super.call(this); // 부모호출
+			this.config = {
+				click_event_name: (('ontouchstart' in document.documentElement) ? "touchstart" : "click"),
+				theme: 'default'
+			};
+		}).apply(this, arguments);
+
+		this.target = null;
+		var cfg = this.config;
+		/**
+		 * Preferences of progress UI
+		 * @method ax5.ui.progress.set_config
+		 * @param {Object} config - 클래스 속성값
+		 * @returns {ax5.ui.progress}
+		 * @example
+		 * ```
+		 * set_config({
+		 *      target : {Element|AX5 nodelist}, // UI를 출력할 대상
+		 * });
+		 * ```
+		 */
+			//== class body start
+		this.init = function(){
+			// after set_config();
+			//console.log(this.config);
+			if(!cfg.target){
+				U.error("aui_progress_400", "[ax5.ui.progress] config.target is required");
+			}
+			this.target = ax5.dom(cfg.target);
+
+			this.target.html( this.get_frame() );
+
+			// 파트수집
+			this.els = {
+				"root": this.target.find('[data-component-grid-els="root"]'),
+				"body": this.target.find('[data-component-grid-els="body"]'),
+				"control": this.target.find('[data-component-grid-els="control"]')
+			};
+
+			// 아이템 이벤트 바인딩
+			this.target.find('[data-component-grid-item-index]').on(cfg.click_event_name, (function(e){
+				this.onclick(e||window.event);
+			}).bind(this));
+			
+			// 컨트롤 이벤트 바인딩
+			this.target.find('[data-component-grid-control]').on(cfg.click_event_name, (function(e){
+				this.onmove(e||window.event);
+			}).bind(this));
+		};
+		
+		this.get_frame = function(){
+			var
+				po = [], i = 0;
+			
+			po.push('<div class="ax5-ui-component-grid ' +cfg.theme + '" data-component-grid-els="root">');
+				po.push('<div class="component-grid-body" data-component-grid-els="body">');
+
+					po.push('<table cellpadding="0" cellspacing="0">');
+						po.push('<tbody>');
+
+						for(var r=0;r<cfg.rows;r++){
+							po.push('<tr>');
+							for(var c=0;c<cfg.cols;c++) {
+								po.push('<td style="width:' + cfg.col_width + '">');
+								po.push('<div class="ax-item-wraper ' + (cfg.item.addon? "has-addon":"") + '" style="height:' + cfg.col_height + 'px;">');
+
+								po.push('<div class="ax-btn ' + (cfg.item.klass||"") + '" data-component-grid-item-index="' + i + '"></div>');
+
+								po.push('</div>');
+								po.push('</td>');
+								i++
+							}
+							po.push('</tr>');
+						}
+
+						po.push('</tbody>');
+					po.push('</table>');
+
+				po.push('</div>');
+
+				if(cfg.control) {
+					cfg.control.height = (cfg.col_height * cfg.rows / 2);
+					po.push('<div class="component-grid-control" data-component-grid-els="control" style="width:' + cfg.control.width + 'px;">');
+					po.push('<table cellpadding="0" cellspacing="0">');
+					po.push('<tbody>');
+						po.push('<tr>');
+							po.push('<td>');
+							po.push('<div class="ax-item-wraper" style="height:' + cfg.control.height + 'px;">');
+								po.push('<button class="ax-btn ' + (cfg.item.klass||"") + '" data-component-grid-control="prev">' + cfg.control.prev + '</buttton>');
+							po.push('</div>');
+							po.push('</td>');
+						po.push('</tr>');
+						po.push('<tr>');
+							po.push('<td>');
+							po.push('<div class="ax-item-wraper" style="height:' + cfg.control.height + 'px;">');
+								po.push('<button class="ax-btn ' + (cfg.item.klass||"") + '" data-component-grid-control="next">' + cfg.control.next + '</button>');
+							po.push('</div>');
+							po.push('</td>');
+						po.push('</tr>');
+					po.push('</tbody>');
+					po.push('</table>');
+					po.push('</div>');
+				}
+			po.push('</div>');
+
+			return po.join('');
+		};
+		
+		this.onclick = function(e, target, index){
+			target = axd.parent(e.target, function(target){
+				if(ax5.dom.attr(target, "data-component-grid-item-index")){
+					return true;
+				}
+			});
+			if(target){
+				index = axd.attr(target, "data-component-grid-item-index");
+				if(this.config.onclick){
+
+					//console.log(U.number(index) + this.page.no * this.page.size);
+					this.config.onclick.call({
+						index: index,
+						list: this.list,
+						item: this.list[ U.number(index) + this.page.no * this.page.size ],
+						target: this.target.elements[0],
+						item_target: target
+					});
+				}
+			}
+		};
+
+	};
+	//== UI Class
+	
+	//== ui class 공통 처리 구문
+	if (U.is_function(ax_super)) ax_class.prototype = new ax_super(); // 상속
+	root.progress = ax_class; // ax5.ui에 연결
+	
+	if (typeof define === "function" && define.amd) {
+		define("_ax5_ui_progress", [], function () { return ax_class; }); // for requireJS
+	}
+	//== ui class 공통 처리 구문
+	
+})(ax5.ui, ax5.ui.root);
+
 // ax5.ui.toast
 (function(root, ax_super) {
 
@@ -1793,10 +1957,17 @@
 				"main-body": this.target.find('[data-touch-grid-els="main-body"]'),
 				"main-body-content": this.target.find('[data-touch-grid-els="main-body-content"]')
 			};
+
+			if(cfg.control){
+				this.els["control"] =  this.target.find('[data-touch-grid-els="control"]');
+				this.els["control"].on("click", (function(e){
+					this.oncontrol(e||window.event);
+				}).bind(this));
+			}
+
 			this.set_size_frame();
 			this.els["main-header"].html( this.get_header("main-header") );
 			this.els["main-body-content"].html( this.get_body("main-body") );
-
 			this.els["main-body-content-tbody"] = this.els["main-body-content"].find('[data-touch-grid-els="main-body-content-tbody"]');
 
 			this.bind_window_resize(function(){
@@ -1810,13 +1981,51 @@
 			// 그리드 레이아웃 구성
 			var po = [];
 			po.push('<div class="ax5-ui-touch-grid ' + cfg.theme + '" data-touch-grid-els="root">');
-				po.push('<div class="touch-grid-main" data-touch-grid-els="main">');
-					po.push('<div class="touch-grid-main-header" data-touch-grid-els="main-header">');
-					po.push('</div>');
-					po.push('<div class="touch-grid-main-body" data-touch-grid-els="main-body">');
-						po.push('<div class="touch-grid-content" data-touch-grid-els="main-body-content"></div>');
+				po.push('<div class="touch-grid-body" data-touch-grid-els="body">');
+					po.push('<div class="touch-grid-main" data-touch-grid-els="main">');
+						po.push('<div class="touch-grid-main-header" data-touch-grid-els="main-header">');
+						po.push('</div>');
+						po.push('<div class="touch-grid-main-body" data-touch-grid-els="main-body">');
+							po.push('<div class="touch-grid-content" data-touch-grid-els="main-body-content"></div>');
+						po.push('</div>');
 					po.push('</div>');
 				po.push('</div>');
+			if(cfg.control) {
+				po.push('<div class="touch-grid-control" data-touch-grid-els="control" style="width:' + cfg.control.width + 'px;">');
+					po.push('<table cellpadding="0" cellspacing="0" style="height:100%;">');
+						po.push('<tbody>');
+						if(cfg.control.first) {
+							po.push('<tr>');
+							po.push('<td>');
+							po.push('<div class="ax-item-wraper"><button class="ax-btn ' + (cfg.control.klass || "") + '" data-touch-grid-control="first">' + cfg.control.first + '</buttton></div>');
+							po.push('</td>');
+							po.push('</tr>');
+						}
+						if(cfg.control.prev) {
+							po.push('<tr>');
+							po.push('<td>');
+							po.push('<div class="ax-item-wraper"><button class="ax-btn ' + (cfg.control.klass || "") + '" data-touch-grid-control="prev">' + cfg.control.prev + '</buttton></div>');
+							po.push('</td>');
+							po.push('</tr>');
+						}
+						if(cfg.control.next) {
+							po.push('<tr>');
+							po.push('<td>');
+							po.push('<div class="ax-item-wraper"><button class="ax-btn ' + (cfg.control.klass || "") + '" data-touch-grid-control="next">' + cfg.control.next + '</button></div>');
+							po.push('</td>');
+							po.push('</tr>');
+						}
+						if(cfg.control.last) {
+							po.push('<tr>');
+							po.push('<td>');
+							po.push('<div class="ax-item-wraper"><button class="ax-btn ' + (cfg.control.klass || "") + '" data-touch-grid-control="last">' + cfg.control.last + '</buttton></div>');
+							po.push('</td>');
+							po.push('</tr>');
+						}
+						po.push('</tbody>');
+					po.push('</table>');
+				po.push('</div>');
+			}
 			po.push('</div>');
 			return po.join('');
 		};
@@ -1828,7 +2037,12 @@
 			this.els["main"].css({height: target_height});
 			this.els["main-header"].css({height: cfg.head_height});
 			this.els["main-body"].css({height: target_height - cfg.head_height});
-
+			if(cfg.control) {
+				this.els["control"].css({height: target_height});
+				var control_item = this.els["control"].find(".ax-item-wraper");
+				//console.log(control_item.elements.length);
+				control_item.css({height: target_height / control_item.elements.length});
+			}
 			this.virtual_scroll.size = Math.ceil((target_height - cfg.head_height) / cfg.item_height);
 		};
 
@@ -1839,6 +2053,10 @@
 				target_width = this.target.width(),
 				free_width = target_width,
 				free_width_col_count = 0;
+
+			if(cfg.control) {
+				free_width -= cfg.control.width;
+			}
 
 			for(var i=0, l=col_group.length;i<l;i++) CG.push(U.clone(col_group[i]));
 			this.col_width_sum = 0;
@@ -1860,6 +2078,9 @@
 					}
 				}
 			}
+			if(cfg.control) {
+				this.col_width_sum -= cfg.control.width;
+			}
 
 			return CG;
 		};
@@ -1878,6 +2099,7 @@
 			for(var i=0, l=this.col_group.length;i<l;i++) {
 				this.els["main"].find('[data-touch-grid-col="' + i + '"]').css( {"width": this.col_group[i].width} );
 			}
+
 			this.els["main"].find('[data-touch-grid-table]').css( {width: this.col_width_sum} );
 		};
 
@@ -1885,7 +2107,7 @@
 			var
 				po = [];
 
-			po.push('<table data-touch-grid-table="' + typ + '" style="width:' + this.col_width_sum + 'px;height:' + cfg.head_height + 'px;">');
+			po.push('<table data-touch-grid-table="' + typ + '" style="width:' + this.col_width_sum + 'px;height:' + cfg.head_height + 'px;line-height:' + cfg.head_height + 'px;">');
 				po.push( this.get_col_group() );
 				po.push('<tbody>');
 					po.push('<tr style="' + (
@@ -1977,6 +2199,7 @@
 			this.els["main-body-content-tbody"].html( this.get_list("main-body") );
 
 			this.els["main-body-content"].find('[data-touch-grid-item-row="'+ this.focused_index +'"]').class_name("add", "focus");
+
 			this.els["main-body-content-tbody"].on("click", (function(e){
 				this.onclick(e||window.event);
 			}).bind(this));
@@ -2039,7 +2262,39 @@
 					cfg.body.onclick.call(that);
 				}
 			}
-		}
+		};
+
+		this.oncontrol = function(e, target, index, that){
+			target = axd.parent(e.target, function(target){
+				if(axd.attr(target, "data-touch-grid-control")){
+					return true;
+				}
+			});
+			if(target){
+				index = axd.attr(target, "data-touch-grid-control");
+				that = {
+					control: index,
+					target: this.target.elements[0],
+					item_target: target
+				};
+
+				if(index == "first"){
+					this.focus(0);
+				}
+				else if(index == "prev"){
+					this.focus(-1, "by");
+				}
+				else if(index == "next"){
+					this.focus(1, "by");
+				}
+				else if(index == "last"){
+					this.focus("last");
+				}
+				if(cfg.control.onclick){
+					cfg.control.onclick.call(that);
+				}
+			}
+		};
 
 	};
 	//== UI Class

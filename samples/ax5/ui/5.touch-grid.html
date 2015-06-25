@@ -89,11 +89,6 @@
 <div class="tag-result">
 	<div id="ax-ui-touch-grid-bigsize-target" style="height:220px;"></div>
 	<div style="padding:5px;">
-		<button class="ax-btn lg" id="ax-ui-touch-grid-bigsize-first">&nbsp;<i class="axi axi-angle-double-up"></i>&nbsp;</button>
-		<button class="ax-btn lg" id="ax-ui-touch-grid-bigsize-up">&nbsp;<i class="axi axi-angle-up"></i>&nbsp;</button>
-		<button class="ax-btn lg" id="ax-ui-touch-grid-bigsize-down">&nbsp;<i class="axi axi-angle-down"></i>&nbsp;</button>
-		<button class="ax-btn lg" id="ax-ui-touch-grid-bigsize-last">&nbsp;<i class="axi axi-angle-double-down"></i>&nbsp;</button>
-
 		TR 의 갯수는 <span id="ax-ui-touch-grid-bigsize-tr-count"></span>
 	</div>
 </div>
@@ -102,7 +97,7 @@
 	var my_touch_grid = new ax5.ui.touch_grid();
 	my_touch_grid.set_config({
 		target: ax5.dom.get("#ax-ui-touch-grid-bigsize-target"),
-		head_height: 40,
+		head_height: 30,
 		head_align: "center",
 		item_height: 40,
 		col_group: [
@@ -116,6 +111,18 @@
 			onclick: function(){
 				console.log(this);
 			}
+		},
+		control:{
+			width: 50,
+			klass: '',
+			//first: '<i class="axi axi-angle-double-up"></i>',
+			prev: '<i class="axi axi-angle-up"></i>',
+			next: '<i class="axi axi-angle-down"></i>',
+			//last: '<i class="axi axi-angle-double-down"></i>',
+			onclick: function(){
+				console.log(this);
+				print_html_node();
+			}
 		}
 	});
 
@@ -128,22 +135,6 @@
 	function print_html_node(){
 		ax5.dom('#ax-ui-touch-grid-bigsize-tr-count').html( '<b>' + ax5.dom("#ax-ui-touch-grid-bigsize-target").find("tr").elements.length + '개</b>' );
 	}
-	ax5.dom("#ax-ui-touch-grid-bigsize-first").on("click", function(){
-		my_touch_grid.focus(0);
-		print_html_node();
-	});
-	ax5.dom("#ax-ui-touch-grid-bigsize-up").on("click", function(){
-		my_touch_grid.focus(-1, "by");
-		print_html_node();
-	});
-	ax5.dom("#ax-ui-touch-grid-bigsize-down").on("click", function(){
-		my_touch_grid.focus(1, "by");
-		print_html_node();
-	});
-	ax5.dom("#ax-ui-touch-grid-bigsize-last").on("click", function(){
-		my_touch_grid.focus("last");
-		print_html_node();
-	});
 })();
 </script>
 </pre>

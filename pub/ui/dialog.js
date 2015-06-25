@@ -213,6 +213,7 @@
 
 			// dialog 높이 구하기 - 너비가 정해지면 높이가 변경 될 것.
 			box.height = this.active_dialog.height();
+
 			//- position 정렬
 			if(typeof opts.position === "undefined" || opts.position === "center"){
 				pos.top = ax5.dom.height(document.body) / 2 - box.height/2;

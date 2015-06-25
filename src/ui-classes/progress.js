@@ -1,7 +1,7 @@
-// ax5.ui.component_grid
+// ax5.ui.progress
 (function(root, ax_super) {
 	/**
-	 * @class ax5.ui.component_grid
+	 * @class ax5.ui.progress
 	 * @classdesc
 	 * @version v0.0.1
 	 * @author tom@axisj.com
@@ -9,7 +9,7 @@
 	 * 2014-06-23 tom : 시작
 	 * @example
 	 * ```
-	 * var my_component_grid = new ax5.ui.component_grid();
+	 * var my_progress = new ax5.ui.progress();
 	 * ```
 	 */
 	var U = ax5.util, axd = ax5.dom;
@@ -25,27 +25,17 @@
 			};
 		}).apply(this, arguments);
 
-		this.list = [];
-		this.page = {};
 		this.target = null;
 		var cfg = this.config;
 		/**
-		 * Preferences of component_grid UI
-		 * @method ax5.ui.component_grid.set_config
+		 * Preferences of progress UI
+		 * @method ax5.ui.progress.set_config
 		 * @param {Object} config - 클래스 속성값
-		 * @returns {ax5.ui.component_grid}
+		 * @returns {ax5.ui.progress}
 		 * @example
 		 * ```
 		 * set_config({
-		 *      target : {Element|AX5 nodelist}, // 메뉴 UI를 출력할 대상
-		 *      keys : { // keys 는 ui 내부에서 사용되는 키값을 사용자가 변경 할 수 있는 환경설정값 이다. 개발환경에 맞게 커스트마이징 할 수 있다.
-		 *          value: {String} ['value'] 키의 값
-		 *          label: {String} ['label'] 키의 텍스트 라벨
-		 *          rowspan: {String} ['rowspan']
-		 *          colspan: {String} ['colspan']
-		 *          klass: {String} ['klass'] 키에 추가할 CSS Class
-		 *      },
-		 *      onclick: {Function} [onclick] - 아이템 클릭이벤트 처리자
+		 *      target : {Element|AX5 nodelist}, // UI를 출력할 대상
 		 * });
 		 * ```
 		 */
@@ -54,7 +44,7 @@
 			// after set_config();
 			//console.log(this.config);
 			if(!cfg.target){
-				U.error("aui_component_grid_400", "[ax5.ui.component_grid] config.target is required");
+				U.error("aui_progress_400", "[ax5.ui.progress] config.target is required");
 			}
 			this.target = ax5.dom(cfg.target);
 
@@ -157,83 +147,16 @@
 				}
 			}
 		};
-		
-		this.onmove = function(e, target, dirc){
-			target = axd.parent(e.target, function(target){
-				if(ax5.dom.attr(target, "data-component-grid-control")){
-					return true;
-				}
-			});
-			if(target){
-				dirc = axd.attr(target, "data-component-grid-control");
-				if(dirc == "prev"){
-					if(this.page.no < 1){
 
-					}
-					else{
-						this.page.no--;
-						this.print_list();
-					}
-				}
-				else{
-					if(this.page.no < this.page.count-1){
-						this.page.no++;
-						this.print_list();
-					}
-				}
-			}
-		};
-
-		this.set_list = function(list){
-			this.list = list;
-			this.page.no = 0;
-			this.page.size = cfg.rows * cfg.cols;
-			this.page.count = Math.ceil( this.list.length / this.page.size );
-			this.print_list();
-		};
-
-		this.print_list = function(){
-			function formatter(val, format){
-				if(U.is_function(format)){
-					var that = {
-						value: val
-					};
-					return format.call(that);
-				}
-				else if(format == "money"){
-					return U.number(val, {money:true});
-				}
-				else{
-					return val;
-				}
-			}
-
-			var item_index = this.page.no * this.page.size;
-			for(var i=0;i<this.page.size;i++){
-				var
-					node = this.els["body"].find('[data-component-grid-item-index="' + i + '"]'),
-					item = this.list[item_index];
-
-				if(item) {
-					node.html('<div class="label" style="' + cfg.item.label.style + '">' + formatter(item[cfg.item.label.key], cfg.item.label.formatter) + '</div>');
-					if (cfg.item.addon) {
-						node.append('<div class="addon" style="' + cfg.item.addon.style + '">' + formatter(item[cfg.item.addon.key], cfg.item.addon.formatter) + '</div>');
-					}
-				}else{
-					node.empty();
-				}
-				item_index++;
-			}
-		}
 	};
 	//== UI Class
 	
 	//== ui class 공통 처리 구문
 	if (U.is_function(ax_super)) ax_class.prototype = new ax_super(); // 상속
-	root.component_grid = ax_class; // ax5.ui에 연결
+	root.progress = ax_class; // ax5.ui에 연결
 	
 	if (typeof define === "function" && define.amd) {
-		define("_ax5_ui_component_grid", [], function () { return ax_class; }); // for requireJS
+		define("_ax5_ui_progress", [], function () { return ax_class; }); // for requireJS
 	}
 	//== ui class 공통 처리 구문
 	

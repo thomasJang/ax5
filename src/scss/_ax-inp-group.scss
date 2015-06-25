@@ -62,7 +62,7 @@
 			//@include border-left-radius(0);
 			//border-left:0px none;
 		}
-		@include input-variant($text-color, $text-shadow, $bg, $bg-image, $color-hover, $border, $drop-shadow);
+		///@include input-variant($text-color, $text-shadow, $bg, $bg-image, $color-hover, $border, $drop-shadow);
 	}
 	.axicon{
 		position: absolute;
@@ -122,7 +122,7 @@
 	}
 }
 // mixins --------------------------------------------- end
-
+// @include input-variant 주석처리 2015-06-25
 // like table -- support IE8 +
 .ax-inp-group {
 	position: relative;
@@ -154,7 +154,7 @@
 			@include input-group-addon($btn-basic-text-color, $btn-basic-text-shadow, $input-basic-border, $btn-basic-bg, $btn-basic-bg-image, $btn-basic-drop-shadow);
 		}
 		.ax-inp {
-			@include input-variant($input-basic-text-color, $input-basic-text-shadow, $input-basic-bg, $input-basic-bg-image, $input-basic-color-hover, $input-basic-border, $input-basic-drop-shadow);
+			///@include input-variant($input-basic-text-color, $input-basic-text-shadow, $input-basic-bg, $input-basic-bg-image, $input-basic-color-hover, $input-basic-border, $input-basic-drop-shadow);
 		}
 	}
 	&.good{
@@ -162,7 +162,7 @@
 			@include input-group-addon($btn-good-text-color, $btn-good-text-shadow, $input-good-border, $btn-good-bg, $btn-good-bg-image, $btn-good-drop-shadow);
 		}
 		.ax-inp {
-			@include input-variant($input-good-text-color, $input-good-text-shadow, $input-good-bg, $input-good-bg-image, $input-good-color-hover, $input-good-border, $input-good-drop-shadow);
+			///@include input-variant($input-good-text-color, $input-good-text-shadow, $input-good-bg, $input-good-bg-image, $input-good-color-hover, $input-good-border, $input-good-drop-shadow);
 		}
 	}
 	&.info{
@@ -170,7 +170,7 @@
 			@include input-group-addon($btn-info-text-color, $btn-info-text-shadow, $input-info-border, $btn-info-bg, $btn-info-bg-image, $btn-info-drop-shadow);
 		}
 		.ax-inp {
-			@include input-variant($input-info-text-color, $input-info-text-shadow, $input-info-bg, $input-info-bg-image, $input-info-color-hover, $input-info-border, $input-info-drop-shadow);
+			///@include input-variant($input-info-text-color, $input-info-text-shadow, $input-info-bg, $input-info-bg-image, $input-info-color-hover, $input-info-border, $input-info-drop-shadow);
 		}
 	}
 	&.warning{
@@ -178,7 +178,7 @@
 			@include input-group-addon($btn-warning-text-color, $btn-warning-text-shadow, $input-warning-border, $btn-warning-bg, $btn-warning-bg-image, $btn-warning-drop-shadow);
 		}
 		.ax-inp {
-			@include input-variant($input-warning-text-color, $input-warning-text-shadow, $input-warning-bg, $input-warning-bg-image, $input-warning-color-hover, $input-warning-border, $input-warning-drop-shadow);
+			///@include input-variant($input-warning-text-color, $input-warning-text-shadow, $input-warning-bg, $input-warning-bg-image, $input-warning-color-hover, $input-warning-border, $input-warning-drop-shadow);
 		}
 	}
 	&.danger{
@@ -186,7 +186,7 @@
 			@include input-group-addon($btn-danger-text-color, $btn-danger-text-shadow, $input-danger-border, $btn-danger-bg, $btn-danger-bg-image, $btn-danger-drop-shadow);
 		}
 		.ax-inp {
-			@include input-variant($input-danger-text-color, $input-danger-text-shadow, $input-danger-bg, $input-danger-bg-image, $input-danger-color-hover, $input-danger-border, $input-danger-drop-shadow);
+			///@include input-variant($input-danger-text-color, $input-danger-text-shadow, $input-danger-bg, $input-danger-bg-image, $input-danger-color-hover, $input-danger-border, $input-danger-drop-shadow);
 		}
 	}
 	&.special{
@@ -194,7 +194,7 @@
 			@include input-group-addon($btn-special-text-color, $btn-special-text-shadow, $input-special-border, $btn-special-bg, $btn-special-bg-image, $btn-special-drop-shadow);
 		}
 		.ax-inp {
-			@include input-variant($input-special-text-color, $input-special-text-shadow, $input-special-bg, $input-special-bg-image, $input-special-color-hover, $input-special-border, $input-special-drop-shadow);
+			///@include input-variant($input-special-text-color, $input-special-text-shadow, $input-special-bg, $input-special-bg-image, $input-special-color-hover, $input-special-border, $input-special-drop-shadow);
 		}
 	}
 
