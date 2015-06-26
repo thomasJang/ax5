@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-06-25 
+ * 2015-06-26 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -1495,133 +1495,134 @@
 		this.main = (function(){
 			if (ax_super) ax_super.call(this); // 부모호출
 			this.config = {
-				click_event_name: (('ontouchstart' in document.documentElement) ? "touchstart" : "click"),
-				theme: 'default'
+				click_event_name: (('ontouchstart' in document.documentElement) ? "touchstart" : "click")
 			};
 		}).apply(this, arguments);
 
-		this.target = null;
+		this.queue = {};
 		var cfg = this.config;
 		/**
 		 * Preferences of progress UI
-		 * @method ax5.ui.progress.set_config
+		 * @method ax5.ui.progress.start
 		 * @param {Object} config - 클래스 속성값
 		 * @returns {ax5.ui.progress}
 		 * @example
 		 * ```
-		 * set_config({
+		 * start({
 		 *      target : {Element|AX5 nodelist}, // UI를 출력할 대상
 		 * });
 		 * ```
 		 */
 			//== class body start
-		this.init = function(){
-			// after set_config();
-			//console.log(this.config);
-			if(!cfg.target){
-				U.error("aui_progress_400", "[ax5.ui.progress] config.target is required");
+		this.start = function(opts){
+			if(!opts.target || !opts.id){
+				U.error("aui_progress_400", "[ax5.ui.progress] target, id is required");
+				return;
 			}
-			this.target = ax5.dom(cfg.target);
 
-			this.target.html( this.get_frame() );
+			var queue_id = opts.id,
+			    q, q_cfg;
+			this.queue[queue_id] = {id:opts.id, config: opts};
+			q = this.queue[queue_id];
+			q_cfg = q.config;
+			q_cfg.target = ax5.dom(q_cfg.target);
+			q_cfg.target.html( this.get_frame(q.config.theme) );
 
 			// 파트수집
-			this.els = {
-				"root": this.target.find('[data-component-grid-els="root"]'),
-				"body": this.target.find('[data-component-grid-els="body"]'),
-				"control": this.target.find('[data-component-grid-els="control"]')
+			q.els = {
+				"root": q_cfg.target.find('[data-progress-els="root"]'),
+				"bar": q_cfg.target.find('[data-progress-els="bar"]'),
+				"status": q_cfg.target.find('[data-progress-els="status"]')
 			};
 
-			// 아이템 이벤트 바인딩
-			this.target.find('[data-component-grid-item-index]').on(cfg.click_event_name, (function(e){
-				this.onclick(e||window.event);
-			}).bind(this));
-			
-			// 컨트롤 이벤트 바인딩
-			this.target.find('[data-component-grid-control]').on(cfg.click_event_name, (function(e){
-				this.onmove(e||window.event);
-			}).bind(this));
+			return this;
+		};
+
+		this.set_progress = function(id, idx, status){
+			var q = this.queue[id], _idx = idx,
+				percent;
+			if(status) _idx + 1;
+			q.status = status;
+			q.progress_index = idx;
+
+			percent = U.number(_idx/q.config.list.length*100, {round:0});
+
+			q.els["status"].html( percent + '% ' + _idx + '/' + q.config.list.length );
+			q.els["bar"].css({width:percent+'%'});
+
+			if(_idx >= q.config.list.length){
+				if(q.config.onend) q.config.onend.call({id:id});
+			}
+			else if(!status && !q.hold){
+				if(q.config.onprogress) q.config.onprogress.call({id:id, list:q.config.list, item:q.config.list[idx], idx:idx});
+			}
+		};
+
+		this.progress = function(opts){
+			if(typeof opts.id === "undefined") {
+				U.error("id가 필요합니다.");
+				return;
+			}
+			var
+				id = opts.id,
+				q = this.queue[id];
+
+			q.hold = false;
+
+			if(typeof q.progress_index === "undefined"){
+				q.progress_index = 0;
+				this.set_progress(id, q.progress_index, false);
+			}
+			else {
+				this.set_progress(id, q.progress_index, true);
+				setTimeout((function(){
+					this.set_progress(id, q.progress_index+1, false);
+				}).bind(this), q.config.progress_time);
+			}
+
+		};
+
+		this.hold = function(id){
+			if(typeof opts.id === "undefined") {
+				U.error("id가 필요합니다.")
+				return;
+			}
+			var
+				id = opts.id,
+				q = this.queue[id];
+
+			q.hold = true;
 		};
 		
-		this.get_frame = function(){
+		this.get_frame = function(theme){
 			var
 				po = [], i = 0;
 			
-			po.push('<div class="ax5-ui-component-grid ' +cfg.theme + '" data-component-grid-els="root">');
-				po.push('<div class="component-grid-body" data-component-grid-els="body">');
-
-					po.push('<table cellpadding="0" cellspacing="0">');
-						po.push('<tbody>');
-
-						for(var r=0;r<cfg.rows;r++){
-							po.push('<tr>');
-							for(var c=0;c<cfg.cols;c++) {
-								po.push('<td style="width:' + cfg.col_width + '">');
-								po.push('<div class="ax-item-wraper ' + (cfg.item.addon? "has-addon":"") + '" style="height:' + cfg.col_height + 'px;">');
-
-								po.push('<div class="ax-btn ' + (cfg.item.klass||"") + '" data-component-grid-item-index="' + i + '"></div>');
-
-								po.push('</div>');
-								po.push('</td>');
-								i++
-							}
-							po.push('</tr>');
-						}
-
-						po.push('</tbody>');
-					po.push('</table>');
-
+			po.push('<div class="ax5-ui-progress ' + (theme||"") + '" data-progress-els="root">');
+				po.push('<div class="progress-bar" data-progress-els="bar" style="width:0%;">');
+					po.push('<span class="progress-status" data-progress-els="status">0%</span>');
 				po.push('</div>');
-
-				if(cfg.control) {
-					cfg.control.height = (cfg.col_height * cfg.rows / 2);
-					po.push('<div class="component-grid-control" data-component-grid-els="control" style="width:' + cfg.control.width + 'px;">');
-					po.push('<table cellpadding="0" cellspacing="0">');
-					po.push('<tbody>');
-						po.push('<tr>');
-							po.push('<td>');
-							po.push('<div class="ax-item-wraper" style="height:' + cfg.control.height + 'px;">');
-								po.push('<button class="ax-btn ' + (cfg.item.klass||"") + '" data-component-grid-control="prev">' + cfg.control.prev + '</buttton>');
-							po.push('</div>');
-							po.push('</td>');
-						po.push('</tr>');
-						po.push('<tr>');
-							po.push('<td>');
-							po.push('<div class="ax-item-wraper" style="height:' + cfg.control.height + 'px;">');
-								po.push('<button class="ax-btn ' + (cfg.item.klass||"") + '" data-component-grid-control="next">' + cfg.control.next + '</button>');
-							po.push('</div>');
-							po.push('</td>');
-						po.push('</tr>');
-					po.push('</tbody>');
-					po.push('</table>');
-					po.push('</div>');
-				}
 			po.push('</div>');
 
 			return po.join('');
 		};
-		
-		this.onclick = function(e, target, index){
-			target = axd.parent(e.target, function(target){
-				if(ax5.dom.attr(target, "data-component-grid-item-index")){
-					return true;
-				}
-			});
-			if(target){
-				index = axd.attr(target, "data-component-grid-item-index");
-				if(this.config.onclick){
 
-					//console.log(U.number(index) + this.page.no * this.page.size);
-					this.config.onclick.call({
-						index: index,
-						list: this.list,
-						item: this.list[ U.number(index) + this.page.no * this.page.size ],
-						target: this.target.elements[0],
-						item_target: target
-					});
-				}
+		// byte load
+		this.set_loaded_byte = function(opts){
+			if(typeof opts.id === "undefined") {
+				U.error("id가 필요합니다.");
+				return;
 			}
-		};
+			
+			var
+				id = opts.id,
+				q = this.queue[id],
+				percent;
+
+			percent = U.number(opts.byte / q.config.total_byte * 100, {round:0});
+			q.els["status"].html( percent + '% ' + U.number(opts.byte, {byte:true}) + '/' + U.number(q.config.total_byte, {byte:true}) );
+			q.els["bar"].css( {width:percent+'%'} );
+		}
 
 	};
 	//== UI Class

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-06-25 
+ publish date : 2015-06-26 
 -->
 <html lang="en">
 <head>
@@ -1968,6 +1968,289 @@ ax5.util.require(["ui/menu.js"], function() {
 
 	});
 })();
+</script>
+
+
+</article>
+
+<!-- split -->
+
+<article class="cover">
+	<h1 data-menu-item="ax-ui-progress">Progress</h1>
+	<p class="lead">
+
+	</p>
+</article>
+
+
+
+<!-- basic -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-progress-style" class="capitalize">style</h3>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+	&lt;h4>Default&lt;/h4>
+	&lt;div class="ax5-ui-progress">
+		&lt;div class="progress-bar" style="width:5%;">
+			&lt;span class="progress-status">5% 1/20&lt;/span>
+		&lt;/div>
+	&lt;/div>
+
+	&lt;h4>Basic&lt;/h4>
+	&lt;div class="ax5-ui-progress basic">
+		&lt;div class="progress-bar" style="width:20%;">
+			&lt;span class="progress-status">20% 4/20&lt;/span>
+		&lt;/div>
+	&lt;/div>
+
+	&lt;h4>Info&lt;/h4>
+	&lt;div class="ax5-ui-progress info">
+		&lt;div class="progress-bar" style="width:30%;">
+			&lt;span class="progress-status">30% 6/20&lt;/span>
+		&lt;/div>
+	&lt;/div>
+
+	&lt;h4>Warning&lt;/h4>
+	&lt;div class="ax5-ui-progress warning">
+		&lt;div class="progress-bar" style="width:40%;">
+			&lt;span class="progress-status">40% 8/20&lt;/span>
+		&lt;/div>
+	&lt;/div>
+
+	&lt;h4>Danger&lt;/h4>
+	&lt;div class="ax5-ui-progress danger">
+		&lt;div class="progress-bar" style="width:50%;">
+			&lt;span class="progress-status">50% 10/20&lt;/span>
+		&lt;/div>
+	&lt;/div>
+
+	&lt;h4>Special&lt;/h4>
+	&lt;div class="ax5-ui-progress special">
+		&lt;div class="progress-bar" style="width:80%;">
+			&lt;span class="progress-status">80% 16/20&lt;/span>
+		&lt;/div>
+	&lt;/div>
+&lt;/div>
+</pre><h4>Result</h4>
+<div class="tag-result">
+	<h4>Default</h4>
+	<div class="ax5-ui-progress">
+		<div class="progress-bar" style="width:5%;">
+			<span class="progress-status">5% 1/20</span>
+		</div>
+	</div>
+
+	<h4>Basic</h4>
+	<div class="ax5-ui-progress basic">
+		<div class="progress-bar" style="width:20%;">
+			<span class="progress-status">20% 4/20</span>
+		</div>
+	</div>
+
+	<h4>Info</h4>
+	<div class="ax5-ui-progress info">
+		<div class="progress-bar" style="width:30%;">
+			<span class="progress-status">30% 6/20</span>
+		</div>
+	</div>
+
+	<h4>Warning</h4>
+	<div class="ax5-ui-progress warning">
+		<div class="progress-bar" style="width:40%;">
+			<span class="progress-status">40% 8/20</span>
+		</div>
+	</div>
+
+	<h4>Danger</h4>
+	<div class="ax5-ui-progress danger">
+		<div class="progress-bar" style="width:50%;">
+			<span class="progress-status">50% 10/20</span>
+		</div>
+	</div>
+
+	<h4>Special</h4>
+	<div class="ax5-ui-progress special">
+		<div class="progress-bar" style="width:80%;">
+			<span class="progress-status">80% 16/20</span>
+		</div>
+	</div>
+</div>
+
+
+</article>
+
+
+
+<!-- script -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-progress-script" class="capitalize">script item of list</h3>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+	&lt;div id="ax-ui-progress-script-target">&lt;/div>
+	&lt;div style="padding:10px;">
+		&lt;button class="ax-btn" id="ax-ui-progress-script-start">시작&lt;/button>
+		&lt;span id="ax-ui-progress-script-display">&lt;/span>
+	&lt;/div>
+&lt;/div>
+&lt;script type="text/javascript">
+(function(){
+	var my_progress = new ax5.ui.progress(), display = ax5.dom('#ax-ui-progress-script-display');
+	my_progress.start({
+		id: 'p-01',
+		theme: 'basic',
+		target: ax5.dom.get('#ax-ui-progress-script-target'),
+		list: [1,2,3,4,5,6,7,8,9,10],
+		start_index: 0,
+		progress_time: 100,
+		onprogress: function(){
+			//console.log(this);
+			display.append( "item:" + this.item + "," );
+			my_progress.progress({id:'p-01'});
+		},
+		onend: function(){
+			//console.log('end');
+			display.append( "end" );
+		}
+	});
+
+	ax5.dom("#ax-ui-progress-script-start").on("click", function(){
+		my_progress.progress({id:'p-01'});
+	});
+
+	
+})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result">
+	<div id="ax-ui-progress-script-target"></div>
+	<div style="padding:10px;">
+		<button class="ax-btn" id="ax-ui-progress-script-start">시작</button>
+		<span id="ax-ui-progress-script-display"></span>
+	</div>
+</div>
+<script type="text/javascript">
+(function(){
+	var my_progress = new ax5.ui.progress(), display = ax5.dom('#ax-ui-progress-script-display');
+	my_progress.start({
+		id: 'p-01',
+		theme: 'basic',
+		target: ax5.dom.get('#ax-ui-progress-script-target'),
+		list: [1,2,3,4,5,6,7,8,9,10],
+		start_index: 0,
+		progress_time: 100,
+		onprogress: function(){
+			//console.log(this);
+			display.append( "item:" + this.item + "," );
+			my_progress.progress({id:'p-01'});
+		},
+		onend: function(){
+			//console.log('end');
+			display.append( "end" );
+		}
+	});
+
+	ax5.dom("#ax-ui-progress-script-start").on("click", function(){
+		my_progress.progress({id:'p-01'});
+	});
+
+	
+})();
+</script>
+
+
+</article>
+
+
+
+<!-- script byte -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-progress-script-byte" class="capitalize">script loaded byte</h3>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+	&lt;div id="ax-ui-progress-script-byte-target">&lt;/div>
+	&lt;div style="padding:10px;">
+		&lt;button class="ax-btn" id="ax-ui-progress-script-byte-start">시작&lt;/button>
+		&lt;span id="ax-ui-progress-script-byte-display">&lt;/span>
+	&lt;/div>
+&lt;/div>
+&lt;script type="text/javascript">
+	(function(){
+		var my_progress = new ax5.ui.progress(),
+		    display = ax5.dom('#ax-ui-progress-script-byte-display'),
+			total_byte = 10 * 1024 * 1024, loaded_byte = 0;
+		my_progress.start({
+			id: 'p-02', // 고유한 값을 사용하세요
+			theme: 'good',
+			target: ax5.dom.get('#ax-ui-progress-script-byte-target'),
+			total_byte: total_byte,
+			progress_time: 100
+		});
+
+		var update_byte = function(){
+			loaded_byte += 1024 * 7;
+			if(loaded_byte >= total_byte){
+				display.append( "end" );
+				return;
+			}
+			display.html( loaded_byte );
+			my_progress.set_loaded_byte({id:'p-02', byte:loaded_byte});
+			setTimeout(function(){
+				update_byte();
+			}, 10);
+		};
+
+		ax5.dom("#ax-ui-progress-script-byte-start").on("click", function(){
+			update_byte();
+		});
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result">
+	<div id="ax-ui-progress-script-byte-target"></div>
+	<div style="padding:10px;">
+		<button class="ax-btn" id="ax-ui-progress-script-byte-start">시작</button>
+		<span id="ax-ui-progress-script-byte-display"></span>
+	</div>
+</div>
+<script type="text/javascript">
+	(function(){
+		var my_progress = new ax5.ui.progress(),
+		    display = ax5.dom('#ax-ui-progress-script-byte-display'),
+			total_byte = 10 * 1024 * 1024, loaded_byte = 0;
+		my_progress.start({
+			id: 'p-02', // 고유한 값을 사용하세요
+			theme: 'good',
+			target: ax5.dom.get('#ax-ui-progress-script-byte-target'),
+			total_byte: total_byte,
+			progress_time: 100
+		});
+
+		var update_byte = function(){
+			loaded_byte += 1024 * 7;
+			if(loaded_byte >= total_byte){
+				display.append( "end" );
+				return;
+			}
+			display.html( loaded_byte );
+			my_progress.set_loaded_byte({id:'p-02', byte:loaded_byte});
+			setTimeout(function(){
+				update_byte();
+			}, 10);
+		};
+
+		ax5.dom("#ax-ui-progress-script-byte-start").on("click", function(){
+			update_byte();
+		});
+	})();
 </script>
 
 

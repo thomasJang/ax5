@@ -1,7 +1,61 @@
-
+@mixin progress-variant($bar-bg, $bar-border, $status-color){
+	.progress-bar {
+		@include ax-gradient(nth($bar-bg, 1), nth($bar-bg, 2));;
+		border: $bar-border;
+	}
+	.progress-status {
+		color: $status-color;
+	}
+}
 
 // mixins --------------------------------------------- end
 
 .ax5-ui-progress{
+	position: relative;
+	box-sizing: border-box;
+	background: $progress-bg;
+	border: $progress-border;
+	padding: $progress-padding;
+	border-radius: $progress-border-radius + $progress-padding;
+	@include box-shadow(inset 1px 1px 0px 0px rgba(0,0,0,0.15));
+	.progress-bar{
+		@include transition(width 0.2s linear);
+		position: relative;
+		//overflow:hidden;
+		box-sizing: border-box;
+		height: $progress-bar-height;
+		border-radius: $progress-border-radius;
+		min-width: $progress-border-radius * 2;
+		@include box-shadow(0px 1px 0px 0px rgba(0,0,0,0.15));
+	}
+	.progress-status{
+		position: absolute;
+		white-space: nowrap;
+		box-sizing: border-box;
+		display: block;
+		text-align: right;
+		height: $progress-bar-height;
+		line-height: $progress-bar-height;
+		padding: 0px $progress-padding * 2;
+	}
+	@include progress-variant($progress-default-bar-bg, $progress-default-bar-border, $progress-default-status-color);
 
+	&.basic{
+		@include progress-variant($progress-basic-bar-bg, $progress-basic-bar-border, $progress-basic-status-color);
+	}
+	&.good{
+		@include progress-variant($progress-good-bar-bg, $progress-good-bar-border, $progress-good-status-color);
+	}
+	&.info{
+		@include progress-variant($progress-info-bar-bg, $progress-info-bar-border, $progress-info-status-color);
+	}
+	&.warning{
+		@include progress-variant($progress-warning-bar-bg, $progress-warning-bar-border, $progress-warning-status-color);
+	}
+	&.danger{
+		@include progress-variant($progress-danger-bar-bg, $progress-danger-bar-border, $progress-danger-status-color);
+	}
+	&.special{
+		@include progress-variant($progress-special-bar-bg, $progress-special-bar-border, $progress-special-status-color);
+	}
 }

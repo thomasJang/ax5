@@ -578,9 +578,36 @@ $modal-special-heading-bg: $panel-special-heading-bg;
 
 //== progress
 $progress-bg: #eee;
-$progress-border: 1px solid #ccc;
-$progress-height: 20;
-$progress-padding: 2;
+$progress-border: 2px solid #979797;
+$progress-bar-height: 20px;
+$progress-padding: 3px;
+$progress-border-radius: 10px;
 
-$progress-bar-bg: #eee;
-$progress-bar-border: 1px solid #ccc;
+//** color for elements within modal
+$progress-default-bar-bg: (#FFFFFF, #F0F0F0); // 배경색들;
+$progress-default-bar-border: 2px solid #aaa;
+$progress-default-status-color: #444;
+
+$progress-basic-bar-bg: (lighten($theme-basic, 10%), $theme-basic); // 배경색들;
+$progress-basic-bar-border: 1px solid $theme-basic;
+$progress-basic-status-color: #fff;
+
+$progress-good-bar-bg: (lighten($theme-good, 10%), $theme-good);
+$progress-good-bar-border: 1px solid $theme-good;
+$progress-good-status-color: #fff;
+
+$progress-info-bar-bg: (lighten($theme-info, 10%), $theme-info);
+$progress-info-bar-border: 1px solid $theme-info;
+$progress-info-status-color: #fff;
+
+$progress-warning-bar-bg: (lighten($theme-warning, 10%), $theme-warning);
+$progress-warning-bar-border: 1px solid $theme-warning;
+$progress-warning-status-color: #fff;
+
+$progress-danger-bar-bg: (lighten($theme-danger, 10%), $theme-danger);
+$progress-danger-bar-border: 1px solid $theme-danger;
+$progress-danger-status-color: #fff;
+
+$progress-special-bar-bg: (lighten($theme-special, 10%), $theme-special);
+$progress-special-bar-border: 1px solid $theme-special;
+$progress-special-status-color: #fff;

@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-06-25 
+ * 2015-06-26 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
