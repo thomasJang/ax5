@@ -33,7 +33,8 @@
 				title: '',
 				heading: {
 					height: 30
-				}
+				},
+				esc_close: true
 			};
 		}).apply(this, arguments);
 
@@ -67,13 +68,15 @@
 				po.push( (opts.title || cfg.title || "") );
 				po.push('</div>');
 				po.push('<div class="ax-modal-body" data-modal-els="body">');
+				if(opts.http) {
 					po.push('<iframe name="' + modal_id + '-frame" src="" width="100%" height="100%" frameborder="0" data-modal-els="iframe"></iframe>');
 					po.push('<form name="' + modal_id + '-form" data-modal-els="iframe-form">');
 					po.push('<input type="hidden" name="modal_id" value="' + modal_id + '" />');
-					for(var p in opts.http.param){
+					for (var p in opts.http.param) {
 						po.push('<input type="hidden" name="' + p + '" value="' + opts.http.param[p] + '" />');
 					}
 					po.push('</form>');
+				}
 				po.push('</div>');
 
 			po.push('</div>');
@@ -99,12 +102,15 @@
 			this.active_modal = ax5.dom('#' + opts.id);
 			// 파트수집
 			this.els = {
-				"root": this.active_modal.find('[data-modal-els="root"]'),
+				"root"   : this.active_modal.find('[data-modal-els="root"]'),
 				"heading": this.active_modal.find('[data-modal-els="heading"]'),
-				"body": this.active_modal.find('[data-modal-els="body"]'),
-				"iframe": this.active_modal.find('[data-modal-els="iframe"]'),
-				"iframe-form": this.active_modal.find('[data-modal-els="iframe-form"]')
+				"body"   : this.active_modal.find('[data-modal-els="body"]')
 			};
+
+			if(opts.http) {
+				this.els["iframe"] = this.active_modal.find('[data-modal-els="iframe"]');
+				this.els["iframe-form"] =  this.active_modal.find('[data-modal-els="iframe-form"]');
+			}
 
 			//- position 정렬
 			if(typeof opts.position === "undefined" || opts.position === "center"){
@@ -116,24 +122,35 @@
 			}
 			this.active_modal.css(box);
 
-			this.els["iframe"].css({height: box.height-cfg.heading.height });
+			if(opts.http) {
+				this.els["iframe"].css({height: box.height - cfg.heading.height});
 
-
-			// iframe content load
-			this.els["iframe-form"].attr({"method": opts.http.method});
-			this.els["iframe-form"].attr({"target": opts.id + "-frame"});
-			this.els["iframe-form"].attr({"action": opts.http.url});
-			this.els["iframe"].on("load", (function(){
-				if(opts.onload) opts.onload.call(opts);
-				else if(cfg.onload) cfg.onload.call(opts);
-			}).bind(this));
-			this.els["iframe-form"].elements[0].submit();
-
+				// iframe content load
+				this.els["iframe-form"].attr({"method": opts.http.method});
+				this.els["iframe-form"].attr({"target": opts.id + "-frame"});
+				this.els["iframe-form"].attr({"action": opts.http.url});
+				this.els["iframe"].on("load", (function () {
+					if (opts.onload) opts.onload.call(opts); else if (cfg.onload) cfg.onload.call(opts);
+				}).bind(this));
+				this.els["iframe-form"].elements[0].submit();
+			}
+			else{
+				var that = {
+					id: opts.id,
+					theme: opts.theme,
+					width: opts.width,
+					height: opts.height
+				};
+				U.extend(that, this.els);
+				if (opts.onload) opts.onload.call(that); else if (cfg.onload) cfg.onload.call(that);
+			}
 
 			// bind key event
-			axd(window).on("keydown.ax-modal", (function(e){
-				this.onkeyup(e||window.event, opts);
-			}).bind(this))
+			if(cfg.esc_close) {
+				axd(window).on("keydown.ax-modal", (function (e) {
+					this.onkeyup(e || window.event, opts);
+				}).bind(this));
+			}
 		};
 		
 		this.onkeyup = function(e, opts, target, k){
