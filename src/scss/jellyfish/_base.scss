@@ -464,7 +464,7 @@ $dialog-special-text: $panel-special-text;
 $dialog-special-heading-bg: $panel-special-heading-bg;
 
 //== toast
-$toast-container-position: 1; // 0:left,top / 1:right,top / 2:right,bottom / 3:left,bottom
+$toast-container-position: 2; // 0:left,top / 1:right,top / 2:right,bottom / 3:left,bottom
 $toast-container-margin: 10px;
 $toast-box-model: $panel-box-model;
 $toast-border: 1px solid rgb(255/2, 255/2, 255/2);

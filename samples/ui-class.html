@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-06-26 
+ publish date : 2015-06-29 
 -->
 <html lang="en">
 <head>
@@ -1984,6 +1984,7 @@ ax5.util.require(["ui/menu.js"], function() {
 	&lt;div id="ax-ui-progress-script-target">&lt;/div>
 	&lt;div style="padding:10px;">
 		&lt;button class="ax-btn" id="ax-ui-progress-script-start">시작&lt;/button>
+		&lt;button class="ax-btn" id="ax-ui-progress-script-clear">Clear&lt;/button>
 		&lt;span id="ax-ui-progress-script-display">&lt;/span>
 	&lt;/div>
 &lt;/div>
@@ -2011,7 +2012,10 @@ ax5.util.require(["ui/menu.js"], function() {
 	ax5.dom("#ax-ui-progress-script-start").on("click", function(){
 		my_progress.progress({id:'p-01'});
 	});
-
+	ax5.dom("#ax-ui-progress-script-clear").on("click", function(){
+		my_progress.clear({id:'p-01'});
+		display.html( "" );
+	});
 	
 })();
 &lt;/script>
@@ -2020,6 +2024,7 @@ ax5.util.require(["ui/menu.js"], function() {
 	<div id="ax-ui-progress-script-target"></div>
 	<div style="padding:10px;">
 		<button class="ax-btn" id="ax-ui-progress-script-start">시작</button>
+		<button class="ax-btn" id="ax-ui-progress-script-clear">Clear</button>
 		<span id="ax-ui-progress-script-display"></span>
 	</div>
 </div>
@@ -2047,7 +2052,10 @@ ax5.util.require(["ui/menu.js"], function() {
 	ax5.dom("#ax-ui-progress-script-start").on("click", function(){
 		my_progress.progress({id:'p-01'});
 	});
-
+	ax5.dom("#ax-ui-progress-script-clear").on("click", function(){
+		my_progress.clear({id:'p-01'});
+		display.html( "" );
+	});
 	
 })();
 </script>

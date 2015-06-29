@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-06-26 
+ * 2015-06-29 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -1609,6 +1609,25 @@
 				q = this.queue[id];
 
 			q.hold = true;
+		};
+
+		this.clear = function(opts){
+			if(typeof opts.id === "undefined") {
+				U.error("id가 필요합니다.");
+				return;
+			}
+			var
+				id = opts.id,
+				q = this.queue[id];
+
+			q.hold = false;
+
+			q.status = status;
+			q.progress_index = 0;
+
+			q.els["status"].html( '0% ' );
+			q.els["bar"].css({width:'0%'});
+
 		};
 		
 		this.get_frame = function(theme){

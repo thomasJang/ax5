@@ -2621,7 +2621,7 @@ a.ax {
   z-index: 2000;
   position: fixed;
   right: 10px;
-  top: 10px; }
+  bottom: 10px; }
   .ax5-ui-toast-container .ax5-ui-toast {
     -webkit-animation: ax-toast 0.2s ease-in-out;
     -moz-animation: ax-toast 0.2s ease-in-out;

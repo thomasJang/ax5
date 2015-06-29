@@ -74,6 +74,7 @@
 	<div id="ax-ui-progress-script-target"></div>
 	<div style="padding:10px;">
 		<button class="ax-btn" id="ax-ui-progress-script-start">시작</button>
+		<button class="ax-btn" id="ax-ui-progress-script-clear">Clear</button>
 		<span id="ax-ui-progress-script-display"></span>
 	</div>
 </div>
@@ -101,7 +102,10 @@
 	ax5.dom("#ax-ui-progress-script-start").on("click", function(){
 		my_progress.progress({id:'p-01'});
 	});
-
+	ax5.dom("#ax-ui-progress-script-clear").on("click", function(){
+		my_progress.clear({id:'p-01'});
+		display.html( "" );
+	});
 	
 })();
 </script>
