@@ -127,6 +127,7 @@
 			var
 				id = opts.id,
 				q = this.queue[id];
+			if(!q) return this;
 
 			q.hold = false;
 

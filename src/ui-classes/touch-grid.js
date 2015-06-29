@@ -303,8 +303,56 @@
 			this.content_scroll(0);
 		};
 
+		this.append = function(item){
+			this.list.push(item);
+			this.focused_index = 0;
+			this.content_scroll();
+			this.focus('last');
+		};
+
+		this.remove = function(index){
+			if(typeof index === "undefined"){
+				index = this.list.length-1;
+			}
+			if(this.list[index]){
+				this.list.splice(index, 1);
+			}
+			else{
+				return this;
+			}
+
+			if(index == this.focused_index){
+				if(index == 0) this.focused_index = 0;
+				else if(this.list.length == 1) this.focused_index = 0;
+				else {
+					this.focused_index -= 1;
+				}
+			}
+
+			var focused_item_top, body_content_top, body_height, view_position_top;
+				focused_item_top = this.focused_index * cfg.item_height,
+				body_content_top = this.els["main-body-content"].position().top,
+				body_height = this.els["main-body"].height(),
+				view_position_top = focused_item_top + body_content_top;
+
+			if( (view_position_top + cfg.item_height) > body_height ) {
+				this.content_scroll(-(body_height - (focused_item_top + cfg.item_height)));
+			}
+			else if( view_position_top < 0 ){
+					this.content_scroll( focused_item_top );
+			}
+			else{
+				this.content_scroll();
+			}
+		};
+
 		this.content_scroll = function(top){
-			this.els["main-body-content"].css({top: -top });
+			if(typeof top === "undefined"){
+				top = U.number(this.els["main-body-content"].position().top, {abs:true});
+			}
+			else{
+				this.els["main-body-content"].css({top: -top });
+			}
 
 			this.virtual_scroll.start_index = Math.floor(top / cfg.item_height);
 			this.virtual_scroll.end_index = U.number(this.virtual_scroll.start_index) + U.number(this.virtual_scroll.size);
