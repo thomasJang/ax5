@@ -28,6 +28,8 @@
 		this.list = [];
 		this.page = {};
 		this.target = null;
+		this.selected_item = null;
+
 		var cfg = this.config;
 		/**
 		 * Preferences of component_grid UI
@@ -143,6 +145,11 @@
 				}
 			});
 			if(target){
+
+				if(this.selected_item) axd.class_name(this.selected_item, "remove", "selected");
+				this.selected_item = target;
+				axd.class_name(target, "add", "selected");
+
 				index = axd.attr(target, "data-component-grid-item-index");
 				if(this.config.onclick){
 
@@ -224,6 +231,28 @@
 				}
 				item_index++;
 			}
+		}
+
+		this.click = function(index){
+			if(this.list[ U.number(index) + this.page.no * this.page.size ]) {
+				var target = this.target.find('[data-component-grid-item-index="' + index + '"]');
+				if(this.selected_item) axd.class_name(this.selected_item, "remove", "selected");
+				this.selected_item = target;
+				axd.class_name(target, "add", "selected");
+
+				if(this.config.onclick){
+					//console.log(U.number(index) + this.page.no * this.page.size);
+					this.config.onclick.call({
+						index: index,
+						list: this.list,
+						item: this.list[ U.number(index) + this.page.no * this.page.size ],
+						target: this.target.elements[0],
+						item_target: target
+					});
+				}
+			}
+
+			return this;
 		}
 	};
 	//== UI Class

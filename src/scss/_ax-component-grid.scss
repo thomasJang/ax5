@@ -40,6 +40,9 @@
 				position: relative;
 				font-size: ceil(($font-size-base * 1.5));
 			}
+			&.selected{
+
+			}
 		}
 		.has-addon {
 			.ax-btn {
