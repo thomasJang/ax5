@@ -64,8 +64,10 @@ ax5.xhr = (function (){
 						that.result      = http.statusText;
 						that.state       = http.readyState;
 						that.type        = http.responseType;
+
 						try {
 							that.data = ("responseText" in http) ? http.responseText : "";
+							if(typeof that.data == "string") that.data = U.parse_json(that.data);
 						}catch(e){}
 
 						if (http.status == 200) {
@@ -102,6 +104,17 @@ ax5.xhr = (function (){
                 };
                 if( "ontimeout" in http ) http.timeout = cfg.timeout, http.ontimeout = ontimeout;
                 else time_id = setTimeout( ontimeout, cfg.timeout);
+
+				http.onerror = function(e){
+					that = cfg;
+					//that.error = "error";
+					if (cfg.error) {
+						cfg.error.call(that, that);
+					} else {
+						if (cfg.response) cfg.response.call(that, that, that.data, that.status, http);
+						else console.log(http);
+					}
+				};
 
 				// 데이터 전송
 				http.send(cfg.param);
@@ -267,7 +280,7 @@ ax5.xhr = (function (){
  * ```
  */
 	function config(opts){
-		U.extend_all(options, opts, true);
+		options = U.extend_all(options, opts, true);
 		return options;
 	}
 

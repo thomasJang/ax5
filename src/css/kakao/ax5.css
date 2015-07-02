@@ -2769,7 +2769,7 @@ a.ax {
         box-sizing: border-box;
         position: relative; }
       .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-body table tbody tr td {
-        font-size: 16px; }
+        font-size: 13px; }
       .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-body table tbody tr:hover td, .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-body table tbody tr:hover th {
         background: #F7F7F7;
         background-image: -webkit-linear-gradient(top, #F7F7F7, #F7F7F7);

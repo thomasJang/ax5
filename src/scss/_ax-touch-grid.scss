@@ -30,7 +30,7 @@
 		tbody {
 			tr{
 				td{
-					font-size: ceil($font-size-base * 1.2);
+					font-size: ceil($font-size-base * 1);
 				}
 				&:hover {
 					td, th {
