@@ -78,6 +78,12 @@
 			this.target.find('[data-component-grid-control]').on(cfg.click_event_name, (function(e){
 				this.onmove(e||window.event);
 			}).bind(this));
+
+
+			this.set_size_frame();
+			this.bind_window_resize(function(){
+				this.set_size_frame();
+			});
 		};
 		
 		this.get_frame = function(){
@@ -93,8 +99,8 @@
 						for(var r=0;r<cfg.rows;r++){
 							po.push('<tr>');
 							for(var c=0;c<cfg.cols;c++) {
-								po.push('<td style="width:' + cfg.col_width + '">');
-								po.push('<div class="ax-item-wraper ' + (cfg.item.addon? "has-addon":"") + '" style="height:' + cfg.col_height + 'px;">');
+								po.push('<td>');
+								po.push('<div class="ax-item-wraper ' + (cfg.item.addon? "has-addon":"") + '">');
 
 								po.push('<div class="ax-btn ' + (cfg.item.klass||"") + '" data-component-grid-item-index="' + i + '"></div>');
 
@@ -111,20 +117,20 @@
 				po.push('</div>');
 
 				if(cfg.control) {
-					cfg.control.height = (cfg.col_height * cfg.rows / 2);
+					//cfg.control.height = (cfg.col_height * cfg.rows / 2);
 					po.push('<div class="component-grid-control" data-component-grid-els="control" style="width:' + cfg.control.width + 'px;">');
 					po.push('<table cellpadding="0" cellspacing="0">');
 					po.push('<tbody>');
 						po.push('<tr>');
 							po.push('<td>');
-							po.push('<div class="ax-item-wraper" style="height:' + cfg.control.height + 'px;">');
+							po.push('<div class="ax-item-wraper">');
 								po.push('<button class="ax-btn ' + (cfg.item.klass||"") + '" data-component-grid-control="prev">' + cfg.control.prev + '</buttton>');
 							po.push('</div>');
 							po.push('</td>');
 						po.push('</tr>');
 						po.push('<tr>');
 							po.push('<td>');
-							po.push('<div class="ax-item-wraper" style="height:' + cfg.control.height + 'px;">');
+							po.push('<div class="ax-item-wraper">');
 								po.push('<button class="ax-btn ' + (cfg.item.klass||"") + '" data-component-grid-control="next">' + cfg.control.next + '</button>');
 							po.push('</div>');
 							po.push('</td>');
@@ -136,6 +142,28 @@
 			po.push('</div>');
 
 			return po.join('');
+		};
+
+
+		this.set_size_frame = function(){  /* resizable */
+			var
+				target_height = this.target.height();
+
+			this.els["body"].find(".ax-item-wraper").css({height:target_height / cfg.rows});
+			this.els["control"].find(".ax-item-wraper").css({height:target_height / 2});
+
+			/*
+			this.els["main"].css({height: target_height});
+			this.els["main-header"].css({height: cfg.head_height});
+			this.els["main-body"].css({height: target_height - cfg.head_height});
+			if(cfg.control) {
+				this.els["control"].css({height: target_height});
+				var control_item = this.els["control"].find(".ax-item-wraper");
+				//console.log(control_item.elements.length);
+				control_item.css({height: target_height / control_item.elements.length});
+			}
+			this.virtual_scroll.size = Math.ceil((target_height - cfg.head_height) / cfg.item_height);
+			*/
 		};
 		
 		this.onclick = function(e, target, index){
@@ -222,9 +250,9 @@
 					item = this.list[item_index];
 
 				if(item) {
-					node.html('<div class="label" style="' + cfg.item.label.style + '">' + formatter(item[cfg.item.label.key], cfg.item.label.formatter) + '</div>');
+					node.html('<div class="label">' + formatter(item[cfg.item.label.key], cfg.item.label.formatter) + '</div>');
 					if (cfg.item.addon) {
-						node.append('<div class="addon" style="' + cfg.item.addon.style + '">' + formatter(item[cfg.item.addon.key], cfg.item.addon.formatter) + '</div>');
+						node.append('<div class="addon">' + formatter(item[cfg.item.addon.key], cfg.item.addon.formatter) + '</div>');
 					}
 				}else{
 					node.empty();

@@ -2836,12 +2836,19 @@ a.ax {
           margin: 0px;
           width: 100%;
           height: 100%; }
-    .ax5-ui-component-grid .component-grid-body .ax-btn .label {
-      position: relative;
-      font-size: 20px; }
+    .ax5-ui-component-grid .component-grid-body .ax-btn {
+      display: flex;
+      flex-direction: column;
+      justify-content: center; }
+      .ax5-ui-component-grid .component-grid-body .ax-btn .label {
+        font-size: 20px;
+        padding: 5px 0px; }
     .ax5-ui-component-grid .component-grid-body .has-addon .ax-btn .label {
+      flex: 1;
+      padding: 10px 0px;
       font-size: 16px; }
     .ax5-ui-component-grid .component-grid-body .has-addon .ax-btn .addon {
+      flex: none;
       position: relative;
       font-size: 13px;
       background: #002A4F;
@@ -2851,7 +2858,8 @@ a.ax {
       filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#002A4F, endColorstr=#002A4F);
       color: #fff;
       border-radius: 10px;
-      text-shadow: none; }
+      text-shadow: none;
+      padding: 3px; }
   .ax5-ui-component-grid .component-grid-control {
     display: table-cell;
     vertical-align: top; }

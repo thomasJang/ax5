@@ -1765,13 +1765,13 @@ ax5.util.require(["ui/menu.js"], function() {
 
 <!-- basic -->
 <article class="content">
-	<h3 data-menu-item="ax-ui-component-grid-default" class="capitalize">default</h3>
+	<h3 data-menu-item="ax-ui-component-grid-default" class="capitalize"">default</h3>
 	<p>
 
 	</p>
 <pre class="prettyprint linenums">
 &lt;div class="tag-result">
-	&lt;div id="ui-component-grid-default-target">&lt;/div>
+	&lt;div id="ui-component-grid-default-target" style="height:200px;">&lt;/div>
 &lt;/div>
 &lt;script type="text/javascript">
 (function(){
@@ -1780,7 +1780,7 @@ ax5.util.require(["ui/menu.js"], function() {
 		target: ax5.dom.get("#ui-component-grid-default-target"),
 		theme: "default",
 		item: {
-			label: {key: 'title', style:"top:6px;"},
+			label: {key: 'title'},
 			klass: 'basic'
 		},
 		control:{
@@ -1790,8 +1790,6 @@ ax5.util.require(["ui/menu.js"], function() {
 		},
 		cols: 3,
 		rows: 3,
-		col_width: '33%',
-		col_height: 60,
 		onclick: function(){
 			console.log(this);
 		}
@@ -1823,7 +1821,7 @@ ax5.util.require(["ui/menu.js"], function() {
 &lt;/script>
 </pre><h4>Result</h4>
 <div class="tag-result">
-	<div id="ui-component-grid-default-target"></div>
+	<div id="ui-component-grid-default-target" style="height:200px;"></div>
 </div>
 <script type="text/javascript">
 (function(){
@@ -1832,7 +1830,7 @@ ax5.util.require(["ui/menu.js"], function() {
 		target: ax5.dom.get("#ui-component-grid-default-target"),
 		theme: "default",
 		item: {
-			label: {key: 'title', style:"top:6px;"},
+			label: {key: 'title'},
 			klass: 'basic'
 		},
 		control:{
@@ -1842,8 +1840,6 @@ ax5.util.require(["ui/menu.js"], function() {
 		},
 		cols: 3,
 		rows: 3,
-		col_width: '33%',
-		col_height: 60,
 		onclick: function(){
 			console.log(this);
 		}
@@ -1887,7 +1883,7 @@ ax5.util.require(["ui/menu.js"], function() {
 	</p>
 <pre class="prettyprint linenums">
 &lt;div class="tag-result">
-	&lt;div id="ui-component-grid-addon-target">&lt;/div>
+	&lt;div id="ui-component-grid-addon-target" style="height:150px;">&lt;/div>
 &lt;/div>
 &lt;script type="text/javascript">
 	(function(){
@@ -1907,8 +1903,6 @@ ax5.util.require(["ui/menu.js"], function() {
 			},
 			cols: 4,
 			rows: 2,
-			col_width: '33%',
-			col_height: 80,
 			onclick: function(){
 				console.log(this);
 			}
@@ -1938,7 +1932,7 @@ ax5.util.require(["ui/menu.js"], function() {
 &lt;/script>
 </pre><h4>Result</h4>
 <div class="tag-result">
-	<div id="ui-component-grid-addon-target"></div>
+	<div id="ui-component-grid-addon-target" style="height:150px;"></div>
 </div>
 <script type="text/javascript">
 	(function(){
@@ -1958,8 +1952,6 @@ ax5.util.require(["ui/menu.js"], function() {
 			},
 			cols: 4,
 			rows: 2,
-			col_width: '33%',
-			col_height: 80,
 			onclick: function(){
 				console.log(this);
 			}
