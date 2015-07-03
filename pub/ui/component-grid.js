@@ -176,6 +176,7 @@
 
 				if(this.selected_item) axd.class_name(this.selected_item, "remove", "selected");
 				this.selected_item = target;
+				this.selected_item_pgno = this.page.no;
 				axd.class_name(target, "add", "selected");
 
 				index = axd.attr(target, "data-component-grid-item-index");
@@ -243,6 +244,13 @@
 				}
 			}
 
+			if(this.selected_item) {
+				axd.class_name(this.selected_item, "remove", "selected");
+				if(this.selected_item_pgno == this.page.no) {
+					axd.class_name(this.selected_item, "add", "selected");
+				}
+			}
+
 			var item_index = this.page.no * this.page.size;
 			for(var i=0;i<this.page.size;i++){
 				var
@@ -259,13 +267,14 @@
 				}
 				item_index++;
 			}
-		}
+		};
 
 		this.click = function(index){
 			if(this.list[ U.number(index) + this.page.no * this.page.size ]) {
 				var target = this.target.find('[data-component-grid-item-index="' + index + '"]');
 				if(this.selected_item) axd.class_name(this.selected_item, "remove", "selected");
 				this.selected_item = target;
+				this.selected_item_pgno = this.page.no;
 				axd.class_name(target, "add", "selected");
 
 				if(this.config.onclick){
