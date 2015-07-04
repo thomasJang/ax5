@@ -3151,10 +3151,8 @@
 				return els[0].innerHTML;
 			} else {
                 tag = ( re_tag.exec(val) || ["", ""] )[1].toLowerCase();
-				if (U.is_element(val) || U.is_nodelist(val)) {
-					append(empty(els), val);
-				}
-				else if (!re_noInnerhtml.test(val)) {
+				if (U.is_number(val)) val = ''+val;
+				if (U.is_string(val) && !re_noInnerhtml.test(val)) {
                     if(tag_not_support_innerhtml[tag]){
                         append(empty(els), val);
                     }else{
@@ -3162,8 +3160,11 @@
                         var i = 0, l = els.length;
                         for (; i < l; i++) {
                             if("innerHTML" in els[i]) els[i].innerHTML = val;
-                        }                        
+                        }
                     }
+				}
+				else if (U.is_element(val) || U.is_nodelist(val)) {
+					append(empty(els), val);
 				}
 				return els;
 			}
