@@ -92,6 +92,7 @@
 
 		<button class="ax-btn lg" id="ax-ui-touch-grid-append-append">Append</button>
 		<button class="ax-btn lg" id="ax-ui-touch-grid-append-remove">Remove</button>
+		<button class="ax-btn lg" id="ax-ui-touch-grid-append-update">Update</button>
 	</div>
 </div>
 <script type="text/javascript">
@@ -103,6 +104,9 @@
 			head_align: "center",
 			item_height: 40,
 			col_group: [
+				{key: 'no', label: 'No.', width: 60, align:"center", formatter: function(){
+					return this.index + 1;
+				}},
 				{key: 'date', label: 'Date', width: 120, align:"center"},
 				{key: 'title', label: '제목', width: '*'},
 				{key: 'price', label: 'Price', width: 120, formatter:"money", align:"right"}
@@ -133,8 +137,10 @@
 			my_touch_grid.append({date:'2015-06-07', title: my_touch_grid.list.length + '. 체커 사용가이드', price:205677});
 		});
 		ax5.dom("#ax-ui-touch-grid-append-remove").on("click", function(){
-			//my_touch_grid.focus("last");
 			my_touch_grid.remove();
+		});
+		ax5.dom("#ax-ui-touch-grid-append-update").on("click", function(){
+			my_touch_grid.update(2, {price:0});
 		});
 	})();
 </script>

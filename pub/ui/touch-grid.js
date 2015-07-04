@@ -269,7 +269,7 @@
 									if(!C.align) return '';
 									return 'text-align:' + C.align + ';';
 								}
-							)(this.col_group[i]) + '">' + this.get_col_value(item, this.col_group, i) + '</td>');
+							)(this.col_group[i]) + '">' + this.get_col_value(item, this.col_group, r, i) + '</td>');
 					}
 					po.push('</tr>');
 				}
@@ -277,9 +277,10 @@
 			return po.join('');
 		};
 
-		this.get_col_value = function(item, CG, ci){
+		this.get_col_value = function(item, CG, r, ci){
 			if(U.is_function(CG[ci].formatter)){
 				var that = {
+					index: r,
 					list: this.list,
 					item: item,
 					col_group: CG,
@@ -308,6 +309,17 @@
 			this.focused_index = 0;
 			this.content_scroll();
 			this.focus('last');
+		};
+
+		this.update = function(index, json){
+			if(typeof index !== "undefined" && this.list[index]){
+				for(var k in json){
+					this.list[index][k] = json[k];
+				}
+				this.content_scroll();
+				this.focus(index);
+			}
+			return this;
 		};
 
 		this.remove = function(index){
