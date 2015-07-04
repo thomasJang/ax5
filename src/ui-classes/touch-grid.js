@@ -4,10 +4,11 @@
 	/**
 	 * @class ax5.ui.touch_grid
 	 * @classdesc
-	 * @version v0.0.1
+	 * @version v0.0.2
 	 * @author tom@axisj.com
 	 * @logs
 	 * 2014-06-17 tom : 시작
+	 * 2014-07-04 tom : append, update, remove
 	 * @example
 	 * ```
 	 * var my_touch_grid = new ax5.ui.touch_grid();
