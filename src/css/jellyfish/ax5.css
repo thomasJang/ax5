@@ -2322,9 +2322,9 @@ a.ax {
     -ms-transform: translateZ(0);
     -o-transform: translateZ(0);
     transform: translateZ(0);
-    -webkit-animation: ax-mask 0.2s ease-in-out;
-    -moz-animation: ax-mask 0.2s ease-in-out;
-    animation: ax-mask 0.2s ease-in-out; }
+    -webkit-animation: ax-mask 0.1s ease-in-out;
+    -moz-animation: ax-mask 0.1s ease-in-out;
+    animation: ax-mask 0.1s ease-in-out; }
   .ax-mask .ax-mask-content {
     z-index: 2;
     position: absolute;

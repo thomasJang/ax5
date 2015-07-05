@@ -1089,6 +1089,7 @@
 		this.main = (function(){
 			if (ax_super) ax_super.call(this); // 부모호출
 			this.config = {
+				theme: '',
 				target: axd.get(document.body)[0]
 			};
 			this.mask_content = '';
@@ -1161,7 +1162,7 @@
 				po = [], css, mask_id = 'ax-mask-'+ ax5.get_guid(), _mask, css = {},
 				that = {};
 
-			po.push('<div class="ax-mask" id="'+ mask_id +'">');
+			po.push('<div class="ax-mask ' + cfg.theme  + '" id="'+ mask_id +'">');
 				po.push('<div class="ax-mask-bg"></div>');
 				po.push('<div class="ax-mask-content">');
 					po.push('<div class="ax-mask-body">');
@@ -2365,6 +2366,7 @@
 
 			this.els["main-body-content"].find('[data-touch-grid-item-row="'+ this.focused_index +'"]').class_name("add", "focus");
 
+			this.els["main-body-content-tbody"].off("click");
 			this.els["main-body-content-tbody"].on("click", (function(e){
 				this.onclick(e||window.event);
 			}).bind(this));
@@ -2415,14 +2417,16 @@
 			});
 			if(target){
 				index = axd.attr(target, "data-touch-grid-item-row");
+
+				this.focus(index);
+
 				that = {
 					list: this.list,
 					item: this.list[index],
+					index: index,
 					target: this.target.elements[0],
-					item_target: target
+					item_target: this.els["main-body-content"].find('[data-touch-grid-item-row="'+ index +'"]')
 				};
-
-				this.focus(index);
 				if(cfg.body.onclick){
 					cfg.body.onclick.call(that);
 				}

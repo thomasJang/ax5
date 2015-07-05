@@ -21,6 +21,7 @@
 		this.main = (function(){
 			if (ax_super) ax_super.call(this); // 부모호출
 			this.config = {
+				theme: '',
 				target: axd.get(document.body)[0]
 			};
 			this.mask_content = '';
@@ -93,7 +94,7 @@
 				po = [], css, mask_id = 'ax-mask-'+ ax5.get_guid(), _mask, css = {},
 				that = {};
 
-			po.push('<div class="ax-mask" id="'+ mask_id +'">');
+			po.push('<div class="ax-mask ' + cfg.theme  + '" id="'+ mask_id +'">');
 				po.push('<div class="ax-mask-bg"></div>');
 				po.push('<div class="ax-mask-content">');
 					po.push('<div class="ax-mask-body">');
