@@ -2049,11 +2049,11 @@
 
 			// 데이터 정리
 			//console.log(cfg.col_group[1]);
-			this.col_group = this.convert_col_group(cfg.col_group);
+			this.col_group = this._convert_col_group(cfg.col_group);
 			//console.log(cfg.col_group[1]);
 
 			// 프레임 생성
-			this.target.html( this.get_frame() );
+			this.target.html( this._get_frame() );
 
 			// 파트수집
 			this.els = {
@@ -2067,23 +2067,23 @@
 			if(cfg.control){
 				this.els["control"] =  this.target.find('[data-touch-grid-els="control"]');
 				this.els["control"].on("click", (function(e){
-					this.oncontrol(e||window.event);
+					this._oncontrol(e||window.event);
 				}).bind(this));
 			}
 
-			this.set_size_frame();
-			this.els["main-header"].html( this.get_header("main-header") );
-			this.els["main-body-content"].html( this.get_body("main-body") );
+			this._set_size_frame();
+			this.els["main-header"].html( this._get_header("main-header") );
+			this.els["main-body-content"].html( this._get_body("main-body") );
 			this.els["main-body-content-tbody"] = this.els["main-body-content"].find('[data-touch-grid-els="main-body-content-tbody"]');
 
 			this.bind_window_resize(function(){
-				this.col_group = this.convert_col_group(cfg.col_group);
-				this.set_size_frame();
-				this.set_size_col_group();
+				this.col_group = this._convert_col_group(cfg.col_group);
+				this._set_size_frame();
+				this._set_size_col_group();
 			});
 		};
 
-		this.get_frame = function(){
+		this._get_frame = function(){
 			// 그리드 레이아웃 구성
 			var po = [];
 			po.push('<div class="ax5-ui-touch-grid ' + cfg.theme + '" data-touch-grid-els="root">');
@@ -2136,7 +2136,7 @@
 			return po.join('');
 		};
 
-		this.set_size_frame = function(){  /* resizable */
+		this._set_size_frame = function(){  /* resizable */
 			var
 				target_height = this.target.height();
 
@@ -2153,7 +2153,7 @@
 		};
 
 		// col_group의 속성값을 정리하여 줍니다. - width등
-		this.convert_col_group = function(col_group){ /* resizable */
+		this._convert_col_group = function(col_group){ /* resizable */
 			var
 				CG = [],
 				target_width = this.target.width(),
@@ -2191,7 +2191,7 @@
 			return CG;
 		};
 
-		this.get_col_group = function(){
+		this._get_col_group = function(){
 			var po = [];
 			po.push('<colgroup>');
 			for(var i=0, l=this.col_group.length;i<l;i++){
@@ -2201,7 +2201,7 @@
 			return po.join('');
 		};
 
-		this.set_size_col_group = function(){
+		this._set_size_col_group = function(){
 			for(var i=0, l=this.col_group.length;i<l;i++) {
 				this.els["main"].find('[data-touch-grid-col="' + i + '"]').css( {"width": this.col_group[i].width} );
 			}
@@ -2209,12 +2209,12 @@
 			this.els["main"].find('[data-touch-grid-table]').css( {width: this.col_width_sum} );
 		};
 
-		this.get_header = function(typ){
+		this._get_header = function(typ){
 			var
 				po = [];
 
 			po.push('<table data-touch-grid-table="' + typ + '" style="width:' + this.col_width_sum + 'px;height:' + cfg.head_height + 'px;line-height:' + cfg.head_height + 'px;">');
-				po.push( this.get_col_group() );
+				po.push( this._get_col_group() );
 				po.push('<tbody>');
 					po.push('<tr style="' + (
 							function(){
@@ -2236,18 +2236,18 @@
 			return po.join('');
 		};
 
-		this.get_body = function(typ){
+		this._get_body = function(typ){
 			var
 				po = [];
 				po.push('<table data-touch-grid-table="' + typ + '" style="width:' + this.col_width_sum + 'px;">');
-				po.push( this.get_col_group() );
+				po.push( this._get_col_group() );
 				po.push('<tbody data-touch-grid-els="main-body-content-tbody"></tbody>');
 				po.push('</table>');
 
 			return po.join('');
 		};
 
-		this.get_list = function(typ){
+		this._get_list = function(typ){
 			var
 				po = [],
 				end_index = this.virtual_scroll.end_index;
@@ -2261,7 +2261,7 @@
 									if(!C.align) return '';
 									return 'text-align:' + C.align + ';';
 								}
-							)(this.col_group[i]) + '">' + this.get_col_value(item, this.col_group, r, i) + '</td>');
+							)(this.col_group[i]) + '">' + this._get_col_value(item, this.col_group, r, i) + '</td>');
 					}
 					po.push('</tr>');
 				}
@@ -2269,7 +2269,7 @@
 			return po.join('');
 		};
 
-		this.get_col_value = function(item, CG, r, ci){
+		this._get_col_value = function(item, CG, r, ci){
 			if(U.is_function(CG[ci].formatter)){
 				var that = {
 					index: r,
@@ -2290,67 +2290,7 @@
 			}
 		};
 
-		this.set_list = function(list){
-			this.list = list;
-			this.focused_index = 0;
-			this.content_scroll(0);
-		};
-
-		this.append = function(item){
-			this.list.push(item);
-			this.focused_index = 0;
-			this.content_scroll();
-			this.focus('last');
-		};
-
-		this.update = function(index, json){
-			if(typeof index !== "undefined" && this.list[index]){
-				for(var k in json){
-					this.list[index][k] = json[k];
-				}
-				this.content_scroll();
-				this.focus(index);
-			}
-			return this;
-		};
-
-		this.remove = function(index){
-			if(typeof index === "undefined"){
-				index = this.list.length-1;
-			}
-			if(this.list[index]){
-				this.list.splice(index, 1);
-			}
-			else{
-				return this;
-			}
-
-			if(index == this.focused_index){
-				if(index == 0) this.focused_index = 0;
-				else if(this.list.length == 1) this.focused_index = 0;
-				else {
-					this.focused_index -= 1;
-				}
-			}
-
-			var focused_item_top, body_content_top, body_height, view_position_top;
-				focused_item_top = this.focused_index * cfg.item_height,
-				body_content_top = this.els["main-body-content"].position().top,
-				body_height = this.els["main-body"].height(),
-				view_position_top = focused_item_top + body_content_top;
-
-			if( (view_position_top + cfg.item_height) > body_height ) {
-				this.content_scroll(-(body_height - (focused_item_top + cfg.item_height)));
-			}
-			else if( view_position_top < 0 ){
-					this.content_scroll( focused_item_top );
-			}
-			else{
-				this.content_scroll();
-			}
-		};
-
-		this.content_scroll = function(top){
+		this._content_scroll = function(top){
 			if(typeof top === "undefined"){
 				top = U.number(this.els["main-body-content"].position().top, {abs:true});
 			}
@@ -2362,54 +2302,17 @@
 			this.virtual_scroll.end_index = U.number(this.virtual_scroll.start_index) + U.number(this.virtual_scroll.size);
 
 			this.els["main-body-content"].css({'padding-top': this.virtual_scroll.start_index * cfg.item_height });
-			this.els["main-body-content-tbody"].html( this.get_list("main-body") );
+			this.els["main-body-content-tbody"].html( this._get_list("main-body") );
 
 			this.els["main-body-content"].find('[data-touch-grid-item-row="'+ this.focused_index +'"]').class_name("add", "focus");
 
 			this.els["main-body-content-tbody"].off("click");
 			this.els["main-body-content-tbody"].on("click", (function(e){
-				this.onclick(e||window.event);
+				this._onclick(e||window.event);
 			}).bind(this));
 		};
 
-		this.focus = function(index, by){
-			if(this.focused_index > -1){
-				// remove focus
-				this.els["main-body-content"].find('[data-touch-grid-item-row="'+ this.focused_index +'"]').class_name("remove", "focus");
-			}
-
-			if(index == "last"){
-				index = this.list.length-1;
-			}
-			else if(typeof by !== "undefined"){
-				if(this.focused_index == -1) return;
-				index = this.focused_index + index;
-			}
-
-			index = U.number(index);
-			if(index < 0) index = 0;
-			if(index >= this.list.length) index = this.list.length-1;
-			this.focused_index = index;
-
-			var focused_item_top, body_content_top, body_height, view_position_top;
-
-				focused_item_top = index * cfg.item_height,
-				body_content_top = this.els["main-body-content"].position().top,
-				body_height = this.els["main-body"].height(),
-				view_position_top = focused_item_top + body_content_top;
-
-			if( (view_position_top + cfg.item_height) > body_height ){
-				this.content_scroll( -(body_height - (focused_item_top + cfg.item_height)) );
-			}
-			else if( view_position_top < 0 ){
-				this.content_scroll( focused_item_top );
-			}
-			else{
-				this.els["main-body-content"].find('[data-touch-grid-item-row="'+ index +'"]').class_name("add", "focus");
-			}
-		};
-
-		this.onclick = function(e, target, index, that){
+		this._onclick = function(e, target, index, that){
 			target = axd.parent(e.target, function(target){
 				if(axd.attr(target, "data-touch-grid-item-row")){
 					return true;
@@ -2433,7 +2336,7 @@
 			}
 		};
 
-		this.oncontrol = function(e, target, index, that){
+		this._oncontrol = function(e, target, index, that){
 			target = axd.parent(e.target, function(target){
 				if(axd.attr(target, "data-touch-grid-control")){
 					return true;
@@ -2464,6 +2367,128 @@
 				}
 			}
 		};
+
+		/**
+		 * 그리드에 아이템을 정의합니다.
+		 * @method ax5.ui.touch_grid.set_list
+		 * @param {Array} list -
+		 * @returns {ax5.ui.touch_grid}
+		 * @example
+		 * ```js
+		 * my_grid.set_list([{no:1, name:'ax5'}]);
+		 * ```
+		 */
+		this.set_list = function(list){
+			this.list = list;
+			this.focused_index = 0;
+			this._content_scroll(0);
+			return this;
+		};
+
+		/**
+		 * 그리드안에 아이템을 모두 제거합니다.
+		 */
+		this.clear = function(){
+			this.list = [];
+			this.focused_index = -1;
+			this._content_scroll(0);
+			return this;
+		};
+
+		this.append = function(item){
+			this.list.push(item);
+			this.focused_index = 0;
+			this._content_scroll();
+			this.focus('last');
+			return this;
+		};
+
+		this.update = function(index, json){
+			if(typeof index !== "undefined" && this.list[index]){
+				for(var k in json){
+					this.list[index][k] = json[k];
+				}
+				this._content_scroll();
+				this.focus(index);
+			}
+			return this;
+		};
+
+		this.remove = function(index){
+			if(typeof index === "undefined"){
+				index = this.list.length-1;
+			}
+			if(this.list[index]){
+				this.list.splice(index, 1);
+			}
+			else{
+				return this;
+			}
+
+			if(index == this.focused_index){
+				if(index == 0) this.focused_index = 0;
+				else if(this.list.length == 1) this.focused_index = 0;
+				else {
+					this.focused_index -= 1;
+				}
+			}
+
+			var focused_item_top, body_content_top, body_height, view_position_top;
+			focused_item_top = this.focused_index * cfg.item_height,
+				body_content_top = this.els["main-body-content"].position().top,
+				body_height = this.els["main-body"].height(),
+				view_position_top = focused_item_top + body_content_top;
+
+			if( (view_position_top + cfg.item_height) > body_height ) {
+				this._content_scroll(-(body_height - (focused_item_top + cfg.item_height)));
+			}
+			else if( view_position_top < 0 ){
+				this._content_scroll( focused_item_top );
+			}
+			else{
+				this._content_scroll();
+			}
+			return this;
+		};
+
+		this.focus = function(index, by){
+			if(this.focused_index > -1){
+				// remove focus
+				this.els["main-body-content"].find('[data-touch-grid-item-row="'+ this.focused_index +'"]').class_name("remove", "focus");
+			}
+
+			if(index == "last"){
+				index = this.list.length-1;
+			}
+			else if(typeof by !== "undefined"){
+				if(this.focused_index == -1) return;
+				index = this.focused_index + index;
+			}
+
+			index = U.number(index);
+			if(index < 0) index = 0;
+			if(index >= this.list.length) index = this.list.length-1;
+			this.focused_index = index;
+
+			var focused_item_top, body_content_top, body_height, view_position_top;
+
+			focused_item_top = index * cfg.item_height,
+				body_content_top = this.els["main-body-content"].position().top,
+				body_height = this.els["main-body"].height(),
+				view_position_top = focused_item_top + body_content_top;
+
+			if( (view_position_top + cfg.item_height) > body_height ){
+				this._content_scroll( -(body_height - (focused_item_top + cfg.item_height)) );
+			}
+			else if( view_position_top < 0 ){
+				this._content_scroll( focused_item_top );
+			}
+			else{
+				this.els["main-body-content"].find('[data-touch-grid-item-row="'+ index +'"]').class_name("add", "focus");
+			}
+			return this;
+		};
+
 
 	};
 	//== UI Class
