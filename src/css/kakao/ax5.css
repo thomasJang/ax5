@@ -2837,17 +2837,49 @@ a.ax {
           width: 100%;
           height: 100%; }
     .ax5-ui-component-grid .component-grid-body .ax-btn {
+      display: -webkit-box;
+      display: -moz-box;
+      display: box;
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flexbox;
       display: flex;
+      -webkit-box-align: center;
+      -moz-box-align: center;
+      box-align: center;
+      -webkit-align-items: center;
+      -moz-align-items: center;
+      -ms-align-items: center;
+      -o-align-items: center;
+      align-items: center;
+      -ms-flex-align: center;
+      -webkit-box-orient: vertical;
+      -moz-box-orient: vertical;
+      box-orient: vertical;
+      -webkit-flex-direction: column;
+      -moz-flex-direction: column;
       flex-direction: column;
-      justify-content: center; }
+      -ms-flex-direction: column; }
       .ax5-ui-component-grid .component-grid-body .ax-btn .label {
         font-size: 20px;
         padding: 5px 0px; }
     .ax5-ui-component-grid .component-grid-body .has-addon .ax-btn .label {
+      -webkit-box-flex: 1;
+      -moz-box-flex: 1;
+      box-flex: 1;
+      -webkit-flex: 1;
+      -moz-flex: 1;
+      -ms-flex: 1;
       flex: 1;
       padding: 10px 0px;
       font-size: 16px; }
     .ax5-ui-component-grid .component-grid-body .has-addon .ax-btn .addon {
+      -webkit-box-flex: none;
+      -moz-box-flex: none;
+      box-flex: none;
+      -webkit-flex: none;
+      -moz-flex: none;
+      -ms-flex: none;
       flex: none;
       position: relative;
       font-size: 13px;

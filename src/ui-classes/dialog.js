@@ -237,7 +237,12 @@
 			// bind key event
 			axd(window).on("keydown.ax-dialog", (function(e){
 				this.onkeyup(e||window.event, opts, callback);
-			}).bind(this))
+			}).bind(this));
+
+			if(cfg.onopen){
+				cfg.onopen.call(this, this);
+			}
+			return this;
 		};
 
 		this.btn_onclick = function(e, opts, callback, target, k){
@@ -332,6 +337,9 @@
 				this.mask.close();
 				this.active_dialog = null;
 				axd(window).off("keydown.ax-dialog");
+				if(cfg.onclose){
+					cfg.onclose.call(this, this);
+				}
 			}
 			return this;
 		}

@@ -262,6 +262,12 @@
 	var my_dialog = new ax5.ui.dialog();
 	my_dialog.set_config({
 		title: '<i class="axi axi-circle-check"></i> AX5 Confirm',
+		onopen: function(){
+			console.log('dialog opened');
+		},
+		onclose: function(){
+			console.log('dialog closed');
+		}
 	});
 
 	// default

@@ -36,9 +36,10 @@
 		@include component-grid-table-layout();
 
 		.ax-btn {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
+			@include display(flex);
+			@include align-items(center);
+			@include flex-direction(column);
+
 			.label{
 				font-size: ceil(($font-size-base * 1.5));
 				padding: 5px 0px;
@@ -49,15 +50,13 @@
 		}
 		.has-addon {
 			.ax-btn {
-				//align-items: stretch;
-				//align-content: stretch;
 				.label{
-					flex: 1;
+					@include flex(1);
 					padding: 10px 0px;
 					font-size: ceil(($font-size-base * 1.2));
 				}
 				.addon{
-					flex:none;
+					@include flex(none);
 					position: relative;
 					font-size: ceil(($font-size-base * 1));
 					background: #002A4F;

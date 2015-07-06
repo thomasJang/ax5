@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-07-04 
+ publish date : 2015-07-06 
 -->
 <html lang="en">
 <head>
@@ -1078,6 +1078,12 @@ ax5.util.require(["ui/menu.js"], function() {
 	var my_dialog = new ax5.ui.dialog();
 	my_dialog.set_config({
 		title: '&lt;i class="axi axi-circle-check">&lt;/i> AX5 Confirm',
+		onopen: function(){
+			console.log('dialog opened');
+		},
+		onclose: function(){
+			console.log('dialog closed');
+		}
 	});
 
 	// default
@@ -1104,6 +1110,12 @@ ax5.util.require(["ui/menu.js"], function() {
 	var my_dialog = new ax5.ui.dialog();
 	my_dialog.set_config({
 		title: '<i class="axi axi-circle-check"></i> AX5 Confirm',
+		onopen: function(){
+			console.log('dialog opened');
+		},
+		onclose: function(){
+			console.log('dialog closed');
+		}
 	});
 
 	// default
