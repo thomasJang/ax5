@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-07-06 
+ * 2015-07-07 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -2495,6 +2495,28 @@
 				this.els["main-body-content"].find('[data-touch-grid-item-row="'+ index +'"]').class_name("add", "focus");
 			}
 			return this;
+		};
+
+		/**
+		 * 전체 리스트나 선택된 아이템을 반환합니다.
+		 * @method ax5.ui.touch_grid.get
+		 * @param {String} cmd - all|selected
+		 * @returns {Array|Object}
+		 * @example
+		 * ```js
+		 * my_grid.get(); // list
+		 * my_grid.get("all"); // list
+		 * my_grid.get("selected"); // focused item
+		 * ```
+		 */
+		this.get = function(cmd){
+			if(typeof cmd == "undefined" || cmd == "all"){
+				return this.list;
+			}
+			else if(cmd == "selected"){
+				if(this.focused_index == -1) return {};
+				return {index:this.focused_index, item:this.list[this.focused_index]};
+			}
 		};
 
 

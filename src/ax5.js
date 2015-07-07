@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-07-06 
+ * 2015-07-07 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -1346,7 +1346,15 @@
 
 			each(cond, function (k, c) {
 				if (k == "round") {
-					result = (is_number(c)) ? +(Math.round(result + "e+" + c) + "e-" + c) : Math.round(result);
+					if(is_number(c)){
+						if(c < 0){
+							result = +(Math.round(result + "e-" + Math.abs(c)) + "e+" + Math.abs(c));
+						}else{
+							result = +(Math.round(result + "e+" + c) + "e-" + c);
+						}
+					}else{
+						result = Math.round(result);
+					}
 				}
 				else if (k == "money") {
 					result = (function (val) {
@@ -2624,7 +2632,11 @@
 			// todo : attributes 걸리는 것이 없지만 혹시나 모를 데이터를 위해.
 			if(ax5.info.browser.name !== "ie" && ax5.info.browser.version > 7){
 				for(var a in el.attributes) {
-					if (typeof el.attributes[a] === "object") el.attributes[a] = null;
+					if (typeof el.attributes[a] === "object") {
+						try {
+							el.attributes[a] = null;
+						}catch(e){}
+					}
 				}
 			}
 
