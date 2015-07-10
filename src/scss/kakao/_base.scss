@@ -16,9 +16,9 @@ $white: #fff;
 $black: #000;
 
 
-$theme-basic: #FEEE00; // #337ab7;
+$theme-basic: #F79231; // #337ab7;
 $theme-good:  #503C3E;
-$theme-info:  #F79231;
+$theme-info:  #FEEE00;
 $theme-warning: #FF5B00;
 $theme-danger: darken($theme-warning, 20%);
 $theme-link: #fff;
@@ -116,26 +116,26 @@ $caret-width-large:         5px;
 //== Buttons
 $btn-font-weight:                normal;
 
-$btn-default-text-color: #474749;
+$btn-default-text-color: #3b3b3b;
 $btn-default-text-shadow: none; //0px 1px 0px rgba(255,255,255, 0.5);
 $btn-default-bg: (#D0D0D0, #D0D0D0); // 배경색들
 $btn-default-bg-image: "";
 $btn-default-border: 1px solid #D0D0D0;
 $btn-default-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
-	$btn-default-hover-text-color: darken($btn-default-text-color, 10%);
+	$btn-default-hover-text-color: darken(#3b3b3b, 10%);
 	$btn-default-hover-text-shadow: 0px 1px 0px rgba(255,255,255, 0.5);
 	$btn-default-hover-bg: (#D0D0D0, #D0D0D0); // 배경색들
 	$btn-default-hover-bg-image: "";
 	$btn-default-hover-border: 1px solid darken(#D0D0D0, 10%);
 	$btn-default-hover-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
 
-$btn-basic-text-color: #5A3100;
+$btn-basic-text-color: #fff;//#5A3100;
 $btn-basic-text-shadow: none; //0px -1px 0px darken($theme-basic, 50%);
 $btn-basic-bg: ($theme-basic, $theme-basic); // 배경색들
 $btn-basic-bg-image: "";
 $btn-basic-border: 1px solid $theme-basic;
 $btn-basic-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
-	$btn-basic-hover-text-color: #000;
+	$btn-basic-hover-text-color: #fff;
 	$btn-basic-hover-text-shadow: none; //0px -1px 0px darken($theme-basic, 50%);
 	$btn-basic-hover-bg: ($theme-basic, $theme-basic); // 배경색들
 	$btn-basic-hover-bg-image: "";
@@ -155,13 +155,13 @@ $btn-good-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
 	$btn-good-hover-border: 1px solid darken($theme-good, 10%);
 	$btn-good-hover-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
 
-$btn-info-text-color:#fff;
+$btn-info-text-color:$theme-good;
 $btn-info-text-shadow: none; //0px -1px 0px rgba(0,0,0,0.9);
 $btn-info-bg: ($theme-info, $theme-info); // 배경색들
 $btn-info-bg-image: "";
 $btn-info-border: 1px solid $theme-info;
 $btn-info-drop-shadow: none; //0px 1px 0px 0lipx rgba(0,0,0,0.15);
-	$btn-info-hover-text-color:#fff;
+	$btn-info-hover-text-color:$theme-good;
 	$btn-info-hover-text-shadow: none; //0px -1px 0px rgba(0,0,0,0.9);
 	$btn-info-hover-bg: ($theme-info, $theme-info);
 	$btn-info-hover-bg-image: "";
@@ -362,15 +362,15 @@ $panel-default-text:          $gray-dark;
 $panel-default-border:        1px solid #ddd;
 $panel-default-heading-bg:    #f5f5f5;
 
-$panel-basic-text:          #5A3100;
+$panel-basic-text:          $white;
 $panel-basic-border:        1px solid $theme-basic;
 $panel-basic-heading-bg:    $theme-basic;
 
-$panel-good-text:          $white;
+$panel-good-text:          $theme-info;
 $panel-good-border:        1px solid $theme-good;
 $panel-good-heading-bg:    $theme-good;
 
-$panel-info-text:          $white;
+$panel-info-text:          $theme-good;
 $panel-info-border:        1px solid $theme-info;
 $panel-info-heading-bg:    $theme-info;
 
@@ -503,43 +503,53 @@ $toast-special-bg: $panel-bg;
 $toast-special-color: $panel-special-heading-bg;
 
 //== touch-grid
-$touch-grid-header-bg: (#FFFFFF, #F1F1F1); // 그리드 헤더 배경색들
-$touch-grid-header-border: 2px solid #BCBCBD;
+
+/* Rectangle 14 Copy 26: */
+$touch-grid-header-bg: (#3B3B3B, #3B3B3B); // 그리드 헤더 배경색들
+$touch-grid-header-border: 2px solid #292929;
 $touch-grid-header-padding: 0px $padding-base-horizontal;
-
-$touch-grid-body-bg: (#FFFFFF, #FFFFFF);
-$touch-grid-body-border: 2px solid #BCBCBD;
+$touch-grid-header-text-color: #7A7A77;
+/* Rectangle 14 Copy 29: */
+$touch-grid-body-bg: (#444444, #444444);
+$touch-grid-body-border: 2px solid #292929;
 $touch-grid-body-padding: 0px $padding-base-horizontal;
+$touch-grid-body-text-color: #FFFFFF;
+/* Rectangle 14 Copy 28: */
 
-$touch-grid-body-even-bg: (#FFFFFF, #FFFFFF);
-$touch-grid-body-hover-bg: (#F7F7F7, #F7F7F7);
-$touch-grid-body-focus-bg: (#F0F0F0, #F0F0F0);
+$touch-grid-body-even-bg: (#444444, #444444);
+$touch-grid-body-hover-bg: (darken(#525252, 10%), darken(#525252, 10%));
+$touch-grid-body-focus-bg: (#525252, #525252);
+
+
 
 //== calendar
-$calendar-control-bg: (#FFFFFF, #F0F0F0);
-$calendar-control-border: 1px solid #B4B4B4;
+
+$calendar-control-bg: (#E7E7E7, #E7E7E7);
+$calendar-control-border: 1px solid #E7E7E7;
 $calendar-control-border-radius: 2px;
 $calendar-control-font-size: ceil(($font-size-base * 1.25));
 
-$calendar-header-bg: (#FFFFFF, #FFFFFF);
+
+/* Rectangle 5 Copy: */
+$calendar-header-bg: (#292929, #292929);
 $calendar-header-border: 0px none;
 $calendar-header-padding: 10px 2px;
 $calendar-header-font-size: ceil(($font-size-base * 0.8));
 
-$calendar-body-bg: (#FFFFFF, #FFFFFF);
+$calendar-body-bg: (#292929, #292929);
 $calendar-body-border: 0px none;
 $calendar-body-font-size: $font-size-base;
 
-$calendar-sun-text-color: #C78B81;
+$calendar-sun-text-color: $theme-basic;
 $calendar-sat-text-color: #32B4DC;
 
-$calendar-date-bg: (#FFFFFF, #FFFFFF);
+$calendar-date-bg: (#292929, #292929);
 $calendar-date-text-color: #C3C4C6;
-$calendar-live-bg: (#F0F0F0, #F0F0F0);
+$calendar-live-bg: (#3B3B3B, #3B3B3B);
 $calendar-live-text-color: #6D6E70;
-$calendar-hover-bg: (#32B4DC, #32B4DC);
-$calendar-hover-text-color: #fff;
-$calendar-focus-bg: (#E67241, #E67241);
+$calendar-hover-bg: ($theme-info, $theme-info);
+$calendar-hover-text-color: $theme-good;
+$calendar-focus-bg: ($theme-basic, $theme-basic);
 $calendar-focus-text-color: #fff;
 
 //== component-grid

@@ -85,7 +85,11 @@
 				this.set_size_frame();
 			});
 		};
-		
+
+		this.resize = function(){
+			this.set_size_frame();
+		};
+
 		this.get_frame = function(){
 			var
 				po = [], i = 0;
@@ -102,7 +106,7 @@
 								po.push('<td>');
 								po.push('<div class="ax-item-wraper ' + (cfg.item.addon? "has-addon":"") + '">');
 
-								po.push('<div class="ax-btn ' + (cfg.item.klass||"") + '" data-component-grid-item-index="' + i + '"></div>');
+								po.push('<button class="ax-btn ' + (cfg.item.klass||"") + '" data-component-grid-item-index="' + i + '"></button>');
 
 								po.push('</div>');
 								po.push('</td>');

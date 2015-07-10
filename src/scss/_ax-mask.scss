@@ -33,8 +33,8 @@
     left:0px;top:0px;width:100%;height:100%;
     background: $mask-bg;
     @include opacity($mask-bg-opacity);
-    @include transform(translateZ(0));
-    @include animation(ax-mask 0.1s ease-in-out);
+    //@include transform(translateZ(0));
+    //@include animation(ax-mask 0.1s ease-in-out);
   }
   .ax-mask-content{
     z-index: 2;

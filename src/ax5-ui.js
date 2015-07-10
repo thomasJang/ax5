@@ -50,12 +50,16 @@ ax5.ui = (function (core) {
 		};
 
 		this.bind_window_resize = function(callBack){
-			ax5.dom.resize((function(){
-				if(this.bind_window_resize__) clearTimeout(this.bind_window_resize__);
-				this.bind_window_resize__ = setTimeout((function(){
-					callBack.call(this);
-				}).bind(this), 10);
-			}).bind(this));
+
+			setTimeout((function(){
+				ax5.dom.resize((function(){
+					if(this.bind_window_resize__) clearTimeout(this.bind_window_resize__);
+					this.bind_window_resize__ = setTimeout((function(){
+						callBack.call(this);
+					}).bind(this), 10);
+				}).bind(this));
+			}).bind(this), 100);
+
 		};
 	}
 

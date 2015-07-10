@@ -505,10 +505,12 @@ $toast-special-color: $panel-special-heading-bg;
 $touch-grid-header-bg: (#FFFFFF, #F1F1F1); // 그리드 헤더 배경색들
 $touch-grid-header-border: 2px solid #BCBCBD;
 $touch-grid-header-padding: 0px $padding-base-horizontal;
+$touch-grid-header-text-color: $text-color;
 
 $touch-grid-body-bg: (#FFFFFF, #FFFFFF);
 $touch-grid-body-border: 2px solid #BCBCBD;
 $touch-grid-body-padding: 0px $padding-base-horizontal;
+$touch-grid-body-text-color: $text-color;
 
 $touch-grid-body-even-bg: (#FFFFFF, #FFFFFF);
 $touch-grid-body-hover-bg: (#F7F7F7, #F7F7F7);

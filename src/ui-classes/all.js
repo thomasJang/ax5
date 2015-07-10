@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-07-07 
+ * 2015-07-10 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -331,7 +331,11 @@
 				this.set_size_frame();
 			});
 		};
-		
+
+		this.resize = function(){
+			this.set_size_frame();
+		};
+
 		this.get_frame = function(){
 			var
 				po = [], i = 0;
@@ -348,7 +352,7 @@
 								po.push('<td>');
 								po.push('<div class="ax-item-wraper ' + (cfg.item.addon? "has-addon":"") + '">');
 
-								po.push('<div class="ax-btn ' + (cfg.item.klass||"") + '" data-component-grid-item-index="' + i + '"></div>');
+								po.push('<button class="ax-btn ' + (cfg.item.klass||"") + '" data-component-grid-item-index="' + i + '"></button>');
 
 								po.push('</div>');
 								po.push('</td>');

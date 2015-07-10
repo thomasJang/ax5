@@ -2316,15 +2316,7 @@ a.ax {
     height: 100%;
     background: #333333;
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
-    opacity: 0.6;
-    -webkit-transform: translateZ(0);
-    -moz-transform: translateZ(0);
-    -ms-transform: translateZ(0);
-    -o-transform: translateZ(0);
-    transform: translateZ(0);
-    -webkit-animation: ax-mask 0.1s ease-in-out;
-    -moz-animation: ax-mask 0.1s ease-in-out;
-    animation: ax-mask 0.1s ease-in-out; }
+    opacity: 0.6; }
   .ax-mask .ax-mask-content {
     z-index: 2;
     position: absolute;
@@ -2366,40 +2358,26 @@ a.ax {
 
 @-webkit-keyframes ax-dialog {
   0% {
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-    opacity: 0;
     -webkit-transform: scale(1); }
 
   1% {
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-    opacity: 0;
-    -webkit-transform: scale(0.7); }
+    -webkit-transform: scale(1.1); }
 
   100% {
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
-    opacity: 0.6;
     -webkit-transform: scale(1); } }
 
 @-moz-keyframes ax-dialog {
   0% {
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-    opacity: 0;
     -moz-transform: scale(1); }
 
   1% {
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-    opacity: 0;
-    -moz-transform: scale(0.7); }
+    -moz-transform: scale(1.1); }
 
   100% {
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
-    opacity: 0.6;
     -moz-transform: scale(1); } }
 
 @keyframes ax-dialog {
   0% {
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-    opacity: 0;
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
     -ms-transform: scale(1);
@@ -2407,17 +2385,13 @@ a.ax {
     transform: scale(1); }
 
   1% {
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-    opacity: 0;
-    -webkit-transform: scale(0.7);
-    -moz-transform: scale(0.7);
-    -ms-transform: scale(0.7);
-    -o-transform: scale(0.7);
-    transform: scale(0.7); }
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1); }
 
   100% {
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
-    opacity: 0.6;
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
     -ms-transform: scale(1);
@@ -2425,9 +2399,14 @@ a.ax {
     transform: scale(1); } }
 
 .ax5-ui-dialog {
-  -webkit-animation: ax-dialog 0.1s ease-in-out;
-  -moz-animation: ax-dialog 0.1s ease-in-out;
-  animation: ax-dialog 0.1s ease-in-out;
+  -webkit-animation: ax-dialog 0.2s ease-in-out;
+  -moz-animation: ax-dialog 0.2s ease-in-out;
+  animation: ax-dialog 0.2s ease-in-out;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
   color: #333333;
   font-size: 13px;
   font-weight: 400;
@@ -2735,7 +2714,8 @@ a.ax {
           padding: 0px 7px;
           vertical-align: middle;
           line-height: 1em;
-          cursor: pointer; }
+          cursor: pointer;
+          color: #333333; }
           .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-header table tbody td:not(:last-child), .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-header table tbody th:not(:last-child) {
             border-right: 2px solid #BCBCBD; }
     .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-body {
@@ -2759,6 +2739,7 @@ a.ax {
           vertical-align: middle;
           line-height: 1em;
           cursor: pointer;
+          color: #333333;
           border-bottom: 2px solid #BCBCBD; }
           .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-body table tbody td:not(:last-child), .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-body table tbody th:not(:last-child) {
             border-right: 2px solid #BCBCBD; }
@@ -2833,7 +2814,12 @@ a.ax {
           margin: 0px;
           width: 100%;
           height: 100%; }
-    .ax5-ui-component-grid .component-grid-body .ax-btn {
+    .ax5-ui-component-grid .component-grid-body .ax-btn .label {
+      font-size: 20px;
+      padding: 5px 0px;
+      vertical-align: middle;
+      text-align: center; }
+    .ax5-ui-component-grid .component-grid-body .has-addon .ax-btn {
       display: -webkit-box;
       display: -moz-box;
       display: box;
@@ -2857,38 +2843,35 @@ a.ax {
       -moz-flex-direction: column;
       flex-direction: column;
       -ms-flex-direction: column; }
-      .ax5-ui-component-grid .component-grid-body .ax-btn .label {
-        font-size: 20px;
-        padding: 5px 0px; }
-    .ax5-ui-component-grid .component-grid-body .has-addon .ax-btn .label {
-      -webkit-box-flex: 1;
-      -moz-box-flex: 1;
-      box-flex: 1;
-      -webkit-flex: 1;
-      -moz-flex: 1;
-      -ms-flex: 1;
-      flex: 1;
-      padding: 10px 0px;
-      font-size: 16px; }
-    .ax5-ui-component-grid .component-grid-body .has-addon .ax-btn .addon {
-      -webkit-box-flex: none;
-      -moz-box-flex: none;
-      box-flex: none;
-      -webkit-flex: none;
-      -moz-flex: none;
-      -ms-flex: none;
-      flex: none;
-      position: relative;
-      font-size: 13px;
-      background: #002A4F;
-      background: #002A4F;
-      background-image: -webkit-linear-gradient(top, #002A4F, #002A4F);
-      background-image: linear-gradient(to bottom, #002A4F, #002A4F);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#002A4F, endColorstr=#002A4F);
-      color: #fff;
-      border-radius: 10px;
-      text-shadow: none;
-      padding: 3px; }
+      .ax5-ui-component-grid .component-grid-body .has-addon .ax-btn .label {
+        -webkit-box-flex: 1;
+        -moz-box-flex: 1;
+        box-flex: 1;
+        -webkit-flex: 1;
+        -moz-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        padding: 10px 0px;
+        font-size: 16px; }
+      .ax5-ui-component-grid .component-grid-body .has-addon .ax-btn .addon {
+        -webkit-box-flex: none;
+        -moz-box-flex: none;
+        box-flex: none;
+        -webkit-flex: none;
+        -moz-flex: none;
+        -ms-flex: none;
+        flex: none;
+        position: relative;
+        font-size: 13px;
+        background: #002A4F;
+        background: #002A4F;
+        background-image: -webkit-linear-gradient(top, #002A4F, #002A4F);
+        background-image: linear-gradient(to bottom, #002A4F, #002A4F);
+        filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#002A4F, endColorstr=#002A4F);
+        color: #fff;
+        border-radius: 10px;
+        text-shadow: none;
+        padding: 3px; }
   .ax5-ui-component-grid .component-grid-control {
     display: table-cell;
     vertical-align: top; }
@@ -3035,40 +3018,26 @@ a.ax {
 
 @-webkit-keyframes ax-modal {
   0% {
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-    opacity: 0;
     -webkit-transform: scale(1); }
 
   1% {
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-    opacity: 0;
-    -webkit-transform: scale(0.7); }
+    -webkit-transform: scale(1.1); }
 
   100% {
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
-    opacity: 0.6;
     -webkit-transform: scale(1); } }
 
 @-moz-keyframes ax-modal {
   0% {
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-    opacity: 0;
     -moz-transform: scale(1); }
 
   1% {
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-    opacity: 0;
-    -moz-transform: scale(0.7); }
+    -moz-transform: scale(1.1); }
 
   100% {
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
-    opacity: 0.6;
     -moz-transform: scale(1); } }
 
 @keyframes ax-modal {
   0% {
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-    opacity: 0;
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
     -ms-transform: scale(1);
@@ -3076,17 +3045,13 @@ a.ax {
     transform: scale(1); }
 
   1% {
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-    opacity: 0;
-    -webkit-transform: scale(0.7);
-    -moz-transform: scale(0.7);
-    -ms-transform: scale(0.7);
-    -o-transform: scale(0.7);
-    transform: scale(0.7); }
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1); }
 
   100% {
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
-    opacity: 0.6;
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
     -ms-transform: scale(1);
@@ -3094,9 +3059,14 @@ a.ax {
     transform: scale(1); } }
 
 .ax5-ui-modal {
-  -webkit-animation: ax-modal 0.1s ease-in-out;
-  -moz-animation: ax-modal 0.1s ease-in-out;
-  animation: ax-modal 0.1s ease-in-out;
+  -webkit-animation: ax-modal 0.2s ease-in-out;
+  -moz-animation: ax-modal 0.2s ease-in-out;
+  animation: ax-modal 0.2s ease-in-out;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
   color: #333333;
   font-size: 13px;
   font-weight: 400;
@@ -3112,11 +3082,36 @@ a.ax {
   left: 0px;
   top: 0px;
   overflow: hidden;
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: stretch;
+  -moz-box-align: stretch;
+  box-align: stretch;
+  -webkit-align-items: stretch;
+  -moz-align-items: stretch;
+  -ms-align-items: stretch;
+  -o-align-items: stretch;
   align-items: stretch;
-  align-content: stretch;
-  flex-flow: column; }
+  -ms-flex-align: stretch;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-direction: column; }
   .ax5-ui-modal .ax-modal-heading {
+    -webkit-box-flex: none;
+    -moz-box-flex: none;
+    box-flex: none;
+    -webkit-flex: none;
+    -moz-flex: none;
+    -ms-flex: none;
     flex: none;
     font-size: 20px;
     font-weight: 600;
@@ -3132,6 +3127,12 @@ a.ax {
   .ax5-ui-modal .ax-modal-body {
     padding: 0px;
     text-align: center;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    box-flex: 1;
+    -webkit-flex: 1;
+    -moz-flex: 1;
+    -ms-flex: 1;
     flex: 1;
     position: relative; }
     .ax5-ui-modal .ax-modal-body iframe {

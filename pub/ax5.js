@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-07-07 
+ * 2015-07-10 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -4124,12 +4124,16 @@ ax5.ui = (function (core) {
 		};
 
 		this.bind_window_resize = function(callBack){
-			ax5.dom.resize((function(){
-				if(this.bind_window_resize__) clearTimeout(this.bind_window_resize__);
-				this.bind_window_resize__ = setTimeout((function(){
-					callBack.call(this);
-				}).bind(this), 10);
-			}).bind(this));
+
+			setTimeout((function(){
+				ax5.dom.resize((function(){
+					if(this.bind_window_resize__) clearTimeout(this.bind_window_resize__);
+					this.bind_window_resize__ = setTimeout((function(){
+						callBack.call(this);
+					}).bind(this), 10);
+				}).bind(this));
+			}).bind(this), 100);
+
 		};
 	}
 

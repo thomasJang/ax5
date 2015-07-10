@@ -15,13 +15,13 @@
 }
 
 @mixin ax-modal-section() {
-	display: flex;
-	align-items: stretch;
-	align-content: stretch;
-	flex-flow: column;
+	@include display(flex);
+	@include align-items(stretch);
+	@include flex-direction(column);
+	//@include justify-content(space-between);
 
 	.ax-modal-heading{
-		flex: none;
+		@include flex(none);
 		font-size: ceil(($font-size-base * 1.5));
 		font-weight: 600;
 		padding: $modal-heading-padding;
@@ -38,7 +38,7 @@
 	.ax-modal-body{
 		padding: $modal-body-padding;
 		text-align: center;
-		flex: 1;
+		@include flex(1);
 		position: relative;
 		iframe{
 			border: 0px none;
@@ -62,22 +62,23 @@
 
 @include keyframes(ax-modal) {
 	0% {
-		@include opacity(0.0);
+		//@include opacity(0.0);
 		@include transform( scale(1) );
 	}
 	1% {
-		@include opacity(0.0);
-		@include transform( scale(0.7) );
+		//@include opacity(0.0);
+		@include transform( scale(1.1) );
 	}
 	100% {
-		@include opacity($mask-bg-opacity);
+		//@include opacity($mask-bg-opacity);
 		@include transform( scale(1) );
 	}
 }
 // mixins --------------------------------------------- end
 
 .ax5-ui-modal{
-	@include animation(ax-modal 0.1s ease-in-out);
+	@include animation(ax-modal 0.2s ease-in-out);
+	@include transform(translateZ(0));
 
 	@include ax-modal();
 	@include ax-modal-section();

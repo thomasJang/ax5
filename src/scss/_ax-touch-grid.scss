@@ -1,5 +1,5 @@
 // btn Linear Gradient
-@mixin touch-grid-table($padding, $border, $cell-border) {
+@mixin touch-grid-table($padding, $border, $cell-border, $text-color) {
 	table{
 		box-sizing: border-box;
 		table-layout: fixed;
@@ -13,6 +13,7 @@
 				vertical-align: middle;
 				line-height: 1em;
 				cursor: pointer;
+				color: $text-color;
 
 				&:not(:last-child){
 					border-right: $border;
@@ -95,7 +96,7 @@
 				position: relative;
 				overflow: hidden;
 				@include ax-gradient(nth($touch-grid-header-bg, 1), nth($touch-grid-header-bg, 2));
-				@include touch-grid-table($touch-grid-header-padding, $touch-grid-header-border, "");
+				@include touch-grid-table($touch-grid-header-padding, $touch-grid-header-border, "", $touch-grid-header-text-color);
 			}
 			.touch-grid-main-body {
 				box-sizing: border-box;
@@ -104,7 +105,7 @@
 				position: relative;
 				overflow: hidden;
 				@include ax-gradient(nth($touch-grid-body-bg, 1), nth($touch-grid-body-bg, 2));
-				@include touch-grid-table($touch-grid-body-padding, $touch-grid-body-border, $touch-grid-body-border);
+				@include touch-grid-table($touch-grid-body-padding, $touch-grid-body-border, $touch-grid-body-border, $touch-grid-body-text-color);
 				.touch-grid-content {
 					box-sizing: border-box;
 					position: relative;
