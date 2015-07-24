@@ -1,4 +1,4 @@
-# ax5 새로운 JS UI 라이브러리
+﻿# ax5 새로운 JS UI 라이브러리
 
 ## link
 - [API테스터] (http://ax5.io)
@@ -33,5 +33,4 @@ ax5.js는 ax5-polyfill.js + ax5-core.js + ax5-xhr.js + ax5-ui.js의 합친파일
 *** [주의!!] ax5.js파일을 푸시해도 머지하지 않습니다. ***
 
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/tom-axisj/ax5/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
+https://www.axisj.com
