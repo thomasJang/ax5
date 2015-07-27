@@ -1,6 +1,7 @@
 ﻿module.exports = function(grunt) {
   // sample code 빌드
 
+	// module inline 생성
 	grunt.registerMultiTask('ax5_mobile_inline', '', function () {
 		var options = this.options({});
 		var file_names = grunt.file.expand({cwd: options.pwd}, options.filter);
@@ -26,6 +27,6 @@
 		}
 	});
 	grunt.loadNpmTasks('ax5_mobile_inline');
-    
+
 	grunt.registerTask('run', ['ax5_mobile_inline','watch']);
 };
