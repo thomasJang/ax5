@@ -222,7 +222,7 @@ ax5.xhr = (function (){
 			password       : "",
 			withCredentials: false,
 			crossDomain    : false,
-			timeout        : 0
+			timeout        : 3000
 		};
 		
 /**
