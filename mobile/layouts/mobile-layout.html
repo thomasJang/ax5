@@ -2,9 +2,59 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title></title>
+	<title>ax5 mobile</title>
+
+	<link rel="stylesheet" type="text/css" href="../../plugin/prettify/github.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/app.css">
+	<link rel="stylesheet" type="text/css" href="" id="ax5-theme">
+	<link rel="stylesheet" type="text/css" href="http://cdn.axisj.com/axicon/axicon.min.css">
+
+	<script type="text/javascript" src="../../plugin/prettify/prettify.js"></script>
+	<script type="text/javascript" src="../../pub/ax5.js"></script>
+	<script type="text/javascript" src="../../pub/ui/all.js"></script>
+
 </head>
 <body>
+	<div class="app_container">
+		<div class="app-nav">
+			<div class="box-bg"></div>
+			<div class="box-content">
+				<a href="#" class="logo">AX5</a>
+				<ul class="menu">
+					<li class="vline"></li>
+					<li><a href="index.html">JS Core</a></li>
+					<li class="vline"></li>
+					<li><a href="css.html">CSS</a></li>
+					<li class="vline"></li>
+					<li><a href="ui-class.html">UI Class</a></li>
+					<li class="vline"></li>
+					<li><a href="#" onclick="alert('준비중인 컨텐츠 입니다.');">Customize</a></li>
+					<li class="vline"></li>
+					<li><a href="/jsdoc/">JSDOC</a></li>
+					<li class="vline"></li>
+				</ul>
+				<div class="theme-selector">
+					<select class="ax-select" id="ax5-theme-select"></select>
+				</div>
+			</div>
+		</div>
 
+		<div class="app-visual" id="app-visual">
+			<div class="app-wrap">
+				<div class="visual"></div>
+				<h1>UI Class</h1>
+				<h3>AX5 UI 클래스의 사용법과 상세 예제를 만나실 수 있습니다.</h3>
+			</div>
+		</div>
+
+		<div class="app-page">
+			<div class="app-content app-wrap">
+				<layout-placeholder name="body"/>
+			</div>
+			<div class="app-nav-left" id="app-nav-left"></div>
+		</div>
+
+		<div class="mobile_viewer"></div>
+	</div>
 </body>
 </html>

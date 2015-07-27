@@ -1,0 +1,61 @@
+html, body{
+	margin:0px;padding:0px;
+	font-family: $font-family-base;
+	font-size: 14px;color:#555555;
+	height:100%;line-height: 1.6em;
+}
+
+*{}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
+{margin: 0.5em auto;color:#555555;}
+
+article {
+	h1 {
+		font-size: 2.5em;
+	}
+	h2 {
+		font-size: 1.8em;
+	}
+	h3 {
+		font-size: 1.5em;
+	}
+	h4 {
+		font-size: 1.2em;
+	}
+	h5 {
+		font-size: 1em;
+	}
+}
+
+p{}
+li{}
+
+div.block-end{height:30px;}
+pre.prettyprint{
+	border-radius: 10px;
+	margin: 20px 0;
+	//background-color: #f3f3f3;
+
+	-moz-tab-size: 4;
+	-o-tab-size:   4;
+	tab-size:      4;
+
+}
+
+
+
+@for $i from 1 through 10 {
+	.DH#{$i} {
+		line-height:0px;
+		height: #{$i}px;
+	}
+	.DH#{$i*10} {
+		line-height:0px;
+		height: #{$i*10}px;
+	}
+}
