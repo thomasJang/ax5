@@ -1,3 +1,5 @@
+[![axisj-contributed](https://img.shields.io/badge/AXISJ.com-Contributed-green.svg)](https://github.com/axisj) ![](https://img.shields.io/badge/Seowoo-Mondo&Thomas-red.svg)
+
 # ax5 
 
 Optimized for modern browsers Javascript dom Control / Touch UI library
