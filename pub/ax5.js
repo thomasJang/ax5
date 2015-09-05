@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-07-22 
+ * 2015-09-06 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -2559,6 +2559,7 @@
 						tmp = safe.appendChild(doc.createElement("div"));
 						// Deserialize a standard representation
 						tag = ( re_tag.exec(elem) || ["", ""] )[1].toLowerCase();
+						console.log(tag);
 						wrap = tag_map[tag] || [ 0, "", "" ];
 						tmp.innerHTML = wrap[1] + elem.replace(re_single_tags, "<$1></$2>") + wrap[2];
 
@@ -2567,26 +2568,7 @@
 						while (j--) {
 							tmp = tmp.lastChild;
 						}
-
-                        /* ax5 에겐 필요없는 구문이 될 듯.
-                        if (!info.support.tbody) {
-                            // String was a <table>, *may* have spurious <tbody>
-                            elem = tag === "table" && !rtbody.test(elem) ?
-                                tmp.firstChild :
-
-                                // String was a bare <thead> or <tfoot>
-                                wrap[1] === "<table>" && !rtbody.test(elem) ?
-                                    tmp :
-                                    0;
-
-                            j = elem && elem.childNodes.length;
-                            while (j--) {
-                                if (node_name((tbody = elem.childNodes[j]), "tbody") && !tbody.childNodes.length) {
-                                    elem.removeChild(tbody);
-                                }
-                            }
-                        }
-                        */
+						
 						U.merge(nodes, tmp.childNodes);
 
 						// Fix #12392 for WebKit and IE > 9
@@ -2608,7 +2590,15 @@
 
 			i = 0;
 			while ((elem = nodes[i++])) {
-				safe.appendChild(elem);
+				if(elem.nodeName == "SCRIPT"){
+					var s = doc.createElement('script');
+					s.type = elem.type;
+					if(elem.src) s.src = elem.src;
+					s.text = elem.innerHTML;
+					safe.appendChild( s );
+				}else{
+					safe.appendChild( elem );
+				}
 			}
 			//console.log(safe.innerHTML);
 			return safe;
@@ -3827,7 +3817,7 @@ ax5.xhr = (function (){
 				// header 셋팅
 				if(cfg.method.toUpperCase() == "GET"){
 					// GET이면 head 무시
-					cfg.header.accept = "*/*", cfg.header['content-type'] = "text/plain";
+					cfg.header.accept = "*/*", cfg.header['content-type'] = "text/html";
 				}
 				
 				try {
@@ -3854,7 +3844,7 @@ ax5.xhr = (function (){
 
 						try {
 							that.data = ("responseText" in http) ? http.responseText : "";
-							if(typeof that.data == "string") that.data = U.parse_json(that.data);
+							if(http.responseType == "JSON" && typeof that.data == "string") that.data = U.parse_json(that.data);
 						}catch(e){}
 
 						if (http.status == 200) {

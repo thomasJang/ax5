@@ -13,16 +13,22 @@
 <div id="parent">
     <div id="test">!</div>
 </div>
+
+<textarea id="textarea">
+	<h1>h1h1</h1>
+	<script type="text/javascript">
+		alert(1);
+	</script>
+
+</textarea>
+
 </body>
 <script type="text/javascript">
 
     ax5.dom.ready(function(){
-       console.log(1);
+	    ax5.dom("#test").append( ax5.dom("#textarea").val() );
     });
 
-    ax5.dom.ready(function(){
-        console.log(2);
-    });
-
+    //
 </script>
 </html>

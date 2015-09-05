@@ -40,7 +40,7 @@ ax5.xhr = (function (){
 				// header 셋팅
 				if(cfg.method.toUpperCase() == "GET"){
 					// GET이면 head 무시
-					cfg.header.accept = "*/*", cfg.header['content-type'] = "text/plain";
+					cfg.header.accept = "*/*", cfg.header['content-type'] = "text/html";
 				}
 				
 				try {
@@ -67,7 +67,7 @@ ax5.xhr = (function (){
 
 						try {
 							that.data = ("responseText" in http) ? http.responseText : "";
-							if(typeof that.data == "string") that.data = U.parse_json(that.data);
+							if(http.responseType == "JSON" && typeof that.data == "string") that.data = U.parse_json(that.data);
 						}catch(e){}
 
 						if (http.status == 200) {
