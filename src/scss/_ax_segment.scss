@@ -71,7 +71,7 @@
 			table {
 				td {
 					.ax-btn {
-						@include segment-btn($segment-basic-border, $segment-bg, $segment-basic-bg, $segment-text, $segment-basic-text);
+						@include segment-btn($segment-basic-border, $segment-bg, $segment-basic-bg, $segment-basic-border-color, $segment-basic-text);
 					}
 				}
 			}
@@ -82,7 +82,7 @@
 			table {
 				td {
 					.ax-btn {
-						@include segment-btn($segment-good-border, $segment-bg, $segment-good-bg, $segment-text, $segment-good-text);
+						@include segment-btn($segment-good-border, $segment-bg, $segment-good-bg, $segment-good-border-color, $segment-good-text);
 					}
 				}
 			}
@@ -93,7 +93,7 @@
 			table {
 				td {
 					.ax-btn {
-						@include segment-btn($segment-info-border, $segment-bg, $segment-info-bg, $segment-text, $segment-info-text);
+						@include segment-btn($segment-info-border, $segment-bg, $segment-info-bg, $segment-info-border-color, $segment-info-text);
 					}
 				}
 			}
@@ -104,7 +104,7 @@
 			table {
 				td {
 					.ax-btn {
-						@include segment-btn($segment-warning-border, $segment-bg, $segment-warning-bg, $segment-text, $segment-warning-text);
+						@include segment-btn($segment-warning-border, $segment-bg, $segment-warning-bg, $segment-warning-border-color, $segment-warning-text);
 					}
 				}
 			}
@@ -115,7 +115,7 @@
 			table {
 				td {
 					.ax-btn {
-						@include segment-btn($segment-danger-border, $segment-bg, $segment-danger-bg, $segment-text, $segment-danger-text);
+						@include segment-btn($segment-danger-border, $segment-bg, $segment-danger-bg, $segment-danger-border-color, $segment-danger-text);
 					}
 				}
 			}
@@ -126,7 +126,7 @@
 			table {
 				td {
 					.ax-btn {
-						@include segment-btn($segment-special-border, $segment-bg, $segment-special-bg, $segment-text, $segment-special-text);
+						@include segment-btn($segment-special-border, $segment-bg, $segment-special-bg, $segment-special-border-color, $segment-special-text);
 					}
 				}
 			}

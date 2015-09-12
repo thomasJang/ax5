@@ -3609,7 +3609,7 @@ input[type='checkbox']:checked + .ax5-ui-switch.with-label {
     background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
     background-image: linear-gradient(to bottom, #ffffff, #ffffff);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#ffffff);
-    color: #333333;
+    color: #32B4DC;
     border: 1px solid #32B4DC;
     border-right: 0px none; }
     .ax5-ui-segment.basic .ax5-ui-segment-group table td .ax-btn[data-segment-item-last] {
@@ -3625,7 +3625,7 @@ input[type='checkbox']:checked + .ax5-ui-switch.with-label {
     background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
     background-image: linear-gradient(to bottom, #ffffff, #ffffff);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#ffffff);
-    color: #333333;
+    color: #78B43C;
     border: 1px solid #78B43C;
     border-right: 0px none; }
     .ax5-ui-segment.good .ax5-ui-segment-group table td .ax-btn[data-segment-item-last] {
@@ -3641,7 +3641,7 @@ input[type='checkbox']:checked + .ax5-ui-switch.with-label {
     background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
     background-image: linear-gradient(to bottom, #ffffff, #ffffff);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#ffffff);
-    color: #333333;
+    color: #002A4F;
     border: 1px solid #002A4F;
     border-right: 0px none; }
     .ax5-ui-segment.info .ax5-ui-segment-group table td .ax-btn[data-segment-item-last] {
@@ -3657,7 +3657,7 @@ input[type='checkbox']:checked + .ax5-ui-switch.with-label {
     background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
     background-image: linear-gradient(to bottom, #ffffff, #ffffff);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#ffffff);
-    color: #333333;
+    color: #E66E3C;
     border: 1px solid #E66E3C;
     border-right: 0px none; }
     .ax5-ui-segment.warning .ax5-ui-segment-group table td .ax-btn[data-segment-item-last] {
@@ -3673,7 +3673,7 @@ input[type='checkbox']:checked + .ax5-ui-switch.with-label {
     background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
     background-image: linear-gradient(to bottom, #ffffff, #ffffff);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#ffffff);
-    color: #333333;
+    color: #a74015;
     border: 1px solid #a74015;
     border-right: 0px none; }
     .ax5-ui-segment.danger .ax5-ui-segment-group table td .ax-btn[data-segment-item-last] {
@@ -3689,7 +3689,7 @@ input[type='checkbox']:checked + .ax5-ui-switch.with-label {
     background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
     background-image: linear-gradient(to bottom, #ffffff, #ffffff);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#ffffff);
-    color: #333333;
+    color: #bc4cd0;
     border: 1px solid #bc4cd0;
     border-right: 0px none; }
     .ax5-ui-segment.special .ax5-ui-segment-group table td .ax-btn[data-segment-item-last] {

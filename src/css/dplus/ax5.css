@@ -3618,7 +3618,7 @@ input[type='checkbox']:checked + .ax5-ui-switch.with-label {
     background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
     background-image: linear-gradient(to bottom, #ffffff, #ffffff);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#ffffff);
-    color: #333333;
+    color: #FFCB08;
     border: 1px solid #FFCB08;
     border-right: 0px none; }
     .ax5-ui-segment.basic .ax5-ui-segment-group table td .ax-btn[data-segment-item-last] {
@@ -3634,7 +3634,7 @@ input[type='checkbox']:checked + .ax5-ui-switch.with-label {
     background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
     background-image: linear-gradient(to bottom, #ffffff, #ffffff);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#ffffff);
-    color: #333333;
+    color: #219ECF;
     border: 1px solid #219ECF;
     border-right: 0px none; }
     .ax5-ui-segment.good .ax5-ui-segment-group table td .ax-btn[data-segment-item-last] {
@@ -3682,7 +3682,7 @@ input[type='checkbox']:checked + .ax5-ui-switch.with-label {
     background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
     background-image: linear-gradient(to bottom, #ffffff, #ffffff);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#ffffff);
-    color: #333333;
+    color: #8d231a;
     border: 1px solid #8d231a;
     border-right: 0px none; }
     .ax5-ui-segment.danger .ax5-ui-segment-group table td .ax-btn[data-segment-item-last] {
@@ -3698,7 +3698,7 @@ input[type='checkbox']:checked + .ax5-ui-switch.with-label {
     background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
     background-image: linear-gradient(to bottom, #ffffff, #ffffff);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#ffffff);
-    color: #333333;
+    color: #292929;
     border: 1px solid #292929;
     border-right: 0px none; }
     .ax5-ui-segment.special .ax5-ui-segment-group table td .ax-btn[data-segment-item-last] {
