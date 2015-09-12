@@ -4,58 +4,58 @@
 
 	// root of function
 	var root = this, win = window, doc = document, docElem = document.documentElement,
-	/** @namespace {Object} ax5 */
+		/** @namespace {Object} ax5 */
 		ax5 = {}, info, U, dom;
 
-    var node_names = "abbr|article|aside|audio|bdi|canvas|data|datalist|details|figcaption|figure|footer|header|hgroup|mark|meter|nav|output|progress|section|summary|time|video",
-        re_tag = /<([\w:]+)/,
-        re_single_tags = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/gi,
-        re_html = /<|&#?\w+;/,
-        re_noInnerhtml = /<(?:script|style|link)/i,
-        core_pnum = /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source,
-        re_margin = /^margin/,
-        re_numsplit = new RegExp( "^(" + core_pnum + ")(.*)$", "i" ),
-        re_numnonpx = new RegExp( "^(" + core_pnum + ")(?!px)[a-z%]+$", "i" ),
-        re_position = /^(top|right|bottom|left)$/,
-        re_is_json = /^(["'](\\.|[^"\\\n\r])*?["']|[,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t])+?$/,
-        re_ms = /^-ms-/,
-        re_snake_case = /[\-_]([\da-z])/gi,
-        re_camel_case = /([A-Z])/g,
-        re_dot = /\./,
-        re_int = /[-|+]?[\D]/gi,
-        re_not_num = /\D/gi,
-        re_money_split = new RegExp('([0-9])([0-9][0-9][0-9][,.])'),
-        re_amp = /&/g,
-        re_eq = /=/,
-        re_class_name_split = /[ ]+/g,
-        body = doc.createElement('body'),
-        safe_fragment = (function(){
-            var list = node_names.split( "|" ),
-                safeFrag = doc.createDocumentFragment();
-            if ( safeFrag.createElement ) {
-                while ( list.length ) {
-                    safeFrag.createElement(
-                        list.pop()
-                    );
-                }
-            }
-            return safeFrag;
-        })(),
-        fragment_div = safe_fragment.appendChild( doc.createElement("div")),
-        tag_map = {
-            option: [ 1, "<select multiple='multiple'>", "</select>" ],
-            legend: [ 1, "<fieldset>", "</fieldset>" ],
-            area: [ 1, "<map>", "</map>" ],
-            param: [ 1, "<object>", "</object>" ],
-            thead: [ 1, "<table>", "</table>" ],
-            tr: [ 2, "<table><tbody>", "</tbody></table>" ],
-            col: [ 2, "<table><tbody></tbody><colgroup>", "</colgroup></table>" ],
-            td: [ 3, "<table><tbody><tr>", "</tr></tbody></table>" ]
-        },
-        tag_not_support_innerhtml = {
-            col:1, colGroup:1, frameSet:1, html:1, head:1, style:1, table:1,
-            tBody:1, tFoot:1, tHead:1, title:1, tr:1
-        };
+	var node_names = "abbr|article|aside|audio|bdi|canvas|data|datalist|details|figcaption|figure|footer|header|hgroup|mark|meter|nav|output|progress|section|summary|time|video",
+		re_tag = /<([\w:]+)/,
+		re_single_tags = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/gi,
+		re_html = /<|&#?\w+;/,
+		re_noInnerhtml = /<(?:script|style|link)/i,
+		core_pnum = /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source,
+		re_margin = /^margin/,
+		re_numsplit = new RegExp("^(" + core_pnum + ")(.*)$", "i"),
+		re_numnonpx = new RegExp("^(" + core_pnum + ")(?!px)[a-z%]+$", "i"),
+		re_position = /^(top|right|bottom|left)$/,
+		re_is_json = /^(["'](\\.|[^"\\\n\r])*?["']|[,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t])+?$/,
+		re_ms = /^-ms-/,
+		re_snake_case = /[\-_]([\da-z])/gi,
+		re_camel_case = /([A-Z])/g,
+		re_dot = /\./,
+		re_int = /[-|+]?[\D]/gi,
+		re_not_num = /\D/gi,
+		re_money_split = new RegExp('([0-9])([0-9][0-9][0-9][,.])'),
+		re_amp = /&/g,
+		re_eq = /=/,
+		re_class_name_split = /[ ]+/g,
+		body = doc.createElement('body'),
+		safe_fragment = (function() {
+			var list = node_names.split("|"),
+				safeFrag = doc.createDocumentFragment();
+			if (safeFrag.createElement) {
+				while (list.length) {
+					safeFrag.createElement(
+						list.pop()
+					);
+				}
+			}
+			return safeFrag;
+		})(),
+		fragment_div = safe_fragment.appendChild(doc.createElement("div")),
+		tag_map = {
+			option: [1, "<select multiple='multiple'>", "</select>"],
+			legend: [1, "<fieldset>", "</fieldset>"],
+			area: [1, "<map>", "</map>"],
+			param: [1, "<object>", "</object>"],
+			thead: [1, "<table>", "</table>"],
+			tr: [2, "<table><tbody>", "</tbody></table>"],
+			col: [2, "<table><tbody></tbody><colgroup>", "</colgroup></table>"],
+			td: [3, "<table><tbody><tr>", "</tr></tbody></table>"]
+		},
+		tag_not_support_innerhtml = {
+			col: 1, colGroup: 1, frameSet: 1, html: 1, head: 1, style: 1, table: 1,
+			tBody: 1, tFoot: 1, tHead: 1, title: 1, tr: 1
+		};
 
 	/**
 	 * guid
@@ -67,13 +67,13 @@
 	 * @method ax5.get_guid
 	 * @returns {Number} guid
 	 */
-	ax5.get_guid = function(){return ax5.guid++;};
+	ax5.get_guid = function() {return ax5.guid++;};
 
 	/**
 	 * 상수모음
 	 * @namespace ax5.info
 	 */
-	ax5.info = info = (function(){
+	ax5.info = info = (function() {
 		/**
 		 * ax5 version
 		 * @member {String} ax5.info.version
@@ -94,7 +94,7 @@
 		 * }
 		 * ```
 		 */
-		var onerror = function(){
+		var onerror = function() {
 			console.error(U.to_array(arguments).join(":"));
 		};
 
@@ -117,13 +117,13 @@
 		};
 
 		var week_names = [
-			{ label: "SUN" },
-			{ label: "MON" },
-			{ label: "TUE" },
-			{ label: "WED" },
-			{ label: "THU" },
-			{ label: "FRI" },
-			{ label: "SAT" }
+			{label: "SUN"},
+			{label: "MON"},
+			{label: "TUE"},
+			{label: "WED"},
+			{label: "THU"},
+			{label: "FRI"},
+			{label: "SAT"}
 		];
 
 		/**
@@ -135,18 +135,21 @@
 		 * //Object {name: "chrome", version: "39.0.2171.71", mobile: false}
 		 * ```
 		 */
-		var browser = (function (ua, mobile, browserName, match, browser, browserVersion) {
+		var browser = (function(ua, mobile, browserName, match, browser, browserVersion) {
 			ua = navigator.userAgent.toLowerCase(), mobile = (ua.search(/mobile/g) != -1), browserName, match, browser, browserVersion;
 
 			if (ua.search(/iphone/g) != -1) {
-				return { name: "iphone", version: 0, mobile: true }
-			} else if (ua.search(/ipad/g) != -1) {
-				return { name: "ipad", version: 0, mobile: true }
-			} else if (ua.search(/android/g) != -1) {
+				return {name: "iphone", version: 0, mobile: true}
+			}
+			else if (ua.search(/ipad/g) != -1) {
+				return {name: "ipad", version: 0, mobile: true}
+			}
+			else if (ua.search(/android/g) != -1) {
 				match = /(android)[ \/]([\w.]+)/.exec(ua) || [];
 				browserVersion = (match[2] || "0");
-				return { name: "android", version: browserVersion, mobile: mobile }
-			} else {
+				return {name: "android", version: browserVersion, mobile: mobile}
+			}
+			else {
 				browserName = "";
 				match = /(opr)[ \/]([\w.]+)/.exec(ua) || /(chrome)[ \/]([\w.]+)/.exec(ua) || /(webkit)[ \/]([\w.]+)/.exec(ua) || /(msie) ([\w.]+)/.exec(ua) || ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) || [];
 				browser = (match[1] || "");
@@ -203,7 +206,7 @@
 			}, urls = url.href.split(/[\?#]/);
 			url.param = url.param.replace("?", "");
 			url.url = urls[0];
-			if(url.href.search("#") > -1){
+			if (url.href.search("#") > -1) {
 				url.hashdata = U.last(urls);
 			}
 			urls = null;
@@ -224,12 +227,11 @@
 		};
 	})();
 
-
 	/**
 	 * Refer to this by {@link ax5}.
 	 * @namespace ax5.util
 	 */
-	ax5['util'] = U = (function(){
+	ax5['util'] = U = (function() {
 		var _toString = Object.prototype.toString;
 
 		/**
@@ -249,7 +251,7 @@
 		 * ```
 		 */
 		function each(O, _fn) {
-			if(is_nothing(O)) return [];
+			if (is_nothing(O)) return [];
 			var key, i = 0, l = O.length,
 				isObj = l === undefined || typeof O === "function";
 			if (isObj) {
@@ -257,7 +259,8 @@
 					if (typeof O[key] != "undefined")
 						if (_fn.call(O[key], key, O[key]) === false) break;
 				}
-			} else {
+			}
+			else {
 				for (; i < l;) {
 					if (typeof O[i] != "undefined")
 						if (_fn.call(O[i], i, O[i++]) === false) break;
@@ -296,7 +299,7 @@
 		 * ```
 		 */
 		function map(O, _fn) {
-			if(is_nothing(O)) return [];
+			if (is_nothing(O)) return [];
 			var key, i = 0, l = O.length, results = [], fn_result;
 			if (is_object(O)) {
 				for (key in O) {
@@ -306,7 +309,8 @@
 						else results.push(fn_result);
 					}
 				}
-			} else {
+			}
+			else {
 				for (; i < l;) {
 					if (typeof O[i] != "undefined") {
 						fn_result = undefined;
@@ -352,7 +356,7 @@
 		 * ```
 		 */
 		function search(O, _fn) {
-			if(is_nothing(O)) return -1;
+			if (is_nothing(O)) return -1;
 			var key, i = 0, l = O.length;
 			if (is_object(O)) {
 				for (key in O) {
@@ -365,7 +369,8 @@
 						break;
 					}
 				}
-			} else {
+			}
+			else {
 				for (; i < l;) {
 					if (typeof O[i] != "undefined" && is_function(_fn) && _fn.call(O[i], i, O[i])) {
 						return i;
@@ -478,7 +483,7 @@
 		 * ```
 		 */
 		function filter(O, _fn) {
-			if(is_nothing(O)) return [];
+			if (is_nothing(O)) return [];
 			var k, i = 0, l = O.length, results = [], fn_result;
 			if (is_object(O)) {
 				for (k in O) {
@@ -486,7 +491,8 @@
 						if (fn_result = _fn.call(O[k], k, O[k])) results.push(O[k]);
 					}
 				}
-			} else {
+			}
+			else {
 				for (; i < l;) {
 					if (typeof O[i] != "undefined") {
 						if (fn_result = _fn.call(O[i], i, O[i])) results.push(O[i]);
@@ -528,7 +534,7 @@
 			else if (ax5.util.is_object(O)) {
 				json_string += "{";
 				var json_object_body = [];
-				each(O, function (key, value) {
+				each(O, function(key, value) {
 					json_object_body.push('"' + key + '": ' + to_json(value));
 				});
 				json_string += json_object_body.join(", ");
@@ -549,41 +555,42 @@
 			return json_string;
 		}
 
-        /**
-         * 관용의 JSON Parser
-         * @method ax5.util.parse_json
-         * @param {String} JSONString
-         * @param {Boolean} [force] - 강제 적용 여부 (json 문자열 검사를 무시하고 오브젝트 변환을 시도합니다.)
-         * @returns {Object}
-         * @example
-         * ```
-         * console.log(ax5.util.parse_json('{"a":1}'));
-         * // Object {a: 1} 
-         * console.log(ax5.util.parse_json("{'a':1, 'b':'b'}"));
-         * // Object {a: 1, b: "b"}
-         * console.log(ax5.util.parse_json("{'a':1, 'b':function(){return 1;}}", true));
-         * // Object {a: 1, b: function}
-         * console.log(ax5.util.parse_json("{a:1}"));
-         * // Object {a: 1}
-         * console.log(ax5.util.parse_json("[1,2,3]"));
-         * // [1, 2, 3]
-         * console.log(ax5.util.parse_json("['1','2','3']"));
-         * // ["1", "2", "3"]
-         * console.log(ax5.util.parse_json("[{'a':'99'},'2','3']"));
-         * // [Object, "2", "3"]
-         * ```
-         */
-        function parse_json(str, force){
-            if( force || (re_is_json).test(str) ){
-                try {
-                    return (new Function('', 'return ' + str))();
-                }catch(e){
-                    return {error:500, msg:'syntax error'};
-                }
-            }else {
-                return {error:500, msg:'syntax error'};
-            }
-        }
+		/**
+		 * 관용의 JSON Parser
+		 * @method ax5.util.parse_json
+		 * @param {String} JSONString
+		 * @param {Boolean} [force] - 강제 적용 여부 (json 문자열 검사를 무시하고 오브젝트 변환을 시도합니다.)
+		 * @returns {Object}
+		 * @example
+		 * ```
+		 * console.log(ax5.util.parse_json('{"a":1}'));
+		 * // Object {a: 1}
+		 * console.log(ax5.util.parse_json("{'a':1, 'b':'b'}"));
+		 * // Object {a: 1, b: "b"}
+		 * console.log(ax5.util.parse_json("{'a':1, 'b':function(){return 1;}}", true));
+		 * // Object {a: 1, b: function}
+		 * console.log(ax5.util.parse_json("{a:1}"));
+		 * // Object {a: 1}
+		 * console.log(ax5.util.parse_json("[1,2,3]"));
+		 * // [1, 2, 3]
+		 * console.log(ax5.util.parse_json("['1','2','3']"));
+		 * // ["1", "2", "3"]
+		 * console.log(ax5.util.parse_json("[{'a':'99'},'2','3']"));
+		 * // [Object, "2", "3"]
+		 * ```
+		 */
+		function parse_json(str, force) {
+			if (force || (re_is_json).test(str)) {
+				try {
+					return (new Function('', 'return ' + str))();
+				} catch (e) {
+					return {error: 500, msg: 'syntax error'};
+				}
+			}
+			else {
+				return {error: 500, msg: 'syntax error'};
+			}
+		}
 		
 		/**
 		 * 타겟 오브젝트의 키를 대상 오브젝트의 키만큼 확장합니다.
@@ -633,22 +640,20 @@
 		 * // 덮어씀.
 		 * ```
 		 */
-		function extend_all(O, _O, overwrite){
+		function extend_all(O, _O, overwrite) {
 			if (typeof O !== "object" && typeof O !== "function") O = {};
 			if (typeof _O === "string") O = _O;
 			else {
-				for (var k in _O){
-					if(typeof O[k] === "undefined") {
+				for (var k in _O) {
+					if (typeof O[k] === "undefined") {
 						O[k] = _O[k];
 					}
-					else
-					if(Object.prototype.toString.call(O[k]) == "[object Object]")
+					else if (Object.prototype.toString.call(O[k]) == "[object Object]")
 					{
 						// 키값이 오브젝트인 경우.
 						O[k] = extend_all(O[k], _O[k], overwrite);
 					}
-					else
-					{
+					else {
 						if (overwrite === true) {
 							O[k] = _O[k];
 						}
@@ -693,7 +698,7 @@
 		 */
 		function get_type(O) {
 			var typeName;
-			if(O != null && O == O.window){
+			if (O != null && O == O.window) {
 				typeName = "window";
 			}
 			else if (!!(O && O.nodeType == 1)) {
@@ -735,6 +740,7 @@
 		function is_window(O) {
 			return O != null && O == O.window;
 		}
+
 		/**
 		 * 오브젝트가 HTML 엘리먼트여부인지 판단합니다.
 		 * @method ax5.util.is_element
@@ -744,6 +750,7 @@
 		function is_element(O) {
 			return !!(O && (O.nodeType == 1 || O.nodeType == 11));
 		}
+
 		/**
 		 * 오브젝트가 Object인지 판단합니다.
 		 * @method ax5.util.is_object
@@ -753,6 +760,7 @@
 		function is_object(O) {
 			return _toString.call(O) == "[object Object]";
 		}
+
 		/**
 		 * 오브젝트가 Array인지 판단합니다.
 		 * @method ax5.util.is_array
@@ -762,6 +770,7 @@
 		function is_array(O) {
 			return _toString.call(O) == "[object Array]";
 		}
+
 		/**
 		 * 오브젝트가 Function인지 판단합니다.
 		 * @method ax5.util.is_function
@@ -771,6 +780,7 @@
 		function is_function(O) {
 			return typeof O === "function";
 		}
+
 		/**
 		 * 오브젝트가 String인지 판단합니다.
 		 * @method ax5.util.is_string
@@ -780,6 +790,7 @@
 		function is_string(O) {
 			return _toString.call(O) == "[object String]";
 		}
+
 		/**
 		 * 오브젝트가 Number인지 판단합니다.
 		 * @method ax5.util.is_number
@@ -789,6 +800,7 @@
 		function is_number(O) {
 			return _toString.call(O) == "[object Number]";
 		}
+
 		/**
 		 * 오브젝트가 NodeList인지 판단합니다.
 		 * @method ax5.util.is_nodelist
@@ -798,6 +810,7 @@
 		function is_nodelist(O) {
 			return (_toString.call(O) == "[object NodeList]" || (O && O[0] && O[0].nodeType == 1));
 		}
+
 		/**
 		 * 오브젝트가 undefined인지 판단합니다.
 		 * @method ax5.util.is_undefined
@@ -807,6 +820,7 @@
 		function is_undefined(O) {
 			return typeof O === "undefined";
 		}
+
 		/**
 		 * 오브젝트가 undefined이거나 null이거나 빈값인지 판단합니다.
 		 * @method ax5.util.is_nothing
@@ -816,6 +830,7 @@
 		function is_nothing(O) {
 			return (typeof O === "undefined" || O === null || O === "");
 		}
+
 		/**
 		 * 오브젝트의 첫번째 아이템을 반환합니다.
 		 * @method ax5.util.first
@@ -842,6 +857,7 @@
 				return undefined;
 			}
 		}
+
 		/**
 		 * 오브젝트의 마지막 아이템을 반환합니다.
 		 * @method ax5.util.last
@@ -892,10 +908,10 @@
 			opts = opts || {};
 			return (doc.cookie = [
 				escape(cn), '=', escape(cv),
-				expire      ? "; expires=" + expire.toUTCString() : "", // use expires attribute, max-age is not supported by IE
-				opts.path    ? "; path=" + opts.path : "",
-				opts.domain  ? "; domain=" + opts.domain : "",
-				opts.secure  ? "; secure" : ""
+				expire ? "; expires=" + expire.toUTCString() : "", // use expires attribute, max-age is not supported by IE
+				opts.path ? "; path=" + opts.path : "",
+				opts.domain ? "; domain=" + opts.domain : "",
+				opts.secure ? "; secure" : ""
 			].join(""));
 		}
 
@@ -941,13 +957,13 @@
 				readyRegExp = info.is_browser && navigator.platform === 'PLAYSTATION 3' ? /^complete$/ : /^(complete|loaded)$/,
 				loadCount = mods.length, loadErrors = [], loaded_src = {}, onloadTimer, onerrorTimer, returned = false,
 				scripts = dom.get("script[src]"), styles = dom.get("style[href]"),
-				onload = function () {
+				onload = function() {
 					if (loadCount < 1 && loadErrors.length == 0 && !returned) {
 						if (callBack) callBack({});
 						returned = true;
 					}
 				},
-				onerror = function () {
+				onerror = function() {
 					if (loadCount < 1 && loadErrors.length > 0 && !returned) {
 						console.error(loadErrors);
 						if (errorBack) errorBack({
@@ -964,7 +980,7 @@
 					plugin, plugin_src = info.base_url + src, attr_nm = (type === "js") ? "src" : "href",
 					plug_load, plug_err, s = scripts.length;
 
-				while(s--){
+				while (s--) {
 					if (scripts[s].getAttribute(attr_nm) === plugin_src) {
 						hasPlugin = true;
 						break;
@@ -976,49 +992,50 @@
 					loadCount--;
 					onload();
 
-				} else {
+				}
+				else {
 
 					plugin = (type === "js") ?
 						dom.create("script", {type: "text/javascript", src: plugin_src, "data-src": plugin_src}) :
 						dom.create("link", {rel: "stylesheet", type: "text/css", href: plugin_src});
 
-					plug_load = function (e, plugin_src) {
-						if (e && ( e.type === 'load' || readyRegExp.test((e.currentTarget || e.srcElement).readyState) )){
-							if(!loaded_src[plugin_src]) loadCount--;
+					plug_load = function(e, plugin_src) {
+						if (e && ( e.type === 'load' || readyRegExp.test((e.currentTarget || e.srcElement).readyState) )) {
+							if (!loaded_src[plugin_src]) loadCount--;
 							if (onloadTimer) clearTimeout(onloadTimer);
 							onloadTimer = setTimeout(onload, 1);
 						}
 					},
-					plug_err = function (e) {
-						loadCount--;
-						loadErrors.push({
-							src: info.base_url + src, error:e
-						});
-						if (onerrorTimer) clearTimeout(onerrorTimer);
-						onerrorTimer = setTimeout(onerror, 1);
-					};
+						plug_err = function(e) {
+							loadCount--;
+							loadErrors.push({
+								src: info.base_url + src, error: e
+							});
+							if (onerrorTimer) clearTimeout(onerrorTimer);
+							onerrorTimer = setTimeout(onerror, 1);
+						};
 
 					ax5.xhr({
-						url : plugin_src, contentType: "",
-						res : function (response, status) {
+						url: plugin_src, contentType: "",
+						res: function(response, status) {
 							var time_id, hasPlugin = false, scripts = dom.get("script[src]"), s = scripts.length;
-							while(s--){
+							while (s--) {
 								if (scripts[s].getAttribute(attr_nm) === plugin_src) {
 									hasPlugin = true;
 									break;
 								}
 							}
 
-							if(!hasPlugin) head.appendChild(plugin);
+							if (!hasPlugin) head.appendChild(plugin);
 							plugin.onload = function(e) {
 								plug_load(e, plugin_src);
-								if(time_id) clearTimeout(time_id);
+								if (time_id) clearTimeout(time_id);
 							};
-							time_id = setTimeout(function(){
+							time_id = setTimeout(function() {
 								plug_load({type: "load"}, plugin_src);
 							}, 500);
 						},
-						error : function () {
+						error: function() {
 							plug_err(this);
 						}
 					});
@@ -1059,9 +1076,11 @@
 			if (typeof str === "undefined" || typeof pos === "undefined") return "";
 			if (is_string(pos)) {
 				return (str.indexOf(pos) > -1) ? str.substr(0, str.indexOf(pos)) : str;
-			} else if (is_number(pos)) {
+			}
+			else if (is_number(pos)) {
 				return str.substr(0, pos);
-			} else {
+			}
+			else {
 				return "";
 			}
 		}
@@ -1082,12 +1101,14 @@
 		 */
 		function right(str, pos) {
 			if (typeof str === "undefined" || typeof pos === "undefined") return "";
-			str = ''+str;
+			str = '' + str;
 			if (is_string(pos)) {
 				return (str.lastIndexOf(pos) > -1) ? str.substr(str.lastIndexOf(pos) + 1) : str;
-			} else if (is_number(pos)) {
+			}
+			else if (is_number(pos)) {
 				return str.substr(str.length - pos);
-			} else {
+			}
+			else {
 				return "";
 			}
 		}
@@ -1105,7 +1126,7 @@
 		 * ```
 		 */
 		function camel_case(str) {
-			return str.replace(re_ms, "ms-").replace(re_snake_case, function (all, letter) {
+			return str.replace(re_ms, "ms-").replace(re_snake_case, function(all, letter) {
 				return letter.toUpperCase();
 			});
 		}
@@ -1124,7 +1145,7 @@
 		 * ```
 		 */
 		function snake_case(str) {
-			return camel_case(str).replace(re_camel_case, function (all, letter) {
+			return camel_case(str).replace(re_camel_case, function(all, letter) {
 				return "-" + letter.toLowerCase();
 			});
 		}
@@ -1163,25 +1184,34 @@
 			if (pair[1]) {
 				pair[1] = pair[1].replace(re_not_num, "");
 				returnValue = Number(pair[0] + "." + pair[1]) || 0;
-			} else {
+			}
+			else {
 				returnValue = Number(pair[0]) || 0;
 			}
 			result = (isMinus) ? -returnValue : returnValue;
 
-			each(cond, function (k, c) {
+			each(cond, function(k, c) {
 				if (k == "round") {
-					if(is_number(c)){
-						if(c < 0){
+					if (is_number(c)) {
+						if (c < 0) {
 							result = +(Math.round(result + "e-" + Math.abs(c)) + "e+" + Math.abs(c));
-						}else{
+						}
+						else {
 							result = +(Math.round(result + "e+" + c) + "e-" + c);
 						}
-					}else{
+					}
+					else {
 						result = Math.round(result);
 					}
 				}
+				if (k == "floor") {
+					result = Math.floor(result);
+				}
+				if (k == "ceil") {
+					result = Math.ceil(result);
+				}
 				else if (k == "money") {
-					result = (function (val) {
+					result = (function(val) {
 						var txtNumber = '' + val;
 						if (isNaN(txtNumber) || txtNumber == "") {
 							return "";
@@ -1194,7 +1224,8 @@
 							} while (re_money_split.test(arrNumber[0]));
 							if (arrNumber.length > 1) {
 								return arrNumber.join('');
-							} else {
+							}
+							else {
 								return arrNumber[0].split('.')[0];
 							}
 						}
@@ -1204,7 +1235,7 @@
 					result = Math.abs(Number(result));
 				}
 				else if (k == "byte") {
-					result = (function (val) {
+					result = (function(val) {
 						val = Number(result);
 						var n_unit = "KB";
 						var myByte = val / 1024;
@@ -1260,7 +1291,8 @@
 				for (; j < l; j++) {
 					first[i++] = second[j];
 				}
-			} else {
+			}
+			else {
 				while (second[j] !== undefined) {
 					first[i++] = second[j++];
 				}
@@ -1291,19 +1323,17 @@
 			if (is_string(O) && typeof cond !== "undefined" && cond == "param") {
 				return O;
 			}
-			else
-			if ( (is_string(O) && typeof cond !== "undefined" && cond == "object") || (is_string(O) && typeof cond === "undefined") ){
+			else if ((is_string(O) && typeof cond !== "undefined" && cond == "object") || (is_string(O) && typeof cond === "undefined")) {
 				p = {};
-				each(O.split(re_amp), function () {
+				each(O.split(re_amp), function() {
 					var item = this.split(re_eq);
 					p[item[0]] = item[1];
 				});
 				return p;
 			}
-			else
-			{
+			else {
 				p = [];
-				each(O, function (k, v) {
+				each(O, function(k, v) {
 					p.push(k + "=" + escape(v));
 				});
 				return p.join('&');
@@ -1318,7 +1348,7 @@
 			return decodeURIComponent(s);
 		}
 
-		function error(){
+		function error() {
 			ax5.info.onerror.apply(this, arguments);
 		}
 
@@ -1330,24 +1360,25 @@
 		 * @param {String} [typ] - x-shader/x-fragment|x-shader/x-vertex
 		 * @returns {shader}
 		 */
-		function get_shader(gl, script, typ){
+		function get_shader(gl, script, typ) {
 			if (!script) {
 				return null;
 			}
 
 			var str = "", s, shader;
-			if(is_string(script) || is_array(script)){
+			if (is_string(script) || is_array(script)) {
 				str = [].concat(script).join('');
 				if (typ == "x-shader/x-fragment") {
 					shader = gl.createShader(gl.FRAGMENT_SHADER);
-				} else if (typ == "x-shader/x-vertex") {
+				}
+				else if (typ == "x-shader/x-vertex") {
 					shader = gl.createShader(gl.VERTEX_SHADER);
-				} else {
+				}
+				else {
 					return null;
 				}
 			}
-			else
-			{
+			else {
 				s = script.firstChild;
 				while (s) {
 					if (s.nodeType == 3) {
@@ -1357,9 +1388,11 @@
 				}
 				if (script.type == "x-shader/x-fragment") {
 					shader = gl.createShader(gl.FRAGMENT_SHADER);
-				} else if (script.type == "x-shader/x-vertex") {
+				}
+				else if (script.type == "x-shader/x-vertex") {
 					shader = gl.createShader(gl.VERTEX_SHADER);
-				} else {
+				}
+				else {
 					return null;
 				}
 			}
@@ -1381,12 +1414,28 @@
 				window.oRequestAnimationFrame ||
 				window.msRequestAnimationFrame ||
 				function(/* function FrameRequestCallback */ callback, /* DOMElement Element */ element) {
-					window.setTimeout(callback, 1000/60);
+					window.setTimeout(callback, 1000 / 60);
 				};
 		})();
 
-		function request_ani_frame(o){
+		function request_ani_frame(o) {
 			requestAnimFrame(o);
+		}
+
+		function local_date(yy, mm, dd, hh, mi, ss) {
+			var utc_d, local_d;
+			local_d = new Date();
+			if (typeof hh === "undefined") hh = 23;
+			if (typeof mi === "undefined") mi = 59;
+			utc_d = new Date(Date.UTC(yy, mm, dd || 1, hh, mi, ss || 0));
+
+			if (mm == 0 && dd == 1 && utc_d.getUTCHours() + (utc_d.getTimezoneOffset() / 60) < 0) {
+				utc_d.setUTCHours(0);
+			}
+			else {
+				utc_d.setUTCHours(utc_d.getUTCHours() + (utc_d.getTimezoneOffset() / 60));
+			}
+			return utc_d;
 		}
 
 		/**
@@ -1402,35 +1451,20 @@
 		 * ax5.util.date('1919-03-01', {add:{d:10}, return:'yyyy/mm/dd'}); // "1919/03/11"
 		 * ```
 		 */
-		function date(d, cond){
-			function local_date(yy, mm, dd, hh, mi, ss){
-				var utc_d, local_d;
-				local_d = new Date();
-				if(typeof hh === "undefined") hh = 23;
-				if(typeof mi === "undefined") mi = 59;
-				utc_d = new Date(Date.UTC(yy, mm, dd||1, hh, mi, ss||0));
-
-				if(mm == 0 && dd == 1 && utc_d.getUTCHours() + (utc_d.getTimezoneOffset()/60) < 0){
-					utc_d.setUTCHours(0);
-				}else{
-					utc_d.setUTCHours(utc_d.getUTCHours() + (utc_d.getTimezoneOffset()/60));
-				}
-				return utc_d;
-			}
-
+		function date(d, cond) {
 			var yy, mm, dd, hh, mi,
 				aDateTime, aTimes, aTime, aDate,
 				utc_d, local_d,
 				va;
 
-			if(is_string(d)){
-				if(d.length == 0){
+			if (is_string(d)) {
+				if (d.length == 0) {
 					d = new Date();
 				}
 				else if (d.length > 15) {
 					aDateTime = d.split(/ /g), aTimes, aTime,
-					aDate = aDateTime[0].split(/\D/g),
-					yy = aDate[0];
+						aDate = aDateTime[0].split(/\D/g),
+						yy = aDate[0];
 					mm = parseFloat(aDate[1]);
 					dd = parseFloat(aDate[2]);
 					aTime = aDateTime[1] || "09:00";
@@ -1438,37 +1472,35 @@
 					hh = parseFloat(aTimes[0]);
 					mi = parseFloat(aTimes[1]);
 					if (aTime.right(2) === "AM" || aTime.right(2) === "PM") hh += 12;
-					d = local_date(yy, mm-1, dd, hh, mi);
+					d = local_date(yy, mm - 1, dd, hh, mi);
 				}
-				else if(d.length == 14){
+				else if (d.length == 14) {
 					va = d.replace(/\D/g, "");
-					d = local_date(va.substr(0, 4), va.substr(4, 2)-1, number(va.substr(6, 2)), number(va.substr(8, 2)), number(va.substr(10, 2)), number(va.substr(12, 2)));
+					d = local_date(va.substr(0, 4), va.substr(4, 2) - 1, number(va.substr(6, 2)), number(va.substr(8, 2)), number(va.substr(10, 2)), number(va.substr(12, 2)));
 				}
 				else if (d.length > 7) {
 					va = d.replace(/\D/g, "");
-					d = local_date(va.substr(0, 4), va.substr(4, 2)-1, number(va.substr(6, 2)));
+					d = local_date(va.substr(0, 4), va.substr(4, 2) - 1, number(va.substr(6, 2)));
 				}
 				else if (d.length > 4) {
 					va = d.replace(/\D/g, "");
-					d = local_date(va.substr(0, 4), va.substr(4, 2)-1, 1);
+					d = local_date(va.substr(0, 4), va.substr(4, 2) - 1, 1);
 				}
 				else if (d.length > 2) {
 					va = d.replace(/\D/g, "");
-					return local_date(va.substr(0, 4), va.substr(4, 2)-1, 1);
+					return local_date(va.substr(0, 4), va.substr(4, 2) - 1, 1);
 				}
-				else
-				{
+				else {
 					d = new Date();
 				}
 			}
 
-			if(typeof cond === "undefined"){
+			if (typeof cond === "undefined") {
 				return d;
 			}
-			else
-			{
-				if(cond["add"]){
-					d = (function(_d, opts){
+			else {
+				if (cond["add"]) {
+					d = (function(_d, opts) {
 						var
 							yy, mm, dd, mxdd,
 							DyMilli = ((1000 * 60) * 60) * 24;
@@ -1485,16 +1517,18 @@
 							mxdd = days_of_month(yy, mm);
 							if (mxdd < dd) dd = mxdd;
 							_d = new Date(yy, mm, dd, 12);
-						} else if (typeof opts["y"] !== "undefined") {
+						}
+						else if (typeof opts["y"] !== "undefined") {
 							_d.setTime(_d.getTime() + ((opts["y"] * 365) * DyMilli));
-						} else {
+						}
+						else {
 							_d.setTime(_d.getTime() + (opts["y"] * DyMilli));
 						}
 						return _d;
 					})(new Date(d), cond["add"]);
 				}
-				if(cond["return"]){
-					return (function(){
+				if (cond["return"]) {
+					return (function() {
 						var fStr = cond["return"], nY, nM, nD, nH, nMM, nS, nDW;
 
 						nY = d.getUTCFullYear();
@@ -1505,13 +1539,27 @@
 						nS = set_digit(d.getSeconds(), 2);
 						nDW = d.getDay();
 
-						var yre = /[^y]*(yyyy)[^y]*/gi; yre.exec(fStr); var regY = RegExp.$1;
-						var mre = /[^m]*(mm)[^m]*/gi; mre.exec(fStr); var regM = RegExp.$1;
-						var dre = /[^d]*(dd)[^d]*/gi; dre.exec(fStr); var regD = RegExp.$1;
-						var hre = /[^h]*(hh)[^h]*/gi; hre.exec(fStr); var regH = RegExp.$1;
-						var mire = /[^m]*(mi)[^i]*/gi; mire.exec(fStr); var regMI = RegExp.$1;
-						var sre = /[^s]*(ss)[^s]*/gi; sre.exec(fStr); var regS = RegExp.$1;
-						var dwre = /[^d]*(dw)[^w]*/gi; dwre.exec(fStr); var regDW = RegExp.$1;
+						var yre = /[^y]*(yyyy)[^y]*/gi;
+						yre.exec(fStr);
+						var regY = RegExp.$1;
+						var mre = /[^m]*(mm)[^m]*/gi;
+						mre.exec(fStr);
+						var regM = RegExp.$1;
+						var dre = /[^d]*(dd)[^d]*/gi;
+						dre.exec(fStr);
+						var regD = RegExp.$1;
+						var hre = /[^h]*(hh)[^h]*/gi;
+						hre.exec(fStr);
+						var regH = RegExp.$1;
+						var mire = /[^m]*(mi)[^i]*/gi;
+						mire.exec(fStr);
+						var regMI = RegExp.$1;
+						var sre = /[^s]*(ss)[^s]*/gi;
+						sre.exec(fStr);
+						var regS = RegExp.$1;
+						var dwre = /[^d]*(dw)[^w]*/gi;
+						dwre.exec(fStr);
+						var regDW = RegExp.$1;
 
 						if (regY === "yyyy") {
 							fStr = fStr.replace(regY, right(nY, regY.length));
@@ -1539,9 +1587,47 @@
 						return fStr;
 					})();
 				}
-				else{
+				else {
 					return d;
 				}
+			}
+		}
+
+		/**
+		 * 인자인 날짜가 오늘부터 몇일전인지 반환합니다. 또는 인자인 날짜가 가까운 미래에 몇일 후인지 반환합니다.
+		 * @method ax5.util.ddday
+		 * @param {String|Data} d
+		 * @param {Object} cond
+		 * @returns {Number}
+		 */
+		function dday(d, cond) {
+			var memory_day = date(d), DyMilli = ((1000 * 60) * 60) * 24, today = new Date(), diffnum, this_year_memory_day;
+			function get_day_time(_d){
+				return Math.floor(_d.getTime() / DyMilli) * DyMilli;
+			}
+			if (typeof cond === "undefined") {
+				diffnum = number((( get_day_time(memory_day) - get_day_time(today) ) / DyMilli), {floor: true});
+				return diffnum;
+			}
+			else {
+				diffnum = number((( get_day_time(memory_day) - get_day_time(today) ) / DyMilli), {floor: true});
+				if (cond["today"]) {
+					today = date(cond.today);
+					diffnum = number((( get_day_time(memory_day) - get_day_time(today) ) / DyMilli), {floor: true});
+				}
+				if (cond["this_year"]) {
+					this_year_memory_day = new Date(today.getFullYear(), memory_day.getMonth(), memory_day.getDate());
+					diffnum = number((( get_day_time(this_year_memory_day) - get_day_time(today) ) / DyMilli), {floor: true});
+					if(diffnum < 0){
+						this_year_memory_day = new Date(today.getFullYear()+1, memory_day.getMonth(), memory_day.getDate());
+						diffnum = number((( get_day_time(this_year_memory_day) - get_day_time(today) ) / DyMilli), {floor: true});
+					}
+					if (cond["age"]) {
+						diffnum = this_year_memory_day.getFullYear() - memory_day.getFullYear();
+					}
+				}
+
+				return diffnum;
 			}
 		}
 
@@ -1554,9 +1640,9 @@
 		 * @param {Number} [radix]
 		 * @returns {String}
 		 */
-		function set_digit(num, length, padder, radix){
+		function set_digit(num, length, padder, radix) {
 			var s = num.toString(radix || 10);
-			return times( (padder || '0'), (length - s.length) ) + s;
+			return times((padder || '0'), (length - s.length)) + s;
 		}
 
 		function times(s, count) { return count < 1 ? '' : new Array(count + 1).join(s); }
@@ -1569,61 +1655,62 @@
 		 * @returns {Number}
 		 */
 		function days_of_month(y, m) {
-			if(m == 3 || m == 5 || m == 8 || m == 10){
+			if (m == 3 || m == 5 || m == 8 || m == 10) {
 				return 30;
 			}
-			else if(m == 1){
+			else if (m == 1) {
 				return (((y % 4 == 0) && (y % 100 != 0)) || (y % 400 == 0)) ? 29 : 28;
 			}
-			else{
+			else {
 				return 31;
 			}
 		}
 
 		return {
-            alert       : alert,
-            each        : each,
-            map         : map,
-            search      : search,
-            reduce      : reduce,
-            reduce_right: reduce_right,
-            filter      : filter,
-            to_json     : to_json,
-            parse_json  : parse_json,
-            extend      : extend,
-            extend_all  : extend_all,
-            clone       : clone,
-            first       : first,
-            last        : last,
-            left        : left,
-            right       : right,
-            get_type    : get_type,
-            is_window   : is_window,
-            is_element  : is_element,
-            is_object   : is_object,
-            is_array    : is_array,
-            is_function : is_function,
-            is_string   : is_string,
-            is_number   : is_number,
-            is_nodelist : is_nodelist,
-            is_undefined: is_undefined,
-            is_nothing  : is_nothing,
-            set_cookie  : set_cookie,
-            get_cookie  : get_cookie,
-            require     : require,
-            camel_case  : camel_case,
-            snake_case  : snake_case,
-            number      : number,
-            to_array    : to_array,
-            merge       : merge,
-            param       : param,
-			error       : error,
-			get_shader  : get_shader,
-			request_ani_frame : request_ani_frame,
-			date        : date,
-			set_digit   : set_digit,
-			times       : times,
-			days_of_month : days_of_month
+			alert: alert,
+			each: each,
+			map: map,
+			search: search,
+			reduce: reduce,
+			reduce_right: reduce_right,
+			filter: filter,
+			to_json: to_json,
+			parse_json: parse_json,
+			extend: extend,
+			extend_all: extend_all,
+			clone: clone,
+			first: first,
+			last: last,
+			left: left,
+			right: right,
+			get_type: get_type,
+			is_window: is_window,
+			is_element: is_element,
+			is_object: is_object,
+			is_array: is_array,
+			is_function: is_function,
+			is_string: is_string,
+			is_number: is_number,
+			is_nodelist: is_nodelist,
+			is_undefined: is_undefined,
+			is_nothing: is_nothing,
+			set_cookie: set_cookie,
+			get_cookie: get_cookie,
+			require: require,
+			camel_case: camel_case,
+			snake_case: snake_case,
+			number: number,
+			to_array: to_array,
+			merge: merge,
+			param: param,
+			error: error,
+			get_shader: get_shader,
+			request_ani_frame: request_ani_frame,
+			date: date,
+			dday: dday,
+			set_digit: set_digit,
+			times: times,
+			days_of_month: days_of_month
 		}
 	})();
 
@@ -1645,14 +1732,14 @@
 	 * Refer to this by {@link ax5}.
 	 * @namespace ax5.dom
 	 */
-	// dom class instance
-	ax5.dom = dom = function (query) {
-		var axdom = (function () {
+		// dom class instance
+	ax5.dom = dom = function(query) {
+		var axdom = (function() {
 			function ax(query) {
-				this.toString = function () {
+				this.toString = function() {
 					return "[object ax5.dom]";
 				};
-				if(typeof query === 'undefined') {
+				if (typeof query === 'undefined') {
 					U.error("ax5.dom(undefined) is error ");
 					return;
 				}
@@ -1688,7 +1775,7 @@
 				 * // {border: "1px solid rgb(0, 0, 0)", color: "rgb(255, 51, 0)"}
 				 * ```
 				 */
-				this.css = function (O) {
+				this.css = function(O) {
 					var rs = dom.css(this.elements, O);
 					return (rs === this.elements) ? this : rs;
 				};
@@ -1710,7 +1797,7 @@
 				 * ax5.dom("[data-ax-grid=\"9B\"]").class_name("toggle", "red");
 				 * ```
 				 */
-				this.class_name = function (command, O) {
+				this.class_name = function(command, O) {
 					var rs = dom.class_name(this.elements, command, O);
 					return (rs === this.elements) ? this : rs;
 				};
@@ -1743,7 +1830,7 @@
 				 * ```
 				 */
 					// todo: event type 모두 체크
-				this.on = function (typ, _fn) {
+				this.on = function(typ, _fn) {
 					dom.on(this.elements, typ, _fn);
 					return this;
 				};
@@ -1760,7 +1847,7 @@
 				 * axd("[data-event-test=text-box]").off("click.fnb").off("click.fnc");
 				 * ```
 				 */
-				this.off = function (typ, _fn) {
+				this.off = function(typ, _fn) {
 					dom.off(this.elements, typ, _fn);
 					return this;
 				};
@@ -1780,7 +1867,7 @@
 				 * ax5.dom("[data-ax-grid=A]").attr({"data-next2":null});
 				 * ```
 				 */
-				this.attr = function (O) {
+				this.attr = function(O) {
 					var rs = dom.attr(this.elements, O);
 					return (rs === this.elements) ? this : rs;
 				};
@@ -1794,7 +1881,7 @@
 				 *
 				 * ```
 				 */
-				this.find = function (query) {
+				this.find = function(query) {
 					return new axdom(dom.get(this.elements[0], query));
 				};
 
@@ -1806,29 +1893,29 @@
 				 * @example
 				 * ```
 				 * <div>
-				 * 	 <ul id="list-container">
-				 * 		 <li data-list-item="0" id="li0">
-				 * 		    <div>child>child</div>
-				 * 		 </li>
-				 * 		 <li data-list-item="1" id="li1"></li>
-				 * 		 <li data-list-item="2" id="li2"></li>
-				 * 		 <li data-list-item="3" id="li3"></li>
-				 * 		 <li data-list-item="4" id="li4"></li>
-				 * 		 <li data-list-item="5" id="li5"></li>
-				 * 	 </ul>
+				 *     <ul id="list-container">
+				 *         <li data-list-item="0" id="li0">
+				 *            <div>child>child</div>
+				 *         </li>
+				 *         <li data-list-item="1" id="li1"></li>
+				 *         <li data-list-item="2" id="li2"></li>
+				 *         <li data-list-item="3" id="li3"></li>
+				 *         <li data-list-item="4" id="li4"></li>
+				 *         <li data-list-item="5" id="li5"></li>
+				 *     </ul>
 				 * </div>
 				 * <script>
 				 * var el = ax5.dom("#list-container");
 				 * var li = el.child(el);
 				 *
 				 * console.log(
-				 * 	 (c_li = li.next(2)).elements[0].id,
-				 * 	 (c_li = c_li.prev()).elements[0].id
+				 *     (c_li = li.next(2)).elements[0].id,
+				 *     (c_li = c_li.prev()).elements[0].id
 				 * );
 				 * </script>
 				 * ```
 				 */
-				this.prev = function (times) {
+				this.prev = function(times) {
 					return new axdom(dom.prev(this.elements, times));
 				};
 				/**
@@ -1839,29 +1926,29 @@
 				 * @example
 				 * ```
 				 * <div>
-				 * 	 <ul id="list-container">
-				 * 		 <li data-list-item="0" id="li0">
-				 * 		    <div>child>child</div>
-				 * 		 </li>
-				 * 		 <li data-list-item="1" id="li1"></li>
-				 * 		 <li data-list-item="2" id="li2"></li>
-				 * 		 <li data-list-item="3" id="li3"></li>
-				 * 		 <li data-list-item="4" id="li4"></li>
-				 * 		 <li data-list-item="5" id="li5"></li>
-				 * 	 </ul>
+				 *     <ul id="list-container">
+				 *         <li data-list-item="0" id="li0">
+				 *            <div>child>child</div>
+				 *         </li>
+				 *         <li data-list-item="1" id="li1"></li>
+				 *         <li data-list-item="2" id="li2"></li>
+				 *         <li data-list-item="3" id="li3"></li>
+				 *         <li data-list-item="4" id="li4"></li>
+				 *         <li data-list-item="5" id="li5"></li>
+				 *     </ul>
 				 * </div>
 				 * <script>
 				 * var el = ax5.dom("#list-container");
 				 * var li = el.child(el);
 				 *
 				 * console.log(
-				 * 	 (c_li = li.next(2)).elements[0].id,
-				 * 	 (c_li = c_li.prev()).elements[0].id
+				 *     (c_li = li.next(2)).elements[0].id,
+				 *     (c_li = c_li.prev()).elements[0].id
 				 * );
 				 * </script>
 				 * ```
 				 */
-				this.next = function (times) {
+				this.next = function(times) {
 					return new axdom(dom.next(this.elements, times));
 				};
 
@@ -1882,7 +1969,7 @@
 				 * // 같은 결과
 				 * ```
 				 */
-				this.parent = function (cond) {
+				this.parent = function(cond) {
 					return new axdom(dom.parent(this.elements, cond));
 				};
 				/**
@@ -1897,7 +1984,7 @@
 				 * // 원하는 대로~
 				 * ```
 				 */
-				this.child = function () {
+				this.child = function() {
 					return new axdom(dom.child(this.elements));
 				};
 				/**
@@ -1907,7 +1994,7 @@
 				 * @example
 				 * ```
 				 * console.log(
-				 * 	 ax5.dom("#list-container").css({"width":"400px", "box-sizing":"border-box",
+				 *     ax5.dom("#list-container").css({"width":"400px", "box-sizing":"border-box",
 				 * 	 "border":"2px solid", "padding":"50px"}).css({"background":"#ccc"}).width()
 				 * );
 				 * console.log(
@@ -1916,7 +2003,7 @@
 				 * );
 				 * ```
 				 */
-				this.width = function () {
+				this.width = function() {
 					return dom.width(this.elements);
 				};
 				/**
@@ -1928,7 +2015,7 @@
 				 * // width 와 동일
 				 * ```
 				 */
-				this.height = function () {
+				this.height = function() {
 					return dom.height(this.elements);
 				};
 				/**
@@ -1941,7 +2028,7 @@
 				 * ax5.dom("#list-container").html("<a href='#1234'>링크");
 				 * ```
 				 */
-				this.html = function (val) {
+				this.html = function(val) {
 					var rs = dom.html(this.elements, val);
 					return (rs === this.elements) ? this : rs;
 				};
@@ -1958,7 +2045,7 @@
 				 * .append(ax5.dom.get("#move-item"));
 				 * ```
 				 */
-				this.append = function (val) {
+				this.append = function(val) {
 					var rs = dom.manipulate("append", this.elements, val);
 					return (rs === this.elements) ? this : rs;
 				};
@@ -1975,7 +2062,7 @@
 				 * .prepend(ax5.dom.get("#move-item"));
 				 * ```
 				 */
-				this.prepend = function (val) {
+				this.prepend = function(val) {
 					var rs = dom.manipulate("prepend", this.elements, val);
 					return (rs === this.elements) ? this : rs;
 				};
@@ -1992,7 +2079,7 @@
 				 * .before(ax5.dom.get("#move-item"));
 				 * ```
 				 */
-				this.before = function (val) {
+				this.before = function(val) {
 					var rs = dom.manipulate("before", this.elements, val);
 					return (rs === this.elements) ? this : rs;
 				};
@@ -2009,7 +2096,7 @@
 				 * .after(ax5.dom.get("#move-item"));
 				 * ```
 				 */
-				this.after = function (val) {
+				this.after = function(val) {
 					var rs = dom.manipulate("after", this.elements, val);
 					return (rs === this.elements) ? this : rs;
 				};
@@ -2021,7 +2108,7 @@
 				 * ax5.dom("[data-list-item='0']").remove();
 				 * ```
 				 */
-				this.remove = function () {
+				this.remove = function() {
 					return dom.remove(this.elements);
 				};
 				/**
@@ -2032,12 +2119,12 @@
 				 * @example
 				 * ```
 				 * console.log(
-				 * 	ax5.dom("#query").offset()
+				 *    ax5.dom("#query").offset()
 				 * );
 				 * // {"top": 8, "left": 8}
 				 * ```
 				 */
-				this.offset = function () {
+				this.offset = function() {
 					return dom.offset(this.elements);
 				};
 				/**
@@ -2048,12 +2135,12 @@
 				 * @example
 				 * ```
 				 * console.log(
-				 * 	ax5.dom("#query").position()
+				 *    ax5.dom("#query").position()
 				 * );
 				 * // {"top": 8, "left": 8}
 				 * ```
 				 */
-				this.position = function () {
+				this.position = function() {
 					return dom.position(this.elements);
 				};
 				/**
@@ -2081,7 +2168,7 @@
 				 * // 각각의 박스모델 속성을 지정하여 호출 할 수 있습니다. borderWidth, border-width 중 하나의 방법으로 사용 가능합니다.
 				 * ```
 				 */
-				this.box_model = function (cond) {
+				this.box_model = function(cond) {
 					return dom.box_model(this.elements, cond);
 				};
 				/**
@@ -2112,7 +2199,7 @@
 				 * el.data("remove"); // remove all
 				 * ```
 				 */
-				this.data = function (command, O) {
+				this.data = function(command, O) {
 					var rs = dom.data(this.elements, command, O);
 					return (rs === this.elements) ? this : rs;
 				};
@@ -2127,7 +2214,7 @@
 				 * axd("#id").empty();
 				 * ```
 				 */
-				this.empty = function (){
+				this.empty = function() {
 					dom.empty(this.elements);
 					return this;
 				};
@@ -2136,18 +2223,37 @@
 				 * @method ax5.dom0.get_webgl_context
 				 * @returns {wegGlContext}
 				 */
-				this.get_webgl_context = function (){
+				this.get_webgl_context = function() {
 					return dom.get_webgl_context(this.elements);
 				};
 				/**
-				 * 엘리먼트의 value값을 반환합니다.
+				 * 엘리먼트의 value값을 반환 또는 부여합니다.
 				 * @method ax5.dom0.val
 				 * @param {String} [v] - element.value에 부여할 값
 				 * @returns {String}
 				 */
-				this.val = function(v){
+				this.val = function(v) {
 					return dom.val(this.elements, v);
 				};
+				/**
+				 * 첫번째 엘리먼트 오브젝트를 반환합니다.
+				 * @method ax5.dom0.elt
+				 * @returns {domElement}
+				 */
+				this.elt = function(){
+					return this.elements[0];
+				};
+
+				/**
+				 * 엘리먼트에 이벤트를 발생시킵니다.
+				 * @method ax5.dom0.dispatch_event
+				 * @param {String} [evt_nm] - 발생시킬 이벤트 이름
+				 * @returns {ax5.dom0}
+				 */
+				this.dispatch_event = function(evt_nm){
+					dom.dispatch_event(this.elements, evt_nm);
+					return this;
+				}
 			}
 
 			return ax;
@@ -2156,16 +2262,17 @@
 	};
 
 	// dom functions
-	(function () {
-        var curCSS;
+	(function() {
+		var curCSS;
 		//if("내장함수 시작") {
 		// 이벤트 바인딩
 		function eBind(elem, type, eventHandle) {
-			if(!U.is_string(type)) console.error("type=" + type);
+			if (!U.is_string(type)) console.error("type=" + type);
 			type = U.left(type, ".");
 			if (elem.addEventListener) {
 				elem.addEventListener(type, eventHandle, false);
-			} else if (elem.attachEvent) {
+			}
+			else if (elem.attachEvent) {
 				elem.attachEvent("on" + type, eventHandle);
 			}
 		}
@@ -2178,7 +2285,8 @@
 				else {
 					elem.removeEventListener(type);
 				}
-			} else if (elem.detachEvent) {
+			}
+			else if (elem.detachEvent) {
 				if (eventHandle) elem.detachEvent("on" + type, eventHandle);
 				else elem.detachEvent("on" + type);
 			}
@@ -2201,14 +2309,14 @@
 
 		// 엘리먼트 순서이동
 		function sibling(els, forward, times) {
-			var prop = (forward == "prev") ? "previousSibling" : "nextSibling", 
+			var prop = (forward == "prev") ? "previousSibling" : "nextSibling",
 				el = [].concat(els)[0];
 			times = (typeof times == "undefined" || times < 1) ? 1 : times;
 			do {
 				el = el[prop];
 			}
 			while (
-				(function () {
+				(function() {
 					if (!el) return false;
 					if (el.nodeType == 1) times--;
 					return (times > 0)
@@ -2217,95 +2325,94 @@
 			return el;
 		}
 
-        if ( window.getComputedStyle ) {
-            curCSS = function (elem, name, num) {
-                var width, minWidth, maxWidth, computed, ret, style, left, rs, rsLeft;
+		if (window.getComputedStyle) {
+			curCSS = function(elem, name, num) {
+				var width, minWidth, maxWidth, computed, ret, style, left, rs, rsLeft;
 
-                computed = window.getComputedStyle(elem, null),
-                ret = computed ? computed.getPropertyValue(name) || computed[name] : undefined,
-                style = elem.style;
+				computed = window.getComputedStyle(elem, null),
+					ret = computed ? computed.getPropertyValue(name) || computed[name] : undefined,
+					style = elem.style;
 
-                if ( computed ) {
+				if (computed) {
 
-                    // A tribute to the "awesome hack by Dean Edwards"
-                    // Chrome < 17 and Safari 5.0 uses "computed value" instead of "used value" for margin-right
-                    // Safari 5.1.7 (at least) returns percentage for a larger set of values, but width seems to be reliably pixels
-                    // this is against the CSSOM draft spec: http://dev.w3.org/csswg/cssom/#resolved-values
-                    if ( re_numnonpx.test( ret ) && re_margin.test( name ) ) {
-                        // Remember the original values
-                        width = style.width;
-                        minWidth = style.minWidth;
-                        maxWidth = style.maxWidth;
+					// A tribute to the "awesome hack by Dean Edwards"
+					// Chrome < 17 and Safari 5.0 uses "computed value" instead of "used value" for margin-right
+					// Safari 5.1.7 (at least) returns percentage for a larger set of values, but width seems to be reliably pixels
+					// this is against the CSSOM draft spec: http://dev.w3.org/csswg/cssom/#resolved-values
+					if (re_numnonpx.test(ret) && re_margin.test(name)) {
+						// Remember the original values
+						width = style.width;
+						minWidth = style.minWidth;
+						maxWidth = style.maxWidth;
 
-                        // Put in the new values to get a computed value out
-                        style.minWidth = style.maxWidth = style.width = ret;
-                        ret = computed.width;
+						// Put in the new values to get a computed value out
+						style.minWidth = style.maxWidth = style.width = ret;
+						ret = computed.width;
 
-                        // Revert the changed values
-                        style.width = width;
-                        style.minWidth = minWidth;
-                        style.maxWidth = maxWidth;
-                    }
-                }
+						// Revert the changed values
+						style.width = width;
+						style.minWidth = minWidth;
+						style.maxWidth = maxWidth;
+					}
+				}
 
-                if(num) ret = parseFloat(ret) || 0;
-                return ret;
-            }
-        }
-        else{
-            curCSS = function(elem, name, num) {
-                var width, minWidth, maxWidth, computed, ret, style, left, rs, rsLeft;
+				if (num) ret = parseFloat(ret) || 0;
+				return ret;
+			}
+		}
+		else {
+			curCSS = function(elem, name, num) {
+				var width, minWidth, maxWidth, computed, ret, style, left, rs, rsLeft;
 
-                computed = elem.currentStyle,
-                ret = computed ? computed[ name ] : undefined,
-                style = elem.style;
+				computed = elem.currentStyle,
+					ret = computed ? computed[name] : undefined,
+					style = elem.style;
 
-                // Avoid setting ret to empty string here
-                // so we don't default to auto
-                if ( ret == null && style && style[ name ] ) {
-                    ret = style[ name ];
-                }
+				// Avoid setting ret to empty string here
+				// so we don't default to auto
+				if (ret == null && style && style[name]) {
+					ret = style[name];
+				}
 
-                // From the awesome hack by Dean Edwards
-                // http://erik.eae.net/archives/2007/07/27/18.54.15/#comment-102291
+				// From the awesome hack by Dean Edwards
+				// http://erik.eae.net/archives/2007/07/27/18.54.15/#comment-102291
 
-                // If we're not dealing with a regular pixel number
-                // but a number that has a weird ending, we need to convert it to pixels
-                // but not position css attributes, as those are proportional to the parent element instead
-                // and we can't measure the parent instead because it might trigger a "stacking dolls" problem
-                if ( re_numnonpx.test( ret ) && !re_position.test( name ) ) {
+				// If we're not dealing with a regular pixel number
+				// but a number that has a weird ending, we need to convert it to pixels
+				// but not position css attributes, as those are proportional to the parent element instead
+				// and we can't measure the parent instead because it might trigger a "stacking dolls" problem
+				if (re_numnonpx.test(ret) && !re_position.test(name)) {
 
-                    // Remember the original values
-                    left = style.left;
-                    rs = elem.runtimeStyle;
-                    rsLeft = rs && rs.left;
+					// Remember the original values
+					left = style.left;
+					rs = elem.runtimeStyle;
+					rsLeft = rs && rs.left;
 
-                    // Put in the new values to get a computed value out
-                    if ( rsLeft ) {
-                        rs.left = elem.currentStyle.left;
-                    }
-                    style.left = name === "fontSize" ? "1em" : ret;
-                    ret = style.pixelLeft + "px";
+					// Put in the new values to get a computed value out
+					if (rsLeft) {
+						rs.left = elem.currentStyle.left;
+					}
+					style.left = name === "fontSize" ? "1em" : ret;
+					ret = style.pixelLeft + "px";
 
-                    // Revert the changed values
-                    style.left = left;
-                    if ( rsLeft ) {
-                        rs.left = rsLeft;
-                    }
-                }
-                ret = ret === "" ? "auto" : ret;
+					// Revert the changed values
+					style.left = left;
+					if (rsLeft) {
+						rs.left = rsLeft;
+					}
+				}
+				ret = ret === "" ? "auto" : ret;
 
-                if(num) ret = parseFloat(ret) || 0;
-                return ret;
-            }
-        }
-        // jQuery 1.10.2 소스를 참고하여 curCSS를 재작성하였습니다.
-
+				if (num) ret = parseFloat(ret) || 0;
+				return ret;
+			}
+		}
+		// jQuery 1.10.2 소스를 참고하여 curCSS를 재작성하였습니다.
 
 		// 엘리먼트 스타일 값 가져오기
 		function style(el, key, fn_nm) {
 			if (U.is_string(key)) {
-				return curCSS( el, key );
+				return curCSS(el, key);
 			}
 			else if (U.is_array(key)) {
 				var css = {}, i = 0, l = key.length;
@@ -2344,9 +2451,9 @@
 								style(el, ["box-sizing", "padding-top", "padding-bottom", "border-top-width", "border-bottom-width"], fn_nm);
 
 							if (box_cond["box-sizing"] == "content-box") {
-								d = parseInt(d) + (ax5.util.reduce(box_cond, function (p, n) {
-									return U.number(p | 0) + U.number(n);
-								}));
+								d = parseInt(d) + (ax5.util.reduce(box_cond, function(p, n) {
+										return U.number(p | 0) + U.number(n);
+									}));
 							}
 						}
 					}
@@ -2362,9 +2469,9 @@
 
 		// createFragment
 		function create_fragment(elems) {
-			var safe = safe_fragment.appendChild( doc.createElement("div")), tmp, nodes = [], tag, wrap, tbody,
-                elem, i = 0, l = elems.length, j;
-            // safe = doc.createDocumentFragment();
+			var safe = safe_fragment.appendChild(doc.createElement("div")), tmp, nodes = [], tag, wrap, tbody,
+				elem, i = 0, l = elems.length, j;
+			// safe = doc.createDocumentFragment();
 
 			for (; i < l; i++) {
 				elem = elems[i];
@@ -2383,8 +2490,7 @@
 						tmp = safe.appendChild(doc.createElement("div"));
 						// Deserialize a standard representation
 						tag = ( re_tag.exec(elem) || ["", ""] )[1].toLowerCase();
-						console.log(tag);
-						wrap = tag_map[tag] || [ 0, "", "" ];
+						wrap = tag_map[tag] || [0, "", ""];
 						tmp.innerHTML = wrap[1] + elem.replace(re_single_tags, "<$1></$2>") + wrap[2];
 
 						// Descend through wrappers to the right content
@@ -2406,22 +2512,23 @@
 						// Remember the top-level container for proper cleanup
 						tmp = safe.lastChild;
 						//tmp = safe.firstChild;
-                        safe.removeChild(tmp);
-                        tmp = null;
+						safe.removeChild(tmp);
+						tmp = null;
 					}
 				}
 			}
 
 			i = 0;
 			while ((elem = nodes[i++])) {
-				if(elem.nodeName == "SCRIPT"){
+				if (elem.nodeName == "SCRIPT") {
 					var s = doc.createElement('script');
 					s.type = elem.type;
-					if(elem.src) s.src = elem.src;
+					if (elem.src) s.src = elem.src;
 					s.text = elem.innerHTML;
-					safe.appendChild( s );
-				}else{
-					safe.appendChild( elem );
+					safe.appendChild(s);
+				}
+				else {
+					safe.appendChild(elem);
 				}
 			}
 			//console.log(safe.innerHTML);
@@ -2429,35 +2536,37 @@
 		}
 		
 		// 엘리먼트와 자식 엘리먼트의 이벤트와 데이터를 모두 지워줍니다.
-		function clear_element_data(el){
+		function clear_element_data(el) {
 			var e_hds, ei, el,
 				c_el, ci, cl;
 			
-			for(var hd in el.e_hd){
-				if(typeof el.e_hd[hd] === "function"){
+			for (var hd in el.e_hd) {
+				if (typeof el.e_hd[hd] === "function") {
 					eUnBind(el, hd, el.e_hd[hd]);
-				}else{
-					for(var ehi=0;ehi<el.e_hd[hd].length;ehi++)
+				}
+				else {
+					for (var ehi = 0; ehi < el.e_hd[hd].length; ehi++)
 						eUnBind(el, hd, el.e_hd[hd][ehi]);
 				}
 			}
-			if(el["e_hd"]) delete el["e_hd"];
-			if(el["ax5_data"]) delete el["ax5_data"];
+			if (el["e_hd"]) delete el["e_hd"];
+			if (el["ax5_data"]) delete el["ax5_data"];
 			// todo : attributes 걸리는 것이 없지만 혹시나 모를 데이터를 위해.
-			if(ax5.info.browser.name !== "ie" && ax5.info.browser.version > 7){
-				for(var a in el.attributes) {
+			if (ax5.info.browser.name !== "ie" && ax5.info.browser.version > 7) {
+				for (var a in el.attributes) {
 					if (typeof el.attributes[a] === "object") {
 						try {
 							el.attributes[a] = null;
-						}catch(e){}
+						} catch (e) {
+						}
 					}
 				}
 			}
 
 			// 자식들도 확인 합니다.
-			if(el.hasChildNodes()){
+			if (el.hasChildNodes()) {
 				c_el = el.childNodes, ci = 0, cl = c_el.length;
-				for (;ci < cl; ci++)
+				for (; ci < cl; ci++)
 					clear_element_data(c_el[ci]);
 			}
 		}
@@ -2480,7 +2589,7 @@
 		 */
 		function ready(_fn) {
 			var is_ready = false;
-			promise(function () {
+			promise(function() {
 				if (is_ready) return;
 				is_ready = ax5.dom.is_ready = true;
 				_fn();
@@ -2490,11 +2599,13 @@
 		function promise(_fn) {
 			if (doc.readyState === "complete") {
 				setTimeout(_fn);
-			} else {
+			}
+			else {
 				if (doc.addEventListener) {
 					doc.addEventListener("DOMContentLoaded", _fn, false);
 					win.addEventListener("load", _fn, false);
-				} else {
+				}
+				else {
 					doc.attachEvent("onreadystatechange", _fn);
 					win.attachEvent("onload", _fn);
 					// If IE and not a frame
@@ -2539,6 +2650,7 @@
 				eBind(window, "resize", _fn);
 			});
 		}
+
 		/**
 		 * 브라우저 scroll 이벤트를 캐치하여 사용자 함수를 호출 하거나 스트롤 포지션을 리턴합니다.
 		 * @method ax5.dom.scroll
@@ -2552,13 +2664,14 @@
 		 */
 		function scroll(_fn) {
 
-			if(typeof _fn === "undefined"){
+			if (typeof _fn === "undefined") {
 				return {
 					top: docElem.scrollTop || doc.body.scrollTop,
 					left: docElem.scrollLeft || doc.body.scrollLeft
 				}
-			}else{
-				ready(function(){
+			}
+			else {
+				ready(function() {
 					eBind(window, "scroll", _fn);
 				});
 				return false;
@@ -2582,22 +2695,22 @@
 			var els, r_els = [], p_els;
 			var i = 0, l = query.length;
 			if (query.toString() === "[object ax5.dom]") {
-                r_els = query.elements;
+				r_els = query.elements;
 			}
 			else if (U.is_window(query)) r_els.push(query);
 			else if (U.is_element(query)) r_els.push(query);
 			else if (U.is_array(query) || U.is_nodelist(query)) {
-				for (i=0; i < l; i++)  if (U.is_element(query[i])) r_els.push(query[i]);
+				for (i = 0; i < l; i++)  if (U.is_element(query[i])) r_els.push(query[i]);
 			}
 			else if (U.is_string(query) && query.substr(0, 1) === "#") r_els.push(doc.getElementById(query.substr(1)));
 			else {
-                els = doc.querySelectorAll(query), l = els.length;
-				for (i=0; i < l; i++) r_els.push(els[i]);
+				els = doc.querySelectorAll(query), l = els.length;
+				for (i = 0; i < l; i++) r_els.push(els[i]);
 			}
 			if (typeof sub_query !== "undefined") {
 				p_els = (info.browser.name == "ie" && info.browser.version < 8) ? doc : r_els[0];
-                r_els = [], els = p_els.querySelectorAll(sub_query), l = els.length;
-				for (i=0; i < l; i++) r_els.push(els[i]);
+				r_els = [], els = p_els.querySelectorAll(sub_query), l = els.length;
+				for (i = 0; i < l; i++) r_els.push(els[i]);
 			}
 			return r_els;
 		}
@@ -2645,7 +2758,7 @@
 			for (var k in attr) {
 				element.setAttribute(k, attr[k]);
 			}
-			if(val) element.appendChild(create_fragment([].concat(val)));
+			if (val) element.appendChild(create_fragment([].concat(val)));
 			return element;
 		}
 
@@ -2678,6 +2791,7 @@
 			}
 			return els;
 		}
+
 		// todo : opacity 컨트롤 테스트
 
 		/**
@@ -2705,31 +2819,31 @@
 				O = [].concat(O);
 				for (var di = 0; di < els.length; di++) {
 					cns = els[di]["className"];
-					if(cns !== "") cns = cns.split(re_class_name_split);
+					if (cns !== "") cns = cns.split(re_class_name_split);
 					else cns = [];
 					if (command === "add") {
-						O.forEach(function(O){
-							if (U.search(cns, function () {
+						O.forEach(function(O) {
+							if (U.search(cns, function() {
 									return O.trim() == this;
 								}) == -1) cns.push(O.trim());
 						});
-					} else if (command === "remove") {
+					}
+					else if (command === "remove") {
 						O.forEach(function(O) {
-							cns = U.filter(cns, function () {
+							cns = U.filter(cns, function() {
 								return O.trim() != this;
 							});
 						});
-					} else if (command === "toggle") {
+					}
+					else if (command === "toggle") {
 						O.forEach(function(O) {
 							var class_count = cns.length;
-							cns = U.filter(cns, function () {
+							cns = U.filter(cns, function() {
 								return O.trim() != this;
 							});
 							if (class_count === cns.length) cns.push(O.trim());
 						});
 					}
-
-
 
 					els[di]["className"] = cns.join(" ");
 				}
@@ -2737,13 +2851,14 @@
 			}
 			else { // has
 				if (typeof O === "undefined") O = command;
-                cns = els[0]["className"].trim().split(re_class_name_split);
+				cns = els[0]["className"].trim().split(re_class_name_split);
 				if (U.is_string(O)) { // hasClass
 					// get Class Name
-					return (U.search(cns, function () {
+					return (U.search(cns, function() {
 						return this.trim() === O
 					}) > -1);
-				} else {
+				}
+				else {
 					console.error("set_class argument error");
 				}
 				return els;
@@ -2769,10 +2884,11 @@
 			var i = 0, l = els.length, k;
 			if (U.is_object(O)) {
 				for (; i < l; i++) {
-					for (k in O){
-						if(O[k] == null){
+					for (k in O) {
+						if (O[k] == null) {
 							els[i].removeAttribute(k);
-						}else{
+						}
+						else {
 							els[i].setAttribute(k, O[k]);
 						}
 					}
@@ -2818,11 +2934,12 @@
 			els = va_elem(els, "on");
 			for (var i = 0; i < els.length; i++) {
 				var __fn, _d = els[i];
-				if(!_d) break;
+				if (!_d) break;
 				if (!_d.e_hd) _d.e_hd = {};
 				if (typeof _d.e_hd[typ] === "undefined") {
 					__fn = _d.e_hd[typ] = _fn;
-				} else {
+				}
+				else {
 					if (!U.is_array(_d.e_hd[typ])) _d.e_hd[typ] = [_d.e_hd[typ]];
 					_d.e_hd[typ].push(_fn);
 					__fn = _d.e_hd[typ][_d.e_hd[typ].length - 1];
@@ -2848,14 +2965,16 @@
 			els = va_elem(els, "off");
 			for (var i = 0; i < els.length; i++) {
 				var _d = els[i];
-				if(_d.e_hd) {
+				if (_d.e_hd) {
 					if (U.is_array(_d.e_hd[typ])) {
 						var _na = [];
 						for (var i = 0; i < _d.e_hd[typ].length; i++) {
-							if (_d.e_hd[typ][i] == _fn || typeof _fn === "undefined") eUnBind(_d, typ, _d.e_hd[typ][i]); else _na.push(_d.e_hd[typ][i]);
+							if (_d.e_hd[typ][i] == _fn || typeof _fn === "undefined") eUnBind(_d, typ, _d.e_hd[typ][i]);
+							else _na.push(_d.e_hd[typ][i]);
 						}
 						_d.e_hd[typ] = _na;
-					} else {
+					}
+					else {
 						if (_d.e_hd[typ] == _fn || typeof _fn === "undefined") {
 							eUnBind(_d, typ, _d.e_hd[typ]);
 							delete _d.e_hd[typ]; // 함수 제거
@@ -2873,20 +2992,20 @@
 		 * @example
 		 * ```
 		 * <ul id="list-container">
-		 * 	 <li data-list-item="0">
-		 * 		<div>child>child</div>
-		 * 	 </li>
-		 * 	 <li data-list-item="1"></li>
-		 * 	 <li data-list-item="2"></li>
-		 * 	 <li data-list-item="3"></li>
-		 * 	 <li data-list-item="4"></li>
-		 * 	 <li data-list-item="5"></li>
+		 *     <li data-list-item="0">
+		 *        <div>child>child</div>
+		 *     </li>
+		 *     <li data-list-item="1"></li>
+		 *     <li data-list-item="2"></li>
+		 *     <li data-list-item="3"></li>
+		 *     <li data-list-item="4"></li>
+		 *     <li data-list-item="5"></li>
 		 * </ul>
 		 * <script>
 		 * var el = ax5.dom.get("#list-container");
 		 * console.log(
-		 * 	 ax5.dom.child(el)[1].tagName,
-		 * 	 ax5.dom.attr(ax5.dom.child(el)[1], "data-list-item")
+		 *     ax5.dom.child(el)[1].tagName,
+		 *     ax5.dom.attr(ax5.dom.child(el)[1], "data-list-item")
 		 * );
 		 * // LI 1
 		 * </script>
@@ -2919,7 +3038,7 @@
 		 * 	[, 그 외 찾고 싶은 attribute명들]
 		 * };
 		 * console.log(
-		 * 	ax5.dom.parent(e.target, {tagname:"a", clazz:"ax-menu-handel", "data-custom-attr":"attr_value"})
+		 *    ax5.dom.parent(e.target, {tagname:"a", clazz:"ax-menu-handel", "data-custom-attr":"attr_value"})
 		 * );
 		 * // cond 함수로 처리하기
 		 * ax5.dom.on(fnObj.layout.client_main, "click.app_expand", function(e){
@@ -2942,25 +3061,24 @@
 			els = va_elem(els, "parent");
 			var _target = els[0];
 			if (_target) {
-				while ((function () {
+				while ((function() {
 					var result = true;
-					if(typeof cond === "undefined"){
+					if (typeof cond === "undefined") {
 						_target = (_target.parentNode) ? _target.parentNode : false;
 					}
-					else
-					if(U.is_function(cond)){
+					else if (U.is_function(cond)) {
 						result = cond(_target);
 					}
-					else
-					if(U.is_object(cond)) {
+					else if (U.is_object(cond)) {
 						for (var k in cond) {
 							if (k === "tagname") {
 								if (_target.tagName.toLocaleLowerCase() != cond[k]) {
 									result = false;
 									break;
 								}
-							} else if (k === "clazz" || k === "class_name") {
-								if("className" in _target) {
+							}
+							else if (k === "clazz" || k === "class_name") {
+								if ("className" in _target) {
 									var klasss = _target.className.split(re_class_name_split);
 									var hasClass = false;
 									for (var a = 0; a < klasss.length; a++) {
@@ -2970,17 +3088,20 @@
 										}
 									}
 									result = hasClass;
-								}else{
+								}
+								else {
 									result = false;
 									break;
 								}
-							} else { // 그외 속성값들.
-								if(_target.getAttribute) {
+							}
+							else { // 그외 속성값들.
+								if (_target.getAttribute) {
 									if (_target.getAttribute(k) != cond[k]) {
 										result = false;
 										break;
 									}
-								}else{
+								}
+								else {
 									result = false;
 									break;
 								}
@@ -2988,10 +3109,12 @@
 						}
 					}
 					return !result;
-				})()) {
+				})())
+				{
 					if (_target.parentNode) {
 						_target = _target.parentNode;
-					} else {
+					}
+					else {
 						_target = false;
 						break;
 					}
@@ -3009,16 +3132,16 @@
 		 * @example
 		 * ```
 		 * <div>
-		 * 	 <ul id="list-container">
-		 * 		 <li data-list-item="0" id="li0">
-		 * 			<div>child>child</div>
-		 * 		 </li>
-		 * 		 <li data-list-item="1" id="li1"></li>
-		 * 		 <li data-list-item="2" id="li2"></li>
-		 * 		 <li data-list-item="3" id="li3"></li>
-		 * 		 <li data-list-item="4" id="li4"></li>
-		 * 		 <li data-list-item="5" id="li5"></li>
-		 * 	 </ul>
+		 *     <ul id="list-container">
+		 *         <li data-list-item="0" id="li0">
+		 *            <div>child>child</div>
+		 *         </li>
+		 *         <li data-list-item="1" id="li1"></li>
+		 *         <li data-list-item="2" id="li2"></li>
+		 *         <li data-list-item="3" id="li3"></li>
+		 *         <li data-list-item="4" id="li4"></li>
+		 *         <li data-list-item="5" id="li5"></li>
+		 *     </ul>
 		 * </div>
 		 * <script>
 		 * var el = ax5.dom.get("#list-container");
@@ -3026,8 +3149,8 @@
 		 * var c_li;
 		 *
 		 * console.log(
-		 * 	 (c_li = ax5.dom.next(li, 2)).id,
-		 * 	 (c_li = ax5.dom.prev(c_li)).id
+		 *     (c_li = ax5.dom.next(li, 2)).id,
+		 *     (c_li = ax5.dom.prev(c_li)).id
 		 * );
 		 * </script>
 		 * ```
@@ -3046,16 +3169,16 @@
 		 * @example
 		 * ```
 		 * <div>
-		 * 	 <ul id="list-container">
-		 * 		 <li data-list-item="0" id="li0">
-		 * 			<div>child>child</div>
-		 * 		 </li>
-		 * 		 <li data-list-item="1" id="li1"></li>
-		 * 		 <li data-list-item="2" id="li2"></li>
-		 * 		 <li data-list-item="3" id="li3"></li>
-		 * 		 <li data-list-item="4" id="li4"></li>
-		 * 		 <li data-list-item="5" id="li5"></li>
-		 * 	 </ul>
+		 *     <ul id="list-container">
+		 *         <li data-list-item="0" id="li0">
+		 *            <div>child>child</div>
+		 *         </li>
+		 *         <li data-list-item="1" id="li1"></li>
+		 *         <li data-list-item="2" id="li2"></li>
+		 *         <li data-list-item="3" id="li3"></li>
+		 *         <li data-list-item="4" id="li4"></li>
+		 *         <li data-list-item="5" id="li5"></li>
+		 *     </ul>
 		 * </div>
 		 * <script>
 		 * var el = ax5.dom.get("#list-container");
@@ -3063,8 +3186,8 @@
 		 * var c_li;
 		 *
 		 * console.log(
-		 * 	 (c_li = ax5.dom.next(li, 2)).id,
-		 * 	 (c_li = ax5.dom.prev(c_li)).id
+		 *     (c_li = ax5.dom.next(li, 2)).id,
+		 *     (c_li = ax5.dom.prev(c_li)).id
 		 * );
 		 * </script>
 		 * ```
@@ -3148,22 +3271,24 @@
 		 */
 		function html(els, val) {
 			els = va_elem(els, "html");
-            var tag, wrap;
+			var tag, wrap;
 			if (typeof val == "undefined") {
 				return els[0].innerHTML;
-			} else {
-                tag = ( re_tag.exec(val) || ["", ""] )[1].toLowerCase();
-				if (U.is_number(val)) val = ''+val;
+			}
+			else {
+				tag = ( re_tag.exec(val) || ["", ""] )[1].toLowerCase();
+				if (U.is_number(val)) val = '' + val;
 				if (U.is_string(val) && !re_noInnerhtml.test(val)) {
-                    if(tag_not_support_innerhtml[tag]){
-                        append(empty(els), val);
-                    }else{
-                        val = val.replace(re_single_tags, "<$1></$2>");
-                        var i = 0, l = els.length;
-                        for (; i < l; i++) {
-                            if("innerHTML" in els[i]) els[i].innerHTML = val;
-                        }
-                    }
+					if (tag_not_support_innerhtml[tag]) {
+						append(empty(els), val);
+					}
+					else {
+						val = val.replace(re_single_tags, "<$1></$2>");
+						var i = 0, l = els.length;
+						for (; i < l; i++) {
+							if ("innerHTML" in els[i]) els[i].innerHTML = val;
+						}
+					}
 				}
 				else if (U.is_element(val) || U.is_nodelist(val)) {
 					append(empty(els), val);
@@ -3258,7 +3383,7 @@
 			if (act === "append") {
 				for (; i < l; i++) {
 					_el = cf(el);
-					while(_el.firstChild){
+					while (_el.firstChild) {
 						els[i].appendChild(_el.firstChild);
 					}
 				}
@@ -3266,7 +3391,7 @@
 			else if (act == "prepend") {
 				for (; i < l; i++) {
 					_el = cf(el);
-					while(_el.firstChild) {
+					while (_el.firstChild) {
 						els[i].insertBefore(_el.firstChild, els[i].firstChild);
 					}
 				}
@@ -3274,7 +3399,7 @@
 			else if (act == "before") {
 				for (; i < l; i++) {
 					_el = cf(el);
-					while(_el.firstChild){
+					while (_el.firstChild) {
 						els[i].parentNode.insertBefore(_el.firstChild, els[i]);
 					}
 				}
@@ -3282,7 +3407,7 @@
 			else if (act == "after") {
 				for (; i < l; i++) {
 					_el = cf(el);
-					while(_el.firstChild){
+					while (_el.firstChild) {
 						els[i].parentNode.insertBefore(_el.firstChild, els[i].nextSibling);
 					}
 				}
@@ -3332,7 +3457,7 @@
 				box = el.getBoundingClientRect();
 			}
 			return {
-				top : box.top + ( win.pageYOffset || (docElem.scrollTop || doc.body.scrollTop) ) - ( docElem.clientTop || 0 ),
+				top: box.top + ( win.pageYOffset || (docElem.scrollTop || doc.body.scrollTop) ) - ( docElem.clientTop || 0 ),
 				left: box.left + ( win.pageXOffset || (docElem.scrollLeft || doc.body.scrollLeft) ) - ( docElem.clientLeft || 0 )
 			}
 		}
@@ -3378,7 +3503,7 @@
 				parentPos.left += curCSS(el_parent, "borderLeftWidth", "float");
 			}
 			return {
-				top : pos.top - parentPos.top - (curCSS(el, "marginTop", "float") || 0),
+				top: pos.top - parentPos.top - (curCSS(el, "marginTop", "float") || 0),
 				left: pos.left - parentPos.left - (curCSS(el, "marginLeft", "float") || 0)
 			};
 		}
@@ -3427,22 +3552,22 @@
 				model.height = height(el);
 			}
 			if (typeof cond === "undefined" || cond == "padding") {
-				model.padding = U.map(style(el, ["padding-top", "padding-right", "padding-bottom", "padding-left"]), function (k, v) {
+				model.padding = U.map(style(el, ["padding-top", "padding-right", "padding-bottom", "padding-left"]), function(k, v) {
 					return parseFloat(v);
 				});
 			}
 			if (typeof cond === "undefined" || cond == "margin") {
-				model.margin = U.map(style(el, ["margin-top", "margin-right", "margin-bottom", "margin-left"]), function (k, v) {
+				model.margin = U.map(style(el, ["margin-top", "margin-right", "margin-bottom", "margin-left"]), function(k, v) {
 					return parseFloat(v);
 				});
 			}
 			if (typeof cond === "undefined" || cond == "border") {
-				model.border = U.map(style(el, ["border-top", "border-right", "border-bottom", "border-left"]), function (k, v) {
+				model.border = U.map(style(el, ["border-top", "border-right", "border-bottom", "border-left"]), function(k, v) {
 					return v;
 				});
 			}
 			if (typeof cond === "undefined" || cond == "borderWidth") {
-				model.borderWidth = U.map(style(el, ["border-top-width", "border-right-width", "border-bottom-width", "border-left-width"]), function (k, v) {
+				model.borderWidth = U.map(style(el, ["border-top-width", "border-right-width", "border-bottom-width", "border-left-width"]), function(k, v) {
 					return parseFloat(v);
 				});
 			}
@@ -3513,7 +3638,7 @@
 				}
 				else {
 					for (; i < l; i++) {
-						each(O, function () {
+						each(O, function() {
 							delete els[i].ax5_data[this];
 						});
 					}
@@ -3527,9 +3652,9 @@
 		 * @method ax5.dom.get_webgl_context
 		 * @returns {wegGlContext}
 		 */
-		function get_webgl_context(els){
+		function get_webgl_context(els) {
 			els = va_elem(els, "get_webgl_context");
-			var apis = ['experimental-webgl','webgl','webkit-3d','moz-webgl','3d'],
+			var apis = ['experimental-webgl', 'webgl', 'webkit-3d', 'moz-webgl', '3d'],
 				i = apis.length, el = els[0], ctx;
 			while (i--) if (ctx = el.getContext(apis[i], {antialias: true})) break;
 			if (ctx == null) alert("WebGL is not available");
@@ -3543,56 +3668,77 @@
 		 * @param {String} [v] - element.value에 부여할 값
 		 * @returns {String}
 		 */
-		function val(els, v){
+		function val(els, v) {
 			els = va_elem(els, "val");
-			if(els[0] && 'value' in els[0]){
-				if(typeof v !== "undefined") els[0].value = v;
+			if (els[0] && 'value' in els[0]) {
+				if (typeof v !== "undefined") els[0].value = v;
 				return els[0].value;
-			}else{
+			}
+			else {
 				return null;
 			}
 		}
 
+		/**
+		 * 엘리먼트 에 이벤트를 발생시킵니다.
+		 * @method ax5.dom.dispatch_event
+		 * @param {Elements|Element} elements
+		 * @param {String} [evt_nm] - 발생시킬 이벤트 이름
+		 */
+		function dispatch_event(els, evt_nm){
+			els = va_elem(els, "val");
+			if ("createEvent" in document) {
+				var evt = document.createEvent("HTMLEvents");
+				evt.initEvent(evt_nm, false, true);
+				els[0].dispatchEvent(evt);
+			}
+			else {
+				els[0].fireEvent("on" + evt_nm);
+			}
+		}
+
 		U.extend(ax5.dom, {
-			ready     : ready,
-			scroll    : scroll,
-			resize    : resize,
-			get       : get,
-			get_one   : get_one,
-			create    : create,
-			css       : css,
+			ready: ready,
+			scroll: scroll,
+			resize: resize,
+			get: get,
+			get_one: get_one,
+			create: create,
+			css: css,
 			class_name: class_name,
-			attr      : attr,
-			on        : on,
-			off       : off,
-			child     : child,
-			parent    : parent,
-			prev      : prev,
-			next      : next,
-			html      : html,
-			width     : width,
-			height    : height,
-			append    : append,
-			prepend   : prepend,
-			before    : before,
-			after     : after,
+			attr: attr,
+			on: on,
+			off: off,
+			child: child,
+			parent: parent,
+			prev: prev,
+			next: next,
+			html: html,
+			width: width,
+			height: height,
+			append: append,
+			prepend: prepend,
+			before: before,
+			after: after,
 			manipulate: manipulate,
-			remove    : remove,
-			empty     : empty,
-			offset    : offset,
-			position  : position,
-			box_model : box_model,
-			data      : data,
+			remove: remove,
+			empty: empty,
+			offset: offset,
+			position: position,
+			box_model: box_model,
+			data: data,
 			get_webgl_context: get_webgl_context,
-			val       : val
+			val: val,
+			dispatch_event: dispatch_event
 		});
 	})();
 
 	if (typeof module === "object" && module && 'exports' in module) {
 		module.exports = ax5; // commonJS
-	} else {
+	}
+	else {
 		root.ax5 = ax5;
-		if (typeof define === "function" && define.amd) define("_ax5", [], function () {
+		if (typeof define === "function" && define.amd) define("_ax5", [], function() {
 			return ax5;
 		}); // requireJS
 	}

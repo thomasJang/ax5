@@ -33,9 +33,9 @@
 
 // mixins --------------------------------------------- end
 
-.ax-item-group{
+.ax-item-group {
 	padding: 0px;
-	.ax-item, .ax-item-group{
+	.ax-item, .ax-item-group {
 		@include ax();
 		position: relative;
 		display: block;
@@ -53,10 +53,10 @@
 			@include ax-border-radius($item-group-border-radius, "bottom");
 		}
 	}
-	.ax-item-group{
+	.ax-item-group {
 		padding: 10px 10px;
 	}
-	a.ax-item{
+	a.ax-item {
 		color: $item-group-link-color;
 		cursor: pointer;
 
@@ -68,7 +68,7 @@
 			background-color: $item-group-hover-bg;
 		}
 	}
-	.ax-item{
+	.ax-item {
 		// Disabled state
 		&.disabled,
 		&.disabled:hover,
@@ -103,7 +103,7 @@
 	// -- special
 	@include item-variant(special, $theme-special, $item-group-special-bg, $item-group-special-border);
 
-	&:not(.ax-item-group-depth-0){
-		background-color: darken($item-group-bg, 3%);
+	&:not(.ax-item-group-depth-0) {
+		//	background-color: darken($item-group-bg, 3%);
 	}
 }

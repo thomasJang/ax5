@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* Rectangle 14 Copy 26: */
 /* Rectangle 14 Copy 29: */
 /* Rectangle 14 Copy 28: */
@@ -29,11 +30,7 @@
   text-transform: capitalize; }
 
 .ax {
-  color: #333333;
-  font-size: 13px;
-  font-weight: 400;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 18px; }
+  color: #333333; }
 
 a.ax {
   color: #FF5B00;
@@ -70,26 +67,32 @@ a.ax {
 
 .ax.mute {
   color: #777777; }
+
 .ax.basic {
   color: #f68518; }
   .ax.basic:hover {
     color: #d36c08; }
+
 .ax.good {
   color: #503C3E; }
   .ax.good:hover {
     color: #332627; }
+
 .ax.info {
   color: #FEEE00; }
   .ax.info:hover {
     color: #cbbe00; }
+
 .ax.warning {
   color: #FF5B00; }
   .ax.warning:hover {
     color: #cc4900; }
+
 .ax.danger {
   color: #993700; }
   .ax.danger:hover {
     color: #662400; }
+
 .ax.special {
   color: #292929; }
   .ax.special:hover {
@@ -119,11 +122,13 @@ a.ax {
     display: none; }
   .ax-btn .badge {
     position: relative; }
-  .badge a:hover, .badge a:focus {
+  .badge a:hover,
+  .badge a:focus {
     color: #fff;
     text-decoration: none;
     cursor: pointer; }
-  .ax-item.active > .badge, .nav-pills > .active > a > .badge {
+  .ax-item.active > .badge,
+  .nav-pills > .active > a > .badge {
     color: #FF5B00;
     background-color: #fff; }
   .ax-item > .badge {
@@ -135,10 +140,6 @@ a.ax {
 
 .ax-btn {
   color: #333333;
-  font-size: 13px;
-  font-weight: 400;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 18px;
   display: inline-block;
   font-weight: normal;
   text-align: center;
@@ -166,14 +167,22 @@ a.ax {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none; }
-  .ax-btn:focus, .ax-btn.focus, .ax-btn:active:focus, .ax-btn:active.focus, .ax-btn.active:focus, .ax-btn.active.focus {
+  .ax-btn:focus,
+  .ax-btn.focus,
+  .ax-btn:active:focus,
+  .ax-btn:active.focus,
+  .ax-btn.active:focus,
+  .ax-btn.active.focus {
     outline: thin dotted;
     outline: 0; }
-  .ax-btn:active, .ax-btn.active {
+  .ax-btn:active,
+  .ax-btn.active {
     outline: 0;
     background-image: none;
     box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset; }
-  .ax-btn:hover, .ax-btn:focus, .ax-btn.focus {
+  .ax-btn:hover,
+  .ax-btn:focus,
+  .ax-btn.focus {
     text-decoration: none;
     color: #222222;
     text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
@@ -183,21 +192,28 @@ a.ax {
     background-image: linear-gradient(to bottom, #D0D0D0, #D0D0D0);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#D0D0D0, endColorstr=#D0D0D0);
     box-shadow: none; }
-    .ax-btn:hover .badge, .ax-btn:focus .badge, .ax-btn.focus .badge {
+    .ax-btn:hover .badge,
+    .ax-btn:focus .badge,
+    .ax-btn.focus .badge {
       text-shadow: none;
       color: #D0D0D0;
       background-color: #222222; }
-  .ax-btn:active, .ax-btn.active {
+  .ax-btn:active,
+  .ax-btn.active {
     outline: 0;
     background-image: none;
     box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset; }
-  .ax-btn.disabled, .ax-btn[disabled], fieldset[disabled] .ax-btn {
+  .ax-btn.disabled,
+  .ax-btn[disabled],
+  fieldset[disabled] .ax-btn {
     cursor: not-allowed;
     pointer-events: none;
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
     opacity: 0.65;
     box-shadow: none; }
-  .ax-btn.disabled, .ax-btn[disabled], fieldset[disabled] .ax-btn {
+  .ax-btn.disabled,
+  .ax-btn[disabled],
+  fieldset[disabled] .ax-btn {
     cursor: not-allowed;
     pointer-events: none;
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
@@ -216,7 +232,9 @@ a.ax {
       text-shadow: none;
       color: #F79231;
       background-color: #fff; }
-    .ax-btn.basic:hover, .ax-btn.basic:focus, .ax-btn.basic.focus {
+    .ax-btn.basic:hover,
+    .ax-btn.basic:focus,
+    .ax-btn.basic.focus {
       text-decoration: none;
       color: #fff;
       text-shadow: none;
@@ -226,15 +244,20 @@ a.ax {
       background-image: linear-gradient(to bottom, #F79231, #F79231);
       filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F79231, endColorstr=#F79231);
       box-shadow: none; }
-      .ax-btn.basic:hover .badge, .ax-btn.basic:focus .badge, .ax-btn.basic.focus .badge {
+      .ax-btn.basic:hover .badge,
+      .ax-btn.basic:focus .badge,
+      .ax-btn.basic.focus .badge {
         text-shadow: none;
         color: #F79231;
         background-color: #fff; }
-    .ax-btn.basic:active, .ax-btn.basic.active {
+    .ax-btn.basic:active,
+    .ax-btn.basic.active {
       outline: 0;
       background-image: none;
       box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset; }
-    .ax-btn.basic.disabled, .ax-btn.basic[disabled], fieldset[disabled] .ax-btn.basic {
+    .ax-btn.basic.disabled,
+    .ax-btn.basic[disabled],
+    fieldset[disabled] .ax-btn.basic {
       cursor: not-allowed;
       pointer-events: none;
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
@@ -253,7 +276,9 @@ a.ax {
       text-shadow: none;
       color: #503C3E;
       background-color: #FEEE00; }
-    .ax-btn.good:hover, .ax-btn.good:focus, .ax-btn.good.focus {
+    .ax-btn.good:hover,
+    .ax-btn.good:focus,
+    .ax-btn.good.focus {
       text-decoration: none;
       color: #fff;
       text-shadow: none;
@@ -263,15 +288,20 @@ a.ax {
       background-image: linear-gradient(to bottom, #503C3E, #503C3E);
       filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#503C3E, endColorstr=#503C3E);
       box-shadow: none; }
-      .ax-btn.good:hover .badge, .ax-btn.good:focus .badge, .ax-btn.good.focus .badge {
+      .ax-btn.good:hover .badge,
+      .ax-btn.good:focus .badge,
+      .ax-btn.good.focus .badge {
         text-shadow: none;
         color: #503C3E;
         background-color: #fff; }
-    .ax-btn.good:active, .ax-btn.good.active {
+    .ax-btn.good:active,
+    .ax-btn.good.active {
       outline: 0;
       background-image: none;
       box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset; }
-    .ax-btn.good.disabled, .ax-btn.good[disabled], fieldset[disabled] .ax-btn.good {
+    .ax-btn.good.disabled,
+    .ax-btn.good[disabled],
+    fieldset[disabled] .ax-btn.good {
       cursor: not-allowed;
       pointer-events: none;
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
@@ -290,7 +320,9 @@ a.ax {
       text-shadow: none;
       color: #FEEE00;
       background-color: #503C3E; }
-    .ax-btn.info:hover, .ax-btn.info:focus, .ax-btn.info.focus {
+    .ax-btn.info:hover,
+    .ax-btn.info:focus,
+    .ax-btn.info.focus {
       text-decoration: none;
       color: #503C3E;
       text-shadow: none;
@@ -300,15 +332,20 @@ a.ax {
       background-image: linear-gradient(to bottom, #FEEE00, #FEEE00);
       filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FEEE00, endColorstr=#FEEE00);
       box-shadow: none; }
-      .ax-btn.info:hover .badge, .ax-btn.info:focus .badge, .ax-btn.info.focus .badge {
+      .ax-btn.info:hover .badge,
+      .ax-btn.info:focus .badge,
+      .ax-btn.info.focus .badge {
         text-shadow: none;
         color: #FEEE00;
         background-color: #503C3E; }
-    .ax-btn.info:active, .ax-btn.info.active {
+    .ax-btn.info:active,
+    .ax-btn.info.active {
       outline: 0;
       background-image: none;
       box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset; }
-    .ax-btn.info.disabled, .ax-btn.info[disabled], fieldset[disabled] .ax-btn.info {
+    .ax-btn.info.disabled,
+    .ax-btn.info[disabled],
+    fieldset[disabled] .ax-btn.info {
       cursor: not-allowed;
       pointer-events: none;
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
@@ -327,7 +364,9 @@ a.ax {
       text-shadow: none;
       color: #FF5B00;
       background-color: #fff; }
-    .ax-btn.warning:hover, .ax-btn.warning:focus, .ax-btn.warning.focus {
+    .ax-btn.warning:hover,
+    .ax-btn.warning:focus,
+    .ax-btn.warning.focus {
       text-decoration: none;
       color: #fff;
       text-shadow: none;
@@ -337,15 +376,20 @@ a.ax {
       background-image: linear-gradient(to bottom, #FF5B00, #FF5B00);
       filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FF5B00, endColorstr=#FF5B00);
       box-shadow: none; }
-      .ax-btn.warning:hover .badge, .ax-btn.warning:focus .badge, .ax-btn.warning.focus .badge {
+      .ax-btn.warning:hover .badge,
+      .ax-btn.warning:focus .badge,
+      .ax-btn.warning.focus .badge {
         text-shadow: none;
         color: #FF5B00;
         background-color: #fff; }
-    .ax-btn.warning:active, .ax-btn.warning.active {
+    .ax-btn.warning:active,
+    .ax-btn.warning.active {
       outline: 0;
       background-image: none;
       box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset; }
-    .ax-btn.warning.disabled, .ax-btn.warning[disabled], fieldset[disabled] .ax-btn.warning {
+    .ax-btn.warning.disabled,
+    .ax-btn.warning[disabled],
+    fieldset[disabled] .ax-btn.warning {
       cursor: not-allowed;
       pointer-events: none;
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
@@ -364,7 +408,9 @@ a.ax {
       text-shadow: none;
       color: #993700;
       background-color: #fff; }
-    .ax-btn.danger:hover, .ax-btn.danger:focus, .ax-btn.danger.focus {
+    .ax-btn.danger:hover,
+    .ax-btn.danger:focus,
+    .ax-btn.danger.focus {
       text-decoration: none;
       color: #fff;
       text-shadow: none;
@@ -374,15 +420,20 @@ a.ax {
       background-image: linear-gradient(to bottom, #993700, #993700);
       filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#993700, endColorstr=#993700);
       box-shadow: none; }
-      .ax-btn.danger:hover .badge, .ax-btn.danger:focus .badge, .ax-btn.danger.focus .badge {
+      .ax-btn.danger:hover .badge,
+      .ax-btn.danger:focus .badge,
+      .ax-btn.danger.focus .badge {
         text-shadow: none;
         color: #993700;
         background-color: #fff; }
-    .ax-btn.danger:active, .ax-btn.danger.active {
+    .ax-btn.danger:active,
+    .ax-btn.danger.active {
       outline: 0;
       background-image: none;
       box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset; }
-    .ax-btn.danger.disabled, .ax-btn.danger[disabled], fieldset[disabled] .ax-btn.danger {
+    .ax-btn.danger.disabled,
+    .ax-btn.danger[disabled],
+    fieldset[disabled] .ax-btn.danger {
       cursor: not-allowed;
       pointer-events: none;
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
@@ -401,7 +452,9 @@ a.ax {
       text-shadow: none;
       color: #fff;
       background-color: #333333; }
-    .ax-btn.link:hover, .ax-btn.link:focus, .ax-btn.link.focus {
+    .ax-btn.link:hover,
+    .ax-btn.link:focus,
+    .ax-btn.link.focus {
       text-decoration: none;
       color: #333333;
       text-shadow: none;
@@ -411,15 +464,20 @@ a.ax {
       background-image: linear-gradient(to bottom, #fff, #fff);
       filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#fff, endColorstr=#fff);
       box-shadow: none; }
-      .ax-btn.link:hover .badge, .ax-btn.link:focus .badge, .ax-btn.link.focus .badge {
+      .ax-btn.link:hover .badge,
+      .ax-btn.link:focus .badge,
+      .ax-btn.link.focus .badge {
         text-shadow: none;
         color: #fff;
         background-color: #333333; }
-    .ax-btn.link:active, .ax-btn.link.active {
+    .ax-btn.link:active,
+    .ax-btn.link.active {
       outline: 0;
       background-image: none;
       box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset; }
-    .ax-btn.link.disabled, .ax-btn.link[disabled], fieldset[disabled] .ax-btn.link {
+    .ax-btn.link.disabled,
+    .ax-btn.link[disabled],
+    fieldset[disabled] .ax-btn.link {
       cursor: not-allowed;
       pointer-events: none;
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
@@ -438,7 +496,9 @@ a.ax {
       text-shadow: none;
       color: #101010;
       background-color: #808080; }
-    .ax-btn.special:hover, .ax-btn.special:focus, .ax-btn.special.focus {
+    .ax-btn.special:hover,
+    .ax-btn.special:focus,
+    .ax-btn.special.focus {
       text-decoration: none;
       color: #fff;
       text-shadow: none;
@@ -448,15 +508,20 @@ a.ax {
       background-image: linear-gradient(to bottom, #292929, #292929);
       filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#292929, endColorstr=#292929);
       box-shadow: none; }
-      .ax-btn.special:hover .badge, .ax-btn.special:focus .badge, .ax-btn.special.focus .badge {
+      .ax-btn.special:hover .badge,
+      .ax-btn.special:focus .badge,
+      .ax-btn.special.focus .badge {
         text-shadow: none;
         color: #292929;
         background-color: #fff; }
-    .ax-btn.special:active, .ax-btn.special.active {
+    .ax-btn.special:active,
+    .ax-btn.special.active {
       outline: 0;
       background-image: none;
       box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset; }
-    .ax-btn.special.disabled, .ax-btn.special[disabled], fieldset[disabled] .ax-btn.special {
+    .ax-btn.special.disabled,
+    .ax-btn.special[disabled],
+    fieldset[disabled] .ax-btn.special {
       cursor: not-allowed;
       pointer-events: none;
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
@@ -489,10 +554,6 @@ a.ax {
 
 .ax-inp {
   color: #333333;
-  font-size: 13px;
-  font-weight: 400;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 18px;
   font-weight: normal;
   vertical-align: middle;
   touch-action: manipulation;
@@ -728,10 +789,6 @@ a.ax {
 
 .ax-select {
   color: #333333;
-  font-size: 13px;
-  font-weight: 400;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 18px;
   font-weight: normal;
   vertical-align: middle;
   white-space: nowrap;
@@ -959,10 +1016,6 @@ a.ax {
 
 .ax-textarea {
   color: #333333;
-  font-size: 13px;
-  font-weight: 400;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 18px;
   font-weight: normal;
   vertical-align: middle;
   white-space: nowrap;
@@ -1515,7 +1568,7 @@ a.ax {
     padding: 4px 7px;
     font-family: axicon; }
     .ax-inp-group.has-basic .axicon:before {
-      content: '\f164'; }
+      content: ""; }
   .ax-inp-group.has-good .ax-addon {
     position: absolute;
     width: 60px;
@@ -1571,7 +1624,7 @@ a.ax {
     padding: 4px 7px;
     font-family: axicon; }
     .ax-inp-group.has-good .axicon:before {
-      content: '\f164'; }
+      content: ""; }
   .ax-inp-group.has-info .ax-addon {
     position: absolute;
     width: 60px;
@@ -1627,7 +1680,7 @@ a.ax {
     padding: 4px 7px;
     font-family: axicon; }
     .ax-inp-group.has-info .axicon:before {
-      content: '\e6c6'; }
+      content: ""; }
   .ax-inp-group.has-warning .ax-addon {
     position: absolute;
     width: 60px;
@@ -1683,7 +1736,7 @@ a.ax {
     padding: 4px 7px;
     font-family: axicon; }
     .ax-inp-group.has-warning .axicon:before {
-      content: '\e730'; }
+      content: ""; }
   .ax-inp-group.has-danger .ax-addon {
     position: absolute;
     width: 60px;
@@ -1739,7 +1792,7 @@ a.ax {
     padding: 4px 7px;
     font-family: axicon; }
     .ax-inp-group.has-danger .axicon:before {
-      content: '\e72f'; }
+      content: ""; }
   .ax-inp-group.has-special .ax-addon {
     position: absolute;
     width: 60px;
@@ -1795,7 +1848,7 @@ a.ax {
     padding: 4px 7px;
     font-family: axicon; }
     .ax-inp-group.has-special .axicon:before {
-      content: '\e60a'; }
+      content: ""; }
   .ax-inp-group.lg .ax-addon {
     padding: 1px 10px;
     font-size: 17px;
@@ -1883,10 +1936,6 @@ a.ax {
   padding: 0px; }
   .ax-item-group .ax-item, .ax-item-group .ax-item-group {
     color: #333333;
-    font-size: 13px;
-    font-weight: 400;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    line-height: 18px;
     position: relative;
     display: block;
     padding: 10px 15px;
@@ -1905,15 +1954,20 @@ a.ax {
   .ax-item-group a.ax-item {
     color: #555;
     cursor: pointer; }
-    .ax-item-group a.ax-item:hover, .ax-item-group a.ax-item:focus {
+    .ax-item-group a.ax-item:hover,
+    .ax-item-group a.ax-item:focus {
       text-decoration: none;
       color: #555;
       background-color: #f5f5f5; }
-  .ax-item-group .ax-item.disabled, .ax-item-group .ax-item.disabled:hover, .ax-item-group .ax-item.disabled:focus {
+  .ax-item-group .ax-item.disabled,
+  .ax-item-group .ax-item.disabled:hover,
+  .ax-item-group .ax-item.disabled:focus {
     background-color: #eeeeee;
     color: #777777;
     cursor: not-allowed; }
-  .ax-item-group .ax-item.active, .ax-item-group .ax-item.active:hover, .ax-item-group .ax-item.active:focus {
+  .ax-item-group .ax-item.active,
+  .ax-item-group .ax-item.active:hover,
+  .ax-item-group .ax-item.active:focus {
     z-index: 2;
     color: #5A3100;
     background-color: #F79231;
@@ -1926,11 +1980,14 @@ a.ax {
     color: #555; }
     .ax-item-group a.ax-item.good .list-group-item-heading {
       color: inherit; }
-    .ax-item-group a.ax-item.good:hover, .ax-item-group a.ax-item.good:focus {
+    .ax-item-group a.ax-item.good:hover,
+    .ax-item-group a.ax-item.good:focus {
       color: #fff;
       background-color: #503C3E;
       border-color: #161011; }
-    .ax-item-group a.ax-item.good.active, .ax-item-group a.ax-item.good.active:hover, .ax-item-group a.ax-item.good.active:focus {
+    .ax-item-group a.ax-item.good.active,
+    .ax-item-group a.ax-item.good.active:hover,
+    .ax-item-group a.ax-item.good.active:focus {
       color: #fff;
       background-color: #503C3E;
       border-color: #161011; }
@@ -1942,11 +1999,14 @@ a.ax {
     color: #fff; }
     .ax-item-group a.ax-item.info .list-group-item-heading {
       color: inherit; }
-    .ax-item-group a.ax-item.info:hover, .ax-item-group a.ax-item.info:focus {
+    .ax-item-group a.ax-item.info:hover,
+    .ax-item-group a.ax-item.info:focus {
       color: #fff;
       background-color: #FEEE00;
       border-color: #988e00; }
-    .ax-item-group a.ax-item.info.active, .ax-item-group a.ax-item.info.active:hover, .ax-item-group a.ax-item.info.active:focus {
+    .ax-item-group a.ax-item.info.active,
+    .ax-item-group a.ax-item.info.active:hover,
+    .ax-item-group a.ax-item.info.active:focus {
       color: #fff;
       background-color: #FEEE00;
       border-color: #988e00; }
@@ -1958,11 +2018,14 @@ a.ax {
     color: #555; }
     .ax-item-group a.ax-item.warning .list-group-item-heading {
       color: inherit; }
-    .ax-item-group a.ax-item.warning:hover, .ax-item-group a.ax-item.warning:focus {
+    .ax-item-group a.ax-item.warning:hover,
+    .ax-item-group a.ax-item.warning:focus {
       color: #fff;
       background-color: #FF5B00;
       border-color: #993700; }
-    .ax-item-group a.ax-item.warning.active, .ax-item-group a.ax-item.warning.active:hover, .ax-item-group a.ax-item.warning.active:focus {
+    .ax-item-group a.ax-item.warning.active,
+    .ax-item-group a.ax-item.warning.active:hover,
+    .ax-item-group a.ax-item.warning.active:focus {
       color: #fff;
       background-color: #FF5B00;
       border-color: #993700; }
@@ -1974,11 +2037,14 @@ a.ax {
     color: #fff; }
     .ax-item-group a.ax-item.danger .list-group-item-heading {
       color: inherit; }
-    .ax-item-group a.ax-item.danger:hover, .ax-item-group a.ax-item.danger:focus {
+    .ax-item-group a.ax-item.danger:hover,
+    .ax-item-group a.ax-item.danger:focus {
       color: #fff;
       background-color: #993700;
       border-color: #331200; }
-    .ax-item-group a.ax-item.danger.active, .ax-item-group a.ax-item.danger.active:hover, .ax-item-group a.ax-item.danger.active:focus {
+    .ax-item-group a.ax-item.danger.active,
+    .ax-item-group a.ax-item.danger.active:hover,
+    .ax-item-group a.ax-item.danger.active:focus {
       color: #fff;
       background-color: #993700;
       border-color: #331200; }
@@ -1990,11 +2056,14 @@ a.ax {
     color: #555; }
     .ax-item-group a.ax-item.link .list-group-item-heading {
       color: inherit; }
-    .ax-item-group a.ax-item.link:hover, .ax-item-group a.ax-item.link:focus {
+    .ax-item-group a.ax-item.link:hover,
+    .ax-item-group a.ax-item.link:focus {
       color: #fff;
       background-color: #fff;
       border-color: #cccccc; }
-    .ax-item-group a.ax-item.link.active, .ax-item-group a.ax-item.link.active:hover, .ax-item-group a.ax-item.link.active:focus {
+    .ax-item-group a.ax-item.link.active,
+    .ax-item-group a.ax-item.link.active:hover,
+    .ax-item-group a.ax-item.link.active:focus {
       color: #fff;
       background-color: #fff;
       border-color: #cccccc; }
@@ -2006,23 +2075,20 @@ a.ax {
     color: #fff; }
     .ax-item-group a.ax-item.special .list-group-item-heading {
       color: inherit; }
-    .ax-item-group a.ax-item.special:hover, .ax-item-group a.ax-item.special:focus {
+    .ax-item-group a.ax-item.special:hover,
+    .ax-item-group a.ax-item.special:focus {
       color: #fff;
       background-color: #292929;
       border-color: black; }
-    .ax-item-group a.ax-item.special.active, .ax-item-group a.ax-item.special.active:hover, .ax-item-group a.ax-item.special.active:focus {
+    .ax-item-group a.ax-item.special.active,
+    .ax-item-group a.ax-item.special.active:hover,
+    .ax-item-group a.ax-item.special.active:focus {
       color: #fff;
       background-color: #292929;
       border-color: black; }
-  .ax-item-group:not(.ax-item-group-depth-0) {
-    background-color: #f7f7f7; }
 
 .ax-panel {
   color: #333333;
-  font-size: 13px;
-  font-weight: 400;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 18px;
   box-sizing: border-box;
   background-color: #fff;
   border: 1px solid transparent;
@@ -2127,10 +2193,6 @@ a.ax {
 
 .ax-scroll {
   color: #333333;
-  font-size: 13px;
-  font-weight: 400;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 18px;
   box-sizing: border-box;
   background-color: #fff;
   border: 1px solid transparent;
@@ -2206,10 +2268,6 @@ a.ax {
 
 .ax-menu {
   color: #333333;
-  font-size: 13px;
-  font-weight: 400;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 18px;
   box-sizing: border-box;
   background-color: #fff;
   border: 1px solid transparent;
@@ -2221,10 +2279,6 @@ a.ax {
 
 .ax-tab {
   color: #333333;
-  font-size: 13px;
-  font-weight: 400;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 18px;
   box-sizing: border-box;
   background-color: #fff;
   border: 1px solid transparent;
@@ -2236,10 +2290,6 @@ a.ax {
 
 .ax-toolbar {
   color: #333333;
-  font-size: 13px;
-  font-weight: 400;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 18px;
   box-sizing: border-box;
   background-color: #fff;
   border: 1px solid transparent;
@@ -2251,10 +2301,6 @@ a.ax {
 
 .ax-label {
   color: #333333;
-  font-size: 13px;
-  font-weight: 400;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 18px;
   box-sizing: border-box;
   background-color: #fff;
   border: 1px solid transparent;
@@ -2268,7 +2314,6 @@ a.ax {
   from {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     opacity: 0; }
-
   to {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
     opacity: 0.6; } }
@@ -2277,7 +2322,6 @@ a.ax {
   from {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     opacity: 0; }
-
   to {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
     opacity: 0.6; } }
@@ -2286,7 +2330,6 @@ a.ax {
   from {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     opacity: 0; }
-
   to {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
     opacity: 0.6; } }
@@ -2363,20 +2406,16 @@ a.ax {
 @-webkit-keyframes ax-dialog {
   0% {
     -webkit-transform: scale(1); }
-
   1% {
     -webkit-transform: scale(1.1); }
-
   100% {
     -webkit-transform: scale(1); } }
 
 @-moz-keyframes ax-dialog {
   0% {
     -moz-transform: scale(1); }
-
   1% {
     -moz-transform: scale(1.1); }
-
   100% {
     -moz-transform: scale(1); } }
 
@@ -2387,14 +2426,12 @@ a.ax {
     -ms-transform: scale(1);
     -o-transform: scale(1);
     transform: scale(1); }
-
   1% {
     -webkit-transform: scale(1.1);
     -moz-transform: scale(1.1);
     -ms-transform: scale(1.1);
     -o-transform: scale(1.1);
     transform: scale(1.1); }
-
   100% {
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
@@ -2412,10 +2449,6 @@ a.ax {
   -o-transform: translateZ(0);
   transform: translateZ(0);
   color: #333333;
-  font-size: 13px;
-  font-weight: 400;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 18px;
   box-sizing: border-box;
   background-color: #fff;
   border: 1px solid gray;
@@ -2498,8 +2531,7 @@ a.ax {
   from {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     opacity: 0;
-    -webkit-transform: translateX(100px); }
-
+    -webkit-transform: translateY(-100px); }
   to {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
     opacity: 0.6;
@@ -2509,8 +2541,7 @@ a.ax {
   from {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     opacity: 0;
-    -moz-transform: translateX(100px); }
-
+    -moz-transform: translateY(-100px); }
   to {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
     opacity: 0.6;
@@ -2520,12 +2551,11 @@ a.ax {
   from {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     opacity: 0;
-    -webkit-transform: translateX(100px);
-    -moz-transform: translateX(100px);
-    -ms-transform: translateX(100px);
-    -o-transform: translateX(100px);
-    transform: translateX(100px); }
-
+    -webkit-transform: translateY(-100px);
+    -moz-transform: translateY(-100px);
+    -ms-transform: translateY(-100px);
+    -o-transform: translateY(-100px);
+    transform: translateY(-100px); }
   to {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
     opacity: 0.6;
@@ -2540,7 +2570,6 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
     opacity: 1;
     -webkit-transform: translateX(0px); }
-
   to {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     opacity: 0;
@@ -2551,7 +2580,6 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
     opacity: 1;
     -moz-transform: translateX(0px); }
-
   to {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     opacity: 0;
@@ -2566,7 +2594,6 @@ a.ax {
     -ms-transform: translateX(0px);
     -o-transform: translateX(0px);
     transform: translateX(0px); }
-
   to {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     opacity: 0;
@@ -2580,7 +2607,6 @@ a.ax {
   from {
     filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
     opacity: 1; }
-
   to {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     opacity: 0; } }
@@ -2589,7 +2615,6 @@ a.ax {
   from {
     filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
     opacity: 1; }
-
   to {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     opacity: 0; } }
@@ -2598,7 +2623,6 @@ a.ax {
   from {
     filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
     opacity: 1; }
-
   to {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     opacity: 0; } }
@@ -2613,10 +2637,6 @@ a.ax {
     -moz-animation: ax-toast 0.2s ease-in-out;
     animation: ax-toast 0.2s ease-in-out;
     color: #333333;
-    font-size: 13px;
-    font-weight: 400;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    line-height: 18px;
     box-sizing: border-box;
     border: 1px solid gray;
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
@@ -2908,6 +2928,54 @@ a.ax {
       text-align: center;
       padding: 0px; }
 
+@-webkit-keyframes ax5-ui-calendar-fadeout {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1; }
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0; } }
+
+@-moz-keyframes ax5-ui-calendar-fadeout {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1; }
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0; } }
+
+@keyframes ax5-ui-calendar-fadeout {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1; }
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0; } }
+
+@-webkit-keyframes ax5-ui-calendar-fadein {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0; }
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1; } }
+
+@-moz-keyframes ax5-ui-calendar-fadein {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0; }
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1; } }
+
+@keyframes ax5-ui-calendar-fadein {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0; }
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1; } }
+
 .ax5-ui-calendar {
   box-sizing: border-box;
   position: relative; }
@@ -2934,6 +3002,10 @@ a.ax {
         line-height: inherit; }
     .ax5-ui-calendar .calendar-control .date-display {
       text-align: center; }
+      .ax5-ui-calendar .calendar-control .date-display [data-calendar-display] {
+        margin: 0px 10px;
+        cursor: pointer;
+        text-decoration: underline; }
     .ax5-ui-calendar .calendar-control .date-move-right {
       display: block;
       position: absolute;
@@ -2946,6 +3018,18 @@ a.ax {
         line-height: inherit; }
     .ax5-ui-calendar .calendar-control a:hover {
       color: #b34000; }
+  .ax5-ui-calendar .calendar-body.fadein {
+    -webkit-animation: ax5-ui-calendar-fadein 0.3s ease-in-out;
+    -moz-animation: ax5-ui-calendar-fadein 0.3s ease-in-out;
+    animation: ax5-ui-calendar-fadein 0.3s ease-in-out;
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1; }
+  .ax5-ui-calendar .calendar-body.fadeout {
+    -webkit-animation: ax5-ui-calendar-fadeout 0.3s ease-in-out;
+    -moz-animation: ax5-ui-calendar-fadeout 0.3s ease-in-out;
+    animation: ax5-ui-calendar-fadeout 0.3s ease-in-out;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0; }
   .ax5-ui-calendar .calendar-body table {
     box-sizing: border-box;
     table-layout: fixed;
@@ -3002,13 +3086,77 @@ a.ax {
           background-image: linear-gradient(to bottom, #3B3B3B, #3B3B3B);
           filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#3B3B3B, endColorstr=#3B3B3B);
           color: #6D6E70; }
-        .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date.hover, .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date:hover, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date.hover, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date:hover {
+        .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date.hover, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date.hover {
+          background: #FEEE00;
+          background-image: -webkit-linear-gradient(top, #FEEE00, #FEEE00);
+          background-image: linear-gradient(to bottom, #FEEE00, #FEEE00);
+          filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FEEE00, endColorstr=#FEEE00);
+          color: #503C3E !important; }
+        .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date.focus, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date.focus {
+          background: #F79231;
+          background-image: -webkit-linear-gradient(top, #F79231, #F79231);
+          background-image: linear-gradient(to bottom, #F79231, #F79231);
+          filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F79231, endColorstr=#F79231);
+          color: #fff; }
+      .ax5-ui-calendar .calendar-body table tbody td .calendar-item-month, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-month {
+        display: block;
+        width: 100%;
+        height: 100%;
+        vertical-align: middle;
+        border-radius: 0;
+        overflow: hidden;
+        line-height: inherit;
+        background: #292929;
+        background-image: -webkit-linear-gradient(top, #292929, #292929);
+        background-image: linear-gradient(to bottom, #292929, #292929);
+        filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#292929, endColorstr=#292929);
+        color: #C3C4C6;
+        font-size: 16px; }
+        .ax5-ui-calendar .calendar-body table tbody td .calendar-item-month.live, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-month.live {
+          background: #3B3B3B;
+          background-image: -webkit-linear-gradient(top, #3B3B3B, #3B3B3B);
+          background-image: linear-gradient(to bottom, #3B3B3B, #3B3B3B);
+          filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#3B3B3B, endColorstr=#3B3B3B);
+          color: #6D6E70; }
+        .ax5-ui-calendar .calendar-body table tbody td .calendar-item-month.hover, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-month.hover {
           background: #FEEE00;
           background-image: -webkit-linear-gradient(top, #FEEE00, #FEEE00);
           background-image: linear-gradient(to bottom, #FEEE00, #FEEE00);
           filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FEEE00, endColorstr=#FEEE00);
           color: #503C3E; }
-        .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date.focus, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date.focus {
+        .ax5-ui-calendar .calendar-body table tbody td .calendar-item-month.focus, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-month.focus {
+          background: #F79231;
+          background-image: -webkit-linear-gradient(top, #F79231, #F79231);
+          background-image: linear-gradient(to bottom, #F79231, #F79231);
+          filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F79231, endColorstr=#F79231);
+          color: #fff; }
+      .ax5-ui-calendar .calendar-body table tbody td .calendar-item-year, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-year {
+        display: block;
+        width: 100%;
+        height: 100%;
+        vertical-align: middle;
+        border-radius: 0;
+        overflow: hidden;
+        line-height: inherit;
+        background: #292929;
+        background-image: -webkit-linear-gradient(top, #292929, #292929);
+        background-image: linear-gradient(to bottom, #292929, #292929);
+        filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#292929, endColorstr=#292929);
+        color: #C3C4C6;
+        font-size: 16px; }
+        .ax5-ui-calendar .calendar-body table tbody td .calendar-item-year.live, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-year.live {
+          background: #3B3B3B;
+          background-image: -webkit-linear-gradient(top, #3B3B3B, #3B3B3B);
+          background-image: linear-gradient(to bottom, #3B3B3B, #3B3B3B);
+          filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#3B3B3B, endColorstr=#3B3B3B);
+          color: #6D6E70; }
+        .ax5-ui-calendar .calendar-body table tbody td .calendar-item-year.hover, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-year.hover {
+          background: #FEEE00;
+          background-image: -webkit-linear-gradient(top, #FEEE00, #FEEE00);
+          background-image: linear-gradient(to bottom, #FEEE00, #FEEE00);
+          filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FEEE00, endColorstr=#FEEE00);
+          color: #503C3E; }
+        .ax5-ui-calendar .calendar-body table tbody td .calendar-item-year.focus, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-year.focus {
           background: #F79231;
           background-image: -webkit-linear-gradient(top, #F79231, #F79231);
           background-image: linear-gradient(to bottom, #F79231, #F79231);
@@ -3025,60 +3173,68 @@ a.ax {
 
 @-webkit-keyframes ax-modal {
   0% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
     -webkit-transform: scale(1); }
-
   1% {
-    -webkit-transform: scale(1.1); }
-
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-transform: translateY(300px); }
   100% {
-    -webkit-transform: scale(1); } }
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+    -webkit-transform: translateY(0); } }
 
 @-moz-keyframes ax-modal {
   0% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
     -moz-transform: scale(1); }
-
   1% {
-    -moz-transform: scale(1.1); }
-
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -moz-transform: translateY(300px); }
   100% {
-    -moz-transform: scale(1); } }
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+    -moz-transform: translateY(0); } }
 
 @keyframes ax-modal {
   0% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
     -ms-transform: scale(1);
     -o-transform: scale(1);
     transform: scale(1); }
-
   1% {
-    -webkit-transform: scale(1.1);
-    -moz-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    -o-transform: scale(1.1);
-    transform: scale(1.1); }
-
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-transform: translateY(300px);
+    -moz-transform: translateY(300px);
+    -ms-transform: translateY(300px);
+    -o-transform: translateY(300px);
+    transform: translateY(300px); }
   100% {
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);
-    -ms-transform: scale(1);
-    -o-transform: scale(1);
-    transform: scale(1); } }
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0); } }
 
 .ax5-ui-modal {
-  -webkit-animation: ax-modal 0.2s ease-in-out;
-  -moz-animation: ax-modal 0.2s ease-in-out;
-  animation: ax-modal 0.2s ease-in-out;
-  -webkit-transform: translateZ(0);
-  -moz-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  -o-transform: translateZ(0);
-  transform: translateZ(0);
+  -webkit-animation: ax-modal 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -moz-animation: ax-modal 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: ax-modal 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -webkit-transform: translateZ(0px);
+  -moz-transform: translateZ(0px);
+  -ms-transform: translateZ(0px);
+  -o-transform: translateZ(0px);
+  transform: translateZ(0px);
   color: #333333;
-  font-size: 13px;
-  font-weight: 400;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 18px;
   box-sizing: border-box;
   background-color: #fff;
   border: 1px solid gray;
@@ -3126,7 +3282,6 @@ a.ax {
     font-size: 20px;
     font-weight: 600;
     padding: 0px 12px;
-    border-bottom: 1px solid transparent;
     box-sizing: border-box;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px; }
@@ -3273,3 +3428,204 @@ a.ax {
     border: 1px solid #292929; }
   .ax5-ui-progress.special .progress-status {
     color: #fff; }
+
+.ax5-ui-switch-label {
+  display: inline-block;
+  vertical-align: middle; }
+
+.ax5-ui-switch {
+  vertical-align: middle;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  background: #F1F1F1;
+  border: 1px solid #A1A1A1;
+  border-radius: 15px;
+  width: 50px;
+  height: 30px; }
+  .ax5-ui-switch [class^="button-"],
+  .ax5-ui-switch [class*="button-"] {
+    display: inline-block;
+    padding: 5px;
+    text-align: center;
+    width: 15px;
+    height: 30px;
+    box-sizing: border-box;
+    line-height: 25px;
+    overflow: hidden; }
+  .ax5-ui-switch:before {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    box-sizing: border-box;
+    background-color: #fff;
+    color: #ffffff;
+    border: 1px solid #A1A1A1;
+    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    display: inline-block;
+    text-align: center;
+    content: "";
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    -webkit-transform-origin: 0% 50%;
+    -moz-transform-origin: 0% 50%;
+    -ms-transform-origin: 0% 50%;
+    -o-transform-origin: 0% 50%;
+    transform-origin: 0% 50%; }
+
+input[type='checkbox'] + .ax5-ui-switch {
+  background: #f1f1f1; }
+  input[type='checkbox'] + .ax5-ui-switch [class^="button-"],
+  input[type='checkbox'] + .ax5-ui-switch [class*="button-"] {
+    color: #fff; }
+  input[type='checkbox'] + .ax5-ui-switch:before {
+    background: #fff; }
+
+input[type='checkbox']:checked + .ax5-ui-switch {
+  background: #503C3E;
+  border: 1px solid #503C3E; }
+  input[type='checkbox']:checked + .ax5-ui-switch [class^="button-"],
+  input[type='checkbox']:checked + .ax5-ui-switch [class*="button-"] {
+    color: #fff; }
+  input[type='checkbox']:checked + .ax5-ui-switch:before {
+    -webkit-transform: scale(1.3) translateX(13px);
+    -moz-transform: scale(1.3) translateX(13px);
+    -ms-transform: scale(1.3) translateX(13px);
+    -o-transform: scale(1.3) translateX(13px);
+    transform: scale(1.3) translateX(13px);
+    border: 1px solid #503C3E;
+    background: #fff; }
+
+.ax5-ui-switch.with-label {
+  vertical-align: middle;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  background: #F1F1F1;
+  border: 1px solid #A1A1A1;
+  border-radius: 15px;
+  width: 70px;
+  height: 30px; }
+  .ax5-ui-switch.with-label [class^="button-"],
+  .ax5-ui-switch.with-label [class*="button-"] {
+    display: inline-block;
+    padding: 5px;
+    text-align: center;
+    width: 35px;
+    height: 30px;
+    box-sizing: border-box;
+    line-height: 25px;
+    overflow: hidden; }
+  .ax5-ui-switch.with-label:before {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    box-sizing: border-box;
+    background-color: #fff;
+    color: #ffffff;
+    border: 1px solid #87878E;
+    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    display: inline-block;
+    text-align: center;
+    content: "";
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    -webkit-transform-origin: 0% 50%;
+    -moz-transform-origin: 0% 50%;
+    -ms-transform-origin: 0% 50%;
+    -o-transform-origin: 0% 50%;
+    transform-origin: 0% 50%; }
+
+input[type='checkbox'] + .ax5-ui-switch.with-label {
+  background: #F79231; }
+  input[type='checkbox'] + .ax5-ui-switch.with-label [class^="button-"],
+  input[type='checkbox'] + .ax5-ui-switch.with-label [class*="button-"] {
+    color: #fff; }
+  input[type='checkbox'] + .ax5-ui-switch.with-label:before {
+    background: #fff; }
+
+input[type='checkbox']:checked + .ax5-ui-switch.with-label {
+  background: #503C3E; }
+  input[type='checkbox']:checked + .ax5-ui-switch.with-label [class^="button-"],
+  input[type='checkbox']:checked + .ax5-ui-switch.with-label [class*="button-"] {
+    color: #FEEE00; }
+  input[type='checkbox']:checked + .ax5-ui-switch.with-label:before {
+    -webkit-transform: translateX(39px);
+    -moz-transform: translateX(39px);
+    -ms-transform: translateX(39px);
+    -o-transform: translateX(39px);
+    transform: translateX(39px);
+    background: #fff; }
+
+.ax5-ui-segment {
+  position: relative;
+  display: inline-block; }
+  .ax5-ui-segment .ax5-ui-segment-group {
+    position: absolute; }
+    .ax5-ui-segment .ax5-ui-segment-group table {
+      table-layout: fixed;
+      border-collapse: collapse;
+      border-spacing: 0px;
+      border: 0px none;
+      width: 100%; }
+      .ax5-ui-segment .ax5-ui-segment-group table td {
+        position: relative;
+        box-sizing: content-box;
+        padding: 0px;
+        margin: 0px;
+        vertical-align: top; }
+        .ax5-ui-segment .ax5-ui-segment-group table td .ax-item-wraper {
+          padding: 0px;
+          box-sizing: border-box; }
+        .ax5-ui-segment .ax5-ui-segment-group table td .ax-btn {
+          vertical-align: middle;
+          position: relative;
+          margin: 0px;
+          width: 100%;
+          height: 100%;
+          border-radius: 0px;
+          background: #ffffff;
+          background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
+          background-image: linear-gradient(to bottom, #ffffff, #ffffff);
+          filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#ffffff);
+          color: #333333;
+          border: 1px solid #ddd;
+          border-right: 0px none; }
+          .ax5-ui-segment .ax5-ui-segment-group table td .ax-btn[data-segment-item-first] {
+            border-top-left-radius: 6px;
+            border-bottom-left-radius: 6px; }
+          .ax5-ui-segment .ax5-ui-segment-group table td .ax-btn[data-segment-item-last] {
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px; }
+          .ax5-ui-segment .ax5-ui-segment-group table td .ax-btn[data-segment-item-last] {
+            border-right: 1px solid #ddd; }
+          .ax5-ui-segment .ax5-ui-segment-group table td .ax-btn.on {
+            background: #D0D0D0;
+            background-image: -webkit-linear-gradient(top, #D0D0D0, #D0D0D0);
+            background-image: linear-gradient(to bottom, #D0D0D0, #D0D0D0);
+            filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#D0D0D0, endColorstr=#D0D0D0);
+            color: #3b3b3b; }
+  .ax5-ui-segment.basic .ax5-ui-segment-group table td .ax-btn {
+    background: #ffffff;
+    background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
+    background-image: linear-gradient(to bottom, #ffffff, #ffffff);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#ffffff);
+    color: #333333;
+    border: 1px solid #ddd;
+    border-right: 0px none; }
+    .ax5-ui-segment.basic .ax5-ui-segment-group table td .ax-btn[data-segment-item-last] {
+      border-right: 1px solid #ddd; }
+    .ax5-ui-segment.basic .ax5-ui-segment-group table td .ax-btn.on {
+      background: #D0D0D0;
+      background-image: -webkit-linear-gradient(top, #D0D0D0, #D0D0D0);
+      background-image: linear-gradient(to bottom, #D0D0D0, #D0D0D0);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#D0D0D0, endColorstr=#D0D0D0);
+      color: #3b3b3b; }

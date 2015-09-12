@@ -8,7 +8,8 @@ ax5.dom.ready(function(){
 		init: function(){
 			var themes = [
 				["jellyfish","jellyfish"],
-				["kakao","kakao"]
+				["kakao","kakao"],
+				["dplus","dplus"]
 			];
 			var po = [];
 			ax5.util.each(themes, function(){

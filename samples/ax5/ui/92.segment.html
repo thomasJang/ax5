@@ -1,0 +1,41 @@
+<article class="cover">
+	<h1 data-menu-item="ax-ui-switch">Segment</h1>
+
+	<p class="lead">
+
+	</p>
+</article>
+
+
+<!-- basic -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-switch-segment" class="capitalize">default</h3>
+
+	<p>
+
+	</p>
+<pre>
+<div class="tag-result">
+
+	<label class="ax5-ui-segment">
+		<input type="text" id="ui-segment-id-1" class="ax-inp" style="width:200px;" value="N" />
+	</label>
+
+</div>
+<script type="text/javascript">
+	(function() {
+		var my_segment = new ax5.ui.segment();
+		my_segment.set_config({
+			target: ax5.dom.get("#ui-segment-id-1"),
+			list: [
+				{value: "N", text: "선택안함", selected: true},
+				{value: "0", text: "남자"},
+				{value: "1", text: "여자"}
+			]
+		});
+
+	})();
+</script>
+</pre>
+
+</article>

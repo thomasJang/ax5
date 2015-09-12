@@ -69,7 +69,7 @@
 		watch: {
 			theme: {
 				files: ['src/scss/*.scss','src/scss/**/*.scss'],
-				tasks: ['sass:theme']
+				tasks: ['sass:theme','cssmin','copy:css']
 			},
 			sample_doc: {
 				files: ['samples/css/*.scss'],
@@ -95,7 +95,8 @@
 			theme: {
 				files: {
 					'src/css/jellyfish/ax5.css': 'src/scss/jellyfish/ax5.scss',
-					'src/css/kakao/ax5.css': 'src/scss/kakao/ax5.scss'
+					'src/css/kakao/ax5.css': 'src/scss/kakao/ax5.scss',
+					'src/css/dplus/ax5.css': 'src/scss/dplus/ax5.scss'
 				}
 			},
 			sample_doc: {
@@ -111,8 +112,9 @@
 			},
 			target: {
 				files: [
-					{expand: true, cwd: 'src/css/jellyfish', src: ['*.css', '!*.min.css'], dest: 'src/css/jellyfish', ext: '.min.css'},
-					{expand: true, cwd: 'src/css/kakao', src: ['*.css', '!*.min.css'], dest: 'src/css/kakao', ext: '.min.css'}
+					//{expand: true, cwd: 'src/css/jellyfish', src: ['*.css', '!*.min.css'], dest: 'src/css/jellyfish', ext: '.min.css'},
+					//{expand: true, cwd: 'src/css/kakao', src: ['*.css', '!*.min.css'], dest: 'src/css/kakao', ext: '.min.css'},
+					{expand: true, cwd: 'src/css/dplus', src: ['*.css', '!*.min.css'], dest: 'src/css/dplus', ext: '.min.css'}
 				]
 			}
 		}
@@ -126,8 +128,8 @@
 	grunt.loadNpmTasks('grunt-sass');
 
 	grunt.registerTask('pub-js', ['concat','uglify:core','copy:js','uglify:ui','watch:lib']);
-	grunt.registerTask('pub-css', ['cssmin','copy:css','watch:css']);
+	//grunt.registerTask('pub-css', ['cssmin','copy:css','watch:css']);
 	
-	grunt.registerTask('sass-make-theme', ['sass:theme','watch:theme']);
+	grunt.registerTask('sass-make-theme', ['sass:theme','cssmin','copy:css','watch:theme']);
 	grunt.registerTask('sass-make-doc', ['sass:sample_doc','watch:sample_doc']);
 };

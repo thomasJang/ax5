@@ -25,7 +25,6 @@
 		font-size: ceil(($font-size-base * 1.5));
 		font-weight: 600;
 		padding: $modal-heading-padding;
-		border-bottom: 1px solid transparent;
 		box-sizing: border-box;
 		@include ax-border-radius($modal-border-radius, "top", -1);
 
@@ -50,6 +49,7 @@
 	.ax-modal-heading{
 		color: $text-color;
 		background: $heading-bg-color;
+		//border-bottom: 1px solid $text-color;
 		.badge {
 			color: $heading-bg-color;
 			background-color: $text-color;
@@ -62,27 +62,26 @@
 
 @include keyframes(ax-modal) {
 	0% {
-		//@include opacity(0.0);
+		@include opacity(0.0);
 		@include transform( scale(1) );
 	}
 	1% {
-		//@include opacity(0.0);
-		@include transform( scale(1.1) );
+		@include opacity(0.0);
+		@include transform(translateY(300px));
 	}
 	100% {
-		//@include opacity($mask-bg-opacity);
-		@include transform( scale(1) );
+		@include opacity(1.0);
+		@include transform(translateY(0));
 	}
 }
 // mixins --------------------------------------------- end
 
 .ax5-ui-modal{
-	@include animation(ax-modal 0.2s ease-in-out);
-	@include transform(translateZ(0));
+	@include animation(ax-modal 0.5s $ease-out-back);
+	@include transform(translateZ(0px));
 
 	@include ax-modal();
 	@include ax-modal-section();
-
 	@include modal-variant($modal-default-text, $modal-default-heading-bg);
 
 	&.basic{

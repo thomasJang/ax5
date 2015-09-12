@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-07-06 
+ publish date : 2015-09-12 
 -->
 <html lang="en">
 <head>
@@ -342,7 +342,7 @@ ax5.util.require(["ui/menu.js"], function() {
 
 <pre class="prettyprint linenums">
 &lt;div class="tag-result">
-	&lt;div id="ui-menu-target-tree" style="height:400px;">&lt;/div>
+	&lt;div id="ui-menu-target-tree" style="height:450px;">&lt;/div>
 &lt;/div>
 &lt;script type="text/javascript">
 (function(){
@@ -382,7 +382,7 @@ ax5.util.require(["ui/menu.js"], function() {
 &lt;/script>
 </pre><h4>Result</h4>
 <div class="tag-result">
-	<div id="ui-menu-target-tree" style="height:400px;"></div>
+	<div id="ui-menu-target-tree" style="height:450px;"></div>
 </div>
 <script type="text/javascript">
 (function(){
@@ -1733,7 +1733,8 @@ ax5.util.require(["ui/menu.js"], function() {
 			target: ax5.dom.get('#ui-calendar-control-target'),
 			control: {
 				left: '&lt;i class="axi axi-ion-arrow-left-b">&lt;/i>',
-				display: 'yyyy년 mm월',
+				year_tmpl: '%s년',
+				month_tmpl: '%s월',
 				right: '&lt;i class="axi axi-ion-arrow-right-b">&lt;/i>'
 			},
 			width: 350,
@@ -1758,7 +1759,8 @@ ax5.util.require(["ui/menu.js"], function() {
 			target: ax5.dom.get('#ui-calendar-control-target'),
 			control: {
 				left: '<i class="axi axi-ion-arrow-left-b"></i>',
-				display: 'yyyy년 mm월',
+				year_tmpl: '%s년',
+				month_tmpl: '%s월',
 				right: '<i class="axi axi-ion-arrow-right-b"></i>'
 			},
 			width: 350,
@@ -2543,6 +2545,175 @@ ax5.util.require(["ui/menu.js"], function() {
 				my_modal.close();
 			};
 
+		});
+	})();
+</script>
+
+
+</article>
+
+<!-- split -->
+
+<article class="cover">
+	<h1 data-menu-item="ax-ui-switch">Segment</h1>
+
+	<p class="lead">
+
+	</p>
+</article>
+
+
+<!-- basic -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-switch-segment" class="capitalize">default</h3>
+
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+
+	&lt;label class="ax5-ui-segment">
+		&lt;input type="text" id="ui-segment-id-1" class="ax-inp" style="width:200px;" value="N" />
+	&lt;/label>
+
+&lt;/div>
+&lt;script type="text/javascript">
+	(function() {
+		var my_segment = new ax5.ui.segment();
+		my_segment.set_config({
+			target: ax5.dom.get("#ui-segment-id-1"),
+			list: [
+				{value: "N", text: "선택안함", selected: true},
+				{value: "0", text: "남자"},
+				{value: "1", text: "여자"}
+			]
+		});
+
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result">
+
+	<label class="ax5-ui-segment">
+		<input type="text" id="ui-segment-id-1" class="ax-inp" style="width:200px;" value="N" />
+	</label>
+
+</div>
+<script type="text/javascript">
+	(function() {
+		var my_segment = new ax5.ui.segment();
+		my_segment.set_config({
+			target: ax5.dom.get("#ui-segment-id-1"),
+			list: [
+				{value: "N", text: "선택안함", selected: true},
+				{value: "0", text: "남자"},
+				{value: "1", text: "여자"}
+			]
+		});
+
+	})();
+</script>
+
+
+</article>
+
+<!-- split -->
+
+<article class="cover">
+	<h1 data-menu-item="ax-ui-switch">Switch</h1>
+
+	<p class="lead">
+
+	</p>
+</article>
+
+
+<!-- basic -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-switch-default" class="capitalize">default</h3>
+
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+	&lt;span class="ax5-ui-switch-label">
+	텍스트
+	&lt;/span>
+	&lt;input type="checkbox" id="ui-switch-id-1" hidden/>
+	&lt;label class="ax5-ui-switch" for="ui-switch-id-1">
+		&lt;span class="button-on">&lt;/span>&lt;span class="button-off">&lt;/span>
+	&lt;/label>
+&lt;/div>
+&lt;script type="text/javascript">
+	(function() {
+		ax5.dom("#ui-switch-id-1").on("change", function(e) {
+			console.log(ax5.dom("#ui-switch-id-1").elements[0].checked);
+		});
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result">
+	<span class="ax5-ui-switch-label">
+	텍스트
+	</span>
+	<input type="checkbox" id="ui-switch-id-1" hidden/>
+	<label class="ax5-ui-switch" for="ui-switch-id-1">
+		<span class="button-on"></span><span class="button-off"></span>
+	</label>
+</div>
+<script type="text/javascript">
+	(function() {
+		ax5.dom("#ui-switch-id-1").on("change", function(e) {
+			console.log(ax5.dom("#ui-switch-id-1").elements[0].checked);
+		});
+	})();
+</script>
+
+
+</article>
+
+
+
+<!-- basic -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-switch-default" class="capitalize">with-label</h3>
+
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+	&lt;span class="ax5-ui-switch-label">
+	텍스트
+	&lt;/span>
+	&lt;input type="checkbox" id="ui-switch-id-2" hidden/>
+	&lt;label class="ax5-ui-switch with-label" for="ui-switch-id-2">
+		&lt;span class="button-on">남&lt;/span>&lt;span class="button-off">여&lt;/span>
+	&lt;/label>
+&lt;/div>
+&lt;script type="text/javascript">
+	(function() {
+		ax5.dom("#ui-switch-id-2").on("change", function(e) {
+			console.log(ax5.dom("#ui-switch-id-2").elements[0].checked);
+		});
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result">
+	<span class="ax5-ui-switch-label">
+	텍스트
+	</span>
+	<input type="checkbox" id="ui-switch-id-2" hidden/>
+	<label class="ax5-ui-switch with-label" for="ui-switch-id-2">
+		<span class="button-on">남</span><span class="button-off">여</span>
+	</label>
+</div>
+<script type="text/javascript">
+	(function() {
+		ax5.dom("#ui-switch-id-2").on("change", function(e) {
+			console.log(ax5.dom("#ui-switch-id-2").elements[0].checked);
 		});
 	})();
 </script>

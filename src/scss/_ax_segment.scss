@@ -1,0 +1,91 @@
+@mixin segment-btn($border, $bg, $on-bg, $text-color, $on-text-color){
+	@include ax-btn-gradient(nth($bg, 1), nth($bg, 2));
+	color: $text-color;
+
+	border: $border;
+	border-right: 0px none;
+
+	&[data-segment-item-first]{
+
+	}
+	&[data-segment-item-last]{
+		border-right: $border;
+	}
+
+	&.on{
+		@include ax-btn-gradient(nth($on-bg, 1), nth($on-bg, 2));
+		color: $on-text-color;
+	}
+}
+
+
+.ax5-ui-segment {
+	position: relative;
+	display: inline-block;
+	.ax5-ui-segment-group {
+		position: absolute;
+
+		table {
+			table-layout: fixed;
+			border-collapse: collapse;
+			border-spacing: 0px;
+			border: 0px none;
+			width: 100%;
+			td {
+				position: relative;
+				box-sizing: content-box;
+				padding: 0px;
+				margin: 0px;
+				vertical-align: top;
+				.ax-item-wraper {
+					//padding: 1px 3px;
+					padding: 0px;
+					box-sizing: border-box;
+				}
+				.ax-btn {
+					vertical-align: middle;
+					position: relative;
+					margin: 0px;
+					width: 100%;
+					height: 100%;
+
+
+					border-radius: 0px;
+
+					&[data-segment-item-first]{
+						@include ax-border-radius($border-radius-base, left);
+					}
+					&[data-segment-item-last]{
+						@include ax-border-radius($border-radius-base, right);
+					}
+
+					@include segment-btn($segment-default-border, $segment-bg, $segment-default-bg, $segment-text, $segment-default-text);
+				}
+			}
+		}
+	}
+
+	&.basic{
+		.ax5-ui-segment-group {
+			table {
+				td {
+					.ax-btn {
+						@include segment-btn($segment-default-border, $segment-bg, $segment-default-bg, $segment-text, $segment-default-text);
+					}
+				}
+			}
+		}
+	}
+	&.info{
+
+	}
+	&.warning{
+
+	}
+	&.danger{
+
+	}
+	&.special{
+
+	}
+}

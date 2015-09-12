@@ -1,0 +1,18 @@
+//~~ extend within chequer-cacao
+
+.ax5-ui-modal{
+	.ax-modal-heading{
+		font-size: ceil(($font-size-base * 1));
+	}
+}
+
+.ax-mask {
+	height: 120%;
+	.ax-mask-bg{
+		height:120%;
+		background: transparent;
+	}
+	.ax-mask-content{
+		height:120%;
+	}
+}

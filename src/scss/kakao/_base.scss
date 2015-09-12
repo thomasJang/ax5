@@ -622,3 +622,38 @@ $progress-danger-status-color: #fff;
 $progress-special-bar-bg: (lighten($theme-special, 10%), $theme-special);
 $progress-special-bar-border: 1px solid $theme-special;
 $progress-special-status-color: #fff;
+
+
+//== segment
+$segment-text:          $gray-dark;
+$segment-bg:                    (#ffffff, #ffffff);
+
+
+//** Border color for elements within panels
+$segment-default-text:          $btn-default-text-color;
+$segment-default-border:        1px solid #ddd;
+$segment-default-bg:    $btn-default-bg;
+
+$segment-basic-text:          $btn-basic-text-color;
+$segment-basic-border:        1px solid $theme-basic;
+$segment-basic-bg:    $btn-basic-bg;
+
+$segment-good-text:          $btn-good-text-color;
+$segment-good-border:        1px solid $theme-good;
+$segment-good-bg:    $btn-good-bg;
+
+$segment-info-text:          $btn-info-text-color;
+$segment-info-border:        1px solid $theme-info;
+$segment-info-bg:    $btn-info-bg;
+
+$segment-warning-text:          $btn-warning-text-color;
+$segment-warning-border:        1px solid $theme-warning;
+$segment-warning-bg:    $btn-warning-bg;
+
+$segment-danger-text:          $btn-danger-text-color;
+$segment-danger-border:        1px solid $theme-danger;
+$segment-danger-bg:    $btn-danger-bg;
+
+$segment-special-text:          $btn-special-text-color;
+$segment-special-border:        1px solid $theme-special;
+$segment-special-bg:    $btn-special-bg;

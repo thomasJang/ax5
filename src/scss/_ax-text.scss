@@ -25,10 +25,10 @@
 // ax5-text
 @mixin ax{
   color: $text-color;
-  font-size: $font-size-base;
-  font-weight: $font-weight;
-  font-family: $font-family-base;
-  line-height: $line-height-computed;
+  //font-size: $font-size-base;
+  //font-weight: $font-weight;
+  //font-family: $font-family-base;
+  //line-height: $line-height-computed;
 }
 .ax{ @include ax; }
 a.ax{

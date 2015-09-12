@@ -1,0 +1,66 @@
+<article class="cover">
+	<h1 data-menu-item="ax-ui-switch">Switch</h1>
+
+	<p class="lead">
+
+	</p>
+</article>
+
+
+<!-- basic -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-switch-default" class="capitalize">default</h3>
+
+	<p>
+
+	</p>
+<pre>
+<div class="tag-result">
+	<span class="ax5-ui-switch-label">
+	텍스트
+	</span>
+	<input type="checkbox" id="ui-switch-id-1" hidden/>
+	<label class="ax5-ui-switch" for="ui-switch-id-1">
+		<span class="button-on"></span><span class="button-off"></span>
+	</label>
+</div>
+<script type="text/javascript">
+	(function() {
+		ax5.dom("#ui-switch-id-1").on("change", function(e) {
+			console.log(ax5.dom("#ui-switch-id-1").elements[0].checked);
+		});
+	})();
+</script>
+</pre>
+
+</article>
+
+
+
+<!-- basic -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-switch-default" class="capitalize">with-label</h3>
+
+	<p>
+
+	</p>
+<pre>
+<div class="tag-result">
+	<span class="ax5-ui-switch-label">
+	텍스트
+	</span>
+	<input type="checkbox" id="ui-switch-id-2" hidden/>
+	<label class="ax5-ui-switch with-label" for="ui-switch-id-2">
+		<span class="button-on">남</span><span class="button-off">여</span>
+	</label>
+</div>
+<script type="text/javascript">
+	(function() {
+		ax5.dom("#ui-switch-id-2").on("change", function(e) {
+			console.log(ax5.dom("#ui-switch-id-2").elements[0].checked);
+		});
+	})();
+</script>
+</pre>
+
+</article>
