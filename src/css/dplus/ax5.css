@@ -3583,7 +3583,8 @@ input[type='checkbox']:checked + .ax5-ui-switch.with-label {
         vertical-align: top; }
         .ax5-ui-segment .ax5-ui-segment-group table td .ax-item-wraper {
           padding: 0px;
-          box-sizing: border-box; }
+          box-sizing: border-box;
+          height: 100%; }
         .ax5-ui-segment .ax5-ui-segment-group table td .ax-btn {
           vertical-align: middle;
           position: relative;
