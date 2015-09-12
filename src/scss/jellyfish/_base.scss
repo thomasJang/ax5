@@ -131,7 +131,7 @@ $caret-width-large: 5px;
 $btn-font-weight: normal;
 
 $btn-default-text-color: #4A4A4A;
-$btn-default-text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
+$btn-default-text-shadow: none; //0px 1px 0px rgba(255, 255, 255, 0.5);
 $btn-default-bg: (#FFFFFF, #F0F0F0);
 // 배경색들
 $btn-default-bg-image: "";
@@ -139,7 +139,7 @@ $btn-default-border: 1px solid #B4B4B4;
 $btn-default-drop-shadow: none;
 //0px 1px 0px 0px rgba(0,0,0,0.15);
 $btn-default-hover-text-color: #4A4A4A;
-$btn-default-hover-text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
+$btn-default-hover-text-shadow: none; //0px 1px 0px rgba(0,0,0, 0.5);
 $btn-default-hover-bg: (#F0F0F0, #F0F0F0);
 // 배경색들
 $btn-default-hover-bg-image: "";

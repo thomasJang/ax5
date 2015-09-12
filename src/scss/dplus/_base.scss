@@ -129,7 +129,7 @@ $btn-default-bg-image: "";
 $btn-default-border: 1px solid #F1F1F1;
 $btn-default-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
 	$btn-default-hover-text-color: darken(#3b3b3b, 10%);
-	$btn-default-hover-text-shadow: 0px 1px 0px rgba(255,255,255, 0.5);
+	$btn-default-hover-text-shadow: none; //0px 1px 0px rgba(255,255,255, 0.5);
 	$btn-default-hover-bg: (#D0D0D0, #D0D0D0); // 배경색들
 	$btn-default-hover-bg-image: "";
 	$btn-default-hover-border: 1px solid darken(#D0D0D0, 10%);

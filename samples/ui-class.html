@@ -2584,7 +2584,7 @@ ax5.util.require(["ui/menu.js"], function() {
 		my_segment.set_config({
 			target: ax5.dom.get("#ui-segment-id-1"),
 			list: [
-				{value: "N", text: "선택안함", selected: true},
+				{value: "N", text: "선택안함"},
 				{value: "0", text: "남자"},
 				{value: "1", text: "여자"}
 			]
@@ -2606,10 +2606,125 @@ ax5.util.require(["ui/menu.js"], function() {
 		my_segment.set_config({
 			target: ax5.dom.get("#ui-segment-id-1"),
 			list: [
-				{value: "N", text: "선택안함", selected: true},
+				{value: "N", text: "선택안함"},
 				{value: "0", text: "남자"},
 				{value: "1", text: "여자"}
 			]
+		});
+
+	})();
+</script>
+
+
+</article>
+
+<!-- style -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-switch-segment-theme" class="capitalize">theme</h3>
+
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+
+	&lt;label class="ax5-ui-segment basic">
+		&lt;input type="text" id="ui-segment-id-basic" class="ax-inp" style="width:200px;" value="N" />
+	&lt;/label>
+
+	&lt;label class="ax5-ui-segment good">
+		&lt;input type="text" id="ui-segment-id-good" class="ax-inp" style="width:200px;" value="N" />
+	&lt;/label>
+
+	&lt;div class="DH10">&lt;/div>
+
+	&lt;label class="ax5-ui-segment info">
+		&lt;input type="text" id="ui-segment-id-info" class="ax-inp" style="width:200px;" value="N" />
+	&lt;/label>
+
+	&lt;label class="ax5-ui-segment warning">
+		&lt;input type="text" id="ui-segment-id-warning" class="ax-inp" style="width:200px;" value="N" />
+	&lt;/label>
+
+	&lt;div class="DH10">&lt;/div>
+
+	&lt;label class="ax5-ui-segment danger">
+		&lt;input type="text" id="ui-segment-id-danger" class="ax-inp" style="width:200px;" value="N" />
+	&lt;/label>
+
+	&lt;label class="ax5-ui-segment special">
+		&lt;input type="text" id="ui-segment-id-special" class="ax-inp" style="width:200px;" value="N" />
+	&lt;/label>
+
+&lt;/div>
+&lt;script type="text/javascript">
+	(function() {
+
+		var themes = "basic,good,info,warning,danger,special".split(/,/g);
+		var instances = [];
+		themes.forEach(function(n) {
+			var ui = new ax5.ui.segment();
+			ui.set_config({
+				target: ax5.dom.get("#ui-segment-id-" + n),
+				list: [
+					{value: "N", text: "선택안함"},
+					{value: "0", text: "남자"},
+					{value: "1", text: "여자"}
+				]
+			});
+			instances.push(ui);
+		});
+
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result">
+
+	<label class="ax5-ui-segment basic">
+		<input type="text" id="ui-segment-id-basic" class="ax-inp" style="width:200px;" value="N" />
+	</label>
+
+	<label class="ax5-ui-segment good">
+		<input type="text" id="ui-segment-id-good" class="ax-inp" style="width:200px;" value="N" />
+	</label>
+
+	<div class="DH10"></div>
+
+	<label class="ax5-ui-segment info">
+		<input type="text" id="ui-segment-id-info" class="ax-inp" style="width:200px;" value="N" />
+	</label>
+
+	<label class="ax5-ui-segment warning">
+		<input type="text" id="ui-segment-id-warning" class="ax-inp" style="width:200px;" value="N" />
+	</label>
+
+	<div class="DH10"></div>
+
+	<label class="ax5-ui-segment danger">
+		<input type="text" id="ui-segment-id-danger" class="ax-inp" style="width:200px;" value="N" />
+	</label>
+
+	<label class="ax5-ui-segment special">
+		<input type="text" id="ui-segment-id-special" class="ax-inp" style="width:200px;" value="N" />
+	</label>
+
+</div>
+<script type="text/javascript">
+	(function() {
+
+		var themes = "basic,good,info,warning,danger,special".split(/,/g);
+		var instances = [];
+		themes.forEach(function(n) {
+			var ui = new ax5.ui.segment();
+			ui.set_config({
+				target: ax5.dom.get("#ui-segment-id-" + n),
+				list: [
+					{value: "N", text: "선택안함"},
+					{value: "0", text: "남자"},
+					{value: "1", text: "여자"}
+				]
+			});
+			instances.push(ui);
 		});
 
 	})();

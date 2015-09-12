@@ -70,22 +70,65 @@
 			table {
 				td {
 					.ax-btn {
-						@include segment-btn($segment-default-border, $segment-bg, $segment-default-bg, $segment-text, $segment-default-text);
+						@include segment-btn($segment-basic-border, $segment-bg, $segment-basic-bg, $segment-text, $segment-basic-text);
+					}
+				}
+			}
+		}
+	}
+	&.good{
+		.ax5-ui-segment-group {
+			table {
+				td {
+					.ax-btn {
+						@include segment-btn($segment-good-border, $segment-bg, $segment-good-bg, $segment-text, $segment-good-text);
 					}
 				}
 			}
 		}
 	}
 	&.info{
-
+		.ax5-ui-segment-group {
+			table {
+				td {
+					.ax-btn {
+						@include segment-btn($segment-info-border, $segment-bg, $segment-info-bg, $segment-text, $segment-info-text);
+					}
+				}
+			}
+		}
 	}
 	&.warning{
-
+		.ax5-ui-segment-group {
+			table {
+				td {
+					.ax-btn {
+						@include segment-btn($segment-warning-border, $segment-bg, $segment-warning-bg, $segment-text, $segment-warning-text);
+					}
+				}
+			}
+		}
 	}
 	&.danger{
-
+		.ax5-ui-segment-group {
+			table {
+				td {
+					.ax-btn {
+						@include segment-btn($segment-danger-border, $segment-bg, $segment-danger-bg, $segment-text, $segment-danger-text);
+					}
+				}
+			}
+		}
 	}
 	&.special{
-
+		.ax5-ui-segment-group {
+			table {
+				td {
+					.ax-btn {
+						@include segment-btn($segment-special-border, $segment-bg, $segment-special-bg, $segment-text, $segment-special-text);
+					}
+				}
+			}
+		}
 	}
 }

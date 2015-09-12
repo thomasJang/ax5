@@ -3619,13 +3619,93 @@ input[type='checkbox']:checked + .ax5-ui-switch.with-label {
     background-image: linear-gradient(to bottom, #ffffff, #ffffff);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#ffffff);
     color: #333333;
-    border: 1px solid #ddd;
+    border: 1px solid #F79231;
     border-right: 0px none; }
     .ax5-ui-segment.basic .ax5-ui-segment-group table td .ax-btn[data-segment-item-last] {
-      border-right: 1px solid #ddd; }
+      border-right: 1px solid #F79231; }
     .ax5-ui-segment.basic .ax5-ui-segment-group table td .ax-btn.on {
-      background: #D0D0D0;
-      background-image: -webkit-linear-gradient(top, #D0D0D0, #D0D0D0);
-      background-image: linear-gradient(to bottom, #D0D0D0, #D0D0D0);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#D0D0D0, endColorstr=#D0D0D0);
-      color: #3b3b3b; }
+      background: #F79231;
+      background-image: -webkit-linear-gradient(top, #F79231, #F79231);
+      background-image: linear-gradient(to bottom, #F79231, #F79231);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F79231, endColorstr=#F79231);
+      color: #fff; }
+  .ax5-ui-segment.good .ax5-ui-segment-group table td .ax-btn {
+    background: #ffffff;
+    background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
+    background-image: linear-gradient(to bottom, #ffffff, #ffffff);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#ffffff);
+    color: #333333;
+    border: 1px solid #503C3E;
+    border-right: 0px none; }
+    .ax5-ui-segment.good .ax5-ui-segment-group table td .ax-btn[data-segment-item-last] {
+      border-right: 1px solid #503C3E; }
+    .ax5-ui-segment.good .ax5-ui-segment-group table td .ax-btn.on {
+      background: #503C3E;
+      background-image: -webkit-linear-gradient(top, #503C3E, #503C3E);
+      background-image: linear-gradient(to bottom, #503C3E, #503C3E);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#503C3E, endColorstr=#503C3E);
+      color: #FEEE00; }
+  .ax5-ui-segment.info .ax5-ui-segment-group table td .ax-btn {
+    background: #ffffff;
+    background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
+    background-image: linear-gradient(to bottom, #ffffff, #ffffff);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#ffffff);
+    color: #333333;
+    border: 1px solid #FEEE00;
+    border-right: 0px none; }
+    .ax5-ui-segment.info .ax5-ui-segment-group table td .ax-btn[data-segment-item-last] {
+      border-right: 1px solid #FEEE00; }
+    .ax5-ui-segment.info .ax5-ui-segment-group table td .ax-btn.on {
+      background: #FEEE00;
+      background-image: -webkit-linear-gradient(top, #FEEE00, #FEEE00);
+      background-image: linear-gradient(to bottom, #FEEE00, #FEEE00);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FEEE00, endColorstr=#FEEE00);
+      color: #503C3E; }
+  .ax5-ui-segment.warning .ax5-ui-segment-group table td .ax-btn {
+    background: #ffffff;
+    background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
+    background-image: linear-gradient(to bottom, #ffffff, #ffffff);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#ffffff);
+    color: #333333;
+    border: 1px solid #FF5B00;
+    border-right: 0px none; }
+    .ax5-ui-segment.warning .ax5-ui-segment-group table td .ax-btn[data-segment-item-last] {
+      border-right: 1px solid #FF5B00; }
+    .ax5-ui-segment.warning .ax5-ui-segment-group table td .ax-btn.on {
+      background: #FF5B00;
+      background-image: -webkit-linear-gradient(top, #FF5B00, #FF5B00);
+      background-image: linear-gradient(to bottom, #FF5B00, #FF5B00);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FF5B00, endColorstr=#FF5B00);
+      color: #fff; }
+  .ax5-ui-segment.danger .ax5-ui-segment-group table td .ax-btn {
+    background: #ffffff;
+    background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
+    background-image: linear-gradient(to bottom, #ffffff, #ffffff);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#ffffff);
+    color: #333333;
+    border: 1px solid #993700;
+    border-right: 0px none; }
+    .ax5-ui-segment.danger .ax5-ui-segment-group table td .ax-btn[data-segment-item-last] {
+      border-right: 1px solid #993700; }
+    .ax5-ui-segment.danger .ax5-ui-segment-group table td .ax-btn.on {
+      background: #993700;
+      background-image: -webkit-linear-gradient(top, #993700, #993700);
+      background-image: linear-gradient(to bottom, #993700, #993700);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#993700, endColorstr=#993700);
+      color: #fff; }
+  .ax5-ui-segment.special .ax5-ui-segment-group table td .ax-btn {
+    background: #ffffff;
+    background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
+    background-image: linear-gradient(to bottom, #ffffff, #ffffff);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#ffffff);
+    color: #333333;
+    border: 1px solid #292929;
+    border-right: 0px none; }
+    .ax5-ui-segment.special .ax5-ui-segment-group table td .ax-btn[data-segment-item-last] {
+      border-right: 1px solid #292929; }
+    .ax5-ui-segment.special .ax5-ui-segment-group table td .ax-btn.on {
+      background: #101010;
+      background-image: -webkit-linear-gradient(top, #101010, #292929);
+      background-image: linear-gradient(to bottom, #101010, #292929);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#101010, endColorstr=#292929);
+      color: #808080; }

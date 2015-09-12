@@ -2086,12 +2086,11 @@
 			this.target = ax5.dom(cfg.target);
 
 			// 프레임 생성
-			this.target.after(this._get_frame(this.target.elements[0].id));
-			//axd.append(document.body, this._get_frame(this.target.elements[0].id));
+			this.target.after(this._get_frame(this.target.elt().id));
 
 			// 파트수집
 			this.els = {
-				"root": axd('[data-segment-els="root"]')
+				"root": axd('[data-segment-origin-id="' + this.target.elt().id + '"]')
 			};
 
 			this._set_size_frame();
@@ -2107,8 +2106,35 @@
 			this.target.on("change", function(){
 				_this.set_value(_this.target.val());
 			});
+			this.els["root"].find('[data-segment-item-index]').on("click", function(e){
+				_this._onclick(e||window.event);
+			});
 		};
+		
+		this._onclick = function(e, target, index, that){
+			target = axd.parent(e.target, function(target){
+				if(axd.attr(target, "data-segment-item-index")){
+					return true;
+				}
+			});
+			if(target){
+				index = axd.attr(target, "data-segment-item-index");
 
+				var item = cfg.list[index];
+				_this.target.val(item.value);
+				_this.target.dispatch_event("change");
+
+				that = {
+					list: cfg.list,
+					index: index,
+					target: this.target.elements[0]
+				};
+				if(cfg.onclick){
+					cfg.onclick.call(that);
+				}
+			}
+		};
+		
 		this._set_size_frame = function(){
 			this.els["root"].css({
 				top:0, left:0,
@@ -2158,6 +2184,9 @@
 
 		this.set_value = function(val){
 			var selected_item, selected_index;
+
+			this.els["root"].find('[data-segment-item-index]').class_name("remove", "on");
+
 			for (var i = 0, l = cfg.list.length, item; i < l; i++) {
 				item = cfg.list[i];
 				if(item.value == val){
@@ -2166,9 +2195,6 @@
 				}
 			}
 			if(selected_item){
-				if(this.target.val() != val){
-					this.target.val(val);
-				}
 				this.els["root"].find('[data-segment-item-index="'+selected_index+'"]').class_name("add", "on");
 			}
 		}
