@@ -139,13 +139,13 @@ $btn-basic-text-color: #1E252E;//#5A3100;
 $btn-basic-text-shadow: none; //0px -1px 0px darken($theme-basic, 50%);
 $btn-basic-bg: ($theme-basic, $theme-basic); // 배경색들
 $btn-basic-bg-image: "";
-$btn-basic-border: 1px solid $theme-basic;
+$btn-basic-border: 1px solid darken($theme-basic, 10%);
 $btn-basic-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
 	$btn-basic-hover-text-color: #1E252E;
 	$btn-basic-hover-text-shadow: none; //0px -1px 0px darken($theme-basic, 50%);
 	$btn-basic-hover-bg: ($theme-basic, $theme-basic); // 배경색들
 	$btn-basic-hover-bg-image: "";
-	$btn-basic-hover-border: 1px solid darken($theme-basic, 5%);
+	$btn-basic-hover-border: 1px solid darken($theme-basic, 10%);
 	$btn-basic-hover-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
 
 $btn-good-text-color:$white;
@@ -445,7 +445,7 @@ $dialog-border: 1px solid rgb(255/2, 255/2, 255/2);
 $dialog-box-shaodw: 0px 0px 4px 0px rgba(0,0,0,0.50);
 $dialog-body-padding: $panel-body-padding;
 $dialog-heading-padding: $panel-heading-padding;
-$dialog-border-radius: $panel-border-radius;
+$dialog-border-radius: 8px;
 
 //** Border color for elements within dialog
 $dialog-default-text: $panel-default-text;
@@ -474,38 +474,38 @@ $dialog-special-heading-bg: $panel-special-heading-bg;
 $toast-container-position: 1; // 0:left,top / 1:right,top / 2:right,bottom / 3:left,bottom
 $toast-container-margin: 10px;
 $toast-box-model: $panel-box-model;
-$toast-border: 1px solid $theme-good;//rgb(255/2, 255/2, 255/2);
-$toast-box-shaodw: 0px 0px 5px 0px rgba(0,0,0,0.60);
+$toast-border: 0px none;
+$toast-box-shaodw: 0px 0px 4px 0px rgba(0,0,0,0.50);
 $toast-body-padding: 6px;
-$toast-border-radius: 0px;
+$toast-border-radius: 8px;
 
 //** Border color for elements within toast
-$toast-default-text: $panel-default-text;
-$toast-default-bg: $panel-bg;
+$toast-default-text: #293340;
+$toast-default-bg: #F1F1F1;
 $toast-default-color: $text-color;
 
-$toast-basic-text: $panel-default-text;
-$toast-basic-bg: $panel-bg;
+$toast-basic-text: #293340;
+$toast-basic-bg: #F1F1F1;
 $toast-basic-color: $panel-basic-heading-bg;
 
-$toast-good-text: $panel-default-text;
-$toast-good-bg: $panel-bg;
+$toast-good-text: #293340;
+$toast-good-bg: #F1F1F1;
 $toast-good-color: $panel-good-heading-bg;
 
-$toast-info-text: $panel-default-text;
-$toast-info-bg: $panel-bg;
+$toast-info-text: #293340;
+$toast-info-bg: #F1F1F1;
 $toast-info-color: $panel-info-heading-bg;
 
-$toast-warning-text: $panel-default-text;
-$toast-warning-bg: $panel-bg;
+$toast-warning-text: #293340;
+$toast-warning-bg: #F1F1F1;
 $toast-warning-color: $panel-warning-heading-bg;
 
-$toast-danger-text: $panel-default-text;
-$toast-danger-bg: $panel-bg;
+$toast-danger-text: #293340;
+$toast-danger-bg: #F1F1F1;
 $toast-danger-color: $panel-danger-heading-bg;
 
-$toast-special-text: $panel-default-text;
-$toast-special-bg: $panel-bg;
+$toast-special-text: #293340;
+$toast-special-bg: #F1F1F1;
 $toast-special-color: $panel-special-heading-bg;
 
 //== touch-grid
@@ -529,18 +529,18 @@ $touch-grid-body-focus-bg: (#525252, #525252);
 
 
 //== calendar
-$calendar-control-bg: (#FFFFFF, #F0F0F0);
-$calendar-control-border: 1px solid #B4B4B4;
-$calendar-control-border-radius: 2px;
+$calendar-control-bg: (#f1f1f1, #f1f1f1);
+$calendar-control-border: 0px none;
+$calendar-control-border-radius: 0px;
 $calendar-control-font-size: ceil(($font-size-base * 1.25));
 
 $calendar-header-bg: (#FFFFFF, #FFFFFF);
-$calendar-header-border: 0px none;
+$calendar-header-border: 1px solid #c9c9c9;
 $calendar-header-padding: 10px 2px;
 $calendar-header-font-size: ceil(($font-size-base * 0.8));
 
 $calendar-body-bg: (#FFFFFF, #FFFFFF);
-$calendar-body-border: 0px none;
+$calendar-body-border: 1px solid #c9c9c9;
 $calendar-body-font-size: $font-size-base;
 
 $calendar-sun-text-color: #F65867;
@@ -562,12 +562,12 @@ $component-grid-addon-text-color: #fff;
 
 //== modal
 $modal-box-model: $panel-box-model;
-$modal-bg: $panel-bg;
-$modal-border: 1px solid rgb(255/2, 255/2, 255/2);
+$modal-bg: #F1F1F1;
+$modal-border: 0px none;
 $modal-box-shaodw: 0px 0px 4px 0px rgba(0,0,0,0.50);
 $modal-body-padding: $panel-body-padding;
 $modal-heading-padding: 0px 12px;
-$modal-border-radius: $panel-border-radius;
+$modal-border-radius: 8px;
 
 //** Border color for elements within modal
 $modal-default-text: $panel-default-text;

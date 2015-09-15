@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-09-12 
+ publish date : 2015-09-15 
 -->
 <html lang="en">
 <head>
@@ -2829,6 +2829,101 @@ ax5.util.require(["ui/menu.js"], function() {
 	(function() {
 		ax5.dom("#ui-switch-id-2").on("change", function(e) {
 			console.log(ax5.dom("#ui-switch-id-2").elements[0].checked);
+		});
+	})();
+</script>
+
+
+</article>
+
+<!-- split -->
+
+<article class="cover">
+	<h1 data-menu-item="ax-ui-div-slider">DivSlider</h1>
+
+	<p class="lead">
+
+	</p>
+</article>
+
+
+<!-- basic -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-div-slider-default" class="capitalize">default</h3>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result" style="height:300px;">
+
+	&lt;div class="ax5-ui-div-slider" id="div-slider-target" style="height:200px;border: 2px solid #000;">
+		&lt;div class="slider-holder">
+			&lt;div class="slider-item" style="height:200px;background:red;">1&lt;/div>
+			&lt;div class="slider-item" style="height:200px;background:blue;">2&lt;/div>
+			&lt;div class="slider-item" style="height:200px;background:green;">3&lt;/div>
+			&lt;div class="slider-item" style="height:200px;background:purple;">4&lt;/div>
+		&lt;/div>
+	&lt;/div>
+
+	&lt;button class="ax-btn" id="div-slider-target-btn-P">prev&lt;/button>
+	&lt;button class="ax-btn" id="div-slider-target-btn-N">next&lt;/button>
+
+&lt;/div>
+&lt;script type="text/javascript">
+	(function() {
+
+		var ui = new ax5.ui.div_slider();
+		ui.set_config({
+			target: ax5.dom.get("#div-slider-target"),
+			on_event: function(){
+				if(this.action == "status_change"){
+					console.log(this.display_index);
+				}
+			}
+		});
+
+		ax5.dom("#div-slider-target-btn-P").on("click", function(){
+			ui.prev();
+		});
+		ax5.dom("#div-slider-target-btn-N").on("click", function(){
+			ui.next();
+		});
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result" style="height:300px;">
+
+	<div class="ax5-ui-div-slider" id="div-slider-target" style="height:200px;border: 2px solid #000;">
+		<div class="slider-holder">
+			<div class="slider-item" style="height:200px;background:red;">1</div>
+			<div class="slider-item" style="height:200px;background:blue;">2</div>
+			<div class="slider-item" style="height:200px;background:green;">3</div>
+			<div class="slider-item" style="height:200px;background:purple;">4</div>
+		</div>
+	</div>
+
+	<button class="ax-btn" id="div-slider-target-btn-P">prev</button>
+	<button class="ax-btn" id="div-slider-target-btn-N">next</button>
+
+</div>
+<script type="text/javascript">
+	(function() {
+
+		var ui = new ax5.ui.div_slider();
+		ui.set_config({
+			target: ax5.dom.get("#div-slider-target"),
+			on_event: function(){
+				if(this.action == "status_change"){
+					console.log(this.display_index);
+				}
+			}
+		});
+
+		ax5.dom("#div-slider-target-btn-P").on("click", function(){
+			ui.prev();
+		});
+		ax5.dom("#div-slider-target-btn-N").on("click", function(){
+			ui.next();
 		});
 	})();
 </script>

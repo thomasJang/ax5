@@ -1,0 +1,18 @@
+.ax5-ui-div-slider{
+	position: relative;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
+	.slider-holder{
+		position: absolute;
+		left:0px;
+		top:0px;
+		.slider-item{
+			box-sizing: border-box;
+		}
+
+		&.touch-end{
+			@include transition(all 0.3s $ease-out-expo);
+		}
+	}
+}

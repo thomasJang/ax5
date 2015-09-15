@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-09-12 
+ * 2015-09-15 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -4271,6 +4271,13 @@ ax5.ui = (function (core) {
 			}).bind(this), 100);
 
 		};
+
+		this.stop_event = function(e){
+			if (e.preventDefault) e.preventDefault();
+			if (e.stopPropagation) e.stopPropagation();
+			e.cancelBubble = true;
+			return false;
+		}
 	}
 
 	return {

@@ -2,7 +2,7 @@
 	@include ax();
 	box-sizing: $toast-box-model;
 	border: $toast-border;
-	@include opacity(0.8);
+	@include opacity(0.9);
 
 	@include ax-border-radius($toast-border-radius);
 	@include box-shadow($toast-box-shaodw);
@@ -50,7 +50,7 @@
 
 @include keyframes(ax-toast) {
 	from {
-		@include opacity(0.0);
+		//@include opacity(0.0);
 		@if($toast-container-position == 0) {
 			@include transform(translateY(-100px));
 		}
@@ -65,19 +65,30 @@
 		}
 	}
 	to {
-		@include opacity($mask-bg-opacity);
+		//@include opacity($mask-bg-opacity);
 		@include transform( translateX(0px) )
 	}
 }
 
 @include keyframes(ax-toast-removed) {
 	from {
-		@include opacity(1.0);
+		//@include opacity(1.0);
 		@include transform( translateX(0px) );
 	}
 	to {
-		@include opacity(0.0);
-		@include transform( translateX(300px) );
+		//@include opacity(0.0);
+		@if($toast-container-position == 0) {
+			@include transform(translateY(-100px));
+		}
+		@else if($toast-container-position == 1) {
+			@include transform(translateY(-100px));
+		}
+		@else if($toast-container-position == 2) {
+			@include transform(translateY(100px));
+		}
+		@else if($toast-container-position == 3) {
+			@include transform(translateY(100px));
+		}
 	}
 }
 
@@ -112,10 +123,10 @@
 	}
 
 	.ax5-ui-toast{
-		@include animation(ax-toast 0.2s ease-in-out);
+		@include animation(ax-toast 0.3s $ease-out-back);
 		@include ax-toast();
 		@include ax-toast-section();
-		@include transition(all 0.2s ease-in-out);
+		@include transition(all 0.3s ease-in-out);
 
 		@include toast-variant($toast-default-text, $toast-default-bg, $toast-default-color);
 
@@ -139,10 +150,10 @@
 		}
 
 		&.removed{
-			@include animation(ax-toast-removed 0.2s ease-in-out forwards);
+			@include animation(ax-toast-removed 0.3s $ease-in-back forwards);
 		}
 		&.destroy{
-			@include animation(ax-toast-destroy 0.2s ease-in-out forwards);
+			@include animation(ax-toast-destroy 0.3s $ease-in-back forwards);
 		}
 	}
 }

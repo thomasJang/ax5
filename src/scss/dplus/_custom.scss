@@ -16,3 +16,119 @@
 		height:120%;
 	}
 }
+
+
+.ax5-ui-calendar {
+	.calendar-control{
+		margin-bottom: 0px;
+		.date-move-left{
+			display:block;
+			position:absolute;left:0px;top:0px;
+			text-align: center;
+			font-size: ceil($calendar-control-font-size * 1.2);
+			cursor: pointer;
+			color: $theme-good;
+			i{line-height: inherit;}
+		}
+		.date-display{
+			text-align:center;
+			color: $theme-good;
+			[data-calendar-display]{
+				margin: 0px 3px;
+				cursor: pointer;
+				//text-decoration: none;
+				//background: $theme-good;
+				//color: #fff;
+				padding: 5px;
+			}
+		}
+		.date-move-right{
+			display:block;
+			position:absolute;right:0px;top:0px;
+			text-align: center;
+			font-size: ceil($calendar-control-font-size * 1.2);
+			cursor: pointer;
+			color: $theme-good;
+			i{line-height: inherit;}
+		}
+		a:hover{
+			color: $link-hover-color;
+		}
+	}
+	.calendar-body {
+		table {
+			thead {
+				td, th {
+					border: 0px none;
+					border-top: $calendar-header-border;
+					border-bottom: $calendar-header-border;
+				}
+			}
+			tbody {
+				td, th {
+					border: 0px none;
+					border-top: $calendar-body-border;
+					border-bottom: $calendar-body-border;
+					padding: 0px;
+					.calendar-item-date {
+						border-radius: 0;
+						@include ax-gradient(nth($calendar-date-bg, 1), nth($calendar-date-bg, 2));
+						color: $calendar-date-text-color;
+						&.live {
+							@include ax-gradient(nth($calendar-date-bg, 1), nth($calendar-date-bg, 2));
+							color: $calendar-live-text-color;
+						}
+						&.hover {
+							@include ax-gradient(nth($calendar-hover-bg, 1), nth($calendar-hover-bg, 2));
+							color: $calendar-hover-text-color !important;
+						}
+						&.focus {
+							@include ax-gradient(nth($calendar-focus-bg, 1), nth($calendar-focus-bg, 2));
+							color: $calendar-focus-text-color;
+						}
+					}
+					.calendar-item-month {
+						&.live {
+							@include ax-gradient(nth($calendar-date-bg, 1), nth($calendar-date-bg, 2));
+							color: $calendar-live-text-color;
+						}
+						&.hover {
+							@include ax-gradient(nth($calendar-hover-bg, 1), nth($calendar-hover-bg, 2));
+							color: $calendar-hover-text-color;
+						}
+						&.focus {
+							@include ax-gradient(nth($calendar-focus-bg, 1), nth($calendar-focus-bg, 2));
+							color: $calendar-focus-text-color;
+						}
+					}
+					.calendar-item-year {
+						&.live {
+							@include ax-gradient(nth($calendar-date-bg, 1), nth($calendar-date-bg, 2));
+							color: $calendar-live-text-color;
+						}
+						&.hover {
+							@include ax-gradient(nth($calendar-hover-bg, 1), nth($calendar-hover-bg, 2));
+							color: $calendar-hover-text-color;
+						}
+						&.focus {
+							@include ax-gradient(nth($calendar-focus-bg, 1), nth($calendar-focus-bg, 2));
+							color: $calendar-focus-text-color;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.ax5-ui-dialog{
+	.ax-dialog-body {
+		.ax-dialog-buttons {
+			.ax-btn {
+				padding: 5px 5px;
+				min-width: 100px;
+				border-radius: 6px;
+			}
+		}
+	}
+}

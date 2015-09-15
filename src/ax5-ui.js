@@ -61,6 +61,13 @@ ax5.ui = (function (core) {
 			}).bind(this), 100);
 
 		};
+
+		this.stop_event = function(e){
+			if (e.preventDefault) e.preventDefault();
+			if (e.stopPropagation) e.stopPropagation();
+			e.cancelBubble = true;
+			return false;
+		}
 	}
 
 	return {
