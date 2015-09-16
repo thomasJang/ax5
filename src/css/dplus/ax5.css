@@ -3839,6 +3839,35 @@ input[type='checkbox']:checked + .ax5-ui-switch.with-label {
       -webkit-transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
       -moz-transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
       transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1); }
+  .ax5-ui-div-slider .slider-status {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    text-align: center; }
+    .ax5-ui-div-slider .slider-status .dot-group {
+      position: relative; }
+      .ax5-ui-div-slider .slider-status .dot-group .dot {
+        margin: 7px;
+        display: inline-block;
+        box-sizing: border-box;
+        width: 7px;
+        height: 7px;
+        border: 1px solid #FFFFFF;
+        border-radius: 50%; }
+      .ax5-ui-div-slider .slider-status .dot-group .on_dot {
+        position: absolute;
+        left: -50%;
+        top: 7px;
+        display: block;
+        box-sizing: border-box;
+        width: 7px;
+        height: 7px;
+        background: #FFFFFF;
+        border-radius: 50%;
+        -webkit-transition: all 0.3s, cubic-bezier(0.19, 1, 0.22, 1);
+        -moz-transition: all 0.3s, cubic-bezier(0.19, 1, 0.22, 1);
+        transition: all 0.3s, cubic-bezier(0.19, 1, 0.22, 1); }
 
 .ax5-ui-modal .ax-modal-heading {
   font-size: 14px; }

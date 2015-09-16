@@ -15,4 +15,38 @@
 			@include transition(all 0.3s $ease-out-expo);
 		}
 	}
+
+	.slider-status{
+		position: absolute;
+		bottom: 0px;
+		left: 0px;
+		width: 100%;
+		text-align: center;
+
+		.dot-group{
+			position: relative;
+			.dot{
+				margin: 7px;
+				display: inline-block;
+				box-sizing: border-box;
+				width: 7px;
+				height: 7px;
+				border: 1px solid #FFFFFF;
+				border-radius: 50%;
+			}
+			.on_dot{
+				position: absolute;
+				left: -50%; top: 7px;
+				display: block;
+				box-sizing: border-box;
+				width: 7px;
+				height: 7px;
+				background: #FFFFFF;
+				border-radius: 50%;
+
+				@include transition(all 0.3s, $ease-out-expo);
+			}
+		}
+	}
+
 }
