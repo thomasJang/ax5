@@ -1352,21 +1352,22 @@
 
 		this._on_touch_move = function(e) {
 			var mouse = _this.get_mouse(e);
-			var new_left = Number(touch_start.position.left) - (touch_start.mouse.x - mouse.x);
-			if (new_left > 0) new_left = 0;
-			else if (new_left < -(this.holder_width - this.item_width)) {
-				new_left = -(this.holder_width - this.item_width);
-			}
-			this.els.holder.css({left: new_left});
-
-			touch_start.time = (new Date()).getTime();
-			touch_start.new_left = new_left;
-
-			// 터치 방향 판단 하여 수평일 때만 이벤트 중지
 			if (!touch_start.direction) {
 				touch_start.direction = (Math.abs((touch_start.mouse.x - mouse.x)) > Math.abs((touch_start.mouse.y - mouse.y))) ? "X" : "Y";
 			}
+
+			// 터치 방향 판단 하여 수평일 때만
 			if (touch_start.direction == "X") {
+				var new_left = Number(touch_start.position.left) - (touch_start.mouse.x - mouse.x);
+				if (new_left > 0) new_left = 0;
+				else if (new_left < -(this.holder_width - this.item_width)) {
+					new_left = -(this.holder_width - this.item_width);
+				}
+				this.els.holder.css({left: new_left});
+
+				touch_start.time = (new Date()).getTime();
+				touch_start.new_left = new_left;
+
 				if (e.preventDefault) e.preventDefault();
 				if (e.stopPropagation) e.stopPropagation();
 				e.cancelBubble = true;
@@ -1437,9 +1438,11 @@
 			axd(document.body).off("mouseout.ax5divslider");
 			axd(document.body).attr({"onselectstart": null});
 
+			/*
 			if (e.preventDefault) e.preventDefault();
 			if (e.stopPropagation) e.stopPropagation();
 			e.cancelBubble = true;
+			*/
 		};
 
 		this.prev = function() {
