@@ -3862,9 +3862,9 @@ input[type='checkbox']:checked + .ax5-ui-switch.with-label {
         height: 7px;
         background: #FFFFFF;
         border-radius: 50%;
-        -webkit-transition: all 0.3s, cubic-bezier(0.19, 1, 0.22, 1);
-        -moz-transition: all 0.3s, cubic-bezier(0.19, 1, 0.22, 1);
-        transition: all 0.3s, cubic-bezier(0.19, 1, 0.22, 1); }
+        -webkit-transition: all 0.5s, cubic-bezier(0.19, 1, 0.22, 1);
+        -moz-transition: all 0.5s, cubic-bezier(0.19, 1, 0.22, 1);
+        transition: all 0.5s, cubic-bezier(0.19, 1, 0.22, 1); }
 
 .ax-button-wrap {
   display: inline-block;

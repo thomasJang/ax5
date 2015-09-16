@@ -176,6 +176,7 @@
 			};
 
 			var du_time = touch_end.time - touch_start.time, extra_move = 0, new_left = touch_start.new_left, move_left = 0, display_index;
+
 			if (du_time < 120 && Math.abs((touch_start.mouse.x - touch_end.mouse.x)) > 5) {
 				if ((touch_start.mouse.x - touch_end.mouse.x) < 0) {
 					if (this.display_index > 0) {
@@ -189,33 +190,34 @@
 				}
 			}
 
-			display_index = U.number(new_left / this.item_width, {round: true, abs: true});
+			if(typeof new_left != "undefined") {
 
-			this.els.holder.css({left: -(this.item_width * display_index)}).class_name("add", "touch-end");
+				display_index = U.number(new_left / this.item_width, {round: true, abs: true});
+				this.els.holder.css({left: -(this.item_width * display_index)}).class_name("add", "touch-end");
 
-
-			if (cfg.on_event) {
-				if (this.display_index != display_index) {
-					var that = {
-						display_index: display_index,
-						action: "status_change"
-					};
-					cfg.on_event.call(that, that);
-				}
-				else {
-					if (cfg.on_event) {
+				if (cfg.on_event) {
+					if (this.display_index != display_index) {
 						var that = {
-							display_index: this.display_index,
-							action: "touch_end"
+							display_index: display_index,
+							action: "status_change"
 						};
 						cfg.on_event.call(that, that);
 					}
+					else {
+						if (cfg.on_event) {
+							var that = {
+								display_index: this.display_index,
+								action: "touch_end"
+							};
+							cfg.on_event.call(that, that);
+						}
+					}
 				}
-			}
 
-			// update display_index
-			this.display_index = display_index;
-			this._update_dot();
+				// update display_index
+				this.display_index = display_index;
+				this._update_dot();
+			}
 
 			axd(document.body).off(e_touch_move + ".ax5divslider");
 			axd(document.body).off(e_touch_end + ".ax5divslider");
