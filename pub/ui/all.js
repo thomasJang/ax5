@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-09-15 
+ * 2015-09-16 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -1333,9 +1333,10 @@
 			this.els.holder.css({left: new_left});
 
 			// 이동량이 작으면 시작 타이머 초기화
-			if(Math.abs(touch_start.new_left - new_left) < 30) {
-				touch_start.time = (new Date()).getTime();
-			}
+			//if(Math.abs(touch_start.new_left - new_left) < 30) {
+			//	touch_start.time = (new Date()).getTime();
+			//}
+			touch_start.time = (new Date()).getTime();
 			touch_start.new_left = new_left;
 
 			if (e.preventDefault) e.preventDefault();
@@ -1351,25 +1352,17 @@
 			};
 
 			var du_time = touch_end.time - touch_start.time, extra_move = 0, new_left = touch_start.new_left, move_left = 0, display_index;
-			//console.log(du_time);
-			if( du_time < 120){
-				extra_move = 1000 * (1000 / du_time);
-				extra_move = extra_move % this.item_width;
-
-				if((touch_start.mouse.x - touch_end.mouse.x) < 0){
-					move_left = (touch_start.mouse.x - touch_end.mouse.x) - extra_move;
+			if( du_time < 120 && Math.abs((touch_start.mouse.x - touch_end.mouse.x)) > 5 ){
+				if((touch_start.mouse.x - touch_end.mouse.x) < 0) {
+					if(this.display_index > 0) {
+						new_left = -(this.item_width * (this.display_index - 1));
+					}
 				}
 				else{
-					move_left = (touch_start.mouse.x - touch_end.mouse.x) + extra_move;
+					if(this.display_index < this.els.items.elements.length-1){
+						new_left = -(this.item_width * (this.display_index + 1));
+					}
 				}
-				move_left = move_left % this.item_width;
-				
-				new_left = Number(touch_start.new_left) - move_left;
-				if(new_left > 0) new_left = 0;
-				else if(new_left < -(this.holder_width - this.item_width) ){ new_left = -(this.holder_width - this.item_width); }
-
-			}else{
-
 			}
 
 			display_index = U.number(new_left / this.item_width, {round:true, abs:true});
