@@ -217,6 +217,14 @@
 				// update display_index
 				this.display_index = display_index;
 				this._update_dot();
+			}else{
+				if (cfg.on_event) {
+					var that = {
+						display_index: this.display_index,
+						action: "click"
+					};
+					cfg.on_event.call(that, that);
+				}
 			}
 
 			axd(document.body).off(e_touch_move + ".ax5divslider");

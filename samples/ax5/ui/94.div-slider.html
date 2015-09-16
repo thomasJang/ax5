@@ -36,8 +36,10 @@
 		ui.set_config({
 			target: ax5.dom.get("#div-slider-target"),
 			on_event: function(){
-				if(this.action == "status_change"){
+				if(this.action == "status_change") {
 					//console.log(this.display_index);
+				}else if(this.action == "click"){
+					alert("click");
 				}else{
 					//console.log(this.action);
 				}
