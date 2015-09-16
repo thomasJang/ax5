@@ -127,16 +127,18 @@
 			else if(new_left < -(this.holder_width - this.item_width) ){ new_left = -(this.holder_width - this.item_width); }
 			this.els.holder.css({left: new_left});
 
-			// 이동량이 작으면 시작 타이머 초기화
-			//if(Math.abs(touch_start.new_left - new_left) < 30) {
-			//	touch_start.time = (new Date()).getTime();
-			//}
 			touch_start.time = (new Date()).getTime();
 			touch_start.new_left = new_left;
 
-			if (e.preventDefault) e.preventDefault();
-			if (e.stopPropagation) e.stopPropagation();
-			e.cancelBubble = true;
+			// 터치 방향 판단 하여 수평일 때만 이벤트 중지
+			if(!touch_start.direction){
+				touch_start.direction = (Math.abs((touch_start.mouse.x - mouse.x)) > Math.abs((touch_start.mouse.y - mouse.y))) ? "X" : "Y";
+			}
+			if(touch_start.direction == "X") {
+				if (e.preventDefault) e.preventDefault();
+				if (e.stopPropagation) e.stopPropagation();
+				e.cancelBubble = true;
+			}
 		};
 
 		this._on_touch_end = function(e) {
