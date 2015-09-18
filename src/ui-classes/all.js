@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-09-16 
+ * 2015-09-18 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -1203,7 +1203,7 @@
 // todo : prompt
 // todo : toast
 
-(function(root, ax_super) {
+(function (root, ax_super) {
 
 	/**
 	 * @class ax5.ui.div_slider
@@ -1232,9 +1232,9 @@
 	}
 
 	//== UI Class
-	var ax_class = function() {
+	var ax_class = function () {
 		// 클래스 생성자
-		this.main = (function() {
+		this.main = (function () {
 			if (ax_super) ax_super.call(this); // 부모호출
 			this.config = {
 				effect: "",
@@ -1251,9 +1251,13 @@
 		var touch_start = {}, touch_end = {};
 		this.display_index = 0;
 
-		this.get_mouse = function(e) {
+		this.get_mouse = function (e) {
 			var mouse = {};
-			if ('touches' in e && e.touches[0]) {
+			if ('changedTouches' in e) {
+				mouse.x = Number(e.changedTouches[0].pageX);
+				mouse.y = Number(e.changedTouches[0].pageY);
+			}
+			else if ('touches' in e && e.touches[0]) {
 				mouse.x = Number(e.touches[0].pageX);
 				mouse.y = Number(e.touches[0].pageY);
 			}
@@ -1264,7 +1268,7 @@
 			return mouse;
 		};
 
-		this.init = function() {
+		this.init = function () {
 			this.target = ax5.dom(cfg.target);
 
 			// 파트수집
@@ -1274,54 +1278,68 @@
 				dots: []
 			};
 
-			var po = [];
+			if (this.els.items.elements.length > 1) {
+				var po = [];
+				po.push('<div class="slider-status">');
+				po.push('<div class="dot-group">');
+				for (var i = 0, l = this.els.items.elements.length; i < l; i++) {
+					po.push('<div class="dot" data-item-dot="' + i + '"></div>');
+				}
+				po.push('<div class="on_dot" data-item-dot-on="on"></div>');
+				po.push('</div>');
+				po.push('</div>');
+				this.target.append(po.join(''));
 
-			po.push('<div class="slider-status">');
-			po.push('<div class="dot-group">');
-			for (var i = 0, l = this.els.items.elements.length; i < l; i++) {
-				po.push('<div class="dot" data-item-dot="' + i + '"></div>');
+				for (var i = 0, l = this.target.find('[data-item-dot]').elements.length; i < l; i++) {
+					this.els.dots.push(axd(this.target.find('[data-item-dot]').elements[i]));
+				}
+				this.els.dot_on = this.target.find('[data-item-dot-on]');
 			}
-			po.push('<div class="on_dot" data-item-dot-on="on"></div>');
-			po.push('</div>');
-			po.push('</div>');
-			this.target.append(po.join(''));
-
-			for(var i=0, l=this.target.find('[data-item-dot]').elements.length;i<l;i++){
-				this.els.dots.push( axd(this.target.find('[data-item-dot]').elements[i]) );
-			}
-			this.els.dot_on = this.target.find('[data-item-dot-on]');
 
 			this._set_size_frame();
-			this.bind_window_resize(function() {
+			this.bind_window_resize(function () {
 				this._set_size_frame();
 			});
 
-			setTimeout(function() {
+			setTimeout(function () {
 				_this._set_size_frame();
 			}, 300);
 
-			this.target.on(e_touch_start, function(e) {
-				_this._on_touch_start(e || window.event);
+			if (this.els.items.elements.length > 1) {
+				this.target.on(e_touch_start, function (e) {
+					_this._on_touch_start(e || window.event);
+				});
+			}
+			this.target.on("click", function (e) {
+				if (cfg.on_event) {
+					var that = {
+						display_index: 0,
+						action: "click"
+					};
+					cfg.on_event.call(that, that);
+				}
 			});
 		};
 
-		this._set_size_frame = function() {
+		this._set_size_frame = function () {
 			this.els.items.css({width: this.target.width(), "float": "left"});
 			this.els.holder.css({width: this.target.find(".slider-item").elements.length * this.target.width()});
 
-			this.item_width = this.target.width();
-			this.holder_width = this.target.find(".slider-item").elements.length * this.target.width();
+			if (this.els.items.elements.length > 1) {
+				this.item_width = this.target.width();
+				this.holder_width = this.target.find(".slider-item").elements.length * this.target.width();
 
-			this.els.holder.css({left: -(this.item_width * this.display_index)});
-			this._update_dot();
+				this.els.holder.css({left: -(this.item_width * this.display_index)});
+				this._update_dot();
+			}
 		};
 
-		this._update_dot = function() {
-			var bx = ax5.dom.box_model( this.els.dots[this.display_index] );
+		this._update_dot = function () {
+			var bx = ax5.dom.box_model(this.els.dots[this.display_index]);
 			this.els.dot_on.css({left: bx.position.left + bx.margin[3]});
 		};
 
-		this._on_touch_start = function(e) {
+		this._on_touch_start = function (e) {
 			touch_start = {
 				mouse: _this.get_mouse(e),
 				time: (new Date()).getTime(),
@@ -1330,13 +1348,13 @@
 
 			this.els.holder.class_name("remove", "touch-end");
 
-			axd(document.body).on(e_touch_move + ".ax5divslider", function(e) {
+			axd(document.body).on(e_touch_move + ".ax5divslider", function (e) {
 				_this._on_touch_move(e || window.event);
 			});
-			axd(document.body).on(e_touch_end + ".ax5divslider", function(e) {
+			axd(document.body).on(e_touch_end + ".ax5divslider", function (e) {
 				_this._on_touch_end(e || window.event);
 			});
-			axd(document.body).on("mouseout.ax5divslider", function(e) {
+			axd(document.body).on("mouseout.ax5divslider", function (e) {
 				_this._on_touch_end(e || window.event);
 			});
 			axd(document.body).attr({"onselectstart": "return false;"});
@@ -1350,7 +1368,7 @@
 			}
 		};
 
-		this._on_touch_move = function(e) {
+		this._on_touch_move = function (e) {
 			var mouse = _this.get_mouse(e);
 			if (!touch_start.direction) {
 				touch_start.direction = (Math.abs((touch_start.mouse.x - mouse.x)) > Math.abs((touch_start.mouse.y - mouse.y))) ? "X" : "Y";
@@ -1374,7 +1392,7 @@
 			}
 		};
 
-		this._on_touch_end = function(e) {
+		this._on_touch_end = function (e) {
 
 			touch_end = {
 				mouse: _this.get_mouse(e),
@@ -1396,7 +1414,8 @@
 				}
 			}
 
-			if(typeof new_left != "undefined") {
+
+			if (typeof new_left != "undefined") {
 
 				display_index = U.number(new_left / this.item_width, {round: true, abs: true});
 				this.els.holder.css({left: -(this.item_width * display_index)}).class_name("add", "touch-end");
@@ -1423,29 +1442,20 @@
 				// update display_index
 				this.display_index = display_index;
 				this._update_dot();
-			}else{
-				if (cfg.on_event) {
-					var that = {
-						display_index: this.display_index,
-						action: "click"
-					};
-					cfg.on_event.call(that, that);
-				}
+
+				axd(document.body).off(e_touch_move + ".ax5divslider");
+				axd(document.body).off(e_touch_end + ".ax5divslider");
+				axd(document.body).off("mouseout.ax5divslider");
+				axd(document.body).attr({"onselectstart": null});
+
+				if (e.preventDefault) e.preventDefault();
+				if (e.stopPropagation) e.stopPropagation();
+				e.cancelBubble = true;
 			}
 
-			axd(document.body).off(e_touch_move + ".ax5divslider");
-			axd(document.body).off(e_touch_end + ".ax5divslider");
-			axd(document.body).off("mouseout.ax5divslider");
-			axd(document.body).attr({"onselectstart": null});
-
-			/*
-			if (e.preventDefault) e.preventDefault();
-			if (e.stopPropagation) e.stopPropagation();
-			e.cancelBubble = true;
-			*/
 		};
 
-		this.prev = function() {
+		this.prev = function () {
 			if (this.display_index <= 0) {
 				return this;
 			}
@@ -1461,7 +1471,7 @@
 			}
 		};
 
-		this.next = function() {
+		this.next = function () {
 			if (this.display_index >= this.els.items.elements.length - 1) {
 				return this;
 			}
@@ -1485,7 +1495,9 @@
 	root.div_slider = ax_class; // ax5.ui에 연결
 
 	if (typeof define === "function" && define.amd) {
-		define("_ax5_ui_div_slider", [], function() { return ax_class; }); // for requireJS
+		define("_ax5_ui_div_slider", [], function () {
+			return ax_class;
+		}); // for requireJS
 	}
 	//== ui class 공통 처리 구문
 
