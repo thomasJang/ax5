@@ -7,8 +7,10 @@
 		position: absolute;
 		left:0px;
 		top:0px;
+		width: 100%;
 		.slider-item{
 			box-sizing: border-box;
+			width: 100%;
 		}
 
 		&.touch-end{

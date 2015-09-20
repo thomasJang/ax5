@@ -581,6 +581,8 @@ $calendar-control-bg: (#FFFFFF, #F0F0F0);
 $calendar-control-border: 1px solid #B4B4B4;
 $calendar-control-border-radius: 2px;
 $calendar-control-font-size: ceil(($font-size-base * 1.25));
+$calendar-control-text-color: $text-color;
+$calendar-control-hover-text-color: $theme-basic;
 
 $calendar-header-bg: (#FFFFFF, #FFFFFF);
 $calendar-header-border: 0px none;

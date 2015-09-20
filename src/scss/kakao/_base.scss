@@ -528,7 +528,8 @@ $calendar-control-bg: (#E7E7E7, #E7E7E7);
 $calendar-control-border: 1px solid #E7E7E7;
 $calendar-control-border-radius: 2px;
 $calendar-control-font-size: ceil(($font-size-base * 1.25));
-
+$calendar-control-text-color: $text-color;
+$calendar-control-hover-text-color: $theme-basic;
 
 /* Rectangle 5 Copy: */
 $calendar-header-bg: (#292929, #292929);

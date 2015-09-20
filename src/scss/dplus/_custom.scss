@@ -20,40 +20,7 @@
 
 .ax5-ui-calendar {
 	.calendar-control{
-		margin-bottom: 0px;
-		.date-move-left{
-			display:block;
-			position:absolute;left:0px;top:0px;
-			text-align: center;
-			font-size: ceil($calendar-control-font-size * 1.2);
-			cursor: pointer;
-			color: $theme-good;
-			i{line-height: inherit;}
-		}
-		.date-display{
-			text-align:center;
-			color: $theme-good;
-			[data-calendar-display]{
-				margin: 0px 3px;
-				cursor: pointer;
-				//text-decoration: none;
-				//background: $theme-good;
-				//color: #fff;
-				padding: 5px;
-			}
-		}
-		.date-move-right{
-			display:block;
-			position:absolute;right:0px;top:0px;
-			text-align: center;
-			font-size: ceil($calendar-control-font-size * 1.2);
-			cursor: pointer;
-			color: $theme-good;
-			i{line-height: inherit;}
-		}
-		a:hover{
-			color: $link-hover-color;
-		}
+		margin:0px;
 	}
 	.calendar-body {
 		table {

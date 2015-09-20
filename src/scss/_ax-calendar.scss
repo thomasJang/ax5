@@ -55,8 +55,12 @@
 			cursor: pointer;
 			i{line-height: inherit;}
 		}
+		color: $calendar-control-text-color;
+		a{
+			color: $calendar-control-text-color;
+		}
 		a:hover{
-			color: $link-hover-color;
+			color: $calendar-control-hover-text-color;
 		}
 	}
 	.calendar-body {
@@ -124,13 +128,17 @@
 							@include ax-gradient(nth($calendar-live-bg, 1), nth($calendar-live-bg, 2));
 							color: $calendar-live-text-color;
 						}
-						&.hover {
-							@include ax-gradient(nth($calendar-hover-bg, 1), nth($calendar-hover-bg, 2));
-							color: $calendar-hover-text-color !important;
-						}
 						&.focus {
 							@include ax-gradient(nth($calendar-focus-bg, 1), nth($calendar-focus-bg, 2));
 							color: $calendar-focus-text-color;
+							&.hover {
+								@include ax-gradient(nth($calendar-hover-bg, 1), nth($calendar-hover-bg, 2));
+								color: $calendar-hover-text-color !important;
+							}
+						}
+						&.hover {
+							@include ax-gradient(nth($calendar-hover-bg, 1), nth($calendar-hover-bg, 2));
+							color: $calendar-hover-text-color !important;
 						}
 					}
 					.calendar-item-month {

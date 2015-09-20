@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-09-18 
+ * 2015-09-21 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -108,7 +108,9 @@
 		this.get_frame = function ()
 		{
 			var po = [];
-			po.push( '<div class="ax5-ui-calendar ' + cfg.theme + '" data-calendar-els="root" style="width:' + cfg.width + 'px;" onselectstart="return false;">' );
+			po.push( '<div class="ax5-ui-calendar ' + cfg.theme + '" data-calendar-els="root" style="'+ (function(){
+					return (cfg.width) ? 'width:' + cfg.width + 'px;' : '';
+				})() + '" onselectstart="return false;">' );
 			if (cfg.control)
 			{
 				po.push( '<div class="calendar-control" data-calendar-els="control" style="height:' + cfg.item_height + 'px;line-height:' + cfg.item_height + 'px;">' );
@@ -170,14 +172,21 @@
 
 		this.print_day = function (now_date)
 		{
-			var dot_date = U.date( now_date ), po = [], month_start_date = new Date( dot_date.getFullYear(), dot_date.getMonth(), 1, 12 ), _today = new Date(), table_start_date = (function ()
+			var dot_date = U.date( now_date ), po = [], month_start_date = new Date( dot_date.getFullYear(), dot_date.getMonth(), 1, 12 ),
+				//_today = new Date(),
+				_today = cfg.display_date,
+				table_start_date = (function ()
 				{
 					var day = month_start_date.getDay();
 					if (day == 0) day = 7;
 					return U.date( month_start_date, {add: {d: -day}} );
-				})(), loop_date, this_month = dot_date.getMonth(), this_date = dot_date.getDate(), item_styles = [ 'width:' + cfg.item_width + 'px', 'height:' + cfg.item_height + 'px', 'line-height:' + (cfg.item_height - cfg.item_padding * 2) + 'px', 'padding:' + cfg.item_padding + 'px' ], i, k;
+				})(), loop_date, this_month = dot_date.getMonth(), this_date = dot_date.getDate(),
+				item_styles = [ 'width:' + cfg.item_width + 'px', 'height:' + cfg.item_height + 'px', 'line-height:' + (cfg.item_height - cfg.item_padding * 2) + 'px', 'padding:' + cfg.item_padding + 'px' ],
+				i, k;
 
-			po.push( '<table data-calendar-table="day" cellpadding="0" cellspacing="0">' );
+			po.push( '<table data-calendar-table="day" cellpadding="0" cellspacing="0" style="'+ (function(){
+					return (cfg.width) ? 'width:' + cfg.width + 'px;' : 'width:100%;';
+				})() + '">' );
 			po.push( '<thead>' );
 			po.push( '<tr>' );
 			k = 0;
@@ -241,9 +250,12 @@
 
 			var _item_width = cfg.item_width * 7 / 3, _item_height = cfg.item_height * 6 / 4;
 
-			var dot_date = U.date( now_date ), n_month = dot_date.getMonth(), po = [], item_styles = [ 'width:' + _item_width + 'px', 'height:' + _item_height + 'px', 'line-height:' + (_item_height - cfg.item_padding * 2) + 'px', 'padding:' + cfg.item_padding + 'px' ], i, k, m;
+			var dot_date = U.date( now_date ), n_month = dot_date.getMonth(), po = [],
+				item_styles = [ 'width:' + _item_width + 'px', 'height:' + _item_height + 'px', 'line-height:' + (_item_height - cfg.item_padding * 2) + 'px', 'padding:' + cfg.item_padding + 'px' ], i, k, m;
 
-			po.push( '<table data-calendar-table="month" cellpadding="0" cellspacing="0">' );
+			po.push( '<table data-calendar-table="month" cellpadding="0" cellspacing="0" style="'+ (function(){
+					return (cfg.width) ? 'width:' + cfg.width + 'px;' : 'width:100%;';
+				})() + '">' );
 			po.push( '<thead>' );
 			po.push( '<tr>' );
 
@@ -314,13 +326,16 @@
 		{
 			var _item_width = cfg.item_width * 7 / 4, _item_height = cfg.item_height * 6 / 5;
 
-			var dot_date = U.date( now_date ), n_year = dot_date.getFullYear(), po = [], item_styles = [ 'width:' + _item_width + 'px', 'height:' + _item_height + 'px', 'line-height:' + (_item_height - cfg.item_padding * 2) + 'px', 'padding:' + cfg.item_padding + 'px' ], i, k, m;
+			var dot_date = U.date( now_date ), n_year = dot_date.getFullYear(), po = [],
+				item_styles = [ 'width:' + _item_width + 'px', 'height:' + _item_height + 'px', 'line-height:' + (_item_height - cfg.item_padding * 2) + 'px', 'padding:' + cfg.item_padding + 'px' ], i, k, m;
 
-			po.push( '<table data-calendar-table="year" cellpadding="0" cellspacing="0">' );
+			po.push( '<table data-calendar-table="year" cellpadding="0" cellspacing="0" style="'+ (function(){
+					return (cfg.width) ? 'width:' + cfg.width + 'px;' : 'width:100%;';
+				})() + '">' );
 			po.push( '<thead>' );
 			po.push( '<tr>' );
 
-			po.push( '<td class="calendar-col-0" colspan="5">년도를 선택해주세요' );
+			po.push( '<td class="calendar-col-0" colspan="4">년도를 선택해주세요' );
 			po.push( '</td>' );
 
 			po.push( '</tr>' );
@@ -1278,7 +1293,7 @@
 				dots: []
 			};
 
-			if (this.els.items.elements.length > 1) {
+			if (this.els.items.elements.length > 1 && this.els.dots.length == 0) {
 				var po = [];
 				po.push('<div class="slider-status">');
 				po.push('<div class="dot-group">');
@@ -1296,7 +1311,7 @@
 				this.els.dot_on = this.target.find('[data-item-dot-on]');
 			}
 
-			this._set_size_frame();
+			//this._set_size_frame();
 			this.bind_window_resize(function () {
 				this._set_size_frame();
 			});

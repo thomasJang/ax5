@@ -73,7 +73,7 @@
 				dots: []
 			};
 
-			if (this.els.items.elements.length > 1) {
+			if (this.els.items.elements.length > 1 && this.els.dots.length == 0) {
 				var po = [];
 				po.push('<div class="slider-status">');
 				po.push('<div class="dot-group">');
@@ -91,7 +91,7 @@
 				this.els.dot_on = this.target.find('[data-item-dot-on]');
 			}
 
-			this._set_size_frame();
+			//this._set_size_frame();
 			this.bind_window_resize(function () {
 				this._set_size_frame();
 			});

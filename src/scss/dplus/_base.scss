@@ -529,14 +529,16 @@ $touch-grid-body-focus-bg: (#525252, #525252);
 
 
 //== calendar
-$calendar-control-bg: (#f1f1f1, #f1f1f1);
+$calendar-control-bg: (#219ECF, #219ECF);
 $calendar-control-border: 0px none;
 $calendar-control-border-radius: 0px;
 $calendar-control-font-size: ceil(($font-size-base * 1.25));
+$calendar-control-text-color: #fff;
+$calendar-control-hover-text-color: $theme-basic;
 
-$calendar-header-bg: (#FFFFFF, #FFFFFF);
+$calendar-header-bg: (#f1f1f1, #f1f1f1);
 $calendar-header-border: 1px solid #c9c9c9;
-$calendar-header-padding: 10px 2px;
+$calendar-header-padding: 7px 2px;
 $calendar-header-font-size: ceil(($font-size-base * 0.8));
 
 $calendar-body-bg: (#FFFFFF, #FFFFFF);
@@ -553,7 +555,7 @@ $calendar-live-text-color: #6D6E70;
 $calendar-hover-bg: ($theme-info, $theme-info);
 $calendar-hover-text-color: #fff;
 $calendar-focus-bg: ($theme-basic, $theme-basic);
-$calendar-focus-text-color: #fff;
+$calendar-focus-text-color: #000;
 
 
 //== component-grid

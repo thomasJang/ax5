@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-09-18 
+ * 2015-09-21 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -3799,7 +3799,7 @@
 			else if (command !== "remove" && (command === "get" || command === "read" || (typeof O === "undefined" && U.is_string(command)))) {
 				if (typeof O === "undefined") O = command;
 				if (!U.is_string(O)) return els;
-				return (typeof els[0].ax5_data[O] === "undefined") ? "" : els[0].ax5_data[O];
+				return (typeof els[0].ax5_data === "undefined" || typeof els[0].ax5_data[O] === "undefined") ? "" : els[0].ax5_data[O];
 			}
 			else if (command === "remove") {
 				if (typeof O === "undefined") {
