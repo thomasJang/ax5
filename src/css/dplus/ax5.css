@@ -3042,6 +3042,7 @@ a.ax {
       filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#FFFFFF);
       overflow: hidden; }
       .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date {
+        position: relative;
         display: block;
         width: 100%;
         height: 100%;
@@ -3055,30 +3056,62 @@ a.ax {
         filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#FFFFFF);
         color: #C3C4C6;
         font-size: 16px; }
+        .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date span.addon, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date span.addon {
+          position: absolute;
+          left: 0px;
+          top: 0px;
+          width: 100%;
+          text-align: center;
+          line-height: 10px; }
+        .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date span.lunar, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date span.lunar {
+          position: absolute;
+          left: 0px;
+          bottom: 3px;
+          width: 100%;
+          text-align: center;
+          font-size: 12px;
+          color: #eee;
+          line-height: 12px; }
         .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date.live, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date.live {
           background: #F0F0F0;
           background-image: -webkit-linear-gradient(top, #F0F0F0, #F0F0F0);
           background-image: linear-gradient(to bottom, #F0F0F0, #F0F0F0);
           filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F0F0F0, endColorstr=#F0F0F0);
           color: #6D6E70; }
+          .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date.live span.addon, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date.live span.addon {
+            color: #A1A1A1; }
+          .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date.live span.lunar, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date.live span.lunar {
+            color: #A1A1A1; }
         .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date.focus, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date.focus {
           background: #FFCB08;
           background-image: -webkit-linear-gradient(top, #FFCB08, #FFCB08);
           background-image: linear-gradient(to bottom, #FFCB08, #FFCB08);
           filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFCB08, endColorstr=#FFCB08);
           color: #000; }
+          .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date.focus span.addon, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date.focus span.addon {
+            color: #000; }
+          .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date.focus span.lunar, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date.focus span.lunar {
+            color: #000; }
           .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date.focus.hover, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date.focus.hover {
             background: #219ECF;
             background-image: -webkit-linear-gradient(top, #219ECF, #219ECF);
             background-image: linear-gradient(to bottom, #219ECF, #219ECF);
             filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#219ECF, endColorstr=#219ECF);
             color: #fff !important; }
+            .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date.focus.hover span.addon, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date.focus.hover span.addon {
+              color: #fff; }
+            .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date.focus.hover span.lunar, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date.focus.hover span.lunar {
+              color: #fff; }
         .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date.hover, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date.hover {
           background: #219ECF;
           background-image: -webkit-linear-gradient(top, #219ECF, #219ECF);
           background-image: linear-gradient(to bottom, #219ECF, #219ECF);
           filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#219ECF, endColorstr=#219ECF);
           color: #fff !important; }
+          .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date.hover span.addon, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date.hover span.addon {
+            color: #fff; }
+          .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date.hover span.lunar, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date.hover span.lunar {
+            color: #fff; }
       .ax5-ui-calendar .calendar-body table tbody td .calendar-item-month, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-month {
         display: block;
         width: 100%;

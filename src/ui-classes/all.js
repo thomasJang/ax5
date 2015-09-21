@@ -43,6 +43,10 @@
 		this.target = null;
 		var cfg = this.config;
 		var a_day = 1000 * 60 * 60 * 24;
+		this.printed_day = {
+			start: "", end: ""
+		};
+		this.display_ed_dt = "";
 
 		/**
 		 * Preferences of calendar UI
@@ -215,7 +219,7 @@
 						})() + ' ' + (function ()
 						{
 							return ""; //( U.date(loop_date, {return:"yyyymmdd"}) == U.date(cfg.display_date, {return:"yyyymmdd"}) ) ? "hover" : "";
-						})() + '" data-calendar-item-date="' + U.date( loop_date, {return: cfg.date_format} ) + '">' + loop_date.getDate() + '</a>' );
+						})() + '" data-calendar-item-date="' + U.date( loop_date, {return: cfg.date_format} ) + '"><span class="addon"></span>' + loop_date.getDate() + '<span class="lunar"></span></a>' );
 					po.push( '</td>' );
 					k++;
 					loop_date = U.date( loop_date, {add: {d: 1}} );
@@ -242,6 +246,18 @@
 				return false;
 			} );
 
+			this.printed_day = {
+				start: table_start_date, end: loop_date
+			};
+
+			if(cfg.on_event){
+				var that = {
+					action: "print_day",
+					printed_day: this.printed_day
+				};
+				cfg.on_event.call(that, that);
+			}
+			
 			this.set_display();
 		};
 

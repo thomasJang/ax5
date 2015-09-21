@@ -41,7 +41,6 @@
 						border-radius: 0;
 						@include ax-gradient(nth($calendar-date-bg, 1), nth($calendar-date-bg, 2));
 						color: $calendar-date-text-color;
-
 						&.live {
 							@include ax-gradient(nth($calendar-date-bg, 1), nth($calendar-date-bg, 2));
 							color: $calendar-live-text-color;

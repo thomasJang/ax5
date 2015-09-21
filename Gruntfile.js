@@ -96,7 +96,8 @@
 				files: {
 					'src/css/jellyfish/ax5.css': 'src/scss/jellyfish/ax5.scss',
 					'src/css/kakao/ax5.css': 'src/scss/kakao/ax5.scss',
-					'src/css/dplus/ax5.css': 'src/scss/dplus/ax5.scss'
+					'src/css/dplus/ax5.css': 'src/scss/dplus/ax5.scss',
+					'src/css/gajago/ax5.css': 'src/scss/gajago/ax5.scss'
 				}
 			},
 			sample_doc: {
@@ -112,9 +113,10 @@
 			},
 			target: {
 				files: [
-					//{expand: true, cwd: 'src/css/jellyfish', src: ['*.css', '!*.min.css'], dest: 'src/css/jellyfish', ext: '.min.css'},
-					//{expand: true, cwd: 'src/css/kakao', src: ['*.css', '!*.min.css'], dest: 'src/css/kakao', ext: '.min.css'},
-					{expand: true, cwd: 'src/css/dplus', src: ['*.css', '!*.min.css'], dest: 'src/css/dplus', ext: '.min.css'}
+					{expand: true, cwd: 'src/css/jellyfish', src: ['*.css', '!*.min.css'], dest: 'src/css/jellyfish', ext: '.min.css'},
+					{expand: true, cwd: 'src/css/kakao', src: ['*.css', '!*.min.css'], dest: 'src/css/kakao', ext: '.min.css'},
+					{expand: true, cwd: 'src/css/dplus', src: ['*.css', '!*.min.css'], dest: 'src/css/dplus', ext: '.min.css'},
+					{expand: true, cwd: 'src/css/gajago', src: ['*.css', '!*.min.css'], dest: 'src/css/gajago', ext: '.min.css'}
 				]
 			}
 		}
