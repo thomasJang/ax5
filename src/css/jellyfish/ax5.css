@@ -3109,6 +3109,12 @@ a.ax {
             color: #fff; }
           .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date.hover span.lunar, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date.hover span.lunar {
             color: #fff; }
+        .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date.disable, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date.disable {
+          background: #FFFFFF;
+          background-image: -webkit-linear-gradient(top, #FFFFFF, #FFFFFF);
+          background-image: linear-gradient(to bottom, #FFFFFF, #FFFFFF);
+          filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#FFFFFF);
+          color: #dddedf; }
       .ax5-ui-calendar .calendar-body table tbody td .calendar-item-month, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-month {
         display: block;
         width: 100%;

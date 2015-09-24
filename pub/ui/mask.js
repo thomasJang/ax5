@@ -144,7 +144,7 @@
 			var cfg = this.mask_config;
 			axd.remove(this._mask);
 			axd.class_name(this.target, "remove", "ax-masking");
-			if(cfg.onchange) {
+			if(cfg && cfg.onchange) {
 				that = {
 					type: "close"
 				};

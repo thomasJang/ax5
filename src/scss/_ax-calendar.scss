@@ -182,6 +182,10 @@
 								color: $calendar-hover-text-color;
 							}
 						}
+						&.disable{
+							@include ax-gradient(nth($calendar-date-bg, 1), nth($calendar-date-bg, 2));
+							color: lighten($calendar-date-text-color, 10%);
+						}
 					}
 					.calendar-item-month {
 						display: block;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-09-21 
+ publish date : 2015-09-25 
 -->
 <html lang="en">
 <head>
@@ -1770,6 +1770,77 @@ ax5.util.require(["ui/menu.js"], function() {
 			item_height: 50,
 			item_padding: 4,
 			display_date: '2015-05-01',
+			onclick: function(){
+				console.log(this);
+			}
+		});
+	})();
+</script>
+
+
+</article>
+
+
+
+
+<!-- selectable control -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-calendar-selectable" class="capitalize">selectable</h3>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result" style="background: #fff;border:1px solid #ccc;">
+	&lt;div id="ui-calendar-selectable-target">&lt;/div>
+&lt;/div>
+&lt;script type="text/javascript">
+	(function(){
+		var my_calendar = new ax5.ui.calendar();
+		my_calendar.set_config({
+			target: ax5.dom.get('#ui-calendar-selectable-target'),
+			control: {
+				left: '&lt;i class="axi axi-ion-arrow-left-b">&lt;/i>',
+				year_tmpl: '%s년',
+				month_tmpl: '%s월',
+				right: '&lt;i class="axi axi-ion-arrow-right-b">&lt;/i>'
+			},
+			width: 350,
+			item_width: 50,
+			item_height: 50,
+			item_padding: 4,
+			display_date: '2015-05-01',
+			selectable: {
+				'2015-05-01':true, '2015-05-04':true, '2015-05-05':true, '2015-05-08':true
+			},
+			onclick: function(){
+				console.log(this);
+			}
+		});
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result" style="background: #fff;border:1px solid #ccc;">
+	<div id="ui-calendar-selectable-target"></div>
+</div>
+<script type="text/javascript">
+	(function(){
+		var my_calendar = new ax5.ui.calendar();
+		my_calendar.set_config({
+			target: ax5.dom.get('#ui-calendar-selectable-target'),
+			control: {
+				left: '<i class="axi axi-ion-arrow-left-b"></i>',
+				year_tmpl: '%s년',
+				month_tmpl: '%s월',
+				right: '<i class="axi axi-ion-arrow-right-b"></i>'
+			},
+			width: 350,
+			item_width: 50,
+			item_height: 50,
+			item_padding: 4,
+			display_date: '2015-05-01',
+			selectable: {
+				'2015-05-01':true, '2015-05-04':true, '2015-05-05':true, '2015-05-08':true
+			},
 			onclick: function(){
 				console.log(this);
 			}

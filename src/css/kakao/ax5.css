@@ -3116,6 +3116,12 @@ a.ax {
             color: #503C3E; }
           .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date.hover span.lunar, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date.hover span.lunar {
             color: #503C3E; }
+        .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date.disable, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date.disable {
+          background: #292929;
+          background-image: -webkit-linear-gradient(top, #292929, #292929);
+          background-image: linear-gradient(to bottom, #292929, #292929);
+          filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#292929, endColorstr=#292929);
+          color: #dddedf; }
       .ax5-ui-calendar .calendar-body table tbody td .calendar-item-month, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-month {
         display: block;
         width: 100%;

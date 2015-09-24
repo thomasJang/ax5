@@ -529,33 +529,33 @@ $touch-grid-body-focus-bg: (#525252, #525252);
 
 
 //== calendar
-$calendar-control-bg: (#219ECF, #219ECF);
-$calendar-control-border: 0px none;
-$calendar-control-border-radius: 0px;
+$calendar-control-bg: (#FFFFFF, #F0F0F0);
+$calendar-control-border: 1px solid #B4B4B4;
+$calendar-control-border-radius: 2px;
 $calendar-control-font-size: ceil(($font-size-base * 1.25));
-$calendar-control-text-color: #fff;
+$calendar-control-text-color: $text-color;
 $calendar-control-hover-text-color: $theme-basic;
 
-$calendar-header-bg: (#f1f1f1, #f1f1f1);
-$calendar-header-border: 1px solid #c9c9c9;
-$calendar-header-padding: 7px 2px;
+$calendar-header-bg: (#FFFFFF, #FFFFFF);
+$calendar-header-border: 0px none;
+$calendar-header-padding: 10px 2px;
 $calendar-header-font-size: ceil(($font-size-base * 0.8));
 
 $calendar-body-bg: (#FFFFFF, #FFFFFF);
-$calendar-body-border: 1px solid #c9c9c9;
+$calendar-body-border: 0px none;
 $calendar-body-font-size: $font-size-base;
 
-$calendar-sun-text-color: #F65867;
-$calendar-sat-text-color: $theme-info;
+$calendar-sun-text-color: #C78B81;
+$calendar-sat-text-color: #32B4DC;
 
 $calendar-date-bg: (#FFFFFF, #FFFFFF);
 $calendar-date-text-color: #C3C4C6;
 $calendar-live-bg: (#F0F0F0, #F0F0F0);
 $calendar-live-text-color: #6D6E70;
-$calendar-hover-bg: ($theme-info, $theme-info);
+$calendar-hover-bg: (#32B4DC, #32B4DC);
 $calendar-hover-text-color: #fff;
-$calendar-focus-bg: ($theme-basic, $theme-basic);
-$calendar-focus-text-color: #000;
+$calendar-focus-bg: (#E67241, #E67241);
+$calendar-focus-text-color: #fff;
 
 
 //== component-grid

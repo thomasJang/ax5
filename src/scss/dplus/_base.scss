@@ -95,7 +95,7 @@ $padding-base-vertical:     4px;
 $padding-base-horizontal:   7px;
 
 $padding-large-vertical:    5px;
-$padding-large-horizontal:  10px;
+$padding-large-horizontal:  15px;
 
 $padding-small-vertical:    2px;
 $padding-small-horizontal:  5px;
@@ -106,9 +106,9 @@ $padding-xs-horizontal:     5px;
 $line-height-large:         1.3333333; // extra decimals for Win 8.1 Chrome
 $line-height-small:         1.5;
 
-$border-radius-base:        (0px, 0px, 0px, 0px);
-$border-radius-large:       (0px, 0px, 0px, 0px);
-$border-radius-small:       (0px, 0px, 0px, 0px);
+$border-radius-base:        (8px, 8px, 8px, 8px);
+$border-radius-large:       (12px, 12px, 12px, 12px);
+$border-radius-small:       (3px, 3px, 3px, 3px);
 //** Global color for active items (e.g., navs or dropdowns).
 $component-active-color:    #5A3100;
 //** Global background color for active items (e.g., navs or dropdowns).
@@ -542,7 +542,7 @@ $calendar-header-padding: 7px 2px;
 $calendar-header-font-size: ceil(($font-size-base * 0.8));
 
 $calendar-body-bg: (#FFFFFF, #FFFFFF);
-$calendar-body-border: 1px solid #c9c9c9;
+$calendar-body-border: 1px solid #eee;
 $calendar-body-font-size: $font-size-base;
 
 $calendar-sun-text-color: #F65867;

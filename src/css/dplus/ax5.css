@@ -158,10 +158,10 @@ a.ax {
   padding: 4px 7px;
   font-size: 14px;
   line-height: 1.428571429;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -527,29 +527,29 @@ a.ax {
       opacity: 0.65;
       box-shadow: none; }
   .ax-btn.lg {
-    padding: 5px 10px;
+    padding: 5px 15px;
     font-size: 18px;
     line-height: 1.3333333;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px; }
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px; }
   .ax-btn.sm {
     padding: 2px 5px;
     font-size: 12px;
     line-height: 1.5;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px; }
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px; }
   .ax-btn.xs {
     padding: 0px 5px;
     font-size: 12px;
     line-height: 1.5;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px; }
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px; }
 
 .ax-inp {
   color: #333333;
@@ -749,35 +749,35 @@ a.ax {
       box-shadow: none;
       opacity: 1; }
   .ax-inp.lg {
-    padding: 5px 10px;
+    padding: 5px 15px;
     font-size: 18px;
     line-height: 1.3333333;
     height: 36px;
-    border-radius: 0px;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px; }
+    border-radius: 12px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px; }
   .ax-inp.sm {
     padding: 2px 5px;
     font-size: 12px;
     line-height: 1.5;
     height: 24px;
-    border-radius: 0px;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px; }
+    border-radius: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px; }
   .ax-inp.xs {
     padding: 0px 5px;
     font-size: 12px;
     line-height: 1.5;
     height: 20px;
-    border-radius: 0px;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px; }
+    border-radius: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px; }
   .ax-inp[disabled], .ax-inp[readonly] {
     background: #eeeeee;
     background-image: -webkit-linear-gradient(top, #eeeeee, #eeeeee);
@@ -983,35 +983,35 @@ a.ax {
       box-shadow: none;
       opacity: 1; }
   .ax-select.lg {
-    padding: 5px 10px;
+    padding: 5px 15px;
     font-size: 18px;
     line-height: 1.3333333;
     height: 36px;
-    border-radius: 0px;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px; }
+    border-radius: 12px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px; }
   .ax-select.sm {
     padding: 2px 5px;
     font-size: 12px;
     line-height: 1.5;
     height: 24px;
-    border-radius: 0px;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px; }
+    border-radius: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px; }
   .ax-select.xs {
     padding: 0px 5px;
     font-size: 12px;
     line-height: 1.5;
     height: 20px;
-    border-radius: 0px;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px; }
+    border-radius: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px; }
 
 .ax-textarea {
   color: #333333;
@@ -1210,35 +1210,35 @@ a.ax {
       box-shadow: none;
       opacity: 1; }
   .ax-textarea.lg {
-    padding: 5px 10px;
+    padding: 5px 15px;
     font-size: 18px;
     line-height: 1.3333333;
     height: auto;
-    border-radius: 0px;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px; }
+    border-radius: 12px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px; }
   .ax-textarea.sm {
     padding: 2px 5px;
     font-size: 12px;
     line-height: 1.5;
     height: auto;
-    border-radius: 0px;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px; }
+    border-radius: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px; }
   .ax-textarea.xs {
     padding: 0px 5px;
     font-size: 12px;
     line-height: 1.5;
     height: auto;
-    border-radius: 0px;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px; }
+    border-radius: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px; }
 
 .ax-inp-group {
   position: relative;
@@ -1849,28 +1849,28 @@ a.ax {
     .ax-inp-group.has-special .axicon:before {
       content: ""; }
   .ax-inp-group.lg .ax-addon {
-    padding: 1px 10px;
+    padding: 1px 15px;
     font-size: 18px;
     line-height: -6.6666667;
     height: 28px;
     overflow: hidden;
     display: inline-block; }
   .ax-inp-group.lg .ax-inp {
-    padding: 5px 10px;
+    padding: 5px 15px;
     font-size: 18px;
     line-height: 1.3333333;
     height: 36px;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px; }
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px; }
     .ax-inp-group.lg .ax-inp:not(:first-child) {
       padding-left: 70px; }
     .ax-inp-group.lg .ax-inp:not(:last-child) {
       padding-right: 70px; }
   .ax-inp-group.lg .axicon {
     box-sizing: border-box;
-    padding: 5px 10px;
+    padding: 5px 15px;
     font-size: 18px;
     line-height: 1.3333333;
     height: 36px; }
@@ -1886,10 +1886,10 @@ a.ax {
     font-size: 12px;
     line-height: 24px;
     height: 24px;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px; }
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px; }
     .ax-inp-group.sm .ax-inp:not(:first-child) {
       padding-left: 70px; }
     .ax-inp-group.sm .ax-inp:not(:last-child) {
@@ -1912,10 +1912,10 @@ a.ax {
     font-size: 12px;
     line-height: 20px;
     height: 20px;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px; }
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px; }
     .ax-inp-group.xs .ax-inp:not(:first-child) {
       padding-left: 70px; }
     .ax-inp-group.xs .ax-inp:not(:last-child) {
@@ -1942,12 +1942,12 @@ a.ax {
     background-color: #fff;
     border: 1px solid #ddd; }
     .ax-item-group .ax-item:first-child, .ax-item-group .ax-item-group:first-child {
-      border-top-left-radius: 0px;
-      border-top-right-radius: 0px; }
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px; }
     .ax-item-group .ax-item:last-child, .ax-item-group .ax-item-group:last-child {
       margin-bottom: 0;
-      border-bottom-right-radius: 0px;
-      border-bottom-left-radius: 0px; }
+      border-bottom-right-radius: 8px;
+      border-bottom-left-radius: 8px; }
   .ax-item-group .ax-item-group {
     padding: 10px 10px; }
   .ax-item-group a.ax-item {
@@ -2091,10 +2091,10 @@ a.ax {
   box-sizing: border-box;
   background-color: #fff;
   border: 1px solid transparent;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   border: 1px solid #ddd; }
   .ax-panel .ax-panel-heading {
@@ -2102,8 +2102,8 @@ a.ax {
     font-weight: 600;
     padding: 10px 12px;
     border-bottom: 1px solid transparent;
-    border-top-left-radius: -1px;
-    border-top-right-radius: -1px; }
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px; }
     .ax-panel .ax-panel-heading .badge {
       font-size: 0.8em;
       color: #f5f5f5;
@@ -2112,8 +2112,8 @@ a.ax {
     padding: 12px; }
   .ax-panel .ax-panel-foot {
     padding: 10px 12px;
-    border-bottom-right-radius: -1px;
-    border-bottom-left-radius: -1px; }
+    border-bottom-right-radius: 7px;
+    border-bottom-left-radius: 7px; }
   .ax-panel .ax-panel-heading {
     color: #333333;
     background: #f5f5f5; }
@@ -2195,10 +2195,10 @@ a.ax {
   box-sizing: border-box;
   background-color: #fff;
   border: 1px solid transparent;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   border-radius: 0;
   box-shadow: none;
@@ -2270,10 +2270,10 @@ a.ax {
   box-sizing: border-box;
   background-color: #fff;
   border: 1px solid transparent;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); }
 
 .ax-tab {
@@ -2281,10 +2281,10 @@ a.ax {
   box-sizing: border-box;
   background-color: #fff;
   border: 1px solid transparent;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); }
 
 .ax-toolbar {
@@ -2292,10 +2292,10 @@ a.ax {
   box-sizing: border-box;
   background-color: #fff;
   border: 1px solid transparent;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); }
 
 .ax-label {
@@ -2303,10 +2303,10 @@ a.ax {
   box-sizing: border-box;
   background-color: #fff;
   border: 1px solid transparent;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); }
 
 @-webkit-keyframes ax-mask {
@@ -3035,7 +3035,7 @@ a.ax {
       cursor: pointer;
       text-align: center;
       font-size: 14px;
-      border: 1px solid #c9c9c9;
+      border: 1px solid #eee;
       background: #FFFFFF;
       background-image: -webkit-linear-gradient(top, #FFFFFF, #FFFFFF);
       background-image: linear-gradient(to bottom, #FFFFFF, #FFFFFF);
@@ -3112,6 +3112,12 @@ a.ax {
             color: #fff; }
           .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date.hover span.lunar, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date.hover span.lunar {
             color: #fff; }
+        .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date.disable, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date.disable {
+          background: #FFFFFF;
+          background-image: -webkit-linear-gradient(top, #FFFFFF, #FFFFFF);
+          background-image: linear-gradient(to bottom, #FFFFFF, #FFFFFF);
+          filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#FFFFFF);
+          color: #dddedf; }
       .ax5-ui-calendar .calendar-body table tbody td .calendar-item-month, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-month {
         display: block;
         width: 100%;
@@ -3756,11 +3762,11 @@ input[type='checkbox']:checked + .ax5-ui-switch.with-label {
           border: 1px solid #ddd;
           border-right: 0px none; }
           .ax5-ui-segment .ax5-ui-segment-group table td .ax-btn[data-segment-item-first] {
-            border-top-left-radius: 0px;
-            border-bottom-left-radius: 0px; }
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px; }
           .ax5-ui-segment .ax5-ui-segment-group table td .ax-btn[data-segment-item-last] {
-            border-top-right-radius: 0px;
-            border-bottom-right-radius: 0px; }
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px; }
           .ax5-ui-segment .ax5-ui-segment-group table td .ax-btn[data-segment-item-last] {
             border-right: 1px solid #ddd; }
           .ax5-ui-segment .ax5-ui-segment-group table td .ax-btn.on {
@@ -3916,13 +3922,8 @@ input[type='checkbox']:checked + .ax5-ui-switch.with-label {
 .ax5-ui-modal .ax-modal-heading {
   font-size: 14px; }
 
-.ax-mask {
-  height: 120%; }
-  .ax-mask .ax-mask-bg {
-    height: 120%;
-    background: transparent; }
-  .ax-mask .ax-mask-content {
-    height: 120%; }
+.ax-mask .ax-mask-bg {
+  background: transparent; }
 
 .ax5-ui-calendar .calendar-control {
   margin: 0px; }
@@ -3934,11 +3935,11 @@ input[type='checkbox']:checked + .ax5-ui-switch.with-label {
 
 .ax5-ui-calendar .calendar-body table tbody td, .ax5-ui-calendar .calendar-body table tbody th {
   border: 0px none;
-  border-top: 1px solid #c9c9c9;
-  border-bottom: 1px solid #c9c9c9;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
   padding: 0px; }
   .ax5-ui-calendar .calendar-body table tbody td .calendar-item-date, .ax5-ui-calendar .calendar-body table tbody th .calendar-item-date {
-    border-radius: 0;
+    border-radius: 5px;
     background: #FFFFFF;
     background-image: -webkit-linear-gradient(top, #FFFFFF, #FFFFFF);
     background-image: linear-gradient(to bottom, #FFFFFF, #FFFFFF);
