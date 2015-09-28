@@ -530,8 +530,8 @@ $touch-grid-body-focus-bg: (#525252, #525252);
 
 //== calendar
 $calendar-control-bg: (#FFFFFF, #F0F0F0);
-$calendar-control-border: 1px solid #B4B4B4;
-$calendar-control-border-radius: 2px;
+$calendar-control-border: 1px solid #eee;
+$calendar-control-border-radius: 6px;
 $calendar-control-font-size: ceil(($font-size-base * 1.25));
 $calendar-control-text-color: $text-color;
 $calendar-control-hover-text-color: $theme-basic;
@@ -564,10 +564,10 @@ $component-grid-addon-text-color: #fff;
 
 //== modal
 $modal-box-model: $panel-box-model;
-$modal-bg: #F1F1F1;
+$modal-bg: #FFFFFF;
 $modal-border: 0px none;
 $modal-box-shaodw: 0px 0px 4px 0px rgba(0,0,0,0.50);
-$modal-body-padding: $panel-body-padding;
+$modal-body-padding: 5px; //$panel-body-padding;
 $modal-heading-padding: 0px 12px;
 $modal-border-radius: 8px;
 

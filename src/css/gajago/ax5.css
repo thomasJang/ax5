@@ -2958,8 +2958,8 @@ a.ax {
     background-image: -webkit-linear-gradient(top, #FFFFFF, #F0F0F0);
     background-image: linear-gradient(to bottom, #FFFFFF, #F0F0F0);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#F0F0F0);
-    border: 1px solid #B4B4B4;
-    border-radius: 2px;
+    border: 1px solid #eee;
+    border-radius: 6px;
     font-size: 18px;
     margin-bottom: 5px;
     color: #333333; }
@@ -3400,7 +3400,7 @@ a.ax {
   transform: translateZ(0px);
   color: #333333;
   box-sizing: border-box;
-  background-color: #F1F1F1;
+  background-color: #FFFFFF;
   border: 0px none;
   border-radius: 8px;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.5);
@@ -3451,7 +3451,7 @@ a.ax {
       color: #e8e8e8;
       background-color: #333333; }
   .ax5-ui-modal .ax-modal-body {
-    padding: 12px;
+    padding: 5px;
     text-align: center;
     -webkit-box-flex: 1;
     -moz-box-flex: 1;

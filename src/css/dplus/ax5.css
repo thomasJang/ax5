@@ -156,7 +156,7 @@ a.ax {
   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F1F1F1, endColorstr=#F1F1F1);
   box-shadow: none;
   padding: 4px 7px;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.428571429;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
@@ -528,7 +528,7 @@ a.ax {
       box-shadow: none; }
   .ax-btn.lg {
     padding: 5px 15px;
-    font-size: 18px;
+    font-size: 17px;
     line-height: 1.3333333;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
@@ -567,9 +567,9 @@ a.ax {
   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#FFFFFF);
   box-shadow: none;
   padding: 4px 7px;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.428571429;
-  height: 30px;
+  height: 28px;
   border-radius: 0px;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
@@ -750,9 +750,9 @@ a.ax {
       opacity: 1; }
   .ax-inp.lg {
     padding: 5px 15px;
-    font-size: 18px;
+    font-size: 17px;
     line-height: 1.3333333;
-    height: 36px;
+    height: 35px;
     border-radius: 12px;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
@@ -801,9 +801,9 @@ a.ax {
   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F1F1F1, endColorstr=#F1F1F1);
   box-shadow: none;
   padding: 4px 7px;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.428571429;
-  height: 30px;
+  height: 28px;
   border-radius: 0px;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
@@ -984,9 +984,9 @@ a.ax {
       opacity: 1; }
   .ax-select.lg {
     padding: 5px 15px;
-    font-size: 18px;
+    font-size: 17px;
     line-height: 1.3333333;
-    height: 36px;
+    height: 35px;
     border-radius: 12px;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
@@ -1028,7 +1028,7 @@ a.ax {
   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#FFFFFF);
   box-shadow: none;
   padding: 4px 7px;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.428571429;
   height: auto;
   border-radius: 0px;
@@ -1211,7 +1211,7 @@ a.ax {
       opacity: 1; }
   .ax-textarea.lg {
     padding: 5px 15px;
-    font-size: 18px;
+    font-size: 17px;
     line-height: 1.3333333;
     height: auto;
     border-radius: 12px;
@@ -1265,9 +1265,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F1F1F1, endColorstr=#F1F1F1);
     box-shadow: none;
     padding: 0px 7px;
-    font-size: 14px;
+    font-size: 13px;
     line-height: -6.571428571;
-    height: 22px;
+    height: 20px;
     border-radius: 0px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
@@ -1309,9 +1309,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFCB08, endColorstr=#FFCB08);
     box-shadow: none;
     padding: 0px 7px;
-    font-size: 14px;
+    font-size: 13px;
     line-height: -6.571428571;
-    height: 22px;
+    height: 20px;
     border-radius: 0px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
@@ -1346,9 +1346,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#219ECF, endColorstr=#219ECF);
     box-shadow: none;
     padding: 0px 7px;
-    font-size: 14px;
+    font-size: 13px;
     line-height: -6.571428571;
-    height: 22px;
+    height: 20px;
     border-radius: 0px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
@@ -1383,9 +1383,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#fff, endColorstr=#fff);
     box-shadow: none;
     padding: 0px 7px;
-    font-size: 14px;
+    font-size: 13px;
     line-height: -6.571428571;
-    height: 22px;
+    height: 20px;
     border-radius: 0px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
@@ -1420,9 +1420,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F1F1F1, endColorstr=#F1F1F1);
     box-shadow: none;
     padding: 0px 7px;
-    font-size: 14px;
+    font-size: 13px;
     line-height: -6.571428571;
-    height: 22px;
+    height: 20px;
     border-radius: 0px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
@@ -1457,9 +1457,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#8d231a, endColorstr=#8d231a);
     box-shadow: none;
     padding: 0px 7px;
-    font-size: 14px;
+    font-size: 13px;
     line-height: -6.571428571;
-    height: 22px;
+    height: 20px;
     border-radius: 0px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
@@ -1494,9 +1494,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#101010, endColorstr=#292929);
     box-shadow: none;
     padding: 0px 7px;
-    font-size: 14px;
+    font-size: 13px;
     line-height: -6.571428571;
-    height: 22px;
+    height: 20px;
     border-radius: 0px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
@@ -1531,9 +1531,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFCB08, endColorstr=#FFCB08);
     box-shadow: none;
     padding: 0px 7px;
-    font-size: 14px;
+    font-size: 13px;
     line-height: -6.571428571;
-    height: 22px;
+    height: 20px;
     border-radius: 0px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
@@ -1561,9 +1561,9 @@ a.ax {
     right: 0px;
     top: 0px;
     color: #a17f00;
-    font-size: 16.8px;
+    font-size: 15.6px;
     font-weight: 400;
-    line-height: 20px;
+    line-height: 18px;
     padding: 4px 7px;
     font-family: axicon; }
     .ax-inp-group.has-basic .axicon:before {
@@ -1587,9 +1587,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#219ECF, endColorstr=#219ECF);
     box-shadow: none;
     padding: 0px 7px;
-    font-size: 14px;
+    font-size: 13px;
     line-height: -6.571428571;
-    height: 22px;
+    height: 20px;
     border-radius: 0px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
@@ -1617,9 +1617,9 @@ a.ax {
     right: 0px;
     top: 0px;
     color: #135b77;
-    font-size: 16.8px;
+    font-size: 15.6px;
     font-weight: 400;
-    line-height: 20px;
+    line-height: 18px;
     padding: 4px 7px;
     font-family: axicon; }
     .ax-inp-group.has-good .axicon:before {
@@ -1643,9 +1643,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#fff, endColorstr=#fff);
     box-shadow: none;
     padding: 0px 7px;
-    font-size: 14px;
+    font-size: 13px;
     line-height: -6.571428571;
-    height: 22px;
+    height: 20px;
     border-radius: 0px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
@@ -1673,9 +1673,9 @@ a.ax {
     right: 0px;
     top: 0px;
     color: #135b77;
-    font-size: 16.8px;
+    font-size: 15.6px;
     font-weight: 400;
-    line-height: 20px;
+    line-height: 18px;
     padding: 4px 7px;
     font-family: axicon; }
     .ax-inp-group.has-info .axicon:before {
@@ -1699,9 +1699,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F1F1F1, endColorstr=#F1F1F1);
     box-shadow: none;
     padding: 0px 7px;
-    font-size: 14px;
+    font-size: 13px;
     line-height: -6.571428571;
-    height: 22px;
+    height: 20px;
     border-radius: 0px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
@@ -1729,9 +1729,9 @@ a.ax {
     right: 0px;
     top: 0px;
     color: #8d231a;
-    font-size: 16.8px;
+    font-size: 15.6px;
     font-weight: 400;
-    line-height: 20px;
+    line-height: 18px;
     padding: 4px 7px;
     font-family: axicon; }
     .ax-inp-group.has-warning .axicon:before {
@@ -1755,9 +1755,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#8d231a, endColorstr=#8d231a);
     box-shadow: none;
     padding: 0px 7px;
-    font-size: 14px;
+    font-size: 13px;
     line-height: -6.571428571;
-    height: 22px;
+    height: 20px;
     border-radius: 0px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
@@ -1785,9 +1785,9 @@ a.ax {
     right: 0px;
     top: 0px;
     color: #8d231a;
-    font-size: 16.8px;
+    font-size: 15.6px;
     font-weight: 400;
-    line-height: 20px;
+    line-height: 18px;
     padding: 4px 7px;
     font-family: axicon; }
     .ax-inp-group.has-danger .axicon:before {
@@ -1811,9 +1811,9 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#101010, endColorstr=#292929);
     box-shadow: none;
     padding: 0px 7px;
-    font-size: 14px;
+    font-size: 13px;
     line-height: -6.571428571;
-    height: 22px;
+    height: 20px;
     border-radius: 0px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
@@ -1841,25 +1841,25 @@ a.ax {
     right: 0px;
     top: 0px;
     color: black;
-    font-size: 16.8px;
+    font-size: 15.6px;
     font-weight: 400;
-    line-height: 20px;
+    line-height: 18px;
     padding: 4px 7px;
     font-family: axicon; }
     .ax-inp-group.has-special .axicon:before {
       content: ""; }
   .ax-inp-group.lg .ax-addon {
     padding: 1px 15px;
-    font-size: 18px;
+    font-size: 17px;
     line-height: -6.6666667;
-    height: 28px;
+    height: 27px;
     overflow: hidden;
     display: inline-block; }
   .ax-inp-group.lg .ax-inp {
     padding: 5px 15px;
-    font-size: 18px;
+    font-size: 17px;
     line-height: 1.3333333;
-    height: 36px;
+    height: 35px;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
@@ -1871,9 +1871,9 @@ a.ax {
   .ax-inp-group.lg .axicon {
     box-sizing: border-box;
     padding: 5px 15px;
-    font-size: 18px;
+    font-size: 17px;
     line-height: 1.3333333;
-    height: 36px; }
+    height: 35px; }
   .ax-inp-group.sm .ax-addon {
     padding: -2px 5px;
     font-size: 12px;
@@ -2746,7 +2746,7 @@ a.ax {
         box-sizing: border-box;
         position: relative; }
       .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-body table tbody tr td {
-        font-size: 14px; }
+        font-size: 13px; }
       .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-body table tbody tr:hover td, .ax5-ui-touch-grid .touch-grid-body .touch-grid-main .touch-grid-main-body table tbody tr:hover th {
         background: #393939;
         background-image: -webkit-linear-gradient(top, #393939, #393939);
@@ -2782,7 +2782,7 @@ a.ax {
           width: 100%;
           height: 100%; }
     .ax5-ui-touch-grid .touch-grid-control table td .ax-btn {
-      font-size: 35px;
+      font-size: 33px;
       text-align: center;
       padding: 0px;
       border-width: 2px; }
@@ -2814,7 +2814,7 @@ a.ax {
           width: 100%;
           height: 100%; }
     .ax5-ui-component-grid .component-grid-body .ax-btn .label {
-      font-size: 21px;
+      font-size: 20px;
       padding: 5px 0px;
       vertical-align: middle;
       text-align: center; }
@@ -2851,7 +2851,7 @@ a.ax {
         -ms-flex: 1;
         flex: 1;
         padding: 10px 0px;
-        font-size: 17px; }
+        font-size: 16px; }
       .ax5-ui-component-grid .component-grid-body .has-addon .ax-btn .addon {
         -webkit-box-flex: none;
         -moz-box-flex: none;
@@ -2861,7 +2861,7 @@ a.ax {
         -ms-flex: none;
         flex: none;
         position: relative;
-        font-size: 14px;
+        font-size: 13px;
         background: #002A4F;
         background: #002A4F;
         background-image: -webkit-linear-gradient(top, #002A4F, #002A4F);
@@ -2896,7 +2896,7 @@ a.ax {
           width: 100%;
           height: 100%; }
     .ax5-ui-component-grid .component-grid-control table td .ax-btn {
-      font-size: 35px;
+      font-size: 33px;
       text-align: center;
       padding: 0px; }
 
@@ -2960,7 +2960,7 @@ a.ax {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#219ECF, endColorstr=#219ECF);
     border: 0px none;
     border-radius: 0px;
-    font-size: 18px;
+    font-size: 17px;
     margin-bottom: 5px;
     color: #fff; }
     .ax5-ui-calendar .calendar-control .date-move-left {
@@ -2969,7 +2969,7 @@ a.ax {
       left: 0px;
       top: 0px;
       text-align: center;
-      font-size: 22px;
+      font-size: 21px;
       cursor: pointer; }
       .ax5-ui-calendar .calendar-control .date-move-left i {
         line-height: inherit; }
@@ -2985,7 +2985,7 @@ a.ax {
       right: 0px;
       top: 0px;
       text-align: center;
-      font-size: 22px;
+      font-size: 21px;
       cursor: pointer; }
       .ax5-ui-calendar .calendar-control .date-move-right i {
         line-height: inherit; }
@@ -3016,7 +3016,7 @@ a.ax {
       line-height: 1em;
       cursor: pointer;
       text-align: center;
-      font-size: 12px;
+      font-size: 11px;
       padding: 7px 2px;
       border: 1px solid #c9c9c9;
       background: #f1f1f1;
@@ -3034,7 +3034,7 @@ a.ax {
       line-height: 1em;
       cursor: pointer;
       text-align: center;
-      font-size: 14px;
+      font-size: 13px;
       border: 1px solid #eee;
       background: #FFFFFF;
       background-image: -webkit-linear-gradient(top, #FFFFFF, #FFFFFF);
@@ -3440,7 +3440,7 @@ a.ax {
     -moz-flex: none;
     -ms-flex: none;
     flex: none;
-    font-size: 21px;
+    font-size: 20px;
     font-weight: 600;
     padding: 0px 12px;
     box-sizing: border-box;
@@ -3920,7 +3920,7 @@ input[type='checkbox']:checked + .ax5-ui-switch.with-label {
         transition: all 0.5s, cubic-bezier(0.19, 1, 0.22, 1); }
 
 .ax5-ui-modal .ax-modal-heading {
-  font-size: 14px; }
+  font-size: 13px; }
 
 .ax-mask .ax-mask-bg {
   background: transparent; }

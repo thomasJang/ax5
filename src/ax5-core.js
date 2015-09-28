@@ -1595,7 +1595,7 @@
 
 		/**
 		 * 인자인 날짜가 오늘부터 몇일전인지 반환합니다. 또는 인자인 날짜가 가까운 미래에 몇일 후인지 반환합니다.
-		 * @method ax5.util.ddday
+		 * @method ax5.util.dday
 		 * @param {String|Data} d
 		 * @param {Object} cond
 		 * @returns {Number}
@@ -1609,6 +1609,7 @@
 				diffnum = number((( get_day_time(memory_day) - get_day_time(today) ) / DyMilli), {floor: true});
 				return diffnum;
 			}
+
 			else {
 				diffnum = number((( get_day_time(memory_day) - get_day_time(today) ) / DyMilli), {floor: true});
 				if (cond["today"]) {
