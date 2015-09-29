@@ -95,13 +95,15 @@
 			}
 		};
 		
-		this._set_size_frame = function(){
+		this._set_size_frame = this.alignment = function(){
 			this.els["root"].css({
 				top:0, left:0,
 				width: this.target.width(),
 				height: this.target.height()
 			});
 		};
+
+
 
 		this._get_frame = function(origin_id) {
 

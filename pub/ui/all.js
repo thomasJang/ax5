@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-09-28 
+ * 2015-09-29 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -2447,13 +2447,15 @@
 			}
 		};
 		
-		this._set_size_frame = function(){
+		this._set_size_frame = this.alignment = function(){
 			this.els["root"].css({
 				top:0, left:0,
 				width: this.target.width(),
 				height: this.target.height()
 			});
 		};
+
+
 
 		this._get_frame = function(origin_id) {
 

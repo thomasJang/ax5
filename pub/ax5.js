@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-09-28 
+ * 2015-09-29 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -1778,9 +1778,11 @@
 		 */
 		function dday(d, cond) {
 			var memory_day = date(d), DyMilli = ((1000 * 60) * 60) * 24, today = new Date(), diffnum, this_year_memory_day;
-			function get_day_time(_d){
+
+			function get_day_time(_d) {
 				return Math.floor(_d.getTime() / DyMilli) * DyMilli;
 			}
+
 			if (typeof cond === "undefined") {
 				diffnum = number((( get_day_time(memory_day) - get_day_time(today) ) / DyMilli), {floor: true});
 				return diffnum;
@@ -1795,8 +1797,8 @@
 				if (cond["this_year"]) {
 					this_year_memory_day = new Date(today.getFullYear(), memory_day.getMonth(), memory_day.getDate());
 					diffnum = number((( get_day_time(this_year_memory_day) - get_day_time(today) ) / DyMilli), {floor: true});
-					if(diffnum < 0){
-						this_year_memory_day = new Date(today.getFullYear()+1, memory_day.getMonth(), memory_day.getDate());
+					if (diffnum < 0) {
+						this_year_memory_day = new Date(today.getFullYear() + 1, memory_day.getMonth(), memory_day.getDate());
 						diffnum = number((( get_day_time(this_year_memory_day) - get_day_time(today) ) / DyMilli), {floor: true});
 					}
 					if (cond["age"]) {
@@ -1806,6 +1808,37 @@
 
 				return diffnum;
 			}
+		}
+
+		/**
+		 * 인자인 날짜가 몇년 몇월의 몇번째 주차인지 반환합니다.
+		 * @method ax5.util.weeks_of_month
+		 * @param {String|Data} d
+		 * @returns {Object}
+		 * @example
+		 * ```js
+		 * ax5.util.weeks_of_month("2015-10-01"); // {year: 2015, month: 9, count: 5}
+		 * ax5.util.weeks_of_month("2015-09-19"); // {year: 2015, month: 9, count: 3}
+		 * ```
+		 */
+		function weeks_of_month(d) {
+			var my_date = date(d),
+				adj_day = 0,
+				week = [1, 0, 5, 4, 3, 2, 1], // 요일별 보정
+				start_of_month = new Date(my_date.getFullYear(), my_date.getMonth(), 1);
+
+			adj_day = my_date.getDate() - start_of_month.getDate() - week[my_date.getDay()];
+
+			if (( adj_day - week[my_date.getDay()] ) < 0) {
+				my_date.setDate(start_of_month.getDate() - 1);
+				start_of_month.setDate(start_of_month.getDate() - my_date.getDate());
+				adj_day = my_date.getDate() - start_of_month.getDate();
+			}
+			return {
+				year: my_date.getFullYear(),
+				month: my_date.getMonth() + 1,
+				count: parseInt(adj_day / 7 + 1)
+			};
 		}
 
 		/**
@@ -1887,7 +1920,8 @@
 			dday: dday,
 			set_digit: set_digit,
 			times: times,
-			days_of_month: days_of_month
+			days_of_month: days_of_month,
+			weeks_of_month: weeks_of_month
 		}
 	})();
 
@@ -2417,7 +2451,7 @@
 				 * @method ax5.dom0.elt
 				 * @returns {domElement}
 				 */
-				this.elt = function(){
+				this.elt = function() {
 					return this.elements[0];
 				};
 
@@ -2427,7 +2461,7 @@
 				 * @param {String} [evt_nm] - 발생시킬 이벤트 이름
 				 * @returns {ax5.dom0}
 				 */
-				this.dispatch_event = function(evt_nm){
+				this.dispatch_event = function(evt_nm) {
 					dom.dispatch_event(this.elements, evt_nm);
 					return this;
 				}
@@ -3862,7 +3896,7 @@
 		 * @param {Elements|Element} elements
 		 * @param {String} [evt_nm] - 발생시킬 이벤트 이름
 		 */
-		function dispatch_event(els, evt_nm){
+		function dispatch_event(els, evt_nm) {
 			els = va_elem(els, "val");
 			if ("createEvent" in document) {
 				var evt = document.createEvent("HTMLEvents");
