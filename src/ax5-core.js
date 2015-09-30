@@ -1646,22 +1646,15 @@
 		 * ```
 		 */
 		function weeks_of_month(d) {
-			var my_date = date(d),
-				adj_day = 0,
-				week = [1, 0, 5, 4, 3, 2, 1], // 요일별 보정
-				start_of_month = new Date(my_date.getFullYear(), my_date.getMonth(), 1);
-
-			adj_day = my_date.getDate() - start_of_month.getDate() - week[my_date.getDay()];
-
-			if (( adj_day - week[my_date.getDay()] ) < 0) {
-				my_date.setDate(start_of_month.getDate() - 1);
-				start_of_month.setDate(start_of_month.getDate() - my_date.getDate());
-				adj_day = my_date.getDate() - start_of_month.getDate();
-			}
+			var my_date = date(d);
+			//s_of_month = new Date(my_date.getFullYear(), my_date.getMonth(), 1);
+			//s_of_month.getDay()
+			//console.log(s_of_month.getDay(), my_date.getDay());
+			//console.log(parseInt(my_date.getDate() / 7 + 1));
 			return {
 				year: my_date.getFullYear(),
 				month: my_date.getMonth() + 1,
-				count: parseInt(adj_day / 7 + 1)
+				count: parseInt(my_date.getDate() / 7 + 1)
 			};
 		}
 
