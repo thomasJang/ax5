@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<!-- 
+ ax5 - v0.0.1 
+ publish date : 2015-10-03 
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ax5</title>
+
+	<meta name="viewport" content="width=640, user-scalable=no, initial-scale=1, maximum-scale=1.0, minimum-scale=1" />
+
+    <link rel="stylesheet" type="text/css" href="../plugin/prettify/github.css">
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+	<link rel="stylesheet" type="text/css" href="" id="ax5-theme">
+	<link rel="stylesheet" type="text/css" href="http://cdn.axisj.com/axicon/axicon.min.css">
+	
+    <script type="text/javascript" src="../plugin/prettify/prettify.js"></script>
+    <script type="text/javascript" src="../pub/ax5.js"></script>
+	<script type="text/javascript" src="../pub/ui/all.js"></script>
+
+</head>
+<body>
+
+<div class="app-nav">
+	<div class="box-bg"></div>
+	<div class="box-content">
+		<a href="#" class="logo">AX5</a>
+		<ul class="menu">
+			<li class="vline"></li>
+			<li><a href="index.html">JS Core</a></li>
+			<li class="vline"></li>
+			<li><a href="css.html">CSS</a></li>
+			<li class="vline"></li>
+			<li><a href="ui-class-1.html">UI Class.1</a></li>
+			<li class="vline"></li>
+			<li><a href="ui-class-2.html">UI Class.2</a></li>
+			<li class="vline"></li>
+			<li><a href="/jsdoc/">JSDOC</a></li>
+			<li class="vline"></li>
+		</ul>
+		<div class="theme-selector">
+			<select class="ax-select" id="ax5-theme-select"></select>
+		</div>
+	</div>
+</div>
+
+<!-- split -->
+
+<div class="app-visual" id="app-visual">
+	<div class="app-wrap">
+		<div class="visual"></div>
+		<h1>UI Class</h1>
+		<h3>AX5 UI 클래스의 사용법과 상세 예제를 만나실 수 있습니다.</h3>
+	</div>
+</div>
+
+<div class="app-page">
+	<div class="app-content app-wrap">
+
+<!-- split -->
+
+<article class="cover">
+	<h1 data-menu-item="ax-ui-keypad">Keypad</h1>
+	<p class="lead">
+
+	</p>
+</article>
+
+
+<!-- basic -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-keypad-basic" class="capitalize">basic</h3>
+
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+	&lt;div id="ui-keypad-basic-target" style="width:300px;height: 250px;">&lt;/div>
+&lt;/div>
+&lt;script type="text/javascript">
+(function(){
+	var my_keypad = new ax5.ui.keypad();
+	my_keypad.set_config({
+		target: ax5.dom.get("#ui-keypad-basic-target"),
+		theme: "default",
+		board: {
+			keys: [
+				{label:"7", value:7},
+				{label:"8", value:8},
+				{label:"9", value:9},
+				{label:'&lt;i class="axi axi-delete">&lt;/i>', value:"del", klass:"warning", width:"40%"},
+				{newline:true},
+				{label:"4", value:4},
+				{label:"5", value:5},
+				{label:"6", value:6},
+				{label:"CLR", value:"clear", klass:"danger", width:"40%"},
+				{newline:true},
+				{label:"1", value:1},
+				{label:"2", value:2},
+				{label:"3", value:3},
+				{label:"ENTER", value:"return", rowspan:2, klass:"basic", width:"40%"},
+				{newline:true},
+				{label:"0", value:0},
+				{label:"", value:null, colspan:2}
+			],
+			col_width: "20%",
+			col_height: "60px"
+		},
+		onclick: function(){
+			console.log(this);
+		}
+	});
+})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result">
+	<div id="ui-keypad-basic-target" style="width:300px;height: 250px;"></div>
+</div>
+<script type="text/javascript">
+(function(){
+	var my_keypad = new ax5.ui.keypad();
+	my_keypad.set_config({
+		target: ax5.dom.get("#ui-keypad-basic-target"),
+		theme: "default",
+		board: {
+			keys: [
+				{label:"7", value:7},
+				{label:"8", value:8},
+				{label:"9", value:9},
+				{label:'<i class="axi axi-delete"></i>', value:"del", klass:"warning", width:"40%"},
+				{newline:true},
+				{label:"4", value:4},
+				{label:"5", value:5},
+				{label:"6", value:6},
+				{label:"CLR", value:"clear", klass:"danger", width:"40%"},
+				{newline:true},
+				{label:"1", value:1},
+				{label:"2", value:2},
+				{label:"3", value:3},
+				{label:"ENTER", value:"return", rowspan:2, klass:"basic", width:"40%"},
+				{newline:true},
+				{label:"0", value:0},
+				{label:"", value:null, colspan:2}
+			],
+			col_width: "20%",
+			col_height: "60px"
+		},
+		onclick: function(){
+			console.log(this);
+		}
+	});
+})();
+</script>
+
+
+</article>
+
+
+<!-- examples -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-keypad-example" class="capitalize">example</h3>
+
+<pre class="prettyprint linenums">
+&lt;div class="tag-result" style="height: 250px;">
+	&lt;div style="padding:3px;">
+		&lt;input type="text" class="ax-inp lg" id="ui-keypad-example-disp" value="" style="width:234px;text-align: right;" />
+	&lt;/div>
+	&lt;div id="ui-keypad-example-target" style="width:240px;">&lt;/div>
+&lt;/div>
+&lt;script type="text/javascript">
+(function(){
+	var my_disp = ax5.dom.get_one("#ui-keypad-example-disp");
+	var my_keypad = new ax5.ui.keypad();
+	my_keypad.set_config({
+		target: ax5.dom.get("#ui-keypad-example-target"),
+		theme: "default",
+		board: {
+			keys: [
+				{label:"7", value:7},
+				{label:"8", value:8},
+				{label:"9", value:9},
+				{label:"0", value:0},
+				{newline:true},
+				{label:"4", value:4},
+				{label:"5", value:5},
+				{label:"6", value:6},
+				{label:'&lt;i class="axi axi-delete">&lt;/i>', value:"del", klass:"warning"},
+				{newline:true},
+				{label:"1", value:1},
+				{label:"2", value:2},
+				{label:"3", value:3},
+				{label:"ENTER", value:"return", klass:"basic"}
+			],
+			col_width: "25%",
+			col_height: "60px"
+		},
+		onclick: function(){
+			if(this.item.value == null) return;
+			if(this.item.value == "del"){
+				if(my_disp.value == "") return;
+				my_disp.value = ax5.util.number(ax5.util.number(my_disp.value.substr(0, my_disp.value.length-1)), {money:true});
+			}
+			else
+			if(this.item.value == "return"){
+				if(my_disp.value == "") return;
+				alert(ax5.util.number(my_disp.value));
+			}
+			else{
+				if(my_disp.value == "" && ax5.util.number(this.item.value) == 0) return;
+				my_disp.value = ax5.util.number('' + ax5.util.number(my_disp.value) + this.item.value, {money:true});
+			}
+		}
+	});
+})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result" style="height: 250px;">
+	<div style="padding:3px;">
+		<input type="text" class="ax-inp lg" id="ui-keypad-example-disp" value="" style="width:234px;text-align: right;" />
+	</div>
+	<div id="ui-keypad-example-target" style="width:240px;"></div>
+</div>
+<script type="text/javascript">
+(function(){
+	var my_disp = ax5.dom.get_one("#ui-keypad-example-disp");
+	var my_keypad = new ax5.ui.keypad();
+	my_keypad.set_config({
+		target: ax5.dom.get("#ui-keypad-example-target"),
+		theme: "default",
+		board: {
+			keys: [
+				{label:"7", value:7},
+				{label:"8", value:8},
+				{label:"9", value:9},
+				{label:"0", value:0},
+				{newline:true},
+				{label:"4", value:4},
+				{label:"5", value:5},
+				{label:"6", value:6},
+				{label:'<i class="axi axi-delete"></i>', value:"del", klass:"warning"},
+				{newline:true},
+				{label:"1", value:1},
+				{label:"2", value:2},
+				{label:"3", value:3},
+				{label:"ENTER", value:"return", klass:"basic"}
+			],
+			col_width: "25%",
+			col_height: "60px"
+		},
+		onclick: function(){
+			if(this.item.value == null) return;
+			if(this.item.value == "del"){
+				if(my_disp.value == "") return;
+				my_disp.value = ax5.util.number(ax5.util.number(my_disp.value.substr(0, my_disp.value.length-1)), {money:true});
+			}
+			else
+			if(this.item.value == "return"){
+				if(my_disp.value == "") return;
+				alert(ax5.util.number(my_disp.value));
+			}
+			else{
+				if(my_disp.value == "" && ax5.util.number(this.item.value) == 0) return;
+				my_disp.value = ax5.util.number('' + ax5.util.number(my_disp.value) + this.item.value, {money:true});
+			}
+		}
+	});
+})();
+</script>
+
+
+</article>
+
+<!-- split -->
+
+<article class="cover">
+	<h1 data-menu-item="ax-ui-touch-grid">Touch-grid</h1>
+	<p class="lead">
+
+	</p>
+</article>
+
+
+
+<!-- basic -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-touch-grid-default" class="capitalize">default</h3>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+	&lt;div id="ax-ui-touch-grid-default-target" style="height:200px;">&lt;/div>
+	&lt;div style="padding:5px;">
+		&lt;button class="ax-btn lg" id="ax-ui-touch-grid-default-first">&nbsp;&lt;i class="axi axi-angle-double-up">&lt;/i>&nbsp;&lt;/button>
+		&lt;button class="ax-btn lg" id="ax-ui-touch-grid-default-up">&nbsp;&lt;i class="axi axi-angle-up">&lt;/i>&nbsp;&lt;/button>
+		&lt;button class="ax-btn lg" id="ax-ui-touch-grid-default-down">&nbsp;&lt;i class="axi axi-angle-down">&lt;/i>&nbsp;&lt;/button>
+		&lt;button class="ax-btn lg" id="ax-ui-touch-grid-default-last">&nbsp;&lt;i class="axi axi-angle-double-down">&lt;/i>&nbsp;&lt;/button>
+	&lt;/div>
+&lt;/div>
+&lt;script type="text/javascript">
+(function(){
+	var my_touch_grid = new ax5.ui.touch_grid();
+	my_touch_grid.set_config({
+		target: ax5.dom.get("#ax-ui-touch-grid-default-target"),
+		head_height: 40,
+		head_align: "center",
+		item_height: 40,
+		col_group: [
+			{key: 'date', label: 'Date', width: 120, align:"center"},
+			{key: 'title', label: '제목', width: '*'},
+			{key: 'price', label: 'Price', width: 120, formatter:"money", align:"right"}
+		],
+		body: {
+			onclick: function(){
+				console.log(this);
+			}
+		}
+	});
+
+	my_touch_grid.set_list([
+		{date:'2015-06-07', title:'1 체커 사용가이드', price:205677},
+		{date:'2015-06-06', title:'2 체커에 대한 사용동의 안내', price:'205677'},
+		{date:'2015-06-07', title:'3 체커 사용가이드'},
+		{date:'2015-06-06', title:'4 체커에 대한 사용동의 안내'},
+		{date:'2015-06-07', title:'5 체커 사용가이드'},
+		{date:'2015-06-06', title:'6 체커에 대한 사용동의 안내'},
+		{date:'2015-06-07', title:'7 체커 사용가이드'},
+		{date:'2015-06-06', title:'8 체커에 대한 사용동의 안내'}
+	]);
+
+	ax5.dom("#ax-ui-touch-grid-default-first").on("click", function(){
+		my_touch_grid.focus(0);
+	});
+	ax5.dom("#ax-ui-touch-grid-default-up").on("click", function(){
+		my_touch_grid.focus(-1, "by");
+	});
+	ax5.dom("#ax-ui-touch-grid-default-down").on("click", function(){
+		my_touch_grid.focus(1, "by");
+	});
+	ax5.dom("#ax-ui-touch-grid-default-last").on("click", function(){
+		my_touch_grid.focus("last");
+	});
+})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result">
+	<div id="ax-ui-touch-grid-default-target" style="height:200px;"></div>
+	<div style="padding:5px;">
+		<button class="ax-btn lg" id="ax-ui-touch-grid-default-first">&nbsp;<i class="axi axi-angle-double-up"></i>&nbsp;</button>
+		<button class="ax-btn lg" id="ax-ui-touch-grid-default-up">&nbsp;<i class="axi axi-angle-up"></i>&nbsp;</button>
+		<button class="ax-btn lg" id="ax-ui-touch-grid-default-down">&nbsp;<i class="axi axi-angle-down"></i>&nbsp;</button>
+		<button class="ax-btn lg" id="ax-ui-touch-grid-default-last">&nbsp;<i class="axi axi-angle-double-down"></i>&nbsp;</button>
+	</div>
+</div>
+<script type="text/javascript">
+(function(){
+	var my_touch_grid = new ax5.ui.touch_grid();
+	my_touch_grid.set_config({
+		target: ax5.dom.get("#ax-ui-touch-grid-default-target"),
+		head_height: 40,
+		head_align: "center",
+		item_height: 40,
+		col_group: [
+			{key: 'date', label: 'Date', width: 120, align:"center"},
+			{key: 'title', label: '제목', width: '*'},
+			{key: 'price', label: 'Price', width: 120, formatter:"money", align:"right"}
+		],
+		body: {
+			onclick: function(){
+				console.log(this);
+			}
+		}
+	});
+
+	my_touch_grid.set_list([
+		{date:'2015-06-07', title:'1 체커 사용가이드', price:205677},
+		{date:'2015-06-06', title:'2 체커에 대한 사용동의 안내', price:'205677'},
+		{date:'2015-06-07', title:'3 체커 사용가이드'},
+		{date:'2015-06-06', title:'4 체커에 대한 사용동의 안내'},
+		{date:'2015-06-07', title:'5 체커 사용가이드'},
+		{date:'2015-06-06', title:'6 체커에 대한 사용동의 안내'},
+		{date:'2015-06-07', title:'7 체커 사용가이드'},
+		{date:'2015-06-06', title:'8 체커에 대한 사용동의 안내'}
+	]);
+
+	ax5.dom("#ax-ui-touch-grid-default-first").on("click", function(){
+		my_touch_grid.focus(0);
+	});
+	ax5.dom("#ax-ui-touch-grid-default-up").on("click", function(){
+		my_touch_grid.focus(-1, "by");
+	});
+	ax5.dom("#ax-ui-touch-grid-default-down").on("click", function(){
+		my_touch_grid.focus(1, "by");
+	});
+	ax5.dom("#ax-ui-touch-grid-default-last").on("click", function(){
+		my_touch_grid.focus("last");
+	});
+})();
+</script>
+
+
+</article>
+
+
+
+
+<!-- append, remove -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-touch-grid-append" class="capitalize">append & remove</h3>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+	&lt;div id="ax-ui-touch-grid-append-target" style="height:200px;">&lt;/div>
+	&lt;div style="padding:5px;">
+		&lt;button class="ax-btn lg" id="ax-ui-touch-grid-append-first">&nbsp;&lt;i class="axi axi-angle-double-up">&lt;/i>&nbsp;&lt;/button>
+		&lt;button class="ax-btn lg" id="ax-ui-touch-grid-append-up">&nbsp;&lt;i class="axi axi-angle-up">&lt;/i>&nbsp;&lt;/button>
+		&lt;button class="ax-btn lg" id="ax-ui-touch-grid-append-down">&nbsp;&lt;i class="axi axi-angle-down">&lt;/i>&nbsp;&lt;/button>
+		&lt;button class="ax-btn lg" id="ax-ui-touch-grid-append-last">&nbsp;&lt;i class="axi axi-angle-double-down">&lt;/i>&nbsp;&lt;/button>
+
+		&lt;button class="ax-btn lg" id="ax-ui-touch-grid-append-append">Append&lt;/button>
+		&lt;button class="ax-btn lg" id="ax-ui-touch-grid-append-remove">Remove&lt;/button>
+		&lt;button class="ax-btn lg" id="ax-ui-touch-grid-append-update">Update&lt;/button>
+	&lt;/div>
+&lt;/div>
+&lt;script type="text/javascript">
+	(function(){
+		var my_touch_grid = new ax5.ui.touch_grid();
+		my_touch_grid.set_config({
+			target: ax5.dom.get("#ax-ui-touch-grid-append-target"),
+			head_height: 40,
+			head_align: "center",
+			item_height: 40,
+			col_group: [
+				{key: 'no', label: 'No.', width: 60, align:"center", formatter: function(){
+					return this.index + 1;
+				}},
+				{key: 'date', label: 'Date', width: 120, align:"center"},
+				{key: 'title', label: '제목', width: '*'},
+				{key: 'price', label: 'Price', width: 120, formatter:"money", align:"right"}
+			],
+			body: {
+				onclick: function(){
+					console.log(this);
+				}
+			}
+		});
+
+		my_touch_grid.set_list([]);
+
+		ax5.dom("#ax-ui-touch-grid-append-first").on("click", function(){
+			my_touch_grid.focus(0);
+		});
+		ax5.dom("#ax-ui-touch-grid-append-up").on("click", function(){
+			my_touch_grid.focus(-1, "by");
+		});
+		ax5.dom("#ax-ui-touch-grid-append-down").on("click", function(){
+			my_touch_grid.focus(1, "by");
+		});
+		ax5.dom("#ax-ui-touch-grid-append-last").on("click", function(){
+			my_touch_grid.focus("last");
+		});
+
+		ax5.dom("#ax-ui-touch-grid-append-append").on("click", function(){
+			my_touch_grid.append({date:'2015-06-07', title: my_touch_grid.list.length + '. 체커 사용가이드', price:205677});
+		});
+		ax5.dom("#ax-ui-touch-grid-append-remove").on("click", function(){
+			my_touch_grid.remove();
+		});
+		ax5.dom("#ax-ui-touch-grid-append-update").on("click", function(){
+			my_touch_grid.update(2, {price:0});
+		});
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result">
+	<div id="ax-ui-touch-grid-append-target" style="height:200px;"></div>
+	<div style="padding:5px;">
+		<button class="ax-btn lg" id="ax-ui-touch-grid-append-first">&nbsp;<i class="axi axi-angle-double-up"></i>&nbsp;</button>
+		<button class="ax-btn lg" id="ax-ui-touch-grid-append-up">&nbsp;<i class="axi axi-angle-up"></i>&nbsp;</button>
+		<button class="ax-btn lg" id="ax-ui-touch-grid-append-down">&nbsp;<i class="axi axi-angle-down"></i>&nbsp;</button>
+		<button class="ax-btn lg" id="ax-ui-touch-grid-append-last">&nbsp;<i class="axi axi-angle-double-down"></i>&nbsp;</button>
+
+		<button class="ax-btn lg" id="ax-ui-touch-grid-append-append">Append</button>
+		<button class="ax-btn lg" id="ax-ui-touch-grid-append-remove">Remove</button>
+		<button class="ax-btn lg" id="ax-ui-touch-grid-append-update">Update</button>
+	</div>
+</div>
+<script type="text/javascript">
+	(function(){
+		var my_touch_grid = new ax5.ui.touch_grid();
+		my_touch_grid.set_config({
+			target: ax5.dom.get("#ax-ui-touch-grid-append-target"),
+			head_height: 40,
+			head_align: "center",
+			item_height: 40,
+			col_group: [
+				{key: 'no', label: 'No.', width: 60, align:"center", formatter: function(){
+					return this.index + 1;
+				}},
+				{key: 'date', label: 'Date', width: 120, align:"center"},
+				{key: 'title', label: '제목', width: '*'},
+				{key: 'price', label: 'Price', width: 120, formatter:"money", align:"right"}
+			],
+			body: {
+				onclick: function(){
+					console.log(this);
+				}
+			}
+		});
+
+		my_touch_grid.set_list([]);
+
+		ax5.dom("#ax-ui-touch-grid-append-first").on("click", function(){
+			my_touch_grid.focus(0);
+		});
+		ax5.dom("#ax-ui-touch-grid-append-up").on("click", function(){
+			my_touch_grid.focus(-1, "by");
+		});
+		ax5.dom("#ax-ui-touch-grid-append-down").on("click", function(){
+			my_touch_grid.focus(1, "by");
+		});
+		ax5.dom("#ax-ui-touch-grid-append-last").on("click", function(){
+			my_touch_grid.focus("last");
+		});
+
+		ax5.dom("#ax-ui-touch-grid-append-append").on("click", function(){
+			my_touch_grid.append({date:'2015-06-07', title: my_touch_grid.list.length + '. 체커 사용가이드', price:205677});
+		});
+		ax5.dom("#ax-ui-touch-grid-append-remove").on("click", function(){
+			my_touch_grid.remove();
+		});
+		ax5.dom("#ax-ui-touch-grid-append-update").on("click", function(){
+			my_touch_grid.update(2, {price:0});
+		});
+	})();
+</script>
+
+
+</article>
+
+
+<!-- bigsize -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-touch-grid-bigsize" class="capitalize">bigsize</h3>
+	<p>
+		아이템의 갯수가 많아지면 문서에 html노드를 너무 많이 만들어 내게 된다. 당장 사용하지도 않을 것인데.
+		그로 인데 웹 애플리케이션의 속도가 저하되는 문제가 발생된다. 이를 해결 하기 위해 현재 스크롤에 보이는 아이템만 출력시키는 꼼수가 필요하다.
+	</p>
+	<p>
+		아래 예제에서보면 <code>list</code>에 10,000개의 아이템이 담겨 있다. 하지만 div안에 담겨있는 html노드 수는 6개를 유지하고 있다. (헤드에 1개 바디에 5개)
+	</p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+	&lt;div id="ax-ui-touch-grid-bigsize-target" style="height:220px;">&lt;/div>
+	&lt;div style="padding:5px;">
+		TR 의 갯수는 &lt;span id="ax-ui-touch-grid-bigsize-tr-count">&lt;/span>
+	&lt;/div>
+&lt;/div>
+&lt;script type="text/javascript">
+(function(){
+	var my_touch_grid = new ax5.ui.touch_grid();
+	my_touch_grid.set_config({
+		target: ax5.dom.get("#ax-ui-touch-grid-bigsize-target"),
+		head_height: 30,
+		head_align: "center",
+		item_height: 40,
+		col_group: [
+			{key: 'no', label: '번호', width: 120, align:"center", formatter: function(){
+				return ax5.util.number(this.value, {money: true});
+			}},
+			{key: 'title', label: '제목', width: '*'},
+			{key: 'price', label: 'Price', width: 120, formatter:"money", align:"right"}
+		],
+		body: {
+			onclick: function(){
+				console.log(this);
+			}
+		},
+		control:{
+			width: 50,
+			klass: '',
+			//first: '&lt;i class="axi axi-angle-double-up">&lt;/i>',
+			prev: '&lt;i class="axi axi-angle-up">&lt;/i>',
+			next: '&lt;i class="axi axi-angle-down">&lt;/i>',
+			//last: '&lt;i class="axi axi-angle-double-down">&lt;/i>',
+			onclick: function(){
+				console.log(this);
+				print_html_node();
+			}
+		}
+	});
+
+	var list = [];
+	for(var i=1;i&lt;10001;i++){
+		list.push({no:i, title:'제목 '+ i,  price: i*1000});
+	}
+	my_touch_grid.set_list(list);
+
+	function print_html_node(){
+		ax5.dom('#ax-ui-touch-grid-bigsize-tr-count').html( '&lt;b>' + ax5.dom("#ax-ui-touch-grid-bigsize-target").find("tr").elements.length + '개&lt;/b>' );
+	}
+})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result">
+	<div id="ax-ui-touch-grid-bigsize-target" style="height:220px;"></div>
+	<div style="padding:5px;">
+		TR 의 갯수는 <span id="ax-ui-touch-grid-bigsize-tr-count"></span>
+	</div>
+</div>
+<script type="text/javascript">
+(function(){
+	var my_touch_grid = new ax5.ui.touch_grid();
+	my_touch_grid.set_config({
+		target: ax5.dom.get("#ax-ui-touch-grid-bigsize-target"),
+		head_height: 30,
+		head_align: "center",
+		item_height: 40,
+		col_group: [
+			{key: 'no', label: '번호', width: 120, align:"center", formatter: function(){
+				return ax5.util.number(this.value, {money: true});
+			}},
+			{key: 'title', label: '제목', width: '*'},
+			{key: 'price', label: 'Price', width: 120, formatter:"money", align:"right"}
+		],
+		body: {
+			onclick: function(){
+				console.log(this);
+			}
+		},
+		control:{
+			width: 50,
+			klass: '',
+			//first: '<i class="axi axi-angle-double-up"></i>',
+			prev: '<i class="axi axi-angle-up"></i>',
+			next: '<i class="axi axi-angle-down"></i>',
+			//last: '<i class="axi axi-angle-double-down"></i>',
+			onclick: function(){
+				console.log(this);
+				print_html_node();
+			}
+		}
+	});
+
+	var list = [];
+	for(var i=1;i<10001;i++){
+		list.push({no:i, title:'제목 '+ i,  price: i*1000});
+	}
+	my_touch_grid.set_list(list);
+
+	function print_html_node(){
+		ax5.dom('#ax-ui-touch-grid-bigsize-tr-count').html( '<b>' + ax5.dom("#ax-ui-touch-grid-bigsize-target").find("tr").elements.length + '개</b>' );
+	}
+})();
+</script>
+
+
+</article>
+
+<!-- split -->
+
+<article class="cover">
+	<h1 data-menu-item="ax-ui-component-grid">Component-grid</h1>
+	<p class="lead">
+
+	</p>
+</article>
+
+
+
+<!-- basic -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-component-grid-default" class="capitalize"">default</h3>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+	&lt;div id="ui-component-grid-default-target" style="height:200px;">&lt;/div>
+&lt;/div>
+&lt;script type="text/javascript">
+(function(){
+	var my_component_grid = new ax5.ui.component_grid();
+	my_component_grid.set_config({
+		target: ax5.dom.get("#ui-component-grid-default-target"),
+		theme: "default",
+		item: {
+			label: {key: 'title'},
+			klass: 'basic'
+		},
+		control:{
+			width: 50,
+			prev: '&lt;i class="axi axi-keyboard-arrow-up">&lt;/i>',
+			next: '&lt;i class="axi axi-keyboard-arrow-down">&lt;/i>'
+		},
+		cols: 3,
+		rows: 3,
+		onclick: function(){
+			console.log(this);
+		}
+	});
+
+	my_component_grid.set_list([
+		{code:'item-01-001', title:'상품1'},
+		{code:'item-01-002', title:'상품2'},
+		{code:'item-01-003', title:'상품3'},
+		{code:'item-01-004', title:'상품4'},
+		{code:'item-01-005', title:'상품5'},
+		{code:'item-01-006', title:'상품6'},
+		{code:'item-01-007', title:'상품7'},
+		{code:'item-01-008', title:'상품8'},
+		{code:'item-01-009', title:'상품9'},
+		{code:'item-01-010', title:'상품10'},
+		{code:'item-01-011', title:'상품11'},
+		{code:'item-01-012', title:'상품12'},
+		{code:'item-01-013', title:'상품13'},
+		{code:'item-01-014', title:'상품14'},
+		{code:'item-01-015', title:'상품15'},
+		{code:'item-01-016', title:'상품16'},
+		{code:'item-01-017', title:'상품17'}
+	]);
+
+	//my_component_grid.click(1); 현재 페이지의 순번을 클릭상태로
+
+})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result">
+	<div id="ui-component-grid-default-target" style="height:200px;"></div>
+</div>
+<script type="text/javascript">
+(function(){
+	var my_component_grid = new ax5.ui.component_grid();
+	my_component_grid.set_config({
+		target: ax5.dom.get("#ui-component-grid-default-target"),
+		theme: "default",
+		item: {
+			label: {key: 'title'},
+			klass: 'basic'
+		},
+		control:{
+			width: 50,
+			prev: '<i class="axi axi-keyboard-arrow-up"></i>',
+			next: '<i class="axi axi-keyboard-arrow-down"></i>'
+		},
+		cols: 3,
+		rows: 3,
+		onclick: function(){
+			console.log(this);
+		}
+	});
+
+	my_component_grid.set_list([
+		{code:'item-01-001', title:'상품1'},
+		{code:'item-01-002', title:'상품2'},
+		{code:'item-01-003', title:'상품3'},
+		{code:'item-01-004', title:'상품4'},
+		{code:'item-01-005', title:'상품5'},
+		{code:'item-01-006', title:'상품6'},
+		{code:'item-01-007', title:'상품7'},
+		{code:'item-01-008', title:'상품8'},
+		{code:'item-01-009', title:'상품9'},
+		{code:'item-01-010', title:'상품10'},
+		{code:'item-01-011', title:'상품11'},
+		{code:'item-01-012', title:'상품12'},
+		{code:'item-01-013', title:'상품13'},
+		{code:'item-01-014', title:'상품14'},
+		{code:'item-01-015', title:'상품15'},
+		{code:'item-01-016', title:'상품16'},
+		{code:'item-01-017', title:'상품17'}
+	]);
+
+	//my_component_grid.click(1); 현재 페이지의 순번을 클릭상태로
+
+})();
+</script>
+
+
+</article>
+
+
+
+<!-- addon -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-component-grid-addon" class="capitalize">addon</h3>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result">
+	&lt;div id="ui-component-grid-addon-target" style="height:150px;">&lt;/div>
+&lt;/div>
+&lt;script type="text/javascript">
+	(function(){
+		var my_component_grid = new ax5.ui.component_grid();
+		my_component_grid.set_config({
+			target: ax5.dom.get("#ui-component-grid-addon-target"),
+			theme: "default",
+			item: {
+				label: {key: 'title', style:"top:12px;"},
+				addon: {key: 'price', formatter: 'money', style:"top:20px;"},
+				klass: ''
+			},
+			control:{
+				width: 50,
+				prev: '&lt;i class="axi axi-keyboard-arrow-up">&lt;/i>',
+				next: '&lt;i class="axi axi-keyboard-arrow-down">&lt;/i>'
+			},
+			cols: 4,
+			rows: 2,
+			onclick: function(){
+				console.log(this);
+			}
+		});
+
+		my_component_grid.set_list([
+			{code:'item-01-001', title:'상품1', price:4000},
+			{code:'item-01-002', title:'상품2', price:3000},
+			{code:'item-01-003', title:'상품3', price:2500},
+			{code:'item-01-004', title:'상품4', price:1000},
+			{code:'item-01-005', title:'상품5', price:2000},
+			{code:'item-01-006', title:'상품6', price:4500},
+			{code:'item-01-007', title:'상품7', price:5000},
+			{code:'item-01-008', title:'상품8', price:8000},
+			{code:'item-01-009', title:'상품9', price:4000},
+			{code:'item-01-010', title:'상품10', price:3000},
+			{code:'item-01-011', title:'상품11', price:2500},
+			{code:'item-01-012', title:'상품12', price:1000},
+			{code:'item-01-013', title:'상품13', price:2000},
+			{code:'item-01-014', title:'상품14', price:4500},
+			{code:'item-01-015', title:'상품15', price:5000},
+			{code:'item-01-016', title:'상품16', price:8000},
+			{code:'item-01-017', title:'상품17', price:2200}
+		]);
+
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result">
+	<div id="ui-component-grid-addon-target" style="height:150px;"></div>
+</div>
+<script type="text/javascript">
+	(function(){
+		var my_component_grid = new ax5.ui.component_grid();
+		my_component_grid.set_config({
+			target: ax5.dom.get("#ui-component-grid-addon-target"),
+			theme: "default",
+			item: {
+				label: {key: 'title', style:"top:12px;"},
+				addon: {key: 'price', formatter: 'money', style:"top:20px;"},
+				klass: ''
+			},
+			control:{
+				width: 50,
+				prev: '<i class="axi axi-keyboard-arrow-up"></i>',
+				next: '<i class="axi axi-keyboard-arrow-down"></i>'
+			},
+			cols: 4,
+			rows: 2,
+			onclick: function(){
+				console.log(this);
+			}
+		});
+
+		my_component_grid.set_list([
+			{code:'item-01-001', title:'상품1', price:4000},
+			{code:'item-01-002', title:'상품2', price:3000},
+			{code:'item-01-003', title:'상품3', price:2500},
+			{code:'item-01-004', title:'상품4', price:1000},
+			{code:'item-01-005', title:'상품5', price:2000},
+			{code:'item-01-006', title:'상품6', price:4500},
+			{code:'item-01-007', title:'상품7', price:5000},
+			{code:'item-01-008', title:'상품8', price:8000},
+			{code:'item-01-009', title:'상품9', price:4000},
+			{code:'item-01-010', title:'상품10', price:3000},
+			{code:'item-01-011', title:'상품11', price:2500},
+			{code:'item-01-012', title:'상품12', price:1000},
+			{code:'item-01-013', title:'상품13', price:2000},
+			{code:'item-01-014', title:'상품14', price:4500},
+			{code:'item-01-015', title:'상품15', price:5000},
+			{code:'item-01-016', title:'상품16', price:8000},
+			{code:'item-01-017', title:'상품17', price:2200}
+		]);
+
+	})();
+</script>
+
+
+</article>
+
+<!-- split -->
+
+<article class="cover">
+	<h1 data-menu-item="ax-ui-div-slider">DivSlider</h1>
+
+	<p class="lead">
+
+	</p>
+</article>
+
+
+<!-- basic -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-div-slider-default" class="capitalize">default</h3>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result" style="height:300px;">
+
+	&lt;div class="ax5-ui-div-slider" id="div-slider-target" style="height:200px;border: 2px solid #000;">
+		&lt;div class="slider-holder">
+			&lt;div class="slider-item" style="height:200px;background:red;">1&lt;/div>
+			&lt;div class="slider-item" style="height:200px;background:blue;">2&lt;/div>
+			&lt;div class="slider-item" style="height:200px;background:green;">3&lt;/div>
+			&lt;div class="slider-item" style="height:200px;background:purple;">4&lt;/div>
+		&lt;/div>
+	&lt;/div>
+
+	&lt;button class="ax-btn" id="div-slider-target-btn-P">prev&lt;/button>
+	&lt;button class="ax-btn" id="div-slider-target-btn-N">next&lt;/button>
+
+&lt;/div>
+&lt;script type="text/javascript">
+	(function() {
+
+		var ui = new ax5.ui.div_slider();
+		ui.set_config({
+			target: ax5.dom.get("#div-slider-target"),
+			on_event: function(){
+				if(this.action == "status_change") {
+					//console.log(this.display_index);
+				}else if(this.action == "click"){
+					alert("click");
+				}else{
+					//console.log(this.action);
+				}
+			}
+		});
+
+		ax5.dom("#div-slider-target-btn-P").on("click", function(){
+			ui.prev();
+		});
+		ax5.dom("#div-slider-target-btn-N").on("click", function(){
+			ui.next();
+		});
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result" style="height:300px;">
+
+	<div class="ax5-ui-div-slider" id="div-slider-target" style="height:200px;border: 2px solid #000;">
+		<div class="slider-holder">
+			<div class="slider-item" style="height:200px;background:red;">1</div>
+			<div class="slider-item" style="height:200px;background:blue;">2</div>
+			<div class="slider-item" style="height:200px;background:green;">3</div>
+			<div class="slider-item" style="height:200px;background:purple;">4</div>
+		</div>
+	</div>
+
+	<button class="ax-btn" id="div-slider-target-btn-P">prev</button>
+	<button class="ax-btn" id="div-slider-target-btn-N">next</button>
+
+</div>
+<script type="text/javascript">
+	(function() {
+
+		var ui = new ax5.ui.div_slider();
+		ui.set_config({
+			target: ax5.dom.get("#div-slider-target"),
+			on_event: function(){
+				if(this.action == "status_change") {
+					//console.log(this.display_index);
+				}else if(this.action == "click"){
+					alert("click");
+				}else{
+					//console.log(this.action);
+				}
+			}
+		});
+
+		ax5.dom("#div-slider-target-btn-P").on("click", function(){
+			ui.prev();
+		});
+		ax5.dom("#div-slider-target-btn-N").on("click", function(){
+			ui.next();
+		});
+	})();
+</script>
+
+
+</article>
+
+<!-- split -->
+
+<article class="cover">
+	<h1 data-menu-item="ax-ui-single-uploader">Single Uploader</h1>
+
+	<p class="lead">
+
+	</p>
+</article>
+
+
+<!-- basic -->
+<article class="content">
+	<h3 data-menu-item="ax-ui-single-uploader-default" class="capitalize">default</h3>
+	<p>
+
+	</p>
+<pre class="prettyprint linenums">
+&lt;div class="tag-result" style="height:300px;">
+
+
+&lt;/div>
+&lt;script type="text/javascript">
+	(function() {
+
+		var ui = new ax5.ui.single_uploader();
+
+	})();
+&lt;/script>
+</pre><h4>Result</h4>
+<div class="tag-result" style="height:300px;">
+
+
+</div>
+<script type="text/javascript">
+	(function() {
+
+		var ui = new ax5.ui.single_uploader();
+
+	})();
+</script>
+
+
+</article>
+
+<!-- split -->
+
+		<!-- end div class="nav-content"-->
+	</div>
+	<div class="app-nav-left" id="app-nav-left"></div>
+</div>
+<!-- end div class="app-page"-->
+<script type="text/javascript" src="app.js"></script>
+</body>
+</hml>

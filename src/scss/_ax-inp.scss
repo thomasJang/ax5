@@ -118,14 +118,14 @@
   // size
   &.lg {
 	// line-height: ensure even-numbered height of button next to large input
-	@include input-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $border-radius-large, $input-height-large);
+	@include input-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $input-border-radius-large, $input-height-large);
   }
   &.sm {
 	// line-height: ensure proper height of button next to small input
-	@include input-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $border-radius-small, $input-height-small);
+	@include input-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $input-border-radius-small, $input-height-small);
   }
   &.xs {
-	@include input-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $border-radius-small, $input-height-xs);
+	@include input-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $input-border-radius-small, $input-height-xs);
   }
 
 
@@ -186,14 +186,14 @@
   // size
   &.lg {
 	// line-height: ensure even-numbered height of button next to large input
-	@include input-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $border-radius-large, $input-height-large);
+	@include input-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $input-border-radius-large, $input-height-large);
   }
   &.sm {
 	// line-height: ensure proper height of button next to small input
-	@include input-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $border-radius-small, $input-height-small);
+	@include input-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $input-border-radius-small, $input-height-small);
   }
   &.xs {
-	@include input-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $border-radius-small, $input-height-xs);
+	@include input-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $input-border-radius-small, $input-height-xs);
   }
 }
 

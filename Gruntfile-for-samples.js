@@ -16,13 +16,14 @@
 				files: {
 					'samples/index.html': ['samples/layout/head.html', 'samples/layout/visual-dom.html', 'samples/layout/install.html', 'samples/ax5/util/*.html', 'samples/ax5/dom/*.html', 'samples/ax5/xhr/*.html', 'samples/layout/bottom.html'],
 					'samples/css.html': ['samples/layout/head.html', 'samples/layout/visual-css.html', 'samples/ax5/css/*.html', 'samples/layout/bottom.html'],
-					'samples/ui-class.html': ['samples/layout/head.html','samples/layout/visual-ui.html','samples/ax5/ui/*.html','samples/layout/bottom.html']
+					'samples/ui-class-1.html': ['samples/layout/head.html','samples/layout/visual-ui.html','samples/ax5/ui-1/*.html','samples/layout/bottom.html'],
+					'samples/ui-class-2.html': ['samples/layout/head.html','samples/layout/visual-ui.html','samples/ax5/ui-2/*.html','samples/layout/bottom.html']
 				}
 			}
 		},
         replace: {
 	        samples: {
-                src: ['samples/index.html','samples/css.html','samples/ui-class.html'],
+                src: ['samples/index.html','samples/css.html','samples/ui-class-1.html','samples/ui-class-2.html'],
                 overwrite: true,                 // overwrite matched source files
                 options: {
                     processTemplates: false
@@ -39,7 +40,7 @@
                 }]
             },
 	        url: {
-		        src: ['samples/index.html','samples/css.html','samples/ui-class.html'],
+		        src: ['samples/index.html','samples/css.html','samples/ui-class-1.html','samples/ui-class-2.html'],
 		        overwrite: true,                 // overwrite matched source files
 		        options: {
 			        processTemplates: false
@@ -54,7 +55,7 @@
         },
 		watch: {
 			samples: {
-				files: ['samples/ax5/util/*.html', 'samples/ax5/dom/*.html', 'samples/ax5/xhr/*.html','samples/ax5/css/*.html','samples/ax5/ui/*.html'],
+				files: ['samples/ax5/util/*.html', 'samples/ax5/dom/*.html', 'samples/ax5/xhr/*.html','samples/ax5/css/*.html','samples/ax5/ui-1/*.html','samples/ax5/ui-2/*.html'],
 				tasks: ['concat:samples', 'replace:samples', 'replace:url']
 			}
 		}

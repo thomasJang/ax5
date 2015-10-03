@@ -17,3 +17,63 @@
 		}
 	}
 }
+
+.ax-btn{
+	&.lg{
+		font-weight: 800;
+	}
+}
+
+.ax-inp {
+	padding-left: 5px;
+	padding-right: 5px;
+	border: 1px solid transparent;
+	border-bottom: 1px solid #eeeeee;
+	&:focus {
+		border-color: transparent;
+		outline: 0;
+		@include box-shadow(none);
+		border-bottom: 1px solid $theme-basic;
+	}
+	&.lg{
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+}
+
+.ax-item-group {
+	.ax-item {
+		&:first-child{
+			border-top: 1px solid $theme-basic;
+		}
+		border-left: 0px none;
+		border-right: 0px none;
+		padding: 12px 0px;
+	}
+}
+
+.ax5-ui-dialog {
+	.ax-dialog-heading{
+		font-size: 1.2em;
+		font-weight: 600;
+	}
+	.ax-dialog-body{
+		.ax-dialog-msg{
+			font-size: 1.1em;
+		}
+		.ax-dialog-prompt {
+
+		}
+		.ax-dialog-buttons{
+			.ax-btn{
+				padding: 10px;
+				font-size: 1.2em;
+			}
+			button{
+				&:not(:last-child){
+					margin-right: 5px;
+				}
+			}
+		}
+	}
+}

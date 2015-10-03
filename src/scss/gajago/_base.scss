@@ -22,7 +22,7 @@ $theme-info:  #219ECF;
 $theme-warning: #D94034;
 $theme-danger: darken($theme-warning, 20%);
 $theme-link: #fff;
-$theme-special: #292929;
+$theme-special: #aaaaaa;
 $theme-muted: $gray-light;
 
 // 공통 : Global
@@ -63,7 +63,7 @@ $font-family-serif:       "";
 $font-family-monospace:   "";
 $font-family-base:        "";
 
-$font-size-base:          14px;
+$font-size-base:          12px;
 $font-size-large:         ceil(($font-size-base * 1.25)); // ~18px
 $font-size-small:         ceil(($font-size-base * 0.85)); // ~12px
 $font-weight:	400;
@@ -141,7 +141,7 @@ $btn-basic-bg: ($theme-basic, $theme-basic); // 배경색들
 $btn-basic-bg-image: "";
 $btn-basic-border: 1px solid darken($theme-basic, 10%);
 $btn-basic-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
-	$btn-basic-hover-text-color: #1E252E;
+	$btn-basic-hover-text-color: #fff;
 	$btn-basic-hover-text-shadow: none; //0px -1px 0px darken($theme-basic, 50%);
 	$btn-basic-hover-bg: ($theme-basic, $theme-basic); // 배경색들
 	$btn-basic-hover-bg-image: "";
@@ -213,17 +213,17 @@ $btn-link-drop-shadow: none;
 	$btn-link-hover-border: 1px solid #fff;
 	$btn-link-hover-drop-shadow: none;
 
-$btn-special-text-color:#808080;
+$btn-special-text-color:#ffffff;
 $btn-special-text-shadow: none; //0px -1px 0px darken($theme-special, 50%);
-$btn-special-bg: (darken($theme-special, 10%), $theme-special); // 배경색들
+$btn-special-bg: ($theme-special, $theme-special); // 배경색들
 $btn-special-bg-image: "";
-$btn-special-border: 1px solid darken($theme-special, 20%);
+$btn-special-border: 1px solid darken($theme-special, 0%);
 $btn-special-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
 	$btn-special-hover-text-color:#fff;
 	$btn-special-hover-text-shadow: none; //0px -1px 0px darken($theme-special, 50%);
 	$btn-special-hover-bg: ($theme-special, $theme-special);
 	$btn-special-hover-bg-image: "";
-	$btn-special-hover-border: 1px solid darken($theme-special, 20%);
+	$btn-special-hover-border: 1px solid darken($theme-special, 0%);
 	$btn-special-hover-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
 
 $btn-link-disabled-color:        $gray-light;
@@ -247,12 +247,12 @@ $input-height-small:             (floor($font-size-small * $line-height-small) +
 //** XSmall `.form-control` height
 $input-height-xs:             (floor($font-size-small * $line-height-small) + ($padding-xs-vertical * 2) + 2);
 
-$input-default-text-color: #4A4A4A;
-$input-default-text-shadow: 0px 1px 0px rgba(255,255,255, 0.5);
+$input-default-text-color: #777777;
+$input-default-text-shadow: none; //0px 1px 0px rgba(255,255,255, 0.5);
 $input-default-bg: (#ffffff, #FFFFFF); // 배경색들
 $input-default-bg-image: "";
 $input-default-color-hover: #ccc;
-$input-default-border: 1px solid #eee;
+$input-default-border: 0px none; //1px solid #eee;
 $input-default-drop-shadow: none; //0px 1px 3px 0px rgba(0,0,0,0.15) inset;
 
 $input-basic-text-color: darken($theme-basic, 20%);
@@ -311,9 +311,9 @@ $input-special-drop-shadow: 0px 1px 3px 0px rgba(0,0,0,0.15) inset;
 //** Background color on `.list-group-item`
 $item-group-bg:                 #fff;
 //** `.list-group-item` border color
-$item-group-border:             #ddd;
+$item-group-border:             #eeeeee;
 //** List group border radius
-$item-group-border-radius:      $border-radius-base;
+$item-group-border-radius:      (0px, 0px, 0px, 0px);
 
 //** Background color of single list items on hover
 $item-group-hover-bg:           #f5f5f5;
@@ -333,7 +333,7 @@ $item-group-disabled-bg:         $gray-lighter;
 //** Text color for content within disabled list items
 $item-group-disabled-text-color: $item-group-disabled-color;
 
-$item-group-link-color:         #555;
+$item-group-link-color:         #555555;
 $item-group-link-hover-color:   $item-group-link-color;
 $item-group-link-heading-color: #333;
 
