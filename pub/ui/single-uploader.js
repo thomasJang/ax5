@@ -92,7 +92,7 @@
 
 			setTimeout((function() {
 				this.__set_size_layout();
-			}).bind(this));
+			}).bind(this), 1);
 
 		};
 
@@ -107,7 +107,7 @@
 			po.push('<img class="upload-preview-img" data-ui-els="preview-img" src="" style="display:none;width:100%;height:100%;" />');
 			po.push('<span class="empty-msg">' + cfg.empty_msg + '<span>');
 			po.push('</div>');
-			po.push('<div class="ax5-ui-progress" data-ui-els="progress" style="display: none;"><div class="progress-bar" data-ui-els="progress-bar"></div></div>');
+			po.push('<div class="ax5-ui-progress ' + (cfg.progress_theme || "") + '" data-ui-els="progress" style="display: none;"><div class="progress-bar" data-ui-els="progress-bar"></div></div>');
 			po.push('<input type="file" ' + inputFileMultiple + ' accept="' + inputFileAccept + '" data-ui-els="input-file" />');
 
 			po.push('</div>');
@@ -169,13 +169,14 @@
 
 						preview.src = reader.result;
 
-						if(preview.width > preview.height){ // 가로형
-							if(preview.height > box_height){
+						if (preview.width > preview.height) { // 가로형
+							if (preview.height > box_height) {
 								css = {
-									width: preview.width * (box_height / preview.height), height:box_height
+									width: preview.width * (box_height / preview.height), height: box_height
 								};
 								css.left = (box_width - css.width) / 2;
-							}else{
+							}
+							else {
 								css = {
 									width: preview.width, height: preview.height
 								};
@@ -183,12 +184,13 @@
 							}
 						}
 						else { // 세로형
-							if(preview.width > box_width) {
+							if (preview.width > box_width) {
 								css = {
 									height: preview.height * (box_width / preview.width), width: box_width
 								};
 								//css.top = (box_height - css.height) / 2;
-							}else{
+							}
+							else {
 								css = {
 									width: preview.width, height: preview.height
 								};
@@ -221,7 +223,7 @@
 
 		this.upload = function() {
 
-			if(!this.selected_file){
+			if (!this.selected_file) {
 				if (cfg.on_event) {
 					var that = {
 						action: "error",
@@ -235,10 +237,10 @@
 			var formData = new FormData(),
 				progress_bar = this.els["progress-bar"];
 
-			this.els["progress"].show();
+			this.els["progress"].css({display: "block"});
 			progress_bar.css({width: '0%'});
 
-			formData.append(cfg.upload_http.filename_param_key, file);
+			formData.append(cfg.upload_http.filename_param_key, this.selected_file);
 			for (var k in cfg.upload_http.data) {
 				formData.append(k, cfg.upload_http.data[k]);
 			}
@@ -248,23 +250,24 @@
 			this.xhr.onload = function(e) {
 				var res = e.target.response;
 				try {
-					if (typeof res == "string") res = res.object();
+					if (typeof res == "string") res = U.parse_json(res);
 				} catch (e) {
-					trace(e);
-					return;
+					console.log(e);
+					return false;
 				}
 				if (res.error) {
+					console.log(res.error);
 					return false;
 				}
 				_this.upload_complete(res);
 			};
 			this.xhr.upload.onprogress = function(e) {
-				progress_bar.css({width: ((e.loaded / e.total) * 100).round(2) + '%'});
+				progress_bar.css({width: U.number((e.loaded / e.total) * 100, {round: 2}) + '%'});
 				if (e.lengthComputable) {
 					if (e.loaded >= e.total) {
 						//_this.upload_complete();
 						setTimeout(function() {
-							_this.els["progress"].fadeOut();
+							_this.els["progress"].css({display: "none"});
 						}, 300);
 					}
 				}
@@ -273,17 +276,17 @@
 		};
 
 		this.upload_complete = function(res) {
+			this.selected_file = null;
 			this.uploaded_file = res;
-			this.els["container"].addClass("uploaded");
+			this.els["container"].class_name("add", "uploaded");
 
 			if (cfg.on_event) {
 				var that = {
 					action: "uploaded",
 					file: res
 				};
-				cfg.onupload.call(that, that);
+				cfg.on_event.call(that, that);
 			}
-			//console.log(this.uploadedFile);
 		};
 
 		this.set_uploaded_file = function(file) {
@@ -298,12 +301,10 @@
 
 		this.set_preview_img = function(src) {
 			if (src) {
-				this.els["preview-img"].fadeIn();
-				this.els["preview-img"].attr("src", src);
+				this.els["preview-img"].attr({"src": src});
 			}
 			else {
-				this.els["preview-img"].hide();
-				this.els["preview-img"].removeAttr("src");
+				this.els["preview-img"].attr({"src": null});
 			}
 		};
 

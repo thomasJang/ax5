@@ -23,12 +23,12 @@ $uploadfile = $upload_dir . "/" . basename($new_file_name);
 if (move_uploaded_file($_FILES['fileData']['tmp_name'], $uploadfile)) {
 
     echo "{";
-    echo "name:'". urlencode($file_name) ."', ";
-    echo "type:'". urlencode($file_ext) ."', ";
-    echo "saveName:'". urlencode($new_file_name) ."', ";
-    echo "fileSize:'". $file_size ."', ";
-    echo "uploadedPath:'/samples/AXUpload5/files/', ";
-    echo "thumbUrl:'". urlencode("files/".$new_file_name) ."'";
+    echo "'name':'". urlencode($file_name) ."', ";
+    echo "'type':'". urlencode($file_ext) ."', ";
+    echo "'saveName':'". urlencode($new_file_name) ."', ";
+    echo "'fileSize':'". $file_size ."', ";
+    echo "'uploadedPath':'/samples/AXUpload5/files/', ";
+    echo "'thumbUrl':'". urlencode("php/files/".$new_file_name) ."'";
     echo "}";
 
 } else {

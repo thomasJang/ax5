@@ -3961,6 +3961,8 @@ input[type='checkbox']:checked + .ax5-ui-switch.with-label {
     padding: 0;
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     opacity: 0; }
+  .ax5-ui-single-uploader .ax5-ui-progress {
+    position: absolute; }
 
 .ax5-ui-modal .ax-modal-heading {
   font-size: 13px; }

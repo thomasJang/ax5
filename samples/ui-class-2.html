@@ -1028,6 +1028,7 @@
 			target: ax5.dom.get("#ax-ui-single-uploader-default-target"),
 			file_types: "image/*",
 			empty_msg: "파일을 선택하세요",
+			progress_theme: "basic",
 			upload_http: {
 				method: "POST",
 				url: "php/frame-upload.php",
@@ -1039,7 +1040,8 @@
 					console.log(that.file);
 				}
 				else if(that.action == "uploaded"){
-					ui.set_preview_img(that.file.thumbUrl.dec());
+					console.log(that);
+					ui.set_preview_img(decodeURIComponent(that.file.thumbUrl));
 				}
 				else if(that.action == "error"){
 					alert(that.error.msg);
@@ -1072,6 +1074,7 @@
 			target: ax5.dom.get("#ax-ui-single-uploader-default-target"),
 			file_types: "image/*",
 			empty_msg: "파일을 선택하세요",
+			progress_theme: "basic",
 			upload_http: {
 				method: "POST",
 				url: "php/frame-upload.php",
@@ -1083,7 +1086,8 @@
 					console.log(that.file);
 				}
 				else if(that.action == "uploaded"){
-					ui.set_preview_img(that.file.thumbUrl.dec());
+					console.log(that);
+					ui.set_preview_img(decodeURIComponent(that.file.thumbUrl));
 				}
 				else if(that.action == "error"){
 					alert(that.error.msg);
