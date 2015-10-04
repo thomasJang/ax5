@@ -136,7 +136,7 @@
 				}
 			}
 
-			this.els["input-file"].trigger("click");
+			this.els["input-file"].dispatch_event("click");
 		};
 
 		this.__on_select_file = function(evt){
