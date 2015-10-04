@@ -105,6 +105,7 @@
 					_this._on_touch_start(e || window.event);
 				});
 			}
+			/*
 			this.target.on("click", function (e) {
 				if (cfg.on_event) {
 					var that = {
@@ -114,6 +115,7 @@
 					cfg.on_event.call(that, that);
 				}
 			});
+			*/
 		};
 
 		this._set_size_frame = function () {
@@ -166,7 +168,8 @@
 		this._on_touch_move = function (e) {
 			var mouse = _this.get_mouse(e);
 			if (!touch_start.direction) {
-				touch_start.direction = (Math.abs((touch_start.mouse.x - mouse.x)) > Math.abs((touch_start.mouse.y - mouse.y))) ? "X" : "Y";
+				var dx = Math.abs(touch_start.mouse.x - mouse.x), dy = Math.abs(touch_start.mouse.y - mouse.y) * 2;
+				touch_start.direction = (dx > dy) ? "X" : "Y";
 			}
 
 			// 터치 방향 판단 하여 수평일 때만
@@ -184,6 +187,11 @@
 				if (e.preventDefault) e.preventDefault();
 				if (e.stopPropagation) e.stopPropagation();
 				e.cancelBubble = true;
+			}else{
+				axd(document.body).off(e_touch_move + ".ax5divslider");
+				axd(document.body).off(e_touch_end + ".ax5divslider");
+				axd(document.body).off("mouseout.ax5divslider");
+				axd(document.body).attr({"onselectstart": null});
 			}
 		};
 
@@ -209,6 +217,25 @@
 				}
 			}
 
+			if(touch_start.direction != "X"){
+				if (cfg.on_event) {
+					var that = {
+						display_index: 0,
+						action: "click"
+					};
+					console.log(that);
+					cfg.on_event.call(that, that);
+
+					axd(document.body).off(e_touch_move + ".ax5divslider");
+					axd(document.body).off(e_touch_end + ".ax5divslider");
+					axd(document.body).off("mouseout.ax5divslider");
+					axd(document.body).attr({"onselectstart": null});
+
+					if (e.preventDefault) e.preventDefault();
+					if (e.stopPropagation) e.stopPropagation();
+					e.cancelBubble = true;
+				}
+			}
 
 			if (typeof new_left != "undefined") {
 
