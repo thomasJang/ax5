@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
  ax5 - v0.0.1 
- publish date : 2015-10-04 
+ publish date : 2015-10-05 
 -->
 <html lang="en">
 <head>
@@ -1012,7 +1012,12 @@
 <pre class="prettyprint linenums">
 &lt;div class="tag-result" style="height:300px;">
 
-	&lt;div style="width:200px;height: 200px;border:1px solid #ccc;border-radius:10px;overflow: hidden;" id="ax-ui-single-uploader-default-target">&lt;/div>
+	&lt;div
+			style="width:200px;height: 200px;border:1px solid #ccc;border-radius:10px;overflow: hidden;"
+			id="ax-ui-single-uploader-default-target">
+	&lt;/div>
+	&lt;div class="DH10">&lt;/div>
+	&lt;button class="ax-btn basic" id="ax-ui-single-uploader-default-target-upload">Upload&lt;/button>
 
 &lt;/div>
 &lt;script type="text/javascript">
@@ -1021,6 +1026,7 @@
 		var ui = new ax5.ui.single_uploader();
 		ui.set_config({
 			target: ax5.dom.get("#ax-ui-single-uploader-default-target"),
+			file_types: "image/*",
 			empty_msg: "파일을 선택하세요",
 			upload_http: {
 				method: "POST",
@@ -1028,20 +1034,34 @@
 				filename_param_key: "fileData",
 				data: {}
 			},
-			on_select: function(){
-
-			},
-			on_upload: function(file){
-				ui.set_preview_img(file.thumbUrl.dec());
+			on_event: function(that){
+				if(that.action == "fileselect"){
+					console.log(that.file);
+				}
+				else if(that.action == "uploaded"){
+					ui.set_preview_img(that.file.thumbUrl.dec());
+				}
+				else if(that.action == "error"){
+					alert(that.error.msg);
+				}
 			}
-		})
+		});
+
+		ax5.dom("#ax-ui-single-uploader-default-target-upload").on("click", function(){
+			ui.upload();
+		});
 
 	})();
 &lt;/script>
 </pre><h4>Result</h4>
 <div class="tag-result" style="height:300px;">
 
-	<div style="width:200px;height: 200px;border:1px solid #ccc;border-radius:10px;overflow: hidden;" id="ax-ui-single-uploader-default-target"></div>
+	<div
+			style="width:200px;height: 200px;border:1px solid #ccc;border-radius:10px;overflow: hidden;"
+			id="ax-ui-single-uploader-default-target">
+	</div>
+	<div class="DH10"></div>
+	<button class="ax-btn basic" id="ax-ui-single-uploader-default-target-upload">Upload</button>
 
 </div>
 <script type="text/javascript">
@@ -1050,6 +1070,7 @@
 		var ui = new ax5.ui.single_uploader();
 		ui.set_config({
 			target: ax5.dom.get("#ax-ui-single-uploader-default-target"),
+			file_types: "image/*",
 			empty_msg: "파일을 선택하세요",
 			upload_http: {
 				method: "POST",
@@ -1057,13 +1078,22 @@
 				filename_param_key: "fileData",
 				data: {}
 			},
-			on_select: function(){
-
-			},
-			on_upload: function(file){
-				ui.set_preview_img(file.thumbUrl.dec());
+			on_event: function(that){
+				if(that.action == "fileselect"){
+					console.log(that.file);
+				}
+				else if(that.action == "uploaded"){
+					ui.set_preview_img(that.file.thumbUrl.dec());
+				}
+				else if(that.action == "error"){
+					alert(that.error.msg);
+				}
 			}
-		})
+		});
+
+		ax5.dom("#ax-ui-single-uploader-default-target-upload").on("click", function(){
+			ui.upload();
+		});
 
 	})();
 </script>

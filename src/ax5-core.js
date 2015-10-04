@@ -176,6 +176,19 @@
 		var wheel_enm = ((/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel");
 
 		/**
+		 * 첫번째 자리수 동사 - (필요한것이 없을때 : 4, 실행오류 : 5)
+		 * 두번째 자리수 목적어 - 문자열 0, 숫자 1, 배열 2, 오브젝트 3, 함수 4, DOM 5, 파일 6, 기타 7
+		 * 세번째 자리수 옵션
+		 * @member {Object} ax5.info.error_msg
+		 */
+		var error_msg = {
+			"single-uploader": {
+				"460": "업로드할 파일이 없습니다.",
+				"461": "업로드된 파일이 없습니다."
+			}
+		};
+
+		/**
 		 * 현재 페이지의 Url 정보를 리턴합니다.
 		 * @method ax5.info.url_util
 		 * @returns {Object}
@@ -214,7 +227,39 @@
 			return url;
 		}
 
+		/**
+		 * ax5 error를 반환합니다.
+		 * @method ax5.info.get_error
+		 * @returns {Object}
+		 * @example
+		 * ```
+		 * if(!this.selected_file){
+		 *      if (cfg.on_event) {
+		 *      	var that = {
+		 *      		action: "error",
+		 *      		error: ax5.info.get_error("single-uploader", "460", "upload")
+		 *      	};
+		 *      	cfg.on_event.call(that, that);
+		 *      }
+		 *      return this;
+		 * }
+		 * ```
+		 */
+		function get_error(class_name, error_code, method_name){
+			if(info.error_msg && info.error_msg[class_name]){
+				return {
+					class_name: class_name,
+					error_code: error_code,
+					method_name:method_name,
+					msg: info.error_msg[class_name][error_code]
+				};
+			}else{
+				return {class_name: class_name, error_code: error_code, method_name: method_name};
+			}
+		}
+
 		return {
+			error_msg: error_msg,
 			version: version,
 			base_url: base_url,
 			onerror: onerror,
@@ -223,7 +268,8 @@
 			browser: browser,
 			is_browser: is_browser,
 			wheel_enm: wheel_enm,
-			url_util: url_util
+			url_util: url_util,
+			get_error: get_error
 		};
 	})();
 

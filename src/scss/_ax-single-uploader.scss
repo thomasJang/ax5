@@ -35,6 +35,7 @@
 		vertical-align: middle;
 		cursor: pointer;
 		overflow: hidden;
+		@include user-select(none);
 		.upload-preview-img {
 			position: absolute;
 			left: 0;
