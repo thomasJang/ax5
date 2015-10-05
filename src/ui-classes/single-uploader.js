@@ -108,14 +108,14 @@
 			po.push('<span class="empty-msg">' + cfg.empty_msg + '<span>');
 			po.push('</div>');
 			po.push('<div class="ax5-ui-progress ' + (cfg.progress_theme || "") + '" data-ui-els="progress" style="display: none;"><div class="progress-bar" data-ui-els="progress-bar"></div></div>');
-			po.push('<input type="file" ' + inputFileMultiple + ' accept="' + inputFileAccept + '" data-ui-els="input-file" />');
+			po.push('<input type="file" ' + inputFileMultiple + ' accept="' + inputFileAccept + '" capture="camera" data-ui-els="input-file" />');
 
 			po.push('</div>');
 
 			return po.join('');
 		};
 
-		this.__set_size_layout = function() {
+		this.__set_size_layout = this.align = function() {
 			var progress_margin = 20,
 				progress_height = this.els["progress"].height(),
 				ct_width = this.els["container"].width(),
@@ -136,7 +136,20 @@
 				}
 			}
 
-			this.els["input-file"].dispatch_event("click");
+			if(window.imagePicker){
+				window.imagePicker.getPictures(
+					function(results) {
+						for (var i = 0; i < results.length; i++) {
+							console.log('Image URI: ' + results[i]);
+						}
+						_this.__on_select_file(results);
+					}, function (error) {
+						console.log('Error: ' + error);
+					}
+				);
+			}else{
+				this.els["input-file"].dispatch_event("click");
+			}
 		};
 
 		this.__on_select_file = function(evt) {
@@ -144,11 +157,16 @@
 				target_id = this.target.id,
 				preview = this.els["preview-img"].elements[0];
 
+			console.log(evt);
+			
 			if ('dataTransfer' in evt) {
 				file = evt.dataTransfer.files[0];
 			}
-			else {
+			else if('target' in evt){
 				file = evt.target.files[0];
+			}
+			else if(evt){
+				file = evt[0];
 			}
 
 			if (!file) return false;
@@ -158,54 +176,64 @@
 			// 선택된 이미지 프리뷰 기능
 			(function(root) {
 				root.els["preview-img"].css({display: "block"});
-				var reader = new FileReader(target_id);
 
-				reader.onloadend = function() {
-					try {
+				function setcss_preview(img, box_width, box_height){
+					var css = {};
 
-						var css = {};
-						var box_width = root.els["preview-img"].width();
-						var box_height = root.els["preview-img"].height();
-
-						preview.src = reader.result;
-
-						if (preview.width > preview.height) { // 가로형
-							if (preview.height > box_height) {
+					var image = new Image();
+					image.src = img.src;
+					image.onload = function() {
+						// access image size here
+						//console.log(this.width, this.height);
+						if (this.width > this.height) { // 가로형
+							if (this.height > box_height) {
 								css = {
-									width: preview.width * (box_height / preview.height), height: box_height
+									width: this.width * (box_height / this.height), height: box_height
 								};
 								css.left = (box_width - css.width) / 2;
 							}
 							else {
 								css = {
-									width: preview.width, height: preview.height
+									width: this.width, height: this.height
 								};
-								//css.top = (box_height - css.height) / 2;
+								css.top = (box_height - css.height) / 2;
 							}
 						}
 						else { // 세로형
-							if (preview.width > box_width) {
+							if (this.width > box_width) {
 								css = {
-									height: preview.height * (box_width / preview.width), width: box_width
+									height: this.height * (box_width / this.width), width: box_width
 								};
-								//css.top = (box_height - css.height) / 2;
+								css.top = (box_height - css.height) / 2;
 							}
 							else {
 								css = {
-									width: preview.width, height: preview.height
+									width: this.width, height: this.height
 								};
 								css.left = (box_width - css.width) / 2;
 							}
 						}
+						console.log(css);
 						root.els["preview-img"].css(css);
+					};
+				}
 
-					} catch (ex) {
-						console.log(ex);
+				if(window.imagePicker) {
+					preview.src = file;
+					setcss_preview(preview, root.els["container"].width(), root.els["container"].height());
+				}else {
+					var reader = new FileReader(target_id);
+					reader.onloadend = function() {
+						try {
+							preview.src = reader.result;
+							setcss_preview(preview, root.els["container"].width(), root.els["container"].height());
+						} catch (ex) {
+							console.log(ex);
+						}
+					};
+					if (file) {
+						reader.readAsDataURL(file);
 					}
-				};
-
-				if (file) {
-					reader.readAsDataURL(file);
 				}
 			})(this);
 
@@ -240,7 +268,14 @@
 			this.els["progress"].css({display: "block"});
 			progress_bar.css({width: '0%'});
 
-			formData.append(cfg.upload_http.filename_param_key, this.selected_file);
+			if(window.imagePicker) {
+				formData.append(cfg.upload_http.filename_param_key, this.selected_file);
+				// 다른 처리 방법 적용 필요
+			}
+			else{
+				formData.append(cfg.upload_http.filename_param_key, this.selected_file);
+			}
+
 			for (var k in cfg.upload_http.data) {
 				formData.append(k, cfg.upload_http.data[k]);
 			}
