@@ -121,11 +121,13 @@
 				ct_width = this.els["container"].width(),
 				ct_height = this.els["container"].height();
 
-			this.els["progress"].css({
-				left: progress_margin,
-				top: ct_height / 2 - progress_height / 2,
-				width: ct_width - (progress_margin * 2)
-			});
+			if(ct_width != 0 && ct_height != 0) {
+				this.els["progress"].css({
+					left: progress_margin,
+					top: ct_height / 2 - progress_height / 2,
+					width: ct_width - (progress_margin * 2)
+				});
+			}
 			//this.els["preview-img"].css({width: ct_width, height: ct_height});
 		};
 

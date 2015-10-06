@@ -95,12 +95,15 @@
 			}
 		};
 		
-		this._set_size_frame = this.alignment = function(){
-			this.els["root"].css({
-				top:0, left:0,
-				width: this.target.width(),
-				height: this.target.height()
-			});
+		this._set_size_frame = this.align = function(){
+			var ct_width = this.target.width();
+			if(ct_width > 0) {
+				this.els["root"].css({
+					top: 0, left: 0,
+					width: this.target.width(),
+					height: this.target.height()
+				});
+			}
 		};
 
 

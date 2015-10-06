@@ -118,16 +118,19 @@
 			*/
 		};
 
-		this._set_size_frame = function () {
-			this.els.items.css({width: this.target.width(), "float": "left"});
-			this.els.holder.css({width: this.target.find(".slider-item").elements.length * this.target.width()});
+		this._set_size_frame = this.align = function () {
+			var ct_width = this.target.width();
+			if(ct_width > 0) {
+				this.els.items.css({width: ct_width, "float": "left"});
+				this.els.holder.css({width: this.target.find(".slider-item").elements.length * ct_width});
 
-			if (this.els.items.elements.length > 1) {
-				this.item_width = this.target.width();
-				this.holder_width = this.target.find(".slider-item").elements.length * this.target.width();
+				if (this.els.items.elements.length > 1) {
+					this.item_width = ct_width;
+					this.holder_width = this.target.find(".slider-item").elements.length * ct_width;
 
-				this.els.holder.css({left: -(this.item_width * this.display_index)});
-				this._update_dot();
+					this.els.holder.css({left: -(this.item_width * this.display_index)});
+					this._update_dot();
+				}
 			}
 		};
 
