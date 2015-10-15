@@ -182,7 +182,9 @@ a.ax {
     box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset; }
   .ax-btn:hover,
   .ax-btn:focus,
-  .ax-btn.focus {
+  .ax-btn.focus,
+  .ax-btn:active,
+  .ax-btn.active {
     text-decoration: none;
     color: #222222;
     text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
@@ -194,7 +196,9 @@ a.ax {
     box-shadow: none; }
     .ax-btn:hover .badge,
     .ax-btn:focus .badge,
-    .ax-btn.focus .badge {
+    .ax-btn.focus .badge,
+    .ax-btn:active .badge,
+    .ax-btn.active .badge {
       text-shadow: none;
       color: #D0D0D0;
       background-color: #222222; }
@@ -234,7 +238,9 @@ a.ax {
       background-color: #fff; }
     .ax-btn.basic:hover,
     .ax-btn.basic:focus,
-    .ax-btn.basic.focus {
+    .ax-btn.basic.focus,
+    .ax-btn.basic:active,
+    .ax-btn.basic.active {
       text-decoration: none;
       color: #fff;
       text-shadow: none;
@@ -246,7 +252,9 @@ a.ax {
       box-shadow: none; }
       .ax-btn.basic:hover .badge,
       .ax-btn.basic:focus .badge,
-      .ax-btn.basic.focus .badge {
+      .ax-btn.basic.focus .badge,
+      .ax-btn.basic:active .badge,
+      .ax-btn.basic.active .badge {
         text-shadow: none;
         color: #F79231;
         background-color: #fff; }
@@ -278,7 +286,9 @@ a.ax {
       background-color: #FEEE00; }
     .ax-btn.good:hover,
     .ax-btn.good:focus,
-    .ax-btn.good.focus {
+    .ax-btn.good.focus,
+    .ax-btn.good:active,
+    .ax-btn.good.active {
       text-decoration: none;
       color: #fff;
       text-shadow: none;
@@ -290,7 +300,9 @@ a.ax {
       box-shadow: none; }
       .ax-btn.good:hover .badge,
       .ax-btn.good:focus .badge,
-      .ax-btn.good.focus .badge {
+      .ax-btn.good.focus .badge,
+      .ax-btn.good:active .badge,
+      .ax-btn.good.active .badge {
         text-shadow: none;
         color: #503C3E;
         background-color: #fff; }
@@ -322,7 +334,9 @@ a.ax {
       background-color: #503C3E; }
     .ax-btn.info:hover,
     .ax-btn.info:focus,
-    .ax-btn.info.focus {
+    .ax-btn.info.focus,
+    .ax-btn.info:active,
+    .ax-btn.info.active {
       text-decoration: none;
       color: #503C3E;
       text-shadow: none;
@@ -334,7 +348,9 @@ a.ax {
       box-shadow: none; }
       .ax-btn.info:hover .badge,
       .ax-btn.info:focus .badge,
-      .ax-btn.info.focus .badge {
+      .ax-btn.info.focus .badge,
+      .ax-btn.info:active .badge,
+      .ax-btn.info.active .badge {
         text-shadow: none;
         color: #FEEE00;
         background-color: #503C3E; }
@@ -366,7 +382,9 @@ a.ax {
       background-color: #fff; }
     .ax-btn.warning:hover,
     .ax-btn.warning:focus,
-    .ax-btn.warning.focus {
+    .ax-btn.warning.focus,
+    .ax-btn.warning:active,
+    .ax-btn.warning.active {
       text-decoration: none;
       color: #fff;
       text-shadow: none;
@@ -378,7 +396,9 @@ a.ax {
       box-shadow: none; }
       .ax-btn.warning:hover .badge,
       .ax-btn.warning:focus .badge,
-      .ax-btn.warning.focus .badge {
+      .ax-btn.warning.focus .badge,
+      .ax-btn.warning:active .badge,
+      .ax-btn.warning.active .badge {
         text-shadow: none;
         color: #FF5B00;
         background-color: #fff; }
@@ -410,7 +430,9 @@ a.ax {
       background-color: #fff; }
     .ax-btn.danger:hover,
     .ax-btn.danger:focus,
-    .ax-btn.danger.focus {
+    .ax-btn.danger.focus,
+    .ax-btn.danger:active,
+    .ax-btn.danger.active {
       text-decoration: none;
       color: #fff;
       text-shadow: none;
@@ -422,7 +444,9 @@ a.ax {
       box-shadow: none; }
       .ax-btn.danger:hover .badge,
       .ax-btn.danger:focus .badge,
-      .ax-btn.danger.focus .badge {
+      .ax-btn.danger.focus .badge,
+      .ax-btn.danger:active .badge,
+      .ax-btn.danger.active .badge {
         text-shadow: none;
         color: #993700;
         background-color: #fff; }
@@ -454,7 +478,9 @@ a.ax {
       background-color: #333333; }
     .ax-btn.link:hover,
     .ax-btn.link:focus,
-    .ax-btn.link.focus {
+    .ax-btn.link.focus,
+    .ax-btn.link:active,
+    .ax-btn.link.active {
       text-decoration: none;
       color: #333333;
       text-shadow: none;
@@ -466,7 +492,9 @@ a.ax {
       box-shadow: none; }
       .ax-btn.link:hover .badge,
       .ax-btn.link:focus .badge,
-      .ax-btn.link.focus .badge {
+      .ax-btn.link.focus .badge,
+      .ax-btn.link:active .badge,
+      .ax-btn.link.active .badge {
         text-shadow: none;
         color: #fff;
         background-color: #333333; }
@@ -498,7 +526,9 @@ a.ax {
       background-color: #808080; }
     .ax-btn.special:hover,
     .ax-btn.special:focus,
-    .ax-btn.special.focus {
+    .ax-btn.special.focus,
+    .ax-btn.special:active,
+    .ax-btn.special.active {
       text-decoration: none;
       color: #fff;
       text-shadow: none;
@@ -510,7 +540,9 @@ a.ax {
       box-shadow: none; }
       .ax-btn.special:hover .badge,
       .ax-btn.special:focus .badge,
-      .ax-btn.special.focus .badge {
+      .ax-btn.special.focus .badge,
+      .ax-btn.special:active .badge,
+      .ax-btn.special.active .badge {
         text-shadow: none;
         color: #292929;
         background-color: #fff; }

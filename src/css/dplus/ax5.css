@@ -181,7 +181,9 @@ a.ax {
     box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset; }
   .ax-btn:hover,
   .ax-btn:focus,
-  .ax-btn.focus {
+  .ax-btn.focus,
+  .ax-btn:active,
+  .ax-btn.active {
     text-decoration: none;
     color: #222222;
     text-shadow: none;
@@ -193,7 +195,9 @@ a.ax {
     box-shadow: none; }
     .ax-btn:hover .badge,
     .ax-btn:focus .badge,
-    .ax-btn.focus .badge {
+    .ax-btn.focus .badge,
+    .ax-btn:active .badge,
+    .ax-btn.active .badge {
       text-shadow: none;
       color: #D0D0D0;
       background-color: #222222; }
@@ -221,7 +225,7 @@ a.ax {
   .ax-btn.basic {
     color: #1E252E;
     text-shadow: none;
-    border: 1px solid #d4a700;
+    border: 1px solid #ffcb08;
     background: #FFCB08;
     background-image: -webkit-linear-gradient(top, #FFCB08, #FFCB08);
     background-image: linear-gradient(to bottom, #FFCB08, #FFCB08);
@@ -233,21 +237,25 @@ a.ax {
       background-color: #1E252E; }
     .ax-btn.basic:hover,
     .ax-btn.basic:focus,
-    .ax-btn.basic.focus {
+    .ax-btn.basic.focus,
+    .ax-btn.basic:active,
+    .ax-btn.basic.active {
       text-decoration: none;
       color: #1E252E;
       text-shadow: none;
       border: 1px solid #d4a700;
-      background: #FFCB08;
-      background-image: -webkit-linear-gradient(top, #FFCB08, #FFCB08);
-      background-image: linear-gradient(to bottom, #FFCB08, #FFCB08);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFCB08, endColorstr=#FFCB08);
+      background: #ffffff;
+      background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
+      background-image: linear-gradient(to bottom, #ffffff, #ffffff);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#ffffff);
       box-shadow: none; }
       .ax-btn.basic:hover .badge,
       .ax-btn.basic:focus .badge,
-      .ax-btn.basic.focus .badge {
+      .ax-btn.basic.focus .badge,
+      .ax-btn.basic:active .badge,
+      .ax-btn.basic.active .badge {
         text-shadow: none;
-        color: #FFCB08;
+        color: #ffffff;
         background-color: #1E252E; }
     .ax-btn.basic:active,
     .ax-btn.basic.active {
@@ -277,22 +285,26 @@ a.ax {
       background-color: #fff; }
     .ax-btn.good:hover,
     .ax-btn.good:focus,
-    .ax-btn.good.focus {
+    .ax-btn.good.focus,
+    .ax-btn.good:active,
+    .ax-btn.good.active {
       text-decoration: none;
-      color: #fff;
+      color: #219ECF;
       text-shadow: none;
       border: 1px solid #219ecf;
-      background: #219ECF;
-      background-image: -webkit-linear-gradient(top, #219ECF, #219ECF);
-      background-image: linear-gradient(to bottom, #219ECF, #219ECF);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#219ECF, endColorstr=#219ECF);
+      background: #e6e6e6;
+      background-image: -webkit-linear-gradient(top, #e6e6e6, #e6e6e6);
+      background-image: linear-gradient(to bottom, #e6e6e6, #e6e6e6);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#e6e6e6, endColorstr=#e6e6e6);
       box-shadow: none; }
       .ax-btn.good:hover .badge,
       .ax-btn.good:focus .badge,
-      .ax-btn.good.focus .badge {
+      .ax-btn.good.focus .badge,
+      .ax-btn.good:active .badge,
+      .ax-btn.good.active .badge {
         text-shadow: none;
-        color: #219ECF;
-        background-color: #fff; }
+        color: #e6e6e6;
+        background-color: #219ECF; }
     .ax-btn.good:active,
     .ax-btn.good.active {
       outline: 0;
@@ -321,21 +333,25 @@ a.ax {
       background-color: #219ECF; }
     .ax-btn.info:hover,
     .ax-btn.info:focus,
-    .ax-btn.info.focus {
+    .ax-btn.info.focus,
+    .ax-btn.info:active,
+    .ax-btn.info.active {
       text-decoration: none;
       color: #219ECF;
       text-shadow: none;
       border: 1px solid #219ecf;
-      background: #fff;
-      background-image: -webkit-linear-gradient(top, #fff, #fff);
-      background-image: linear-gradient(to bottom, #fff, #fff);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#fff, endColorstr=#fff);
+      background: #e6e6e6;
+      background-image: -webkit-linear-gradient(top, #e6e6e6, #e6e6e6);
+      background-image: linear-gradient(to bottom, #e6e6e6, #e6e6e6);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#e6e6e6, endColorstr=#e6e6e6);
       box-shadow: none; }
       .ax-btn.info:hover .badge,
       .ax-btn.info:focus .badge,
-      .ax-btn.info.focus .badge {
+      .ax-btn.info.focus .badge,
+      .ax-btn.info:active .badge,
+      .ax-btn.info.active .badge {
         text-shadow: none;
-        color: #fff;
+        color: #e6e6e6;
         background-color: #219ECF; }
     .ax-btn.info:active,
     .ax-btn.info.active {
@@ -365,7 +381,9 @@ a.ax {
       background-color: #D94034; }
     .ax-btn.warning:hover,
     .ax-btn.warning:focus,
-    .ax-btn.warning.focus {
+    .ax-btn.warning.focus,
+    .ax-btn.warning:active,
+    .ax-btn.warning.active {
       text-decoration: none;
       color: #D94034;
       text-shadow: none;
@@ -377,7 +395,9 @@ a.ax {
       box-shadow: none; }
       .ax-btn.warning:hover .badge,
       .ax-btn.warning:focus .badge,
-      .ax-btn.warning.focus .badge {
+      .ax-btn.warning.focus .badge,
+      .ax-btn.warning:active .badge,
+      .ax-btn.warning.active .badge {
         text-shadow: none;
         color: #F1F1F1;
         background-color: #D94034; }
@@ -409,7 +429,9 @@ a.ax {
       background-color: #fff; }
     .ax-btn.danger:hover,
     .ax-btn.danger:focus,
-    .ax-btn.danger.focus {
+    .ax-btn.danger.focus,
+    .ax-btn.danger:active,
+    .ax-btn.danger.active {
       text-decoration: none;
       color: #fff;
       text-shadow: none;
@@ -421,7 +443,9 @@ a.ax {
       box-shadow: none; }
       .ax-btn.danger:hover .badge,
       .ax-btn.danger:focus .badge,
-      .ax-btn.danger.focus .badge {
+      .ax-btn.danger.focus .badge,
+      .ax-btn.danger:active .badge,
+      .ax-btn.danger.active .badge {
         text-shadow: none;
         color: #8d231a;
         background-color: #fff; }
@@ -453,7 +477,9 @@ a.ax {
       background-color: #FFCB08; }
     .ax-btn.link:hover,
     .ax-btn.link:focus,
-    .ax-btn.link.focus {
+    .ax-btn.link.focus,
+    .ax-btn.link:active,
+    .ax-btn.link.active {
       text-decoration: none;
       color: #FFCB08;
       text-shadow: none;
@@ -465,7 +491,9 @@ a.ax {
       box-shadow: none; }
       .ax-btn.link:hover .badge,
       .ax-btn.link:focus .badge,
-      .ax-btn.link.focus .badge {
+      .ax-btn.link.focus .badge,
+      .ax-btn.link:active .badge,
+      .ax-btn.link.active .badge {
         text-shadow: none;
         color: #fff;
         background-color: #FFCB08; }
@@ -497,7 +525,9 @@ a.ax {
       background-color: #808080; }
     .ax-btn.special:hover,
     .ax-btn.special:focus,
-    .ax-btn.special.focus {
+    .ax-btn.special.focus,
+    .ax-btn.special:active,
+    .ax-btn.special.active {
       text-decoration: none;
       color: #fff;
       text-shadow: none;
@@ -509,7 +539,9 @@ a.ax {
       box-shadow: none; }
       .ax-btn.special:hover .badge,
       .ax-btn.special:focus .badge,
-      .ax-btn.special.focus .badge {
+      .ax-btn.special.focus .badge,
+      .ax-btn.special:active .badge,
+      .ax-btn.special.active .badge {
         text-shadow: none;
         color: #292929;
         background-color: #fff; }
@@ -823,7 +855,7 @@ a.ax {
   .ax-select.basic {
     color: #1E252E;
     text-shadow: none;
-    border: 1px solid #d4a700;
+    border: 1px solid #ffcb08;
     background: #FFCB08;
     background-image: -webkit-linear-gradient(top, #FFCB08, #FFCB08);
     background-image: linear-gradient(to bottom, #FFCB08, #FFCB08);

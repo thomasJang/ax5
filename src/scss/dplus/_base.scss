@@ -136,11 +136,11 @@ $btn-basic-text-color: #1E252E;//#5A3100;
 $btn-basic-text-shadow: none; //0px -1px 0px darken($theme-basic, 50%);
 $btn-basic-bg: ($theme-basic, $theme-basic); // 배경색들
 $btn-basic-bg-image: "";
-$btn-basic-border: 1px solid darken($theme-basic, 10%);
+$btn-basic-border: 1px solid darken($theme-basic, 0%);
 $btn-basic-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
 	$btn-basic-hover-text-color: #1E252E;
 	$btn-basic-hover-text-shadow: none; //0px -1px 0px darken($theme-basic, 50%);
-	$btn-basic-hover-bg: ($theme-basic, $theme-basic); // 배경색들
+	$btn-basic-hover-bg: (#ffffff, #ffffff); // 배경색들
 	$btn-basic-hover-bg-image: "";
 	$btn-basic-hover-border: 1px solid darken($theme-basic, 10%);
 	$btn-basic-hover-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
@@ -151,9 +151,9 @@ $btn-good-bg: ($theme-good, $theme-good); // 배경색들
 $btn-good-bg-image: "";
 $btn-good-border: 1px solid darken($theme-good, 0%);
 $btn-good-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
-	$btn-good-hover-text-color:$white;
+	$btn-good-hover-text-color: $theme-info;
 	$btn-good-hover-text-shadow: none; //0px -1px 0px darken($theme-good, 50%);
-	$btn-good-hover-bg: ($theme-good, $theme-good);
+	$btn-good-hover-bg: (darken($white, 10%), darken($white, 10%));
 	$btn-good-hover-bg-image: "";
 	$btn-good-hover-border: 1px solid darken($theme-good, 0%);
 	$btn-good-hover-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
@@ -166,7 +166,7 @@ $btn-info-border: 1px solid $theme-info;
 $btn-info-drop-shadow: none; //0px 1px 0px 0lipx rgba(0,0,0,0.15);
 	$btn-info-hover-text-color: $theme-info;
 	$btn-info-hover-text-shadow: none; //0px -1px 0px rgba(0,0,0,0.9);
-	$btn-info-hover-bg: ($white, $white);
+	$btn-info-hover-bg: (darken($white, 10%), darken($white, 10%));
 	$btn-info-hover-bg-image: "";
 	$btn-info-hover-border: 1px solid darken($theme-info, 0%);
 	$btn-info-hover-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);

@@ -28,7 +28,9 @@
 @mixin button-hover-variant($text-color, $text-shadow, $bg, $bg-image, $border, $drop-shadow) {
   &:hover,
   &:focus,
-  &.focus {
+  &.focus,
+  &:active,
+  &.active {
     text-decoration: none;
     color: $text-color;
     text-shadow: $text-shadow;

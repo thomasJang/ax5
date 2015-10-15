@@ -181,7 +181,9 @@ a.ax {
     box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset; }
   .ax-btn:hover,
   .ax-btn:focus,
-  .ax-btn.focus {
+  .ax-btn.focus,
+  .ax-btn:active,
+  .ax-btn.active {
     text-decoration: none;
     color: #222222;
     text-shadow: none;
@@ -193,7 +195,9 @@ a.ax {
     box-shadow: none; }
     .ax-btn:hover .badge,
     .ax-btn:focus .badge,
-    .ax-btn.focus .badge {
+    .ax-btn.focus .badge,
+    .ax-btn:active .badge,
+    .ax-btn.active .badge {
       text-shadow: none;
       color: #D0D0D0;
       background-color: #222222; }
@@ -221,7 +225,7 @@ a.ax {
   .ax-btn.basic {
     color: #fff;
     text-shadow: none;
-    border: 1px solid #c11b01;
+    border: 1px solid #f42201;
     background: #f42201;
     background-image: -webkit-linear-gradient(top, #f42201, #f42201);
     background-image: linear-gradient(to bottom, #f42201, #f42201);
@@ -233,21 +237,25 @@ a.ax {
       background-color: #fff; }
     .ax-btn.basic:hover,
     .ax-btn.basic:focus,
-    .ax-btn.basic.focus {
+    .ax-btn.basic.focus,
+    .ax-btn.basic:active,
+    .ax-btn.basic.active {
       text-decoration: none;
       color: #fff;
       text-shadow: none;
-      border: 1px solid #c11b01;
-      background: #f42201;
-      background-image: -webkit-linear-gradient(top, #f42201, #f42201);
-      background-image: linear-gradient(to bottom, #f42201, #f42201);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#f42201, endColorstr=#f42201);
+      border: 1px solid #fe5d43;
+      background: #fe5d43;
+      background-image: -webkit-linear-gradient(top, #fe5d43, #fe5d43);
+      background-image: linear-gradient(to bottom, #fe5d43, #fe5d43);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#fe5d43, endColorstr=#fe5d43);
       box-shadow: none; }
       .ax-btn.basic:hover .badge,
       .ax-btn.basic:focus .badge,
-      .ax-btn.basic.focus .badge {
+      .ax-btn.basic.focus .badge,
+      .ax-btn.basic:active .badge,
+      .ax-btn.basic.active .badge {
         text-shadow: none;
-        color: #f42201;
+        color: #fe5d43;
         background-color: #fff; }
     .ax-btn.basic:active,
     .ax-btn.basic.active {
@@ -277,7 +285,9 @@ a.ax {
       background-color: #fff; }
     .ax-btn.good:hover,
     .ax-btn.good:focus,
-    .ax-btn.good.focus {
+    .ax-btn.good.focus,
+    .ax-btn.good:active,
+    .ax-btn.good.active {
       text-decoration: none;
       color: #fff;
       text-shadow: none;
@@ -289,7 +299,9 @@ a.ax {
       box-shadow: none; }
       .ax-btn.good:hover .badge,
       .ax-btn.good:focus .badge,
-      .ax-btn.good.focus .badge {
+      .ax-btn.good.focus .badge,
+      .ax-btn.good:active .badge,
+      .ax-btn.good.active .badge {
         text-shadow: none;
         color: #219ECF;
         background-color: #fff; }
@@ -321,7 +333,9 @@ a.ax {
       background-color: #219ECF; }
     .ax-btn.info:hover,
     .ax-btn.info:focus,
-    .ax-btn.info.focus {
+    .ax-btn.info.focus,
+    .ax-btn.info:active,
+    .ax-btn.info.active {
       text-decoration: none;
       color: #219ECF;
       text-shadow: none;
@@ -333,7 +347,9 @@ a.ax {
       box-shadow: none; }
       .ax-btn.info:hover .badge,
       .ax-btn.info:focus .badge,
-      .ax-btn.info.focus .badge {
+      .ax-btn.info.focus .badge,
+      .ax-btn.info:active .badge,
+      .ax-btn.info.active .badge {
         text-shadow: none;
         color: #fff;
         background-color: #219ECF; }
@@ -351,36 +367,40 @@ a.ax {
       opacity: 0.65;
       box-shadow: none; }
   .ax-btn.warning {
-    color: #D94034;
+    color: #fff;
     text-shadow: none;
-    border: 1px solid #F1F1F1;
-    background: #F1F1F1;
-    background-image: -webkit-linear-gradient(top, #F1F1F1, #F1F1F1);
-    background-image: linear-gradient(to bottom, #F1F1F1, #F1F1F1);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F1F1F1, endColorstr=#F1F1F1);
+    border: 1px solid #f42201;
+    background: #f42201;
+    background-image: -webkit-linear-gradient(top, #f42201, #f42201);
+    background-image: linear-gradient(to bottom, #f42201, #f42201);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#f42201, endColorstr=#f42201);
     box-shadow: none; }
     .ax-btn.warning .badge {
       text-shadow: none;
-      color: #F1F1F1;
-      background-color: #D94034; }
+      color: #f42201;
+      background-color: #fff; }
     .ax-btn.warning:hover,
     .ax-btn.warning:focus,
-    .ax-btn.warning.focus {
+    .ax-btn.warning.focus,
+    .ax-btn.warning:active,
+    .ax-btn.warning.active {
       text-decoration: none;
-      color: #D94034;
+      color: #fff;
       text-shadow: none;
-      border: 1px solid #8d231a;
-      background: #F1F1F1;
-      background-image: -webkit-linear-gradient(top, #F1F1F1, #F1F1F1);
-      background-image: linear-gradient(to bottom, #F1F1F1, #F1F1F1);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F1F1F1, endColorstr=#F1F1F1);
+      border: 1px solid #fe5d43;
+      background: #fe5d43;
+      background-image: -webkit-linear-gradient(top, #fe5d43, #fe5d43);
+      background-image: linear-gradient(to bottom, #fe5d43, #fe5d43);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#fe5d43, endColorstr=#fe5d43);
       box-shadow: none; }
       .ax-btn.warning:hover .badge,
       .ax-btn.warning:focus .badge,
-      .ax-btn.warning.focus .badge {
+      .ax-btn.warning.focus .badge,
+      .ax-btn.warning:active .badge,
+      .ax-btn.warning.active .badge {
         text-shadow: none;
-        color: #F1F1F1;
-        background-color: #D94034; }
+        color: #fe5d43;
+        background-color: #fff; }
     .ax-btn.warning:active,
     .ax-btn.warning.active {
       outline: 0;
@@ -409,7 +429,9 @@ a.ax {
       background-color: #fff; }
     .ax-btn.danger:hover,
     .ax-btn.danger:focus,
-    .ax-btn.danger.focus {
+    .ax-btn.danger.focus,
+    .ax-btn.danger:active,
+    .ax-btn.danger.active {
       text-decoration: none;
       color: #fff;
       text-shadow: none;
@@ -421,7 +443,9 @@ a.ax {
       box-shadow: none; }
       .ax-btn.danger:hover .badge,
       .ax-btn.danger:focus .badge,
-      .ax-btn.danger.focus .badge {
+      .ax-btn.danger.focus .badge,
+      .ax-btn.danger:active .badge,
+      .ax-btn.danger.active .badge {
         text-shadow: none;
         color: #8d231a;
         background-color: #fff; }
@@ -453,7 +477,9 @@ a.ax {
       background-color: #f42201; }
     .ax-btn.link:hover,
     .ax-btn.link:focus,
-    .ax-btn.link.focus {
+    .ax-btn.link.focus,
+    .ax-btn.link:active,
+    .ax-btn.link.active {
       text-decoration: none;
       color: #f42201;
       text-shadow: none;
@@ -465,7 +491,9 @@ a.ax {
       box-shadow: none; }
       .ax-btn.link:hover .badge,
       .ax-btn.link:focus .badge,
-      .ax-btn.link.focus .badge {
+      .ax-btn.link.focus .badge,
+      .ax-btn.link:active .badge,
+      .ax-btn.link.active .badge {
         text-shadow: none;
         color: #fff;
         background-color: #f42201; }
@@ -497,7 +525,9 @@ a.ax {
       background-color: #ffffff; }
     .ax-btn.special:hover,
     .ax-btn.special:focus,
-    .ax-btn.special.focus {
+    .ax-btn.special.focus,
+    .ax-btn.special:active,
+    .ax-btn.special.active {
       text-decoration: none;
       color: #fff;
       text-shadow: none;
@@ -509,7 +539,9 @@ a.ax {
       box-shadow: none; }
       .ax-btn.special:hover .badge,
       .ax-btn.special:focus .badge,
-      .ax-btn.special.focus .badge {
+      .ax-btn.special.focus .badge,
+      .ax-btn.special:active .badge,
+      .ax-btn.special.active .badge {
         text-shadow: none;
         color: #aaaaaa;
         background-color: #fff; }
@@ -823,7 +855,7 @@ a.ax {
   .ax-select.basic {
     color: #fff;
     text-shadow: none;
-    border: 1px solid #c11b01;
+    border: 1px solid #f42201;
     background: #f42201;
     background-image: -webkit-linear-gradient(top, #f42201, #f42201);
     background-image: linear-gradient(to bottom, #f42201, #f42201);
@@ -902,25 +934,25 @@ a.ax {
       box-shadow: none;
       opacity: 1; }
   .ax-select.warning {
-    color: #D94034;
+    color: #fff;
     text-shadow: none;
-    border: 1px solid #F1F1F1;
-    background: #F1F1F1;
-    background-image: -webkit-linear-gradient(top, #F1F1F1, #F1F1F1);
-    background-image: linear-gradient(to bottom, #F1F1F1, #F1F1F1);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F1F1F1, endColorstr=#F1F1F1);
+    border: 1px solid #f42201;
+    background: #f42201;
+    background-image: -webkit-linear-gradient(top, #f42201, #f42201);
+    background-image: linear-gradient(to bottom, #f42201, #f42201);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#f42201, endColorstr=#f42201);
     box-shadow: none; }
     .ax-select.warning:focus {
       border-color: #D94034;
       outline: 0;
       box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(217, 64, 52, 0.6); }
     .ax-select.warning::-moz-placeholder {
-      color: #D94034;
+      color: #fff;
       opacity: 1; }
     .ax-select.warning:-ms-input-placeholder {
-      color: #D94034; }
+      color: #fff; }
     .ax-select.warning::-webkit-input-placeholder {
-      color: #D94034; }
+      color: #fff; }
     .ax-select.warning[disabled], .ax-select.warning[readonly] {
       background: #eeeeee;
       background-image: -webkit-linear-gradient(top, #eeeeee, #eeeeee);
@@ -1411,13 +1443,13 @@ a.ax {
     touch-action: manipulation;
     white-space: nowrap;
     box-sizing: border-box;
-    color: #D94034;
+    color: #fff;
     text-shadow: none;
     border: 1px solid #d94034;
-    background: #F1F1F1;
-    background-image: -webkit-linear-gradient(top, #F1F1F1, #F1F1F1);
-    background-image: linear-gradient(to bottom, #F1F1F1, #F1F1F1);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F1F1F1, endColorstr=#F1F1F1);
+    background: #f42201;
+    background-image: -webkit-linear-gradient(top, #f42201, #f42201);
+    background-image: linear-gradient(to bottom, #f42201, #f42201);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#f42201, endColorstr=#f42201);
     box-shadow: none;
     padding: 0px 15px;
     font-size: 12px;
@@ -1690,13 +1722,13 @@ a.ax {
     touch-action: manipulation;
     white-space: nowrap;
     box-sizing: border-box;
-    color: #D94034;
+    color: #fff;
     text-shadow: none;
     border: 1px solid #d94034;
-    background: #F1F1F1;
-    background-image: -webkit-linear-gradient(top, #F1F1F1, #F1F1F1);
-    background-image: linear-gradient(to bottom, #F1F1F1, #F1F1F1);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F1F1F1, endColorstr=#F1F1F1);
+    background: #f42201;
+    background-image: -webkit-linear-gradient(top, #f42201, #f42201);
+    background-image: linear-gradient(to bottom, #f42201, #f42201);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#f42201, endColorstr=#f42201);
     box-shadow: none;
     padding: 0px 15px;
     font-size: 12px;
@@ -3510,9 +3542,9 @@ a.ax {
   position: relative;
   box-sizing: border-box;
   background: #eee;
-  border: 2px solid #979797;
-  padding: 4px;
-  border-radius: 14px;
+  border: 1px solid #979797;
+  padding: 2px;
+  border-radius: 7px;
   box-shadow: inset 1px 1px 0px 0px rgba(0, 0, 0, 0.15); }
   .ax5-ui-progress .progress-bar {
     -webkit-transition: width 0.2s linear;
@@ -3520,9 +3552,9 @@ a.ax {
     transition: width 0.2s linear;
     position: relative;
     box-sizing: border-box;
-    height: 20px;
-    border-radius: 10px;
-    min-width: 20px;
+    height: 10px;
+    border-radius: 5px;
+    min-width: 10px;
     box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.15); }
   .ax5-ui-progress .progress-status {
     position: absolute;
@@ -3530,9 +3562,9 @@ a.ax {
     box-sizing: border-box;
     display: block;
     text-align: right;
-    height: 20px;
-    line-height: 20px;
-    padding: 0px 8px; }
+    height: 10px;
+    line-height: 10px;
+    padding: 0px 4px; }
   .ax5-ui-progress .progress-bar {
     background: #FFFFFF;
     background-image: -webkit-linear-gradient(top, #FFFFFF, #F0F0F0);
@@ -3834,11 +3866,11 @@ input[type='checkbox']:checked + .ax5-ui-switch.with-label {
     .ax5-ui-segment.warning .ax5-ui-segment-group table td .ax-btn[data-segment-item-last] {
       border-right: 1px solid #D94034; }
     .ax5-ui-segment.warning .ax5-ui-segment-group table td .ax-btn.on {
-      background: #F1F1F1;
-      background-image: -webkit-linear-gradient(top, #F1F1F1, #F1F1F1);
-      background-image: linear-gradient(to bottom, #F1F1F1, #F1F1F1);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F1F1F1, endColorstr=#F1F1F1);
-      color: #D94034; }
+      background: #f42201;
+      background-image: -webkit-linear-gradient(top, #f42201, #f42201);
+      background-image: linear-gradient(to bottom, #f42201, #f42201);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#f42201, endColorstr=#f42201);
+      color: #fff; }
   .ax5-ui-segment.danger .ax5-ui-segment-group table td .ax-btn {
     background: #ffffff;
     background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);

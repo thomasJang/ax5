@@ -159,7 +159,7 @@
 				target_id = this.target.id,
 				preview = this.els["preview-img"].elements[0];
 
-			console.log(evt);
+			//console.log(evt);
 			
 			if ('dataTransfer' in evt) {
 				file = evt.dataTransfer.files[0];
@@ -192,13 +192,11 @@
 								css = {
 									width: this.width * (box_height / this.height), height: box_height
 								};
-								css.left = (box_width - css.width) / 2;
 							}
 							else {
 								css = {
 									width: this.width, height: this.height
 								};
-								css.top = (box_height - css.height) / 2;
 							}
 						}
 						else { // 세로형
@@ -206,16 +204,18 @@
 								css = {
 									height: this.height * (box_width / this.width), width: box_width
 								};
-								css.top = (box_height - css.height) / 2;
+
 							}
 							else {
 								css = {
 									width: this.width, height: this.height
 								};
-								css.left = (box_width - css.width) / 2;
+
 							}
 						}
-						console.log(css);
+						css.top = (box_height - css.height) / 2;
+						css.left = (box_width - css.width) / 2;
+						//console.log(css);
 						root.els["preview-img"].css(css);
 					};
 				}
@@ -329,20 +329,65 @@
 		this.set_uploaded_file = function(file) {
 			this.uploaded_file = file;
 			if (this.uploaded_file) {
-				this.els["container"].addClass("uploaded");
+				this.els["container"].class_name("add", "uploaded");
 			}
 			else {
-				this.els["container"].removeClass("uploaded");
+				this.els["container"].class_name("remove", "uploaded");
 			}
 		};
 
 		this.set_preview_img = function(src) {
-			if (src) {
-				this.els["preview-img"].attr({"src": src});
-			}
-			else {
-				this.els["preview-img"].attr({"src": null});
-			}
+
+			(function(root) {
+				function setcss_preview(img, box_width, box_height){
+					var css = {};
+
+					var image = new Image();
+					image.src = img.src;
+					image.onload = function() {
+						// access image size here
+						//console.log(this.width, this.height);
+						if (this.width > this.height) { // 가로형
+							if (this.height > box_height) {
+								css = {
+									width: this.width * (box_height / this.height), height: box_height
+								};
+
+							}
+							else {
+								css = {
+									width: this.width, height: this.height
+								};
+							}
+						}
+						else { // 세로형
+							if (this.width > box_width) {
+								css = {
+									height: this.height * (box_width / this.width), width: box_width
+								};
+							}
+							else {
+								css = {
+									width: this.width, height: this.height
+								};
+							}
+						}
+						css.top = (box_height - css.height) / 2;
+						css.left = (box_width - css.width) / 2;
+						root.els["preview-img"].css(css);
+					};
+				}
+
+				if (src) {
+					root.els["preview-img"].attr({"src": src}).css({display:"block"});
+					setcss_preview(root.els["preview-img"].elements[0], root.els["container"].width(), root.els["container"].height());
+				}
+				else {
+					root.els["preview-img"].attr({"src": null}).css({display:"none"});
+				}
+
+			})(this);
+
 		};
 
 	};

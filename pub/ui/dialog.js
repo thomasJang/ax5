@@ -170,16 +170,16 @@
 				po.push('</div>');
 				po.push('<div class="ax-dialog-body">');
 					po.push('<div class="ax-dialog-msg">');
+
+					po.push( (opts.msg || cfg.msg || "").replace(/\n/g, "<br/>") );
+
 					if(opts.input){
 						U.each(opts.input, function(k, v) {
 							po.push('<div class="ax-dialog-prompt">');
 							po.push( this.label.replace(/\n/g, "<br/>") );
 							po.push('</div>');
-							po.push('<input type="text" class="ax-inp" data-ax-dialog-prompt="' + k + '" style="width:100%;" />');
+							po.push('<input type="' + (this.type||'text') + '" placeholder="' + (this.placeholder||"") + ' " class="ax-inp ' + (this.klass||"") +'" data-ax-dialog-prompt="' + k + '" style="width:100%;" />');
 						});
-					}
-					else{
-						po.push( (opts.msg || cfg.msg || "").replace(/\n/g, "<br/>") );
 					}
 
 					po.push('</div>');

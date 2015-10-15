@@ -136,13 +136,13 @@ $btn-basic-text-color: #fff;//#5A3100;
 $btn-basic-text-shadow: none; //0px -1px 0px darken($theme-basic, 50%);
 $btn-basic-bg: ($theme-basic, $theme-basic); // 배경색들
 $btn-basic-bg-image: "";
-$btn-basic-border: 1px solid darken($theme-basic, 10%);
+$btn-basic-border: 1px solid darken($theme-basic, 0%);
 $btn-basic-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
 	$btn-basic-hover-text-color: #fff;
 	$btn-basic-hover-text-shadow: none; //0px -1px 0px darken($theme-basic, 50%);
-	$btn-basic-hover-bg: ($theme-basic, $theme-basic); // 배경색들
+	$btn-basic-hover-bg: (lighten($theme-basic, 15%), lighten($theme-basic, 15%)); // 배경색들
 	$btn-basic-hover-bg-image: "";
-	$btn-basic-hover-border: 1px solid darken($theme-basic, 10%);
+	$btn-basic-hover-border: 1px solid lighten($theme-basic, 15%);
 	$btn-basic-hover-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
 
 $btn-good-text-color:$white;
@@ -171,17 +171,17 @@ $btn-info-drop-shadow: none; //0px 1px 0px 0lipx rgba(0,0,0,0.15);
 	$btn-info-hover-border: 1px solid darken($theme-info, 0%);
 	$btn-info-hover-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
 
-$btn-warning-text-color:$theme-warning;
+$btn-warning-text-color: $btn-basic-text-color;
 $btn-warning-text-shadow: none; //0px -1px 0px darken($theme-warning, 50%);
-$btn-warning-bg: (#F1F1F1, #F1F1F1); // 배경색들
+$btn-warning-bg: $btn-basic-bg; // 배경색들
 $btn-warning-bg-image: "";
-$btn-warning-border: 1px solid #F1F1F1;
+$btn-warning-border: $btn-basic-border;
 $btn-warning-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
-	$btn-warning-hover-text-color:$theme-warning;
+	$btn-warning-hover-text-color: $btn-basic-hover-text-color;
 	$btn-warning-hover-text-shadow: none; //0px -1px 0px darken($theme-warning, 50%);
-	$btn-warning-hover-bg: (#F1F1F1, #F1F1F1);
+	$btn-warning-hover-bg: $btn-basic-hover-bg;
 	$btn-warning-hover-bg-image: "";
-	$btn-warning-hover-border: 1px solid darken($theme-warning, 20%);
+	$btn-warning-hover-border: $btn-basic-hover-border;
 	$btn-warning-hover-drop-shadow: none; //0px 1px 0px 0px rgba(0,0,0,0.15);
 
 $btn-danger-text-color:#fff;
@@ -592,10 +592,10 @@ $modal-special-heading-bg: $panel-special-heading-bg;
 
 //== progress
 $progress-bg: #eee;
-$progress-border: 2px solid #979797;
-$progress-bar-height: 20px;
-$progress-padding: 4px;
-$progress-border-radius: 10px;
+$progress-border: 1px solid #979797;
+$progress-bar-height: 10px;
+$progress-padding: 2px;
+$progress-border-radius: 5px;
 
 //** color for elements within modal
 $progress-default-bar-bg: (#FFFFFF, #F0F0F0); // 배경색들;
