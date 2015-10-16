@@ -95,13 +95,16 @@
 		};
 
 		this._on_touch_start = function (e) {
+
+			if(this.item_width > this.holder_width) return false;
+
 			touch_start = {
 				mouse: _this.get_mouse(e),
 				time: (new Date()).getTime(),
 				position: this.els.holder.position()
 			};
 
-			this.els.holder.class_name("remove", "touch-end");
+			this.els.holder.class_name("remove", "ax5-ui-horizontal-scroller-touch-end");
 
 			axd(document.body).on(e_touch_move + ".ax5hrozontalscroller", function (e) {
 				_this._on_touch_move(e || window.event);
@@ -128,8 +131,7 @@
 			var mouse = _this.get_mouse(e);
 			if (!touch_start.direction) {
 				var dx = Math.abs(touch_start.mouse.x - mouse.x), dy = Math.abs(touch_start.mouse.y - mouse.y) * 2;
-				console.log(dx);
-				touch_start.direction = (dx > 0) ? "X" : "Y";
+				touch_start.direction = (dx > dy) ? "X" : "Y";
 			}
 
 			// 터치 방향 판단 하여 수평일 때만
@@ -168,6 +170,21 @@
 			};
 
 			if(touch_start.direction == "X"){
+				var du_time = touch_end.time - touch_start.time, extra_move = 0, new_left = touch_start.new_left;
+				if (du_time < 120 && Math.abs((touch_start.mouse.x - touch_end.mouse.x)) > 5) {
+					extra_move = -(touch_start.mouse.x - touch_end.mouse.x) * (10/(du_time||0.1));
+					new_left = Number(new_left) + extra_move;
+
+					if (new_left > 0) new_left = 0;
+					else if (new_left < -(this.holder_width - this.item_width)) {
+						new_left = -(this.holder_width - this.item_width);
+					}
+					//console.log(touch_start.new_left, new_left, extra_move, du_time);
+					this.els.holder
+						.css({left: new_left})
+						.class_name("add", "ax5-ui-horizontal-scroller-touch-end");
+				}
+
 				axd(document.body).off(e_touch_move + ".ax5hrozontalscroller");
 				axd(document.body).off(e_touch_end + ".ax5hrozontalscroller");
 				//axd(document.body).off("mouseout.ax5hrozontalscroller");

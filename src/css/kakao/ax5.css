@@ -4002,3 +4002,8 @@ input[type='checkbox']:checked + .ax5-ui-switch.with-label {
     opacity: 0; }
   .ax5-ui-single-uploader .ax5-ui-progress {
     position: absolute; }
+
+.ax5-ui-horizontal-scroller-touch-end {
+  -webkit-transition: all 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+  -moz-transition: all 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+  transition: all 0.3s cubic-bezier(0.39, 0.575, 0.565, 1); }
