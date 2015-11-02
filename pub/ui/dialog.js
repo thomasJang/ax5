@@ -214,6 +214,9 @@
 			// dialog 높이 구하기 - 너비가 정해지면 높이가 변경 될 것.
 			box.height = this.active_dialog.height();
 
+
+			//console.log(ax5.dom.width(document.body));
+
 			//- position 정렬
 			if(typeof opts.position === "undefined" || opts.position === "center"){
 				pos.top = ax5.dom.height(document.body) / 2 - box.height/2;
@@ -230,6 +233,7 @@
 			}else{
 				this.active_dialog.find("[data-ax-dialog-btn]").elements[0].focus();
 			}
+			
 			this.active_dialog.find("[data-ax-dialog-btn]").on(cfg.click_event_name, (function(e){
 				this.btn_onclick(e||window.event, opts, callback);
 			}).bind(this));
@@ -246,6 +250,9 @@
 		};
 
 		this.btn_onclick = function(e, opts, callback, target, k){
+			
+			//console.log(e.target);
+			
 			target = axd.parent(e.target, function(target){
 				if(ax5.dom.attr(target, "data-ax-dialog-btn")){
 					return true;

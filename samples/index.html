@@ -1552,42 +1552,6 @@ concat과 다를게 없습니다. 하지만 merge는 아이템 순번으로만 �
 </article>
 
 
-
-
-<article class="content">
-	<h2 data-menu-item="ax5-dom-get_webgl_context">ax5.dom.get_webgl_context</h2>
-	<p>
-		webGL context 개체를 반환합니다. webGL을 지원하지 않는 브라우저에서는 <code>null</code> 을 반환합니다.
-	</p>
-<pre class="prettyprint linenums">
-&lt;div id="div-ax5-dom-get_webgl_context" class="script-result">
-	&lt;canvas id="canvas-element-id" width="200" height="80" style="border: 2px dotted blue;">
-		Your browser does not support webGL
-	&lt;/canvas>
-&lt;/div>
-&lt;script>
-	(function(){
-		var util = ax5.util, el = ax5.dom("#canvas-element-id");
-		var context = el.get_webgl_context();
-		ax5.dom("#div-ax5-dom-get_webgl_context").append(context.toString());
-	})();
-&lt;/script>
-</pre><h4>Result</h4>
-<div id="div-ax5-dom-get_webgl_context" class="script-result">
-	<canvas id="canvas-element-id" width="200" height="80" style="border: 2px dotted blue;">
-		Your browser does not support webGL
-	</canvas>
-</div>
-<script>
-	(function(){
-		var util = ax5.util, el = ax5.dom("#canvas-element-id");
-		var context = el.get_webgl_context();
-		ax5.dom("#div-ax5-dom-get_webgl_context").append(context.toString());
-	})();
-</script>
-
-</article>
-
 <!-- split -->
 
 <label data-menu-item="label"><span>Attributes</span></label>

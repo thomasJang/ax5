@@ -104,18 +104,17 @@
 				this.target.on(e_touch_start, function (e) {
 					_this._on_touch_start(e || window.event);
 				});
+			}else{
+				this.target.on("click", function (e) {
+					if (cfg.on_event) {
+						var that = {
+							display_index: 0,
+							action: "click"
+						};
+						cfg.on_event.call(that, that);
+					}
+				});
 			}
-			/*
-			this.target.on("click", function (e) {
-				if (cfg.on_event) {
-					var that = {
-						display_index: 0,
-						action: "click"
-					};
-					cfg.on_event.call(that, that);
-				}
-			});
-			*/
 		};
 
 		this._set_size_frame = this.align = function () {

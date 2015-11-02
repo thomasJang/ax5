@@ -64,22 +64,22 @@
 
 @include keyframes(ax-dialog) {
 	0% {
-		//@include opacity(0.0);
+		@include opacity(0.0);
 		@include transform( scale(1) );
 	}
 	1% {
-		//@include opacity(0.0);
-		@include transform( scale(1.1) );
+		@include opacity(0.0);
+		@include transform( scale(0.3) );
 	}
 	100% {
-		//@include opacity($mask-bg-opacity);
+		@include opacity(1.0);
 		@include transform( scale(1) );
 	}
 }
 // mixins --------------------------------------------- end
 
 .ax5-ui-dialog{
-	@include animation(ax-dialog 0.2s ease-in-out);
+	@include animation(ax-dialog 0.3s $ease-out-back);
 	@include transform(translateZ(0));
 
 	@include ax-dialog();

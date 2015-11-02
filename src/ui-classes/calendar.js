@@ -68,7 +68,7 @@
 				"root": this.target.find('[data-calendar-els="root"]'),
 				"control": this.target.find('[data-calendar-els="control"]'),
 				"control-display": this.target.find('[data-calendar-els="control-display"]'),
-				"body": this.target.find('[data-calendar-els="body"]'),
+				"body": this.target.find('[data-calendar-els="body"]')
 			};
 
 			if (cfg.control)
@@ -114,7 +114,7 @@
 		this.set_display = function() {
 			if (cfg.control)
 			{
-				//this.els["control-display"].html(U.date(cfg.display_date, {return: cfg.control.display}));
+				//this.els["control-display"].html(U.date(cfg.display_date, {"return": cfg.control.display}));
 
 				var myDate = U.date(cfg.display_date), yy = "", mm = "";
 
@@ -193,7 +193,7 @@
 					po.push('<td class="calendar-col-' + k + '" style="' + item_styles.join(';') + ';">');
 					po.push('<a class="calendar-item-date ' + (function() {
 							if (cfg.selectable) {
-								if (cfg.selectable[U.date(loop_date, {return: "yyyy-mm-dd"})]) {
+								if (cfg.selectable[U.date(loop_date, {"return": "yyyy-mm-dd"})]) {
 									return ( loop_date.getMonth() == this_month ) ? "live" : "";
 								}
 								else {
@@ -201,12 +201,12 @@
 								}
 							}
 							else {
-								return ( loop_date.getMonth() == this_month ) ? ( U.date(loop_date, {return: "yyyymmdd"}) == U.date(_today, {return: "yyyymmdd"}) ) ? "focus" : "live" : "";
+								return ( loop_date.getMonth() == this_month ) ? ( U.date(loop_date, {"return": "yyyymmdd"}) == U.date(_today, {"return": "yyyymmdd"}) ) ? "focus" : "live" : "";
 							}
 
 						})() + ' ' + (function() {
-							return ""; //( U.date(loop_date, {return:"yyyymmdd"}) == U.date(cfg.display_date, {return:"yyyymmdd"}) ) ? "hover" : "";
-						})() + '" data-calendar-item-date="' + U.date(loop_date, {return: cfg.date_format}) + '"><span class="addon"></span>' + loop_date.getDate() + '<span class="lunar"></span></a>');
+							return ""; //( U.date(loop_date, {"return":"yyyymmdd"}) == U.date(cfg.display_date, {"return":"yyyymmdd"}) ) ? "hover" : "";
+						})() + '" data-calendar-item-date="' + U.date(loop_date, {"return": cfg.date_format}) + '"><span class="addon"></span>' + loop_date.getDate() + '<span class="lunar"></span></a>');
 					po.push('</td>');
 					k++;
 					loop_date = U.date(loop_date, {add: {d: 1}});
@@ -401,7 +401,7 @@
 			if (target)
 			{
 				value = axd.attr(target, "data-calendar-item-date");
-				var dt = U.date(value, {return: cfg.date_format}), selectable = true;
+				var dt = U.date(value, {"return": cfg.date_format}), selectable = true;
 
 				if(cfg.selectable){
 					if(!cfg.selectable[dt]) selectable = false;
@@ -409,7 +409,7 @@
 
 
 				if(selectable) {
-					this.els["body"].find('[data-calendar-item-date="' + U.date(cfg.display_date, {return: cfg.date_format}) + '"]').class_name("remove", "hover");
+					this.els["body"].find('[data-calendar-item-date="' + U.date(cfg.display_date, {"return": cfg.date_format}) + '"]').class_name("remove", "hover");
 					axd.class_name(target, "add", "hover");
 					cfg.display_date = value;
 

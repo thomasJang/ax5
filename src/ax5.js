@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-10-16 
+ * 2015-10-21 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -873,7 +873,9 @@
 					else if (Object.prototype.toString.call(O[k]) == "[object Object]")
 					{
 						// 키값이 오브젝트인 경우.
-						O[k] = extend_all(O[k], _O[k], overwrite);
+						try {
+							O[k] = extend_all(O[k], _O[k], overwrite);
+						}catch(e){}
 					}
 					else {
 						if (overwrite === true) {
@@ -1680,6 +1682,7 @@
 				va;
 
 			if (is_string(d)) {
+				d = d.replace(/\D/g, "");
 				if (d.length == 0) {
 					d = new Date();
 				}
@@ -2469,14 +2472,6 @@
 					return this;
 				};
 				/**
-				 * 웹지엘 컨텍스트를 반환합니다.
-				 * @method ax5.dom0.get_webgl_context
-				 * @returns {wegGlContext}
-				 */
-				this.get_webgl_context = function() {
-					return dom.get_webgl_context(this.elements);
-				};
-				/**
 				 * 엘리먼트의 value값을 반환 또는 부여합니다.
 				 * @method ax5.dom0.val
 				 * @param {String} [v] - element.value에 부여할 값
@@ -2799,8 +2794,15 @@
 						eUnBind(el, hd, el.e_hd[hd][ehi]);
 				}
 			}
-			if (el["e_hd"]) delete el["e_hd"];
-			if (el["ax5_data"]) delete el["ax5_data"];
+
+			try {
+				if (el["e_hd"]) delete el["e_hd"];
+				if (el["ax5_data"]) delete el["ax5_data"];
+			}catch(e){
+				if (el["e_hd"]) el["e_hd"] = null;
+				if (el["ax5_data"]) el["ax5_data"] = null;
+			}
+
 			// todo : attributes 걸리는 것이 없지만 혹시나 모를 데이터를 위해.
 			if (ax5.info.browser.name !== "ie" && ax5.info.browser.version > 7) {
 				for (var a in el.attributes) {
@@ -2943,6 +2945,7 @@
 		 */
 		function get(query, sub_query) {
 			var els, r_els = [], p_els;
+			if(!query) return r_els;
 			var i = 0, l = query.length;
 			if (query.toString() === "[object ax5.dom]") {
 				r_els = query.elements;
@@ -3522,7 +3525,9 @@
 		function html(els, val) {
 			els = va_elem(els, "html");
 			var tag, wrap;
+
 			if (typeof val == "undefined") {
+				if(!els || !els[0]) return "";
 				return els[0].innerHTML;
 			}
 			else {
@@ -3535,8 +3540,12 @@
 					else {
 						val = val.replace(re_single_tags, "<$1></$2>");
 						var i = 0, l = els.length;
-						for (; i < l; i++) {
-							if ("innerHTML" in els[i]) els[i].innerHTML = val;
+						try {
+							for (; i < l; i++) {
+								if ("innerHTML" in els[i]) els[i].innerHTML = val;
+							}
+						}catch(e){
+
 						}
 					}
 				}
@@ -3898,20 +3907,6 @@
 		}
 
 		/**
-		 * 웹지엘 컨텍스트를 반환합니다.
-		 * @method ax5.dom.get_webgl_context
-		 * @returns {wegGlContext}
-		 */
-		function get_webgl_context(els) {
-			els = va_elem(els, "get_webgl_context");
-			var apis = ['experimental-webgl', 'webgl', 'webkit-3d', 'moz-webgl', '3d'],
-				i = apis.length, el = els[0], ctx;
-			while (i--) if (ctx = el.getContext(apis[i], {antialias: true})) break;
-			if (ctx == null) alert("WebGL is not available");
-			return ctx;
-		}
-
-		/**
 		 * 엘리먼트 value값을 반환합니다.
 		 * @method ax5.dom.val
 		 * @param {Elements|Element} elements
@@ -3977,7 +3972,6 @@
 			position: position,
 			box_model: box_model,
 			data: data,
-			get_webgl_context: get_webgl_context,
 			val: val,
 			dispatch_event: dispatch_event
 		});

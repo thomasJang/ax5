@@ -59,35 +59,36 @@
 					preview_img = this.els["preview-img"],
 					_this = this, timer;
 
-				dragZone.elements[0].addEventListener('dragover', function(e) {
-					e.stopPropagation();
-					e.preventDefault();
+				if (dragZone.elements[0].addEventListener) {
+					dragZone.elements[0].addEventListener('dragover', function(e) {
+						e.stopPropagation();
+						e.preventDefault();
 
-					preview_img.hide();
-					if (timer) clearTimeout(timer);
+						preview_img.hide();
+						if (timer) clearTimeout(timer);
 
-					dragZone.class_name("add", "dragover");
-				}, false);
-				dragZone.elements[0].addEventListener('dragleave', function(e) {
-					e.stopPropagation();
-					e.preventDefault();
+						dragZone.class_name("add", "dragover");
+					}, false);
+					dragZone.elements[0].addEventListener('dragleave', function(e) {
+						e.stopPropagation();
+						e.preventDefault();
 
-					if (timer) clearTimeout(timer);
-					timer = setTimeout(function() {
-						preview_img.show();
-					}, 100);
+						if (timer) clearTimeout(timer);
+						timer = setTimeout(function() {
+							preview_img.show();
+						}, 100);
 
-					dragZone.class_name("remove", "dragover");
-				}, false);
+						dragZone.class_name("remove", "dragover");
+					}, false);
 
-				dragZone.elements[0].addEventListener('drop', function(e) {
-					e.stopPropagation();
-					e.preventDefault();
+					dragZone.elements[0].addEventListener('drop', function(e) {
+						e.stopPropagation();
+						e.preventDefault();
 
-					dragZone.class_name("remove", "dragover");
-					_this.__on_select_file(e || window.event);
-				}, false);
-
+						dragZone.class_name("remove", "dragover");
+						_this.__on_select_file(e || window.event);
+					}, false);
+				}
 			}).call(this);
 
 			setTimeout((function() {

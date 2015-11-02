@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-10-16 
+ * 2015-10-21 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -78,7 +78,7 @@
 				"root": this.target.find('[data-calendar-els="root"]'),
 				"control": this.target.find('[data-calendar-els="control"]'),
 				"control-display": this.target.find('[data-calendar-els="control-display"]'),
-				"body": this.target.find('[data-calendar-els="body"]'),
+				"body": this.target.find('[data-calendar-els="body"]')
 			};
 
 			if (cfg.control)
@@ -124,7 +124,7 @@
 		this.set_display = function() {
 			if (cfg.control)
 			{
-				//this.els["control-display"].html(U.date(cfg.display_date, {return: cfg.control.display}));
+				//this.els["control-display"].html(U.date(cfg.display_date, {"return": cfg.control.display}));
 
 				var myDate = U.date(cfg.display_date), yy = "", mm = "";
 
@@ -203,7 +203,7 @@
 					po.push('<td class="calendar-col-' + k + '" style="' + item_styles.join(';') + ';">');
 					po.push('<a class="calendar-item-date ' + (function() {
 							if (cfg.selectable) {
-								if (cfg.selectable[U.date(loop_date, {return: "yyyy-mm-dd"})]) {
+								if (cfg.selectable[U.date(loop_date, {"return": "yyyy-mm-dd"})]) {
 									return ( loop_date.getMonth() == this_month ) ? "live" : "";
 								}
 								else {
@@ -211,12 +211,12 @@
 								}
 							}
 							else {
-								return ( loop_date.getMonth() == this_month ) ? ( U.date(loop_date, {return: "yyyymmdd"}) == U.date(_today, {return: "yyyymmdd"}) ) ? "focus" : "live" : "";
+								return ( loop_date.getMonth() == this_month ) ? ( U.date(loop_date, {"return": "yyyymmdd"}) == U.date(_today, {"return": "yyyymmdd"}) ) ? "focus" : "live" : "";
 							}
 
 						})() + ' ' + (function() {
-							return ""; //( U.date(loop_date, {return:"yyyymmdd"}) == U.date(cfg.display_date, {return:"yyyymmdd"}) ) ? "hover" : "";
-						})() + '" data-calendar-item-date="' + U.date(loop_date, {return: cfg.date_format}) + '"><span class="addon"></span>' + loop_date.getDate() + '<span class="lunar"></span></a>');
+							return ""; //( U.date(loop_date, {"return":"yyyymmdd"}) == U.date(cfg.display_date, {"return":"yyyymmdd"}) ) ? "hover" : "";
+						})() + '" data-calendar-item-date="' + U.date(loop_date, {"return": cfg.date_format}) + '"><span class="addon"></span>' + loop_date.getDate() + '<span class="lunar"></span></a>');
 					po.push('</td>');
 					k++;
 					loop_date = U.date(loop_date, {add: {d: 1}});
@@ -411,7 +411,7 @@
 			if (target)
 			{
 				value = axd.attr(target, "data-calendar-item-date");
-				var dt = U.date(value, {return: cfg.date_format}), selectable = true;
+				var dt = U.date(value, {"return": cfg.date_format}), selectable = true;
 
 				if(cfg.selectable){
 					if(!cfg.selectable[dt]) selectable = false;
@@ -419,7 +419,7 @@
 
 
 				if(selectable) {
-					this.els["body"].find('[data-calendar-item-date="' + U.date(cfg.display_date, {return: cfg.date_format}) + '"]').class_name("remove", "hover");
+					this.els["body"].find('[data-calendar-item-date="' + U.date(cfg.display_date, {"return": cfg.date_format}) + '"]').class_name("remove", "hover");
 					axd.class_name(target, "add", "hover");
 					cfg.display_date = value;
 
@@ -1067,6 +1067,9 @@
 			// dialog 높이 구하기 - 너비가 정해지면 높이가 변경 될 것.
 			box.height = this.active_dialog.height();
 
+
+			//console.log(ax5.dom.width(document.body));
+
 			//- position 정렬
 			if(typeof opts.position === "undefined" || opts.position === "center"){
 				pos.top = ax5.dom.height(document.body) / 2 - box.height/2;
@@ -1083,6 +1086,7 @@
 			}else{
 				this.active_dialog.find("[data-ax-dialog-btn]").elements[0].focus();
 			}
+			
 			this.active_dialog.find("[data-ax-dialog-btn]").on(cfg.click_event_name, (function(e){
 				this.btn_onclick(e||window.event, opts, callback);
 			}).bind(this));
@@ -1099,6 +1103,9 @@
 		};
 
 		this.btn_onclick = function(e, opts, callback, target, k){
+			
+			//console.log(e.target);
+			
 			target = axd.parent(e.target, function(target){
 				if(ax5.dom.attr(target, "data-ax-dialog-btn")){
 					return true;
@@ -2829,35 +2836,36 @@
 					preview_img = this.els["preview-img"],
 					_this = this, timer;
 
-				dragZone.elements[0].addEventListener('dragover', function(e) {
-					e.stopPropagation();
-					e.preventDefault();
+				if (dragZone.elements[0].addEventListener) {
+					dragZone.elements[0].addEventListener('dragover', function(e) {
+						e.stopPropagation();
+						e.preventDefault();
 
-					preview_img.hide();
-					if (timer) clearTimeout(timer);
+						preview_img.hide();
+						if (timer) clearTimeout(timer);
 
-					dragZone.class_name("add", "dragover");
-				}, false);
-				dragZone.elements[0].addEventListener('dragleave', function(e) {
-					e.stopPropagation();
-					e.preventDefault();
+						dragZone.class_name("add", "dragover");
+					}, false);
+					dragZone.elements[0].addEventListener('dragleave', function(e) {
+						e.stopPropagation();
+						e.preventDefault();
 
-					if (timer) clearTimeout(timer);
-					timer = setTimeout(function() {
-						preview_img.show();
-					}, 100);
+						if (timer) clearTimeout(timer);
+						timer = setTimeout(function() {
+							preview_img.show();
+						}, 100);
 
-					dragZone.class_name("remove", "dragover");
-				}, false);
+						dragZone.class_name("remove", "dragover");
+					}, false);
 
-				dragZone.elements[0].addEventListener('drop', function(e) {
-					e.stopPropagation();
-					e.preventDefault();
+					dragZone.elements[0].addEventListener('drop', function(e) {
+						e.stopPropagation();
+						e.preventDefault();
 
-					dragZone.class_name("remove", "dragover");
-					_this.__on_select_file(e || window.event);
-				}, false);
-
+						dragZone.class_name("remove", "dragover");
+						_this.__on_select_file(e || window.event);
+					}, false);
+				}
 			}).call(this);
 
 			setTimeout((function() {
