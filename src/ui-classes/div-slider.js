@@ -222,10 +222,9 @@
 			if(touch_start.direction != "X"){
 				if (cfg.on_event) {
 					var that = {
-						display_index: 0,
+						display_index: this.display_index,
 						action: "click"
 					};
-					console.log(that);
 					cfg.on_event.call(that, that);
 
 					axd(document.body).off(e_touch_move + ".ax5divslider");

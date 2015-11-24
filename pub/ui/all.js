@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-10-21 
+ * 2015-11-25 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -875,7 +875,7 @@
 		this.main = (function(){
 			if (ax_super) ax_super.call(this); // 부모호출
 			this.config = {
-				click_event_name: "click", //(('ontouchstart' in document.documentElement) ? "touchstart" : "click"),
+				click_event_name: (('ontouchstart' in document.documentElement) ? "touchend" : "click"),
 				mask: {
 					target: document.body,
 					content: ''
@@ -883,7 +883,10 @@
 				theme: 'default',
 				width: 300,
 				title: '',
-				msg: ''
+				msg: '',
+				lang: {
+					"ok":"ok", "cancel":"cancel"
+				}
 			};
 		}).apply(this, arguments);
 
@@ -933,7 +936,7 @@
 			opts.theme = (opts.theme || cfg.theme || "");
 			if(typeof opts.btns === "undefined"){
 				opts.btns = {
-					ok: {label: 'ok', theme: opts.theme}
+					ok: {label: cfg.lang["ok"], theme: opts.theme}
 				};
 			}
 			this.open(opts, callback);
@@ -965,8 +968,8 @@
 			opts.theme = (opts.theme || cfg.theme || "");
 			if(typeof opts.btns === "undefined"){
 				opts.btns = {
-					ok: {label: 'ok', theme: opts.theme},
-					cancel: {label: 'cancel'}
+					ok: {label: cfg.lang["ok"], theme: opts.theme},
+					cancel: {label: cfg.lang["cancel"]}
 				};
 			}
 			this.open(opts, callback);
@@ -1004,8 +1007,8 @@
 			}
 			if(typeof opts.btns === "undefined"){
 				opts.btns = {
-					ok: {label: 'ok', theme: opts.theme},
-					cancel: {label: 'cancel'}
+					ok: {label: cfg.lang["ok"], theme: opts.theme},
+					cancel: {label: cfg.lang["cancel"]}
 				};
 			}
 			this.open(opts, callback);
@@ -1031,7 +1034,7 @@
 							po.push('<div class="ax-dialog-prompt">');
 							po.push( this.label.replace(/\n/g, "<br/>") );
 							po.push('</div>');
-							po.push('<input type="' + (this.type||'text') + '" placeholder="' + (this.placeholder||"") + ' " class="ax-inp ' + (this.klass||"") +'" data-ax-dialog-prompt="' + k + '" style="width:100%;" />');
+							po.push('<input type="' + (this.type||'text') + '" placeholder="' + (this.placeholder||"") + ' " class="ax-inp ' + (this.klass||"") +'" data-ax-dialog-prompt="' + k + '" style="width:100%;" value="' + (this.value||"") + '" />');
 						});
 					}
 
@@ -1446,10 +1449,9 @@
 			if(touch_start.direction != "X"){
 				if (cfg.on_event) {
 					var that = {
-						display_index: 0,
+						display_index: this.display_index,
 						action: "click"
 					};
-					console.log(that);
 					cfg.on_event.call(that, that);
 
 					axd(document.body).off(e_touch_move + ".ax5divslider");

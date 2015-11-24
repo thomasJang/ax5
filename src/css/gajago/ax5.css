@@ -2121,7 +2121,7 @@ a.ax {
 .ax-panel {
   color: #333333;
   box-sizing: border-box;
-  background-color: #f3f3f3;
+  background-color: #fff;
   border: 1px solid transparent;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -2225,7 +2225,7 @@ a.ax {
 .ax-scroll {
   color: #333333;
   box-sizing: border-box;
-  background-color: #f3f3f3;
+  background-color: #fff;
   border: 1px solid transparent;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -2300,7 +2300,7 @@ a.ax {
 .ax-menu {
   color: #333333;
   box-sizing: border-box;
-  background-color: #f3f3f3;
+  background-color: #fff;
   border: 1px solid transparent;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -2311,7 +2311,7 @@ a.ax {
 .ax-tab {
   color: #333333;
   box-sizing: border-box;
-  background-color: #f3f3f3;
+  background-color: #fff;
   border: 1px solid transparent;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -2322,7 +2322,7 @@ a.ax {
 .ax-toolbar {
   color: #333333;
   box-sizing: border-box;
-  background-color: #f3f3f3;
+  background-color: #fff;
   border: 1px solid transparent;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -2333,7 +2333,7 @@ a.ax {
 .ax-label {
   color: #333333;
   box-sizing: border-box;
-  background-color: #f3f3f3;
+  background-color: #fff;
   border: 1px solid transparent;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -2499,7 +2499,7 @@ a.ax {
   transform: translateZ(0);
   color: #333333;
   box-sizing: border-box;
-  background-color: #f3f3f3;
+  background-color: #fff;
   border: 1px solid gray;
   border-radius: 8px;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.5);
@@ -4021,6 +4021,9 @@ input[type='checkbox']:checked + .ax5-ui-switch.with-label {
 
 .ax5-ui-modal .ax-modal-heading {
   font-size: 12px; }
+
+.ax5-ui-dialog .ax-dialog-heading {
+  border-bottom: 1px solid #f3f3f3; }
 
 .ax5-ui-dialog .ax-dialog-body .ax-dialog-buttons .ax-btn {
   padding: 5px 5px;
