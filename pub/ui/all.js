@@ -875,7 +875,7 @@
 		this.main = (function(){
 			if (ax_super) ax_super.call(this); // 부모호출
 			this.config = {
-				click_event_name: (('ontouchstart' in document.documentElement) ? "touchend" : "click"),
+				click_event_name: "click", //(('ontouchstart' in document.documentElement) ? "touchend" : "click"),
 				mask: {
 					target: document.body,
 					content: ''
