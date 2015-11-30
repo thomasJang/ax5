@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-11-25 
+ * 2015-11-30 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -1075,8 +1075,15 @@
 
 			//- position 정렬
 			if(typeof opts.position === "undefined" || opts.position === "center"){
-				pos.top = ax5.dom.height(document.body) / 2 - box.height/2;
-				pos.left = ax5.dom.width(document.body) / 2 - box.width/2;
+				var w = window.innerWidth
+					|| document.documentElement.clientWidth
+					|| document.body.clientWidth;
+				var h = window.innerHeight
+					|| document.documentElement.clientHeight
+					|| document.body.clientHeight;
+
+				pos.top = h / 2 - box.height/2;
+				pos.left = w / 2 - box.width/2;
 			}else{
 				pos.left = opts.position.left || 0;
 				pos.top = opts.position.top || 0;
@@ -1106,8 +1113,7 @@
 		};
 
 		this.btn_onclick = function(e, opts, callback, target, k){
-			
-			//console.log(e.target);
+			if(e.srcElement) e.target = e.srcElement;
 			
 			target = axd.parent(e.target, function(target){
 				if(ax5.dom.attr(target, "data-ax-dialog-btn")){
@@ -1293,46 +1299,8 @@
 		this.init = function () {
 			this.target = ax5.dom(cfg.target);
 
-			// 파트수집
-			this.els = {
-				holder: this.target.find(".slider-holder"),
-				items: this.target.find(".slider-item"),
-				dots: []
-			};
-
-			if (this.els.items.elements.length > 1 && this.els.dots.length == 0) {
-				var po = [];
-				po.push('<div class="slider-status">');
-				po.push('<div class="dot-group">');
-				for (var i = 0, l = this.els.items.elements.length; i < l; i++) {
-					po.push('<div class="dot" data-item-dot="' + i + '"></div>');
-				}
-				po.push('<div class="on_dot" data-item-dot-on="on"></div>');
-				po.push('</div>');
-				po.push('</div>');
-				this.target.append(po.join(''));
-
-				for (var i = 0, l = this.target.find('[data-item-dot]').elements.length; i < l; i++) {
-					this.els.dots.push(axd(this.target.find('[data-item-dot]').elements[i]));
-				}
-				this.els.dot_on = this.target.find('[data-item-dot-on]');
-			}
-
-			//this._set_size_frame();
-			this.bind_window_resize(function () {
-				this._set_size_frame();
-			});
-
-			setTimeout(function () {
-				_this._set_size_frame();
-			}, 300);
-
-			if (this.els.items.elements.length > 1) {
-				this.target.on(e_touch_start, function (e) {
-					_this._on_touch_start(e || window.event);
-				});
-			}else{
-				this.target.on("click", function (e) {
+			if(ax5.info.browser.name == "ie" && Number(ax5.info.browser.version) < 8){
+				this.target.on("click", function(e) {
 					if (cfg.on_event) {
 						var that = {
 							display_index: 0,
@@ -1341,6 +1309,57 @@
 						cfg.on_event.call(that, that);
 					}
 				});
+			}else {
+				// 파트수집
+				this.els = {
+					holder: this.target.find(".slider-holder"),
+					items: this.target.find(".slider-item"),
+					dots: []
+				};
+
+				if (this.els.items.elements.length > 1 && this.els.dots.length == 0) {
+					var po = [];
+					po.push('<div class="slider-status">');
+					po.push('<div class="dot-group">');
+					for (var i = 0, l = this.els.items.elements.length; i < l; i++) {
+						po.push('<div class="dot" data-item-dot="' + i + '"></div>');
+					}
+					po.push('<div class="on_dot" data-item-dot-on="on"></div>');
+					po.push('</div>');
+					po.push('</div>');
+					this.target.append(po.join(''));
+
+					for (var i = 0, l = this.target.find('[data-item-dot]').elements.length; i < l; i++) {
+						this.els.dots.push(axd(this.target.find('[data-item-dot]').elements[i]));
+					}
+					this.els.dot_on = this.target.find('[data-item-dot-on]');
+				}
+
+				//this._set_size_frame();
+				this.bind_window_resize(function() {
+					this._set_size_frame();
+				});
+
+				setTimeout(function() {
+					_this._set_size_frame();
+				}, 300);
+
+				if (this.els.items.elements.length > 1) {
+					this.target.on(e_touch_start, function(e) {
+						_this._on_touch_start(e || window.event);
+					});
+				}
+				else {
+					this.target.on("click", function(e) {
+						if (cfg.on_event) {
+							var that = {
+								display_index: 0,
+								action: "click"
+							};
+							cfg.on_event.call(that, that);
+						}
+					});
+				}
 			}
 		};
 
@@ -3132,7 +3151,6 @@
 								css = {
 									width: this.width * (box_height / this.height), height: box_height
 								};
-
 							}
 							else {
 								css = {

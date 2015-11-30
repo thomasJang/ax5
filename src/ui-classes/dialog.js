@@ -222,8 +222,15 @@
 
 			//- position 정렬
 			if(typeof opts.position === "undefined" || opts.position === "center"){
-				pos.top = ax5.dom.height(document.body) / 2 - box.height/2;
-				pos.left = ax5.dom.width(document.body) / 2 - box.width/2;
+				var w = window.innerWidth
+					|| document.documentElement.clientWidth
+					|| document.body.clientWidth;
+				var h = window.innerHeight
+					|| document.documentElement.clientHeight
+					|| document.body.clientHeight;
+
+				pos.top = h / 2 - box.height/2;
+				pos.left = w / 2 - box.width/2;
 			}else{
 				pos.left = opts.position.left || 0;
 				pos.top = opts.position.top || 0;
@@ -253,8 +260,7 @@
 		};
 
 		this.btn_onclick = function(e, opts, callback, target, k){
-			
-			//console.log(e.target);
+			if(e.srcElement) e.target = e.srcElement;
 			
 			target = axd.parent(e.target, function(target){
 				if(ax5.dom.attr(target, "data-ax-dialog-btn")){

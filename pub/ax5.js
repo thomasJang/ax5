@@ -1,6 +1,6 @@
 /*
  * ax5 - v0.0.1 
- * 2015-11-25 
+ * 2015-11-30 
  * www.axisj.com Javascript UI Library
  * 
  * Copyright 2013, 2015 AXISJ.com and other contributors 
@@ -3036,9 +3036,9 @@
 				var i = 0, l = els.length, k, matchs;
 				for (; i < l; i++) {
 					for (k in O) {
-						//els[i].style[U.camel_case(k)] = (matchs = re_numsplit.exec(O[k])) ? Math.max(0, matchs[1]) + ( matchs[2] || "px" ) : O[k];
-						els[i].style[U.camel_case(k)] = (matchs = re_numsplit.exec(O[k])) ? matchs[1] + ( matchs[2] || "px" ) : O[k];
-						// todo : top 값을 음수로 설정하는 경우 오류 발생 일단 예외처리.
+						try {
+							els[i].style[U.camel_case(k)] = (matchs = re_numsplit.exec(O[k])) ? matchs[1] + ( matchs[2] || "px" ) : O[k];
+						}catch(e){}
 					}
 				}
 			}

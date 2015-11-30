@@ -353,7 +353,6 @@
 								css = {
 									width: this.width * (box_height / this.height), height: box_height
 								};
-
 							}
 							else {
 								css = {

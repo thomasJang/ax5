@@ -2,7 +2,7 @@
 @mixin ax-btn-gradient ($start: #ffffff, $stop: $start) {
   background: $start;
   @include background-image(linear-gradient(top, $start, $stop));
-  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#{$start}, endColorstr=#{$stop});
+  //filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#{$start}, endColorstr=#{$stop});
 }
 
 // Button variants
