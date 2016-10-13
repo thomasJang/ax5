@@ -46,3 +46,10 @@ Optimized for modern browsers Javascript dom Control / Touch UI library
 	})();
 </script>
 ```
+
+## Yoon Added explain
+```
+<script type="text/javascript">
+ 테스트를 위한 목적임.
+</script>
+```
